@@ -1,0 +1,11 @@
+C:\Users\bhdca\Documents\Visual Studio 2008\Projects\MulticastingUDP\MulticastingUDP\bin\Debug\MulticastingUDP.exe
+C:\Users\bhdca\Documents\Visual Studio 2008\Projects\MulticastingUDP\MulticastingUDP\bin\Debug\MulticastingUDP.pdb
+C:\Users\bhdca\Documents\Visual Studio 2008\Projects\MulticastingUDP\MulticastingUDP\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\bhdca\Documents\Visual Studio 2008\Projects\MulticastingUDP\MulticastingUDP\obj\Debug\MulticastingUDP.Properties.Resources.resources
+C:\Users\bhdca\Documents\Visual Studio 2008\Projects\MulticastingUDP\MulticastingUDP\obj\Debug\MulticastingUDP.csproj.GenerateResource.Cache
+C:\Users\bhdca\Documents\Visual Studio 2008\Projects\MulticastingUDP\MulticastingUDP\obj\Debug\MulticastingUDP.exe
+C:\Users\bhdca\Documents\Visual Studio 2008\Projects\MulticastingUDP\MulticastingUDP\obj\Debug\MulticastingUDP.pdb
+C:\Users\bhdca\Documents\Visual Studio 2008\Projects\MulticastingUDP\MulticastingUDP\obj\Debug\MulticastingUDP.FormMain.resources
+C:\Users\bhdca\Documents\Visual Studio 2008\Projects\MulticastingUDP\MulticastingUDP\obj\Debug\MulticastingUDP.FrmSettings.resources
+C:\Users\bhdca\Documents\Visual Studio 2008\Projects\MulticastingUDP\MulticastingUDP\obj\Debug\MulticastingUDP.FrmDataItemPresence.resources
+C:\Users\bhdca\Documents\Visual Studio 2008\Projects\MulticastingUDP\MulticastingUDP\obj\Debug\MulticastingUDP.FrmDetailedView.resources

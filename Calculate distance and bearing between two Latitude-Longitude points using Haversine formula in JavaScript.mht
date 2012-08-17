@@ -1,0 +1,2184 @@
+From: "Saved by Windows Internet Explorer 8"
+Subject: Calculate distance and bearing between two Latitude/Longitude points using Haversine formula in JavaScript
+Date: Sun, 16 Jan 2011 21:32:53 +0100
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0000_01CBB5C4.EF126A10"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.1.7600.16543
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0000_01CBB5C4.EF126A10
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://osiris.tuwien.ac.at/~wgarn/gis-gps/latlong.html
+
+=EF=BB=BF<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" =
+"http://www.w3.org/TR/html4/strict.dtd"><HTML><HEAD>
+<TITLE>Calculate distance and bearing between two Latitude/Longitude =
+points=20
+using Haversine formula in JavaScript</TITLE>
+<META content=3D"text/html; charset=3Dutf-8" =
+http-equiv=3D"Content-Type">
+<META name=3D"author" content=3D"Chris Veness, 2002-2007, =
+www.movable-type.co.uk">
+<META name=3D"keywords"=20
+content=3D"latitude longitude distance bearing points earth"><LINK =
+rel=3D"stylesheet"=20
+type=3D"text/css" href=3D"http://osiris.tuwien.ac.at/~wgarn/mtl.css">
+<STYLE type=3D"text/css">=0A=
+h3 {=0A=
+  font-size: 1em;=0A=
+  color: black;=0A=
+  margin-top: 1.5em;=0A=
+  margin-bottom: 1em;=0A=
+}=0A=
+td {=0A=
+  padding: 0.2em;=0A=
+  vertical-align: baseline;=0A=
+}=0A=
+</STYLE>
+
+<SCRIPT type=3D"text/javascript" src=3D""></SCRIPT>
+
+<SCRIPT type=3D"text/javascript">=0A=
+=0A=
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - =
+- - - - - - - - - - - -  */=0A=
+=0A=
+/*=0A=
+ * Use Haversine formula to Calculate distance (in km) between two =
+points specified by =0A=
+ * latitude/longitude (in numeric degrees)=0A=
+ *=0A=
+ * from: Haversine formula - R. W. Sinnott, "Virtues of the Haversine",=0A=
+ *       Sky and Telescope, vol 68, no 2, 1984=0A=
+ *       http://www.census.gov/cgi-bin/geo/gisfaq?Q5.1=0A=
+ *=0A=
+ * example usage from form:=0A=
+ *   result.value =3D LatLon.distHaversine(lat1.value.parseDeg(), =
+long1.value.parseDeg(), =0A=
+ *                                       lat2.value.parseDeg(), =
+long2.value.parseDeg());=0A=
+ * where lat1, long1, lat2, long2, and result are form fields=0A=
+ */=0A=
+LatLon.distHaversine =3D function(lat1, lon1, lat2, lon2) {=0A=
+  var R =3D 6371; // earth's mean radius in km=0A=
+  var dLat =3D (lat2-lat1).toRad();=0A=
+  var dLon =3D (lon2-lon1).toRad();=0A=
+  lat1 =3D lat1.toRad(), lat2 =3D lat2.toRad();=0A=
+=0A=
+  var a =3D Math.sin(dLat/2) * Math.sin(dLat/2) +=0A=
+          Math.cos(lat1) * Math.cos(lat2) * =0A=
+          Math.sin(dLon/2) * Math.sin(dLon/2);=0A=
+  var c =3D 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));=0A=
+  var d =3D R * c;=0A=
+  return d;=0A=
+}=0A=
+=0A=
+=0A=
+/*=0A=
+ * Use Law of Cosines to calculate distance (in km) between two points =
+specified by latitude/longitude =0A=
+ * (in numeric degrees).=0A=
+ */=0A=
+LatLon.distCosineLaw =3D function(lat1, lon1, lat2, lon2) {=0A=
+  var R =3D 6371; // earth's mean radius in km=0A=
+  var d =3D Math.acos(Math.sin(lat1.toRad())*Math.sin(lat2.toRad()) +=0A=
+                    =
+Math.cos(lat1.toRad())*Math.cos(lat2.toRad())*Math.cos((lon2-lon1).toRad(=
+))) * R;=0A=
+  return d;=0A=
+}=0A=
+=0A=
+=0A=
+/*=0A=
+ * calculate (initial) bearing between two points=0A=
+ *   see http://williams.best.vwh.net/avform.htm#Crs=0A=
+ */=0A=
+LatLon.bearing =3D function(lat1, lon1, lat2, lon2) {=0A=
+  lat1 =3D lat1.toRad(); lat2 =3D lat2.toRad();=0A=
+  var dLon =3D (lon2-lon1).toRad();=0A=
+=0A=
+  var y =3D Math.sin(dLon) * Math.cos(lat2);=0A=
+  var x =3D Math.cos(lat1)*Math.sin(lat2) -=0A=
+          Math.sin(lat1)*Math.cos(lat2)*Math.cos(dLon);=0A=
+  return Math.atan2(y, x).toBrng();=0A=
+}=0A=
+=0A=
+=0A=
+/*=0A=
+ * calculate midpoint of great circle line between p1 & p2.=0A=
+ *   see http://mathforum.org/library/drmath/view/51822.html for =
+derivation=0A=
+ */=0A=
+LatLon.midPoint =3D function(lat1, lon1, lat2, lon2) {=0A=
+  lat1 =3D lat1.toRad(); =0A=
+  lat2 =3D lat2.toRad();=0A=
+  var dLon =3D (lon2-lon1).toRad();=0A=
+=0A=
+  var Bx =3D Math.cos(lat2) * Math.cos(dLon);=0A=
+  var By =3D Math.cos(lat2) * Math.sin(dLon);=0A=
+=0A=
+  lat3 =3D Math.atan2(Math.sin(lat1)+Math.sin(lat2),=0A=
+                    Math.sqrt((Math.cos(lat1)+Bx)*(Math.cos(lat1)+Bx) + =
+By*By ) );=0A=
+  lon3 =3D lon1.toRad() + Math.atan2(By, Math.cos(lat1) + Bx);=0A=
+=0A=
+  if (isNaN(lat3) || isNaN(lon3)) return null;=0A=
+  return new LatLon(lat3.toDeg(), lon3.toDeg());=0A=
+}=0A=
+=0A=
+=0A=
+/*=0A=
+ * calculate destination point given start point, initial bearing (deg) =
+and distance (km)=0A=
+ *   see http://williams.best.vwh.net/avform.htm#LL=0A=
+ */=0A=
+LatLon.prototype.destPoint =3D function(brng, d) {=0A=
+  var R =3D 6371; // earth's mean radius in km=0A=
+  var lat1 =3D this.lat.toRad(), lon1 =3D this.lon.toRad();=0A=
+  brng =3D brng.toRad();=0A=
+=0A=
+  var lat2 =3D Math.asin( Math.sin(lat1)*Math.cos(d/R) + =0A=
+                        Math.cos(lat1)*Math.sin(d/R)*Math.cos(brng) );=0A=
+  var lon2 =3D lon1 + =
+Math.atan2(Math.sin(brng)*Math.sin(d/R)*Math.cos(lat1), =0A=
+                               =
+Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));=0A=
+  lon2 =3D (lon2+Math.PI)%(2*Math.PI) - Math.PI;  // normalise to =
+-180...+180=0A=
+=0A=
+  if (isNaN(lat2) || isNaN(lon2)) return null;=0A=
+  return new LatLon(lat2.toDeg(), lon2.toDeg());=0A=
+}=0A=
+=0A=
+=0A=
+/*=0A=
+ * calculate final bearing arriving at destination point given start =
+point, initial bearing and distance=0A=
+ */=0A=
+LatLon.prototype.finalBrng =3D function(brng, d) {=0A=
+  var p1 =3D this, p2 =3D p1.destPoint(brng, d);=0A=
+  // get reverse bearing point 2 to point 1=0A=
+  var rev =3D LatLon.bearing(p2.lat, p2.lon, p1.lat, p1.lon);=0A=
+  // & reverse it by adding 180=C2=B0=0A=
+  var brng =3D (rev + 180) % 360;=0A=
+  return brng;=0A=
+}=0A=
+=0A=
+=0A=
+/*=0A=
+ * calculate distance, bearing, destination point on rhumb line=0A=
+ *   see http://williams.best.vwh.net/avform.htm#Rhumb=0A=
+ */=0A=
+LatLon.distRhumb =3D function(lat1, lon1, lat2, lon2) {=0A=
+  var R =3D 6371; // earth's mean radius in km=0A=
+  var dLat =3D (lat2-lat1).toRad(), dLon =3D Math.abs(lon2-lon1).toRad();=0A=
+  var dPhi =3D =
+Math.log(Math.tan(lat2.toRad()/2+Math.PI/4)/Math.tan(lat1.toRad()/2+Math.=
+PI/4));=0A=
+  var q =3D (Math.abs(dLat) > 1e-10) ? dLat/dPhi : =
+Math.cos(lat1.toRad());=0A=
+  // if dLon over 180=C2=B0 take shorter rhumb across 180=C2=B0 meridian:=0A=
+  if (dLon > Math.PI) dLon =3D 2*Math.PI - dLon;=0A=
+  var d =3D Math.sqrt(dLat*dLat + q*q*dLon*dLon); =0A=
+  return d * R;=0A=
+}=0A=
+=0A=
+=0A=
+LatLon.brngRhumb =3D function(lat1, lon1, lat2, lon2) {=0A=
+  var dLon =3D (lon2-lon1).toRad();=0A=
+  var dPhi =3D =
+Math.log(Math.tan(lat2.toRad()/2+Math.PI/4)/Math.tan(lat1.toRad()/2+Math.=
+PI/4));=0A=
+  if (Math.abs(dLon) > Math.PI) dLon =3D dLon>0 ? -(2*Math.PI-dLon) : =
+(2*Math.PI+dLon);=0A=
+  return Math.atan2(dLon, dPhi).toBrng();=0A=
+}=0A=
+=0A=
+=0A=
+LatLon.prototype.destPointRhumb =3D function(brng, dist) {=0A=
+  var R =3D 6371; // earth's mean radius in km=0A=
+  var d =3D parseFloat(dist)/R;  // d =3D angular distance covered on =
+earth's surface=0A=
+  var lat1 =3D this.lat.toRad(), lon1 =3D this.lon.toRad();=0A=
+  brng =3D brng.toRad();=0A=
+=0A=
+  var lat2 =3D lat1 + d*Math.cos(brng);=0A=
+  var dLat =3D lat2-lat1;=0A=
+  var dPhi =3D =
+Math.log(Math.tan(lat2/2+Math.PI/4)/Math.tan(lat1/2+Math.PI/4));=0A=
+  var q =3D (Math.abs(dLat) > 1e-10) ? dLat/dPhi : Math.cos(lat1);=0A=
+  var dLon =3D d*Math.sin(brng)/q;=0A=
+  // check for some daft bugger going past the pole=0A=
+  if (Math.abs(lat2) > Math.PI/2) lat2 =3D lat2>0 ? Math.PI-lat2 : =
+-Math.PI-lat2;=0A=
+  lon2 =3D (lon1+dLon+Math.PI)%(2*Math.PI) - Math.PI;=0A=
+ =0A=
+  if (isNaN(lat2) || isNaN(lon2)) return null;=0A=
+  return new LatLon(lat2.toDeg(), lon2.toDeg());=0A=
+}=0A=
+=0A=
+=0A=
+/*=0A=
+ * construct a LatLon object: arguments in numeric degrees=0A=
+ *=0A=
+ * note all LatLong methods expect & return numeric degrees (for =
+lat/long & for bearings)=0A=
+ */=0A=
+function LatLon(lat, lon) {=0A=
+  this.lat =3D lat;=0A=
+  this.lon =3D lon;=0A=
+}=0A=
+=0A=
+=0A=
+/*=0A=
+ * represent point {lat, lon} in standard representation=0A=
+ */=0A=
+LatLon.prototype.toString =3D function() {=0A=
+  return this.lat.toLat() + ', ' + this.lon.toLon();=0A=
+}=0A=
+=0A=
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - =
+- - - - - - - - - - - -  */=0A=
+=0A=
+// extend String object with method for parsing degrees or lat/long =
+values to numeric degrees=0A=
+//=0A=
+// this is very flexible on formats, allowing signed decimal degrees, or =
+deg-min-sec suffixed by =0A=
+// compass direction (NSEW). A variety of separators are accepted (eg =
+3=C2=BA 37' 09"W) or fixed-width =0A=
+// format without separators (eg 0033709W). Seconds and minutes may be =
+omitted. (Minimal validation =0A=
+// is done).=0A=
+=0A=
+String.prototype.parseDeg =3D function() {=0A=
+  if (!isNaN(this)) return Number(this);                 // signed =
+decimal degrees without NSEW=0A=
+  =0A=
+  var degLL =3D this.replace(/^-/,'').replace(/[NSEW]/i,'');  // strip =
+off any sign or compass dir'n=0A=
+  var dms =3D degLL.split(/[^0-9.,]+/);                     // split out =
+separate d/m/s=0A=
+  for (var i in dms) if (dms[i]=3D=3D'') dms.splice(i,1);    // remove =
+empty elements (see note below)=0A=
+  switch (dms.length) {                                  // convert to =
+decimal degrees...=0A=
+    case 3:                                              // interpret =
+3-part result as d/m/s=0A=
+      var deg =3D dms[0]/1 + dms[1]/60 + dms[2]/3600; break;=0A=
+    case 2:                                              // interpret =
+2-part result as d/m=0A=
+      var deg =3D dms[0]/1 + dms[1]/60; break;=0A=
+    case 1:                                              // decimal or =
+non-separated dddmmss=0A=
+      if (/[NS]/i.test(this)) degLL =3D '0' + degLL;       // - =
+normalise N/S to 3-digit degrees=0A=
+      var deg =3D dms[0].slice(0,3)/1 + dms[0].slice(3,5)/60 + =
+dms[0].slice(5)/3600; break;=0A=
+    default: return NaN;=0A=
+  }=0A=
+  if (/^-/.test(this) || /[WS]/i.test(this)) deg =3D -deg; // take '-', =
+west and south as -ve=0A=
+  return deg;=0A=
+}=0A=
+// note: whitespace at start/end will split() into empty elements =
+(except in IE)=0A=
+=0A=
+=0A=
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - =
+- - - - - - - - - - - -  */=0A=
+=0A=
+// extend Number object with methods for converting degrees/radians=0A=
+=0A=
+Number.prototype.toRad =3D function() {  // convert degrees to radians=0A=
+  return this * Math.PI / 180;=0A=
+}=0A=
+=0A=
+Number.prototype.toDeg =3D function() {  // convert radians to degrees =
+(signed)=0A=
+  return this * 180 / Math.PI;=0A=
+}=0A=
+=0A=
+Number.prototype.toBrng =3D function() {  // convert radians to degrees =
+(as bearing: 0...360)=0A=
+  return (this.toDeg()+360) % 360;=0A=
+}=0A=
+=0A=
+=0A=
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - =
+- - - - - - - - - - - -  */=0A=
+=0A=
+// extend Number object with methods for presenting bearings & lat/longs=0A=
+=0A=
+Number.prototype.toDMS =3D function() {  // convert numeric degrees to =
+deg/min/sec=0A=
+  var d =3D Math.abs(this);  // (unsigned result ready for appending =
+compass dir'n)=0A=
+  d +=3D 1/7200;  // add =C2=BD second for rounding=0A=
+  var deg =3D Math.floor(d);=0A=
+  var min =3D Math.floor((d-deg)*60);=0A=
+  var sec =3D Math.floor((d-deg-min/60)*3600);=0A=
+  // add leading zeros if required=0A=
+  if (deg<100) deg =3D '0' + deg; if (deg<10) deg =3D '0' + deg;=0A=
+  if (min<10) min =3D '0' + min;=0A=
+  if (sec<10) sec =3D '0' + sec;=0A=
+  return deg + '\u00B0' + min + '\u2032' + sec + '\u2033';=0A=
+}=0A=
+=0A=
+Number.prototype.toLat =3D function() {  // convert numeric degrees to =
+deg/min/sec latitude=0A=
+  return this.toDMS().slice(1) + (this<0 ? 'S' : 'N');  // knock off =
+initial '0' for lat!=0A=
+}=0A=
+=0A=
+Number.prototype.toLon =3D function() {  // convert numeric degrees to =
+deg/min/sec longitude=0A=
+  return this.toDMS() + (this>0 ? 'E' : 'W');=0A=
+}=0A=
+=0A=
+Number.prototype.toPrecision =3D function(fig) {  // override =
+toPrecision method with one which displays =0A=
+  if (this =3D=3D 0) return 0;                      // trailing zeros in =
+place of exponential notation=0A=
+  var scale =3D Math.ceil(Math.log(this)*Math.LOG10E);=0A=
+  var mult =3D Math.pow(10, fig-scale);=0A=
+  return Math.round(this*mult)/mult;=0A=
+}=0A=
+=0A=
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - =
+- - - - - - - - - - - -  */=0A=
+</SCRIPT>
+
+<META name=3D"GENERATOR" content=3D"MSHTML 9.00.7930.16421"></HEAD>
+<BODY>
+<TABLE width=3D"100%">
+  <TBODY>
+  <TR id=3D"header">
+    <TD vAlign=3D"top" rowSpan=3D"3"><A=20
+      href=3D"http://osiris.tuwien.ac.at/~wgarn/"><IMG alt=3D"Movable =
+Type Home Page"=20
+      src=3D"" width=3D"120" height=3D"120"></A></TD>
+    <TD vAlign=3D"bottom">=20
+      <H1>Movable Type Scripts</H1></TD></TR>
+  <TR class=3D"tableRule">
+    <TD><IMG alt=3D"" src=3D"" width=3D"1" height=3D"1"></TD></TR>
+  <TR id=3D"subhead">
+    <TD vAlign=3D"bottom" align=3D"right">
+      <H2>Calculate distance,          bearing and more between two=20
+      Latitude/Longitude points</H2></TD></TR>
+  <TR>
+    <TD id=3D"margin">&nbsp;</TD>
+    <TD id=3D"pageContent"><!-- sample page to illustrate function -->
+      <FORM name=3D"f" action=3D"none!">
+      <H3>Distance</H3>
+      <P>This script calculates great-circle distances between the two =
+points =E2=80=93=20
+      that is, the shortest           distance over the earth=E2=80=99s =
+surface =E2=80=93 using=20
+      the =E2=80=98<B>Haversine</B>=E2=80=99 formula.</P>
+      <P>It assumes a spherical earth, ignoring ellipsoidal effects =
+=E2=80=93 which is=20
+      accurate           enough<SUP><A =
+href=3D"http://osiris.tuwien.ac.at/~wgarn/gis-gps/latlong.html#ellipsoid"=
+>*</A></SUP>=20
+      for most purposes=E2=80=A6 =E2=80=93 giving an =
+=E2=80=98as-the-crow-flies=E2=80=99           distance=20
+      between the two points (ignoring any hills!).</P>
+      <P>Enter the co-ordinates into the text boxes to try it out. It =
+accepts a=20
+      variety of formats:</P>
+      <UL>
+        <LI>deg-min-sec suffixed with N/S/E/W (e.g. =
+40=C2=B044=E2=80=B255=E2=80=B3N, 73 59 11W), or=20
+        </LI>
+        <LI>signed decimal degrees without compass direction, where =
+negative=20
+        indicates west/south (e.g.             40.7486, =
+-73.9864):</LI></UL>
+      <P>Lat 1:           <INPUT name=3D"lat1" value=3D"53 09 02N" =
+size=3D"12">       =20
+        Long 1:           <INPUT name=3D"long1" value=3D"001 50 40W" =
+size=3D"12"></P>
+      <P>Lat 2:           <INPUT name=3D"lat2" value=3D"52 12 17N" =
+size=3D"12">       =20
+        Long 2:           <INPUT name=3D"long2" value=3D"000 08 26E" =
+size=3D"12"></P>
+      <P><INPUT onclick=3D"result.value =3D &#10;                =
+LatLon.distHaversine(f.lat1.value.parseDeg(), f.long1.value.parseDeg(), =
+&#10;                                      f.lat2.value.parseDeg(), =
+f.long2.value.parseDeg()).toPrecision(4) + ' km'" value=3D"calculate =
+distance" type=3D"button"><INPUT=20
+      name=3D"result" size=3D"12"></P>
+      <P>And you can <A onclick=3D"window.open(this.href + &#10;         =
+                      =
+'?lat1=3D'+f.lat1.value.parseDeg().toRad()+'&amp;long1=3D'+f.long1.value.=
+parseDeg().toRad()+'&amp;lat2=3D'+f.lat2.value.parseDeg().toRad()+'&amp;l=
+ong2=3D'+f.long2.value.parseDeg().toRad()+'&amp;d=3D'+&#10;              =
+                 LatLon.distHaversine(f.lat1.value.parseDeg(), =
+f.long1.value.parseDeg(), &#10;                                          =
+          f.lat2.value.parseDeg(), f.long2.value.parseDeg()),&#10;       =
+                        this.target, =
+'width=3D525,height=3D580,menubar=3Dno,location=3Dno'); return false"=20
+      =
+href=3D"http://osiris.tuwien.ac.at/~wgarn/gis-gps/latlong-map.html" =
+rel=3D"external">see=20
+                it on a map</A> (thanks to the nice guys at Google =
+Maps)</P>
+      <TABLE>
+        <TBODY>
+        <TR id=3D"haversine">
+          <TD>
+            <P>Haversine formula:</P></TD>
+          <TD>
+            <P>R =3D earth=E2=80=99s radius (mean radius =3D =
+6,371km)<BR>=CE=94lat =3D=20
+            lat<SUB>2</SUB>=E2=88=92 lat<SUB>1</SUB><BR>=CE=94long =3D =
+long<SUB>2</SUB>=E2=88=92=20
+            long<SUB>1</SUB><BR>                a =3D =
+sin=C2=B2(=CE=94lat/2) +=20
+            =
+cos(lat<SUB>1</SUB>).cos(lat<SUB>2</SUB>).sin=C2=B2(=CE=94long/2)<BR>    =
+     =20
+                  c =3D 2.atan2(=E2=88=9Aa, =E2=88=9A(1=E2=88=92a))<BR>  =
+              d =3D R.c </P>
+            <P>(Note that angles need to be in radians to pass to trig=20
+            functions).</P></TD></TR>
+        <TR>
+          <TD>JavaScript:</TD>
+          <TD><PRE style=3D"margin-left: 0px;" class=3D"code">var R =3D =
+6371; // km=0A=
+var dLat =3D (lat2-lat1).toRad();=0A=
+var dLon =3D (lon2-lon1).toRad(); =0A=
+var a =3D Math.sin(dLat/2) * Math.sin(dLat/2) +=0A=
+        Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * =0A=
+        Math.sin(dLon/2) * Math.sin(dLon/2); =0A=
+var c =3D 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); =0A=
+var d =3D R * c;</PRE></TD></TR>
+        <TR>
+          <TD colSpan=3D"2">
+            <P>The <A =
+href=3D"http://en.wikipedia.org/wiki/Haversine_formula" =
+rel=3D"external">Haversine</A>=20
+            formula              =E2=80=98remains particularly =
+well-conditioned for=20
+            numerical computation even at small distances=E2=80=99       =
+       =E2=80=93 unlike=20
+            calculations based on the <I><ACRONYM title=3D"cos c =3D cos =
+a cos b + sin a sin b cos C">spherical=20
+                           law of cosines</ACRONYM></I>. (It was =
+published by R=20
+            W Sinnott in <I>Sky and Telescope</I>,              1984, =
+though has=20
+            been known about for much longer; the =
+=E2=80=98half-versed-sine=E2=80=99 is=20
+            (1-cos=CE=B8)/2, or sin=C2=B2(=CE=B8/2) =E2=80=93 =
+don=E2=80=99t ask,              I=E2=80=99m not a=20
+            mathematician).</P>
+            <P>In fact, when Sinnott devised the Haversine formula,=20
+            computational precision was limited.                =
+Nowadays,=20
+            JavaScript (and most modern computers) use IEEE 754 64-bit=20
+            floating-point numbers,                which provide 15 =
+significant=20
+            figures of precision. With this precision,  the simple       =
+       =20
+              <A =
+href=3D"http://mathworld.wolfram.com/SphericalTrigonometry.html"=20
+            rel=3D"external">spherical                law of cosines</A> =
+formula=20
+            gives well-conditioned results down to distances as small    =
+       =20
+                as around 1 metre. In view of this it is probably worth, =
+in most=20
+            situations, using                either the simpler law of =
+cosines=20
+            or the more accurate ellipsoidal <A =
+href=3D"http://osiris.tuwien.ac.at/~wgarn/gis-gps/latlong-vincenty.html">=
+Vincenty</A>=20
+            formula                in preference to Haversine! (See =
+notes below=20
+            on the limitations in accuracy of the spherical           =20
+            model).</P></TD></TR>
+        <TR>
+          <TD>Spherical law<BR>            of cosines:</TD>
+          <TD>d =3D=20
+            =
+acos(sin(lat<SUB>1</SUB>).sin(lat<SUB>2</SUB>)+cos(lat<SUB>1</SUB>).cos(l=
+at<SUB>2</SUB>).cos(long<SUB>2</SUB>=E2=88=92long<SUB>1</SUB>)).R</TD></T=
+R>
+        <TR>
+          <TD>JavaScript:</TD>
+          <TD><PRE style=3D"margin-left: 0px;" class=3D"code">var R =3D =
+6371; // km=0A=
+var d =3D Math.acos(Math.sin(lat1)*Math.sin(lat2) + =0A=
+                  Math.cos(lat1)*Math.cos(lat2) *=0A=
+                  Math.cos(lon2-lon1)) * R;</PRE></TD></TR>
+        <TR>
+          <TD>Excel:</TD>
+          <TD=20
+            =
+class=3D"code">=3DACOS(SIN(lat1)*SIN(lat2)+COS(lat1)*COS(lat2)*COS(lon2-l=
+on1))*6371</TD></TR>
+        <TR>
+          <TD colSpan=3D"2"><I>(Note that here and in all subsequent =
+code=20
+            fragments, for simplicity              I do not show =
+conversions=20
+            from degrees to radians; View Source for complete=20
+        versions).</I></TD></TR></TBODY></TABLE>
+      <H3 id=3D"bearing">Bearing</H3>
+      <P><INPUT onclick=3D"resultBearing.value =3D  &#10;                =
+                  LatLon.bearing(lat1.value.parseDeg(), =
+long1.value.parseDeg(), &#10;                                            =
+     lat2.value.parseDeg(), long2.value.parseDeg()).toDMS();&#10;        =
+            resultBearingFinal.value =3D  &#10;                          =
+        LatLon.bearing(lat2.value.parseDeg(), long2.value.parseDeg(), =
+&#10;                                                 =
+lat1.value.parseDeg(), long1.value.parseDeg());&#10;                    =
+resultBearingFinal.value =3D =
+((parseFloat(resultBearingFinal.value)+180)%360).toDMS(); " =
+value=3D"calculate inital/final bearing" type=3D"button"><INPUT=20
+      name=3D"resultBearing" size=3D"12"> <INPUT =
+name=3D"resultBearingFinal"=20
+      size=3D"12"></P>
+      <TABLE>
+        <TBODY>
+        <TR>
+          <TD>Formula:</TD>
+          <TD>=CE=B8&nbsp;=3D</TD>
+          <TD>atan2(</TD>
+          <TD>sin(=CE=94long).cos(lat<SUB>2</SUB>),<BR>             =20
+            cos(lat<SUB>1</SUB>).sin(lat<SUB>2</SUB>) =E2=88=92=20
+            sin(lat<SUB>1</SUB>).cos(lat<SUB>2</SUB>).cos(=CE=94long)    =
+          =20
+          )</TD></TR>
+        <TR vAlign=3D"baseline">
+          <TD>JavaScript:</TD>
+          <TD colSpan=3D"3"><PRE style=3D"margin-left: 0px;" =
+class=3D"code">var y =3D Math.sin(dLon) * Math.cos(lat2);=0A=
+var x =3D Math.cos(lat1)*Math.sin(lat2) -=0A=
+        Math.sin(lat1)*Math.cos(lat2)*Math.cos(dLon);=0A=
+var brng =3D Math.atan2(y, x).toBrng();</PRE></TD></TR>
+        <TR vAlign=3D"baseline">
+          <TD>Excel:</TD>
+          <TD class=3D"code"=20
+            =
+colSpan=3D"3">=3DATAN2(COS(lat1)*SIN(lat2)-SIN(lat1)*COS(lat2)*COS(lon2-l=
+on1),=20
+            SIN(lon2-lon1)*COS(lat2))</TD></TR></TBODY></TABLE>
+      <P class=3D"note">Since atan2 returns values in the range -=CF=80 =
+... +=CF=80 (that=20
+      is, -180=C2=B0 ... +180=C2=B0), to normalise the result           =
+to a compass=20
+      bearing (in the range 0=C2=B0 ... 360=C2=B0, with -ve values =
+transformed into the=20
+      range 180=C2=B0 ... 360=C2=B0), convert to degrees and then use=20
+      (=CE=B8+360)&nbsp;%&nbsp;360, where % is         modulo.</P>
+      <P class=3D"note">This is the initial bearing which if followed in =
+a=20
+      straight line along a great-circle           arc (orthodrome) will =
+take=20
+      you from the start point to the end point; in general, the bearing =
+       =20
+        you are following will have varied by the time you get to the =
+end point=20
+      (if you were to go from           say 35=C2=B0N,45=C2=B0E =
+(Baghdad) to 35=C2=B0N,135=C2=B0E=20
+      (Osaka), you would start on a bearing         of 60=C2=B0 and end =
+up on a=20
+      bearing of 120=C2=B0!).</P>
+      <P id=3D"finalBrng" class=3D"note">For final bearing, simply take =
+the=20
+      <I>initial</I> bearing from the <I>end</I> point to the =
+<I>start</I> point=20
+                and reverse it (using =CE=B8 =3D (=CE=B8+180) % =
+360).</P>
+      <H3 id=3D"midpoint">Midpoint</H3>
+      <P><INPUT onclick=3D"resultMidpoint.value =3D  &#10;             =
+LatLon.midPoint(lat1.value.parseDeg(), long1.value.parseDeg(), &#10;     =
+                        lat2.value.parseDeg(), =
+long2.value.parseDeg()).toString()" value=3D"calculate midpoint" =
+type=3D"button"><INPUT=20
+      name=3D"resultMidpoint" size=3D"24"></P>
+      <TABLE>
+        <TBODY>
+        <TR>
+          <TD>Formula:</TD>
+          <TD>Bx =3D cos(lat<SUB>2</SUB>).cos(=CE=94long)<BR>            =
+  By =3D=20
+            cos(lat<SUB>2</SUB>).sin(=CE=94long)<BR>              =
+lat<SUB>m</SUB> =3D=20
+            atan2(sin(lat<SUB>1</SUB>) + sin(lat<SUB>2</SUB>),=20
+            =E2=88=9A((cos(lat<SUB>1</SUB>)+Bx)=C2=B2               +=20
+            By=C2=B2))<BR>lon<SUB>m</SUB> =3D lon<SUB>1</SUB> + =
+atan2(By,=20
+            cos(lat<SUB>1</SUB>)+Bx)</TD></TR>
+        <TR>
+          <TD>JavaScript:</TD>
+          <TD><PRE style=3D"margin-left: 0px;" class=3D"code">var Bx =3D =
+Math.cos(lat2) * Math.cos(dLon);=0A=
+var By =3D Math.cos(lat2) * Math.sin(dLon);=0A=
+var lat3 =3D Math.atan2(Math.sin(lat1)+Math.sin(lat2),=0A=
+                      Math.sqrt((Math.cos(lat1)+Bx)*(Math.cos(lat1)+Bx) =
++ =0A=
+                             By*By ) ); =0A=
+var lon3 =3D lon1.toRad() + Math.atan2(By, Math.cos(lat1) + =
+Bx);</PRE></TD></TR></TBODY></TABLE>
+      <P class=3D"note">Just as the initial bearing may vary from the =
+final=20
+      bearing, the midpoint may           not be located half-way =
+between=20
+      latitudes/longitudes; the midpoint between 35=C2=B0N,45=C2=B0E     =
+    and=20
+      35=C2=B0N,135=C2=B0E is around 45=C2=B0N,90=C2=B0E.</P>
+      <P>&nbsp;</P>
+      <HR>
+
+      <H3 id=3D"destPoint"><B>Destination point given distance and =
+bearing from=20
+      start point</B></H3>
+      <P>This page is steadily growing! Given a start point, initial =
+bearing,=20
+      and distance, this will           calculate the destination point =
+and=20
+      final bearing travelling along a (shortest distance) great         =
+ =20
+      circle arc.</P>
+      <TABLE border=3D"0" cellSpacing=3D"8" cellPadding=3D"0">
+        <TBODY>
+        <TR>
+          <TD>Start Lat: </TD>
+          <TD><INPUT name=3D"latStart" value=3D"53 09 02N" =
+size=3D"12"></TD>
+          <TD>Start Long: </TD>
+          <TD><INPUT name=3D"longStart" value=3D"001 50 40W" =
+size=3D"12"></TD></TR>
+        <TR>
+          <TD>Bearing (deg): </TD>
+          <TD><INPUT name=3D"initBearing" value=3D"30=C2=B0" =
+size=3D"12"></TD>
+          <TD>Distance (km): </TD>
+          <TD><INPUT name=3D"distance" value=3D"100"=20
+size=3D"12"></TD></TR></TBODY></TABLE>
+      <TABLE style=3D"margin-top: 1em;">
+        <TBODY>
+        <TR>
+          <TD><INPUT onclick=3D"p1 =3D new =
+LatLon(latStart.value.parseDeg(), longStart.value.parseDeg()); &#10;     =
+                     resultDestination.value =3D =
+p1.destPoint(initBearing.value.parseDeg(), =
+parseFloat(distance.value)).toString();&#10;                          =
+resultFinalBearing.value =3D p1.finalBrng(initBearing.value.parseDeg(), =
+parseFloat(distance.value)).toDMS();" value=3D"calculate destination / =
+final bearing" type=3D"button"></TD>
+          <TD><INPUT name=3D"resultDestination" size=3D"24"> <INPUT =
+name=3D"resultFinalBearing"=20
+            size=3D"12"></TD></TR></TBODY></TABLE>
+      <TABLE style=3D"margin-top: 1em;">
+        <TBODY>
+        <TR>
+          <TD>Formula: </TD>
+          <TD>lat<SUB>2</SUB>&nbsp;=3D =
+asin(sin(lat<SUB>1</SUB>)*cos(d/R) +=20
+            cos(lat<SUB>1</SUB>)*sin(d/R)*cos(=CE=B8))</TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>lon<SUB>2</SUB>&nbsp;=3D lon<SUB>1</SUB> +=20
+            atan2(sin(=CE=B8)*sin(d/R)*cos(lat<SUB>1</SUB>),=20
+            =
+cos(d/R)=E2=88=92sin(lat<SUB>1</SUB>)*sin(lat<SUB>2</SUB>))</TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD><I>d/R is the angular distance (in radians), where =
+</I>d<I> is=20
+            the distance               travelled and </I>R<I> is the =
+earth=E2=80=99s=20
+            radius</I></TD></TR>
+        <TR>
+          <TD>JavaScript:</TD>
+          <TD><PRE style=3D"margin-left: 0px;" class=3D"code">var lat2 =
+=3D Math.asin( Math.sin(lat1)*Math.cos(d/R) + =0A=
+                      Math.cos(lat1)*Math.sin(d/R)*Math.cos(brng) );=0A=
+var lon2 =3D lon1 + =
+Math.atan2(Math.sin(brng)*Math.sin(d/R)*Math.cos(lat1), =0A=
+                             =
+Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));</PRE></TD></TR>
+        <TR>
+          <TD>Excel:</TD>
+          <TD class=3D"code">lat2: =3DASIN(SIN(lat1)*COS(d/ER) +=20
+            COS(lat1)*SIN(d/ER)*COS(brng))<BR>lon2: =3Dlon1 +=20
+            ATAN2(COS(d/ER)-SIN(lat1)*SIN(lat2),=20
+          SIN(brng)*SIN(d/ER)*COS(lat1))</TD></TR></TBODY></TABLE>
+      <P class=3D"note">For final bearing, simply take the =
+<I>initial</I> bearing=20
+      from the <I>end</I> point to the <I>start</I> point         and =
+reverse it=20
+      (using =CE=B8 =3D (=CE=B8+180) % 360).</P>
+      <P>&nbsp;</P>
+      <HR>
+
+      <H3 id=3D"crossTrack">Cross-track distance</H3>
+      <P>Here=E2=80=99s a new one:  I=E2=80=99ve sometimes been asked =
+about distance of a point=20
+      from a great-circle path (sometimes called cross track error).     =
+   =20
+</P>
+      <TABLE>
+        <TBODY>
+        <TR>
+          <TD>Formula: </TD>
+          <TD>d<SUB>xt</SUB> =3D=20
+            =
+asin(sin(d<SUB>13</SUB>/R)*sin(=CE=B8<SUB>13</SUB>=E2=88=92=CE=B8<SUB>12<=
+/SUB>)) *=20
+        R</TD></TR>
+        <TR>
+          <TD style=3D"text-align: right;"><I>where</I></TD>
+          <TD><I> d<SUB>13</SUB> is distance from start point to third=20
+            point<BR>=CE=B8<SUB>13</SUB> is (initial) bearing from start =
+point to=20
+            third point<BR>=CE=B8<SUB>12</SUB> is (initial) bearing from =
+start point=20
+            to end point<BR>              R<I> is the earth=E2=80=99s=20
+          radius</I><BR></I></TD></TR>
+        <TR>
+          <TD>JavaScript:</TD>
+          <TD><PRE style=3D"margin-left: 0px;" class=3D"code">var dXt =
+=3D Math.asin(Math.sin(d13/R)*Math.sin(brng13-brng12)) * =
+R;</PRE></TD></TR>
+        </TBODY></TABLE>
+      <P>Here, the great-circle path is identified by a start point and =
+an end=20
+      point =E2=80=93 depending on what initial data you=E2=80=99re =
+working from, you can use=20
+      the formulae above to obtain the relevant distance and bearings. =
+The sign=20
+      of d<SUB>xt</SUB> tells you which side of the path the third point =
+is on.=20
+      </P>
+      <P>The along-track distance, from the start point to the closest =
+point on=20
+      the path to the third point, is</P>
+      <TABLE>
+        <TBODY>
+        <TR>
+          <TD>Formula: </TD>
+          <TD>d<SUB>at</SUB> =3D=20
+            acos(cos(d<SUB>13</SUB>/R)/cos(d<SUB>xt</SUB>/R)) * =
+R</TD></TR>
+        <TR>
+          <TD style=3D"text-align: right;"><I>where</I></TD>
+          <TD><I> d<SUB>13</SUB> is distance from start point to third=20
+            point<BR>              d<SUB>xt</SUB> is cross-track =
+distance<BR>   =20
+                      R<I> is the earth=E2=80=99s =
+radius</I><BR></I></TD></TR>
+        <TR>
+          <TD>JavaScript:</TD>
+          <TD><PRE style=3D"margin-left: 0px;" class=3D"code">var dAt =
+=3D Math.acos(Math.cos(d13/R)/Math.cos(dXt/R)) * =
+R;</PRE></TD></TR></TBODY></TABLE>
+      <P>&nbsp;</P>
+      <H3 id=3D"clairaut">Closest point to the poles</H3>
+      <P>Also new:  =E2=80=98Clairaut=E2=80=99s formula=E2=80=99 will =
+give you the maximum latitude of a=20
+      great circle path,          given a bearing and latitude on the =
+great=20
+      circle:               </P>
+      <TABLE>
+        <TBODY>
+        <TR>
+          <TD>Formula: </TD>
+          <TD>lat<SUB>max</SUB> =3D =
+acos(abs(sin(=CE=B8)*cos(lat)))</TD></TR>
+        <TR>
+          <TD>JavaScript:</TD>
+          <TD><PRE style=3D"margin-left: 0px;" class=3D"code">var latMax =
+=3D =
+Math.acos(Math.abs(Math.sin(brng)*Math.cos(lat)));</PRE></TD></TR></TBODY=
+></TABLE>
+      <TABLE></TABLE>
+      <P>&nbsp;</P>
+      <HR>
+
+      <H3>Rhumb lines</H3>
+      <P>A =E2=80=98rhumb line=E2=80=99 (or loxodrome) is a path of =
+constant bearing, which=20
+      crosses all meridians at           the same angle.</P>
+      <P>Sailors used to (and sometimes still) navigate along rhumb =
+lines since=20
+      it is easier to follow a constant compass           bearing than =
+to=20
+      continually adjust the bearing as is needed to follow a great =
+circle,=20
+      though they are normally longer  than great-circle (orthodrome) =
+routes.=20
+      Rhumb lines           are straight lines on a Mercator Projection =
+map.</P>
+      <TABLE>
+        <TBODY>
+        <TR>
+          <TD>Lat 1:           <INPUT name=3D"lat1Rhumb" value=3D"50 21 =
+50N" size=3D"12"></TD>
+          <TD>Long 1:           <INPUT name=3D"long1Rhumb" value=3D"004 =
+09 25W"=20
+            size=3D"12"></TD></TR>
+        <TR>
+          <TD>Lat 2:           <INPUT name=3D"lat2Rhumb" value=3D"42 21 =
+04N" size=3D"12"></TD>
+          <TD>Long 2:           <INPUT name=3D"long2Rhumb" value=3D"071 =
+02 27W"=20
+            size=3D"12"></TD></TR></TBODY></TABLE>
+      <TABLE style=3D"margin-top: 1em;">
+        <TBODY>
+        <TR>
+          <TD><INPUT onclick=3D"rhumbDist.value =3D &#10;                =
+         LatLon.distRhumb(lat1Rhumb.value.parseDeg(), =
+long1Rhumb.value.parseDeg(), &#10;                                       =
+   lat2Rhumb.value.parseDeg(), =
+long2Rhumb.value.parseDeg()).toPrecision(4) + ' km';" value=3D"calculate =
+distance" type=3D"button"></TD>
+          <TD><INPUT name=3D"rhumbDist" size=3D"12"></TD></TR>
+        <TR>
+          <TD><INPUT onclick=3D"rhumbBrng.value =3D &#10;                =
+         LatLon.brngRhumb(lat1Rhumb.value.parseDeg(), =
+long1Rhumb.value.parseDeg(), &#10;                                       =
+   lat2Rhumb.value.parseDeg(), long2Rhumb.value.parseDeg()).toDMS();" =
+value=3D"calculate bearing" type=3D"button"></TD>
+          <TD><INPUT name=3D"rhumbBrng" =
+size=3D"12"></TD></TR></TBODY></TABLE>
+      <TABLE style=3D"margin-top: 1em;">
+        <TBODY>
+        <TR>
+          <TD>Formula: </TD>
+          <TD>=CE=94=CF=86&nbsp;=3D=20
+            =
+ln(tan(lat<SUB>2</SUB>/2+=CF=80/4)/tan(lat<SUB>1</SUB>/2+=CF=80/4))</TD><=
+/TR>
+        <TR>
+          <TD><I>if&nbsp;E:W&nbsp;line</I></TD>
+          <TD>q =3D cos(lat1)</TD></TR>
+        <TR>
+          <TD><I>otherwise</I></TD>
+          <TD>q =3D =CE=94lat/=CE=94=CF=86</TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>d =3D =E2=88=9A[=CE=94lat=C2=B2 + =
+q=C2=B2.=CE=94lon=C2=B2].R</TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>=CE=B8 =3D atan2(=CE=94lon, =CE=94=CF=86)</TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD><I>where </I>ln<I> is natural log, </I>=CE=94lon<I> is =
+taking=20
+            shortest route (&lt;180=C2=BA),               and </I>R<I> =
+is the earth=E2=80=99s=20
+            radius</I></TD></TR>
+        <TR>
+          <TD>JavaScript:</TD>
+          <TD><PRE style=3D"margin-left: 0px;" class=3D"code">var dPhi =
+=3D Math.log(Math.tan(lat2/2+Math.PI/4)/Math.tan(lat1/2+Math.PI/4));=0A=
+var q =3D (Math.abs(dLat) &gt; 1e-10) ? dLat/dPhi : Math.cos(lat1);=0A=
+// if dLon over 180=C2=B0 take shorter rhumb across 180=C2=B0 meridian:=0A=
+if (Math.abs(dLon) &gt; Math.PI) {=0A=
+  dLon =3D dLon&gt;0 ? -(2*Math.PI-dLon) : (2*Math.PI+dLon);=0A=
+}=0A=
+var d =3D Math.sqrt(dLat*dLat + q*q*dLon*dLon) * R;=0A=
+var brng =3D Math.atan2(dLon, dPhi);</PRE></TD></TR></TBODY></TABLE>
+      <P>Given a start point and a distance <I>d</I> along constant =
+bearing=20
+      <I>=CE=B8</I>, this will           calculate the destination =
+point. If you=20
+      maintain a constant bearing along a rhumb line, you           will =
+
+      gradually spiral in towards one of the poles. </P>
+      <TABLE border=3D"0" cellSpacing=3D"8" cellPadding=3D"0">
+        <TBODY>
+        <TR>
+          <TD>Start Lat: </TD>
+          <TD><INPUT name=3D"rhumbLatStart" value=3D"51 07 32N" =
+size=3D"12"></TD>
+          <TD>Start Long: </TD>
+          <TD><INPUT name=3D"rhumbLongStart" value=3D"001 20 17E" =
+size=3D"12"></TD></TR>
+        <TR>
+          <TD>Bearing (deg): </TD>
+          <TD><INPUT name=3D"rhumbInitBearing" =
+value=3D"116=C2=B038=E2=80=B210=E2=80=B3" size=3D"12"></TD>
+          <TD>Distance (km): </TD>
+          <TD><INPUT name=3D"rhumbDistance" value=3D"40.23"=20
+        size=3D"12"></TD></TR></TBODY></TABLE>
+      <P><INPUT onclick=3D"p1 =3D new =
+LatLon(rhumbLatStart.value.parseDeg(), rhumbLongStart.value.parseDeg()); =
+&#10;                rhumbResultDestination.value =3D =
+p1.destPointRhumb(rhumbInitBearing.value.parseDeg(), =
+rhumbDistance.value).toString();" value=3D"calculate destination" =
+type=3D"button"><INPUT=20
+      name=3D"rhumbResultDestination" size=3D"24">          &nbsp; </P>
+      <TABLE>
+        <TBODY>
+        <TR>
+          <TD>Formula: </TD>
+          <TD>=CE=B1 =3D d/R <I>(angular distance)</I></TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>lat<SUB>2</SUB>&nbsp;=3D lat<SUB>1</SUB> + =
+=CE=B1.cos(=CE=B8)</TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>=CE=94=CF=86&nbsp;=3D=20
+            =
+ln(tan(lat<SUB>2</SUB>/2+=CF=80/4)/tan(lat<SUB>1</SUB>/2+=CF=80/4))</TD><=
+/TR>
+        <TR>
+          <TD><I>if&nbsp;E:W&nbsp;line</I></TD>
+          <TD>q =3D cos(lat<SUB>1</SUB>) <I></I></TD></TR>
+        <TR>
+          <TD><I>otherwise</I></TD>
+          <TD>q =3D =CE=94lat/=CE=94=CF=86</TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>=CE=94lon =3D =CE=B1.sin(=CE=B8)/q</TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD>lon<SUB>2</SUB> =3D (lon<SUB>1</SUB>+=CE=94lon+=CF=80) % =
+2.=CF=80 =E2=88=92 =CF=80</TD></TR>
+        <TR>
+          <TD>&nbsp;</TD>
+          <TD><I>where </I>ln<I> is natural log and </I>%<I> is modulo,=20
+            </I>=CE=94lon<I> is taking             shortest route =
+(&lt;180=C2=B0), and=20
+            </I>R<I> is the earth=E2=80=99s radius</I></TD></TR>
+        <TR>
+          <TD>JavaScript:</TD>
+          <TD><PRE style=3D"margin-left: 0px;" class=3D"code">lat2 =3D =
+lat1 + d*Math.cos(brng);=0A=
+var dPhi =3D =
+Math.log(Math.tan(lat2/2+Math.PI/4)/Math.tan(lat1/2+Math.PI/4));=0A=
+var q =3D (Math.abs(lat2-lat1) &gt; 1e-10) ? (lat2-lat1)/dPhi : =
+Math.cos(lat1);=0A=
+var dLon =3D d*Math.sin(brng)/q;=0A=
+// check for some daft bugger going past the pole=0A=
+if (Math.abs(lat2) &gt; Math.PI/2) lat2 =3D lat2&gt;0 ? Math.PI-lat2 : =
+-Math.PI-lat2;=0A=
+lon2 =3D (lon1+dLon+Math.PI)%(2*Math.PI) - Math.PI;=0A=
+</PRE></TD></TR></TBODY></TABLE>
+      <P>If you use Ordnance Survey Grid References, I have implemented =
+a script=20
+      for <A =
+href=3D"http://osiris.tuwien.ac.at/~wgarn/gis-gps/latlong-gridref.html">c=
+onverting=20
+              between Lat/Long &amp; OS Grid References</A>.</P>
+      <HR>
+
+      <H3 id=3D"convertDecDMS">Convert between degrees-minutes-seconds =
+&amp;=20
+      decimal degrees</H3>
+      <TABLE style=3D"margin-bottom: 1em;" class=3D"note">
+        <TBODY>
+        <TR>
+          <TD>Latitude</TD>
+          <TD>Longitude</TD>
+          <TD colSpan=3D"2">1=C2=B0 =E2=89=88 111 km <SPAN=20
+            style=3D"color: rgb(153, 153, 153);">(110.57 eq=E2=80=99l =
+=E2=80=94 111.70=20
+            polar)</SPAN></TD></TR>
+        <TR>
+          <TD><INPUT =
+onchange=3D"f.latDec.value=3Df.latDMS.value.parseDeg().toFixed(5);"=20
+            class=3D"note" name=3D"latDMS" value=3D"52 12 17N"></TD>
+          <TD><INPUT =
+onchange=3D"f.lonDec.value=3Df.lonDMS.value.parseDeg().toFixed(5);"=20
+            class=3D"note" name=3D"lonDMS" value=3D"000 08 26E"></TD>
+          <TD>1=E2=80=B2 =E2=89=88 1.85 km <SPAN style=3D"color: =
+rgb(153, 153, 153);">(=3D 1=20
+            nm)</SPAN></TD>
+          <TD>0.001=C2=B0 =E2=89=88 111 m</TD></TR>
+        <TR>
+          <TD><INPUT =
+onchange=3D"f.latDMS.value=3Df.latDec.value.parseDeg().toLat();"=20
+            class=3D"note" name=3D"latDec" value=3D"52.2047"></TD>
+          <TD><INPUT =
+onchange=3D"f.lonDMS.value=3Df.lonDec.value.parseDeg().toLon();"=20
+            class=3D"note" name=3D"lonDec" value=3D"0.1406"></TD>
+          <TD>1=E2=80=B3 =E2=89=88 30.9 m</TD>
+          <TD>0.00001=C2=B0 =E2=89=88 1 m</TD></TR></TBODY></TABLE>
+      <P class=3D"note">No, I=E2=80=99ve not included decimal minutes: a =
+decimal system is=20
+      easy, a sexagesimal        system has merits, but mixing the two =
+is a=20
+      complete sow=E2=80=99s ear. Switch off the option on your =
+GPS!</P></FORM>
+      <HR>
+
+      <P id=3D"notes"><I>Notes:</I></P>
+      <UL style=3D"margin-top: 1.5em;" class=3D"note">
+        <LI id=3D"ellipsoid">Accuracy: since the earth is not quite a =
+sphere,=20
+        there are small errors in using spherical          geometry; the =
+earth=20
+        is actually roughly <B>ellipsoidal</B> (or more precisely, =
+oblate=20
+        spheroidal)          with a radius varying between about 6,378km =
+
+        (equatorial) and 6,357km (polar), and local radius          of =
+curvature=20
+        varying from 6,336km (equatorial meridian) to 6,399km (polar). =
+This=20
+        means that          errors from assuming spherical geometry =
+might be up=20
+        to 0.55% crossing the equator, though generally          below =
+0.3%,=20
+        depending on latitude and direction of travel. An accuracy of =
+better=20
+        than 3m in          1km is good enough for me, but if you want =
+greater=20
+        accuracy, you could use the <A =
+href=3D"http://osiris.tuwien.ac.at/~wgarn/gis-gps/latlong-vincenty.html">=
+Vincenty</A>=20
+        formula          for calculating geodesic distances on =
+ellipsoids, which=20
+        gives results accurate to within 1mm.          (Out of sheer =
+perversity=20
+        =E2=80=93 I=E2=80=99ve never needed such accuracy =E2=80=93 I =
+looked up this formula and=20
+        discovered          the JavaScript implementation was simpler =
+than I=20
+        expected).</LI>
+        <LI>Trig functions take arguments in <B>radians</B>, so =
+latitude,=20
+        longitude, and           bearings in <B>degrees</B> (either =
+decimal or=20
+        degrees/minutes/seconds) need to be converted          to =
+radians, rad =3D=20
+        =CF=80.deg/180. When converting radians back to degrees (deg =3D =
+180.rad/=CF=80),   =20
+               West is negative if using signed decimal degrees. For =
+bearings,=20
+        values in the range -=CF=80 to            +=CF=80 [-180=C2=B0 to =
++180=C2=B0] need to be=20
+        converted to 0 to +2=CF=80 [0=C2=B0=E2=80=93360=C2=B0]; this     =
+       can  be done by=20
+        (brng+2.=CF=80)%2.=CF=80 [brng+360)%360] where % is the modulo =
+operator. View     =20
+              page source to see JavaScript functions to handle these=20
+        conversions.</LI>
+        <LI>The <B>atan2</B>() function widely used here takes two =
+arguments,=20
+        atan2(y, x), and computes           the arc tangent of the ratio =
+y/x. It=20
+        is more flexible than atan(y/x), since it handles x=3D0,         =
+  and it=20
+        also returns values in all 4 quadrants -=CF=80 to +=CF=80 (the =
+atan function=20
+        returns values           in the range -=CF=80/2 to =
++=CF=80/2).</LI>
+        <LI>If you implement any formula involving atan2 in Microsoft=20
+        <B>Excel</B>, you will need to          reverse  the arguments, =
+as <A=20
+        =
+href=3D"http://office.microsoft.com/en-us/assistance/HP052089911033.aspx"=
+=20
+        rel=3D"external">Excel</A>           has them the opposite way =
+around from=20
+        <A =
+href=3D"http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Referenc=
+e:Objects:Math:atan2"=20
+        rel=3D"external">JavaScript</A>=E2=80=93 conventional order is =
+atan2(y, x), but=20
+        Excel uses atan2(x, y). To use atan2 in a (VBA) macro,          =
+you can=20
+        use WorksheetFunction.Atan2(). </LI>
+        <LI>All bearings are with respect to <B>true north</B>, =
+0=C2=B0=3DN, 90=C2=B0=3DE,=20
+        etc;          if you are working from a compass, magnetic north =
+varies=20
+        from          true north in a complex way around the earth, and =
+the=20
+        difference has to be compensated for          by variances =
+indicated on=20
+        local maps.</LI>
+        <LI>I learned a lot from the US Census Bureau <A =
+href=3D"http://osiris.tuwien.ac.at/~wgarn/gis-gps/gis-faq-5.1.html">GIS=20
+                  FAQ</A> which is no longer available, so I=E2=80=99ve =
+made a=20
+copy.</LI>
+        <LI>Thanks to Ed Williams=E2=80=99 <A =
+href=3D"http://williams.best.vwh.net/avform.htm"=20
+        rel=3D"external">Aviation             Formulary</A> for many of =
+the=20
+        formulae.</LI>
+        <LI>For <B>miles</B>, divide km by 1.609344</LI>
+        <LI>For <B>nautical miles</B>, divide km by =
+1.852</LI></UL></TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR class=3D"tableRule">
+    <TD colSpan=3D"2"><IMG alt=3D"" src=3D"" width=3D"1" =
+height=3D"1"></TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>
+      <P id=3D"postscript">Principal JavaScript functions for distance =
+calculation=20
+      are shown below; use        =E2=80=98View Source=E2=80=99  to see =
+remaining functions for=20
+      other formulae shown above and how they are used        from HTML =
+forms.=20
+      These functions should be simple to translate into other languages =
+if=20
+      required. </P>
+      <P><I><B>Update for returning visitors, April 2007</B></I>: As =
+this page=20
+      has grown, it=E2=80=99s become        somewhat unweildy, so I have =
+now revised and=20
+      rationalised the scripts to made the code clearer        and more=20
+      re-usable. All LatLon methods now expect and return numeric =
+degrees;=20
+      converting between        radians, degrees        &amp; =
+deg/min/sec I have=20
+      made extensions of Number or String objects. The LatLon object is =
+just    =20
+         a handy way of holding a (latitude,longitude) pair. If you =
+can=E2=80=99t or=20
+      don=E2=80=99t want to use JavaScript        objects, functions =
+could perhaps=20
+      return a point as an array (e.g. <SPAN style=3D'font-family: =
+"Lucida Console", "Courier New", Courier, monospace; font-size: =
+xx-small;'>return=20
+             [lat, lon];</SPAN>). </P>
+      <P>You are welcome to re-use these scripts [without any warranty =
+express  =20
+           or implied] provided you retain my copyright notice and when =
+possible=20
+      a        link to my website (under a <A =
+href=3D"http://www.fsf.org/licensing/licenses/lgpl.html"=20
+      rel=3D"external">LGPL</A> license).        If you have any queries =
+or find=20
+      any problems, please <A =
+href=3D"mailto:scripts@movable-type.co.uk">contact  =20
+         me</A>.</P>
+      <P><SPAN class=3D"note"><I>=C2=A9 2002-2008 Chris =
+Veness</I></SPAN> </P></TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR>
+  <TR class=3D"tableRule">
+    <TD colSpan=3D"2"><IMG alt=3D"" src=3D"" width=3D"1" =
+height=3D"1"></TD></TR>
+  <TR>
+    <TD colSpan=3D"2"><PRE id=3D"code">/*=0A=
+ * Use Haversine formula to Calculate distance (in km) between two =
+points specified by =0A=
+ * latitude/longitude (in numeric degrees)=0A=
+ *=0A=
+ * example usage from form:=0A=
+ *   result.value =3D LatLon.distHaversine(lat1.value.parseDeg(), =
+long1.value.parseDeg(), =0A=
+ *                                       lat2.value.parseDeg(), =
+long2.value.parseDeg());=0A=
+ * where lat1, long1, lat2, long2, and result are form fields=0A=
+ */=0A=
+LatLon.distHaversine =3D function(lat1, lon1, lat2, lon2) {=0A=
+  var R =3D 6371; // earth's mean radius in km=0A=
+  var dLat =3D (lat2-lat1).toRad();=0A=
+  var dLon =3D (lon2-lon1).toRad();=0A=
+  lat1 =3D lat1.toRad(), lat2 =3D lat2.toRad();=0A=
+=0A=
+  var a =3D Math.sin(dLat/2) * Math.sin(dLat/2) +=0A=
+          Math.cos(lat1) * Math.cos(lat2) * =0A=
+          Math.sin(dLon/2) * Math.sin(dLon/2);=0A=
+  var c =3D 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));=0A=
+  var d =3D R * c;=0A=
+  return d;=0A=
+}=0A=
+=0A=
+=0A=
+/*=0A=
+ * ditto using Law of Cosines=0A=
+ */=0A=
+LatLon.distCosineLaw =3D function(lat1, lon1, lat2, lon2) {=0A=
+  var R =3D 6371; // earth's mean radius in km=0A=
+  var d =3D Math.acos(Math.sin(lat1.toRad())*Math.sin(lat2.toRad()) +=0A=
+                    =
+Math.cos(lat1.toRad())*Math.cos(lat2.toRad())*Math.cos((lon2-lon1).toRad(=
+))) * R;=0A=
+  return d;=0A=
+}=0A=
+=0A=
+=0A=
+/*=0A=
+ * calculate (initial) bearing between two points=0A=
+ *   see http://williams.best.vwh.net/avform.htm#Crs=0A=
+ */=0A=
+LatLon.bearing =3D function(lat1, lon1, lat2, lon2) {=0A=
+  lat1 =3D lat1.toRad(); lat2 =3D lat2.toRad();=0A=
+  var dLon =3D (lon2-lon1).toRad();=0A=
+=0A=
+  var y =3D Math.sin(dLon) * Math.cos(lat2);=0A=
+  var x =3D Math.cos(lat1)*Math.sin(lat2) -=0A=
+          Math.sin(lat1)*Math.cos(lat2)*Math.cos(dLon);=0A=
+  return Math.atan2(y, x).toBrng();=0A=
+}=0A=
+=0A=
+=0A=
+/*=0A=
+ * calculate destination point given start point, initial bearing (deg) =
+and distance (km)=0A=
+ *   see http://williams.best.vwh.net/avform.htm#LL=0A=
+ */=0A=
+LatLon.prototype.destPoint =3D function(brng, d) {=0A=
+  var R =3D 6371; // earth's mean radius in km=0A=
+  var lat1 =3D this.lat.toRad(), lon1 =3D this.lon.toRad();=0A=
+  brng =3D brng.toRad();=0A=
+=0A=
+  var lat2 =3D Math.asin( Math.sin(lat1)*Math.cos(d/R) + =0A=
+                        Math.cos(lat1)*Math.sin(d/R)*Math.cos(brng) );=0A=
+  var lon2 =3D lon1 + =
+Math.atan2(Math.sin(brng)*Math.sin(d/R)*Math.cos(lat1), =0A=
+                               =
+Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));=0A=
+  lon2 =3D (lon2+Math.PI)%(2*Math.PI) - Math.PI;  // normalise to =
+-180...+180=0A=
+=0A=
+  if (isNaN(lat2) || isNaN(lon2)) return null;=0A=
+  return new LatLon(lat2.toDeg(), lon2.toDeg());=0A=
+}=0A=
+=0A=
+=0A=
+/*=0A=
+ * construct a LatLon object: arguments in numeric degrees=0A=
+ *=0A=
+ * note all LatLong methods expect &amp; return numeric degrees (for =
+lat/long &amp; for bearings)=0A=
+ */=0A=
+function LatLon(lat, lon) {=0A=
+  this.lat =3D lat;=0A=
+  this.lon =3D lon;=0A=
+}=0A=
+=0A=
+=0A=
+/*=0A=
+ * represent point {lat, lon} in standard representation=0A=
+ */=0A=
+LatLon.prototype.toString =3D function() {=0A=
+  return this.lat.toLat() + ', ' + this.lon.toLon();=0A=
+}=0A=
+=0A=
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - =
+- - - - - - - - - - - -  */=0A=
+=0A=
+// extend String object with method for parsing degrees or lat/long =
+values to numeric degrees=0A=
+//=0A=
+// this is very flexible on formats, allowing signed decimal degrees, or =
+deg-min-sec suffixed by =0A=
+// compass direction (NSEW). A variety of separators are accepted (eg =
+3=C2=BA 37' 09"W) or fixed-width =0A=
+// format without separators (eg 0033709W). Seconds and minutes may be =
+omitted. (Minimal validation =0A=
+// is done).=0A=
+=0A=
+String.prototype.parseDeg =3D function() {=0A=
+  if (!isNaN(this)) return Number(this);                 // signed =
+decimal degrees without NSEW=0A=
+=0A=
+  var degLL =3D this.replace(/^-/,'').replace(/[NSEW]/i,'');  // strip =
+off any sign or compass dir'n=0A=
+  var dms =3D degLL.split(/[^0-9.]+/);                     // split out =
+separate d/m/s=0A=
+  for (var i in dms) if (dms[i]=3D=3D'') dms.splice(i,1);    // remove =
+empty elements (see note below)=0A=
+  switch (dms.length) {                                  // convert to =
+decimal degrees...=0A=
+    case 3:                                              // interpret =
+3-part result as d/m/s=0A=
+      var deg =3D dms[0]/1 + dms[1]/60 + dms[2]/3600; break;=0A=
+    case 2:                                              // interpret =
+2-part result as d/m=0A=
+      var deg =3D dms[0]/1 + dms[1]/60; break;=0A=
+    case 1:                                              // decimal or =
+non-separated dddmmss=0A=
+      if (/[NS]/i.test(this)) degLL =3D '0' + degLL;       // - =
+normalise N/S to 3-digit degrees=0A=
+      var deg =3D dms[0].slice(0,3)/1 + dms[0].slice(3,5)/60 + =
+dms[0].slice(5)/3600; break;=0A=
+    default: return NaN;=0A=
+  }=0A=
+  if (/^-/.test(this) || /[WS]/i.test(this)) deg =3D -deg; // take '-', =
+west and south as -ve=0A=
+  return deg;=0A=
+}=0A=
+// note: whitespace at start/end will split() into empty elements =
+(except in IE)=0A=
+=0A=
+=0A=
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - =
+- - - - - - - - - - - -  */=0A=
+=0A=
+// extend Number object with methods for converting degrees/radians=0A=
+=0A=
+Number.prototype.toRad =3D function() {  // convert degrees to radians=0A=
+  return this * Math.PI / 180;=0A=
+}=0A=
+=0A=
+Number.prototype.toDeg =3D function() {  // convert radians to degrees =
+(signed)=0A=
+  return this * 180 / Math.PI;=0A=
+}=0A=
+=0A=
+Number.prototype.toBrng =3D function() {  // convert radians to degrees =
+(as bearing: 0...360)=0A=
+  return (this.toDeg()+360) % 360;=0A=
+}=0A=
+=0A=
+=0A=
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - =
+- - - - - - - - - - - -  */=0A=
+=0A=
+// extend Number object with methods for presenting bearings &amp; =
+lat/longs=0A=
+=0A=
+Number.prototype.toDMS =3D function() {  // convert numeric degrees to =
+deg/min/sec=0A=
+  var d =3D Math.abs(this);  // (unsigned result ready for appending =
+compass dir'n)=0A=
+  d +=3D 1/7200;  // add =C2=BD second for rounding=0A=
+  var deg =3D Math.floor(d);=0A=
+  var min =3D Math.floor((d-deg)*60);=0A=
+  var sec =3D Math.floor((d-deg-min/60)*3600);=0A=
+  // add leading zeros if required=0A=
+  if (deg&lt;100) deg =3D '0' + deg; if (deg&lt;10) deg =3D '0' + deg;=0A=
+  if (min&lt;10) min =3D '0' + min;=0A=
+  if (sec&lt;10) sec =3D '0' + sec;=0A=
+  return deg + '\u00B0' + min + '\u2032' + sec + '\u2033';=0A=
+}=0A=
+=0A=
+Number.prototype.toLat =3D function() {  // convert numeric degrees to =
+deg/min/sec latitude=0A=
+  return this.toDMS().slice(1) + (this&lt;0 ? 'S' : 'N');  // knock off =
+initial '0' for lat!=0A=
+}=0A=
+=0A=
+Number.prototype.toLon =3D function() {  // convert numeric degrees to =
+deg/min/sec longitude=0A=
+  return this.toDMS() + (this&gt;0 ? 'E' : 'W');=0A=
+}=0A=
+=0A=
+Number.prototype.toPrecision =3D function(fig) {  // override =
+toPrecision method with one which displays =0A=
+  if (this =3D=3D 0) return 0;                      // trailing zeros in =
+place of exponential notation=0A=
+  var scale =3D Math.ceil(Math.log(this)*Math.LOG10E);=0A=
+  var mult =3D Math.pow(10, fig-scale);=0A=
+  return Math.round(this*mult)/mult;=0A=
+}=0A=
+=0A=
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - =
+- - - - - - - - - - - -  */=0A=
+</PRE></TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD>&nbsp;</TD></TR></TBODY></TABLE>
+<SCRIPT type=3D"text/javascript" =
+src=3D"http://www.google-analytics.com/urchin.js"></SCRIPT>
+
+<SCRIPT type=3D"text/javascript"> _uacct =3D "UA-966502-1"; =
+urchinTracker(); </SCRIPT>
+</BODY></HTML>
+
+------=_NextPart_000_0000_01CBB5C4.EF126A10
+Content-Type: text/css;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Location: http://osiris.tuwien.ac.at/~wgarn/mtl.css
+
+
+------=_NextPart_000_0000_01CBB5C4.EF126A10
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.google-analytics.com/urchin.js
+
+//-- Google Analytics Urchin Module=0A=
+//-- Copyright 2007 Google, All Rights Reserved.=0A=
+=0A=
+//-- Urchin On Demand Settings ONLY=0A=
+var _uacct=3D"";			// set up the Urchin Account=0A=
+var _userv=3D1;			// service mode (0=3Dlocal,1=3Dremote,2=3Dboth)=0A=
+=0A=
+//-- UTM User Settings=0A=
+var _ufsc=3D1;			// set client info flag (1=3Don|0=3Doff)=0A=
+var _udn=3D"auto";		// (auto|none|domain) set the domain name for cookies=0A=
+var _uhash=3D"on";		// (on|off) unique domain hash for cookies=0A=
+var _utimeout=3D"1800";   	// set the inactive session timeout in seconds=0A=
+var _ugifpath=3D"/__utm.gif";	// set the web path to the __utm.gif file=0A=
+var _utsp=3D"|";			// transaction field separator=0A=
+var _uflash=3D1;			// set flash version detect option (1=3Don|0=3Doff)=0A=
+var _utitle=3D1;			// set the document title detect option =
+(1=3Don|0=3Doff)=0A=
+var _ulink=3D0;			// enable linker functionality (1=3Don|0=3Doff)=0A=
+var _uanchor=3D0;			// enable use of anchors for campaign =
+(1=3Don|0=3Doff)=0A=
+var _utcp=3D"/";			// the cookie path for tracking=0A=
+var _usample=3D100;		// The sampling % of visitors to track (1-100).=0A=
+=0A=
+//-- UTM Campaign Tracking Settings=0A=
+var _uctm=3D1;			// set campaign tracking module (1=3Don|0=3Doff)=0A=
+var _ucto=3D"15768000";		// set timeout in seconds (6 month default)=0A=
+var _uccn=3D"utm_campaign";	// name=0A=
+var _ucmd=3D"utm_medium";		// medium (cpc|cpm|link|email|organic)=0A=
+var _ucsr=3D"utm_source";		// source=0A=
+var _uctr=3D"utm_term";		// term/keyword=0A=
+var _ucct=3D"utm_content";	// content=0A=
+var _ucid=3D"utm_id";		// id number=0A=
+var _ucno=3D"utm_nooverride";	// don't override=0A=
+=0A=
+//-- Auto/Organic Sources and Keywords=0A=
+var _uOsr=3Dnew Array();=0A=
+var _uOkw=3Dnew Array();=0A=
+_uOsr[0]=3D"google";	_uOkw[0]=3D"q";=0A=
+_uOsr[1]=3D"yahoo";	_uOkw[1]=3D"p";=0A=
+_uOsr[2]=3D"msn";		_uOkw[2]=3D"q";=0A=
+_uOsr[3]=3D"aol";		_uOkw[3]=3D"query";=0A=
+_uOsr[4]=3D"aol";		_uOkw[4]=3D"encquery";=0A=
+_uOsr[5]=3D"lycos";	_uOkw[5]=3D"query";=0A=
+_uOsr[6]=3D"ask";		_uOkw[6]=3D"q";=0A=
+_uOsr[7]=3D"altavista";	_uOkw[7]=3D"q";=0A=
+_uOsr[8]=3D"netscape";	_uOkw[8]=3D"query";=0A=
+_uOsr[9]=3D"cnn";	_uOkw[9]=3D"query";=0A=
+_uOsr[10]=3D"looksmart";	_uOkw[10]=3D"qt";=0A=
+_uOsr[11]=3D"about";	_uOkw[11]=3D"terms";=0A=
+_uOsr[12]=3D"mamma";	_uOkw[12]=3D"query";=0A=
+_uOsr[13]=3D"alltheweb";	_uOkw[13]=3D"q";=0A=
+_uOsr[14]=3D"gigablast";	_uOkw[14]=3D"q";=0A=
+_uOsr[15]=3D"voila";	_uOkw[15]=3D"rdata";=0A=
+_uOsr[16]=3D"virgilio";	_uOkw[16]=3D"qs";=0A=
+_uOsr[17]=3D"live";	_uOkw[17]=3D"q";=0A=
+_uOsr[18]=3D"baidu";	_uOkw[18]=3D"wd";=0A=
+_uOsr[19]=3D"alice";	_uOkw[19]=3D"qs";=0A=
+_uOsr[20]=3D"yandex";	_uOkw[20]=3D"text";=0A=
+_uOsr[21]=3D"najdi";	_uOkw[21]=3D"q";=0A=
+_uOsr[22]=3D"aol";	_uOkw[22]=3D"q";=0A=
+_uOsr[23]=3D"club-internet"; _uOkw[23]=3D"query";=0A=
+_uOsr[24]=3D"mama";	_uOkw[24]=3D"query";=0A=
+_uOsr[25]=3D"seznam";	_uOkw[25]=3D"q";=0A=
+_uOsr[26]=3D"search";	_uOkw[26]=3D"q";=0A=
+_uOsr[27]=3D"wp";	_uOkw[27]=3D"szukaj";=0A=
+_uOsr[28]=3D"onet";	_uOkw[28]=3D"qt";=0A=
+_uOsr[29]=3D"netsprint";	_uOkw[29]=3D"q";=0A=
+_uOsr[30]=3D"google.interia";	_uOkw[30]=3D"q";=0A=
+_uOsr[31]=3D"szukacz";	_uOkw[31]=3D"q";=0A=
+_uOsr[32]=3D"yam";	_uOkw[32]=3D"k";=0A=
+_uOsr[33]=3D"pchome";	_uOkw[33]=3D"q";=0A=
+_uOsr[34]=3D"kvasir";	_uOkw[34]=3D"searchExpr";=0A=
+_uOsr[35]=3D"sesam";	_uOkw[35]=3D"q";=0A=
+_uOsr[36]=3D"ozu"; _uOkw[36]=3D"q";=0A=
+_uOsr[37]=3D"terra"; _uOkw[37]=3D"query";=0A=
+_uOsr[38]=3D"nostrum"; _uOkw[38]=3D"query";=0A=
+_uOsr[39]=3D"mynet"; _uOkw[39]=3D"q";=0A=
+_uOsr[40]=3D"ekolay"; _uOkw[40]=3D"q";=0A=
+_uOsr[41]=3D"search.ilse"; _uOkw[41]=3D"search_for";=0A=
+_uOsr[42]=3D"bing"; _uOkw[42]=3D"q";=0A=
+=0A=
+//-- Auto/Organic Keywords to Ignore=0A=
+var _uOno=3Dnew Array();=0A=
+//_uOno[0]=3D"urchin";=0A=
+//_uOno[1]=3D"urchin.com";=0A=
+//_uOno[2]=3D"www.urchin.com";=0A=
+=0A=
+//-- Referral domains to Ignore=0A=
+var _uRno=3Dnew Array();=0A=
+//_uRno[0]=3D".urchin.com";=0A=
+=0A=
+//-- **** Don't modify below this point ***=0A=
+var =
+_uff,_udh,_udt,_ubl=3D0,_udo=3D"",_uu,_ufns=3D0,_uns=3D0,_ur=3D"-",_ufno=3D=
+0,_ust=3D0,_ubd=3Ddocument,_udl=3D_ubd.location,_udlh=3D"",_uwv=3D"1.3";=0A=
+var _ugifpath2=3D"http://www.google-analytics.com/__utm.gif";=0A=
+if (_udl.hash) _udlh=3D_udl.href.substring(_udl.href.indexOf('#'));=0A=
+if (_udl.protocol=3D=3D"https:") =
+_ugifpath2=3D"https://ssl.google-analytics.com/__utm.gif";=0A=
+if (!_utcp || _utcp=3D=3D"") _utcp=3D"/";=0A=
+function urchinTracker(page) {=0A=
+ if (_udl.protocol=3D=3D"file:") return;=0A=
+ if (_uff && (!page || page=3D=3D"")) return;=0A=
+ var a,b,c,xx,v,z,k,x=3D"",s=3D"",f=3D0,nv=3D0;=0A=
+ var nx=3D" expires=3D"+_uNx()+";";=0A=
+ var dc=3D_ubd.cookie;=0A=
+ _udh=3D_uDomain();=0A=
+ if (!_uVG()) return;=0A=
+ _uu=3DMath.round(Math.random()*2147483647);=0A=
+ _udt=3Dnew Date();=0A=
+ _ust=3DMath.round(_udt.getTime()/1000);=0A=
+ a=3Ddc.indexOf("__utma=3D"+_udh+".");=0A=
+ b=3Ddc.indexOf("__utmb=3D"+_udh);=0A=
+ c=3Ddc.indexOf("__utmc=3D"+_udh);=0A=
+ if (_udn && _udn!=3D"") { _udo=3D" domain=3D"+_udn+";"; }=0A=
+ if (_utimeout && _utimeout!=3D"") {=0A=
+  x=3Dnew Date(_udt.getTime()+(_utimeout*1000));=0A=
+  x=3D" expires=3D"+x.toGMTString()+";";=0A=
+ }=0A=
+ if (_ulink) {=0A=
+  if (_uanchor && _udlh && _udlh!=3D"") s=3D_udlh+"&";=0A=
+  s+=3D_udl.search;=0A=
+  if(s && s!=3D"" && s.indexOf("__utma=3D")>=3D0) {=0A=
+   if (!(_uIN(a=3D_uGC(s,"__utma=3D","&")))) a=3D"-";=0A=
+   if (!(_uIN(b=3D_uGC(s,"__utmb=3D","&")))) b=3D"-";=0A=
+   if (!(_uIN(c=3D_uGC(s,"__utmc=3D","&")))) c=3D"-";=0A=
+   v=3D_uGC(s,"__utmv=3D","&");=0A=
+   z=3D_uGC(s,"__utmz=3D","&");=0A=
+   k=3D_uGC(s,"__utmk=3D","&");=0A=
+   xx=3D_uGC(s,"__utmx=3D","&");=0A=
+   if ((k*1) !=3D ((_uHash(a+b+c+xx+z+v)*1)+(_udh*1))) =
+{_ubl=3D1;a=3D"-";b=3D"-";c=3D"-";xx=3D"-";z=3D"-";v=3D"-";}=0A=
+   if (a!=3D"-" && b!=3D"-" && c!=3D"-") f=3D1;=0A=
+   else if(a!=3D"-") f=3D2;=0A=
+  }=0A=
+ }=0A=
+ if(f=3D=3D1) {=0A=
+  _ubd.cookie=3D"__utma=3D"+a+"; path=3D"+_utcp+";"+nx+_udo;=0A=
+  _ubd.cookie=3D"__utmb=3D"+b+"; path=3D"+_utcp+";"+x+_udo;=0A=
+  _ubd.cookie=3D"__utmc=3D"+c+"; path=3D"+_utcp+";"+_udo;=0A=
+ } else if (f=3D=3D2) {=0A=
+  a=3D_uFixA(s,"&",_ust);=0A=
+  _ubd.cookie=3D"__utma=3D"+a+"; path=3D"+_utcp+";"+nx+_udo;=0A=
+  _ubd.cookie=3D"__utmb=3D"+_udh+"; path=3D"+_utcp+";"+x+_udo;=0A=
+  _ubd.cookie=3D"__utmc=3D"+_udh+"; path=3D"+_utcp+";"+_udo;=0A=
+  _ufns=3D1;=0A=
+ } else if (a>=3D0 && b>=3D0 && c>=3D0) {=0A=
+   b =3D _uGC(dc,"__utmb=3D"+_udh,";");=0A=
+   b =3D ("-" =3D=3D b) ? _udh : b;  =0A=
+  _ubd.cookie=3D"__utmb=3D"+b+"; path=3D"+_utcp+";"+x+_udo;=0A=
+ } else {=0A=
+  if (a>=3D0) a=3D_uFixA(_ubd.cookie,";",_ust);=0A=
+  else {=0A=
+   a=3D_udh+"."+_uu+"."+_ust+"."+_ust+"."+_ust+".1";=0A=
+   nv=3D1;=0A=
+  }=0A=
+  _ubd.cookie=3D"__utma=3D"+a+"; path=3D"+_utcp+";"+nx+_udo;=0A=
+  _ubd.cookie=3D"__utmb=3D"+_udh+"; path=3D"+_utcp+";"+x+_udo;=0A=
+  _ubd.cookie=3D"__utmc=3D"+_udh+"; path=3D"+_utcp+";"+_udo;=0A=
+  _ufns=3D1;=0A=
+ }=0A=
+ if (_ulink && xx && xx!=3D"" && xx!=3D"-") {=0A=
+   xx=3D_uUES(xx);=0A=
+   if (xx.indexOf(";")=3D=3D-1) _ubd.cookie=3D"__utmx=3D"+xx+"; =
+path=3D"+_utcp+";"+nx+_udo;=0A=
+ }=0A=
+ if (_ulink && v && v!=3D"" && v!=3D"-") {=0A=
+  v=3D_uUES(v);=0A=
+  if (v.indexOf(";")=3D=3D-1) _ubd.cookie=3D"__utmv=3D"+v+"; =
+path=3D"+_utcp+";"+nx+_udo;=0A=
+ }=0A=
+ var wc=3Dwindow;=0A=
+ var c=3D_ubd.cookie;=0A=
+ if(wc && wc.gaGlobal && wc.gaGlobal.dh=3D=3D_udh){=0A=
+  var g=3Dwc.gaGlobal;=0A=
+  var ua=3Dc.split("__utma=3D"+_udh+".")[1].split(";")[0].split(".");=0A=
+  if(g.sid)ua[3]=3Dg.sid;=0A=
+  if(nv>0){=0A=
+   ua[2]=3Dua[3];=0A=
+   if(g.vid){=0A=
+    var v=3Dg.vid.split(".");=0A=
+    ua[0]=3Dv[0];=0A=
+    ua[1]=3Dv[1];=0A=
+   }=0A=
+  }=0A=
+  _ubd.cookie=3D"__utma=3D"+_udh+"."+ua.join(".")+"; =
+path=3D"+_utcp+";"+nx+_udo;=0A=
+ }=0A=
+ _uInfo(page);=0A=
+ _ufns=3D0;=0A=
+ _ufno=3D0;=0A=
+ if (!page || page=3D=3D"") _uff=3D1;=0A=
+}=0A=
+function _uGH() {=0A=
+ var hid;=0A=
+ var wc=3Dwindow;=0A=
+ if (wc && wc.gaGlobal && wc.gaGlobal.hid) {=0A=
+  hid=3Dwc.gaGlobal.hid;=0A=
+ } else {=0A=
+  hid=3DMath.round(Math.random()*0x7fffffff);=0A=
+  if (!wc.gaGlobal) wc.gaGlobal=3D{};=0A=
+  wc.gaGlobal.hid=3Dhid;=0A=
+ }=0A=
+ return hid;=0A=
+}=0A=
+function _uInfo(page) {=0A=
+ var p,s=3D"",dm=3D"",pg=3D_udl.pathname+_udl.search;=0A=
+ if (page && page!=3D"") pg=3D_uES(page,1);=0A=
+ _ur=3D_ubd.referrer;=0A=
+ if (!_ur || _ur=3D=3D"") { _ur=3D"-"; }=0A=
+ else {=0A=
+  dm=3D_ubd.domain;=0A=
+  if(_utcp && _utcp!=3D"/") dm+=3D_utcp;=0A=
+  p=3D_ur.indexOf(dm);=0A=
+  if ((p>=3D0) && (p<=3D8)) { _ur=3D"0"; }=0A=
+  if (_ur.indexOf("[")=3D=3D0 && =
+_ur.lastIndexOf("]")=3D=3D(_ur.length-1)) { _ur=3D"-"; }=0A=
+ }=0A=
+ s+=3D"&utmn=3D"+_uu;=0A=
+ if (_ufsc) s+=3D_uBInfo();=0A=
+ if (_uctm) s+=3D_uCInfo();=0A=
+ if (_utitle && _ubd.title && _ubd.title!=3D"") =
+s+=3D"&utmdt=3D"+_uES(_ubd.title);=0A=
+ if (_udl.hostname && _udl.hostname!=3D"") =
+s+=3D"&utmhn=3D"+_uES(_udl.hostname);=0A=
+ if (_usample && _usample !=3D 100) s+=3D"&utmsp=3D"+_uES(_usample);=0A=
+ s+=3D"&utmhid=3D"+_uGH();=0A=
+ s+=3D"&utmr=3D"+_ur;=0A=
+ s+=3D"&utmp=3D"+pg;=0A=
+ if ((_userv=3D=3D0 || _userv=3D=3D2) && _uSP()) {=0A=
+  var i=3Dnew Image(1,1);=0A=
+  i.src=3D_ugifpath+"?"+"utmwv=3D"+_uwv+s;=0A=
+  i.onload=3Dfunction() { _uVoid(); }=0A=
+ }=0A=
+ if ((_userv=3D=3D1 || _userv=3D=3D2) && _uSP()) {=0A=
+  var i2=3Dnew Image(1,1);=0A=
+  =
+i2.src=3D_ugifpath2+"?"+"utmwv=3D"+_uwv+s+"&utmac=3D"+_uacct+"&utmcc=3D"+=
+_uGCS();=0A=
+  i2.onload=3Dfunction() { _uVoid(); }=0A=
+ }=0A=
+ return;=0A=
+}=0A=
+function _uVoid() { return; }=0A=
+function _uCInfo() {=0A=
+ if (!_ucto || _ucto=3D=3D"") { _ucto=3D"15768000"; }=0A=
+ if (!_uVG()) return;=0A=
+ var =
+c=3D"",t=3D"-",t2=3D"-",t3=3D"-",o=3D0,cs=3D0,cn=3D0,i=3D0,z=3D"-",s=3D""=
+;=0A=
+ if (_uanchor && _udlh && _udlh!=3D"") s=3D_udlh+"&";=0A=
+ s+=3D_udl.search;=0A=
+ var x=3Dnew Date(_udt.getTime()+(_ucto*1000));=0A=
+ var dc=3D_ubd.cookie;=0A=
+ x=3D" expires=3D"+x.toGMTString()+";";=0A=
+ if (_ulink && !_ubl) {=0A=
+  z=3D_uUES(_uGC(s,"__utmz=3D","&"));=0A=
+  if (z!=3D"-" && z.indexOf(";")=3D=3D-1) { =
+_ubd.cookie=3D"__utmz=3D"+z+"; path=3D"+_utcp+";"+x+_udo; return ""; }=0A=
+ }=0A=
+ z=3Ddc.indexOf("__utmz=3D"+_udh+".");=0A=
+ if (z>-1) { z=3D_uGC(dc,"__utmz=3D"+_udh+".",";"); }=0A=
+ else { z=3D"-"; }=0A=
+ t=3D_uGC(s,_ucid+"=3D","&");=0A=
+ t2=3D_uGC(s,_ucsr+"=3D","&");=0A=
+ t3=3D_uGC(s,"gclid=3D","&");=0A=
+ if ((t!=3D"-" && t!=3D"") || (t2!=3D"-" && t2!=3D"") || (t3!=3D"-" && =
+t3!=3D"")) {=0A=
+  if (t!=3D"-" && t!=3D"") c+=3D"utmcid=3D"+_uEC(t);=0A=
+  if (t2!=3D"-" && t2!=3D"") { if (c !=3D "") c+=3D"|"; =
+c+=3D"utmcsr=3D"+_uEC(t2); }=0A=
+  if (t3!=3D"-" && t3!=3D"") { if (c !=3D "") c+=3D"|"; =
+c+=3D"utmgclid=3D"+_uEC(t3); }=0A=
+  t=3D_uGC(s,_uccn+"=3D","&");=0A=
+  if (t!=3D"-" && t!=3D"") c+=3D"|utmccn=3D"+_uEC(t);=0A=
+  else c+=3D"|utmccn=3D(not+set)";=0A=
+  t=3D_uGC(s,_ucmd+"=3D","&");=0A=
+  if (t!=3D"-" && t!=3D"") c+=3D"|utmcmd=3D"+_uEC(t);=0A=
+  else  c+=3D"|utmcmd=3D(not+set)";=0A=
+  t=3D_uGC(s,_uctr+"=3D","&");=0A=
+  if (t!=3D"-" && t!=3D"") c+=3D"|utmctr=3D"+_uEC(t);=0A=
+  else { t=3D_uOrg(1); if (t!=3D"-" && t!=3D"") =
+c+=3D"|utmctr=3D"+_uEC(t); }=0A=
+  t=3D_uGC(s,_ucct+"=3D","&");=0A=
+  if (t!=3D"-" && t!=3D"") c+=3D"|utmcct=3D"+_uEC(t);=0A=
+  t=3D_uGC(s,_ucno+"=3D","&");=0A=
+  if (t=3D=3D"1") o=3D1;=0A=
+  if (z!=3D"-" && o=3D=3D1) return "";=0A=
+ }=0A=
+ if (c=3D=3D"-" || c=3D=3D"") { c=3D_uOrg(); if (z!=3D"-" && =
+_ufno=3D=3D1)  return ""; }=0A=
+ if (c=3D=3D"-" || c=3D=3D"") { if (_ufns=3D=3D1)  c=3D_uRef(); if =
+(z!=3D"-" && _ufno=3D=3D1)  return ""; }=0A=
+ if (c=3D=3D"-" || c=3D=3D"") {=0A=
+  if (z=3D=3D"-" && _ufns=3D=3D1) { =
+c=3D"utmccn=3D(direct)|utmcsr=3D(direct)|utmcmd=3D(none)"; }=0A=
+  if (c=3D=3D"-" || c=3D=3D"") return "";=0A=
+ }=0A=
+ if (z!=3D"-") {=0A=
+  i=3Dz.indexOf(".");=0A=
+  if (i>-1) i=3Dz.indexOf(".",i+1);=0A=
+  if (i>-1) i=3Dz.indexOf(".",i+1);=0A=
+  if (i>-1) i=3Dz.indexOf(".",i+1);=0A=
+  t=3Dz.substring(i+1,z.length);=0A=
+  if (t.toLowerCase()=3D=3Dc.toLowerCase()) cs=3D1;=0A=
+  t=3Dz.substring(0,i);=0A=
+  if ((i=3Dt.lastIndexOf(".")) > -1) {=0A=
+   t=3Dt.substring(i+1,t.length);=0A=
+   cn=3D(t*1);=0A=
+  }=0A=
+ }=0A=
+ if (cs=3D=3D0 || _ufns=3D=3D1) {=0A=
+  t=3D_uGC(dc,"__utma=3D"+_udh+".",";");=0A=
+  if ((i=3Dt.lastIndexOf(".")) > 9) {=0A=
+   _uns=3Dt.substring(i+1,t.length);=0A=
+   _uns=3D(_uns*1);=0A=
+  }=0A=
+  cn++;=0A=
+  if (_uns=3D=3D0) _uns=3D1;=0A=
+  _ubd.cookie=3D"__utmz=3D"+_udh+"."+_ust+"."+_uns+"."+cn+"."+c+"; =
+path=3D"+_utcp+"; "+x+_udo;=0A=
+ }=0A=
+ if (cs=3D=3D0 || _ufns=3D=3D1) return "&utmcn=3D1";=0A=
+ else return "&utmcr=3D1";=0A=
+}=0A=
+function _uRef() {=0A=
+ if (_ur=3D=3D"0" || _ur=3D=3D"" || _ur=3D=3D"-") return "";=0A=
+ var i=3D0,h,k,n;=0A=
+ if ((i=3D_ur.indexOf("://"))<0 || _uGCse()) return "";=0A=
+ h=3D_ur.substring(i+3,_ur.length);=0A=
+ if (h.indexOf("/") > -1) {=0A=
+  k=3Dh.substring(h.indexOf("/"),h.length);=0A=
+  if (k.indexOf("?") > -1) k=3Dk.substring(0,k.indexOf("?"));=0A=
+  h=3Dh.substring(0,h.indexOf("/"));=0A=
+ }=0A=
+ h=3Dh.toLowerCase();=0A=
+ n=3Dh;=0A=
+ if ((i=3Dn.indexOf(":")) > -1) n=3Dn.substring(0,i);=0A=
+ for (var ii=3D0;ii<_uRno.length;ii++) {=0A=
+  if ((i=3Dn.indexOf(_uRno[ii].toLowerCase())) > -1 && =
+n.length=3D=3D(i+_uRno[ii].length)) { _ufno=3D1; break; }=0A=
+ }=0A=
+ if (h.indexOf("www.")=3D=3D0) h=3Dh.substring(4,h.length);=0A=
+ return =
+"utmccn=3D(referral)|utmcsr=3D"+_uEC(h)+"|"+"utmcct=3D"+_uEC(k)+"|utmcmd=3D=
+referral";=0A=
+}=0A=
+function _uOrg(t) {=0A=
+ if (_ur=3D=3D"0" || _ur=3D=3D"" || _ur=3D=3D"-") return "";=0A=
+ var i=3D0,h,k;=0A=
+ if ((i=3D_ur.indexOf("://"))<0 || _uGCse()) return "";=0A=
+ h=3D_ur.substring(i+3,_ur.length);=0A=
+ if (h.indexOf("/") > -1) {=0A=
+  h=3Dh.substring(0,h.indexOf("/"));=0A=
+ }=0A=
+ for (var ii=3D0;ii<_uOsr.length;ii++) {=0A=
+  if (h.toLowerCase().indexOf(_uOsr[ii].toLowerCase()) > -1) {=0A=
+   if ((i=3D_ur.indexOf("?"+_uOkw[ii]+"=3D")) > -1 || =
+(i=3D_ur.indexOf("&"+_uOkw[ii]+"=3D")) > -1) {=0A=
+    k=3D_ur.substring(i+_uOkw[ii].length+2,_ur.length);=0A=
+    if ((i=3Dk.indexOf("&")) > -1) k=3Dk.substring(0,i);=0A=
+    for (var yy=3D0;yy<_uOno.length;yy++) {=0A=
+     if (_uOno[yy].toLowerCase()=3D=3Dk.toLowerCase()) { _ufno=3D1; =
+break; }=0A=
+    }=0A=
+    if (t) return _uEC(k);=0A=
+    else return =
+"utmccn=3D(organic)|utmcsr=3D"+_uEC(_uOsr[ii])+"|"+"utmctr=3D"+_uEC(k)+"|=
+utmcmd=3Dorganic";=0A=
+   }=0A=
+  }=0A=
+ }=0A=
+ return "";=0A=
+}=0A=
+function _uGCse() {=0A=
+ var h,p;=0A=
+ h=3Dp=3D_ur.split("://")[1];=0A=
+ if(h.indexOf("/")>-1) {=0A=
+  h=3Dh.split("/")[0];=0A=
+  p=3Dp.substring(p.indexOf("/")+1,p.length);=0A=
+ }=0A=
+ if(p.indexOf("?")>-1) {=0A=
+  p=3Dp.split("?")[0];=0A=
+ }=0A=
+ if(h.toLowerCase().indexOf("google")>-1) {=0A=
+  if(_ur.indexOf("?q=3D")>-1 || _ur.indexOf("&q=3D")>-1) {=0A=
+   if (p.toLowerCase().indexOf("cse")>-1) {=0A=
+    return true;=0A=
+   }=0A=
+  }=0A=
+ }=0A=
+}=0A=
+function _uBInfo() {=0A=
+ var sr=3D"-",sc=3D"-",ul=3D"-",fl=3D"-",cs=3D"-",je=3D1;=0A=
+ var n=3Dnavigator;=0A=
+ if (self.screen) {=0A=
+  sr=3Dscreen.width+"x"+screen.height;=0A=
+  sc=3Dscreen.colorDepth+"-bit";=0A=
+ } else if (self.java) {=0A=
+  var j=3Djava.awt.Toolkit.getDefaultToolkit();=0A=
+  var s=3Dj.getScreenSize();=0A=
+  sr=3Ds.width+"x"+s.height;=0A=
+ }=0A=
+ if (n.language) { ul=3Dn.language.toLowerCase(); }=0A=
+ else if (n.browserLanguage) { ul=3Dn.browserLanguage.toLowerCase(); }=0A=
+ je=3Dn.javaEnabled()?1:0;=0A=
+ if (_uflash) fl=3D_uFlash();=0A=
+ if (_ubd.characterSet) cs=3D_uES(_ubd.characterSet);=0A=
+ else if (_ubd.charset) cs=3D_uES(_ubd.charset);=0A=
+ return =
+"&utmcs=3D"+cs+"&utmsr=3D"+sr+"&utmsc=3D"+sc+"&utmul=3D"+ul+"&utmje=3D"+j=
+e+"&utmfl=3D"+fl;=0A=
+}=0A=
+function __utmSetTrans() {=0A=
+ var e;=0A=
+ if (_ubd.getElementById) e=3D_ubd.getElementById("utmtrans");=0A=
+ else if (_ubd.utmform && _ubd.utmform.utmtrans) =
+e=3D_ubd.utmform.utmtrans;=0A=
+ if (!e) return;=0A=
+ var l=3De.value.split("UTM:");=0A=
+ var i,i2,c;=0A=
+ if (_userv=3D=3D0 || _userv=3D=3D2) i=3Dnew Array();=0A=
+ if (_userv=3D=3D1 || _userv=3D=3D2) { i2=3Dnew Array(); c=3D_uGCS(); }=0A=
+=0A=
+ for (var ii=3D0;ii<l.length;ii++) {=0A=
+  l[ii]=3D_uTrim(l[ii]);=0A=
+  if (l[ii].charAt(0)!=3D'T' && l[ii].charAt(0)!=3D'I') continue;=0A=
+  var r=3DMath.round(Math.random()*2147483647);=0A=
+  if (!_utsp || _utsp=3D=3D"") _utsp=3D"|";=0A=
+  var f=3Dl[ii].split(_utsp),s=3D"";=0A=
+  if (f[0].charAt(0)=3D=3D'T') {=0A=
+   s=3D"&utmt=3Dtran"+"&utmn=3D"+r;=0A=
+   f[1]=3D_uTrim(f[1]); if(f[1]&&f[1]!=3D"") =
+s+=3D"&utmtid=3D"+_uES(f[1]);=0A=
+   f[2]=3D_uTrim(f[2]); if(f[2]&&f[2]!=3D"") =
+s+=3D"&utmtst=3D"+_uES(f[2]);=0A=
+   f[3]=3D_uTrim(f[3]); if(f[3]&&f[3]!=3D"") =
+s+=3D"&utmtto=3D"+_uES(f[3]);=0A=
+   f[4]=3D_uTrim(f[4]); if(f[4]&&f[4]!=3D"") =
+s+=3D"&utmttx=3D"+_uES(f[4]);=0A=
+   f[5]=3D_uTrim(f[5]); if(f[5]&&f[5]!=3D"") =
+s+=3D"&utmtsp=3D"+_uES(f[5]);=0A=
+   f[6]=3D_uTrim(f[6]); if(f[6]&&f[6]!=3D"") =
+s+=3D"&utmtci=3D"+_uES(f[6]);=0A=
+   f[7]=3D_uTrim(f[7]); if(f[7]&&f[7]!=3D"") =
+s+=3D"&utmtrg=3D"+_uES(f[7]);=0A=
+   f[8]=3D_uTrim(f[8]); if(f[8]&&f[8]!=3D"") =
+s+=3D"&utmtco=3D"+_uES(f[8]);=0A=
+  } else {=0A=
+   s=3D"&utmt=3Ditem"+"&utmn=3D"+r;=0A=
+   f[1]=3D_uTrim(f[1]); if(f[1]&&f[1]!=3D"") =
+s+=3D"&utmtid=3D"+_uES(f[1]);=0A=
+   f[2]=3D_uTrim(f[2]); if(f[2]&&f[2]!=3D"") =
+s+=3D"&utmipc=3D"+_uES(f[2]);=0A=
+   f[3]=3D_uTrim(f[3]); if(f[3]&&f[3]!=3D"") =
+s+=3D"&utmipn=3D"+_uES(f[3]);=0A=
+   f[4]=3D_uTrim(f[4]); if(f[4]&&f[4]!=3D"") =
+s+=3D"&utmiva=3D"+_uES(f[4]);=0A=
+   f[5]=3D_uTrim(f[5]); if(f[5]&&f[5]!=3D"") =
+s+=3D"&utmipr=3D"+_uES(f[5]);=0A=
+   f[6]=3D_uTrim(f[6]); if(f[6]&&f[6]!=3D"") =
+s+=3D"&utmiqt=3D"+_uES(f[6]);=0A=
+  }=0A=
+  if (_udl.hostname && _udl.hostname!=3D"") =
+s+=3D"&utmhn=3D"+_uES(_udl.hostname);=0A=
+  if (_usample && _usample !=3D 100) s+=3D"&utmsp=3D"+_uES(_usample);=0A=
+=0A=
+  if ((_userv=3D=3D0 || _userv=3D=3D2) && _uSP()) {=0A=
+   i[ii]=3Dnew Image(1,1);=0A=
+   i[ii].src=3D_ugifpath+"?"+"utmwv=3D"+_uwv+s;=0A=
+   i[ii].onload=3Dfunction() { _uVoid(); }=0A=
+  }=0A=
+  if ((_userv=3D=3D1 || _userv=3D=3D2) && _uSP()) {=0A=
+   i2[ii]=3Dnew Image(1,1);=0A=
+   =
+i2[ii].src=3D_ugifpath2+"?"+"utmwv=3D"+_uwv+s+"&utmac=3D"+_uacct+"&utmcc=3D=
+"+c;=0A=
+   i2[ii].onload=3Dfunction() { _uVoid(); }=0A=
+  }=0A=
+ }=0A=
+ return;=0A=
+}=0A=
+function _uFlash() {=0A=
+ var f=3D"-",n=3Dnavigator;=0A=
+ if (n.plugins && n.plugins.length) {=0A=
+  for (var ii=3D0;ii<n.plugins.length;ii++) {=0A=
+   if (n.plugins[ii].name.indexOf('Shockwave Flash')!=3D-1) {=0A=
+    f=3Dn.plugins[ii].description.split('Shockwave Flash ')[1];=0A=
+    break;=0A=
+   }=0A=
+  }=0A=
+ } else {=0A=
+  var fl;=0A=
+  try {=0A=
+   fl =3D new ActiveXObject("ShockwaveFlash.ShockwaveFlash.7");=0A=
+   f =3D fl.GetVariable("$version");=0A=
+  } catch(e) {}=0A=
+  if (f =3D=3D "-") {=0A=
+   try {=0A=
+    fl =3D new ActiveXObject("ShockwaveFlash.ShockwaveFlash.6");=0A=
+    f =3D "WIN 6,0,21,0";=0A=
+    fl.AllowScriptAccess =3D "always";=0A=
+    f =3D fl.GetVariable("$version");=0A=
+   } catch(e) {}=0A=
+  }=0A=
+  if (f =3D=3D "-") {=0A=
+   try {=0A=
+    fl =3D new ActiveXObject("ShockwaveFlash.ShockwaveFlash");=0A=
+    f =3D fl.GetVariable("$version");=0A=
+   } catch(e) {}=0A=
+  }=0A=
+  if (f !=3D "-") {=0A=
+   f =3D f.split(" ")[1].split(",");=0A=
+   f =3D f[0] + "." + f[1] + " r" + f[2];=0A=
+  }=0A=
+ }=0A=
+ return f;=0A=
+}=0A=
+function __utmLinkerUrl(l,h) {=0A=
+ var p,k,a=3D"-",b=3D"-",c=3D"-",x=3D"-",z=3D"-",v=3D"-";=0A=
+ var dc=3D_ubd.cookie;=0A=
+ var iq =3D l.indexOf("?");=0A=
+ var ih =3D l.indexOf("#");=0A=
+ var url=3Dl;=0A=
+ if (dc) {=0A=
+  a=3D_uES(_uGC(dc,"__utma=3D"+_udh+".",";"));=0A=
+  b=3D_uES(_uGC(dc,"__utmb=3D"+_udh,";"));=0A=
+  c=3D_uES(_uGC(dc,"__utmc=3D"+_udh,";"));=0A=
+  x=3D_uES(_uGC(dc,"__utmx=3D"+_udh,";"));=0A=
+  z=3D_uES(_uGC(dc,"__utmz=3D"+_udh+".",";"));=0A=
+  v=3D_uES(_uGC(dc,"__utmv=3D"+_udh+".",";"));=0A=
+  k=3D(_uHash(a+b+c+x+z+v)*1)+(_udh*1);=0A=
+  =
+p=3D"__utma=3D"+a+"&__utmb=3D"+b+"&__utmc=3D"+c+"&__utmx=3D"+x+"&__utmz=3D=
+"+z+"&__utmv=3D"+v+"&__utmk=3D"+k;=0A=
+ }=0A=
+ if (p) {=0A=
+  if (h && ih>-1) return;=0A=
+  if (h) { url=3Dl+"#"+p; }=0A=
+  else {=0A=
+   if (iq=3D=3D-1 && ih=3D=3D-1) url=3Dl+"?"+p;=0A=
+   else if (ih=3D=3D-1) url=3Dl+"&"+p;=0A=
+   else if (iq=3D=3D-1) url=3Dl.substring(0,ih-1)+"?"+p+l.substring(ih);=0A=
+   else url=3Dl.substring(0,ih-1)+"&"+p+l.substring(ih);=0A=
+  }=0A=
+ }=0A=
+ return url;=0A=
+}=0A=
+function __utmLinker(l,h) {=0A=
+ if (!_ulink || !l || l=3D=3D"") return;=0A=
+ _udl.href=3D__utmLinkerUrl(l,h);=0A=
+}=0A=
+function __utmLinkPost(f,h) {=0A=
+ if (!_ulink || !f || !f.action) return;=0A=
+ f.action=3D__utmLinkerUrl(f.action, h);=0A=
+ return;=0A=
+}=0A=
+function __utmSetVar(v) {=0A=
+ if (!v || v=3D=3D"") return;=0A=
+ if (!_udo || _udo =3D=3D "") {=0A=
+  _udh=3D_uDomain();=0A=
+  if (_udn && _udn!=3D"") { _udo=3D" domain=3D"+_udn+";"; }=0A=
+ }=0A=
+ if (!_uVG()) return;=0A=
+ var r=3DMath.round(Math.random() * 2147483647);=0A=
+ _ubd.cookie=3D"__utmv=3D"+_udh+"."+_uES(v)+"; path=3D"+_utcp+"; =
+expires=3D"+_uNx()+";"+_udo;=0A=
+ var s=3D"&utmt=3Dvar&utmn=3D"+r;=0A=
+ if (_usample && _usample !=3D 100) s+=3D"&utmsp=3D"+_uES(_usample);=0A=
+ if ((_userv=3D=3D0 || _userv=3D=3D2) && _uSP()) {=0A=
+  var i=3Dnew Image(1,1);=0A=
+  i.src=3D_ugifpath+"?"+"utmwv=3D"+_uwv+s;=0A=
+  i.onload=3Dfunction() { _uVoid(); }=0A=
+ }=0A=
+ if ((_userv=3D=3D1 || _userv=3D=3D2) && _uSP()) {=0A=
+  var i2=3Dnew Image(1,1);=0A=
+  =
+i2.src=3D_ugifpath2+"?"+"utmwv=3D"+_uwv+s+"&utmac=3D"+_uacct+"&utmcc=3D"+=
+_uGCS();=0A=
+  i2.onload=3Dfunction() { _uVoid(); }=0A=
+ }=0A=
+}=0A=
+function _uGCS() {=0A=
+ var t,c=3D"",dc=3D_ubd.cookie;=0A=
+ if ((t=3D_uGC(dc,"__utma=3D"+_udh+".",";"))!=3D"-") =
+c+=3D_uES("__utma=3D"+t+";+");=0A=
+ if ((t=3D_uGC(dc,"__utmx=3D"+_udh,";"))!=3D"-") =
+c+=3D_uES("__utmx=3D"+t+";+");=0A=
+ if ((t=3D_uGC(dc,"__utmz=3D"+_udh+".",";"))!=3D"-") =
+c+=3D_uES("__utmz=3D"+t+";+");=0A=
+ if ((t=3D_uGC(dc,"__utmv=3D"+_udh+".",";"))!=3D"-") =
+c+=3D_uES("__utmv=3D"+t+";");=0A=
+ if (c.charAt(c.length-1)=3D=3D"+") c=3Dc.substring(0,c.length-1);=0A=
+ return c;=0A=
+}=0A=
+function _uGC(l,n,s) {=0A=
+ if (!l || l=3D=3D"" || !n || n=3D=3D"" || !s || s=3D=3D"") return "-";=0A=
+ var i,i2,i3,c=3D"-";=0A=
+ i=3Dl.indexOf(n);=0A=
+ i3=3Dn.indexOf("=3D")+1;=0A=
+ if (i > -1) {=0A=
+  i2=3Dl.indexOf(s,i); if (i2 < 0) { i2=3Dl.length; }=0A=
+  c=3Dl.substring((i+i3),i2);=0A=
+ }=0A=
+ return c;=0A=
+}=0A=
+function _uDomain() {=0A=
+ if (!_udn || _udn=3D=3D"" || _udn=3D=3D"none") { _udn=3D""; return 1; }=0A=
+ if (_udn=3D=3D"auto") {=0A=
+  var d=3D_ubd.domain;=0A=
+  if (d.substring(0,4)=3D=3D"www.") {=0A=
+   d=3Dd.substring(4,d.length);=0A=
+  }=0A=
+  _udn=3Dd;=0A=
+ }=0A=
+ _udn =3D _udn.toLowerCase(); =0A=
+ if (_uhash=3D=3D"off") return 1;=0A=
+ return _uHash(_udn);=0A=
+}=0A=
+function _uHash(d) {=0A=
+ if (!d || d=3D=3D"") return 1;=0A=
+ var h=3D0,g=3D0;=0A=
+ for (var i=3Dd.length-1;i>=3D0;i--) {=0A=
+  var c=3DparseInt(d.charCodeAt(i));=0A=
+  h=3D((h << 6) & 0xfffffff) + c + (c << 14);=0A=
+  if ((g=3Dh & 0xfe00000)!=3D0) h=3D(h ^ (g >> 21));=0A=
+ }=0A=
+ return h;=0A=
+}=0A=
+function _uFixA(c,s,t) {=0A=
+ if (!c || c=3D=3D"" || !s || s=3D=3D"" || !t || t=3D=3D"") return "-";=0A=
+ var a=3D_uGC(c,"__utma=3D"+_udh+".",s);=0A=
+ var lt=3D0,i=3D0;=0A=
+ if ((i=3Da.lastIndexOf(".")) > 9) {=0A=
+  _uns=3Da.substring(i+1,a.length);=0A=
+  _uns=3D(_uns*1)+1;=0A=
+  a=3Da.substring(0,i);=0A=
+  if ((i=3Da.lastIndexOf(".")) > 7) {=0A=
+   lt=3Da.substring(i+1,a.length);=0A=
+   a=3Da.substring(0,i);=0A=
+  }=0A=
+  if ((i=3Da.lastIndexOf(".")) > 5) {=0A=
+   a=3Da.substring(0,i);=0A=
+  }=0A=
+  a+=3D"."+lt+"."+t+"."+_uns;=0A=
+ }=0A=
+ return a;=0A=
+}=0A=
+function _uTrim(s) {=0A=
+  if (!s || s=3D=3D"") return "";=0A=
+  while ((s.charAt(0)=3D=3D' ') || (s.charAt(0)=3D=3D'\n') || =
+(s.charAt(0,1)=3D=3D'\r')) s=3Ds.substring(1,s.length);=0A=
+  while ((s.charAt(s.length-1)=3D=3D' ') || =
+(s.charAt(s.length-1)=3D=3D'\n') || (s.charAt(s.length-1)=3D=3D'\r')) =
+s=3Ds.substring(0,s.length-1);=0A=
+  return s;=0A=
+}=0A=
+function _uEC(s) {=0A=
+  var n=3D"";=0A=
+  if (!s || s=3D=3D"") return "";=0A=
+  for (var i=3D0;i<s.length;i++) {if (s.charAt(i)=3D=3D" ") n+=3D"+"; =
+else n+=3Ds.charAt(i);}=0A=
+  return n;=0A=
+}=0A=
+function __utmVisitorCode(f) {=0A=
+ var r=3D0,t=3D0,i=3D0,i2=3D0,m=3D31;=0A=
+ var a=3D_uGC(_ubd.cookie,"__utma=3D"+_udh+".",";");=0A=
+ if ((i=3Da.indexOf(".",0))<0) return;=0A=
+ if ((i2=3Da.indexOf(".",i+1))>0) r=3Da.substring(i+1,i2); else return =
+"";  =0A=
+ if ((i=3Da.indexOf(".",i2+1))>0) t=3Da.substring(i2+1,i); else return =
+"";  =0A=
+ if (f) {=0A=
+  return r;=0A=
+ } else {=0A=
+  var c=3Dnew =
+Array('A','B','C','D','E','F','G','H','J','K','L','M','N','P','R','S','T'=
+,'U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9');=0A=
+  return =
+c[r>>28&m]+c[r>>23&m]+c[r>>18&m]+c[r>>13&m]+"-"+c[r>>8&m]+c[r>>3&m]+c[((r=
+&7)<<2)+(t>>30&3)]+c[t>>25&m]+c[t>>20&m]+"-"+c[t>>15&m]+c[t>>10&m]+c[t>>5=
+&m]+c[t&m];=0A=
+ }=0A=
+}=0A=
+function _uIN(n) {=0A=
+ if (!n) return false;=0A=
+ for (var i=3D0;i<n.length;i++) {=0A=
+  var c=3Dn.charAt(i);=0A=
+  if ((c<"0" || c>"9") && (c!=3D".")) return false;=0A=
+ }=0A=
+ return true;=0A=
+}=0A=
+function _uES(s,u) {=0A=
+ if (typeof(encodeURIComponent) =3D=3D 'function') {=0A=
+  if (u) return encodeURI(s);=0A=
+  else return encodeURIComponent(s);=0A=
+ } else {=0A=
+  return escape(s);=0A=
+ }=0A=
+}=0A=
+function _uUES(s) {=0A=
+ if (typeof(decodeURIComponent) =3D=3D 'function') {=0A=
+  return decodeURIComponent(s);=0A=
+ } else {=0A=
+  return unescape(s);=0A=
+ }=0A=
+}=0A=
+function _uVG() {=0A=
+ if((_udn.indexOf("www.google.") =3D=3D 0 || _udn.indexOf(".google.") =
+=3D=3D 0 || _udn.indexOf("google.") =3D=3D 0) && _utcp=3D=3D'/' && =
+_udn.indexOf("google.org")=3D=3D-1) {=0A=
+  return false;=0A=
+ }=0A=
+ return true;=0A=
+}=0A=
+function _uSP() {=0A=
+ var s=3D100;=0A=
+ if (_usample) s=3D_usample;=0A=
+ if(s>=3D100 || s<=3D0) return true;=0A=
+ return ((__utmVisitorCode(1)%10000)<(s*100));=0A=
+}=0A=
+function urchinPathCopy(p){=0A=
+ var d=3Ddocument,nx,tx,sx,i,c,cs,t,h,o;=0A=
+ cs=3Dnew Array("a","b","c","v","x","z");=0A=
+ h=3D_uDomain(); if (_udn && _udn!=3D"") o=3D" domain=3D"+_udn+";";=0A=
+ nx=3D_uNx()+";";=0A=
+ tx=3Dnew Date(); tx.setTime(tx.getTime()+(_utimeout*1000));=0A=
+ tx=3Dtx.toGMTString()+";";=0A=
+ sx=3Dnew Date(); sx.setTime(sx.getTime()+(_ucto*1000));=0A=
+ sx=3Dsx.toGMTString()+";";=0A=
+ for (i=3D0;i<6;i++){=0A=
+  t=3D" expires=3D";=0A=
+  if (i=3D=3D1) t+=3Dtx; else if (i=3D=3D2) t=3D""; else if (i=3D=3D5) =
+t+=3Dsx; else t+=3Dnx;=0A=
+  c=3D_uGC(d.cookie,"__utm"+cs[i]+"=3D"+h,";");=0A=
+  if (c!=3D"-") d.cookie=3D"__utm"+cs[i]+"=3D"+c+"; path=3D"+p+";"+t+o;=0A=
+ }=0A=
+}=0A=
+function _uCO() {=0A=
+ if (!_utk || _utk=3D=3D"" || _utk.length<10) return;=0A=
+ var d=3D'www.google.com';=0A=
+ if (_utk.charAt(0)=3D=3D'!') d=3D'analytics.corp.google.com';=0A=
+ _ubd.cookie=3D"GASO=3D"+_utk+"; path=3D"+_utcp+";"+_udo;=0A=
+ var sc=3Ddocument.createElement('script');=0A=
+ sc.type=3D'text/javascript';=0A=
+ sc.id=3D"_gasojs";=0A=
+ =
+sc.src=3D'https://'+d+'/analytics/reporting/overlay_js?gaso=3D'+_utk+'&'+=
+Math.random();=0A=
+ document.getElementsByTagName('head')[0].appendChild(sc);  =0A=
+}=0A=
+function _uGT() {=0A=
+ var h=3Dlocation.hash, a;=0A=
+ if (h && h!=3D"" && h.indexOf("#gaso=3D")=3D=3D0) {=0A=
+  a=3D_uGC(h,"gaso=3D","&");=0A=
+ } else {=0A=
+  a=3D_uGC(_ubd.cookie,"GASO=3D",";");=0A=
+ }=0A=
+ return a;=0A=
+}=0A=
+var _utk=3D_uGT();=0A=
+if (_utk && _utk!=3D"" && _utk.length>10 && _utk.indexOf("=3D")=3D=3D-1) =
+{=0A=
+ if (window.addEventListener) {=0A=
+  window.addEventListener('load', _uCO, false); =0A=
+ } else if (window.attachEvent) { =0A=
+  window.attachEvent('onload', _uCO);=0A=
+ }=0A=
+}=0A=
+=0A=
+function _uNx() {=0A=
+  return (new Date((new Date()).getTime()+63072000000)).toGMTString();=0A=
+}=0A=
+
+------=_NextPart_000_0000_01CBB5C4.EF126A10--
