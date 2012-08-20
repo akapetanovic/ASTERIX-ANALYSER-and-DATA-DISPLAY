@@ -173,7 +173,7 @@
             this.comboBoxSSRFilterBox = new System.Windows.Forms.ComboBox();
             this.checkBoxFilterBySSR = new System.Windows.Forms.CheckBox();
             this.gMapControl = new GMap.NET.WindowsForms.GMapControl();
-            this.PlotDisplayTimer = new System.Windows.Forms.Timer(this.components);
+            this.DataDisplayUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.tabMainTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -1458,10 +1458,10 @@
             this.gMapControl.Load += new System.EventHandler(this.gMapControl_Load);
             this.gMapControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseMove);
             // 
-            // PlotDisplayTimer
+            // DataDisplayUpdateTimer
             // 
-            this.PlotDisplayTimer.Interval = 5000;
-            this.PlotDisplayTimer.Tick += new System.EventHandler(this.PlotDisplayTimer_Tick);
+            this.DataDisplayUpdateTimer.Interval = 5000;
+            this.DataDisplayUpdateTimer.Tick += new System.EventHandler(this.PlotDisplayTimer_Tick);
             // 
             // FormMain
             // 
@@ -1619,7 +1619,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPlotDisplay;
         private GMap.NET.WindowsForms.GMapControl gMapControl;
-        private System.Windows.Forms.Timer PlotDisplayTimer;
+        private System.Windows.Forms.Timer DataDisplayUpdateTimer;
         private System.Windows.Forms.CheckBox checkEnableDisplay;
         private System.Windows.Forms.GroupBox groupBoxUpdateRate;
         private System.Windows.Forms.TextBox textBoxUpdateRate;

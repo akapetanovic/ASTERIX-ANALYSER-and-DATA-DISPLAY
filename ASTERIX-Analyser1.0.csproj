@@ -178,7 +178,7 @@
       <DependentUpon>EarthPlotExporter.cs</DependentUpon>
     </Compile>
     <Compile Include="MapDisplayProvider.cs" />
-    <Compile Include="Mike_Gavaghan_Code\Angle.cs" />
+    <Compile Include="Mike Gavaghan - Geodetic\Angle.cs" />
     <Compile Include="ASTERIX\Bit_Ops.cs" />
     <Compile Include="ASTERIX\CAT001\CAT01DecodeAndStore.cs" />
     <Compile Include="ASTERIX\CAT001\CAT01I020Types.cs" />
@@ -235,14 +235,14 @@
     <Compile Include="ASTERIX\CAT062\CAT62.cs" />
     <Compile Include="ASTERIX\CAT063\CAT63.cs" />
     <Compile Include="ASTERIX\CAT065\CAT65.cs" />
-    <Compile Include="Mike_Gavaghan_Code\Ellipsoid.cs" />
+    <Compile Include="Mike Gavaghan - Geodetic\Ellipsoid.cs" />
     <Compile Include="GeoCordSystem.cs" />
-    <Compile Include="Mike_Gavaghan_Code\GeodeticCalculator.cs" />
-    <Compile Include="Mike_Gavaghan_Code\GeodeticCurve.cs" />
-    <Compile Include="Mike_Gavaghan_Code\GeodeticMeasurement.cs" />
-    <Compile Include="Mike_Gavaghan_Code\GlobalCoordinates.cs" />
-    <Compile Include="Mike_Gavaghan_Code\GlobalPosition.cs" />
-    <Compile Include="RadarData.cs" />
+    <Compile Include="Mike Gavaghan - Geodetic\GeodeticCalculator.cs" />
+    <Compile Include="Mike Gavaghan - Geodetic\GeodeticCurve.cs" />
+    <Compile Include="Mike Gavaghan - Geodetic\GeodeticMeasurement.cs" />
+    <Compile Include="Mike Gavaghan - Geodetic\GlobalCoordinates.cs" />
+    <Compile Include="Mike Gavaghan - Geodetic\GlobalPosition.cs" />
+    <Compile Include="DataSet.cs" />
     <Compile Include="BitExtractor.cs" />
     <Compile Include="FrmDataItemPresence.cs">
       <SubType>Form</SubType>
@@ -265,12 +265,7 @@
     <Compile Include="MainDataStorage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TestForm.Designer.cs">
-      <DependentUpon>TestForm.cs</DependentUpon>
-    </Compile>
+    <Compile Include="StaticDisplayBuilder.cs" />
     <Compile Include="ViewDataBySSRCode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -302,14 +297,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="TestForm.resx">
-      <DependentUpon>TestForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ViewDataBySSRCode.resx">
       <DependentUpon>ViewDataBySSRCode.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="ASTERIX-Analyser1.0_TemporaryKey.pfx" />
-    <None Include="jahorinaJan_cat.48" />
+    <None Include="app.config" />
+    <None Include="Data Samples\jahorinaJan_cat.48" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -326,7 +318,7 @@
       <DependentUpon>FrmSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="SharedData.cs" />
-    <None Include="User Manual.1.3.docx" />
+    <None Include="Documentation\User Manual.1.3.docx" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -351,7 +343,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\radar.jpg" />
+    <Content Include="radar.jpg" />
     <Content Include="README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

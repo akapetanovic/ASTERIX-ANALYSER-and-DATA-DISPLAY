@@ -18,11 +18,11 @@ namespace MulticastingUDP
 
     public partial class FormMain : Form
     {
-        // Dynamic Map Overlay
-        GMapOverlay DinamicOverlay;
         // Static Map Overlay
         GMapOverlay StaticOverlay;
-
+        // Dynamic Map Overlay
+        GMapOverlay DinamicOverlay;
+        
         // Keep track of the last selected SSR code index
         int SSR_Filter_Last_Index = 0;
 
@@ -37,7 +37,7 @@ namespace MulticastingUDP
         {
             InitializeComponent();
 
-            RadarData.InitializeData();
+            SystemAdaptationDataSet.InitializeData();
 
             // Here call constructor 
             // for each ASTERIX type
@@ -51,8 +51,6 @@ namespace MulticastingUDP
             CAT65.Intitialize();
             CAT244.Intitialize();
 
-
-
             // Start the thread to listen for data
             ListenForDataThread.Start();
 
@@ -61,8 +59,6 @@ namespace MulticastingUDP
             this.progressBar1.Style = ProgressBarStyle.Marquee;
             this.progressBar1.MarqueeAnimationSpeed = 100; // 100msec
             this.progressBar1.Visible = false;
-
-
         }
 
         public static void Intitialize()
@@ -95,7 +91,6 @@ namespace MulticastingUDP
             }
 
             this.labelConnIpAndPort.Text = SharedData.CurrentMulticastAddress.ToString() + " : " + Port;
-
         }
 
         // Display menu box to enable users to set up connection(s)
@@ -110,46 +105,39 @@ namespace MulticastingUDP
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            //Load maps
-            gMapControl.Position = new PointLatLng(44.05267, 17.6769);
+            // Initialize Map
+            InitializeMap();
+        }
+
+        private void InitializeMap()
+        {
+            // Set system origin position
+            gMapControl.Position = new PointLatLng(SystemAdaptationDataSet.SystemOriginPoint.Lat, SystemAdaptationDataSet.SystemOriginPoint.Lng);
             this.lblCenterLat.Text = gMapControl.Position.Lat.ToString();
             this.lblCenterLon.Text = gMapControl.Position.Lng.ToString();
+
+            // Choose MAP provider and MAP mode
+            gMapControl.MapProvider = GMapProviders.GoogleTerrainMap;
+            gMapControl.Manager.Mode = AccessMode.ServerAndCache;
+            
+            // Set MIN/MAX for the ZOOM function
             gMapControl.MinZoom = 0;
-            gMapControl.MapProvider = GMapProviders.GoogleMap;
             gMapControl.MaxZoom = 20;
+            // Default ZOOM
             gMapControl.Zoom = 8;
             this.lblZoomLevel.Text = gMapControl.Zoom.ToString();
-            gMapControl.Manager.Mode = AccessMode.ServerAndCache;
+           
+            // Add overlays
             DinamicOverlay = new GMapOverlay(gMapControl, "OverlayOne");
             gMapControl.Overlays.Add(DinamicOverlay);
             StaticOverlay = new GMapOverlay(gMapControl, "OverlayTwo");
             gMapControl.Overlays.Add(StaticOverlay);
-            this.label9.Text = "Current rate at: " + this.PlotDisplayTimer.Interval.ToString() + "ms";
+
+            this.label9.Text = "Current rate at: " + this.DataDisplayUpdateTimer.Interval.ToString() + "ms";
             this.comboBox1.Text = "Plain";
 
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            // Displaying an image as marker
-            //
-            string FileName = @"C:\Users\bhdca\Documents\Visual Studio 2010\Projects\AsterixAnalyserWithDisplay\MulticastingUDP\Images\radar.jpg";
-            Image TestImage = Image.FromFile(FileName);
-            
-            // Hard coded to Jahorina. In the future add option to dynamically add/remove symbols
-            //GPoint RadarLocation = gMapControl.FromLatLngToLocal(new PointLatLng(43.72917, 18.55167));
-            //System.Drawing.Point TestPoint = new System.Drawing.Point(RadarLocation.X, RadarLocation.Y);
-            GMapMarkerImage MyMarkerImage = new GMapMarkerImage(new PointLatLng(43.72917, 18.55167), TestImage);
-            MyMarkerImage.ToolTipText = "Jahorina";
-            MyMarkerImage.ToolTipMode = MarkerTooltipMode.Always;
-            StaticOverlay.Markers.Add(MyMarkerImage);
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            // Displaying overlay via KML file
-            // Load KML-Data into program
-            //string file = @"C:\Users\bhdca\Documents\Visual Studio 2010\Projects\AsterixAnalyserWithDisplay\MulticastingUDP\Images\layer6.kml";
-
-            // Load KML-Data into program
-            //KmlFile kmlData = K =mlFile.Load(file);
-
+            // Now build static display
+            Build_Static_Display();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -394,7 +382,6 @@ namespace MulticastingUDP
         {
 
 
-
         }
 
         private void targetReportDescriptorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -402,12 +389,6 @@ namespace MulticastingUDP
             FrmDetailedView MyDetailedView = new FrmDetailedView();
             MyDetailedView.WhatToDisplay = FrmDetailedView.DisplayType.CAT01I020;
             MyDetailedView.Show();
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            TestForm MyTest = new TestForm();
-            MyTest.Show();
         }
 
         private void measuredPositionInPolarCoordinatesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -506,6 +487,20 @@ namespace MulticastingUDP
         // This is a timer that is resposible for updating the data display
         private void PlotDisplayTimer_Tick(object sender, EventArgs e)
         {
+            Update_PlotTrack_Data();
+        }
+
+        // This method builds the static portion of the display based on the user preference.
+        // Those are elements that are loaded once and do not get changed unless specifically 
+        // initiated by the user.
+        private void Build_Static_Display()
+        {
+            StaticDisplayBuilder.UpdateRadarMarkers(ref StaticOverlay);
+            StaticDisplayBuilder.UpdateWaypointMarkers(ref StaticOverlay);
+        }
+
+        private void Update_PlotTrack_Data()
+        {
             // First clear all the data from the previous cycle.
             if (DinamicOverlay.Markers.Count > 0)
             {
@@ -555,7 +550,7 @@ namespace MulticastingUDP
                     }
                 }
             }
-            else // Here hanlde display of passive display (buffered data)
+            else // Here handle display of passive display (buffered data)
             {
                 MapDisplayProvider.GetDisplayData(true, out TargetList);
 
@@ -625,7 +620,7 @@ namespace MulticastingUDP
                 }
 
                 // Start the timer
-                this.PlotDisplayTimer.Enabled = true;
+                this.DataDisplayUpdateTimer.Enabled = true;
             }
             else
             {
@@ -640,7 +635,7 @@ namespace MulticastingUDP
                 this.checkBoxFilterBySSR.Checked = false;
 
                 // Stop the timer
-                this.PlotDisplayTimer.Enabled = false;
+                this.DataDisplayUpdateTimer.Enabled = false;
 
                 // Clear the latest map display
                 DinamicOverlay.Markers.Clear();
@@ -664,8 +659,8 @@ namespace MulticastingUDP
                 {
                     if (UpdateRateinMS > 0 && UpdateRateinMS < 100001)
                     {
-                        this.PlotDisplayTimer.Interval = UpdateRateinMS;
-                        this.label9.Text = "Current rate at: " + this.PlotDisplayTimer.Interval.ToString() + "ms";
+                        this.DataDisplayUpdateTimer.Interval = UpdateRateinMS;
+                        this.label9.Text = "Current rate at: " + this.DataDisplayUpdateTimer.Interval.ToString() + "ms";
                         this.textBoxUpdateRate.Text = "";
                     }
                     else

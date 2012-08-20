@@ -36,7 +36,6 @@ namespace MulticastingUDP
         // format (The TargetType)
         public static void GetDisplayData(bool Return_Buffered, out System.Collections.Generic.List<TargetType> TargetList)
         {
-
             // First remove all the previous data
             CurrentTargetList.Clear();
 

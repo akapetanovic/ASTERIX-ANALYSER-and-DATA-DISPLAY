@@ -162,7 +162,7 @@ namespace MulticastingUDP
             // Extract the current SIC/SAC so the correct radar can be applied
             //
             ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)CAT48.I048DataItems[CAT48.ItemIDToIndex("010")].value;
-            foreach (RadarData.RadarDataSet RDS in RadarData.RadarDataSets)
+            foreach (SystemAdaptationDataSet.Radar RDS in SystemAdaptationDataSet.RadarDataSet)
             {
                 // If the current SIC/SAC code matched the code of one of the defined radars
                 // then go ahead and calculate the Lat/Long position.

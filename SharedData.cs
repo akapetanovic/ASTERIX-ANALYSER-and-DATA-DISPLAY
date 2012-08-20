@@ -76,11 +76,5 @@ namespace MulticastingUDP
         public static string ConnName = "N/A";
         public static string CurrentMulticastAddress = "N/A";
         public static int Current_Port = 0;
-
-
-        ///////////////////////
-        // Development data
-        public static TestForm MyTestForm = new TestForm();
-
     }
 }
