@@ -119,6 +119,7 @@ namespace MulticastingUDP
             // Choose MAP provider and MAP mode
             gMapControl.MapProvider = GMapProviders.GoogleTerrainMap;
             gMapControl.Manager.Mode = AccessMode.ServerAndCache;
+            gMapControl.EmptyMapBackground = Color.Gray;
             
             // Set MIN/MAX for the ZOOM function
             gMapControl.MinZoom = 0;
@@ -133,11 +134,11 @@ namespace MulticastingUDP
             StaticOverlay = new GMapOverlay(gMapControl, "OverlayTwo");
             gMapControl.Overlays.Add(StaticOverlay);
 
-            this.label9.Text = "Current rate at: " + this.DataDisplayUpdateTimer.Interval.ToString() + "ms";
+            this.label9.Text = "Current rate at: " + this.PlotandTrackDisplayUpdateTimer.Interval.ToString() + "ms";
             this.comboBox1.Text = "Plain";
-
+            
             // Now build static display
-            Build_Static_Display();
+            StaticDisplayBuilder.Build(ref StaticOverlay);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -486,18 +487,10 @@ namespace MulticastingUDP
 
         // This is a timer that is resposible for updating the data display
         private void PlotDisplayTimer_Tick(object sender, EventArgs e)
-        {
+        { 
             Update_PlotTrack_Data();
         }
 
-        // This method builds the static portion of the display based on the user preference.
-        // Those are elements that are loaded once and do not get changed unless specifically 
-        // initiated by the user.
-        private void Build_Static_Display()
-        {
-            StaticDisplayBuilder.UpdateRadarMarkers(ref StaticOverlay);
-            StaticDisplayBuilder.UpdateWaypointMarkers(ref StaticOverlay);
-        }
 
         private void Update_PlotTrack_Data()
         {
@@ -508,15 +501,15 @@ namespace MulticastingUDP
             }
 
             // Now get the data since the last cycle and display it on the map
-            MapDisplayProvider DP = new MapDisplayProvider();
-            System.Collections.Generic.List<MapDisplayProvider.TargetType> TargetList = new System.Collections.Generic.List<MapDisplayProvider.TargetType>();
+            DynamicDisplayBuilder DP = new DynamicDisplayBuilder();
+            System.Collections.Generic.List<DynamicDisplayBuilder.TargetType> TargetList = new System.Collections.Generic.List<DynamicDisplayBuilder.TargetType>();
 
             // Here hanlde display od live data
             if (SharedData.bool_Listen_for_Data == true)
             {
-                MapDisplayProvider.GetDisplayData(false, out TargetList);
+                DynamicDisplayBuilder.GetDisplayData(false, out TargetList);
 
-                foreach (MapDisplayProvider.TargetType Target in TargetList)
+                foreach (DynamicDisplayBuilder.TargetType Target in TargetList)
                 {
                     // If SSR code filtering is to be applied 
                     if (this.checkBoxFilterBySSR.Enabled == true &&
@@ -552,9 +545,9 @@ namespace MulticastingUDP
             }
             else // Here handle display of passive display (buffered data)
             {
-                MapDisplayProvider.GetDisplayData(true, out TargetList);
+                DynamicDisplayBuilder.GetDisplayData(true, out TargetList);
 
-                foreach (MapDisplayProvider.TargetType Target in TargetList)
+                foreach (DynamicDisplayBuilder.TargetType Target in TargetList)
                 {
                     // If SSR code filtering is to be applied 
                     if (this.checkBoxFilterBySSR.Checked == true && (this.comboBoxSSRFilterBox.Items.Count > 0))
@@ -620,7 +613,7 @@ namespace MulticastingUDP
                 }
 
                 // Start the timer
-                this.DataDisplayUpdateTimer.Enabled = true;
+                this.PlotandTrackDisplayUpdateTimer.Enabled = true;
             }
             else
             {
@@ -635,7 +628,7 @@ namespace MulticastingUDP
                 this.checkBoxFilterBySSR.Checked = false;
 
                 // Stop the timer
-                this.DataDisplayUpdateTimer.Enabled = false;
+                this.PlotandTrackDisplayUpdateTimer.Enabled = false;
 
                 // Clear the latest map display
                 DinamicOverlay.Markers.Clear();
@@ -659,8 +652,8 @@ namespace MulticastingUDP
                 {
                     if (UpdateRateinMS > 0 && UpdateRateinMS < 100001)
                     {
-                        this.DataDisplayUpdateTimer.Interval = UpdateRateinMS;
-                        this.label9.Text = "Current rate at: " + this.DataDisplayUpdateTimer.Interval.ToString() + "ms";
+                        this.PlotandTrackDisplayUpdateTimer.Interval = UpdateRateinMS;
+                        this.label9.Text = "Current rate at: " + this.PlotandTrackDisplayUpdateTimer.Interval.ToString() + "ms";
                         this.textBoxUpdateRate.Text = "";
                     }
                     else
@@ -715,9 +708,9 @@ namespace MulticastingUDP
                 SSR_Code_Lookup[I] = false;
 
             // On load determine what SSR codes are present end populate the combo box
-            if (MainDataStorage.CAT01Message.Count > 0)
+            if (MainASTERIXDataStorage.CAT01Message.Count > 0)
             {
-                foreach (MainDataStorage.CAT01Data Msg in MainDataStorage.CAT01Message)
+                foreach (MainASTERIXDataStorage.CAT01Data Msg in MainASTERIXDataStorage.CAT01Message)
                 {
                     if (Msg.I001DataItems[CAT01.ItemIDToIndex("070")].CurrentlyPresent == true)
                     {
@@ -728,9 +721,9 @@ namespace MulticastingUDP
                     }
                 }
             }
-            else if (MainDataStorage.CAT48Message.Count > 0)
+            else if (MainASTERIXDataStorage.CAT48Message.Count > 0)
             {
-                foreach (MainDataStorage.CAT48Data Msg in MainDataStorage.CAT48Message)
+                foreach (MainASTERIXDataStorage.CAT48Data Msg in MainASTERIXDataStorage.CAT48Message)
                 {
                     if (Msg.I048DataItems[CAT48.ItemIDToIndex("070")].CurrentlyPresent == true)
                     {
@@ -837,22 +830,29 @@ namespace MulticastingUDP
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.comboBox1.Text == "Plain")
+            if (this.comboBox1.Text == "Google Plain")
             {
                 gMapControl.MapProvider = GMapProviders.GoogleMap;
             }
-            else if (this.comboBox1.Text == "Satellite")
+            else if (this.comboBox1.Text == "Google Satellite")
             {
                 gMapControl.MapProvider = GMapProviders.GoogleSatelliteMap;
             }
-            else if (this.comboBox1.Text == "Terrain")
+            else if (this.comboBox1.Text == "Google Terrain")
             {
                 gMapControl.MapProvider = GMapProviders.GoogleTerrainMap;
             }
-            else if (this.comboBox1.Text == "Hybrid")
+            else if (this.comboBox1.Text == "Google Hybrid")
             {
                 gMapControl.MapProvider = GMapProviders.GoogleHybridMap;
             }
+            else if (this.comboBox1.Text == "Empty - Custom Built")
+            {
+                gMapControl.MapProvider = GMapProviders.EmptyProvider;
+               
+            }
+           
+
         }
 
         private void label14_Click(object sender, EventArgs e)
@@ -876,6 +876,44 @@ namespace MulticastingUDP
             FrmDetailedView MyDetailedView = new FrmDetailedView();
             MyDetailedView.WhatToDisplay = FrmDetailedView.DisplayType.CAT48I240;
             MyDetailedView.Show();
+        }
+
+        private void colorDialogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisplayAttibutePicker ColorPickerForm = new DisplayAttibutePicker();
+            ColorPickerForm.Show();
+        }
+
+        private void StaticDisplayTimer_Tick(object sender, EventArgs e)
+        {
+            if (DisplayAttributes.StaticDisplayBuildRequired)
+            {
+                // Always check for the change to the background color
+                gMapControl.EmptyMapBackground = DisplayAttributes.GetDisplayAttribute(DisplayAttributes.DisplayItemsType.BackgroundColor).TextColor;
+                
+                // rebuild static display
+                StaticOverlay.Markers.Clear();
+                StaticOverlay.Routes.Clear();
+                StaticOverlay.Polygons.Clear();
+                StaticDisplayBuilder.Build(ref StaticOverlay);
+                DisplayAttributes.StaticDisplayBuildRequired = false;
+            }
+        }
+
+        private void gMapControl_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           
+        }
+
+        private void gMapControl_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                DisplayRightClickOptions MyForm = new DisplayRightClickOptions();
+                MyForm.StartPosition = FormStartPosition.Manual;
+                MyForm.Location = new Point(e.X + 75, e.Y + 150);
+                MyForm.Show();
+            }
         }
     }
 }

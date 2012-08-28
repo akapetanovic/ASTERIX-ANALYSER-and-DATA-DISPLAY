@@ -57,11 +57,9 @@ namespace MulticastingUDP
         public WaypointMarker(PointLatLng p, string WPT_Name_In, Font Font_To_Use_In, Brush Brush_To_Use_In)
             : base(p)
         {
-
             WPT_Name = WPT_Name_In;
             Font_To_Use = Font_To_Use_In;
             Brush_To_Use = Brush_To_Use_In;
-
         }
 
         public override void OnRender(Graphics g)
@@ -70,6 +68,4 @@ namespace MulticastingUDP
               
            }
     }
-
-
 }

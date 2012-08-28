@@ -134,15 +134,15 @@ namespace MulticastingUDP
         #region CAT048_Display_Method_Region
         private void DisplayCAT48I090Data()
         {
-            if (MainDataStorage.CAT48Message.Count > 0)
+            if (MainASTERIXDataStorage.CAT48Message.Count > 0)
             {
-                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("090")].Description);
-                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("090")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("010")].value;
                 this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
                 this.listBoxMainDataBox.Items.Add("    ");
 
                 // Here determine the flag indicating what data is to be shown
-                foreach (MainDataStorage.CAT48Data Msg in MainDataStorage.CAT48Message)
+                foreach (MainASTERIXDataStorage.CAT48Data Msg in MainASTERIXDataStorage.CAT48Message)
                 {
                     SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I048DataItems[CAT48.ItemIDToIndex("010")].value;
 
@@ -168,16 +168,16 @@ namespace MulticastingUDP
         private void DisplayCAT48I070Data()
         {
 
-            if (MainDataStorage.CAT48Message.Count > 0)
+            if (MainASTERIXDataStorage.CAT48Message.Count > 0)
             {
 
-                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("070")].Description);
-                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("070")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("010")].value;
                 this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
                 this.listBoxMainDataBox.Items.Add("    ");
 
                 // Here determine the flag indicating what data is to be shown
-                foreach (MainDataStorage.CAT48Data Msg in MainDataStorage.CAT48Message)
+                foreach (MainASTERIXDataStorage.CAT48Data Msg in MainASTERIXDataStorage.CAT48Message)
                 {
                     SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I048DataItems[CAT48.ItemIDToIndex("010")].value;
 
@@ -203,16 +203,16 @@ namespace MulticastingUDP
 
         private void DisplayCAT48I040Data()
         {
-            if (MainDataStorage.CAT48Message.Count > 0)
+            if (MainASTERIXDataStorage.CAT48Message.Count > 0)
             {
 
-                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("040")].Description);
-                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("040")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("010")].value;
                 this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
                 this.listBoxMainDataBox.Items.Add("    ");
 
                 // Here determine the flag indicating what data is to be shown
-                foreach (MainDataStorage.CAT48Data Msg in MainDataStorage.CAT48Message)
+                foreach (MainASTERIXDataStorage.CAT48Data Msg in MainASTERIXDataStorage.CAT48Message)
                 {
                     SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I048DataItems[CAT48.ItemIDToIndex("010")].value;
 
@@ -238,16 +238,16 @@ namespace MulticastingUDP
 
         private void DisplayCAT48I020Data()
         {
-            if (MainDataStorage.CAT48Message.Count > 0)
+            if (MainASTERIXDataStorage.CAT48Message.Count > 0)
             {
 
-                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("020")].Description);
-                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("020")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("010")].value;
                 this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
                 this.listBoxMainDataBox.Items.Add("    ");
 
                 // Here determine the flag indicating what data is to be shown
-                foreach (MainDataStorage.CAT48Data Msg in MainDataStorage.CAT48Message)
+                foreach (MainASTERIXDataStorage.CAT48Data Msg in MainASTERIXDataStorage.CAT48Message)
                 {
                     SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I048DataItems[CAT48.ItemIDToIndex("010")].value;
 
@@ -281,16 +281,16 @@ namespace MulticastingUDP
         }
         private void DisplayCAT48I240Data()
         {
-            if (MainDataStorage.CAT48Message.Count > 0)
+            if (MainASTERIXDataStorage.CAT48Message.Count > 0)
             {
 
-                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("240")].Description);
-                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("240")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT48Message[0].I048DataItems[CAT48.ItemIDToIndex("010")].value;
                 this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
                 this.listBoxMainDataBox.Items.Add("    ");
 
                 // Here determine the flag indicating what data is to be shown
-                foreach (MainDataStorage.CAT48Data Msg in MainDataStorage.CAT48Message)
+                foreach (MainASTERIXDataStorage.CAT48Data Msg in MainASTERIXDataStorage.CAT48Message)
                 {
                     SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I048DataItems[CAT48.ItemIDToIndex("010")].value;
 
@@ -316,15 +316,15 @@ namespace MulticastingUDP
         #region CAT001_Display_Method_Region
         private void DisplayCAT01I090Data()
         {
-            if (MainDataStorage.CAT01Message.Count > 0)
+            if (MainASTERIXDataStorage.CAT01Message.Count > 0)
             {
-                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainDataStorage.CAT01Message[0].I001DataItems[CAT01.ItemIDToIndex("090")].Description);
-                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainDataStorage.CAT01Message[0].I001DataItems[CAT01.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT01Message[0].I001DataItems[CAT01.ItemIDToIndex("090")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT01Message[0].I001DataItems[CAT01.ItemIDToIndex("010")].value;
                 this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
                 this.listBoxMainDataBox.Items.Add("    ");
 
                 // Here determine the flag indicating what data is to be shown
-                foreach (MainDataStorage.CAT01Data Msg in MainDataStorage.CAT01Message)
+                foreach (MainASTERIXDataStorage.CAT01Data Msg in MainASTERIXDataStorage.CAT01Message)
                 {
                     SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I001DataItems[CAT01.ItemIDToIndex("010")].value;
 
@@ -349,15 +349,15 @@ namespace MulticastingUDP
 
         private void DisplayCAT01I070Data()
         {
-            if (MainDataStorage.CAT01Message.Count > 0)
+            if (MainASTERIXDataStorage.CAT01Message.Count > 0)
             {
-                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainDataStorage.CAT01Message[0].I001DataItems[CAT01.ItemIDToIndex("070")].Description);
-                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainDataStorage.CAT01Message[0].I001DataItems[CAT01.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT01Message[0].I001DataItems[CAT01.ItemIDToIndex("070")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT01Message[0].I001DataItems[CAT01.ItemIDToIndex("010")].value;
                 this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
                 this.listBoxMainDataBox.Items.Add("    ");
 
                 // Here determine the flag indicating what data is to be shown
-                foreach (MainDataStorage.CAT01Data Msg in MainDataStorage.CAT01Message)
+                foreach (MainASTERIXDataStorage.CAT01Data Msg in MainASTERIXDataStorage.CAT01Message)
                 {
                     SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I001DataItems[CAT01.ItemIDToIndex("010")].value;
 
@@ -382,15 +382,15 @@ namespace MulticastingUDP
 
         private void DisplayCAT01I040Data()
         {
-            if (MainDataStorage.CAT01Message.Count > 0)
+            if (MainASTERIXDataStorage.CAT01Message.Count > 0)
             {
-                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainDataStorage.CAT01Message[0].I001DataItems[CAT01.ItemIDToIndex("040")].Description);
-                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainDataStorage.CAT01Message[0].I001DataItems[CAT01.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT01Message[0].I001DataItems[CAT01.ItemIDToIndex("040")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT01Message[0].I001DataItems[CAT01.ItemIDToIndex("010")].value;
                 this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
                 this.listBoxMainDataBox.Items.Add("    ");
 
                 // Here determine the flag indicating what data is to be shown
-                foreach (MainDataStorage.CAT01Data Msg in MainDataStorage.CAT01Message)
+                foreach (MainASTERIXDataStorage.CAT01Data Msg in MainASTERIXDataStorage.CAT01Message)
                 {
                     SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I001DataItems[CAT01.ItemIDToIndex("010")].value;
 
@@ -416,15 +416,15 @@ namespace MulticastingUDP
 
         private void DisplayCAT01I020Data()
         {
-            if (MainDataStorage.CAT01Message.Count > 0)
+            if (MainASTERIXDataStorage.CAT01Message.Count > 0)
             {
-                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainDataStorage.CAT01Message[0].I001DataItems[CAT01.ItemIDToIndex("020")].Description);
-                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainDataStorage.CAT01Message[0].I001DataItems[CAT01.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT01Message[0].I001DataItems[CAT01.ItemIDToIndex("020")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT01Message[0].I001DataItems[CAT01.ItemIDToIndex("010")].value;
                 this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
                 this.listBoxMainDataBox.Items.Add("    ");
 
                 // Here determine the flag indicating what data is to be shown
-                foreach (MainDataStorage.CAT01Data Msg in MainDataStorage.CAT01Message)
+                foreach (MainASTERIXDataStorage.CAT01Data Msg in MainASTERIXDataStorage.CAT01Message)
                 {
                     SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I001DataItems[CAT01.ItemIDToIndex("010")].value;
 
@@ -463,15 +463,15 @@ namespace MulticastingUDP
         #region CAT002_Display_Method_Region
         private void DisplayCAT02I000Data()
         {
-            if (MainDataStorage.CAT02Message.Count > 0)
+            if (MainASTERIXDataStorage.CAT02Message.Count > 0)
             {
-                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainDataStorage.CAT01Message[0].I001DataItems[CAT02.ItemIDToIndex("010")].Description);
-                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainDataStorage.CAT01Message[0].I001DataItems[CAT02.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT01Message[0].I001DataItems[CAT02.ItemIDToIndex("010")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT01Message[0].I001DataItems[CAT02.ItemIDToIndex("010")].value;
                 this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
                 this.listBoxMainDataBox.Items.Add("    ");
 
                 // Here determine the flag indicating what data is to be shown
-                foreach (MainDataStorage.CAT02Data Msg in MainDataStorage.CAT02Message)
+                foreach (MainASTERIXDataStorage.CAT02Data Msg in MainASTERIXDataStorage.CAT02Message)
                 {
                     SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I002DataItems[CAT02.ItemIDToIndex("010")].value;
 
@@ -493,15 +493,15 @@ namespace MulticastingUDP
         }
         private void DisplayCAT02I020Data()
         {
-            if (MainDataStorage.CAT02Message.Count > 0)
+            if (MainASTERIXDataStorage.CAT02Message.Count > 0)
             {
-                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainDataStorage.CAT01Message[0].I001DataItems[CAT02.ItemIDToIndex("010")].Description);
-                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainDataStorage.CAT01Message[0].I001DataItems[CAT02.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT01Message[0].I001DataItems[CAT02.ItemIDToIndex("010")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT01Message[0].I001DataItems[CAT02.ItemIDToIndex("010")].value;
                 this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
                 this.listBoxMainDataBox.Items.Add("    ");
 
                 // Here determine the flag indicating what data is to be shown
-                foreach (MainDataStorage.CAT02Data Msg in MainDataStorage.CAT02Message)
+                foreach (MainASTERIXDataStorage.CAT02Data Msg in MainASTERIXDataStorage.CAT02Message)
                 {
                     SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I002DataItems[CAT02.ItemIDToIndex("010")].value;
 
@@ -524,15 +524,15 @@ namespace MulticastingUDP
         private void DisplayCAT02I030Data()
         {
 
-            if (MainDataStorage.CAT02Message.Count > 0)
+            if (MainASTERIXDataStorage.CAT02Message.Count > 0)
             {
-                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainDataStorage.CAT01Message[0].I001DataItems[CAT02.ItemIDToIndex("010")].Description);
-                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainDataStorage.CAT01Message[0].I001DataItems[CAT02.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT01Message[0].I001DataItems[CAT02.ItemIDToIndex("010")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT01Message[0].I001DataItems[CAT02.ItemIDToIndex("010")].value;
                 this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
                 this.listBoxMainDataBox.Items.Add("    ");
 
                 // Here determine the flag indicating what data is to be shown
-                foreach (MainDataStorage.CAT02Data Msg in MainDataStorage.CAT02Message)
+                foreach (MainASTERIXDataStorage.CAT02Data Msg in MainASTERIXDataStorage.CAT02Message)
                 {
                     SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I002DataItems[CAT02.ItemIDToIndex("010")].value;
 
@@ -556,15 +556,15 @@ namespace MulticastingUDP
         }
         private void DisplayCAT02I041Data()
         {
-            if (MainDataStorage.CAT02Message.Count > 0)
+            if (MainASTERIXDataStorage.CAT02Message.Count > 0)
             {
-                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainDataStorage.CAT01Message[0].I001DataItems[CAT02.ItemIDToIndex("010")].Description);
-                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainDataStorage.CAT01Message[0].I001DataItems[CAT02.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT01Message[0].I001DataItems[CAT02.ItemIDToIndex("010")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT01Message[0].I001DataItems[CAT02.ItemIDToIndex("010")].value;
                 this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
                 this.listBoxMainDataBox.Items.Add("    ");
 
                 // Here determine the flag indicating what data is to be shown
-                foreach (MainDataStorage.CAT02Data Msg in MainDataStorage.CAT02Message)
+                foreach (MainASTERIXDataStorage.CAT02Data Msg in MainASTERIXDataStorage.CAT02Message)
                 {
                     SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I002DataItems[CAT02.ItemIDToIndex("010")].value;
 

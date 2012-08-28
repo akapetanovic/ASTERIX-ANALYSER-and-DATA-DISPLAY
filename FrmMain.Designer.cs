@@ -34,6 +34,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectionSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colorDialogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetDataBufferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cAT001DataItemPresenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -173,7 +174,8 @@
             this.comboBoxSSRFilterBox = new System.Windows.Forms.ComboBox();
             this.checkBoxFilterBySSR = new System.Windows.Forms.CheckBox();
             this.gMapControl = new GMap.NET.WindowsForms.GMapControl();
-            this.DataDisplayUpdateTimer = new System.Windows.Forms.Timer(this.components);
+            this.PlotandTrackDisplayUpdateTimer = new System.Windows.Forms.Timer(this.components);
+            this.StaticDisplayTimer = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.tabMainTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -220,7 +222,8 @@
             // 
             this.settingsToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.connectionSettingsToolStripMenuItem});
+            this.connectionSettingsToolStripMenuItem,
+            this.colorDialogToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
@@ -231,6 +234,13 @@
             this.connectionSettingsToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.connectionSettingsToolStripMenuItem.Text = "Connection Settings";
             this.connectionSettingsToolStripMenuItem.Click += new System.EventHandler(this.connectionSettingsToolStripMenuItem_Click);
+            // 
+            // colorDialogToolStripMenuItem
+            // 
+            this.colorDialogToolStripMenuItem.Name = "colorDialogToolStripMenuItem";
+            this.colorDialogToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.colorDialogToolStripMenuItem.Text = "Display Settings";
+            this.colorDialogToolStripMenuItem.Click += new System.EventHandler(this.colorDialogToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -1227,10 +1237,11 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "Plain",
-            "Satellite",
-            "Terrain",
-            "Hybrid"});
+            "Google Plain",
+            "Google Satellite",
+            "Google Terrain",
+            "Google Hybrid",
+            "Empty - Custom Built"});
             this.comboBox1.Location = new System.Drawing.Point(1198, 459);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
@@ -1437,6 +1448,7 @@
             // 
             // gMapControl
             // 
+            this.gMapControl.BackColor = System.Drawing.Color.Black;
             this.gMapControl.Bearing = 0F;
             this.gMapControl.CanDragMap = true;
             this.gMapControl.GrayScaleMode = false;
@@ -1456,12 +1468,20 @@
             this.gMapControl.TabIndex = 0;
             this.gMapControl.Zoom = 0D;
             this.gMapControl.Load += new System.EventHandler(this.gMapControl_Load);
+            this.gMapControl.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.gMapControl_KeyPress);
+            this.gMapControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseClick);
             this.gMapControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseMove);
             // 
-            // DataDisplayUpdateTimer
+            // PlotandTrackDisplayUpdateTimer
             // 
-            this.DataDisplayUpdateTimer.Interval = 5000;
-            this.DataDisplayUpdateTimer.Tick += new System.EventHandler(this.PlotDisplayTimer_Tick);
+            this.PlotandTrackDisplayUpdateTimer.Interval = 5000;
+            this.PlotandTrackDisplayUpdateTimer.Tick += new System.EventHandler(this.PlotDisplayTimer_Tick);
+            // 
+            // StaticDisplayTimer
+            // 
+            this.StaticDisplayTimer.Enabled = true;
+            this.StaticDisplayTimer.Interval = 500;
+            this.StaticDisplayTimer.Tick += new System.EventHandler(this.StaticDisplayTimer_Tick);
             // 
             // FormMain
             // 
@@ -1619,7 +1639,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPlotDisplay;
         private GMap.NET.WindowsForms.GMapControl gMapControl;
-        private System.Windows.Forms.Timer DataDisplayUpdateTimer;
+        private System.Windows.Forms.Timer PlotandTrackDisplayUpdateTimer;
         private System.Windows.Forms.CheckBox checkEnableDisplay;
         private System.Windows.Forms.GroupBox groupBoxUpdateRate;
         private System.Windows.Forms.TextBox textBoxUpdateRate;
@@ -1647,6 +1667,8 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lblCenterLon;
         private System.Windows.Forms.Label lblCenterLat;
+        private System.Windows.Forms.ToolStripMenuItem colorDialogToolStripMenuItem;
+        private System.Windows.Forms.Timer StaticDisplayTimer;
     }
 }
 

@@ -69,6 +69,8 @@
     <Reference Include="GMap.NET.WindowsForms">
       <HintPath>..\..\GMap\GMap.NET.WindowsForms.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -170,15 +172,46 @@
     <Compile Include="ASTERIX\CAT048\CAT48I060UserData.cs" />
     <Compile Include="ASTERIX\CAT048\CAT48I130UserData.cs" />
     <Compile Include="ASTERIX\CAT048\CAT48I260UserData.cs" />
-    <Compile Include="CustomMarker.cs" />
+    <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\DisplayAttributesPicker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\DisplayAttributesPicker.Designer.cs">
+      <DependentUpon>DisplayAttributesPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\DisplayItemSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\DisplayItemSelection.Designer.cs">
+      <DependentUpon>DisplayItemSelection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\GraphicUtilities.cs" />
+    <Compile Include="DATA DISPLAY\STATIC DATA\SectorBorderDisplay.cs" />
+    <Compile Include="DATA DISPLAY\STATIC DATA\StateBorderDisplay.cs" />
+    <Compile Include="DATA DISPLAY\STATIC DATA\WaypointDisplay.cs" />
+    <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\CustomMarker.cs" />
+    <Compile Include="DATA DISPLAY\STATIC DATA\RadarDisplay.cs" />
+    <Compile Include="DATA SET\LoadSectorBoundaries.cs" />
+    <Compile Include="DATA SET\DisplayAttributes_IO.cs" />
+    <Compile Include="DATA SET\LoadStateBoundaries.cs" />
+    <Compile Include="DATA SET\DisplayAttributes.cs" />
+    <Compile Include="DATA SET\LoadWaypoints.cs" />
+    <Compile Include="DATA SET\LoadRadars.cs" />
+    <Compile Include="DATA SET\LoadAdaptationData.cs" />
+    <Compile Include="DATA SET\LoadCoreSettings.cs" />
+    <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\DisplayRightClickOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\DisplayRightClickOptions.Designer.cs">
+      <DependentUpon>DisplayRightClickOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="EarthPlotExporter.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EarthPlotExporter.Designer.cs">
       <DependentUpon>EarthPlotExporter.cs</DependentUpon>
     </Compile>
-    <Compile Include="MapDisplayProvider.cs" />
-    <Compile Include="Mike Gavaghan - Geodetic\Angle.cs" />
+    <Compile Include="DATA DISPLAY\DynamicDisplayBuilder.cs" />
+    <Compile Include="MIKE GAVANGHAN - GEODETIC\Angle.cs" />
     <Compile Include="ASTERIX\Bit_Ops.cs" />
     <Compile Include="ASTERIX\CAT001\CAT01DecodeAndStore.cs" />
     <Compile Include="ASTERIX\CAT001\CAT01I020Types.cs" />
@@ -235,14 +268,14 @@
     <Compile Include="ASTERIX\CAT062\CAT62.cs" />
     <Compile Include="ASTERIX\CAT063\CAT63.cs" />
     <Compile Include="ASTERIX\CAT065\CAT65.cs" />
-    <Compile Include="Mike Gavaghan - Geodetic\Ellipsoid.cs" />
+    <Compile Include="MIKE GAVANGHAN - GEODETIC\Ellipsoid.cs" />
     <Compile Include="GeoCordSystem.cs" />
-    <Compile Include="Mike Gavaghan - Geodetic\GeodeticCalculator.cs" />
-    <Compile Include="Mike Gavaghan - Geodetic\GeodeticCurve.cs" />
-    <Compile Include="Mike Gavaghan - Geodetic\GeodeticMeasurement.cs" />
-    <Compile Include="Mike Gavaghan - Geodetic\GlobalCoordinates.cs" />
-    <Compile Include="Mike Gavaghan - Geodetic\GlobalPosition.cs" />
-    <Compile Include="DataSet.cs" />
+    <Compile Include="MIKE GAVANGHAN - GEODETIC\GeodeticCalculator.cs" />
+    <Compile Include="MIKE GAVANGHAN - GEODETIC\GeodeticCurve.cs" />
+    <Compile Include="MIKE GAVANGHAN - GEODETIC\GeodeticMeasurement.cs" />
+    <Compile Include="MIKE GAVANGHAN - GEODETIC\GlobalCoordinates.cs" />
+    <Compile Include="MIKE GAVANGHAN - GEODETIC\GlobalPosition.cs" />
+    <Compile Include="DATA SET\SystemAdaptationDataSet.cs" />
     <Compile Include="BitExtractor.cs" />
     <Compile Include="FrmDataItemPresence.cs">
       <SubType>Form</SubType>
@@ -262,16 +295,26 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainDataStorage.cs" />
+    <Compile Include="MainASTERIXDataStorage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StaticDisplayBuilder.cs" />
+    <Compile Include="DATA DISPLAY\StaticDisplayBuilder.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="ViewDataBySSRCode.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ViewDataBySSRCode.Designer.cs">
       <DependentUpon>ViewDataBySSRCode.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="DATA DISPLAY\DISPLAY UTILITIES\DisplayAttributesPicker.resx">
+      <DependentUpon>DisplayAttributesPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DATA DISPLAY\DISPLAY UTILITIES\DisplayItemSelection.resx">
+      <DependentUpon>DisplayItemSelection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DATA DISPLAY\DISPLAY UTILITIES\DisplayRightClickOptions.resx">
+      <DependentUpon>DisplayRightClickOptions.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EarthPlotExporter.resx">
       <DependentUpon>EarthPlotExporter.cs</DependentUpon>
     </EmbeddedResource>
@@ -301,7 +344,7 @@
       <DependentUpon>ViewDataBySSRCode.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="Data Samples\jahorinaJan_cat.48" />
+    <None Include="DATA SAMPLES\jahorinaJan_cat.48" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -318,7 +361,7 @@
       <DependentUpon>FrmSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="SharedData.cs" />
-    <None Include="Documentation\User Manual.1.3.docx" />
+    <None Include="DOCUMENTATION\User Manual.1.3.docx" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -345,6 +388,7 @@
   <ItemGroup>
     <Content Include="radar.jpg" />
     <Content Include="README.txt" />
+    <None Include="Resources\waypoint.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

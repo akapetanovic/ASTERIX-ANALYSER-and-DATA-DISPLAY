@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MulticastingUDP
 {
-    class MapDisplayProvider
+    class DynamicDisplayBuilder
     {
         public class TargetType
         {
@@ -41,11 +41,11 @@ namespace MulticastingUDP
 
             if (Return_Buffered == true)
             {
-                if (MainDataStorage.CAT01Message.Count > 0)
+                if (MainASTERIXDataStorage.CAT01Message.Count > 0)
                 {
-                    for (int Start_Idx = 0; Start_Idx < MainDataStorage.CAT01Message.Count; Start_Idx++)
+                    for (int Start_Idx = 0; Start_Idx < MainASTERIXDataStorage.CAT01Message.Count; Start_Idx++)
                     {
-                        MainDataStorage.CAT01Data Msg = MainDataStorage.CAT01Message[Start_Idx];
+                        MainASTERIXDataStorage.CAT01Data Msg = MainASTERIXDataStorage.CAT01Message[Start_Idx];
 
                         // Get Mode3A
                         CAT01I070Types.CAT01070Mode3UserData Mode3AData = (CAT01I070Types.CAT01070Mode3UserData)Msg.I001DataItems[CAT01.ItemIDToIndex("070")].value;
@@ -62,13 +62,13 @@ namespace MulticastingUDP
                         CurrentTargetList.Add(Target);
                     }
                 }
-                else if (MainDataStorage.CAT48Message.Count > 0)
+                else if (MainASTERIXDataStorage.CAT48Message.Count > 0)
                 {
 
-                    for (int Start_Idx = 0; Start_Idx < MainDataStorage.CAT48Message.Count; Start_Idx++)
+                    for (int Start_Idx = 0; Start_Idx < MainASTERIXDataStorage.CAT48Message.Count; Start_Idx++)
                     {
 
-                        MainDataStorage.CAT48Data Msg = MainDataStorage.CAT48Message[Start_Idx];
+                        MainASTERIXDataStorage.CAT48Data Msg = MainASTERIXDataStorage.CAT48Message[Start_Idx];
 
                         CAT48I070Types.CAT48I070Mode3UserData Mode3AData = (CAT48I070Types.CAT48I070Mode3UserData)Msg.I048DataItems[CAT48.ItemIDToIndex("070")].value;
                         // Get Lat/Long in decimal
@@ -90,12 +90,12 @@ namespace MulticastingUDP
             }
             else
             {
-                if (MainDataStorage.CAT01Message.Count > 0)
+                if (MainASTERIXDataStorage.CAT01Message.Count > 0)
                 {
-                    for (int Start_Idx = LastDataIndex; Start_Idx < MainDataStorage.CAT01Message.Count; Start_Idx++)
+                    for (int Start_Idx = LastDataIndex; Start_Idx < MainASTERIXDataStorage.CAT01Message.Count; Start_Idx++)
                     {
                         LastDataIndex++;
-                        MainDataStorage.CAT01Data Msg = MainDataStorage.CAT01Message[Start_Idx];
+                        MainASTERIXDataStorage.CAT01Data Msg = MainASTERIXDataStorage.CAT01Message[Start_Idx];
 
                         // Get Mode3A
                         CAT01I070Types.CAT01070Mode3UserData Mode3AData = (CAT01I070Types.CAT01070Mode3UserData)Msg.I001DataItems[CAT01.ItemIDToIndex("070")].value;
@@ -112,14 +112,14 @@ namespace MulticastingUDP
                         CurrentTargetList.Add(Target);
                     }
                 }
-                else if (MainDataStorage.CAT48Message.Count > 0)
+                else if (MainASTERIXDataStorage.CAT48Message.Count > 0)
                 {
 
-                    for (int Start_Idx = LastDataIndex; Start_Idx < MainDataStorage.CAT48Message.Count; Start_Idx++)
+                    for (int Start_Idx = LastDataIndex; Start_Idx < MainASTERIXDataStorage.CAT48Message.Count; Start_Idx++)
                     {
                         LastDataIndex++;
 
-                        MainDataStorage.CAT48Data Msg = MainDataStorage.CAT48Message[Start_Idx];
+                        MainASTERIXDataStorage.CAT48Data Msg = MainASTERIXDataStorage.CAT48Message[Start_Idx];
 
                         CAT48I070Types.CAT48I070Mode3UserData Mode3AData = (CAT48I070Types.CAT48I070Mode3UserData)Msg.I048DataItems[CAT48.ItemIDToIndex("070")].value;
                         // Get Lat/Long in decimal

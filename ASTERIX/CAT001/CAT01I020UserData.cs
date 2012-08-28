@@ -39,6 +39,7 @@ namespace MulticastingUDP
 
         public static void DecodeCAT01I002(byte[] Data)
         {
+           
             // Decode 020
             if (CAT01.I001DataItems[CAT01.ItemIDToIndex("020")].CurrentlyPresent == true)
             {

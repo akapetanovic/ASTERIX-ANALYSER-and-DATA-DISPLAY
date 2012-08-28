@@ -29,9 +29,9 @@ namespace MulticastingUDP
                 SSR_Code_Lookup[I] = false;
 
             // On load determine what SSR codes are present end populate the combo box
-            if (MainDataStorage.CAT01Message.Count > 0)
+            if (MainASTERIXDataStorage.CAT01Message.Count > 0)
             {
-                foreach (MainDataStorage.CAT01Data Msg in MainDataStorage.CAT01Message)
+                foreach (MainASTERIXDataStorage.CAT01Data Msg in MainASTERIXDataStorage.CAT01Message)
                 {
                     if (Msg.I001DataItems[CAT01.ItemIDToIndex("070")].CurrentlyPresent == true)
                     {
@@ -42,9 +42,9 @@ namespace MulticastingUDP
                     }
                 }
             }
-            else if (MainDataStorage.CAT48Message.Count > 0)
+            else if (MainASTERIXDataStorage.CAT48Message.Count > 0)
             {
-                foreach (MainDataStorage.CAT48Data Msg in MainDataStorage.CAT48Message)
+                foreach (MainASTERIXDataStorage.CAT48Data Msg in MainASTERIXDataStorage.CAT48Message)
                 {
                     if (Msg.I048DataItems[CAT48.ItemIDToIndex("070")].CurrentlyPresent == true)
                     {
@@ -81,9 +81,9 @@ namespace MulticastingUDP
             {
      
             // On load determine what SSR codes are present end populate the combo box
-            if (MainDataStorage.CAT01Message.Count > 0)
+            if (MainASTERIXDataStorage.CAT01Message.Count > 0)
             {
-                foreach (MainDataStorage.CAT01Data Msg in MainDataStorage.CAT01Message)
+                foreach (MainASTERIXDataStorage.CAT01Data Msg in MainASTERIXDataStorage.CAT01Message)
                 {
                     CAT01I070Types.CAT01070Mode3UserData MyData = (CAT01I070Types.CAT01070Mode3UserData)Msg.I001DataItems[CAT01.ItemIDToIndex("070")].value;
 
@@ -112,9 +112,9 @@ namespace MulticastingUDP
                     }
                 }
             }
-            else if (MainDataStorage.CAT48Message.Count > 0)
+            else if (MainASTERIXDataStorage.CAT48Message.Count > 0)
             {
-                foreach (MainDataStorage.CAT48Data Msg in MainDataStorage.CAT48Message)
+                foreach (MainASTERIXDataStorage.CAT48Data Msg in MainASTERIXDataStorage.CAT48Message)
                 {
                     CAT48I070Types.CAT48I070Mode3UserData MyData = (CAT48I070Types.CAT48I070Mode3UserData)Msg.I048DataItems[CAT48.ItemIDToIndex("070")].value;
 

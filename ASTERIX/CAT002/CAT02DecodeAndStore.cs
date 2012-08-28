@@ -87,7 +87,7 @@ namespace MulticastingUDP
             // All CAT48 data has been decoded, so lets save off the message data to the global
             // storage for latter usage
 
-            MainDataStorage.CAT02Data CAT02MessageData = new MainDataStorage.CAT02Data();
+            MainASTERIXDataStorage.CAT02Data CAT02MessageData = new MainASTERIXDataStorage.CAT02Data();
 
             foreach (CAT02.CAT02DataItem Item in CAT02.I002DataItems)
             {
@@ -102,7 +102,7 @@ namespace MulticastingUDP
                 CAT02MessageData.I002DataItems.Add(MyItem);
             }
 
-            MainDataStorage.CAT02Message.Add(CAT02MessageData);
+            MainASTERIXDataStorage.CAT02Message.Add(CAT02MessageData);
         }
     }
 }

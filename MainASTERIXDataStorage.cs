@@ -12,7 +12,7 @@ namespace MulticastingUDP
     //
     // This is nothig more than a central place for all data to be
     // stored.
-    class MainDataStorage
+    class MainASTERIXDataStorage
     {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CAT 01 Messages
