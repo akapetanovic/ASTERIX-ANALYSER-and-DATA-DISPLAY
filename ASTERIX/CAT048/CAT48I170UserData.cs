@@ -10,7 +10,7 @@ namespace MulticastingUDP
         public static void DecodeCAT48I170(byte[] Data)
         {
             // Increase data buffer index so it ready for the next data item.
-            CAT48.CurrentDataBufferOctalIndex = CAT48.CurrentDataBufferOctalIndex + 3; // 1+
+            CAT48.CurrentDataBufferOctalIndex = CAT48.CurrentDataBufferOctalIndex + 1; // 1+
         }
 
     }

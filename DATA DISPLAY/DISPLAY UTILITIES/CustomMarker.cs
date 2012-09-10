@@ -65,7 +65,9 @@ namespace MulticastingUDP
         public override void OnRender(Graphics g)
            {
                g.DrawString(WPT_Name, Font_To_Use, Brush_To_Use, LocalPosition.X, LocalPosition.Y);
-              
            }
     }
+
+    
+
 }

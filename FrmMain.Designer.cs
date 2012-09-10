@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.listBoxManFrame = new System.Windows.Forms.ListBox();
             this.DataUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -131,21 +130,21 @@
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.buttonStopRun = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.labelConnIpAndPort = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.labelActiveConnName = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.tabMainTab = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.PlotandTrackDisplayUpdateTimer = new System.Windows.Forms.Timer(this.components);
+            this.StaticDisplayTimer = new System.Windows.Forms.Timer(this.components);
+            this.groupBoxConnection = new System.Windows.Forms.GroupBox();
+            this.button8 = new System.Windows.Forms.Button();
             this.tabPlotDisplay = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.numericUpDownUpper = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownLower = new System.Windows.Forms.NumericUpDown();
+            this.checkBoxFLFilter = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblCenterLon = new System.Windows.Forms.Label();
             this.lblCenterLat = new System.Windows.Forms.Label();
@@ -174,28 +173,28 @@
             this.comboBoxSSRFilterBox = new System.Windows.Forms.ComboBox();
             this.checkBoxFilterBySSR = new System.Windows.Forms.CheckBox();
             this.gMapControl = new GMap.NET.WindowsForms.GMapControl();
-            this.PlotandTrackDisplayUpdateTimer = new System.Windows.Forms.Timer(this.components);
-            this.StaticDisplayTimer = new System.Windows.Forms.Timer(this.components);
+            this.tabPageAsterixMessages = new System.Windows.Forms.TabPage();
+            this.listBoxManFrame = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tabMainTab = new System.Windows.Forms.TabControl();
             this.menuStrip1.SuspendLayout();
-            this.tabMainTab.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUpper)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLower)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBoxUpdateRate.SuspendLayout();
             this.groupBoxSSRFilter.SuspendLayout();
+            this.tabPageAsterixMessages.SuspendLayout();
+            this.tabMainTab.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // listBoxManFrame
-            // 
-            this.listBoxManFrame.FormattingEnabled = true;
-            this.listBoxManFrame.HorizontalScrollbar = true;
-            this.listBoxManFrame.Location = new System.Drawing.Point(6, 20);
-            this.listBoxManFrame.Name = "listBoxManFrame";
-            this.listBoxManFrame.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBoxManFrame.Size = new System.Drawing.Size(1315, 797);
-            this.listBoxManFrame.TabIndex = 3;
-            this.listBoxManFrame.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // DataUpdateTimer
             // 
@@ -205,6 +204,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.Black;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsToolStripMenuItem,
             this.toolsToolStripMenuItem,
@@ -214,16 +214,17 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1347, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1335, 24);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // settingsToolStripMenuItem
             // 
-            this.settingsToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.settingsToolStripMenuItem.BackColor = System.Drawing.Color.Black;
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.connectionSettingsToolStripMenuItem,
             this.colorDialogToolStripMenuItem});
+            this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
@@ -239,12 +240,12 @@
             // 
             this.colorDialogToolStripMenuItem.Name = "colorDialogToolStripMenuItem";
             this.colorDialogToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.colorDialogToolStripMenuItem.Text = "Display Settings";
+            this.colorDialogToolStripMenuItem.Text = "Display Attributes";
             this.colorDialogToolStripMenuItem.Click += new System.EventHandler(this.colorDialogToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
-            this.toolsToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.toolsToolStripMenuItem.BackColor = System.Drawing.Color.Black;
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.resetDataBufferToolStripMenuItem,
             this.cAT001DataItemPresenceToolStripMenuItem,
@@ -256,7 +257,7 @@
             this.cAT063ToolStripMenuItem,
             this.cAT065DataItemPresenceToolStripMenuItem,
             this.cAT244DataItemPresenceToolStripMenuItem});
-            this.toolsToolStripMenuItem.Enabled = false;
+            this.toolsToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(120, 20);
             this.toolsToolStripMenuItem.Text = "Data Item Presence";
@@ -345,7 +346,7 @@
             this.cAT063ToolStripMenuItem1,
             this.cAT065ToolStripMenuItem,
             this.cAT244ToolStripMenuItem});
-            this.detailedViewToolStripMenuItem.Enabled = false;
+            this.detailedViewToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.detailedViewToolStripMenuItem.Name = "detailedViewToolStripMenuItem";
             this.detailedViewToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
             this.detailedViewToolStripMenuItem.Text = "Data Item View";
@@ -957,7 +958,7 @@
             // 
             this.dataBySSRCodeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewToolStripMenuItem});
-            this.dataBySSRCodeToolStripMenuItem.Enabled = false;
+            this.dataBySSRCodeToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.dataBySSRCodeToolStripMenuItem.Name = "dataBySSRCodeToolStripMenuItem";
             this.dataBySSRCodeToolStripMenuItem.Size = new System.Drawing.Size(111, 20);
             this.dataBySSRCodeToolStripMenuItem.Text = "View by SSR code";
@@ -974,7 +975,7 @@
             this.googleEarthToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportToolStripMenuItem,
             this.settingsToolStripMenuItem1});
-            this.googleEarthToolStripMenuItem.Enabled = false;
+            this.googleEarthToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.googleEarthToolStripMenuItem.Name = "googleEarthToolStripMenuItem";
             this.googleEarthToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.googleEarthToolStripMenuItem.Text = "Export";
@@ -995,86 +996,28 @@
             // 
             // aboutToolStripMenuItem
             // 
+            this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(14, 3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 13);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Time of Rcv";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(391, 3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "CAT#";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(432, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "SAC/SIC";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(236, 3);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(86, 13);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Multicast:IP/Port";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(113, 3);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(67, 13);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "From:IP/Port";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(345, 3);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 13);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "Bytes#";
-            // 
             // buttonStopRun
             // 
+            this.buttonStopRun.BackColor = System.Drawing.Color.DarkGray;
             this.buttonStopRun.Enabled = false;
-            this.buttonStopRun.Location = new System.Drawing.Point(1256, 1);
+            this.buttonStopRun.Location = new System.Drawing.Point(301, 11);
             this.buttonStopRun.Name = "buttonStopRun";
             this.buttonStopRun.Size = new System.Drawing.Size(75, 23);
             this.buttonStopRun.TabIndex = 16;
             this.buttonStopRun.Text = "Stopped";
-            this.buttonStopRun.UseVisualStyleBackColor = true;
+            this.buttonStopRun.UseVisualStyleBackColor = false;
             this.buttonStopRun.Click += new System.EventHandler(this.button1_Click);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1022, 30);
+            this.label7.Location = new System.Drawing.Point(67, 40);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(134, 13);
             this.label7.TabIndex = 17;
@@ -1083,7 +1026,7 @@
             // labelConnIpAndPort
             // 
             this.labelConnIpAndPort.AutoSize = true;
-            this.labelConnIpAndPort.Location = new System.Drawing.Point(1162, 30);
+            this.labelConnIpAndPort.Location = new System.Drawing.Point(207, 40);
             this.labelConnIpAndPort.Name = "labelConnIpAndPort";
             this.labelConnIpAndPort.Size = new System.Drawing.Size(56, 13);
             this.labelConnIpAndPort.TabIndex = 18;
@@ -1092,7 +1035,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1057, 6);
+            this.label8.Location = new System.Drawing.Point(102, 16);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(128, 13);
             this.label8.TabIndex = 19;
@@ -1101,7 +1044,7 @@
             // labelActiveConnName
             // 
             this.labelActiveConnName.AutoSize = true;
-            this.labelActiveConnName.Location = new System.Drawing.Point(1191, 6);
+            this.labelActiveConnName.Location = new System.Drawing.Point(236, 16);
             this.labelActiveConnName.Name = "labelActiveConnName";
             this.labelActiveConnName.Size = new System.Drawing.Size(27, 13);
             this.labelActiveConnName.TabIndex = 20;
@@ -1109,40 +1052,54 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(1256, 30);
+            this.progressBar1.Location = new System.Drawing.Point(301, 40);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(75, 13);
             this.progressBar1.TabIndex = 21;
             // 
-            // tabMainTab
+            // PlotandTrackDisplayUpdateTimer
             // 
-            this.tabMainTab.Controls.Add(this.tabPage1);
-            this.tabMainTab.Controls.Add(this.tabPlotDisplay);
-            this.tabMainTab.Location = new System.Drawing.Point(0, 46);
-            this.tabMainTab.Name = "tabMainTab";
-            this.tabMainTab.SelectedIndex = 0;
-            this.tabMainTab.Size = new System.Drawing.Size(1335, 855);
-            this.tabMainTab.TabIndex = 22;
+            this.PlotandTrackDisplayUpdateTimer.Interval = 5000;
+            this.PlotandTrackDisplayUpdateTimer.Tick += new System.EventHandler(this.PlotDisplayTimer_Tick);
             // 
-            // tabPage1
+            // StaticDisplayTimer
             // 
-            this.tabPage1.Controls.Add(this.listBoxManFrame);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1327, 829);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Asterix Messages";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.StaticDisplayTimer.Enabled = true;
+            this.StaticDisplayTimer.Interval = 500;
+            this.StaticDisplayTimer.Tick += new System.EventHandler(this.StaticDisplayTimer_Tick);
+            // 
+            // groupBoxConnection
+            // 
+            this.groupBoxConnection.Controls.Add(this.button8);
+            this.groupBoxConnection.Controls.Add(this.label8);
+            this.groupBoxConnection.Controls.Add(this.buttonStopRun);
+            this.groupBoxConnection.Controls.Add(this.progressBar1);
+            this.groupBoxConnection.Controls.Add(this.label7);
+            this.groupBoxConnection.Controls.Add(this.labelActiveConnName);
+            this.groupBoxConnection.Controls.Add(this.labelConnIpAndPort);
+            this.groupBoxConnection.ForeColor = System.Drawing.Color.White;
+            this.groupBoxConnection.Location = new System.Drawing.Point(946, 2);
+            this.groupBoxConnection.Name = "groupBoxConnection";
+            this.groupBoxConnection.Size = new System.Drawing.Size(382, 57);
+            this.groupBoxConnection.TabIndex = 23;
+            this.groupBoxConnection.TabStop = false;
+            this.groupBoxConnection.Text = "Connection";
+            // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.Color.DarkGray;
+            this.button8.Location = new System.Drawing.Point(11, 16);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(50, 21);
+            this.button8.TabIndex = 22;
+            this.button8.Text = "OPEN";
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // tabPlotDisplay
             // 
+            this.tabPlotDisplay.BackColor = System.Drawing.SystemColors.Desktop;
+            this.tabPlotDisplay.Controls.Add(this.groupBox2);
             this.tabPlotDisplay.Controls.Add(this.groupBox1);
             this.tabPlotDisplay.Controls.Add(this.lblZoomLevel);
             this.tabPlotDisplay.Controls.Add(this.label13);
@@ -1157,14 +1114,83 @@
             this.tabPlotDisplay.Controls.Add(this.button1);
             this.tabPlotDisplay.Controls.Add(this.groupBox3);
             this.tabPlotDisplay.Controls.Add(this.gMapControl);
+            this.tabPlotDisplay.ForeColor = System.Drawing.Color.White;
             this.tabPlotDisplay.Location = new System.Drawing.Point(4, 22);
             this.tabPlotDisplay.Name = "tabPlotDisplay";
             this.tabPlotDisplay.Padding = new System.Windows.Forms.Padding(3);
             this.tabPlotDisplay.Size = new System.Drawing.Size(1327, 829);
             this.tabPlotDisplay.TabIndex = 1;
             this.tabPlotDisplay.Text = "Plot Display";
-            this.tabPlotDisplay.UseVisualStyleBackColor = true;
+            this.tabPlotDisplay.SizeChanged += new System.EventHandler(this.tabPlotDisplay_SizeChanged);
             this.tabPlotDisplay.Click += new System.EventHandler(this.tabPlotDisplay_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.BackColor = System.Drawing.Color.Black;
+            this.groupBox2.Controls.Add(this.numericUpDownUpper);
+            this.groupBox2.Controls.Add(this.numericUpDownLower);
+            this.groupBox2.Controls.Add(this.checkBoxFLFilter);
+            this.groupBox2.ForeColor = System.Drawing.Color.Silver;
+            this.groupBox2.Location = new System.Drawing.Point(6, 259);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(126, 80);
+            this.groupBox2.TabIndex = 19;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "FL Filter";
+            // 
+            // numericUpDownUpper
+            // 
+            this.numericUpDownUpper.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.numericUpDownUpper.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDownUpper.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericUpDownUpper.Location = new System.Drawing.Point(76, 16);
+            this.numericUpDownUpper.Maximum = new decimal(new int[] {
+            700,
+            0,
+            0,
+            0});
+            this.numericUpDownUpper.Name = "numericUpDownUpper";
+            this.numericUpDownUpper.Size = new System.Drawing.Size(45, 20);
+            this.numericUpDownUpper.TabIndex = 2;
+            this.numericUpDownUpper.Value = new decimal(new int[] {
+            700,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDownLower
+            // 
+            this.numericUpDownLower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.numericUpDownLower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDownLower.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericUpDownLower.Location = new System.Drawing.Point(76, 54);
+            this.numericUpDownLower.Maximum = new decimal(new int[] {
+            700,
+            0,
+            0,
+            0});
+            this.numericUpDownLower.Name = "numericUpDownLower";
+            this.numericUpDownLower.Size = new System.Drawing.Size(45, 20);
+            this.numericUpDownLower.TabIndex = 1;
+            // 
+            // checkBoxFLFilter
+            // 
+            this.checkBoxFLFilter.AutoSize = true;
+            this.checkBoxFLFilter.Location = new System.Drawing.Point(6, 32);
+            this.checkBoxFLFilter.Name = "checkBoxFLFilter";
+            this.checkBoxFLFilter.Size = new System.Drawing.Size(67, 17);
+            this.checkBoxFLFilter.TabIndex = 0;
+            this.checkBoxFLFilter.Text = "Disabled";
+            this.checkBoxFLFilter.UseVisualStyleBackColor = true;
+            this.checkBoxFLFilter.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // groupBox1
             // 
@@ -1172,7 +1198,8 @@
             this.groupBox1.Controls.Add(this.lblCenterLat);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Location = new System.Drawing.Point(1194, 288);
+            this.groupBox1.ForeColor = System.Drawing.Color.Silver;
+            this.groupBox1.Location = new System.Drawing.Point(6, 374);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(121, 65);
             this.groupBox1.TabIndex = 17;
@@ -1218,7 +1245,8 @@
             // lblZoomLevel
             // 
             this.lblZoomLevel.AutoSize = true;
-            this.lblZoomLevel.Location = new System.Drawing.Point(1249, 272);
+            this.lblZoomLevel.ForeColor = System.Drawing.Color.Silver;
+            this.lblZoomLevel.Location = new System.Drawing.Point(61, 358);
             this.lblZoomLevel.Name = "lblZoomLevel";
             this.lblZoomLevel.Size = new System.Drawing.Size(13, 13);
             this.lblZoomLevel.TabIndex = 16;
@@ -1227,7 +1255,8 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(1198, 443);
+            this.label13.ForeColor = System.Drawing.Color.Silver;
+            this.label13.Location = new System.Drawing.Point(10, 529);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(55, 13);
             this.label13.TabIndex = 15;
@@ -1235,14 +1264,17 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.ForeColor = System.Drawing.Color.Black;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Google Plain",
             "Google Satellite",
             "Google Terrain",
             "Google Hybrid",
-            "Empty - Custom Built"});
-            this.comboBox1.Location = new System.Drawing.Point(1198, 459);
+            "Custom Built"});
+            this.comboBox1.Location = new System.Drawing.Point(10, 545);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 14;
@@ -1250,58 +1282,64 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(1241, 386);
+            this.button7.BackColor = System.Drawing.Color.DarkGray;
+            this.button7.Location = new System.Drawing.Point(53, 472);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(26, 23);
             this.button7.TabIndex = 13;
             this.button7.Text = "●";
-            this.button7.UseVisualStyleBackColor = true;
+            this.button7.UseVisualStyleBackColor = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(1234, 357);
+            this.button6.BackColor = System.Drawing.Color.DarkGray;
+            this.button6.Location = new System.Drawing.Point(46, 443);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(42, 23);
             this.button6.TabIndex = 12;
             this.button6.Text = "↑";
-            this.button6.UseVisualStyleBackColor = true;
+            this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(1234, 415);
+            this.button5.BackColor = System.Drawing.Color.DarkGray;
+            this.button5.Location = new System.Drawing.Point(46, 501);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(42, 23);
             this.button5.TabIndex = 11;
             this.button5.Text = "↓";
-            this.button5.UseVisualStyleBackColor = true;
+            this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(1194, 386);
+            this.button4.BackColor = System.Drawing.Color.DarkGray;
+            this.button4.Location = new System.Drawing.Point(6, 472);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(42, 23);
             this.button4.TabIndex = 10;
             this.button4.Text = "←";
-            this.button4.UseVisualStyleBackColor = true;
+            this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(1272, 386);
+            this.button3.BackColor = System.Drawing.Color.DarkGray;
+            this.button3.Location = new System.Drawing.Point(84, 472);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(42, 23);
             this.button3.TabIndex = 9;
             this.button3.Text = "→";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(1239, 259);
+            this.label12.ForeColor = System.Drawing.Color.Silver;
+            this.label12.Location = new System.Drawing.Point(51, 345);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(34, 13);
             this.label12.TabIndex = 8;
@@ -1309,35 +1347,39 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(1279, 259);
+            this.button2.BackColor = System.Drawing.Color.DarkGray;
+            this.button2.Location = new System.Drawing.Point(91, 345);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(42, 23);
             this.button2.TabIndex = 7;
             this.button2.Text = "+";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1191, 259);
+            this.button1.BackColor = System.Drawing.Color.DarkGray;
+            this.button1.Location = new System.Drawing.Point(3, 345);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(42, 23);
             this.button1.TabIndex = 6;
             this.button1.Text = "-";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_2);
             // 
             // groupBox3
             // 
+            this.groupBox3.BackColor = System.Drawing.Color.Black;
             this.groupBox3.Controls.Add(this.checkEnableDisplay);
             this.groupBox3.Controls.Add(this.groupBoxUpdateRate);
             this.groupBox3.Controls.Add(this.groupBoxSSRFilter);
-            this.groupBox3.Location = new System.Drawing.Point(1191, 6);
+            this.groupBox3.ForeColor = System.Drawing.Color.Silver;
+            this.groupBox3.Location = new System.Drawing.Point(3, 6);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(130, 247);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Plot Display";
+            this.groupBox3.Text = "Plot/Track Display";
             // 
             // checkEnableDisplay
             // 
@@ -1355,7 +1397,7 @@
             // 
             this.groupBoxUpdateRate.Controls.Add(this.label9);
             this.groupBoxUpdateRate.Controls.Add(this.textBoxUpdateRate);
-            this.groupBoxUpdateRate.Enabled = false;
+            this.groupBoxUpdateRate.ForeColor = System.Drawing.Color.Silver;
             this.groupBoxUpdateRate.Location = new System.Drawing.Point(10, 176);
             this.groupBoxUpdateRate.Name = "groupBoxUpdateRate";
             this.groupBoxUpdateRate.Size = new System.Drawing.Size(114, 62);
@@ -1374,6 +1416,7 @@
             // 
             // textBoxUpdateRate
             // 
+            this.textBoxUpdateRate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.textBoxUpdateRate.Enabled = false;
             this.textBoxUpdateRate.Location = new System.Drawing.Point(6, 32);
             this.textBoxUpdateRate.Name = "textBoxUpdateRate";
@@ -1383,12 +1426,14 @@
             // 
             // groupBoxSSRFilter
             // 
+            this.groupBoxSSRFilter.BackColor = System.Drawing.SystemColors.WindowText;
             this.groupBoxSSRFilter.Controls.Add(this.textBoxSSRCode);
             this.groupBoxSSRFilter.Controls.Add(this.label11);
             this.groupBoxSSRFilter.Controls.Add(this.label10);
             this.groupBoxSSRFilter.Controls.Add(this.comboBoxSSRFilterBox);
             this.groupBoxSSRFilter.Controls.Add(this.checkBoxFilterBySSR);
             this.groupBoxSSRFilter.Enabled = false;
+            this.groupBoxSSRFilter.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.groupBoxSSRFilter.Location = new System.Drawing.Point(10, 42);
             this.groupBoxSSRFilter.Name = "groupBoxSSRFilter";
             this.groupBoxSSRFilter.Size = new System.Drawing.Size(110, 128);
@@ -1398,6 +1443,7 @@
             // 
             // textBoxSSRCode
             // 
+            this.textBoxSSRCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.textBoxSSRCode.Enabled = false;
             this.textBoxSSRCode.Location = new System.Drawing.Point(7, 101);
             this.textBoxSSRCode.Name = "textBoxSSRCode";
@@ -1424,7 +1470,9 @@
             // 
             // comboBoxSSRFilterBox
             // 
+            this.comboBoxSSRFilterBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.comboBoxSSRFilterBox.Enabled = false;
+            this.comboBoxSSRFilterBox.ForeColor = System.Drawing.SystemColors.Desktop;
             this.comboBoxSSRFilterBox.FormattingEnabled = true;
             this.comboBoxSSRFilterBox.Location = new System.Drawing.Point(5, 56);
             this.comboBoxSSRFilterBox.Name = "comboBoxSSRFilterBox";
@@ -1436,7 +1484,7 @@
             // checkBoxFilterBySSR
             // 
             this.checkBoxFilterBySSR.AutoSize = true;
-            this.checkBoxFilterBySSR.BackColor = System.Drawing.Color.Red;
+            this.checkBoxFilterBySSR.BackColor = System.Drawing.Color.Transparent;
             this.checkBoxFilterBySSR.Enabled = false;
             this.checkBoxFilterBySSR.Location = new System.Drawing.Point(5, 19);
             this.checkBoxFilterBySSR.Name = "checkBoxFilterBySSR";
@@ -1453,7 +1501,7 @@
             this.gMapControl.CanDragMap = true;
             this.gMapControl.GrayScaleMode = false;
             this.gMapControl.LevelsKeepInMemmory = 5;
-            this.gMapControl.Location = new System.Drawing.Point(6, 6);
+            this.gMapControl.Location = new System.Drawing.Point(139, 6);
             this.gMapControl.MarkersEnabled = true;
             this.gMapControl.MaxZoom = 2;
             this.gMapControl.MinZoom = 2;
@@ -1464,7 +1512,7 @@
             this.gMapControl.RetryLoadTile = 0;
             this.gMapControl.RoutesEnabled = true;
             this.gMapControl.ShowTileGridLines = false;
-            this.gMapControl.Size = new System.Drawing.Size(1179, 817);
+            this.gMapControl.Size = new System.Drawing.Size(1180, 817);
             this.gMapControl.TabIndex = 0;
             this.gMapControl.Zoom = 0D;
             this.gMapControl.Load += new System.EventHandler(this.gMapControl_Load);
@@ -1472,41 +1520,134 @@
             this.gMapControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseClick);
             this.gMapControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseMove);
             // 
-            // PlotandTrackDisplayUpdateTimer
+            // tabPageAsterixMessages
             // 
-            this.PlotandTrackDisplayUpdateTimer.Interval = 5000;
-            this.PlotandTrackDisplayUpdateTimer.Tick += new System.EventHandler(this.PlotDisplayTimer_Tick);
+            this.tabPageAsterixMessages.BackColor = System.Drawing.Color.Black;
+            this.tabPageAsterixMessages.Controls.Add(this.listBoxManFrame);
+            this.tabPageAsterixMessages.Controls.Add(this.label3);
+            this.tabPageAsterixMessages.Controls.Add(this.label1);
+            this.tabPageAsterixMessages.Controls.Add(this.label2);
+            this.tabPageAsterixMessages.Controls.Add(this.label4);
+            this.tabPageAsterixMessages.Controls.Add(this.label5);
+            this.tabPageAsterixMessages.Controls.Add(this.label6);
+            this.tabPageAsterixMessages.Location = new System.Drawing.Point(4, 22);
+            this.tabPageAsterixMessages.Name = "tabPageAsterixMessages";
+            this.tabPageAsterixMessages.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageAsterixMessages.Size = new System.Drawing.Size(1327, 829);
+            this.tabPageAsterixMessages.TabIndex = 0;
+            this.tabPageAsterixMessages.Text = "Asterix Messages";
             // 
-            // StaticDisplayTimer
+            // listBoxManFrame
             // 
-            this.StaticDisplayTimer.Enabled = true;
-            this.StaticDisplayTimer.Interval = 500;
-            this.StaticDisplayTimer.Tick += new System.EventHandler(this.StaticDisplayTimer_Tick);
+            this.listBoxManFrame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.listBoxManFrame.ForeColor = System.Drawing.Color.Black;
+            this.listBoxManFrame.FormattingEnabled = true;
+            this.listBoxManFrame.HorizontalScrollbar = true;
+            this.listBoxManFrame.Location = new System.Drawing.Point(6, 20);
+            this.listBoxManFrame.Name = "listBoxManFrame";
+            this.listBoxManFrame.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.listBoxManFrame.Size = new System.Drawing.Size(1315, 797);
+            this.listBoxManFrame.TabIndex = 0;
+            this.listBoxManFrame.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(432, 3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(50, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "SAC/SIC";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(14, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Time of Rcv";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(391, 3);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "CAT#";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(236, 3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(86, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Multicast:IP/Port";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(113, 3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(67, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "From:IP/Port";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(345, 3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(40, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Bytes#";
+            // 
+            // tabMainTab
+            // 
+            this.tabMainTab.Controls.Add(this.tabPlotDisplay);
+            this.tabMainTab.Controls.Add(this.tabPageAsterixMessages);
+            this.tabMainTab.Location = new System.Drawing.Point(0, 41);
+            this.tabMainTab.Name = "tabMainTab";
+            this.tabMainTab.SelectedIndex = 0;
+            this.tabMainTab.Size = new System.Drawing.Size(1335, 855);
+            this.tabMainTab.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
+            this.tabMainTab.TabIndex = 1;
+            this.tabMainTab.SelectedIndexChanged += new System.EventHandler(this.tabMainTab_SelectedIndexChanged);
+            this.tabMainTab.SizeChanged += new System.EventHandler(this.tabMainTab_SizeChanged);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1347, 907);
+            this.BackColor = System.Drawing.Color.Black;
+            this.ClientSize = new System.Drawing.Size(1335, 907);
+            this.Controls.Add(this.groupBoxConnection);
             this.Controls.Add(this.tabMainTab);
-            this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.labelActiveConnName);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.labelConnIpAndPort);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.buttonStopRun);
             this.Controls.Add(this.menuStrip1);
+            this.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
-            this.Text = "AMER KAPETANOVIC - ASTERIX SNIFFER 1.2";
+            this.Text = "AMER KAPETANOVIC - ASTERIX PLOT/TRACK DISPLAY and SNIFFER  1.3";
             this.Load += new System.EventHandler(this.FormMain_Load);
+            this.Resize += new System.EventHandler(this.FormMain_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.tabMainTab.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.groupBoxConnection.ResumeLayout(false);
+            this.groupBoxConnection.PerformLayout();
             this.tabPlotDisplay.ResumeLayout(false);
             this.tabPlotDisplay.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownUpper)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownLower)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -1515,6 +1656,9 @@
             this.groupBoxUpdateRate.PerformLayout();
             this.groupBoxSSRFilter.ResumeLayout(false);
             this.groupBoxSSRFilter.PerformLayout();
+            this.tabPageAsterixMessages.ResumeLayout(false);
+            this.tabPageAsterixMessages.PerformLayout();
+            this.tabMainTab.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1522,17 +1666,10 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBoxManFrame;
         private System.Windows.Forms.Timer DataUpdateTimer;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem connectionSettingsToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttonStopRun;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cAT001DataItemPresenceToolStripMenuItem;
@@ -1635,40 +1772,53 @@
         private System.Windows.Forms.ToolStripMenuItem dataBySSRCodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem1;
-        private System.Windows.Forms.TabControl tabMainTab;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPlotDisplay;
-        private GMap.NET.WindowsForms.GMapControl gMapControl;
         private System.Windows.Forms.Timer PlotandTrackDisplayUpdateTimer;
-        private System.Windows.Forms.CheckBox checkEnableDisplay;
-        private System.Windows.Forms.GroupBox groupBoxUpdateRate;
-        private System.Windows.Forms.TextBox textBoxUpdateRate;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.GroupBox groupBoxSSRFilter;
-        private System.Windows.Forms.CheckBox checkBoxFilterBySSR;
-        private System.Windows.Forms.ComboBox comboBoxSSRFilterBox;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox textBoxSSRCode;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem colorDialogToolStripMenuItem;
+        private System.Windows.Forms.Timer StaticDisplayTimer;
+        private System.Windows.Forms.GroupBox groupBoxConnection;
+        private System.Windows.Forms.TabPage tabPlotDisplay;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.NumericUpDown numericUpDownUpper;
+        private System.Windows.Forms.NumericUpDown numericUpDownLower;
+        private System.Windows.Forms.CheckBox checkBoxFLFilter;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblCenterLon;
+        private System.Windows.Forms.Label lblCenterLat;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lblZoomLevel;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label lblZoomLevel;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label lblCenterLon;
-        private System.Windows.Forms.Label lblCenterLat;
-        private System.Windows.Forms.ToolStripMenuItem colorDialogToolStripMenuItem;
-        private System.Windows.Forms.Timer StaticDisplayTimer;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckBox checkEnableDisplay;
+        private System.Windows.Forms.GroupBox groupBoxUpdateRate;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBoxUpdateRate;
+        private System.Windows.Forms.GroupBox groupBoxSSRFilter;
+        private System.Windows.Forms.TextBox textBoxSSRCode;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox comboBoxSSRFilterBox;
+        private System.Windows.Forms.CheckBox checkBoxFilterBySSR;
+        private GMap.NET.WindowsForms.GMapControl gMapControl;
+        private System.Windows.Forms.TabPage tabPageAsterixMessages;
+        private System.Windows.Forms.ListBox listBoxManFrame;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TabControl tabMainTab;
+        private System.Windows.Forms.Button button8;
     }
 }
 

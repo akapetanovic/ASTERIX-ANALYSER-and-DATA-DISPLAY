@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASTERIX-Analyser1.0", "ASTERIX-Analyser1.0.csproj", "{3918301C-B46C-4913-9267-D73713C9E529}"
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASTERIX-Display and Analyser", "ASTERIX-Display and Analyser.csproj", "{3918301C-B46C-4913-9267-D73713C9E529}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

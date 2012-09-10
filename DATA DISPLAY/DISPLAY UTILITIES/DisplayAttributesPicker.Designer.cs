@@ -664,6 +664,7 @@
             this.Controls.Add(this.btnUpdate);
             this.Name = "DisplayAttibutePicker";
             this.Text = "Display Attribute Picker";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.ColorPicker_Load);
             this.panelTextAttributes.ResumeLayout(false);
             this.panelTextAttributes.PerformLayout();

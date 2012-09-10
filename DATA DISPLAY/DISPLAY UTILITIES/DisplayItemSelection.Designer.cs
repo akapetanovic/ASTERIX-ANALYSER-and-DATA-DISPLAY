@@ -112,6 +112,7 @@
             this.Name = "DisplayItemSelection";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.DisplayItemSelection_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

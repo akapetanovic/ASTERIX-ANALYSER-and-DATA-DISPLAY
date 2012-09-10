@@ -22,7 +22,7 @@ namespace MulticastingUDP
         GMapOverlay StaticOverlay;
         // Dynamic Map Overlay
         GMapOverlay DinamicOverlay;
-        
+
         // Keep track of the last selected SSR code index
         int SSR_Filter_Last_Index = 0;
 
@@ -99,7 +99,6 @@ namespace MulticastingUDP
             FrmSettings SettingDialog = new FrmSettings();
             SettingDialog.Visible = false;
             SettingDialog.Show(this);
-            SettingDialog.SetDesktopLocation(this.Location.X + this.Width, this.Location.Y);
             SettingDialog.Visible = true;
         }
 
@@ -120,23 +119,23 @@ namespace MulticastingUDP
             gMapControl.MapProvider = GMapProviders.GoogleTerrainMap;
             gMapControl.Manager.Mode = AccessMode.ServerAndCache;
             gMapControl.EmptyMapBackground = Color.Gray;
-            
+
             // Set MIN/MAX for the ZOOM function
             gMapControl.MinZoom = 0;
             gMapControl.MaxZoom = 20;
             // Default ZOOM
             gMapControl.Zoom = 8;
             this.lblZoomLevel.Text = gMapControl.Zoom.ToString();
-           
+
             // Add overlays
-            DinamicOverlay = new GMapOverlay(gMapControl, "OverlayOne");
-            gMapControl.Overlays.Add(DinamicOverlay);
             StaticOverlay = new GMapOverlay(gMapControl, "OverlayTwo");
             gMapControl.Overlays.Add(StaticOverlay);
+            DinamicOverlay = new GMapOverlay(gMapControl, "OverlayOne");
+            gMapControl.Overlays.Add(DinamicOverlay);
 
             this.label9.Text = "Current rate at: " + this.PlotandTrackDisplayUpdateTimer.Interval.ToString() + "ms";
             this.comboBox1.Text = "Plain";
-            
+
             // Now build static display
             StaticDisplayBuilder.Build(ref StaticOverlay);
         }
@@ -164,7 +163,6 @@ namespace MulticastingUDP
                 this.googleEarthToolStripMenuItem.Enabled = false;
             }
 
-            this.checkEnableDisplay.Checked = false;
             HandlePlotDisplayEnabledChanged();
         }
 
@@ -291,7 +289,7 @@ namespace MulticastingUDP
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Asterix Sniffer 1.2 by Amer Kapetanovic\nakapetanovic@gmail.com", "About");
+            MessageBox.Show("Asterix Sniffer 1.3 by Amer Kapetanovic\nakapetanovic@gmail.com", "About");
         }
 
         private void resetDataBufferToolStripMenuItem_Click(object sender, EventArgs e)
@@ -487,7 +485,7 @@ namespace MulticastingUDP
 
         // This is a timer that is resposible for updating the data display
         private void PlotDisplayTimer_Tick(object sender, EventArgs e)
-        { 
+        {
             Update_PlotTrack_Data();
         }
 
@@ -511,35 +509,42 @@ namespace MulticastingUDP
 
                 foreach (DynamicDisplayBuilder.TargetType Target in TargetList)
                 {
-                    // If SSR code filtering is to be applied 
-                    if (this.checkBoxFilterBySSR.Enabled == true &&
-                        this.textBoxSSRCode.Enabled == true &&
-                        this.textBoxSSRCode.Text.Length == 4)
+                    if (Passes_Check_For_Flight_Level_Filter(Target.ModeC))
                     {
-                        if (Target.ModeA == this.textBoxSSRCode.Text)
+                        // If SSR code filtering is to be applied 
+                        if (this.checkBoxFilterBySSR.Enabled == true &&
+                            this.textBoxSSRCode.Enabled == true &&
+                            this.textBoxSSRCode.Text.Length == 4)
+                        {
+                            if (Target.ModeA == this.textBoxSSRCode.Text)
+                            {
+                                GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
+                                MyMarker.ToolTipMode = MarkerTooltipMode.Always;
+
+                                if (Target.ACID_Modes != null)
+                                    MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ACID_Modes + "\n" + Target.ModeC;
+                                else
+                                    MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ModeC;
+
+                                SetLabelAttributes(ref MyMarker);
+                                DinamicOverlay.Markers.Add(MyMarker);
+                            }
+                        }
+                        else // No SSR filter so just display all of them
                         {
                             GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
+                            MyMarker.DisableRegionCheck = true;
+
                             MyMarker.ToolTipMode = MarkerTooltipMode.Always;
 
-                            if (Target.ACID_Modes != "--------")
+                            if (Target.ACID_Modes != null)
                                 MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ACID_Modes + "\n" + Target.ModeC;
                             else
                                 MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ModeC;
 
+                            SetLabelAttributes(ref MyMarker);
                             DinamicOverlay.Markers.Add(MyMarker);
                         }
-                    }
-                    else // No filter so just display all of them
-                    {
-                        GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
-                        MyMarker.ToolTipMode = MarkerTooltipMode.Always;
-
-                        if (Target.ACID_Modes != "--------")
-                            MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ACID_Modes + "\n" + Target.ModeC;
-                        else
-                            MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ModeC;
-
-                        DinamicOverlay.Markers.Add(MyMarker);
                     }
                 }
             }
@@ -549,34 +554,79 @@ namespace MulticastingUDP
 
                 foreach (DynamicDisplayBuilder.TargetType Target in TargetList)
                 {
-                    // If SSR code filtering is to be applied 
-                    if (this.checkBoxFilterBySSR.Checked == true && (this.comboBoxSSRFilterBox.Items.Count > 0))
+                    if (Passes_Check_For_Flight_Level_Filter(Target.ModeC))
                     {
-                        if (Target.ModeA == this.comboBoxSSRFilterBox.Items[SSR_Filter_Last_Index].ToString())
+
+                        // If SSR code filtering is to be applied 
+                        if (this.checkBoxFilterBySSR.Checked == true && (this.comboBoxSSRFilterBox.Items.Count > 0))
+                        {
+                            if (Target.ModeA == this.comboBoxSSRFilterBox.Items[SSR_Filter_Last_Index].ToString())
+                            {
+                                GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
+                                MyMarker.ToolTipMode = MarkerTooltipMode.Always;
+
+                                if (Target.ACID_Modes != null)
+                                    MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ACID_Modes + "\n" + Target.ModeC;
+                                else
+                                    MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ModeC;
+
+                                SetLabelAttributes(ref MyMarker);
+                                DinamicOverlay.Markers.Add(MyMarker);
+                            }
+                        }
+                        else // No filter so just display all of them
                         {
                             GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
                             MyMarker.ToolTipMode = MarkerTooltipMode.Always;
-
-                            if (Target.ACID_Modes != "--------")
+                            
+                            if (Target.ACID_Modes != null)
                                 MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ACID_Modes + "\n" + Target.ModeC;
                             else
                                 MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ModeC;
 
+                            SetLabelAttributes(ref MyMarker);
                             DinamicOverlay.Markers.Add(MyMarker);
                         }
                     }
-                    else // No filter so just display all of them
-                    {
-                        GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
-                        MyMarker.ToolTipMode = MarkerTooltipMode.Always;
-                        if (Target.ACID_Modes != "--------")
-                            MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ACID_Modes + "\n" + Target.ModeC;
-                        else
-                            MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ModeC;
-                        DinamicOverlay.Markers.Add(MyMarker);
-                    }
                 }
             }
+        }
+
+        private void SetLabelAttributes(ref GMap.NET.WindowsForms.Markers.GMapMarkerCross Marker_In)
+        {
+
+            // label Font and Size
+            FontFamily family = new FontFamily("Microsoft Sans Serif");
+            Font font = new Font(family, 8,
+            FontStyle.Bold | FontStyle.Regular);
+            Marker_In.ToolTip.Font = font;
+
+            // Label text color
+            Marker_In.ToolTip.Foreground = Brushes.LimeGreen;
+
+            // Symbol color
+            Marker_In.Pen = new Pen(Brushes.WhiteSmoke);
+
+            // Tool Tip border color
+            Marker_In.ToolTip.Stroke = new Pen(Brushes.WhiteSmoke, 1);
+
+            // Tool Tip Fill color
+            Marker_In.ToolTip.Fill = Brushes.Transparent;
+        }
+
+        private bool Passes_Check_For_Flight_Level_Filter(string Flight_Level)
+        {
+            bool Result = true;
+
+            if (this.checkBoxFLFilter.Checked)
+            {
+                double FL = double.Parse(Flight_Level);
+
+                if (FL < (double)this.numericUpDownLower.Value || FL > (double)this.numericUpDownUpper.Value)
+                    Result = false;
+            }
+
+            return Result;
         }
 
         private void tabPlotDisplay_Click(object sender, EventArgs e)
@@ -619,7 +669,7 @@ namespace MulticastingUDP
             {
                 this.checkEnableDisplay.Text = "Disabled";
                 this.checkEnableDisplay.BackColor = Color.Red;
-                this.checkBoxFilterBySSR.BackColor = Color.Red;
+                this.checkBoxFilterBySSR.BackColor = Color.Transparent;
                 this.textBoxSSRCode.Enabled = false;
                 this.textBoxUpdateRate.Enabled = false;
                 this.groupBoxSSRFilter.Enabled = false;
@@ -677,7 +727,7 @@ namespace MulticastingUDP
             if (this.checkBoxFilterBySSR.Checked == true)
             {
                 this.checkBoxFilterBySSR.Text = "Enabled";
-                this.checkBoxFilterBySSR.BackColor = Color.Green;
+                this.checkBoxFilterBySSR.BackColor = Color.Red;
 
                 if (SharedData.bool_Listen_for_Data == true)
                 {
@@ -693,7 +743,7 @@ namespace MulticastingUDP
             else
             {
                 this.checkBoxFilterBySSR.Text = "Disbaled";
-                this.checkBoxFilterBySSR.BackColor = Color.Red;
+                this.checkBoxFilterBySSR.BackColor = Color.Transparent;
                 this.comboBoxSSRFilterBox.Enabled = false;
                 this.textBoxSSRCode.Enabled = false;
             }
@@ -846,12 +896,12 @@ namespace MulticastingUDP
             {
                 gMapControl.MapProvider = GMapProviders.GoogleHybridMap;
             }
-            else if (this.comboBox1.Text == "Empty - Custom Built")
+            else if (this.comboBox1.Text == "Custom Built")
             {
                 gMapControl.MapProvider = GMapProviders.EmptyProvider;
-               
+
             }
-           
+
 
         }
 
@@ -890,7 +940,7 @@ namespace MulticastingUDP
             {
                 // Always check for the change to the background color
                 gMapControl.EmptyMapBackground = DisplayAttributes.GetDisplayAttribute(DisplayAttributes.DisplayItemsType.BackgroundColor).TextColor;
-                
+
                 // rebuild static display
                 StaticOverlay.Markers.Clear();
                 StaticOverlay.Routes.Clear();
@@ -902,7 +952,7 @@ namespace MulticastingUDP
 
         private void gMapControl_KeyPress(object sender, KeyPressEventArgs e)
         {
-           
+
         }
 
         private void gMapControl_MouseClick(object sender, MouseEventArgs e)
@@ -914,6 +964,50 @@ namespace MulticastingUDP
                 MyForm.Location = new Point(e.X + 75, e.Y + 150);
                 MyForm.Show();
             }
+        }
+
+        private void FormMain_Resize(object sender, EventArgs e)
+        {
+            this.tabMainTab.Size = new Size(this.Size.Width - 16, this.Size.Height - 90);
+
+        }
+
+        private void tabMainTab_SizeChanged(object sender, EventArgs e)
+        {
+            this.tabPlotDisplay.Size = new Size(this.tabMainTab.Size.Width - 8, this.tabMainTab.Size.Height - 26);
+        }
+
+        private void tabPlotDisplay_SizeChanged(object sender, EventArgs e)
+        {
+            this.gMapControl.Size = new Size(this.tabPlotDisplay.Size.Width - 147, this.tabPlotDisplay.Size.Height - 12);
+            this.groupBoxConnection.Location = new Point(this.Size.Width - 408, 1);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBoxFLFilter.Checked)
+            {
+                this.checkBoxFLFilter.Text = "Enabled";
+                this.checkBoxFLFilter.BackColor = Color.Red;
+            }
+            else
+            {
+                this.checkBoxFLFilter.Text = "Disabled";
+                this.checkBoxFLFilter.BackColor = Color.Transparent;
+            }
+        }
+
+        private void tabMainTab_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            FrmSettings SettingDialog = new FrmSettings();
+            SettingDialog.Visible = false;
+            SettingDialog.Show(this);
+            SettingDialog.Visible = true;
         }
     }
 }

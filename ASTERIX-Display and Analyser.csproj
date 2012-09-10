@@ -27,7 +27,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -210,7 +210,7 @@
     <Compile Include="EarthPlotExporter.Designer.cs">
       <DependentUpon>EarthPlotExporter.cs</DependentUpon>
     </Compile>
-    <Compile Include="DATA DISPLAY\DynamicDisplayBuilder.cs" />
+    <Compile Include="DATA DISPLAY\DYNAMIC DATA\DynamicDisplayBuilder.cs" />
     <Compile Include="MIKE GAVANGHAN - GEODETIC\Angle.cs" />
     <Compile Include="ASTERIX\Bit_Ops.cs" />
     <Compile Include="ASTERIX\CAT001\CAT01DecodeAndStore.cs" />
@@ -298,7 +298,7 @@
     <Compile Include="MainASTERIXDataStorage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DATA DISPLAY\StaticDisplayBuilder.cs" />
+    <Compile Include="DATA DISPLAY\STATIC DATA\StaticDisplayBuilder.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="ViewDataBySSRCode.cs">
       <SubType>Form</SubType>
@@ -361,7 +361,7 @@
       <DependentUpon>FrmSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="SharedData.cs" />
-    <None Include="DOCUMENTATION\User Manual.1.3.docx" />
+    <None Include="DOCUMENTATION\User Manual.docx" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -386,6 +386,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DOCUMENTATION\Release Notes.txt" />
     <Content Include="radar.jpg" />
     <Content Include="README.txt" />
     <None Include="Resources\waypoint.jpg" />

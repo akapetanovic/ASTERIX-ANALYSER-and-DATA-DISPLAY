@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="MulticastingUDP.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+        </sectionGroup>
+    </configSections>
+    <userSettings>
+        <MulticastingUDP.Properties.Settings>
+            <setting name="Waypoints" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="StateBorder" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="Sectors" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="Radars" serializeAs="String">
+                <value>True</value>
+            </setting>
+        </MulticastingUDP.Properties.Settings>
+    </userSettings>
+</configuration>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="MulticastingUDP.exe" version="1.0.0.4" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="MulticastingUDP.exe" version="1.0.0.5" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <application />
   <entryPoint>
     <assemblyIdentity name="MulticastingUDP" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
@@ -71,17 +71,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MulticastingUDP.exe" size="245248">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MulticastingUDP.exe" size="249344">
       <assemblyIdentity name="MulticastingUDP" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>iiDCFdCmHtcpCWKJoOqcy3dFKm4=</dsig:DigestValue>
+        <dsig:DigestValue>l0k45luVzQCjgPXmrmeD3kfnFro=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
+  <file name="DOCUMENTATION\Release Notes.txt" size="2348">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>rdZD7bukQ5TjI2gCKG5mlg9nfZw=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="MulticastingUDP.exe.config" size="1193">
     <hash>
       <dsig:Transforms>
@@ -100,13 +109,13 @@
       <dsig:DigestValue>yCpa/4uzXeo0iXk4aHmjXUE+sn8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="README.txt" size="484">
+  <file name="README.txt" size="483">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>uWYzby2K5xS4RYuOy0/nXV/DXbQ=</dsig:DigestValue>
+      <dsig:DigestValue>HsFec8vwWD+wIwgoAybshrV82To=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

@@ -5,6 +5,7 @@ using System.Text;
 using GMap.NET.WindowsForms;
 using System.Drawing;
 using GMap.NET;
+using System.Reflection;
 
 namespace MulticastingUDP
 {
@@ -25,9 +26,17 @@ namespace MulticastingUDP
                 DisplayAttributes.DisplayAttributesType SectorBorderDisplayAttribute = DisplayAttributes.GetDisplayAttribute(DisplayAttributes.DisplayItemsType.SectorBorder);
                 
                 GMapPolygon SectorPolygon = new GMapPolygon(SectorPointList, Sector.SectorName);
-                SectorPolygon.Stroke = new Pen(SectorBorderDisplayAttribute.TextColor, SectorBorderDisplayAttribute.LineWidth);
-                SectorPolygon.Fill = Brushes.Black;
+                SectorPolygon.Stroke = new Pen(SectorBorderDisplayAttribute.LineColor, SectorBorderDisplayAttribute.LineWidth);
+
+                Type brushType = typeof(Brushes);
+
+                Brush myBrush = (Brush)brushType.InvokeMember(SectorBorderDisplayAttribute.AreaPolygonColor.Name,
+                 BindingFlags.Public | BindingFlags.Static | BindingFlags.GetProperty,
+                 null, null, new object[] { });
+
+                SectorPolygon.Fill = myBrush;
                 OverlayOut.Polygons.Add(SectorPolygon);
+              
             }
         }
     }

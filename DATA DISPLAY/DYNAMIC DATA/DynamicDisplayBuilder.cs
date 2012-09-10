@@ -54,6 +54,8 @@ namespace MulticastingUDP
                         // Get Flight Level
                         CAT01I090Types.CAT01I090FlightLevelUserData FlightLevelData = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.I001DataItems[CAT01.ItemIDToIndex("090")].value;
 
+                        
+                        
                         TargetType Target = new TargetType();
                         Target.ModeA = Mode3AData.Mode3A_Code;
                         Target.ModeC = FlightLevelData.FlightLevel.ToString();
@@ -133,7 +135,14 @@ namespace MulticastingUDP
                         TargetType Target = new TargetType();
                         Target.ModeA = Mode3AData.Mode3A_Code;
                         Target.ModeC = FlightLevelData.FlightLevel.ToString();
-                        Target.ACID_Modes = ACID_Mode_S.ACID;
+                        if (ACID_Mode_S != null)
+                        {
+                            Target.ACID_Modes = ACID_Mode_S.ACID;
+                        }
+                        else
+                        {
+                            Target.ACID_Modes = "N/A";
+                        }
                         Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                         Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
                         CurrentTargetList.Add(Target);
