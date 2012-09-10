@@ -39,7 +39,6 @@ namespace MulticastingUDP
 
             // Image attributes
             public Size ImageSize = new Size(30, 30);
-           
         }
 
         // To be called upon system startup in order to load display parameters.
