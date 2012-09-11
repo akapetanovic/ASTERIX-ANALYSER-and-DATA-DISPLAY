@@ -595,23 +595,23 @@ namespace MulticastingUDP
         private void SetLabelAttributes(ref GMap.NET.WindowsForms.Markers.GMapMarkerCross Marker_In)
         {
 
-            // label Font and Size
+            // Label Text Font and Size
             FontFamily family = new FontFamily("Microsoft Sans Serif");
             Font font = new Font(family, 8,
             FontStyle.Bold | FontStyle.Regular);
             Marker_In.ToolTip.Font = font;
+            Marker_In.ToolTip.Foreground = Brushes.DarkGreen;
 
-            // Label text color
-            Marker_In.ToolTip.Foreground = Brushes.LimeGreen;
+            // Label Border color
+            Marker_In.ToolTip.Stroke = new Pen(Brushes.WhiteSmoke, 1);
+            Marker_In.ToolTip.Stroke.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            
+            // Label background color
+            Marker_In.ToolTip.Fill = Brushes.Transparent;
 
             // Symbol color
-            Marker_In.Pen = new Pen(Brushes.WhiteSmoke);
-
-            // Tool Tip border color
-            Marker_In.ToolTip.Stroke = new Pen(Brushes.WhiteSmoke, 1);
-
-            // Tool Tip Fill color
-            Marker_In.ToolTip.Fill = Brushes.Transparent;
+            Marker_In.Pen = new Pen(Brushes.Red);
+            Marker_In.Pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
         }
 
         private bool Passes_Check_For_Flight_Level_Filter(string Flight_Level)
@@ -902,7 +902,6 @@ namespace MulticastingUDP
 
             }
 
-
         }
 
         private void label14_Click(object sender, EventArgs e)
@@ -957,13 +956,7 @@ namespace MulticastingUDP
 
         private void gMapControl_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                DisplayRightClickOptions MyForm = new DisplayRightClickOptions();
-                MyForm.StartPosition = FormStartPosition.Manual;
-                MyForm.Location = new Point(e.X + 75, e.Y + 150);
-                MyForm.Show();
-            }
+           
         }
 
         private void FormMain_Resize(object sender, EventArgs e)
@@ -1008,6 +1001,17 @@ namespace MulticastingUDP
             SettingDialog.Visible = false;
             SettingDialog.Show(this);
             SettingDialog.Visible = true;
+        }
+
+        private void gMapControl_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                DisplayRightClickOptions MyForm = new DisplayRightClickOptions();
+                MyForm.StartPosition = FormStartPosition.Manual;
+                MyForm.Location = new Point(e.X + 75, e.Y + 150);
+                MyForm.Show();
+            }
         }
     }
 }

@@ -20,9 +20,7 @@ namespace MulticastingUDP
             StreamReader MyStreamReader;
 
             FileName = @"C:\ASTERIX\ADAPTATION\DisplayAttributes.txt";
-            Exception Bad_DisplayAttributes = new Exception("DisplayAttributes.txt file");
-
-            
+            //Exception Bad_DisplayAttributes = new Exception("DisplayAttributes.txt file");
 
             if (System.IO.File.Exists(FileName))
             {
@@ -41,27 +39,7 @@ namespace MulticastingUDP
                         DisplayAttribute.TextColor = Color.FromName(words[3]);
                         DisplayAttribute.LineWidth = int.Parse(words[4]);
                         DisplayAttribute.LineColor = Color.FromName(words[5]);
-                        switch (words[6])
-                        {
-                            case "Solid":
-                                DisplayAttribute.LineStyle = DashStyle.Solid;
-                                break;
-                            case "Dash":
-                                DisplayAttribute.LineStyle = DashStyle.Dash;
-                                break;
-                            case "DashDot":
-                                DisplayAttribute.LineStyle = DashStyle.DashDot;
-                                break;
-                            case "DashDotDot":
-                                DisplayAttribute.LineStyle = DashStyle.DashDotDot;
-                                break;
-                            case "Dot":
-                                DisplayAttribute.LineStyle = DashStyle.Dot;
-                                break;
-                            default:
-                                DisplayAttribute.LineStyle = DashStyle.Solid;
-                                break;
-                        }
+                        DisplayAttribute.LineStyle = DisplayAttributes.GetLineStypefromString(words[6]);
                         DisplayAttribute.AreaPolygonColor = Color.FromName(words[7]);
                         DisplayAttribute.ImageSize = new Size(int.Parse(words[8]), int.Parse((words[9])));
                         DisplayAttributes.SetDisplayAttribute((DisplayAttributes.DisplayItemsType)Enum.Parse(typeof(DisplayAttributes.DisplayItemsType), DisplayAttribute.ItemName, true), DisplayAttribute);

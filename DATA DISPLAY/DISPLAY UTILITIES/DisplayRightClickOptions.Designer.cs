@@ -30,6 +30,7 @@
         {
             this.btnDisplaySettings = new System.Windows.Forms.Button();
             this.btnItemsDisplay = new System.Windows.Forms.Button();
+            this.btnLabelAttributes = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDisplaySettings
@@ -44,7 +45,7 @@
             // 
             // btnItemsDisplay
             // 
-            this.btnItemsDisplay.Location = new System.Drawing.Point(0, 32);
+            this.btnItemsDisplay.Location = new System.Drawing.Point(0, 61);
             this.btnItemsDisplay.Name = "btnItemsDisplay";
             this.btnItemsDisplay.Size = new System.Drawing.Size(101, 23);
             this.btnItemsDisplay.TabIndex = 1;
@@ -52,18 +53,29 @@
             this.btnItemsDisplay.UseVisualStyleBackColor = true;
             this.btnItemsDisplay.Click += new System.EventHandler(this.btnItemsDisplay_Click);
             // 
+            // btnLabelAttributes
+            // 
+            this.btnLabelAttributes.Location = new System.Drawing.Point(0, 32);
+            this.btnLabelAttributes.Name = "btnLabelAttributes";
+            this.btnLabelAttributes.Size = new System.Drawing.Size(101, 23);
+            this.btnLabelAttributes.TabIndex = 2;
+            this.btnLabelAttributes.Text = "Label Attributes";
+            this.btnLabelAttributes.UseVisualStyleBackColor = true;
+            this.btnLabelAttributes.Click += new System.EventHandler(this.btnLabelAttributes_Click);
+            // 
             // DisplayRightClickOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(104, 59);
+            this.ClientSize = new System.Drawing.Size(104, 92);
+            this.Controls.Add(this.btnLabelAttributes);
             this.Controls.Add(this.btnItemsDisplay);
             this.Controls.Add(this.btnDisplaySettings);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(110, 87);
+            this.MaximumSize = new System.Drawing.Size(110, 120);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(110, 87);
+            this.MinimumSize = new System.Drawing.Size(110, 120);
             this.Name = "DisplayRightClickOptions";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -78,5 +90,6 @@
 
         private System.Windows.Forms.Button btnDisplaySettings;
         private System.Windows.Forms.Button btnItemsDisplay;
+        private System.Windows.Forms.Button btnLabelAttributes;
     }
 }

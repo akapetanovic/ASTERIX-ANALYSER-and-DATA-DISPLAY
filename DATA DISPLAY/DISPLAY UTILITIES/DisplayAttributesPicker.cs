@@ -86,7 +86,6 @@ namespace MulticastingUDP
                     comboBoxDataItem.Items.Add(DataItem.ItemName);
 
             // Background Color
-            ArrayList ColorList = new ArrayList();
             Type colorType = typeof(System.Drawing.Color);
             PropertyInfo[] propInfoList = colorType.GetProperties(BindingFlags.Static |
                                           BindingFlags.DeclaredOnly | BindingFlags.Public);
@@ -208,28 +207,8 @@ namespace MulticastingUDP
             NewDisplayAttribute.TextColor = Color.FromName(this.comboBoxTextColorChoice.Text);
             NewDisplayAttribute.LineWidth = int.Parse(this.comboBoxLineWidth.Text);
             NewDisplayAttribute.LineColor = Color.FromName(this.comboBoxLineColorChoice.Text);
-
-            switch (this.comboBoxLineStyleChoice.Text)
-            {
-                case "Solid":
-                    NewDisplayAttribute.LineStyle = DashStyle.Solid;
-                    break;
-                case "Dash":
-                    NewDisplayAttribute.LineStyle = DashStyle.Dash;
-                    break;
-                case "DashDot":
-                    NewDisplayAttribute.LineStyle = DashStyle.DashDot;
-                    break;
-                case "DashDotDot":
-                    NewDisplayAttribute.LineStyle = DashStyle.DashDotDot;
-                    break;
-                case "Dot":
-                    NewDisplayAttribute.LineStyle = DashStyle.Dot;
-                    break;
-                default:
-                    NewDisplayAttribute.LineStyle = DashStyle.Solid;
-                    break;
-            }
+            NewDisplayAttribute.LineStyle = DisplayAttributes.GetLineStypefromString(this.comboBoxLineStyleChoice.Text);
+            
             NewDisplayAttribute.AreaPolygonColor = Color.FromName(this.comboBoxAreaPolygonColorChoice.Text);
             NewDisplayAttribute.ImageSize = new Size((int)this.numericUpDown_X.Value, (int)this.numericUpDown_Y.Value);
             DisplayAttributes.SetDisplayAttribute((DisplayAttributes.DisplayItemsType)Enum.Parse(typeof(DisplayAttributes.DisplayItemsType), NewDisplayAttribute.ItemName, true), NewDisplayAttribute);

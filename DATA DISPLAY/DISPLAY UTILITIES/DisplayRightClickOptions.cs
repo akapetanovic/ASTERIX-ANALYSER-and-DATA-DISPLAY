@@ -29,5 +29,12 @@ namespace MulticastingUDP
             MyForm.Show();
             this.Close();
         }
+
+        private void btnLabelAttributes_Click(object sender, EventArgs e)
+        {
+            LabelAttributePicker MyFom = new LabelAttributePicker();
+            MyFom.Show();
+            this.Close();
+        }
     }
 }

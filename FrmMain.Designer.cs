@@ -1518,6 +1518,7 @@
             this.gMapControl.Load += new System.EventHandler(this.gMapControl_Load);
             this.gMapControl.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.gMapControl_KeyPress);
             this.gMapControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseClick);
+            this.gMapControl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseDoubleClick);
             this.gMapControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseMove);
             // 
             // tabPageAsterixMessages

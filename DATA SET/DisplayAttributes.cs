@@ -12,11 +12,11 @@ namespace MulticastingUDP
         // Define a boolean to be used as display invalidation. This is to signal MainForm
         // that a display attribute has changed and that new display build is required.
         public static bool StaticDisplayBuildRequired = false;
-        
+
         // Define all available data display items
         public enum DisplayItemsType { Radar, Waypoint, StateBorder, BackgroundColor, SectorBorder };
 
-     
+
         // Define type for the possibloe display attributes.
         // Not all attributes are applicable for all display items, but for simplicity
         // define all possible here and use those that are applicable
@@ -28,7 +28,7 @@ namespace MulticastingUDP
             public int TextSize = 8;
             public FontFamily TextFont = FontFamily.GenericSansSerif;
             public Color TextColor = Color.White;
-            
+
             // Line/border attributes
             public int LineWidth = 2;
             public Color LineColor = Color.White;
@@ -73,10 +73,8 @@ namespace MulticastingUDP
             DataItem = new DisplayAttributesType();
             DataItem.ItemName = "SectorBorder";
             DisplayAttributeDataSet.Add(DataItem);
-
-            // Now load user defined attributes from the attribute configuration file 
         }
-        
+
         // Returns list index based on the enumerated type.
         private static int DisplayItemToIndex(DisplayItemsType ItemToGet)
         {
@@ -129,7 +127,7 @@ namespace MulticastingUDP
             //DisplayAttribute.LineStyle = DashStyle.Solid;         
             //DisplayAttribute.AreaPolygonColor = Color.FromName(words[7]);
             //DisplayAttribute.ImageSize = new Size(int.Parse(words[8]), int.Parse((words[9])));
-            
+
             StaticDisplayBuildRequired = true;
         }
 
@@ -137,5 +135,35 @@ namespace MulticastingUDP
         {
             return DisplayAttributeDataSet;
         }
+
+        public static DashStyle GetLineStypefromString(string LineStyleIn)
+        {
+            DashStyle DashStyleOut = new DashStyle();
+
+            switch (LineStyleIn)
+            {
+                case "Solid":
+                    DashStyleOut = DashStyle.Solid;
+                    break;
+                case "Dash":
+                    DashStyleOut = DashStyle.Dash;
+                    break;
+                case "DashDot":
+                    DashStyleOut = DashStyle.DashDot;
+                    break;
+                case "DashDotDot":
+                    DashStyleOut = DashStyle.DashDotDot;
+                    break;
+                case "Dot":
+                    DashStyleOut = DashStyle.Dot;
+                    break;
+                default:
+                    DashStyleOut = DashStyle.Solid;
+                    break;
+            }
+            return DashStyleOut;
+        }
     }
 }
+
+
