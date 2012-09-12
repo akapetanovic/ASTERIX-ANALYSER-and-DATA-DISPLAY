@@ -43,6 +43,8 @@ namespace MulticastingUDP
         {
             g.DrawImage(img, LocalPosition.X, LocalPosition.Y, Size.Width, Size.Height);
         }
+
+       
     }
 
     public class WaypointMarker : GMap.NET.WindowsForms.GMapMarker

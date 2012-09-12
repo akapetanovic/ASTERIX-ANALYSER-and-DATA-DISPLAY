@@ -33,14 +33,26 @@ Version 1.2
 Version 1.3
 
 1.	Added possibility to use custom built maps and/or overlays consisting of:
-a.	State Borders
-b.	Sector Borders
-c.	Waypoints
-d.	Radars 
+
+	a.	State Borders
+	b.	Sector Borders
+	c.	Waypoints
+	d.	Radars 
 
 2.	Added Flight Level Filter
 3.	Improved display by adding automatic resizing of the display.
-4.	
+4.	Added display configuration functionality that lets you choose display attributes (Color, size, line type .etc) for all display elements. Please see the user manual for detailes.
+5. Added track/plot count display (the number of acquired plots/tracks since last update cycle
+
+PLANS FOR FUTURE UPDATES: 
+
+Version 1.4
+
+1. Support for CAT062. To be able to decode CAT062 that will enable the application to be used as data display from a tracker provided data (i.e. ARTAS)
+
+Version 1.5
+
+1. Improve display to be able to manupulate the lables (move it and make it interactive, ex: be able to enter CFL, ADES, etc..)
 
 
 Amer Kapetanovic (akapetanovic@gmail.com)

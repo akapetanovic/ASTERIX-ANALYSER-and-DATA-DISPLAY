@@ -30,8 +30,14 @@ namespace MulticastingUDP
         // then all possible but lets keep it simple.
         private bool[] SSR_Code_Lookup = new bool[7778];
 
+        // Flags that the display target has just been enabled
+        private bool FirstCycleDisplayEnabled = true;
+
         // Define the main listener thread
         Thread ListenForDataThread = new Thread(new ThreadStart(ASTERIX.ListenForData));
+
+        GMapMarker currentMarker = null;
+        bool isDraggingMarker = false;
 
         public FormMain()
         {
@@ -106,6 +112,16 @@ namespace MulticastingUDP
         {
             // Initialize Map
             InitializeMap();
+
+            ToolTip toolTip1 = new ToolTip();
+            toolTip1.ShowAlways = false;
+            toolTip1.SetToolTip(this.lblNumberofTargets, "Number of targets since the last update cycle");
+
+            ToolTip toolTip2 = new ToolTip();
+            toolTip1.ShowAlways = false;
+            toolTip1.SetToolTip(this.labelTargetCount, "Number of targets since the last update cycle"); 
+
+
         }
 
         private void InitializeMap()
@@ -507,6 +523,14 @@ namespace MulticastingUDP
             {
                 DynamicDisplayBuilder.GetDisplayData(false, out TargetList);
 
+                if (FirstCycleDisplayEnabled)
+                {
+                    FirstCycleDisplayEnabled = false;
+                    TargetList.Clear();
+                }
+
+                this.lblNumberofTargets.Text = TargetList.Count.ToString();
+
                 foreach (DynamicDisplayBuilder.TargetType Target in TargetList)
                 {
                     if (Passes_Check_For_Flight_Level_Filter(Target.ModeC))
@@ -520,30 +544,24 @@ namespace MulticastingUDP
                             {
                                 GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
                                 MyMarker.ToolTipMode = MarkerTooltipMode.Always;
-
-                                if (Target.ACID_Modes != null)
-                                    MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ACID_Modes + "\n" + Target.ModeC;
-                                else
-                                    MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ModeC;
-
+                                MyMarker.ToolTipText = BuildLabelText(Target);  
                                 SetLabelAttributes(ref MyMarker);
                                 DinamicOverlay.Markers.Add(MyMarker);
+
+
+                              
                             }
                         }
                         else // No SSR filter so just display all of them
                         {
                             GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
                             MyMarker.DisableRegionCheck = true;
-
                             MyMarker.ToolTipMode = MarkerTooltipMode.Always;
-
-                            if (Target.ACID_Modes != null)
-                                MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ACID_Modes + "\n" + Target.ModeC;
-                            else
-                                MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ModeC;
-
+                            MyMarker.ToolTipText = BuildLabelText(Target);  
                             SetLabelAttributes(ref MyMarker);
                             DinamicOverlay.Markers.Add(MyMarker);
+
+                            
                         }
                     }
                 }
@@ -563,13 +581,8 @@ namespace MulticastingUDP
                             if (Target.ModeA == this.comboBoxSSRFilterBox.Items[SSR_Filter_Last_Index].ToString())
                             {
                                 GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
-                                MyMarker.ToolTipMode = MarkerTooltipMode.Always;
-
-                                if (Target.ACID_Modes != null)
-                                    MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ACID_Modes + "\n" + Target.ModeC;
-                                else
-                                    MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ModeC;
-
+                                MyMarker.ToolTipMode = MarkerTooltipMode.Always; 
+                                MyMarker.ToolTipText = BuildLabelText(Target);  
                                 SetLabelAttributes(ref MyMarker);
                                 DinamicOverlay.Markers.Add(MyMarker);
                             }
@@ -578,12 +591,7 @@ namespace MulticastingUDP
                         {
                             GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
                             MyMarker.ToolTipMode = MarkerTooltipMode.Always;
-                            
-                            if (Target.ACID_Modes != null)
-                                MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ACID_Modes + "\n" + Target.ModeC;
-                            else
-                                MyMarker.ToolTipText = Target.ModeA + "\n" + Target.ModeC;
-
+                            MyMarker.ToolTipText = BuildLabelText(Target);  
                             SetLabelAttributes(ref MyMarker);
                             DinamicOverlay.Markers.Add(MyMarker);
                         }
@@ -592,26 +600,47 @@ namespace MulticastingUDP
             }
         }
 
+        /////////////////////////////////////////////////////////////////////////////////
+        // This method builds the label text
+        /// <summary>
+        /// /////////////////////////////////////////////////////////////////////////////
+        /// </summary>
+        /// <param name="Target_In"></param>
+        /// <returns></returns>
+        private string BuildLabelText(DynamicDisplayBuilder.TargetType Target_In)
+        {
+            string Label_Text_Out = "";
+
+            if (Target_In.ACID_Modes != null)
+                Label_Text_Out = Target_In.ModeA + "\n" + Target_In.ACID_Modes + "\n" + Target_In.ModeC;
+            else
+                Label_Text_Out = Target_In.ModeA + "\n" + Target_In.ModeC;
+
+            return Label_Text_Out;
+        }
+
         private void SetLabelAttributes(ref GMap.NET.WindowsForms.Markers.GMapMarkerCross Marker_In)
         {
 
             // Label Text Font and Size
-            FontFamily family = new FontFamily("Microsoft Sans Serif");
-            Font font = new Font(family, 8,
+            Marker_In.ToolTip.Font = new Font(LabelAttributes.TextFont, LabelAttributes.TextSize,
             FontStyle.Bold | FontStyle.Regular);
-            Marker_In.ToolTip.Font = font;
-            Marker_In.ToolTip.Foreground = Brushes.DarkGreen;
+            Marker_In.ToolTip.Foreground = new SolidBrush(LabelAttributes.TextColor);
 
             // Label Border color
-            Marker_In.ToolTip.Stroke = new Pen(Brushes.WhiteSmoke, 1);
-            Marker_In.ToolTip.Stroke.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
-            
+            Marker_In.ToolTip.Stroke = new Pen(new SolidBrush(LabelAttributes.LineColor), LabelAttributes.LineWidth);
+            Marker_In.ToolTip.Stroke.DashStyle = LabelAttributes.LineStyle;
+
             // Label background color
             Marker_In.ToolTip.Fill = Brushes.Transparent;
 
             // Symbol color
-            Marker_In.Pen = new Pen(Brushes.Red);
-            Marker_In.Pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            Marker_In.Pen = new Pen(new SolidBrush(LabelAttributes.TargetColor), LabelAttributes.TargetSize);
+            Marker_In.Pen.DashStyle = LabelAttributes.TargetStyle;
+         
+            // Align the text
+            Marker_In.ToolTip.Format.LineAlignment = StringAlignment.Center;
+            Marker_In.ToolTip.Format.Alignment = StringAlignment.Near;
         }
 
         private bool Passes_Check_For_Flight_Level_Filter(string Flight_Level)
@@ -643,6 +672,8 @@ namespace MulticastingUDP
         {
             if (this.checkEnableDisplay.Checked == true)
             {
+              
+                
                 this.checkEnableDisplay.BackColor = Color.Green;
                 this.groupBoxSSRFilter.Enabled = true;
                 this.checkBoxFilterBySSR.Enabled = true;
@@ -664,9 +695,15 @@ namespace MulticastingUDP
 
                 // Start the timer
                 this.PlotandTrackDisplayUpdateTimer.Enabled = true;
+
+                // Call Update_PlotTrack_Data() twice in order to populate the display right
+                // away, then the timer will take over.
+                Update_PlotTrack_Data();
+                Update_PlotTrack_Data();
             }
             else
             {
+                FirstCycleDisplayEnabled = true;
                 this.checkEnableDisplay.Text = "Disabled";
                 this.checkEnableDisplay.BackColor = Color.Red;
                 this.checkBoxFilterBySSR.BackColor = Color.Transparent;
@@ -912,6 +949,14 @@ namespace MulticastingUDP
         // Update Mouse posistion on the control
         private void gMapControl_MouseMove(object sender, MouseEventArgs e)
         {
+            //if (e.Button == MouseButtons.Left && isDraggingMarker && currentMarker != null)
+            //{
+            //    currentMarker.Position = gMapControl.FromLocalToLatLng(e.X, e.Y);
+
+            //    currentMarker.ToolTip.Offset = new Point(e.X, e.Y);
+
+            //    gMapControl.Refresh();
+            //}
 
         }
 
@@ -956,7 +1001,7 @@ namespace MulticastingUDP
 
         private void gMapControl_MouseClick(object sender, MouseEventArgs e)
         {
-           
+
         }
 
         private void FormMain_Resize(object sender, EventArgs e)
@@ -1012,6 +1057,41 @@ namespace MulticastingUDP
                 MyForm.Location = new Point(e.X + 75, e.Y + 150);
                 MyForm.Show();
             }
+        }
+
+        private void gMapControl_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                GMapOverlay[] overlays = new GMapOverlay[] { DinamicOverlay };
+                for (int i = overlays.Length - 1; i >= 0; i--)
+                {
+                    GMapOverlay o = overlays[i];
+                    if (o != null && o.IsVisibile)
+                        foreach (GMapMarker m in o.Markers)
+                            if (m.IsVisible && m.IsHitTestVisible && m.IsMouseOver)
+                            {
+                                currentMarker = m;
+                                isDraggingMarker = true;
+                                return;
+                            }
+                }
+            }
+
+        }
+
+        private void gMapControl_MouseUp(object sender, MouseEventArgs e)
+        {
+            isDraggingMarker = false;
+            currentMarker = null;
+
+        }
+
+        private void gMapControl_OnMarkerEnter(GMapMarker item)
+        {
+            if (!isDraggingMarker)
+                currentMarker = item;
+
         }
     }
 }

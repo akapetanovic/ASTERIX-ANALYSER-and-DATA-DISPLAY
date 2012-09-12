@@ -141,6 +141,8 @@
             this.groupBoxConnection = new System.Windows.Forms.GroupBox();
             this.button8 = new System.Windows.Forms.Button();
             this.tabPlotDisplay = new System.Windows.Forms.TabPage();
+            this.labelTargetCount = new System.Windows.Forms.Label();
+            this.lblNumberofTargets = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.numericUpDownUpper = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownLower = new System.Windows.Forms.NumericUpDown();
@@ -1099,6 +1101,8 @@
             // tabPlotDisplay
             // 
             this.tabPlotDisplay.BackColor = System.Drawing.SystemColors.Desktop;
+            this.tabPlotDisplay.Controls.Add(this.labelTargetCount);
+            this.tabPlotDisplay.Controls.Add(this.lblNumberofTargets);
             this.tabPlotDisplay.Controls.Add(this.groupBox2);
             this.tabPlotDisplay.Controls.Add(this.groupBox1);
             this.tabPlotDisplay.Controls.Add(this.lblZoomLevel);
@@ -1123,6 +1127,24 @@
             this.tabPlotDisplay.Text = "Plot Display";
             this.tabPlotDisplay.SizeChanged += new System.EventHandler(this.tabPlotDisplay_SizeChanged);
             this.tabPlotDisplay.Click += new System.EventHandler(this.tabPlotDisplay_Click);
+            // 
+            // labelTargetCount
+            // 
+            this.labelTargetCount.AutoSize = true;
+            this.labelTargetCount.Location = new System.Drawing.Point(8, 579);
+            this.labelTargetCount.Name = "labelTargetCount";
+            this.labelTargetCount.Size = new System.Drawing.Size(72, 13);
+            this.labelTargetCount.TabIndex = 25;
+            this.labelTargetCount.Text = "Target Count:";
+            // 
+            // lblNumberofTargets
+            // 
+            this.lblNumberofTargets.AutoSize = true;
+            this.lblNumberofTargets.Location = new System.Drawing.Point(81, 579);
+            this.lblNumberofTargets.Name = "lblNumberofTargets";
+            this.lblNumberofTargets.Size = new System.Drawing.Size(13, 13);
+            this.lblNumberofTargets.TabIndex = 24;
+            this.lblNumberofTargets.Text = "0";
             // 
             // groupBox2
             // 
@@ -1515,11 +1537,14 @@
             this.gMapControl.Size = new System.Drawing.Size(1180, 817);
             this.gMapControl.TabIndex = 0;
             this.gMapControl.Zoom = 0D;
+            this.gMapControl.OnMarkerEnter += new GMap.NET.WindowsForms.MarkerEnter(this.gMapControl_OnMarkerEnter);
             this.gMapControl.Load += new System.EventHandler(this.gMapControl_Load);
             this.gMapControl.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.gMapControl_KeyPress);
             this.gMapControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseClick);
             this.gMapControl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseDoubleClick);
+            this.gMapControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseDown);
             this.gMapControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseMove);
+            this.gMapControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseUp);
             // 
             // tabPageAsterixMessages
             // 
@@ -1820,6 +1845,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TabControl tabMainTab;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label lblNumberofTargets;
+        private System.Windows.Forms.Label labelTargetCount;
     }
 }
 

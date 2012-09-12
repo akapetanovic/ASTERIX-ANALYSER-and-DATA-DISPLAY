@@ -30,8 +30,6 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBoxTextColorChoice = new System.Windows.Forms.ComboBox();
-            this.panelTextAttributes = new System.Windows.Forms.Panel();
-            this.labelSampleText = new System.Windows.Forms.Label();
             this.label = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxTextFontChoice = new System.Windows.Forms.ComboBox();
@@ -42,7 +40,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxLineStyleChoice = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.panelLineAttributes = new System.Windows.Forms.Panel();
             this.comboBoxLineColorChoice = new System.Windows.Forms.ComboBox();
             this.labelLineColor = new System.Windows.Forms.Label();
             this.comboBoxLineWidth = new System.Windows.Forms.ComboBox();
@@ -50,14 +47,14 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.comboBoxTargetStyle = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.panelSymbolAttributes = new System.Windows.Forms.Panel();
             this.comboBoxTargetColor = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.comboBoxTargetSize = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
-            this.panelTextAttributes.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -65,7 +62,6 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.comboBoxTextColorChoice);
-            this.groupBox1.Controls.Add(this.panelTextAttributes);
             this.groupBox1.Controls.Add(this.label);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.comboBoxTextFontChoice);
@@ -73,7 +69,7 @@
             this.groupBox1.Controls.Add(this.comboBoxTextSizeChoice);
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(354, 109);
+            this.groupBox1.Size = new System.Drawing.Size(230, 109);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Label Text Attributes";
@@ -86,23 +82,8 @@
             this.comboBoxTextColorChoice.Name = "comboBoxTextColorChoice";
             this.comboBoxTextColorChoice.Size = new System.Drawing.Size(178, 21);
             this.comboBoxTextColorChoice.TabIndex = 11;
-            // 
-            // panelTextAttributes
-            // 
-            this.panelTextAttributes.Controls.Add(this.labelSampleText);
-            this.panelTextAttributes.Location = new System.Drawing.Point(230, 19);
-            this.panelTextAttributes.Name = "panelTextAttributes";
-            this.panelTextAttributes.Size = new System.Drawing.Size(110, 75);
-            this.panelTextAttributes.TabIndex = 12;
-            // 
-            // labelSampleText
-            // 
-            this.labelSampleText.AutoSize = true;
-            this.labelSampleText.Location = new System.Drawing.Point(4, 27);
-            this.labelSampleText.Name = "labelSampleText";
-            this.labelSampleText.Size = new System.Drawing.Size(73, 13);
-            this.labelSampleText.TabIndex = 0;
-            this.labelSampleText.Text = "Sample TEXT";
+            this.comboBoxTextColorChoice.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxTextColorChoice_DrawItem);
+            this.comboBoxTextColorChoice.SelectedIndexChanged += new System.EventHandler(this.comboBoxTextColorChoice_SelectedIndexChanged);
             // 
             // label
             // 
@@ -129,6 +110,7 @@
             this.comboBoxTextFontChoice.Name = "comboBoxTextFontChoice";
             this.comboBoxTextFontChoice.Size = new System.Drawing.Size(178, 21);
             this.comboBoxTextFontChoice.TabIndex = 17;
+            this.comboBoxTextFontChoice.SelectedIndexChanged += new System.EventHandler(this.comboBoxTextFontChoice_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -167,6 +149,7 @@
             this.comboBoxTextSizeChoice.Name = "comboBoxTextSizeChoice";
             this.comboBoxTextSizeChoice.Size = new System.Drawing.Size(38, 21);
             this.comboBoxTextSizeChoice.TabIndex = 16;
+            this.comboBoxTextSizeChoice.SelectedIndexChanged += new System.EventHandler(this.comboBoxTextSizeChoice_SelectedIndexChanged);
             // 
             // groupBox2
             // 
@@ -174,14 +157,13 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.comboBoxLineStyleChoice);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.panelLineAttributes);
             this.groupBox2.Controls.Add(this.comboBoxLineColorChoice);
             this.groupBox2.Controls.Add(this.labelLineColor);
             this.groupBox2.Controls.Add(this.comboBoxLineWidth);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Location = new System.Drawing.Point(13, 128);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(354, 162);
+            this.groupBox2.Size = new System.Drawing.Size(230, 162);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Label Box and leader line Attributes";
@@ -190,19 +172,21 @@
             // 
             this.comboBoxBackroundColor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxBackroundColor.FormattingEnabled = true;
-            this.comboBoxBackroundColor.Location = new System.Drawing.Point(105, 120);
+            this.comboBoxBackroundColor.Location = new System.Drawing.Point(73, 120);
             this.comboBoxBackroundColor.Name = "comboBoxBackroundColor";
-            this.comboBoxBackroundColor.Size = new System.Drawing.Size(234, 21);
+            this.comboBoxBackroundColor.Size = new System.Drawing.Size(153, 21);
             this.comboBoxBackroundColor.TabIndex = 30;
+            this.comboBoxBackroundColor.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxBackroundColor_DrawItem);
+            this.comboBoxBackroundColor.SelectedIndexChanged += new System.EventHandler(this.comboBoxBackroundColor_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(7, 123);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 13);
+            this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 29;
-            this.label1.Text = "Background Color";
+            this.label1.Text = "Bckg Color";
             // 
             // comboBoxLineStyleChoice
             // 
@@ -227,13 +211,6 @@
             this.label2.TabIndex = 27;
             this.label2.Text = "Type";
             // 
-            // panelLineAttributes
-            // 
-            this.panelLineAttributes.Location = new System.Drawing.Point(229, 24);
-            this.panelLineAttributes.Name = "panelLineAttributes";
-            this.panelLineAttributes.Size = new System.Drawing.Size(110, 75);
-            this.panelLineAttributes.TabIndex = 26;
-            // 
             // comboBoxLineColorChoice
             // 
             this.comboBoxLineColorChoice.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
@@ -242,6 +219,7 @@
             this.comboBoxLineColorChoice.Name = "comboBoxLineColorChoice";
             this.comboBoxLineColorChoice.Size = new System.Drawing.Size(178, 21);
             this.comboBoxLineColorChoice.TabIndex = 25;
+            this.comboBoxLineColorChoice.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxLineColorChoice_DrawItem);
             // 
             // labelLineColor
             // 
@@ -292,14 +270,15 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.comboBoxTargetSize);
             this.groupBox3.Controls.Add(this.comboBoxTargetStyle);
             this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.panelSymbolAttributes);
             this.groupBox3.Controls.Add(this.comboBoxTargetColor);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Location = new System.Drawing.Point(13, 296);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(354, 126);
+            this.groupBox3.Size = new System.Drawing.Size(230, 119);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Target Symbol Attributes";
@@ -315,7 +294,7 @@
             "Dot"});
             this.comboBoxTargetStyle.Location = new System.Drawing.Point(52, 53);
             this.comboBoxTargetStyle.Name = "comboBoxTargetStyle";
-            this.comboBoxTargetStyle.Size = new System.Drawing.Size(178, 21);
+            this.comboBoxTargetStyle.Size = new System.Drawing.Size(172, 21);
             this.comboBoxTargetStyle.TabIndex = 33;
             // 
             // label3
@@ -327,21 +306,15 @@
             this.label3.TabIndex = 32;
             this.label3.Text = "Type";
             // 
-            // panelSymbolAttributes
-            // 
-            this.panelSymbolAttributes.Location = new System.Drawing.Point(233, 26);
-            this.panelSymbolAttributes.Name = "panelSymbolAttributes";
-            this.panelSymbolAttributes.Size = new System.Drawing.Size(110, 75);
-            this.panelSymbolAttributes.TabIndex = 31;
-            // 
             // comboBoxTargetColor
             // 
             this.comboBoxTargetColor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxTargetColor.FormattingEnabled = true;
             this.comboBoxTargetColor.Location = new System.Drawing.Point(52, 26);
             this.comboBoxTargetColor.Name = "comboBoxTargetColor";
-            this.comboBoxTargetColor.Size = new System.Drawing.Size(178, 21);
+            this.comboBoxTargetColor.Size = new System.Drawing.Size(172, 21);
             this.comboBoxTargetColor.TabIndex = 30;
+            this.comboBoxTargetColor.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxTargetColor_DrawItem);
             // 
             // label6
             // 
@@ -354,9 +327,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(272, 428);
+            this.button2.Location = new System.Drawing.Point(165, 421);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(93, 23);
+            this.button2.Size = new System.Drawing.Size(72, 23);
             this.button2.TabIndex = 11;
             this.button2.Text = "Save Settings";
             this.button2.UseVisualStyleBackColor = true;
@@ -364,9 +337,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(23, 428);
+            this.button1.Location = new System.Drawing.Point(7, 421);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 23);
+            this.button1.Size = new System.Drawing.Size(72, 23);
             this.button1.TabIndex = 10;
             this.button1.Text = "Close";
             this.button1.UseVisualStyleBackColor = true;
@@ -374,19 +347,58 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(146, 428);
+            this.btnUpdate.Location = new System.Drawing.Point(86, 421);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(93, 23);
+            this.btnUpdate.Size = new System.Drawing.Size(72, 23);
             this.btnUpdate.TabIndex = 9;
             this.btnUpdate.Text = "Update Display";
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(11, 90);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(27, 13);
+            this.label8.TabIndex = 34;
+            this.label8.Text = "Size";
+            // 
+            // comboBoxTargetSize
+            // 
+            this.comboBoxTargetSize.FormattingEnabled = true;
+            this.comboBoxTargetSize.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20"});
+            this.comboBoxTargetSize.Location = new System.Drawing.Point(52, 82);
+            this.comboBoxTargetSize.Name = "comboBoxTargetSize";
+            this.comboBoxTargetSize.Size = new System.Drawing.Size(38, 21);
+            this.comboBoxTargetSize.TabIndex = 35;
+            this.comboBoxTargetSize.SelectedIndexChanged += new System.EventHandler(this.comboBoxTargetSize_SelectedIndexChanged);
+            // 
             // LabelAttributePicker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(377, 461);
+            this.ClientSize = new System.Drawing.Size(253, 479);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnUpdate);
@@ -399,8 +411,6 @@
             this.Load += new System.EventHandler(this.LabelAttributePicker_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.panelTextAttributes.ResumeLayout(false);
-            this.panelTextAttributes.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -418,8 +428,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.ComboBox comboBoxTextColorChoice;
-        private System.Windows.Forms.Panel panelTextAttributes;
-        private System.Windows.Forms.Label labelSampleText;
         private System.Windows.Forms.Label label;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBoxTextFontChoice;
@@ -427,7 +435,6 @@
         private System.Windows.Forms.ComboBox comboBoxTextSizeChoice;
         private System.Windows.Forms.ComboBox comboBoxLineStyleChoice;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panelLineAttributes;
         private System.Windows.Forms.ComboBox comboBoxLineColorChoice;
         private System.Windows.Forms.Label labelLineColor;
         private System.Windows.Forms.ComboBox comboBoxLineWidth;
@@ -436,8 +443,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBoxTargetStyle;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel panelSymbolAttributes;
         private System.Windows.Forms.ComboBox comboBoxTargetColor;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox comboBoxTargetSize;
     }
 }

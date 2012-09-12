@@ -71,14 +71,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MulticastingUDP.exe" size="257536">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MulticastingUDP.exe" size="261120">
       <assemblyIdentity name="MulticastingUDP" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>Va0oOGQm4HMWsabdyZ40v51JltQ=</dsig:DigestValue>
+        <dsig:DigestValue>o1i6hWwXdy9+upRXWhkqHb4RoKU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

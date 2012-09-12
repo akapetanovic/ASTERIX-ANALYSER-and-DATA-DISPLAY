@@ -13,7 +13,7 @@ namespace MulticastingUDP
     {
 
         // Label text attributes
-        public static Color TextColor = Color.White;
+        public static Color TextColor = Color.DarkGreen;
         public static FontFamily TextFont = FontFamily.GenericSansSerif;
         public static int TextSize = 8;
 
@@ -24,10 +24,11 @@ namespace MulticastingUDP
 
         // Label background color
         public static Color BackgroundColor = Color.Transparent;
-        
+
         // Target Symbol Attributes
-        public static Color TargetColor = Color.White;
+        public static Color TargetColor = Color.DarkGreen;
         public static DashStyle TargetStyle = DashStyle.Solid;
+        public static int TargetSize = 2;
 
         public static void Load()
         {
@@ -74,6 +75,9 @@ namespace MulticastingUDP
                             case "TARGET_STYLE":
                                 TargetStyle = DisplayAttributes.GetLineStypefromString(words[1]);
                                 break;
+                            case "TARGET_SIZE":
+                                TargetSize = int.Parse(words[1]);
+                                break;
                             default:
                                 MessageBox.Show("Bad format of LabelAttributes.txt");
                                 break;
@@ -86,6 +90,47 @@ namespace MulticastingUDP
         public static void Save()
         {
 
+            string FileName;
+            FileName = @"C:\ASTERIX\ADAPTATION\LabelAttributes.txt";
+            DisplayAttributes.DisplayAttributesType DisplayAttribute = new DisplayAttributes.DisplayAttributesType();
+            string DisplayAttributesStream =
+                "#TEXT_COLOR,value" + Environment.NewLine +
+                "#TEXT_FONT,value" + Environment.NewLine +
+                "#TEXT_SIZE,value" + Environment.NewLine +
+                "#LINE_COLOR,value" + Environment.NewLine +
+                "#LINE_STYLE,value" + Environment.NewLine +
+                "#LINE_WIDTH,value" + Environment.NewLine +
+                "#TARGET_COLOR,value" + Environment.NewLine +
+                "#TARGET_STYLE,value" + Environment.NewLine +
+                "#TARGET_SIZE,value" + Environment.NewLine;
+
+            DisplayAttributesStream = DisplayAttributesStream +
+                "TEXT_COLOR," + LabelAttributes.TextColor.Name + Environment.NewLine +
+                "TEXT_FONT," + LabelAttributes.TextFont.Name + Environment.NewLine +
+                "TEXT_SIZE," + LabelAttributes.TextSize.ToString() + Environment.NewLine +
+                "LINE_COLOR," + LabelAttributes.LineColor.Name + Environment.NewLine +
+                "LINE_STYLE," + LabelAttributes.LineStyle.ToString() + Environment.NewLine +
+                "LINE_WIDTH," + LabelAttributes.LineWidth.ToString() + Environment.NewLine +
+                "TARGET_COLOR," + LabelAttributes.TargetColor.Name + Environment.NewLine +
+                "TARGET_STYLE," + LabelAttributes.TargetStyle.ToString() + Environment.NewLine +
+                "TARGET_SIZE," + LabelAttributes.TargetSize.ToString();
+
+            // create a writer and open the file
+            TextWriter tw = new StreamWriter(FileName);
+
+            try
+            {
+                // write a line of text to the file
+                tw.Write(DisplayAttributesStream);
+                MessageBox.Show("Label attributes succefully saved");
+            }
+            catch (System.IO.IOException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            // close the stream
+            tw.Close();
         }
     }
 }

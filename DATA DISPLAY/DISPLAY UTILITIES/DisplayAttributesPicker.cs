@@ -285,28 +285,9 @@ namespace MulticastingUDP
             {
                 // Create pen.
                 Pen MyPen = new Pen(Color.FromName(this.comboBoxLineColorChoice.Text), int.Parse(this.comboBoxLineWidth.Text));
+                
                 // Set line style
-                switch (this.comboBoxLineStyleChoice.Text)
-                {
-                    case "Solid":
-                        MyPen.DashStyle = DashStyle.Solid;
-                        break;
-                    case "Dash":
-                        MyPen.DashStyle = DashStyle.Dash;
-                        break;
-                    case "DashDot":
-                        MyPen.DashStyle = DashStyle.DashDot;
-                        break;
-                    case "DashDotDot":
-                        MyPen.DashStyle = DashStyle.DashDotDot;
-                        break;
-                    case "Dot":
-                        MyPen.DashStyle = DashStyle.Dot;
-                        break;
-                    default:
-                        MyPen.DashStyle = DashStyle.Solid;
-                        break;
-                }
+                MyPen.DashStyle = DisplayAttributes.GetLineStypefromString(this.comboBoxLineStyleChoice.Text);
 
                 int x1 = panelLineAttributes.Width / int.Parse(this.comboBoxTextSizeChoice.Text);
                 int y1 = panelLineAttributes.Height / int.Parse(this.comboBoxTextSizeChoice.Text);
