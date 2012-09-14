@@ -49,5 +49,18 @@ namespace MulticastingUDP
 
         // This is the main storage of all CAT48 Messages
         public static System.Collections.Generic.List<CAT48Data> CAT48Message = new System.Collections.Generic.List<CAT48Data>();
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CAT 62 Messages
+        //
+        // Define collection for CAT62 data items. This is where each data item will be stored 
+        public class CAT62Data
+        {
+            public System.Collections.Generic.List<CAT62.CAT062DataItem> I062DataItems = new System.Collections.Generic.List<CAT62.CAT062DataItem>();
+        }
+
+        // This is the main storage of all CAT62 Messages
+        public static System.Collections.Generic.List<CAT62Data> CAT62Message = new System.Collections.Generic.List<CAT62Data>();
+
     }
 }

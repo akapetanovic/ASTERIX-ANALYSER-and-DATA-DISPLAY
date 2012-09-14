@@ -118,10 +118,10 @@ namespace MulticastingUDP
 
                             // Now retrieve data from the CAT062 class and populate
                             // list for each UAP data item
-                            foreach (CAT62.I062DataItem Item in CAT62.I062DataItems)
+                            foreach (CAT62.CAT062DataItem Item in CAT62.I062DataItems)
                             {
                                 this.DataItemListBox.Items.Add(Item.ID + "     " + Item.Description);
-                                this.StatusListBox.Items.Add(Item.IsPresent.ToString());
+                                this.StatusListBox.Items.Add(Item.HasBeenPresent.ToString());
                             }
 
                             break;

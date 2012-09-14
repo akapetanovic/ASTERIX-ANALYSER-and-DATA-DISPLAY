@@ -71,24 +71,24 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MulticastingUDP.exe" size="261120">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MulticastingUDP.exe" size="267776">
       <assemblyIdentity name="MulticastingUDP" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>o1i6hWwXdy9+upRXWhkqHb4RoKU=</dsig:DigestValue>
+        <dsig:DigestValue>BuYDDwwrA+o1pngaK/VY9K/1UuY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="DOCUMENTATION\Release Notes.txt" size="2348">
+  <file name="DOCUMENTATION\Release Notes.txt" size="2975">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>rdZD7bukQ5TjI2gCKG5mlg9nfZw=</dsig:DigestValue>
+      <dsig:DigestValue>Gdk3O8PMqKFpftiLFoVWP6lQZQM=</dsig:DigestValue>
     </hash>
   </file>
   <file name="MulticastingUDP.exe.config" size="1193">

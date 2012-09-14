@@ -172,6 +172,32 @@
     <Compile Include="ASTERIX\CAT048\CAT48I060UserData.cs" />
     <Compile Include="ASTERIX\CAT048\CAT48I130UserData.cs" />
     <Compile Include="ASTERIX\CAT048\CAT48I260UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I015UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I070UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I105UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I100UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I185UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I210UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I060UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I245UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I380UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I040UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I080UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I290UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I200UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I295UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I136UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I130UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I135UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I390UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I220UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I270UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I300UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I110UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I120UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I510UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I5005UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I340UserData.cs" />
     <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\DisplayAttributesPicker.cs">
       <SubType>Form</SubType>
     </Compile>

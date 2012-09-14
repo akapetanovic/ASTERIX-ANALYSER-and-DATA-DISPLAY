@@ -225,8 +225,12 @@ namespace MulticastingUDP
                 // System Track Data(next version of Category 030 & 011, also applicable to non-ARTAS systems)
                 case "062":
 
-                    CAT62 MyCAT62 = new CAT62();
-                    Common_Message_Data_String = Common_Message_Data_String + MyCAT62.Decode(DataBlock, Time);
+                     CAT62 MyCAT62 = new CAT62();
+                   
+                    MessageData = MyCAT62.Decode(DataBlock, Time, out NumOfMsgsDecoded);
+
+                    for (int I = 0; I < NumOfMsgsDecoded; I++)
+                        SharedData.DataBox.Items.Add(Common_Message_Data_String + MessageData[I]);
                     break;
 
                 // Sensor Status Messages (SPDS)

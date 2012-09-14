@@ -65,7 +65,7 @@ namespace MulticastingUDP
         public static bool Decode_CAT008 = false;
         public static bool Decode_CAT034 = false;
         public static bool Decode_CAT048 = true;
-        public static bool Decode_CAT062 = false;
+        public static bool Decode_CAT062 = true;
         public static bool Decode_CAT063 = false;
         public static bool Decode_CAT065 = false;
         public static bool Decode_CAT244 = false;

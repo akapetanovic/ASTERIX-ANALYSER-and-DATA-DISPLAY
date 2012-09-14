@@ -381,17 +381,6 @@ namespace MulticastingUDP
 
                 //// Extract SIC/SAC Indexes.
                 DataOut[DataOutIndex] = LocalSingleRecordBuffer[SIC_Index].ToString() + '/' + LocalSingleRecordBuffer[SAC_Index].ToString();
-
-                int t = 1;
-                if (LocalSingleRecordBuffer[SIC_Index].ToString() != "23")
-                {
-                    t = 5;
-                }
-                else
-                {
-                    t = 7;
-                }
-                int y = t;
                 
                 // Get all four data words, but use only the number specifed 
                 // by the length of FSPEC words
