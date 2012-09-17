@@ -31,6 +31,8 @@ namespace MulticastingUDP
             }
         }
 
+        
+
         // Saves of the time of reception
         // used by decoders to stamp individual messages
         public static DateTime TimeOfReception;
@@ -41,6 +43,13 @@ namespace MulticastingUDP
         // Buffer to receive raw data
         private static byte[] UDPBuffer;
 
+        public static void CleanUp()
+        {
+             // If socket is opened then close it
+            if (sock != null)
+                sock.Close();
+        }
+        
         // This is to be called by the FrmSettings to re-initialize
         // the socket 
         public static void ReinitializeSocket()

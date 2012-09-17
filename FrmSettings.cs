@@ -242,5 +242,10 @@ namespace MulticastingUDP
         {
 
         }
+
+        private void FrmSettings_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
     }
 }

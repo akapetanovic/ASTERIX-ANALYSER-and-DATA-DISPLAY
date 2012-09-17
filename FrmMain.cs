@@ -1091,7 +1091,13 @@ namespace MulticastingUDP
         {
             if (!isDraggingMarker)
                 currentMarker = item;
+        }
 
+        private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Start the thread to listen for data
+            ListenForDataThread.Abort();
+            ASTERIX.CleanUp();
         }
     }
 }

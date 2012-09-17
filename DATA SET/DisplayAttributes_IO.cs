@@ -20,7 +20,6 @@ namespace MulticastingUDP
             StreamReader MyStreamReader;
 
             FileName = @"C:\ASTERIX\ADAPTATION\DisplayAttributes.txt";
-            //Exception Bad_DisplayAttributes = new Exception("DisplayAttributes.txt file");
 
             if (System.IO.File.Exists(FileName))
             {
