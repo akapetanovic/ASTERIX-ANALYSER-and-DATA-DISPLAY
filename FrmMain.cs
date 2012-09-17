@@ -41,6 +41,8 @@ namespace MulticastingUDP
 
         public FormMain()
         {
+            System.Threading.Thread.Sleep(600);
+
             InitializeComponent();
 
             SystemAdaptationDataSet.InitializeData();
@@ -59,6 +61,9 @@ namespace MulticastingUDP
 
             // Start the thread to listen for data
             ListenForDataThread.Start();
+
+            // Start display update 
+            this.StaticDisplayTimer.Enabled = true;
 
             // Set up progress bar marguee
             this.progressBar1.Step = 2;
@@ -119,7 +124,7 @@ namespace MulticastingUDP
 
             ToolTip toolTip2 = new ToolTip();
             toolTip1.ShowAlways = false;
-            toolTip1.SetToolTip(this.labelTargetCount, "Number of targets since the last update cycle"); 
+            toolTip1.SetToolTip(this.labelTargetCount, "Number of targets since the last update cycle");
 
 
         }
@@ -544,12 +549,12 @@ namespace MulticastingUDP
                             {
                                 GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
                                 MyMarker.ToolTipMode = MarkerTooltipMode.Always;
-                                MyMarker.ToolTipText = BuildLabelText(Target);  
+                                MyMarker.ToolTipText = BuildLabelText(Target);
                                 SetLabelAttributes(ref MyMarker);
                                 DinamicOverlay.Markers.Add(MyMarker);
 
 
-                              
+
                             }
                         }
                         else // No SSR filter so just display all of them
@@ -557,11 +562,11 @@ namespace MulticastingUDP
                             GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
                             MyMarker.DisableRegionCheck = true;
                             MyMarker.ToolTipMode = MarkerTooltipMode.Always;
-                            MyMarker.ToolTipText = BuildLabelText(Target);  
+                            MyMarker.ToolTipText = BuildLabelText(Target);
                             SetLabelAttributes(ref MyMarker);
                             DinamicOverlay.Markers.Add(MyMarker);
 
-                            
+
                         }
                     }
                 }
@@ -581,8 +586,8 @@ namespace MulticastingUDP
                             if (Target.ModeA == this.comboBoxSSRFilterBox.Items[SSR_Filter_Last_Index].ToString())
                             {
                                 GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
-                                MyMarker.ToolTipMode = MarkerTooltipMode.Always; 
-                                MyMarker.ToolTipText = BuildLabelText(Target);  
+                                MyMarker.ToolTipMode = MarkerTooltipMode.Always;
+                                MyMarker.ToolTipText = BuildLabelText(Target);
                                 SetLabelAttributes(ref MyMarker);
                                 DinamicOverlay.Markers.Add(MyMarker);
                             }
@@ -591,7 +596,7 @@ namespace MulticastingUDP
                         {
                             GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
                             MyMarker.ToolTipMode = MarkerTooltipMode.Always;
-                            MyMarker.ToolTipText = BuildLabelText(Target);  
+                            MyMarker.ToolTipText = BuildLabelText(Target);
                             SetLabelAttributes(ref MyMarker);
                             DinamicOverlay.Markers.Add(MyMarker);
                         }
@@ -637,7 +642,7 @@ namespace MulticastingUDP
             // Symbol color
             Marker_In.Pen = new Pen(new SolidBrush(LabelAttributes.TargetColor), LabelAttributes.TargetSize);
             Marker_In.Pen.DashStyle = LabelAttributes.TargetStyle;
-         
+
             // Align the text
             Marker_In.ToolTip.Format.LineAlignment = StringAlignment.Center;
             Marker_In.ToolTip.Format.Alignment = StringAlignment.Near;
@@ -672,8 +677,8 @@ namespace MulticastingUDP
         {
             if (this.checkEnableDisplay.Checked == true)
             {
-              
-                
+
+
                 this.checkEnableDisplay.BackColor = Color.Green;
                 this.groupBoxSSRFilter.Enabled = true;
                 this.checkBoxFilterBySSR.Enabled = true;
@@ -989,6 +994,7 @@ namespace MulticastingUDP
                 StaticOverlay.Markers.Clear();
                 StaticOverlay.Routes.Clear();
                 StaticOverlay.Polygons.Clear();
+
                 StaticDisplayBuilder.Build(ref StaticOverlay);
                 DisplayAttributes.StaticDisplayBuildRequired = false;
             }
@@ -1096,7 +1102,8 @@ namespace MulticastingUDP
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             // Start the thread to listen for data
-            ListenForDataThread.Abort();
+            ASTERIX.RequestStop();
+            ListenForDataThread.Join();
             ASTERIX.CleanUp();
         }
     }

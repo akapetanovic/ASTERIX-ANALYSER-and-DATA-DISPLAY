@@ -1066,7 +1066,6 @@
             // 
             // StaticDisplayTimer
             // 
-            this.StaticDisplayTimer.Enabled = true;
             this.StaticDisplayTimer.Interval = 500;
             this.StaticDisplayTimer.Tick += new System.EventHandler(this.StaticDisplayTimer_Tick);
             // 
@@ -1654,7 +1653,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1335, 907);
+            this.ClientSize = new System.Drawing.Size(1335, 882);
             this.Controls.Add(this.groupBoxConnection);
             this.Controls.Add(this.tabMainTab);
             this.Controls.Add(this.menuStrip1);

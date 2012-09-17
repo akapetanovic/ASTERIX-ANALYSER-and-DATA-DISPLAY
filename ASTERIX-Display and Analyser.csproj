@@ -8,8 +8,8 @@
     <ProjectGuid>{3918301C-B46C-4913-9267-D73713C9E529}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MulticastingUDP</RootNamespace>
-    <AssemblyName>MulticastingUDP</AssemblyName>
+    <RootNamespace>AsterixDisplayAnalyser</RootNamespace>
+    <AssemblyName>Asterix-Display-Analyser</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -17,7 +17,8 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\Release\</PublishUrl>
+    <TargetFrameworkProfile />
+    <PublishUrl>C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\Release\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -27,9 +28,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationRevision>9</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -333,6 +335,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DATA DISPLAY\STATIC DATA\StaticDisplayBuilder.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Settings1.cs" />
     <Compile Include="ViewDataBySSRCode.cs">
       <SubType>Form</SubType>
     </Compile>

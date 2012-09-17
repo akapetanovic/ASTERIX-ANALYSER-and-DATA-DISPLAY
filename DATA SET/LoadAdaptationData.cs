@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Windows.Forms;
 
 namespace MulticastingUDP
 {
@@ -13,6 +14,7 @@ namespace MulticastingUDP
         // It expects configuration files in a specified directory. In the case they are not found the system will default to the default development data set.
         public static void Load()
         {
+            
             /////////////////////////////////////////////////////////////////////////
             // First set the system origin
             /////////////////////////////////////////////////////////////////////////
@@ -47,9 +49,6 @@ namespace MulticastingUDP
             // Now handle display preferences
             /////////////////////////////////////////////////////////////////////////
             Display_Attributes_IO.Load();
-
-            
-
         }
     }
 }

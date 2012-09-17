@@ -31,7 +31,9 @@ namespace MulticastingUDP
             }
         }
 
-        
+        // Volatile is used as hint to the compiler that this data
+        // member will be accessed by multiple threads.
+        private static volatile bool _shouldStop = false;
 
         // Saves of the time of reception
         // used by decoders to stamp individual messages
@@ -87,6 +89,12 @@ namespace MulticastingUDP
             if (Listen_for_Data_Was_On == true)
                 SharedData.bool_Listen_for_Data = true;
         }
+
+        public static void RequestStop()
+        {
+            _shouldStop = true;
+        }
+
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // The method that gets invoked as a thread when a Connect button is 
         // pressed. It will listen on a given multicast address and store messages in the 
@@ -97,7 +105,7 @@ namespace MulticastingUDP
             bool ThereWasAnException = false;
 
             // Loop forever
-            while (true)
+            while (!_shouldStop)
             {
                 // Do something only if user has requested so
                 if (SharedData.bool_Listen_for_Data)
