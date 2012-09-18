@@ -33,14 +33,16 @@ namespace MulticastingUDP
                         {
                             case "SYS_ORIGIN":
 
-                                double Lat = double.Parse(words[1]);
-                                double Lon = double.Parse(words[2]);
+                                double Lat;
+                                double Lon;
 
                                 if (Double.TryParse(words[1], out Lat) == false)
                                     throw Bad_Main_Settings;
                                 if (Double.TryParse(words[2], out Lon) == false)
                                     throw Bad_Main_Settings;
+
                                 SystemAdaptationDataSet.SystemOrigin = new GMap.NET.PointLatLng(Lat, Lon);
+
                                 break;
 
                             case "BACKGROUND":

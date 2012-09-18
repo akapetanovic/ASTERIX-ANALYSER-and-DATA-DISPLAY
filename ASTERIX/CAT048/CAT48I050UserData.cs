@@ -12,6 +12,5 @@ namespace MulticastingUDP
             // Increase data buffer index so it ready for the next data item.
             CAT48.CurrentDataBufferOctalIndex = CAT48.CurrentDataBufferOctalIndex + 3;
         }
-
     }
 }

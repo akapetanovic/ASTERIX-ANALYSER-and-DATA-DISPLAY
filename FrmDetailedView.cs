@@ -144,19 +144,23 @@ namespace MulticastingUDP
                 // Here determine the flag indicating what data is to be shown
                 foreach (MainASTERIXDataStorage.CAT48Data Msg in MainASTERIXDataStorage.CAT48Message)
                 {
-                    SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I048DataItems[CAT48.ItemIDToIndex("010")].value;
+                    if (Msg.I048DataItems[CAT48.ItemIDToIndex("090")].value != null)
+                    {
 
-                    // Display time
-                    string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
-                        SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
-                    this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I048DataItems[CAT48.ItemIDToIndex("010")].value;
 
-                    // Display Data
-                    CAT48I090Types.CAT48I090FlightLevelUserData MyData = (CAT48I090Types.CAT48I090FlightLevelUserData)Msg.I048DataItems[CAT48.ItemIDToIndex("090")].value;
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Validated.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Garbled.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.FlightLevel.ToString());
-                    this.listBoxMainDataBox.Items.Add("    ");
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+
+                        // Display Data
+                        CAT48I090Types.CAT48I090FlightLevelUserData MyData = (CAT48I090Types.CAT48I090FlightLevelUserData)Msg.I048DataItems[CAT48.ItemIDToIndex("090")].value;
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Validated.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Garbled.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.FlightLevel.ToString());
+                        this.listBoxMainDataBox.Items.Add("    ");
+                    }
                 }
             }
             else
@@ -179,20 +183,24 @@ namespace MulticastingUDP
                 // Here determine the flag indicating what data is to be shown
                 foreach (MainASTERIXDataStorage.CAT48Data Msg in MainASTERIXDataStorage.CAT48Message)
                 {
-                    SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I048DataItems[CAT48.ItemIDToIndex("010")].value;
 
-                    // Display time
-                    string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
-                        SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
-                    this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+                    if (Msg.I048DataItems[CAT48.ItemIDToIndex("070")].value != null)
+                    {
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I048DataItems[CAT48.ItemIDToIndex("010")].value;
+
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
 
 
-                    CAT48I070Types.CAT48I070Mode3UserData MyData = (CAT48I070Types.CAT48I070Mode3UserData)Msg.I048DataItems[CAT48.ItemIDToIndex("070")].value;
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Validated.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Garbled.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Smothed_Or_From_Transponder.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Mode3A_Code.ToString());
-                    this.listBoxMainDataBox.Items.Add("    ");
+                        CAT48I070Types.CAT48I070Mode3UserData MyData = (CAT48I070Types.CAT48I070Mode3UserData)Msg.I048DataItems[CAT48.ItemIDToIndex("070")].value;
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Validated.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Garbled.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Smothed_Or_From_Transponder.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Mode3A_Code.ToString());
+                        this.listBoxMainDataBox.Items.Add("    ");
+                    }
                 }
             }
             else
@@ -214,20 +222,24 @@ namespace MulticastingUDP
                 // Here determine the flag indicating what data is to be shown
                 foreach (MainASTERIXDataStorage.CAT48Data Msg in MainASTERIXDataStorage.CAT48Message)
                 {
-                    SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I048DataItems[CAT48.ItemIDToIndex("010")].value;
+                    if (Msg.I048DataItems[CAT48.ItemIDToIndex("040")].value != null)
+                    {
 
-                    // Display time
-                    string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
-                        SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
-                    this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I048DataItems[CAT48.ItemIDToIndex("010")].value;
 
-                    CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates MyData = (CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates)Msg.I048DataItems[CAT48.ItemIDToIndex("040")].value;
-                    this.listBoxMainDataBox.Items.Add("\tDistance:\t" + MyData.Measured_Distance);
-                    this.listBoxMainDataBox.Items.Add("\tAzimuth:\t" + MyData.Measured_Azimuth.ToString());
-                    string Lat, Lon;
-                    MyData.LatLong.GetDegMinSecStringFormat(out Lat, out Lon);
-                    this.listBoxMainDataBox.Items.Add("\tLat/Long:\t" + Lat + "/" + Lon);
-                    this.listBoxMainDataBox.Items.Add("    ");
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+
+                        CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates MyData = (CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates)Msg.I048DataItems[CAT48.ItemIDToIndex("040")].value;
+                        this.listBoxMainDataBox.Items.Add("\tDistance:\t" + MyData.Measured_Distance);
+                        this.listBoxMainDataBox.Items.Add("\tAzimuth:\t" + MyData.Measured_Azimuth.ToString());
+                        string Lat, Lon;
+                        MyData.LatLong.GetDegMinSecStringFormat(out Lat, out Lon);
+                        this.listBoxMainDataBox.Items.Add("\tLat/Long:\t" + Lat + "/" + Lon);
+                        this.listBoxMainDataBox.Items.Add("    ");
+                    }
                 }
             }
             else
@@ -249,29 +261,33 @@ namespace MulticastingUDP
                 // Here determine the flag indicating what data is to be shown
                 foreach (MainASTERIXDataStorage.CAT48Data Msg in MainASTERIXDataStorage.CAT48Message)
                 {
-                    SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I048DataItems[CAT48.ItemIDToIndex("010")].value;
-
-                    // Display time
-                    string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
-                        SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
-                    this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
-
-                    CAT48I020UserData MyData = (CAT48I020UserData)Msg.I048DataItems[CAT48.ItemIDToIndex("020")].value;
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Type_Of_Report.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Simulated_Or_Actual.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.RDP_Chain.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Special_Position_Ind.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Data_From_FFT.ToString());
-
-                    if (MyData.Next_Extension_1 == CAT48I020Types.Next_Extension_Type.Yes)
+                    if (Msg.I048DataItems[CAT48.ItemIDToIndex("020")].value != null)
                     {
-                        this.listBoxMainDataBox.Items.Add("  *** Extension fileds ***");
-                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Test_Target_Indicator.ToString());
-                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Military_Emergency.ToString());
-                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Military_Identification.ToString());
-                        this.listBoxMainDataBox.Items.Add("\t" + MyData.FOE_or_FRI.ToString());
+
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I048DataItems[CAT48.ItemIDToIndex("010")].value;
+
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+
+                        CAT48I020UserData MyData = (CAT48I020UserData)Msg.I048DataItems[CAT48.ItemIDToIndex("020")].value;
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Type_Of_Report.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Simulated_Or_Actual.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.RDP_Chain.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Special_Position_Ind.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Data_From_FFT.ToString());
+
+                        if (MyData.Next_Extension_1 == CAT48I020Types.Next_Extension_Type.Yes)
+                        {
+                            this.listBoxMainDataBox.Items.Add("  *** Extension fileds ***");
+                            this.listBoxMainDataBox.Items.Add("\t" + MyData.Test_Target_Indicator.ToString());
+                            this.listBoxMainDataBox.Items.Add("\t" + MyData.Military_Emergency.ToString());
+                            this.listBoxMainDataBox.Items.Add("\t" + MyData.Military_Identification.ToString());
+                            this.listBoxMainDataBox.Items.Add("\t" + MyData.FOE_or_FRI.ToString());
+                        }
+                        this.listBoxMainDataBox.Items.Add("    ");
                     }
-                    this.listBoxMainDataBox.Items.Add("    ");
                 }
             }
             else
@@ -292,18 +308,22 @@ namespace MulticastingUDP
                 // Here determine the flag indicating what data is to be shown
                 foreach (MainASTERIXDataStorage.CAT48Data Msg in MainASTERIXDataStorage.CAT48Message)
                 {
-                    SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I048DataItems[CAT48.ItemIDToIndex("010")].value;
 
-                    // Display time
-                    string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
-                        SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
-                    this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+                    if (Msg.I048DataItems[CAT48.ItemIDToIndex("240")].value != null)
+                    {
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I048DataItems[CAT48.ItemIDToIndex("010")].value;
 
-                    CAT48I240Types.CAT48I240ACID_Data ACID_String = (CAT48I240Types.CAT48I240ACID_Data)Msg.I048DataItems[CAT48.ItemIDToIndex("240")].value;
-                    this.listBoxMainDataBox.Items.Add("\t" + "Callsign:" + ACID_String.ACID);
-                   
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
 
-                    this.listBoxMainDataBox.Items.Add("    ");
+                        CAT48I240Types.CAT48I240ACID_Data ACID_String = (CAT48I240Types.CAT48I240ACID_Data)Msg.I048DataItems[CAT48.ItemIDToIndex("240")].value;
+                        this.listBoxMainDataBox.Items.Add("\t" + "Callsign:" + ACID_String.ACID);
+
+
+                        this.listBoxMainDataBox.Items.Add("    ");
+                    }
                 }
             }
             else
@@ -326,19 +346,23 @@ namespace MulticastingUDP
                 // Here determine the flag indicating what data is to be shown
                 foreach (MainASTERIXDataStorage.CAT01Data Msg in MainASTERIXDataStorage.CAT01Message)
                 {
-                    SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I001DataItems[CAT01.ItemIDToIndex("010")].value;
+                    if (Msg.I001DataItems[CAT01.ItemIDToIndex("090")].value != null)
+                    {
 
-                    // Display time
-                    string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
-                        SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
-                    this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I001DataItems[CAT01.ItemIDToIndex("010")].value;
 
-                    // Display Data
-                    CAT01I090Types.CAT01I090FlightLevelUserData MyData = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.I001DataItems[CAT01.ItemIDToIndex("090")].value;
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Validated.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Garbled.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.FlightLevel.ToString());
-                    this.listBoxMainDataBox.Items.Add("    ");
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+
+                        // Display Data
+                        CAT01I090Types.CAT01I090FlightLevelUserData MyData = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.I001DataItems[CAT01.ItemIDToIndex("090")].value;
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Validated.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Garbled.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.FlightLevel.ToString());
+                        this.listBoxMainDataBox.Items.Add("    ");
+                    }
                 }
             }
             else
@@ -359,19 +383,23 @@ namespace MulticastingUDP
                 // Here determine the flag indicating what data is to be shown
                 foreach (MainASTERIXDataStorage.CAT01Data Msg in MainASTERIXDataStorage.CAT01Message)
                 {
-                    SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I001DataItems[CAT01.ItemIDToIndex("010")].value;
+                    if (Msg.I001DataItems[CAT01.ItemIDToIndex("070")].value != null)
+                    {
 
-                    // Display time
-                    string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
-                        SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
-                    this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
-                    CAT01I070Types.CAT01070Mode3UserData MyData = (CAT01I070Types.CAT01070Mode3UserData)Msg.I001DataItems[CAT01.ItemIDToIndex("070")].value;
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I001DataItems[CAT01.ItemIDToIndex("010")].value;
 
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Validated.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Garbled.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Smothed_Or_From_Transponder.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Mode3A_Code.ToString());
-                    this.listBoxMainDataBox.Items.Add("    ");
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+                        CAT01I070Types.CAT01070Mode3UserData MyData = (CAT01I070Types.CAT01070Mode3UserData)Msg.I001DataItems[CAT01.ItemIDToIndex("070")].value;
+
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Validated.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Garbled.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Code_Smothed_Or_From_Transponder.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Mode3A_Code.ToString());
+                        this.listBoxMainDataBox.Items.Add("    ");
+                    }
                 }
             }
             else
@@ -392,20 +420,24 @@ namespace MulticastingUDP
                 // Here determine the flag indicating what data is to be shown
                 foreach (MainASTERIXDataStorage.CAT01Data Msg in MainASTERIXDataStorage.CAT01Message)
                 {
-                    SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I001DataItems[CAT01.ItemIDToIndex("010")].value;
+                    if (Msg.I001DataItems[CAT01.ItemIDToIndex("040")].value != null)
+                    {
 
-                    // Display time
-                    string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
-                        SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
-                    this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I001DataItems[CAT01.ItemIDToIndex("010")].value;
 
-                    CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates MyData = (CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates)Msg.I001DataItems[CAT01.ItemIDToIndex("040")].value;
-                    this.listBoxMainDataBox.Items.Add("\tDistance:\t" + MyData.Measured_Distance);
-                    this.listBoxMainDataBox.Items.Add("\tAzimuth:\t" + MyData.Measured_Azimuth.ToString());
-                    string Lat, Lon;
-                    MyData.LatLong.GetDegMinSecStringFormat(out Lat, out Lon);
-                    this.listBoxMainDataBox.Items.Add("\tLat/Long:\t" + Lat + "/" + Lon);
-                    this.listBoxMainDataBox.Items.Add("    ");
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+
+                        CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates MyData = (CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates)Msg.I001DataItems[CAT01.ItemIDToIndex("040")].value;
+                        this.listBoxMainDataBox.Items.Add("\tDistance:\t" + MyData.Measured_Distance);
+                        this.listBoxMainDataBox.Items.Add("\tAzimuth:\t" + MyData.Measured_Azimuth.ToString());
+                        string Lat, Lon;
+                        MyData.LatLong.GetDegMinSecStringFormat(out Lat, out Lon);
+                        this.listBoxMainDataBox.Items.Add("\tLat/Long:\t" + Lat + "/" + Lon);
+                        this.listBoxMainDataBox.Items.Add("    ");
+                    }
                 }
             }
             else
@@ -426,31 +458,34 @@ namespace MulticastingUDP
                 // Here determine the flag indicating what data is to be shown
                 foreach (MainASTERIXDataStorage.CAT01Data Msg in MainASTERIXDataStorage.CAT01Message)
                 {
-                    SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I001DataItems[CAT01.ItemIDToIndex("010")].value;
-
-                    // Display time
-                    string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
-                        SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
-                    this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
-
-                    CAT01I020UserData MyData = (CAT01I020UserData)Msg.I001DataItems[CAT01.ItemIDToIndex("020")].value;
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Type_Of_Report.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Simulated_Or_Actual_Report.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Type_Of_Radar_Detection.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Antena_Source.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Special_Position_Ind.ToString());
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.Data_Is_From_FFT.ToString());
-
-                    if (MyData.Next_Extension_1 == CAT01I020Types.Next_Extension_Type.Yes)
+                    if (Msg.I001DataItems[CAT01.ItemIDToIndex("020")].value != null)
                     {
-                        this.listBoxMainDataBox.Items.Add("  *** Extension fields ***  ");
-                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Is_Test_Target_Indicator.ToString());
-                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Special_SSR_Codes.ToString());
-                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Is_Military_Emergency.ToString());
-                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Is_Military_Identification.ToString());
-                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Next_Extension_2.ToString());
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I001DataItems[CAT01.ItemIDToIndex("010")].value;
+
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+
+                        CAT01I020UserData MyData = (CAT01I020UserData)Msg.I001DataItems[CAT01.ItemIDToIndex("020")].value;
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Type_Of_Report.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Simulated_Or_Actual_Report.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Type_Of_Radar_Detection.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Antena_Source.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Special_Position_Ind.ToString());
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.Data_Is_From_FFT.ToString());
+
+                        if (MyData.Next_Extension_1 == CAT01I020Types.Next_Extension_Type.Yes)
+                        {
+                            this.listBoxMainDataBox.Items.Add("  *** Extension fields ***  ");
+                            this.listBoxMainDataBox.Items.Add("\t" + MyData.Is_Test_Target_Indicator.ToString());
+                            this.listBoxMainDataBox.Items.Add("\t" + MyData.Special_SSR_Codes.ToString());
+                            this.listBoxMainDataBox.Items.Add("\t" + MyData.Is_Military_Emergency.ToString());
+                            this.listBoxMainDataBox.Items.Add("\t" + MyData.Is_Military_Identification.ToString());
+                            this.listBoxMainDataBox.Items.Add("\t" + MyData.Next_Extension_2.ToString());
+                        }
+                        this.listBoxMainDataBox.Items.Add("    ");
                     }
-                    this.listBoxMainDataBox.Items.Add("    ");
                 }
             }
             else
@@ -473,17 +508,21 @@ namespace MulticastingUDP
                 // Here determine the flag indicating what data is to be shown
                 foreach (MainASTERIXDataStorage.CAT02Data Msg in MainASTERIXDataStorage.CAT02Message)
                 {
-                    SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I002DataItems[CAT02.ItemIDToIndex("010")].value;
+                    if (Msg.I002DataItems[CAT02.ItemIDToIndex("000")].value != null)
+                    {
 
-                    // Display time
-                    string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
-                        SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
-                    this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I002DataItems[CAT02.ItemIDToIndex("010")].value;
 
-                    CAT02I000Types.Message_Type MyData = (CAT02I000Types.Message_Type)Msg.I002DataItems[CAT02.ItemIDToIndex("000")].value;
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
 
-                    this.listBoxMainDataBox.Items.Add("\t" + MyData.ToString());
-                    this.listBoxMainDataBox.Items.Add("    ");
+                        CAT02I000Types.Message_Type MyData = (CAT02I000Types.Message_Type)Msg.I002DataItems[CAT02.ItemIDToIndex("000")].value;
+
+                        this.listBoxMainDataBox.Items.Add("\t" + MyData.ToString());
+                        this.listBoxMainDataBox.Items.Add("    ");
+                    }
                 }
             }
             else
@@ -503,17 +542,21 @@ namespace MulticastingUDP
                 // Here determine the flag indicating what data is to be shown
                 foreach (MainASTERIXDataStorage.CAT02Data Msg in MainASTERIXDataStorage.CAT02Message)
                 {
-                    SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I002DataItems[CAT02.ItemIDToIndex("010")].value;
+                    if (Msg.I002DataItems[CAT02.ItemIDToIndex("020")].value != null)
+                    {
 
-                    // Display time
-                    string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
-                        SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
-                    this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I002DataItems[CAT02.ItemIDToIndex("010")].value;
 
-                    double Sector_Number = (double)Msg.I002DataItems[CAT02.ItemIDToIndex("020")].value;
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
 
-                    this.listBoxMainDataBox.Items.Add("\t" + "Sector Number: " + Sector_Number.ToString());
-                    this.listBoxMainDataBox.Items.Add("    ");
+                        double Sector_Number = (double)Msg.I002DataItems[CAT02.ItemIDToIndex("020")].value;
+
+                        this.listBoxMainDataBox.Items.Add("\t" + "Sector Number: " + Sector_Number.ToString());
+                        this.listBoxMainDataBox.Items.Add("    ");
+                    }
                 }
             }
             else
@@ -534,18 +577,22 @@ namespace MulticastingUDP
                 // Here determine the flag indicating what data is to be shown
                 foreach (MainASTERIXDataStorage.CAT02Data Msg in MainASTERIXDataStorage.CAT02Message)
                 {
-                    SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I002DataItems[CAT02.ItemIDToIndex("010")].value;
+                    if (Msg.I002DataItems[CAT02.ItemIDToIndex("010")].value != null)
+                    {
 
-                    // Display time
-                    string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
-                        SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
-                    this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I002DataItems[CAT02.ItemIDToIndex("010")].value;
 
-                    CAT02I030Types.CAT02I030_Time_Of_The_Day_User_Type MyData = (CAT02I030Types.CAT02I030_Time_Of_The_Day_User_Type)Msg.I002DataItems[CAT02.ItemIDToIndex("030")].value;
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
 
-                    
-                    this.listBoxMainDataBox.Items.Add("\t" + "Time of Day: " + MyData.TimeOfDay.ToString());
-                    this.listBoxMainDataBox.Items.Add("    ");
+                        CAT02I030Types.CAT02I030_Time_Of_The_Day_User_Type MyData = (CAT02I030Types.CAT02I030_Time_Of_The_Day_User_Type)Msg.I002DataItems[CAT02.ItemIDToIndex("030")].value;
+
+
+                        this.listBoxMainDataBox.Items.Add("\t" + "Time of Day: " + MyData.TimeOfDay.ToString());
+                        this.listBoxMainDataBox.Items.Add("    ");
+                    }
                 }
             }
             else
@@ -558,6 +605,8 @@ namespace MulticastingUDP
         {
             if (MainASTERIXDataStorage.CAT02Message.Count > 0)
             {
+                
+                
                 this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT01Message[0].I001DataItems[CAT02.ItemIDToIndex("010")].Description);
                 ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT01Message[0].I001DataItems[CAT02.ItemIDToIndex("010")].value;
                 this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
@@ -566,17 +615,21 @@ namespace MulticastingUDP
                 // Here determine the flag indicating what data is to be shown
                 foreach (MainASTERIXDataStorage.CAT02Data Msg in MainASTERIXDataStorage.CAT02Message)
                 {
-                    SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I002DataItems[CAT02.ItemIDToIndex("010")].value;
 
-                    // Display time
-                    string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
-                        SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
-                    this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+                    if (Msg.I002DataItems[CAT02.ItemIDToIndex("041")].value != null)
+                    {
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I002DataItems[CAT02.ItemIDToIndex("010")].value;
 
-                    double Antenna_Rotation_Period = (double)Msg.I002DataItems[CAT02.ItemIDToIndex("041")].value;
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
 
-                    this.listBoxMainDataBox.Items.Add("\t" + "Antenna Rotation Period: " + Antenna_Rotation_Period.ToString());
-                    this.listBoxMainDataBox.Items.Add("    ");
+                        double Antenna_Rotation_Period = (double)Msg.I002DataItems[CAT02.ItemIDToIndex("041")].value;
+
+                        this.listBoxMainDataBox.Items.Add("\t" + "Antenna Rotation Period: " + Antenna_Rotation_Period.ToString());
+                        this.listBoxMainDataBox.Items.Add("    ");
+                    }
                 }
             }
             else

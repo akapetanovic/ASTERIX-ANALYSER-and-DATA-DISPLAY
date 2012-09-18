@@ -364,31 +364,44 @@ namespace MulticastingUDP
             // The four possible FSPEC octets
             BitVector32 FourFSPECOctets = new BitVector32();
 
+            
+            
             while ((DataBufferIndexForThisExtraction) < LengthOfDataBlockInBytes)
             {
-               
-                // Assume that there will be no more than 1000 bytes in one record
+
+                // Assume that there will be no more than 100 bytes in one record
                 byte[] LocalSingleRecordBuffer = new byte[1000];
 
                 Array.Copy(DataBlockBuffer, DataBufferIndexForThisExtraction, LocalSingleRecordBuffer, 0, (LengthOfDataBlockInBytes - DataBufferIndexForThisExtraction));
 
-                // Determine Length of FSPEC fields in bytes
-                FSPEC_Length = ASTERIX.DetermineLenghtOfFSPEC(LocalSingleRecordBuffer);
-
-                // Determine SIC/SAC Index
-                SIC_Index = FSPEC_Length;
-                SAC_Index = SIC_Index + 1;
-
-                //// Extract SIC/SAC Indexes.
-                DataOut[DataOutIndex] = LocalSingleRecordBuffer[SIC_Index].ToString() + '/' + LocalSingleRecordBuffer[SAC_Index].ToString();
-                
                 // Get all four data words, but use only the number specifed 
                 // by the length of FSPEC words
                 FourFSPECOctets = ASTERIX.GetFourFSPECOctets(LocalSingleRecordBuffer);
 
-                // Save of the current data buffer index so it can be used by
-                // Decoder
-                CurrentDataBufferOctalIndex = SAC_Index + 1;
+                // Determine Length of FSPEC fields in bytes
+                FSPEC_Length = ASTERIX.DetermineLenghtOfFSPEC(LocalSingleRecordBuffer);
+
+                // Check wether 010 is present
+                if (FourFSPECOctets[Bit_Ops.Bit7] == true)
+                {
+                    // Determine SIC/SAC Index
+                    SIC_Index = FSPEC_Length;
+                    SAC_Index = SIC_Index + 1;
+
+                    // Extract SIC/SAC Indexes.
+                    DataOut[DataOutIndex] = LocalSingleRecordBuffer[SIC_Index].ToString() + '/' + LocalSingleRecordBuffer[SAC_Index].ToString();
+
+                    // Save of the current data buffer index so it can be used by
+                    // Decoder
+                    CurrentDataBufferOctalIndex = SAC_Index + 1;
+
+                }
+                else
+                {
+                    // Extract SIC/SAC Indexes.
+                    DataOut[DataOutIndex] = "---" + '/' + "---";
+
+                }
 
                 ///////////////////////////////////////////////////////////////////////////
                 // Populate the current SIC/SAC and Time stamp for this meesage

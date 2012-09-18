@@ -169,37 +169,37 @@ namespace MulticastingUDP
                     CAT01I090UserData.DecodeCAT01I090(Data);
                 }
 
-                // I001/141 Truncated Time of Day
+                // I001/141 Truncated Time of Day                           2
                 if (CAT01.I001DataItems[CAT01.ItemIDToIndex("141")].CurrentlyPresent == true)
                 {
                     CAT01I141UserData.DecodeCAT01I141(Data);
                 }
 
-                // I001/130 Radar Plot Characteristics
+                // I001/130 Radar Plot Characteristics                      1+
                 if (CAT01.I001DataItems[CAT01.ItemIDToIndex("130")].CurrentlyPresent == true)
                 {
                     CAT01I130UserData.DecodeCAT01I130(Data);
                 }
 
-                // I001/131 Received Power
+                // I001/131 Received Power                                  1
                 if (CAT01.I001DataItems[CAT01.ItemIDToIndex("131")].CurrentlyPresent == true)
                 {
                     CAT01I131UserData.DecodeCAT01I131(Data);
                 }
 
-                // I001/120 Measured Radial Doppler Speed
+                // I001/120 Measured Radial Doppler Speed                   1
                 if (CAT01.I001DataItems[CAT01.ItemIDToIndex("120")].CurrentlyPresent == true)
                 {
                     CAT01I120UserData.DecodeCAT01I120(Data);
                 }
 
-                // I001/170 Track Status
+                // I001/170 Track Status                                    1+
                 if (CAT01.I001DataItems[CAT01.ItemIDToIndex("170")].CurrentlyPresent == true)
                 {
                     CAT01I170UserData.DecodeCAT01I170(Data);
                 }
 
-                // I001/210 Track Quality
+                // I001/210 Track Quality                                   1+
                 if (CAT01.I001DataItems[CAT01.ItemIDToIndex("210")].CurrentlyPresent == true)
                 {
                     CAT01I210UserData.DecodeCAT01I210(Data);
@@ -207,31 +207,31 @@ namespace MulticastingUDP
 
                 // FX Field Extension Indicator
 
-                // I001/050 Mode-2 Code in Octal Representation
+                // I001/050 Mode-2 Code in Octal Representation             2
                 if (CAT01.I001DataItems[CAT01.ItemIDToIndex("050")].CurrentlyPresent == true)
                 {
                     CAT01I050UserData.DecodeCAT01I050(Data);
                 }
 
-                // I001/080 Mode-3/A Code Confidence Indica
+                // I001/080 Mode-3/A Code Confidence Indicator              2     
                 if (CAT01.I001DataItems[CAT01.ItemIDToIndex("080")].CurrentlyPresent == true)
                 {
                     CAT01I080UserData.DecodeCAT01I080(Data);
                 }
 
-                // I001/100 Mode-C Code and Code Confidence Indicator
+                // I001/100 Mode-C Code and Code Confidence Indicator       4
                 if (CAT01.I001DataItems[CAT01.ItemIDToIndex("100")].CurrentlyPresent == true)
                 {
                     CAT01I100UserData.DecodeCAT01I100(Data);
                 }
 
-                // I001/060 Mode-2 Code Confidence Indicator
+                // I001/060 Mode-2 Code Confidence Indicator                2
                 if (CAT01.I001DataItems[CAT01.ItemIDToIndex("060")].CurrentlyPresent == true)
                 {
                     CAT01I060UserData.DecodeCAT01I060(Data);
                 }
 
-                // I001/030 Warning/Error Conditions
+                // I001/030 Warning/Error Conditions                        1+
                 if (CAT01.I001DataItems[CAT01.ItemIDToIndex("030")].CurrentlyPresent == true)
                 {
                     CAT01I030UserData.DecodeCAT01I030(Data);
@@ -243,7 +243,7 @@ namespace MulticastingUDP
 
                 // FX Field Extension Indicator
 
-                //  I001/150 Presence of X-Pulse
+                //  I001/150 Presence of X-Pulse                            1
                 if (CAT01.I001DataItems[CAT01.ItemIDToIndex("150")].CurrentlyPresent == true)
                 {
                     CAT01I150UserData.DecodeCAT01I150(Data);
