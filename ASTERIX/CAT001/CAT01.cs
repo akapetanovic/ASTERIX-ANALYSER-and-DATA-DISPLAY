@@ -11,9 +11,9 @@ namespace MulticastingUDP
     // (plots and tracks from PSRs, SSRs, MSSRs, excluding Mode S and ground surveillance)
     //
     // PLOT DATA
-    //
-    // 1  I001/010 Data Source Identifier                       2
-    // 2  I001/020 Target Report Descriptor                     1+
+    //2
+    // 2  I001/020 Target Report Descriptor         
+    // 1  I001/010 Data Source Identifier                                   1+
     // 3  I001/040 Measured Position in Polar Coordinates       4
     // 4  I001/070 Mode-3/A Code in Octal Representation        2
     // 5  I001/090 Mode-C Code in Binary Representation         2
@@ -495,6 +495,16 @@ namespace MulticastingUDP
             }
         }
 
+        // Resets all Data Item presence flags toi false
+        private static void Reset_Currently_Present_Flags()
+        {
+            foreach (CAT01DataItem Item in I001DataItems)
+            {
+                Item.CurrentlyPresent = false;
+            }
+
+        }
+
         public static void Intitialize()
         {
             Handle_Type_Of_Report();
@@ -551,7 +561,7 @@ namespace MulticastingUDP
             // The four possible FSPEC octets
             BitVector32 FourFSPECOctets = new BitVector32();
 
-            while ((DataBufferIndexForThisExtraction) < LengthOfDataBlockInBytes)
+            while (DataBufferIndexForThisExtraction < LengthOfDataBlockInBytes)
             {
                 // Assume that there will be no more than 100 bytes in one record
                 byte[] LocalSingleRecordBuffer = new byte[1000];
@@ -564,8 +574,8 @@ namespace MulticastingUDP
 
                 // Determine Length of FSPEC fields in bytes
                 FSPEC_Length = ASTERIX.DetermineLenghtOfFSPEC(LocalSingleRecordBuffer);
-                
-                // Check wether 010 is present
+
+                // Check whether 010 is present
                 if (FourFSPECOctets[Bit_Ops.Bit7] == true)
                 {
                     // Determine SIC/SAC Index
@@ -582,24 +592,25 @@ namespace MulticastingUDP
                     //Call method to determine the type of the report 
                     // that has been received, (plot or track)
                     Determine_Type_Of_Report(LocalSingleRecordBuffer, CurrentDataBufferOctalIndex);
+
+                    ///////////////////////////////////////////////////////////////////////////
+                    // Populate the current SIC/SAC and Time stamp for this meesage
+                    //
+                    I001DataItems[ItemIDToIndex("010")].value =
+                        new ASTERIX.SIC_SAC_Time(LocalSingleRecordBuffer[SIC_Index], LocalSingleRecordBuffer[SAC_Index], ASTERIX.TimeOfReception);
                 }
                 else
                 {
                     // Extract SIC/SAC Indexes.
                     DataOut[DataOutIndex] = "---" + '/' + "---";
-
                     CurrentDataBufferOctalIndex = FSPEC_Length;
-                    
+
                     //Call method to determine the type of the report 
                     // that has been received, (plot or track)
-                    Determine_Type_Of_Report(LocalSingleRecordBuffer, CurrentDataBufferOctalIndex + 1);
+                    Determine_Type_Of_Report(LocalSingleRecordBuffer, CurrentDataBufferOctalIndex);
                 }
-                
-                ///////////////////////////////////////////////////////////////////////////
-                // Populate the current SIC/SAC and Time stamp for this meesage
-                //
-                I001DataItems[ItemIDToIndex("010")].value =
-                    new ASTERIX.SIC_SAC_Time(LocalSingleRecordBuffer[SIC_Index], LocalSingleRecordBuffer[SAC_Index], ASTERIX.TimeOfReception);
+
+                Reset_Currently_Present_Flags();
 
                 // Loop for each FSPEC and determine what data item is present
                 for (int FSPEC_Index = 1; FSPEC_Index <= FSPEC_Length; FSPEC_Index++)
@@ -618,10 +629,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("010")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  010:F";
-                                    I001DataItems[ItemIDToIndex("010")].CurrentlyPresent = false;
-                                }
 
                                 // 020 Target Report Descriptor
                                 if (FourFSPECOctets[Bit_Ops.Bit6] == true)
@@ -630,12 +638,8 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("020")].HasBeenPresent = true;
                                     I001DataItems[ItemIDToIndex("020")].CurrentlyPresent = true;
                                 }
-
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  020:F";
-                                    I001DataItems[ItemIDToIndex("020")].CurrentlyPresent = false;
-                                }
 
                                 // I001/040 Measured Position in Polar Coordinates
                                 if (FourFSPECOctets[Bit_Ops.Bit5] == true)
@@ -645,10 +649,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("040")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  040:F";
-                                    I001DataItems[ItemIDToIndex("040")].CurrentlyPresent = false;
-                                }
 
                                 // I001/070 Mode-3/A Code in Octal Representation 
                                 if (FourFSPECOctets[Bit_Ops.Bit4] == true)
@@ -658,10 +659,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("070")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  070:F";
-                                    I001DataItems[ItemIDToIndex("070")].CurrentlyPresent = false;
-                                }
 
                                 // I001/090 Mode-C Code in Binary Representation
                                 if (FourFSPECOctets[Bit_Ops.Bit3] == true)
@@ -671,10 +669,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("090")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  090:F";
-                                    I001DataItems[ItemIDToIndex("090")].CurrentlyPresent = false;
-                                }
 
                                 // I001/130 Radar Plot Characteristics 
                                 if (FourFSPECOctets[Bit_Ops.Bit2] == true)
@@ -684,10 +679,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("130")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  130:F";
-                                    I001DataItems[ItemIDToIndex("130")].CurrentlyPresent = false;
-                                }
 
                                 // I001/141 Truncated Time of Day 
                                 if (FourFSPECOctets[Bit_Ops.Bit1] == true)
@@ -697,13 +689,9 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("141")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  141:F";
-                                    I001DataItems[ItemIDToIndex("141")].CurrentlyPresent = false;
-                                }
 
                                 break;
-
                             case 2:
 
                                 // I001/050 Mode-2 Code in Octal Representation
@@ -714,10 +702,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("050")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  050:F";
-                                    I001DataItems[ItemIDToIndex("050")].CurrentlyPresent = false;
-                                }
 
                                 // I001/120 Measured Radial Doppler Speed  
                                 if (FourFSPECOctets[Bit_Ops.Bit14] == true)
@@ -727,10 +712,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("120")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  120:F";
-                                    I001DataItems[ItemIDToIndex("120")].CurrentlyPresent = false;
-                                }
 
                                 // I001/131 Received Power  
                                 if (FourFSPECOctets[Bit_Ops.Bit13] == true)
@@ -740,10 +722,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("131")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  131:F";
-                                    I001DataItems[ItemIDToIndex("131")].CurrentlyPresent = false;
-                                }
 
                                 // I001/080 Mode-3/A Code Confidence Indicator
                                 if (FourFSPECOctets[Bit_Ops.Bit12] == true)
@@ -753,10 +732,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("080")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  080:F";
-                                    I001DataItems[ItemIDToIndex("080")].CurrentlyPresent = false;
-                                }
 
                                 // I001/100 Mode-C Code and Code Confidence Indicator
                                 if (FourFSPECOctets[Bit_Ops.Bit11] == true)
@@ -766,10 +742,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("100")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  100:F";
-                                    I001DataItems[ItemIDToIndex("100")].CurrentlyPresent = false;
-                                }
 
                                 // I001/060 Mode-2 Code Confidence Indicator
                                 if (FourFSPECOctets[Bit_Ops.Bit10] == true)
@@ -779,10 +752,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("060")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  060:F";
-                                    I001DataItems[ItemIDToIndex("060")].CurrentlyPresent = false;
-                                }
 
                                 //  I001/030 Warning/Error Conditions
                                 if (FourFSPECOctets[Bit_Ops.Bit9] == true)
@@ -792,13 +762,9 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("030")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  030:F";
-                                    I001DataItems[ItemIDToIndex("030")].CurrentlyPresent = false;
-                                }
 
                                 break;
-
                             case 3:
 
                                 // I001/150 Presence of X-Pulse
@@ -809,10 +775,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("150")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  150:F";
-                                    I001DataItems[ItemIDToIndex("150")].CurrentlyPresent = false;
-                                }
 
                                 break;
 
@@ -837,10 +800,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("010")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  010:F";
-                                    I001DataItems[ItemIDToIndex("010")].CurrentlyPresent = false;
-                                }
 
                                 // 020 Target Report Descriptor
                                 if (FourFSPECOctets[Bit_Ops.Bit6] == true)
@@ -850,10 +810,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("020")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  020:F";
-                                    I001DataItems[ItemIDToIndex("020")].CurrentlyPresent = false;
-                                }
 
                                 // 161 Track/Plot Number
                                 if (FourFSPECOctets[Bit_Ops.Bit5] == true)
@@ -863,10 +820,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("161")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  161:F";
-                                    I001DataItems[ItemIDToIndex("161")].CurrentlyPresent = false;
-                                }
 
                                 // 040 Measured Position in Polar Coordinates
                                 if (FourFSPECOctets[Bit_Ops.Bit4] == true)
@@ -876,10 +830,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("040")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  040:F";
-                                    I001DataItems[ItemIDToIndex("040")].CurrentlyPresent = false;
-                                }
 
                                 // 042 Calculated Position in Cartesian Coordinates
                                 if (FourFSPECOctets[Bit_Ops.Bit3] == true)
@@ -889,10 +840,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("042")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  042:F";
-                                    I001DataItems[ItemIDToIndex("042")].CurrentlyPresent = false;
-                                }
 
                                 // 200 Calculated Track Velocity in polar Coordinates
                                 if (FourFSPECOctets[Bit_Ops.Bit2] == true)
@@ -902,10 +850,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("200")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  200:F";
-                                    I001DataItems[ItemIDToIndex("200")].CurrentlyPresent = false;
-                                }
 
                                 // 070 Mode-3/A Code in Octal Representation 
                                 if (FourFSPECOctets[Bit_Ops.Bit1] == true)
@@ -915,13 +860,9 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("070")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  070:F";
-                                    I001DataItems[ItemIDToIndex("070")].CurrentlyPresent = false;
-                                }
 
                                 break;
-
                             case 2:
 
                                 // 090 Mode-C Code in Binary Representation
@@ -932,10 +873,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("090")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  090:F";
-                                    I001DataItems[ItemIDToIndex("090")].CurrentlyPresent = false;
-                                }
 
                                 // 141 Truncated Time of Day
                                 if (FourFSPECOctets[Bit_Ops.Bit14] == true)
@@ -945,10 +883,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("141")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  141:F";
-                                    I001DataItems[ItemIDToIndex("141")].CurrentlyPresent = false;
-                                }
 
                                 // 130 Radar Plot Characteristics
                                 if (FourFSPECOctets[Bit_Ops.Bit13] == true)
@@ -958,10 +893,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("130")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  130:F";
-                                    I001DataItems[ItemIDToIndex("130")].CurrentlyPresent = false;
-                                }
 
                                 // 131 Received Power
                                 if (FourFSPECOctets[Bit_Ops.Bit12] == true)
@@ -971,10 +903,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("131")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  131:F";
-                                    I001DataItems[ItemIDToIndex("131")].CurrentlyPresent = false;
-                                }
 
                                 // 120 Measured Radial Doppler Speed
                                 if (FourFSPECOctets[Bit_Ops.Bit11] == true)
@@ -984,10 +913,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("120")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  120:F";
-                                    I001DataItems[ItemIDToIndex("120")].CurrentlyPresent = false;
-                                }
 
                                 // 170 Track Status
                                 if (FourFSPECOctets[Bit_Ops.Bit10] == true)
@@ -997,10 +923,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("170")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  170:F";
-                                    I001DataItems[ItemIDToIndex("170")].CurrentlyPresent = false;
-                                }
 
                                 //  210 Track Quality
                                 if (FourFSPECOctets[Bit_Ops.Bit9] == true)
@@ -1010,13 +933,9 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("210")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  210:F";
-                                    I001DataItems[ItemIDToIndex("210")].CurrentlyPresent = false;
-                                }
 
                                 break;
-
                             case 3:
 
                                 // 050 Mode-2 Code in Octal Representation
@@ -1027,10 +946,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("050")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  050:F";
-                                    I001DataItems[ItemIDToIndex("050")].CurrentlyPresent = false;
-                                }
 
                                 //  080 Mode-3/A Code Confidence Indica
                                 if (FourFSPECOctets[Bit_Ops.Bit22] == true)
@@ -1040,10 +956,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("080")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  080:F";
-                                    I001DataItems[ItemIDToIndex("080")].CurrentlyPresent = false;
-                                }
 
                                 //  100 Mode-C Code and Code Confidence Indicator
                                 if (FourFSPECOctets[Bit_Ops.Bit21] == true)
@@ -1053,10 +966,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("100")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  100:F";
-                                    I001DataItems[ItemIDToIndex("100")].CurrentlyPresent = false;
-                                }
 
                                 //  060 Mode-2 Code Confidence Indicator
                                 if (FourFSPECOctets[Bit_Ops.Bit20] == true)
@@ -1066,10 +976,7 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("060")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  060:F";
-                                    I001DataItems[ItemIDToIndex("060")].CurrentlyPresent = false;
-                                }
 
                                 //  030 Warning/Error Conditions
                                 if (FourFSPECOctets[Bit_Ops.Bit19] == true)
@@ -1079,36 +986,21 @@ namespace MulticastingUDP
                                     I001DataItems[ItemIDToIndex("030")].CurrentlyPresent = true;
                                 }
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  030:F";
-                                    I001DataItems[ItemIDToIndex("030")].CurrentlyPresent = false;
-                                }
 
                                 //  Reserved for Special Purpose Indicator (SP)
                                 if (FourFSPECOctets[Bit_Ops.Bit18] == true)
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  SPI:T";
-
-                                }
-
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  SPI:F";
-                                }
 
                                 //  Reserved for RFS Indicator (RS-bit)
                                 if (FourFSPECOctets[Bit_Ops.Bit17] == true)
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  RSB:T";
-
-                                }
-
                                 else
-                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  RSB:F";
-                                }
-                                break;
 
+                                break;
                             // Handle errors
                             default:
                                 DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  UKN:T";

@@ -47,11 +47,11 @@ namespace MulticastingUDP
 
         public static void CleanUp()
         {
-             // If socket is opened then close it
+            // If socket is opened then close it
             if (sock != null)
                 sock.Close();
         }
-        
+
         // This is to be called by the FrmSettings to re-initialize
         // the socket 
         public static void ReinitializeSocket()
@@ -124,24 +124,35 @@ namespace MulticastingUDP
 
                     if (ThereWasAnException == false)
                     {
-                        //////////////////////////////////////////////////////////////////////////
-                        // Lets first take care of the common ASTERIX data. Once that is done and
-                        // we determine the ASTERIX category received, time of the reception and
-                        // length of the data block (in bytes) we can move on and parse the rest
-                        // of the data based on the category
-                        //////////////////////////////////////////////////////////////////////////
-                        ExtractAndDecodeDataBlock(UDPBuffer);
+
+                        // Extract lenghts
+                        int LengthOfASTERIX_CAT = ASTERIX.ExtractLengthOfDataBlockInBytes_Int(UDPBuffer);
+                        int LenghtOfDataBuffer = UDPBuffer.Length;
+                        int DataBufferIndexForThisExtraction = 0;
+
+                        // Loop through the buffer and pass on each ASTERIX category block to
+                        // the category extractor. The extractor itslef will then extract individual
+                        // data records.
+                        while (DataBufferIndexForThisExtraction < LenghtOfDataBuffer)
+                        {
+                            byte[] LocalSingle_ASTERIX_CAT_Buffer = new byte[LengthOfASTERIX_CAT];              
+                            Array.Copy(UDPBuffer, DataBufferIndexForThisExtraction, LocalSingle_ASTERIX_CAT_Buffer, 0, LengthOfASTERIX_CAT);                           
+                            ExtractAndDecodeASTERIX_CAT_DataBlock(LocalSingle_ASTERIX_CAT_Buffer);
+                            DataBufferIndexForThisExtraction = DataBufferIndexForThisExtraction + LengthOfASTERIX_CAT;
+
+                            if (DataBufferIndexForThisExtraction < LenghtOfDataBuffer)
+                            {
+                                Array.Copy(UDPBuffer, DataBufferIndexForThisExtraction, LocalSingle_ASTERIX_CAT_Buffer, 0, 3);
+                                LengthOfASTERIX_CAT = ASTERIX.ExtractLengthOfDataBlockInBytes_Int(LocalSingle_ASTERIX_CAT_Buffer);
+                            }
+                        }
                     }
                 }
             }
         }
 
-        private static void ExtractAndDecodeDataBlock(byte[] DataBlock)
+        private static void ExtractAndDecodeASTERIX_CAT_DataBlock(byte[] DataBlock)
         {
-            // In some cases users might change IP/Port while call to sock.Recive is active
-            // and in that case we would get some garbage data so guard agains it. Also, if we get
-            // and kind of I/O exception from the socket, do not use the data
-
             // First thing is to store the time of the reception regardless of the category received
             string Time = DateTime.Now.Hour.ToString().PadLeft(2, '0') + ":" + DateTime.Now.Minute.ToString().PadLeft(2, '0') + ":" +
                 DateTime.Now.Second.ToString().PadLeft(2, '0') + ":" + DateTime.Now.Millisecond.ToString().PadLeft(3, '0');
@@ -181,7 +192,7 @@ namespace MulticastingUDP
             string[] MessageData = new string[1000];
 
             byte[] DataBlockNoCATandLEN = new byte[DataBlock.Length - 3];
-            
+
             // Now after we extracted Category and Lenght of the Data Block lets remove the first three octets from the data 
             // buffer and pass it on to individual message handlers to do message decoding
             Array.Copy(DataBlock, 3, DataBlockNoCATandLEN, 0, (DataBlock.Length - 3));
@@ -192,7 +203,7 @@ namespace MulticastingUDP
             int NumOfMsgsDecoded;
             switch (Category)
             {
-                 
+
                 // Monoradar Data Target Reports, from a Radar Surveillance System to an SDPS
                 // (plots and tracks from PSRs, SSRs, MSSRs, excluding Mode S and ground surveillance)
                 case "001":
@@ -232,7 +243,7 @@ namespace MulticastingUDP
                 case "048":
 
                     CAT48 MyCAT48 = new CAT48();
-                   
+
                     MessageData = MyCAT48.Decode(DataBlock, Time, out NumOfMsgsDecoded);
 
                     for (int I = 0; I < NumOfMsgsDecoded; I++)
@@ -242,8 +253,8 @@ namespace MulticastingUDP
                 // System Track Data(next version of Category 030 & 011, also applicable to non-ARTAS systems)
                 case "062":
 
-                     CAT62 MyCAT62 = new CAT62();
-                   
+                    CAT62 MyCAT62 = new CAT62();
+
                     MessageData = MyCAT62.Decode(DataBlock, Time, out NumOfMsgsDecoded);
 
                     for (int I = 0; I < NumOfMsgsDecoded; I++)
@@ -383,10 +394,9 @@ namespace MulticastingUDP
         }
 
         // This method returns the lenght of FSPEC in bytes (8bits). 
-        // The minumum value is 1, and if it is bigger then one byte then 
+        // The minumum value is 1, and if it is bigger than one byte then 
         // bit 8 is set to true to indicate that next byte is also used
         // as FSPEC field. After the last FSPEC field ASTERIX data items begin.
-        // SIC/SAC, etc....
         public static int DetermineLenghtOfFSPEC(byte[] Data)
         {
             // Assume it is 1
@@ -404,8 +414,6 @@ namespace MulticastingUDP
             ////////////////////////////////////////////////////////////////////////
             // Now check for the 8th bit of each FSPEC field. If it is set 
             // to true then the next octet is also FSPEC.
-            // WARNING: However as soon as we find first octet which is not
-            // FSPEC stop looking any further
             if (BO.DWord[Bit_Ops.Bit0] == true)
             {
                 LenghtOfFSPEC++;
@@ -424,21 +432,6 @@ namespace MulticastingUDP
             }
 
             return LenghtOfFSPEC;
-        }
-
-        // Gets the index of the first data item after the SIC/SAC.
-        // Once the index is obtained, it is up to the user to maintain
-        // index depending on the availablity of data items and it size
-        public static int GetIndexToFirstDataItem(byte[] Data)
-        {
-            // Determine Length of FSPEC fields in bytes
-            int FSPEC_Length = ASTERIX.DetermineLenghtOfFSPEC(Data);
-
-            // Determine SIC/SAC Index
-            int SIC_Index = FSPEC_Length;
-            int SAC_Index = SIC_Index + 1;
-
-            return SAC_Index + 1;
         }
 
         /////////////////////////////////////////////////////////////////////////

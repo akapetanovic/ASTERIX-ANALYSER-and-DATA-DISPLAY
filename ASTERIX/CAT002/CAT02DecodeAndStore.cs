@@ -19,9 +19,6 @@ namespace MulticastingUDP
         {
             BitExtractor BE = new BitExtractor();
 
-            // First obtain the index to the first data item in the data buffer
-            int DataIndex = ASTERIX.GetIndexToFirstDataItem(Data);
-
             // I002/000, Message Type                        1
             if (CAT02.I002DataItems[CAT02.ItemIDToIndex("000")].CurrentlyPresent == true)
             {
