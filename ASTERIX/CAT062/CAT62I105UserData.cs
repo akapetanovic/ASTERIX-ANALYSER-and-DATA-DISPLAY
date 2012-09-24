@@ -37,7 +37,7 @@ namespace MulticastingUDP
         private const double POS_FIX_20 = POS_FIX_19 * 2.0;
         private const double POS_FIX_21 = POS_FIX_20 * 2.0;
         private const double POS_FIX_22 = POS_FIX_21 * 2.0;
-        private const double POS_FIX_23 = POS_FIX_21 * 2.0;
+        private const double POS_FIX_23 = POS_FIX_22 * 2.0;
         private const double POS_FIX_24 = POS_FIX_23 * 2.0;
         // 45
         private const double POS_FIX_25 = POS_FIX_24 * 2.0;
@@ -53,86 +53,147 @@ namespace MulticastingUDP
         {
 
             // Get an instance of bit ops
-            Bit_Ops BO_Lon = new Bit_Ops();
+            Bit_Ops BO = new Bit_Ops();
 
-            BO_Lon.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT48.CurrentDataBufferOctalIndex + 8];
-            BO_Lon.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT48.CurrentDataBufferOctalIndex + 7];
-            BO_Lon.DWord[Bit_Ops.Bits16_23_Of_DWord] = Data[CAT48.CurrentDataBufferOctalIndex + 6];
-            BO_Lon.DWord[Bit_Ops.Bits24_31_Of_DWord] = Data[CAT48.CurrentDataBufferOctalIndex + 5];
+            BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 3];
+            BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 2];
+            BO.DWord[Bit_Ops.Bits16_23_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 1];
+            BO.DWord[Bit_Ops.Bits24_31_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
 
+            double Result = 0.0;
+            double Latitude = 0.0;
             double Longitude = 0.0;
+        
             ///////////////////////////////////////////////////////////////////////////////////////
-            if (BO_Lon.DWord[Bit_Ops.Bit0] == true)
-                Longitude = POS_FIX_1;
-            if (BO_Lon.DWord[Bit_Ops.Bit1] == true)
-                Longitude = Longitude + POS_FIX_2;
-            if (BO_Lon.DWord[Bit_Ops.Bit2] == true)
-                Longitude = Longitude + POS_FIX_3;
-            if (BO_Lon.DWord[Bit_Ops.Bit3] == true)
-                Longitude = Longitude + POS_FIX_4;
-            if (BO_Lon.DWord[Bit_Ops.Bit4] == true)
-                Longitude = Longitude + POS_FIX_5;
-            if (BO_Lon.DWord[Bit_Ops.Bit5] == true)
-                Longitude = Longitude + POS_FIX_6;
-            if (BO_Lon.DWord[Bit_Ops.Bit6] == true)
-                Longitude = Longitude + POS_FIX_7;
-            if (BO_Lon.DWord[Bit_Ops.Bit7] == true)
-                Longitude = Longitude + POS_FIX_8;
-            if (BO_Lon.DWord[Bit_Ops.Bit8] == true)
-                Longitude = Longitude + POS_FIX_9;
-            if (BO_Lon.DWord[Bit_Ops.Bit9] == true)
-                Longitude = Longitude + POS_FIX_10;
-            if (BO_Lon.DWord[Bit_Ops.Bit10] == true)
-                Longitude = Longitude + POS_FIX_11;
-            if (BO_Lon.DWord[Bit_Ops.Bit11] == true)
-                Longitude = Longitude + POS_FIX_12;
-            if (BO_Lon.DWord[Bit_Ops.Bit12] == true)
-                Longitude = Longitude + POS_FIX_13;
-            if (BO_Lon.DWord[Bit_Ops.Bit13] == true)
-                Longitude = Longitude + POS_FIX_14;
-            if (BO_Lon.DWord[Bit_Ops.Bit14] == true)
-                Longitude = Longitude + POS_FIX_15;
-            if (BO_Lon.DWord[Bit_Ops.Bit15] == true)
-                Longitude = Longitude + POS_FIX_16;
-            if (BO_Lon.DWord[Bit_Ops.Bit16] == true)
-                Longitude = Longitude + POS_FIX_17;
-            if (BO_Lon.DWord[Bit_Ops.Bit17] == true)
-                Longitude = Longitude + POS_FIX_18;
-            if (BO_Lon.DWord[Bit_Ops.Bit18] == true)
-                Longitude = Longitude + POS_FIX_19;
-            if (BO_Lon.DWord[Bit_Ops.Bit19] == true)
-                Longitude = Longitude + POS_FIX_20;
-            if (BO_Lon.DWord[Bit_Ops.Bit20] == true)
-                Longitude = Longitude + POS_FIX_21;
-            if (BO_Lon.DWord[Bit_Ops.Bit21] == true)
-                Longitude = Longitude + POS_FIX_22;
-            if (BO_Lon.DWord[Bit_Ops.Bit22] == true)
-                Longitude = Longitude + POS_FIX_23;
-            if (BO_Lon.DWord[Bit_Ops.Bit23] == true)
-                Longitude = Longitude + POS_FIX_24;
-            if (BO_Lon.DWord[Bit_Ops.Bit24] == true)
-                Longitude = Longitude + POS_FIX_25;
-            if (BO_Lon.DWord[Bit_Ops.Bit25] == true)
-                Longitude = Longitude + POS_FIX_26;
-            if (BO_Lon.DWord[Bit_Ops.Bit26] == true)
-                Longitude = Longitude + POS_FIX_27;
-            
-            
-            
-            // Get an instance of bit ops
-            Bit_Ops BO_Lat = new Bit_Ops();
+            if (BO.DWord[Bit_Ops.Bit0] == true)
+                Result = POS_FIX_1;
+            if (BO.DWord[Bit_Ops.Bit1] == true)
+                Result = Result + POS_FIX_2;
+            if (BO.DWord[Bit_Ops.Bit2] == true)
+                Result = Result + POS_FIX_3;
+            if (BO.DWord[Bit_Ops.Bit3] == true)
+                Result = Result + POS_FIX_4;
+            if (BO.DWord[Bit_Ops.Bit4] == true)
+                Result = Result + POS_FIX_5;
+            if (BO.DWord[Bit_Ops.Bit5] == true)
+                Result = Result + POS_FIX_6;
+            if (BO.DWord[Bit_Ops.Bit6] == true)
+                Result = Result + POS_FIX_7;
+            if (BO.DWord[Bit_Ops.Bit7] == true)
+                Result = Result + POS_FIX_8;
+            if (BO.DWord[Bit_Ops.Bit8] == true)
+                Result = Result + POS_FIX_9;
+            if (BO.DWord[Bit_Ops.Bit9] == true)
+                Result = Result + POS_FIX_10;
+            if (BO.DWord[Bit_Ops.Bit10] == true)
+                Result = Result + POS_FIX_11;
+            if (BO.DWord[Bit_Ops.Bit11] == true)
+                Result = Result + POS_FIX_12;
+            if (BO.DWord[Bit_Ops.Bit12] == true)
+                Result = Result + POS_FIX_13;
+            if (BO.DWord[Bit_Ops.Bit13] == true)
+                Result = Result + POS_FIX_14;
+            if (BO.DWord[Bit_Ops.Bit14] == true)
+                Result = Result + POS_FIX_15;
+            if (BO.DWord[Bit_Ops.Bit15] == true)
+                Result = Result + POS_FIX_16;
+            if (BO.DWord[Bit_Ops.Bit16] == true)
+                Result = Result + POS_FIX_17;
+            if (BO.DWord[Bit_Ops.Bit17] == true)
+                Result = Result + POS_FIX_18;
+            if (BO.DWord[Bit_Ops.Bit18] == true)
+                Result = Result + POS_FIX_19;
+            if (BO.DWord[Bit_Ops.Bit19] == true)
+                Result = Result + POS_FIX_20;
+            if (BO.DWord[Bit_Ops.Bit20] == true)
+                Result = Result + POS_FIX_21;
+            if (BO.DWord[Bit_Ops.Bit21] == true)
+                Result = Result + POS_FIX_22;
+            if (BO.DWord[Bit_Ops.Bit22] == true)
+                Result = Result + POS_FIX_23;
+            if (BO.DWord[Bit_Ops.Bit23] == true)
+                Result = Result + POS_FIX_24;
+            if (BO.DWord[Bit_Ops.Bit24] == true)
+                Result = Result + POS_FIX_25;
+            if (BO.DWord[Bit_Ops.Bit25] == true)
+                Result = Result + POS_FIX_26;
+            if (BO.DWord[Bit_Ops.Bit26] == true)
+                Result = Result + POS_FIX_27;
 
-            BO_Lat.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT48.CurrentDataBufferOctalIndex + 4];
-            BO_Lat.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT48.CurrentDataBufferOctalIndex + 3];
-            BO_Lat.DWord[Bit_Ops.Bits16_23_Of_DWord] = Data[CAT48.CurrentDataBufferOctalIndex + 2];
-            BO_Lat.DWord[Bit_Ops.Bits24_31_Of_DWord] = Data[CAT48.CurrentDataBufferOctalIndex + 1];
-            
-            
-            
+            Latitude = Result;
+            Result = 0.0;
+
+            BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 7];
+            BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 6];
+            BO.DWord[Bit_Ops.Bits16_23_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 5];
+            BO.DWord[Bit_Ops.Bits24_31_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 4];
+
+            if (BO.DWord[Bit_Ops.Bit0] == true)
+                Result = POS_FIX_1;
+            if (BO.DWord[Bit_Ops.Bit1] == true)
+                Result = Result + POS_FIX_2;
+            if (BO.DWord[Bit_Ops.Bit2] == true)
+                Result = Result + POS_FIX_3;
+            if (BO.DWord[Bit_Ops.Bit3] == true)
+                Result = Result + POS_FIX_4;
+            if (BO.DWord[Bit_Ops.Bit4] == true)
+                Result = Result + POS_FIX_5;
+            if (BO.DWord[Bit_Ops.Bit5] == true)
+                Result = Result + POS_FIX_6;
+            if (BO.DWord[Bit_Ops.Bit6] == true)
+                Result = Result + POS_FIX_7;
+            if (BO.DWord[Bit_Ops.Bit7] == true)
+                Result = Result + POS_FIX_8;
+            if (BO.DWord[Bit_Ops.Bit8] == true)
+                Result = Result + POS_FIX_9;
+            if (BO.DWord[Bit_Ops.Bit9] == true)
+                Result = Result + POS_FIX_10;
+            if (BO.DWord[Bit_Ops.Bit10] == true)
+                Result = Result + POS_FIX_11;
+            if (BO.DWord[Bit_Ops.Bit11] == true)
+                Result = Result + POS_FIX_12;
+            if (BO.DWord[Bit_Ops.Bit12] == true)
+                Result = Result + POS_FIX_13;
+            if (BO.DWord[Bit_Ops.Bit13] == true)
+                Result = Result + POS_FIX_14;
+            if (BO.DWord[Bit_Ops.Bit14] == true)
+                Result = Result + POS_FIX_15;
+            if (BO.DWord[Bit_Ops.Bit15] == true)
+                Result = Result + POS_FIX_16;
+            if (BO.DWord[Bit_Ops.Bit16] == true)
+                Result = Result + POS_FIX_17;
+            if (BO.DWord[Bit_Ops.Bit17] == true)
+                Result = Result + POS_FIX_18;
+            if (BO.DWord[Bit_Ops.Bit18] == true)
+                Result = Result + POS_FIX_19;
+            if (BO.DWord[Bit_Ops.Bit19] == true)
+                Result = Result + POS_FIX_20;
+            if (BO.DWord[Bit_Ops.Bit20] == true)
+                Result = Result + POS_FIX_21;
+            if (BO.DWord[Bit_Ops.Bit21] == true)
+                Result = Result + POS_FIX_22;
+            if (BO.DWord[Bit_Ops.Bit22] == true)
+                Result = Result + POS_FIX_23;
+            if (BO.DWord[Bit_Ops.Bit23] == true)
+                Result = Result + POS_FIX_24;
+            if (BO.DWord[Bit_Ops.Bit24] == true)
+                Result = Result + POS_FIX_25;
+            if (BO.DWord[Bit_Ops.Bit25] == true)
+                Result = Result + POS_FIX_26;
+            if (BO.DWord[Bit_Ops.Bit26] == true)
+                Result = Result + POS_FIX_27;
+
+            Longitude = Result;
+
+            GeoCordSystemDegMinSecUtilities.LatLongClass LatLong = new GeoCordSystemDegMinSecUtilities.LatLongClass(Latitude, Longitude);
+
+            //////////////////////////////////////////////////////////////////////////////////
+            // Now assign it to the generic list
+            CAT62.I062DataItems[CAT62.ItemIDToIndex("105")].value = LatLong;
+            //////////////////////////////////////////////////////////////////////////////////
+
             // Increase data buffer index so it ready for the next data item.
             CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 8;
-
-
         }
     }
 }

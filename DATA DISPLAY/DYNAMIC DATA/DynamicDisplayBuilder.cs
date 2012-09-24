@@ -54,8 +54,7 @@ namespace MulticastingUDP
                         // Get Flight Level
                         CAT01I090Types.CAT01I090FlightLevelUserData FlightLevelData = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.I001DataItems[CAT01.ItemIDToIndex("090")].value;
 
-                        
-                        
+
                         TargetType Target = new TargetType();
                         Target.ModeA = Mode3AData.Mode3A_Code;
                         Target.ModeC = FlightLevelData.FlightLevel.ToString();
@@ -79,14 +78,34 @@ namespace MulticastingUDP
                         CAT48I090Types.CAT48I090FlightLevelUserData FlightLevelData = (CAT48I090Types.CAT48I090FlightLevelUserData)Msg.I048DataItems[CAT48.ItemIDToIndex("090")].value;
                         // Get ACID data for Mode-S
                         CAT48I240Types.CAT48I240ACID_Data ACID_Mode_S = (CAT48I240Types.CAT48I240ACID_Data)Msg.I048DataItems[CAT48.ItemIDToIndex("240")].value;
-                        
+
                         TargetType Target = new TargetType();
                         Target.ModeA = Mode3AData.Mode3A_Code;
                         Target.ModeC = FlightLevelData.FlightLevel.ToString();
-                        Target.ACID_Modes = ACID_Mode_S.ACID;
+                        if (ACID_Mode_S != null)
+                        {
+                            Target.ACID_Modes = ACID_Mode_S.ACID;
+                        }
+                        else
+                        {
+                            Target.ACID_Modes = "N/A";
+                        }
                         Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                         Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
                         CurrentTargetList.Add(Target);
+                    }
+                }
+                else if (MainASTERIXDataStorage.CAT62Message.Count > 0)
+                {
+
+                    for (int Start_Idx = 0; Start_Idx < MainASTERIXDataStorage.CAT62Message.Count; Start_Idx++)
+                    {
+                        MainASTERIXDataStorage.CAT62Data Msg = MainASTERIXDataStorage.CAT62Message[Start_Idx];
+                        // Get Lat/Long in decimal
+                        GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.I062DataItems[CAT62.ItemIDToIndex("105")].value;
+                        TargetType Target = new TargetType();
+                        Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
+                        Target.Lon = LatLongData.GetLatLongDecimal().LongitudeDecimal;
                     }
                 }
             }
@@ -130,7 +149,7 @@ namespace MulticastingUDP
                         CAT48I090Types.CAT48I090FlightLevelUserData FlightLevelData = (CAT48I090Types.CAT48I090FlightLevelUserData)Msg.I048DataItems[CAT48.ItemIDToIndex("090")].value;
                         // Get ACID data for Mode-S
                         CAT48I240Types.CAT48I240ACID_Data ACID_Mode_S = (CAT48I240Types.CAT48I240ACID_Data)Msg.I048DataItems[CAT48.ItemIDToIndex("240")].value;
-                        
+
 
                         TargetType Target = new TargetType();
                         Target.ModeA = Mode3AData.Mode3A_Code;
@@ -145,6 +164,23 @@ namespace MulticastingUDP
                         }
                         Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                         Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                        CurrentTargetList.Add(Target);
+                    }
+
+                }
+                else if (MainASTERIXDataStorage.CAT62Message.Count > 0)
+                {
+
+                    for (int Start_Idx = LastDataIndex; Start_Idx < MainASTERIXDataStorage.CAT62Message.Count; Start_Idx++)
+                    {
+                        LastDataIndex++;
+
+                        MainASTERIXDataStorage.CAT62Data Msg = MainASTERIXDataStorage.CAT62Message[Start_Idx];
+                        // Get Lat/Long in decimal
+                        GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.I062DataItems[CAT62.ItemIDToIndex("105")].value;
+                        TargetType Target = new TargetType();
+                        Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
+                        Target.Lon = LatLongData.GetLatLongDecimal().LongitudeDecimal;
                         CurrentTargetList.Add(Target);
                     }
 
