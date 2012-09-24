@@ -363,8 +363,6 @@ namespace MulticastingUDP
 
             // The four possible FSPEC octets
             BitVector32 FourFSPECOctets = new BitVector32();
-
-            
             
             while ((DataBufferIndexForThisExtraction) < LengthOfDataBlockInBytes)
             {
