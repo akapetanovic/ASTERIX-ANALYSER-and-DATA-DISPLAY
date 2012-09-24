@@ -204,7 +204,6 @@ namespace MulticastingUDP
                 MyItem.HasBeenPresent = Item.HasBeenPresent;
                 MyItem.ID = Item.ID;
                 MyItem.value = Item.value;
-
                 CAT62MessageData.I062DataItems.Add(MyItem);
             }
 

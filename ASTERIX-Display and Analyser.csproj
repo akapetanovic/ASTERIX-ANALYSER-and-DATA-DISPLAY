@@ -174,8 +174,10 @@
     <Compile Include="ASTERIX\CAT048\CAT48I060UserData.cs" />
     <Compile Include="ASTERIX\CAT048\CAT48I130UserData.cs" />
     <Compile Include="ASTERIX\CAT048\CAT48I260UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I015Types.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I015UserData.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I070UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I105Types.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I105UserData.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I100UserData.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I185UserData.cs" />
@@ -191,6 +193,7 @@
     <Compile Include="ASTERIX\CAT062\CAT62I136UserData.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I130UserData.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I135UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I390Types.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I390UserData.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I220UserData.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I270UserData.cs" />
