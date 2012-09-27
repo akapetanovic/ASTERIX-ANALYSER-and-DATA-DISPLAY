@@ -17,7 +17,7 @@ namespace AsterixDisplayAnalyser
         // of the user to save the data in a file it desired.
         public static void Do(byte[] Data)
         {
-            SharedData.CAT244Decoded.AppendLine("Test 244");
+           
         }
 
     }

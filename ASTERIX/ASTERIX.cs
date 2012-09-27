@@ -230,7 +230,7 @@ namespace AsterixDisplayAnalyser
                     break;
                 // Monoradar Derived Weather Information
                 case "008":
-                    if (Properties.Settings.Default.CAT_001_Enabled == true)
+                    if (Properties.Settings.Default.CAT_008_Enabled == true)
                     {
                         CAT08 MyCAT08 = new CAT08();
                         Common_Message_Data_String = Common_Message_Data_String + MyCAT08.Decode(DataBlock, Time);
@@ -238,7 +238,7 @@ namespace AsterixDisplayAnalyser
                     break;
                 // Next version of Category 002: PSR Radar, M-SSR Radar, Mode-S Station
                 case "034":
-                    if (Properties.Settings.Default.CAT_001_Enabled == true)
+                    if (Properties.Settings.Default.CAT_034_Enabled == true)
                     {
                         CAT34 MyCAT34 = new CAT34();
                         Common_Message_Data_String = Common_Message_Data_String + MyCAT34.Decode(DataBlock, Time);
@@ -246,7 +246,7 @@ namespace AsterixDisplayAnalyser
                     break;
                 // Next version of Category 001: PSR Radar, M-SSR Radar, Mode-S Station
                 case "048":
-                    if (Properties.Settings.Default.CAT_001_Enabled == true)
+                    if (Properties.Settings.Default.CAT_048_Enabled == true)
                     {
                         CAT48 MyCAT48 = new CAT48();
 
@@ -258,7 +258,7 @@ namespace AsterixDisplayAnalyser
                     break;
                 // System Track Data(next version of Category 030 & 011, also applicable to non-ARTAS systems)
                 case "062":
-                    if (Properties.Settings.Default.CAT_001_Enabled == true)
+                    if (Properties.Settings.Default.CAT_062_Enabled == true)
                     {
                         CAT62 MyCAT62 = new CAT62();
 
@@ -270,7 +270,7 @@ namespace AsterixDisplayAnalyser
                     break;
                 // Sensor Status Messages (SPDS)
                 case "063":
-                    if (Properties.Settings.Default.CAT_001_Enabled == true)
+                    if (Properties.Settings.Default.CAT_063_Enabled == true)
                     {
                         CAT63 MyCAT63 = new CAT63();
                         Common_Message_Data_String = Common_Message_Data_String + MyCAT63.Decode(DataBlock, Time);
@@ -278,7 +278,7 @@ namespace AsterixDisplayAnalyser
                     break;
                 // SDPS Service Status Messages (SDPS)
                 case "065":
-                    if (Properties.Settings.Default.CAT_001_Enabled == true)
+                    if (Properties.Settings.Default.CAT_065_Enabled == true)
                     {
                         CAT65 MyCAT65 = new CAT65();
                         Common_Message_Data_String = Common_Message_Data_String + MyCAT65.Decode(DataBlock, Time);
@@ -286,7 +286,7 @@ namespace AsterixDisplayAnalyser
                     break;
                 // Transmission of Reference Trajectory State Vectors
                 case "244":
-                    if (Properties.Settings.Default.CAT_001_Enabled == true)
+                    if (Properties.Settings.Default.CAT_244_Enabled == true)
                     {
                         CAT244 MyCAT244 = new CAT244();
                         Common_Message_Data_String = Common_Message_Data_String + MyCAT244.Decode(DataBlock, Time);

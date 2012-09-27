@@ -26,7 +26,7 @@ namespace AsterixDisplayAnalyser
             // I065/040, SDPS Configuration and Status
             // I065/050, Service Status Report
 
-            SharedData.CAT065Decoded.AppendLine("Test 065");
+          
         }
 
     }

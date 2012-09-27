@@ -31,7 +31,7 @@ namespace AsterixDisplayAnalyser
             // I008/110, Station Configuration Status  
             // I008/120, Total Number of Items Constituting One Weather Picture  
 
-            SharedData.CAT008Decoded.AppendLine("Test 008");
+            
         }
     }
 }

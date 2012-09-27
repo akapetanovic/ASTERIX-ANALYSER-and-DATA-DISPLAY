@@ -15,7 +15,7 @@ namespace AsterixDisplayAnalyser
         public static int Type_of_Aircraft = Bit_Ops.Bit3;
         public static int Wake_Turbulence_Category = Bit_Ops.Bit2;
         public static int Departure_Airport = Bit_Ops.Bit1;
-        public static int WORD0_FX_Extension_indicator = Bit_Ops.Bit0;
+        public static int WORD0_FX_Extension_Indicator = Bit_Ops.Bit0;
         // WORD 1
         public static int Destination_Airport = Bit_Ops.Bit7;
         public static int Runway_Designation = Bit_Ops.Bit6;

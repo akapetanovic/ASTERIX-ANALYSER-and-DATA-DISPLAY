@@ -18,7 +18,7 @@ namespace AsterixDisplayAnalyser
             //Extract the first octet
             WORD0.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
 
-            if (WORD0.DWord[CAT62I390Types.WORD0_FX_Extension_indicator] == true)
+            if (WORD0.DWord[CAT62I390Types.WORD0_FX_Extension_Indicator] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 1;
                 WORD1.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];

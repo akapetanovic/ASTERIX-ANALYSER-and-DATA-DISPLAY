@@ -25,34 +25,7 @@ namespace AsterixDisplayAnalyser
         // Used to convert feet to meeters
         public  static double FeetToMeeters = 0.3048;
 
-        /////////////////////////////////////////////////////////////////////////
-        // This section contains data buffers for decoded data, for each
-        // category. Once the data is stored, it is up to the user to save
-        // decoded data in a file for later analasis.
-        //
-        // The data is stored in the following format:
-        //
-        // Line 1: CATXXX 
-        // Line 2: DIXXX DIXXX 
-        // Line 2: ----------------------------------
-        // Line 3: DIXXX:Data DIXXX:Data etc
-        // 
-        // Example:  CAT001 
-        //           010 020 ...
-        //           ------------------
-        //           8/34 PRI ...
-        ///////////////////////////////////////////////////////////////////////////
-        public static StringBuilder CAT000Decoded;
-        public static StringBuilder CAT001Decoded;
-        public static StringBuilder CAT002Decoded;
-        public static StringBuilder CAT008Decoded;
-        public static StringBuilder CAT034Decoded;
-        public static StringBuilder CAT048Decoded;
-        public static StringBuilder CAT062Decoded;
-        public static StringBuilder CAT063Decoded;
-        public static StringBuilder CAT065Decoded;
-        public static StringBuilder CAT244Decoded;
-        ///////////////////////////////////////////////////////////////////////////
+        
 
         ///////////////////////////////////////////////////////////////////////////
         //

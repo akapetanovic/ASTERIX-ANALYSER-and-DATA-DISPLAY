@@ -203,6 +203,9 @@
     <Compile Include="ASTERIX\CAT062\CAT62I510UserData.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I5005UserData.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I340UserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I380Types.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I295Types.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I340Types.cs" />
     <Compile Include="CAT_Decoder_Selector.cs">
       <SubType>Form</SubType>
     </Compile>
