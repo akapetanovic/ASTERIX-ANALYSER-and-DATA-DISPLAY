@@ -101,11 +101,15 @@ namespace AsterixDisplayAnalyser
                     for (int Start_Idx = 0; Start_Idx < MainASTERIXDataStorage.CAT62Message.Count; Start_Idx++)
                     {
                         MainASTERIXDataStorage.CAT62Data Msg = MainASTERIXDataStorage.CAT62Message[Start_Idx];
+
+                        CAT62I060Types.CAT62060Mode3UserData Mode3AData = (CAT62I060Types.CAT62060Mode3UserData)Msg.I062DataItems[CAT62.ItemIDToIndex("060")].value;
                         // Get Lat/Long in decimal
                         GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.I062DataItems[CAT62.ItemIDToIndex("105")].value;
                         TargetType Target = new TargetType();
+                        Target.ModeA = Mode3AData.Mode3A_Code;
                         Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
                         Target.Lon = LatLongData.GetLatLongDecimal().LongitudeDecimal;
+                        CurrentTargetList.Add(Target);
                     }
                 }
             }
@@ -176,9 +180,12 @@ namespace AsterixDisplayAnalyser
                         LastDataIndex++;
 
                         MainASTERIXDataStorage.CAT62Data Msg = MainASTERIXDataStorage.CAT62Message[Start_Idx];
+                       
+                        CAT62I060Types.CAT62060Mode3UserData Mode3AData = (CAT62I060Types.CAT62060Mode3UserData)Msg.I062DataItems[CAT62.ItemIDToIndex("060")].value;
                         // Get Lat/Long in decimal
                         GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.I062DataItems[CAT62.ItemIDToIndex("105")].value;
                         TargetType Target = new TargetType();
+                        Target.ModeA = Mode3AData.Mode3A_Code;
                         Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
                         Target.Lon = LatLongData.GetLatLongDecimal().LongitudeDecimal;
                         CurrentTargetList.Add(Target);

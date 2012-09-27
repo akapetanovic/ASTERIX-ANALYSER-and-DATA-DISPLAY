@@ -73,95 +73,95 @@ namespace AsterixDisplayAnalyser
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
             // WORD1
-            if (WORD0.DWord[CAT62I380Types.Trajectory_Intent_Status] == true)
+            if (WORD1.DWord[CAT62I380Types.Trajectory_Intent_Status] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 1;
             }
-            if (WORD0.DWord[CAT62I380Types.Trajectory_Intent_Data] == true)
+            if (WORD1.DWord[CAT62I380Types.Trajectory_Intent_Data] == true)
             {
                 // Repetitive Data Item starting with a one-octet Field Repetition
                 // Indicator (REP) followed by at least one Trajectory Intent Point
                 // comprising fifteen octets
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 16;
             }
-            if (WORD0.DWord[CAT62I380Types.Communications_ACAS] == true)
+            if (WORD1.DWord[CAT62I380Types.Communications_ACAS] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
-            if (WORD0.DWord[CAT62I380Types.Status_Reported_By_ADS_B] == true)
+            if (WORD1.DWord[CAT62I380Types.Status_Reported_By_ADS_B] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
-            if (WORD0.DWord[CAT62I380Types.ACAS_Resolution_Advisory_Report] == true)
+            if (WORD1.DWord[CAT62I380Types.ACAS_Resolution_Advisory_Report] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 7;
             }
-            if (WORD0.DWord[CAT62I380Types.Barometric_Vertical_Rate] == true)
+            if (WORD1.DWord[CAT62I380Types.Barometric_Vertical_Rate] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
-            if (WORD0.DWord[CAT62I380Types.Geometric_Vertical_Rate] == true)
+            if (WORD1.DWord[CAT62I380Types.Geometric_Vertical_Rate] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
             // WORD2
-            if (WORD0.DWord[CAT62I380Types.Roll_Angle] == true)
+            if (WORD2.DWord[CAT62I380Types.Roll_Angle] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
-            if (WORD0.DWord[CAT62I380Types.Track_Angle_Rate] == true)
+            if (WORD2.DWord[CAT62I380Types.Track_Angle_Rate] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
-            if (WORD0.DWord[CAT62I380Types.Track_Angle] == true)
+            if (WORD2.DWord[CAT62I380Types.Track_Angle] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
-            if (WORD0.DWord[CAT62I380Types.Ground_Speed] == true)
+            if (WORD2.DWord[CAT62I380Types.Ground_Speed] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
-            if (WORD0.DWord[CAT62I380Types.Velocity_Uncertainty] == true)
+            if (WORD2.DWord[CAT62I380Types.Velocity_Uncertainty] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 1;
             }
-            if (WORD0.DWord[CAT62I380Types.Meteorological_Data] == true)
+            if (WORD2.DWord[CAT62I380Types.Meteorological_Data] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 8;
             }
-            if (WORD0.DWord[CAT62I380Types.Emitter_Category] == true)
+            if (WORD2.DWord[CAT62I380Types.Emitter_Category] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 1;
             }
             // WORD3
-            if (WORD0.DWord[CAT62I380Types.Position_Data] == true)
+            if (WORD3.DWord[CAT62I380Types.Position_Data] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 6;
             }
-            if (WORD0.DWord[CAT62I380Types.Geometric_Altitude_Data] == true)
+            if (WORD3.DWord[CAT62I380Types.Geometric_Altitude_Data] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
-            if (WORD0.DWord[CAT62I380Types.Position_Uncertainty_Data] == true)
+            if (WORD3.DWord[CAT62I380Types.Position_Uncertainty_Data] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 1;
             }
-            if (WORD0.DWord[CAT62I380Types.Mode_S_MB_Data] == true)
+            if (WORD3.DWord[CAT62I380Types.Mode_S_MB_Data] == true)
             {
                 // Repetitive starting with an one-octet Field Repetition Indicator
                 // (REP) followed by at least one BDS report comprising one seven
                 // octet BDS register and one octet BDS code.
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 9;
             }
-            if (WORD0.DWord[CAT62I380Types.Indicated_Airspeed] == true)
+            if (WORD3.DWord[CAT62I380Types.Indicated_Airspeed] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
-            if (WORD0.DWord[CAT62I380Types.Mach_Number] == true)
+            if (WORD3.DWord[CAT62I380Types.Mach_Number] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
-            if (WORD0.DWord[CAT62I380Types.Barometric_Pressure_Setting] == true)
+            if (WORD3.DWord[CAT62I380Types.Barometric_Pressure_Setting] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }

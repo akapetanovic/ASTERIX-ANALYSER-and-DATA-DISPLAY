@@ -93,6 +93,7 @@ namespace AsterixDisplayAnalyser
         public static void RequestStop()
         {
             _shouldStop = true;
+            sock.Close();
         }
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -113,7 +114,7 @@ namespace AsterixDisplayAnalyser
                     ThereWasAnException = false;
                     try
                     {
-                        // Lets receive data an an array of bytes 
+                        // Lets receive data in an array of bytes 
                         // (an octet, of course composed of 8bits)
                         UDPBuffer = sock.Receive(ref iep);
                     }

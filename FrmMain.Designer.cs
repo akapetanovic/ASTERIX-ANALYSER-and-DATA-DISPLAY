@@ -34,6 +34,7 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectionSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cATDecoderSelectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetDataBufferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cAT001DataItemPresenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -184,7 +185,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tabMainTab = new System.Windows.Forms.TabControl();
-            this.cATDecoderSelectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -246,6 +246,13 @@
             this.colorDialogToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.colorDialogToolStripMenuItem.Text = "Display Attributes";
             this.colorDialogToolStripMenuItem.Click += new System.EventHandler(this.colorDialogToolStripMenuItem_Click);
+            // 
+            // cATDecoderSelectorToolStripMenuItem
+            // 
+            this.cATDecoderSelectorToolStripMenuItem.Name = "cATDecoderSelectorToolStripMenuItem";
+            this.cATDecoderSelectorToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.cATDecoderSelectorToolStripMenuItem.Text = "CAT Decoder Selector";
+            this.cATDecoderSelectorToolStripMenuItem.Click += new System.EventHandler(this.cATDecoderSelectorToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -1535,7 +1542,7 @@
             this.gMapControl.RetryLoadTile = 0;
             this.gMapControl.RoutesEnabled = true;
             this.gMapControl.ShowTileGridLines = false;
-            this.gMapControl.Size = new System.Drawing.Size(1180, 817);
+            this.gMapControl.Size = new System.Drawing.Size(1180, 801);
             this.gMapControl.TabIndex = 0;
             this.gMapControl.Zoom = 0D;
             this.gMapControl.OnMarkerEnter += new GMap.NET.WindowsForms.MarkerEnter(this.gMapControl_OnMarkerEnter);
@@ -1573,7 +1580,7 @@
             this.listBoxManFrame.Location = new System.Drawing.Point(6, 20);
             this.listBoxManFrame.Name = "listBoxManFrame";
             this.listBoxManFrame.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBoxManFrame.Size = new System.Drawing.Size(1315, 797);
+            this.listBoxManFrame.Size = new System.Drawing.Size(1315, 784);
             this.listBoxManFrame.TabIndex = 0;
             this.listBoxManFrame.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -1649,13 +1656,6 @@
             this.tabMainTab.TabIndex = 1;
             this.tabMainTab.SelectedIndexChanged += new System.EventHandler(this.tabMainTab_SelectedIndexChanged);
             this.tabMainTab.SizeChanged += new System.EventHandler(this.tabMainTab_SizeChanged);
-            // 
-            // cATDecoderSelectorToolStripMenuItem
-            // 
-            this.cATDecoderSelectorToolStripMenuItem.Name = "cATDecoderSelectorToolStripMenuItem";
-            this.cATDecoderSelectorToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.cATDecoderSelectorToolStripMenuItem.Text = "CAT Decoder Selector";
-            this.cATDecoderSelectorToolStripMenuItem.Click += new System.EventHandler(this.cATDecoderSelectorToolStripMenuItem_Click);
             // 
             // FormMain
             // 
