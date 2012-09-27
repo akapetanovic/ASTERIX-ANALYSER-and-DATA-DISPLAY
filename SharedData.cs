@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
     public static class SharedData
     {
@@ -53,22 +53,6 @@ namespace MulticastingUDP
         public static StringBuilder CAT065Decoded;
         public static StringBuilder CAT244Decoded;
         ///////////////////////////////////////////////////////////////////////////
-
-        ///////////////////////////////////////////////////////////////////////////
-        // This section contains flags indicating which categories are to be 
-        // decoded. This is implemented so we do not decode messages we are not
-        // interested in.
-        // In the future it is to be incluced in GUI interface.
-        public static bool Decode_CAT000 = false;
-        public static bool Decode_CAT001 = true;
-        public static bool Decode_CAT002 = true;
-        public static bool Decode_CAT008 = false;
-        public static bool Decode_CAT034 = false;
-        public static bool Decode_CAT048 = true;
-        public static bool Decode_CAT062 = true;
-        public static bool Decode_CAT063 = false;
-        public static bool Decode_CAT065 = false;
-        public static bool Decode_CAT244 = false;
 
         ///////////////////////////////////////////////////////////////////////////
         //

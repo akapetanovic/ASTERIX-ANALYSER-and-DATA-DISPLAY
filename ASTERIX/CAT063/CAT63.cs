@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
     class CAT63
     {
@@ -132,25 +132,25 @@ namespace MulticastingUDP
             I063DataItems[ItemIDToIndex("030")].ID = "030";
             I063DataItems[ItemIDToIndex("030")].Description = "Time of Message";
             I063DataItems[ItemIDToIndex("030")].IsPresent = false;
-          
+
             // 4. I063/050 Sensor Identifier  
             I063DataItems.Add(new I063DataItem());
             I063DataItems[ItemIDToIndex("050")].ID = "050";
             I063DataItems[ItemIDToIndex("050")].Description = "Sensor Identifier";
             I063DataItems[ItemIDToIndex("050")].IsPresent = false;
-      
+
             // 5. I063/060 Sensor Configuration and Status 
             I063DataItems.Add(new I063DataItem());
             I063DataItems[ItemIDToIndex("060")].ID = "060";
             I063DataItems[ItemIDToIndex("060")].Description = " Sensor Configuration and Status";
             I063DataItems[ItemIDToIndex("060")].IsPresent = false;
-            
+
             // 6. I063/070 Time Stamping Bias 
             I063DataItems.Add(new I063DataItem());
             I063DataItems[ItemIDToIndex("070")].ID = "070";
             I063DataItems[ItemIDToIndex("070")].Description = "Time Stamping Bias";
             I063DataItems[ItemIDToIndex("070")].IsPresent = false;
-                
+
             // 7. I063/080 SSR/Mode S Range Gain and Bias  
             I063DataItems.Add(new I063DataItem());
             I063DataItems[ItemIDToIndex("080")].ID = "080";
@@ -162,24 +162,24 @@ namespace MulticastingUDP
             I063DataItems[ItemIDToIndex("081")].ID = "081";
             I063DataItems[ItemIDToIndex("081")].Description = "SSR/Mode S Azimuth Bias";
             I063DataItems[ItemIDToIndex("081")].IsPresent = false;
- 
+
             // 9. I063/090 PSR Range Gain and Bias        
             I063DataItems.Add(new I063DataItem());
             I063DataItems[ItemIDToIndex("090")].ID = "090";
             I063DataItems[ItemIDToIndex("090")].Description = "PSR Range Gain and Bias";
             I063DataItems[ItemIDToIndex("090")].IsPresent = false;
-            
+
             // 10. I063/091 PSR Azimuth Bias 
             I063DataItems.Add(new I063DataItem());
             I063DataItems[ItemIDToIndex("091")].ID = "091";
             I063DataItems[ItemIDToIndex("091")].Description = "PSR Azimuth Bias ";
-            I063DataItems[ItemIDToIndex("091")].IsPresent = false;       
-            
+            I063DataItems[ItemIDToIndex("091")].IsPresent = false;
+
             // 11. I063/092 PSR Elevation Bias  
             I063DataItems.Add(new I063DataItem());
             I063DataItems[ItemIDToIndex("092")].ID = "092";
             I063DataItems[ItemIDToIndex("092")].Description = "PSR Elevation Bias";
-            I063DataItems[ItemIDToIndex("092")].IsPresent = false;    
+            I063DataItems[ItemIDToIndex("092")].IsPresent = false;
         }
 
 
@@ -338,12 +338,7 @@ namespace MulticastingUDP
                         break;
                 }
 
-                // Now check if the user requested data to be decoded
-                if (SharedData.Decode_CAT063 == true)
-                {
-                    CAT63DecodeAndStore.Do(Data);
-                }
-
+                CAT63DecodeAndStore.Do(Data);
             }
 
             // Return decoded data

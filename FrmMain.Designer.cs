@@ -1,4 +1,4 @@
-﻿namespace MulticastingUDP
+﻿namespace AsterixDisplayAnalyser
 {
     partial class FormMain
     {
@@ -184,6 +184,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tabMainTab = new System.Windows.Forms.TabControl();
+            this.cATDecoderSelectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -225,7 +226,8 @@
             this.settingsToolStripMenuItem.BackColor = System.Drawing.Color.Black;
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.connectionSettingsToolStripMenuItem,
-            this.colorDialogToolStripMenuItem});
+            this.colorDialogToolStripMenuItem,
+            this.cATDecoderSelectorToolStripMenuItem});
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
@@ -234,14 +236,14 @@
             // connectionSettingsToolStripMenuItem
             // 
             this.connectionSettingsToolStripMenuItem.Name = "connectionSettingsToolStripMenuItem";
-            this.connectionSettingsToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.connectionSettingsToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.connectionSettingsToolStripMenuItem.Text = "Connection Settings";
             this.connectionSettingsToolStripMenuItem.Click += new System.EventHandler(this.connectionSettingsToolStripMenuItem_Click);
             // 
             // colorDialogToolStripMenuItem
             // 
             this.colorDialogToolStripMenuItem.Name = "colorDialogToolStripMenuItem";
-            this.colorDialogToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.colorDialogToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.colorDialogToolStripMenuItem.Text = "Display Attributes";
             this.colorDialogToolStripMenuItem.Click += new System.EventHandler(this.colorDialogToolStripMenuItem_Click);
             // 
@@ -1648,6 +1650,13 @@
             this.tabMainTab.SelectedIndexChanged += new System.EventHandler(this.tabMainTab_SelectedIndexChanged);
             this.tabMainTab.SizeChanged += new System.EventHandler(this.tabMainTab_SizeChanged);
             // 
+            // cATDecoderSelectorToolStripMenuItem
+            // 
+            this.cATDecoderSelectorToolStripMenuItem.Name = "cATDecoderSelectorToolStripMenuItem";
+            this.cATDecoderSelectorToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.cATDecoderSelectorToolStripMenuItem.Text = "CAT Decoder Selector";
+            this.cATDecoderSelectorToolStripMenuItem.Click += new System.EventHandler(this.cATDecoderSelectorToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1847,6 +1856,7 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label lblNumberofTargets;
         private System.Windows.Forms.Label labelTargetCount;
+        private System.Windows.Forms.ToolStripMenuItem cATDecoderSelectorToolStripMenuItem;
     }
 }
 

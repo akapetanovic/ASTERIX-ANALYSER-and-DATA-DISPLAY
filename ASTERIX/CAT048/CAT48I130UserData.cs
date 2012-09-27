@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
     class CAT48I130UserData
     {

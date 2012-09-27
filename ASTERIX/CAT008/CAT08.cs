@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
     class CAT08
     {
@@ -130,7 +130,7 @@ namespace MulticastingUDP
             I008DataItems[ItemIDToIndex("020")].ID = "020";
             I008DataItems[ItemIDToIndex("020")].Description = "Vector Qualifier";
             I008DataItems[ItemIDToIndex("020")].IsPresent = false;
-                              
+
             // 4 /036 Sequence of Cartesian Vectors in SPF Notation 
             I008DataItems.Add(new I008DataItem());
             I008DataItems[ItemIDToIndex("036")].ID = "036";
@@ -142,37 +142,37 @@ namespace MulticastingUDP
             I008DataItems[ItemIDToIndex("034")].ID = "034";
             I008DataItems[ItemIDToIndex("034")].Description = "Sequence of Polar Vectors in SPF Notation";
             I008DataItems[ItemIDToIndex("034")].IsPresent = false;
-    
+
             // 6 /040 Contour Identifier  
             I008DataItems.Add(new I008DataItem());
             I008DataItems[ItemIDToIndex("040")].ID = "040";
             I008DataItems[ItemIDToIndex("040")].Description = "Contour Identifier";
             I008DataItems[ItemIDToIndex("040")].IsPresent = false;
-                          
+
             // 7 /050 Sequence of Contour Points in SPF Notation
             I008DataItems.Add(new I008DataItem());
             I008DataItems[ItemIDToIndex("050")].ID = "050";
             I008DataItems[ItemIDToIndex("050")].Description = "Sequence of Contour Points in SPF Notation";
             I008DataItems[ItemIDToIndex("050")].IsPresent = false;
-  
+
             // 8 /090 Time of Day
             I008DataItems.Add(new I008DataItem());
             I008DataItems[ItemIDToIndex("090")].ID = "090";
             I008DataItems[ItemIDToIndex("090")].Description = "Time of Day";
             I008DataItems[ItemIDToIndex("090")].IsPresent = false;
-                                   
+
             // 9 /100 Processing Status 
             I008DataItems.Add(new I008DataItem());
             I008DataItems[ItemIDToIndex("100")].ID = "100";
             I008DataItems[ItemIDToIndex("100")].Description = "Processing Status";
             I008DataItems[ItemIDToIndex("100")].IsPresent = false;
-                            
+
             // 10 /110 Station Configuration Status 
             I008DataItems.Add(new I008DataItem());
             I008DataItems[ItemIDToIndex("110")].ID = "110";
             I008DataItems[ItemIDToIndex("110")].Description = "Station Configuration Status";
             I008DataItems[ItemIDToIndex("110")].IsPresent = false;
-                 
+
             // 11 /120 Total Number of Items Constituting One Weather Picture 
             I008DataItems.Add(new I008DataItem());
             I008DataItems[ItemIDToIndex("120")].ID = "120";
@@ -183,7 +183,7 @@ namespace MulticastingUDP
             I008DataItems.Add(new I008DataItem());
             I008DataItems[ItemIDToIndex("038")].ID = "038";
             I008DataItems[ItemIDToIndex("038")].Description = "Sequence of Weather Vectors in SPF Notation";
-            I008DataItems[ItemIDToIndex("038")].IsPresent = false; 
+            I008DataItems[ItemIDToIndex("038")].IsPresent = false;
         }
 
 
@@ -333,12 +333,7 @@ namespace MulticastingUDP
                         break;
                 }
 
-                // Now check if the user requested data to be decoded
-                if (SharedData.Decode_CAT008 == true)
-                {
-                    CAT08DecodeAndStore.Do(Data);
-                }
-
+                CAT08DecodeAndStore.Do(Data);
             }
 
             // Return decoded data

@@ -6,7 +6,7 @@ using GMap.NET.WindowsForms;
 using System.Drawing;
 using GMap.NET;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
     class StateBorderDisplay
     {

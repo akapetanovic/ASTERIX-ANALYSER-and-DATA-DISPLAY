@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
     class CAT65
     {   ////////////////////////////////////////////////////////////////////
@@ -234,12 +234,7 @@ namespace MulticastingUDP
                         break;
                 }
 
-                // Now check if the user requested data to be decoded
-                if (SharedData.Decode_CAT065 == true)
-                {
-                    CAT65DecodeAndStore.Do(Data);
-                }
-
+                CAT65DecodeAndStore.Do(Data);
             }
 
             // Return decoded data

@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
 
     // Monoradar Data Target Reports, from a Radar Surveillance System to an SDPS

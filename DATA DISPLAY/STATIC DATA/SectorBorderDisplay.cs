@@ -7,7 +7,7 @@ using System.Drawing;
 using GMap.NET;
 using System.Reflection;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
     class SectorBorderDisplay
     {

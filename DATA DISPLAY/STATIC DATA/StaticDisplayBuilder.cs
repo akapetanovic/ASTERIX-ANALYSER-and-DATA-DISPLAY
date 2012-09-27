@@ -7,12 +7,13 @@ using GMap.NET.WindowsForms;
 using GMap.NET;
 using GMap.NET.MapProviders;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
     class StaticDisplayBuilder
     {
         public static void Build(ref GMapOverlay Overlay)
         {
+            
             if (Properties.Settings.Default.Radars)
                 RadarDisplay.Build(ref Overlay);
 

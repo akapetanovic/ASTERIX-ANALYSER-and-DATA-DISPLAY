@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MulticastingUDP;
+using AsterixDisplayAnalyser;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
     class CAT34DecodeAndStore
     {

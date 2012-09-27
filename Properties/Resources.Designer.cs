@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MulticastingUDP.Properties {
+namespace AsterixDisplayAnalyser.Properties {
     using System;
     
     

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
     // This class is the main data storage for each message type
     // If the user selects an option to store the data, then each 

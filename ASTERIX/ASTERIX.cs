@@ -8,7 +8,7 @@ using System.Net.Sockets;
 using System.Windows.Forms;
 using System.Threading;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
     static class ASTERIX
     {
@@ -135,8 +135,8 @@ namespace MulticastingUDP
                         // data records.
                         while (DataBufferIndexForThisExtraction < LenghtOfDataBuffer)
                         {
-                            byte[] LocalSingle_ASTERIX_CAT_Buffer = new byte[LengthOfASTERIX_CAT];              
-                            Array.Copy(UDPBuffer, DataBufferIndexForThisExtraction, LocalSingle_ASTERIX_CAT_Buffer, 0, LengthOfASTERIX_CAT);                           
+                            byte[] LocalSingle_ASTERIX_CAT_Buffer = new byte[LengthOfASTERIX_CAT];
+                            Array.Copy(UDPBuffer, DataBufferIndexForThisExtraction, LocalSingle_ASTERIX_CAT_Buffer, 0, LengthOfASTERIX_CAT);
                             ExtractAndDecodeASTERIX_CAT_DataBlock(LocalSingle_ASTERIX_CAT_Buffer);
                             DataBufferIndexForThisExtraction = DataBufferIndexForThisExtraction + LengthOfASTERIX_CAT;
 
@@ -207,81 +207,91 @@ namespace MulticastingUDP
                 // Monoradar Data Target Reports, from a Radar Surveillance System to an SDPS
                 // (plots and tracks from PSRs, SSRs, MSSRs, excluding Mode S and ground surveillance)
                 case "001":
+                    if (Properties.Settings.Default.CAT_001_Enabled == true)
+                    {
+                        CAT01 MyCAT01 = new CAT01();
+                        MessageData = MyCAT01.Decode(DataBlock, Time, out NumOfMsgsDecoded);
 
-                    CAT01 MyCAT01 = new CAT01();
-                    MessageData = MyCAT01.Decode(DataBlock, Time, out NumOfMsgsDecoded);
+                        for (int I = 0; I < NumOfMsgsDecoded; I++)
+                            SharedData.DataBox.Items.Add(Common_Message_Data_String + MessageData[I]);
 
-                    for (int I = 0; I < NumOfMsgsDecoded; I++)
-                        SharedData.DataBox.Items.Add(Common_Message_Data_String + MessageData[I]);
+                    }
                     break;
-
                 // Monoradar Service Messages (status, North marker, sector crossing messages)
                 case "002":
+                    if (Properties.Settings.Default.CAT_002_Enabled == true)
+                    {
+                        CAT02 MyCAT02 = new CAT02();
+                        MessageData = MyCAT02.Decode(DataBlock, Time, out NumOfMsgsDecoded);
 
-                    CAT02 MyCAT02 = new CAT02();
-                    MessageData = MyCAT02.Decode(DataBlock, Time, out NumOfMsgsDecoded);
-
-                    for (int I = 0; I < NumOfMsgsDecoded; I++)
-                        SharedData.DataBox.Items.Add(Common_Message_Data_String + MessageData[I]);
+                        for (int I = 0; I < NumOfMsgsDecoded; I++)
+                            SharedData.DataBox.Items.Add(Common_Message_Data_String + MessageData[I]);
+                    }
                     break;
-
                 // Monoradar Derived Weather Information
                 case "008":
-
-                    CAT08 MyCAT08 = new CAT08();
-                    Common_Message_Data_String = Common_Message_Data_String + MyCAT08.Decode(DataBlock, Time);
+                    if (Properties.Settings.Default.CAT_001_Enabled == true)
+                    {
+                        CAT08 MyCAT08 = new CAT08();
+                        Common_Message_Data_String = Common_Message_Data_String + MyCAT08.Decode(DataBlock, Time);
+                    }
                     break;
-
                 // Next version of Category 002: PSR Radar, M-SSR Radar, Mode-S Station
                 case "034":
-
-                    CAT34 MyCAT34 = new CAT34();
-                    Common_Message_Data_String = Common_Message_Data_String + MyCAT34.Decode(DataBlock, Time);
+                    if (Properties.Settings.Default.CAT_001_Enabled == true)
+                    {
+                        CAT34 MyCAT34 = new CAT34();
+                        Common_Message_Data_String = Common_Message_Data_String + MyCAT34.Decode(DataBlock, Time);
+                    }
                     break;
-
                 // Next version of Category 001: PSR Radar, M-SSR Radar, Mode-S Station
                 case "048":
+                    if (Properties.Settings.Default.CAT_001_Enabled == true)
+                    {
+                        CAT48 MyCAT48 = new CAT48();
 
-                    CAT48 MyCAT48 = new CAT48();
+                        MessageData = MyCAT48.Decode(DataBlock, Time, out NumOfMsgsDecoded);
 
-                    MessageData = MyCAT48.Decode(DataBlock, Time, out NumOfMsgsDecoded);
-
-                    for (int I = 0; I < NumOfMsgsDecoded; I++)
-                        SharedData.DataBox.Items.Add(Common_Message_Data_String + MessageData[I]);
+                        for (int I = 0; I < NumOfMsgsDecoded; I++)
+                            SharedData.DataBox.Items.Add(Common_Message_Data_String + MessageData[I]);
+                    }
                     break;
-
                 // System Track Data(next version of Category 030 & 011, also applicable to non-ARTAS systems)
                 case "062":
+                    if (Properties.Settings.Default.CAT_001_Enabled == true)
+                    {
+                        CAT62 MyCAT62 = new CAT62();
 
-                    CAT62 MyCAT62 = new CAT62();
+                        MessageData = MyCAT62.Decode(DataBlock, Time, out NumOfMsgsDecoded);
 
-                    MessageData = MyCAT62.Decode(DataBlock, Time, out NumOfMsgsDecoded);
-
-                    for (int I = 0; I < NumOfMsgsDecoded; I++)
-                        SharedData.DataBox.Items.Add(Common_Message_Data_String + MessageData[I]);
+                        for (int I = 0; I < NumOfMsgsDecoded; I++)
+                            SharedData.DataBox.Items.Add(Common_Message_Data_String + MessageData[I]);
+                    }
                     break;
-
                 // Sensor Status Messages (SPDS)
                 case "063":
-
-                    CAT63 MyCAT63 = new CAT63();
-                    Common_Message_Data_String = Common_Message_Data_String + MyCAT63.Decode(DataBlock, Time);
+                    if (Properties.Settings.Default.CAT_001_Enabled == true)
+                    {
+                        CAT63 MyCAT63 = new CAT63();
+                        Common_Message_Data_String = Common_Message_Data_String + MyCAT63.Decode(DataBlock, Time);
+                    }
                     break;
-
                 // SDPS Service Status Messages (SDPS)
                 case "065":
-
-                    CAT65 MyCAT65 = new CAT65();
-                    Common_Message_Data_String = Common_Message_Data_String + MyCAT65.Decode(DataBlock, Time);
+                    if (Properties.Settings.Default.CAT_001_Enabled == true)
+                    {
+                        CAT65 MyCAT65 = new CAT65();
+                        Common_Message_Data_String = Common_Message_Data_String + MyCAT65.Decode(DataBlock, Time);
+                    }
                     break;
-
                 // Transmission of Reference Trajectory State Vectors
                 case "244":
-
-                    CAT244 MyCAT244 = new CAT244();
-                    Common_Message_Data_String = Common_Message_Data_String + MyCAT244.Decode(DataBlock, Time);
+                    if (Properties.Settings.Default.CAT_001_Enabled == true)
+                    {
+                        CAT244 MyCAT244 = new CAT244();
+                        Common_Message_Data_String = Common_Message_Data_String + MyCAT244.Decode(DataBlock, Time);
+                    }
                     break;
-
                 // Handle unsupported data/categories
                 default:
 

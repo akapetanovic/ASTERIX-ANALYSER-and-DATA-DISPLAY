@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
     /// <summary>
     /// Encapsulation of an ellipsoid, and declaration of common reference ellipsoids.

@@ -203,6 +203,12 @@
     <Compile Include="ASTERIX\CAT062\CAT62I510UserData.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I5005UserData.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I340UserData.cs" />
+    <Compile Include="CAT_Decoder_Selector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CAT_Decoder_Selector.Designer.cs">
+      <DependentUpon>CAT_Decoder_Selector.cs</DependentUpon>
+    </Compile>
     <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\DisplayAttributesPicker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -338,13 +344,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DATA DISPLAY\STATIC DATA\StaticDisplayBuilder.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="Settings1.cs" />
     <Compile Include="ViewDataBySSRCode.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ViewDataBySSRCode.Designer.cs">
       <DependentUpon>ViewDataBySSRCode.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CAT_Decoder_Selector.resx">
+      <DependentUpon>CAT_Decoder_Selector.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DATA DISPLAY\DISPLAY UTILITIES\DisplayAttributesPicker.resx">
       <DependentUpon>DisplayAttributesPicker.cs</DependentUpon>
     </EmbeddedResource>
@@ -429,7 +437,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DOCUMENTATION\Release Notes.txt" />
-    <Content Include="radar.jpg" />
+    <Content Include="Resources\radar.jpg" />
     <Content Include="README.txt" />
     <None Include="Resources\waypoint.jpg" />
   </ItemGroup>

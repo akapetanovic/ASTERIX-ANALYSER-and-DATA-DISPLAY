@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
     public partial class DisplayItemSelection : Form
     {

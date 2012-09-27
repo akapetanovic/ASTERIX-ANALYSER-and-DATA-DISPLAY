@@ -5,7 +5,7 @@ using System.Text;
 using GMap.NET;
 using System.IO;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
     /// <summary>
     /// /////////////////////////////////////////////////////////////////////

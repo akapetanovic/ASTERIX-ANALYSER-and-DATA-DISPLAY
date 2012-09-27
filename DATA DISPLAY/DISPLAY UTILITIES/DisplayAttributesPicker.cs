@@ -10,7 +10,7 @@ using System.Collections;
 using System.Reflection;
 using System.Drawing.Drawing2D;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
     public partial class DisplayAttibutePicker : Form
     {

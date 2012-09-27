@@ -3,23 +3,12 @@ C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA D
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\bin\Debug\Asterix-Display-Analyser.application
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\bin\Debug\Asterix-Display-Analyser.exe
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\bin\Debug\Asterix-Display-Analyser.pdb
-C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\MulticastingUDP.DisplayAttibutePicker.resources
-C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\MulticastingUDP.DisplayItemSelection.resources
-C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\MulticastingUDP.DisplayRightClickOptions.resources
-C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\MulticastingUDP.LabelAttributePicker.resources
-C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\MulticastingUDP.EarthPlotExporter.resources
-C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\MulticastingUDP.FrmDataItemPresence.resources
-C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\MulticastingUDP.FrmDetailedView.resources
-C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\MulticastingUDP.FormMain.resources
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.Properties.Resources.resources
-C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\MulticastingUDP.FrmSettings.resources
-C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\MulticastingUDP.ViewDataBySSRCode.resources
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\ASTERIX-Display and Analyser.csproj.GenerateResource.Cache
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\Asterix-Display-Analyser.exe.manifest
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\Asterix-Display-Analyser.application
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\Asterix-Display-Analyser.exe
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\Asterix-Display-Analyser.pdb
-C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\ASTERIX-Display and Analyser.csprojResolveAssemblyReference.cache
 C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\MulticastingUDP.DisplayAttibutePicker.resources
 C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\MulticastingUDP.DisplayItemSelection.resources
@@ -47,3 +36,14 @@ C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DI
 C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\Asterix-Display-Analyser.application
 C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\Asterix-Display-Analyser.exe
 C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\Asterix-Display-Analyser.pdb
+C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.DisplayAttibutePicker.resources
+C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.DisplayItemSelection.resources
+C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.DisplayRightClickOptions.resources
+C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.LabelAttributePicker.resources
+C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.EarthPlotExporter.resources
+C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmDataItemPresence.resources
+C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmDetailedView.resources
+C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.FormMain.resources
+C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmSettings.resources
+C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.ViewDataBySSRCode.resources
+C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.CAT_Decoder_Selector.resources

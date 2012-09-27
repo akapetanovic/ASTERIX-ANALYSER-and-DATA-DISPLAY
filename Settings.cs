@@ -1,4 +1,4 @@
-﻿namespace MulticastingUDP.Properties {
+﻿namespace AsterixDisplayAnalyser {
     
     
     // This class allows you to handle specific events on the settings class:

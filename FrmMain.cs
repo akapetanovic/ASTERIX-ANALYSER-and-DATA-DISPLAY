@@ -13,7 +13,7 @@ using GMap.NET.WindowsForms;
 using GMap.NET;
 using GMap.NET.MapProviders;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
 
     public partial class FormMain : Form
@@ -1105,6 +1105,12 @@ namespace MulticastingUDP
             ASTERIX.RequestStop();
             ListenForDataThread.Join();
             ASTERIX.CleanUp();
+        }
+
+        private void cATDecoderSelectorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CAT_Decoder_Selector MY_CAT_Decoder_Selector = new CAT_Decoder_Selector();
+            MY_CAT_Decoder_Selector.Show();
         }
     }
 }

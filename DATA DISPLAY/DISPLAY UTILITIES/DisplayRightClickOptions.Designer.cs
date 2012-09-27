@@ -1,4 +1,4 @@
-﻿namespace MulticastingUDP
+﻿namespace AsterixDisplayAnalyser
 {
     partial class DisplayRightClickOptions
     {

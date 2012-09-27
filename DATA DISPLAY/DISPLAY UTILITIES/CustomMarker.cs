@@ -7,7 +7,7 @@ using System.Drawing.Drawing2D;
 using GMap.NET.WindowsForms;
 using GMap.NET;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
     public class GMapMarkerImage : GMap.NET.WindowsForms.GMapMarker
     {

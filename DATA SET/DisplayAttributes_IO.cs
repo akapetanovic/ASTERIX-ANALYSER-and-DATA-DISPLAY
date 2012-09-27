@@ -8,7 +8,7 @@ using System.Drawing.Drawing2D;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
     class Display_Attributes_IO
     {

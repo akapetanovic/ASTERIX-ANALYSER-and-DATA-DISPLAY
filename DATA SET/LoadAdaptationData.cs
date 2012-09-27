@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 
-namespace MulticastingUDP
+namespace AsterixDisplayAnalyser
 {
     class LoadAdaptationData
     {
