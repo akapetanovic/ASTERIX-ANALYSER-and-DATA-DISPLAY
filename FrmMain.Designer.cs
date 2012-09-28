@@ -189,7 +189,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tabMainTab = new System.Windows.Forms.TabControl();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.NorthMarkerTimer = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -1487,6 +1487,7 @@
             this.labelTrackCoastLabel.Size = new System.Drawing.Size(67, 13);
             this.labelTrackCoastLabel.TabIndex = 3;
             this.labelTrackCoastLabel.Text = "Track coast:";
+          
             // 
             // labelDisplayUpdateRate
             // 
@@ -1583,7 +1584,7 @@
             this.gMapControl.CanDragMap = true;
             this.gMapControl.GrayScaleMode = false;
             this.gMapControl.LevelsKeepInMemmory = 5;
-            this.gMapControl.Location = new System.Drawing.Point(139, 6);
+            this.gMapControl.Location = new System.Drawing.Point(186, -29);
             this.gMapControl.MarkersEnabled = true;
             this.gMapControl.MaxZoom = 2;
             this.gMapControl.MinZoom = 2;
@@ -1709,9 +1710,9 @@
             this.tabMainTab.SelectedIndexChanged += new System.EventHandler(this.tabMainTab_SelectedIndexChanged);
             this.tabMainTab.SizeChanged += new System.EventHandler(this.tabMainTab_SizeChanged);
             // 
-            // backgroundWorker1
+            // NorthMarkerTimer
             // 
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            this.NorthMarkerTimer.Tick += new System.EventHandler(this.NorthMarkerTimer_Tick);
             // 
             // FormMain
             // 
@@ -1913,11 +1914,11 @@
         private System.Windows.Forms.Label lblNumberofTargets;
         private System.Windows.Forms.Label labelTargetCount;
         private System.Windows.Forms.ToolStripMenuItem cATDecoderSelectorToolStripMenuItem;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label labelTrackCoast;
         private System.Windows.Forms.Label labelTrackCoastLabel;
         private System.Windows.Forms.TextBox textBox1TrackCoast;
         private System.Windows.Forms.CheckBox checkBoxSyncToNM;
+        private System.Windows.Forms.Timer NorthMarkerTimer;
     }
 }
 

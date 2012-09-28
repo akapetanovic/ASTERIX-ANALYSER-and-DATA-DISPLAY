@@ -39,6 +39,8 @@ namespace AsterixDisplayAnalyser
         GMapMarker currentMarker = null;
         bool isDraggingMarker = false;
 
+        bool North_Marker_Received = false;
+
         public FormMain()
         {
             System.Threading.Thread.Sleep(600);
@@ -70,16 +72,11 @@ namespace AsterixDisplayAnalyser
             this.progressBar1.Style = ProgressBarStyle.Marquee;
             this.progressBar1.MarqueeAnimationSpeed = 100; // 100msec
             this.progressBar1.Visible = false;
-
-            HandlePlotDisplayEnabledChanged();
         }
 
         public void HandleNorthMarkMessage()
         {
-            if (this.checkBoxSyncToNM.Checked == true)
-            {
-                this.backgroundWorker1.RunWorkerAsync();
-            }
+            North_Marker_Received = true;
         }
 
         // This is a timer driven method which will update the main 
@@ -144,6 +141,8 @@ namespace AsterixDisplayAnalyser
             this.checkBoxFLFilter.Checked = Properties.Settings.Default.FL_Filter_Enabled;
             this.numericUpDownUpper.Value = Properties.Settings.Default.FL_Upper;
             this.numericUpDownLower.Value = Properties.Settings.Default.FL_Lower;
+
+            HandlePlotDisplayEnabledChanged();
         }
 
         private void InitializeMap()
@@ -567,9 +566,6 @@ namespace AsterixDisplayAnalyser
                                 MyMarker.ToolTipText = BuildLabelText(Target);
                                 SetLabelAttributes(ref MyMarker);
                                 DinamicOverlay.Markers.Add(MyMarker);
-
-
-
                             }
                         }
                         else // No SSR filter so just display all of them
@@ -580,8 +576,6 @@ namespace AsterixDisplayAnalyser
                             MyMarker.ToolTipText = BuildLabelText(Target);
                             SetLabelAttributes(ref MyMarker);
                             DinamicOverlay.Markers.Add(MyMarker);
-
-
                         }
                     }
                 }
@@ -707,10 +701,12 @@ namespace AsterixDisplayAnalyser
                         this.PlotandTrackDisplayUpdateTimer.Enabled = true;
                         this.textBoxUpdateRate.Enabled = true;
                         this.labelDisplayUpdateRate.Enabled = true;
+                        this.NorthMarkerTimer.Enabled = false;
                     }
                     else
                     {
                         this.PlotandTrackDisplayUpdateTimer.Enabled = false;
+                        this.NorthMarkerTimer.Enabled = true;
                         this.textBoxUpdateRate.Enabled = false;
                         this.labelDisplayUpdateRate.Enabled = false;
                     }
@@ -1133,7 +1129,6 @@ namespace AsterixDisplayAnalyser
         {
             isDraggingMarker = false;
             currentMarker = null;
-
         }
 
         private void gMapControl_OnMarkerEnter(GMapMarker item)
@@ -1166,11 +1161,6 @@ namespace AsterixDisplayAnalyser
             {
                 this.PlotandTrackDisplayUpdateTimer.Enabled = true;
             }
-        }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            Update_PlotTrack_Data();
         }
 
         private void textBox1TrackCoast_KeyPress(object sender, KeyPressEventArgs e)
@@ -1231,6 +1221,14 @@ namespace AsterixDisplayAnalyser
         {
             Properties.Settings.Default.FL_Lower = this.numericUpDownLower.Value;
             Properties.Settings.Default.Save();
+        }
+        private void NorthMarkerTimer_Tick(object sender, EventArgs e)
+        {
+            if (North_Marker_Received == true)
+            {
+                North_Marker_Received = false;
+                Update_PlotTrack_Data(); 
+            }
         }
     }
 }
