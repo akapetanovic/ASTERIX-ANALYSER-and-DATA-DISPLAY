@@ -35,10 +35,10 @@ namespace AsterixDisplayAnalyser
                 {
                     if (Msg.I001DataItems[CAT01.ItemIDToIndex("070")].CurrentlyPresent == true)
                     {
-                    CAT01I070Types.CAT01070Mode3UserData MyData = (CAT01I070Types.CAT01070Mode3UserData)Msg.I001DataItems[CAT01.ItemIDToIndex("070")].value;
-                    int Result;
-                    if (int.TryParse(MyData.Mode3A_Code, out Result) == true)
-                        SSR_Code_Lookup[Result] = true;
+                        CAT01I070Types.CAT01070Mode3UserData MyData = (CAT01I070Types.CAT01070Mode3UserData)Msg.I001DataItems[CAT01.ItemIDToIndex("070")].value;
+                        int Result;
+                        if (int.TryParse(MyData.Mode3A_Code, out Result) == true)
+                            SSR_Code_Lookup[Result] = true;
                     }
                 }
             }
@@ -48,17 +48,27 @@ namespace AsterixDisplayAnalyser
                 {
                     if (Msg.I048DataItems[CAT48.ItemIDToIndex("070")].CurrentlyPresent == true)
                     {
-                    CAT48I070Types.CAT48I070Mode3UserData MyData = (CAT48I070Types.CAT48I070Mode3UserData)Msg.I048DataItems[CAT48.ItemIDToIndex("070")].value;
+                        CAT48I070Types.CAT48I070Mode3UserData MyData = (CAT48I070Types.CAT48I070Mode3UserData)Msg.I048DataItems[CAT48.ItemIDToIndex("070")].value;
 
-                    int Result;
-                    if (int.TryParse(MyData.Mode3A_Code, out Result) == true)
-                        SSR_Code_Lookup[Result] = true;
-                }
+                        int Result;
+                        if (int.TryParse(MyData.Mode3A_Code, out Result) == true)
+                            SSR_Code_Lookup[Result] = true;
+                    }
                 }
             }
-            else
+            else if (MainASTERIXDataStorage.CAT62Message.Count > 0)
             {
+                foreach (MainASTERIXDataStorage.CAT62Data Msg in MainASTERIXDataStorage.CAT62Message)
+                {
+                    if (Msg.I062DataItems[CAT62.ItemIDToIndex("060")].CurrentlyPresent == true)
+                    {
+                        CAT62I060Types.CAT62060Mode3UserData MyData = (CAT62I060Types.CAT62060Mode3UserData)Msg.I062DataItems[CAT62.ItemIDToIndex("060")].value;
 
+                        int Result;
+                        if (int.TryParse(MyData.Mode3A_Code, out Result) == true)
+                            SSR_Code_Lookup[Result] = true;
+                    }
+                }
             }
 
             this.comboBoxSSRCode.Items.Clear();
@@ -79,73 +89,105 @@ namespace AsterixDisplayAnalyser
 
             if (SSR_Code_Lookup.Length > 0)
             {
-     
-            // On load determine what SSR codes are present end populate the combo box
-            if (MainASTERIXDataStorage.CAT01Message.Count > 0)
-            {
-                foreach (MainASTERIXDataStorage.CAT01Data Msg in MainASTERIXDataStorage.CAT01Message)
+
+                // On load determine what SSR codes are present end populate the combo box
+                if (MainASTERIXDataStorage.CAT01Message.Count > 0)
                 {
-                    CAT01I070Types.CAT01070Mode3UserData MyData = (CAT01I070Types.CAT01070Mode3UserData)Msg.I001DataItems[CAT01.ItemIDToIndex("070")].value;
-
-                    if (MyData.Mode3A_Code == this.comboBoxSSRCode.Items[this.comboBoxSSRCode.SelectedIndex].ToString())
+                    foreach (MainASTERIXDataStorage.CAT01Data Msg in MainASTERIXDataStorage.CAT01Message)
                     {
-                        ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I001DataItems[CAT01.ItemIDToIndex("010")].value;
+                        CAT01I070Types.CAT01070Mode3UserData MyData = (CAT01I070Types.CAT01070Mode3UserData)Msg.I001DataItems[CAT01.ItemIDToIndex("070")].value;
 
-                        // Display time
-                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
-                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
-                        this.listBoxDataBySSRCode.Items.Add("Rcvd Time: " + Time);
-                        
-                        CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates PositionData = (CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates)Msg.I001DataItems[CAT01.ItemIDToIndex("040")].value;
-                        this.listBoxDataBySSRCode.Items.Add("\tDistance:\t" + PositionData.Measured_Distance);
-                        this.listBoxDataBySSRCode.Items.Add("\tAzimuth:\t" + PositionData.Measured_Azimuth.ToString());
-                        string Lat, Lon;
-                        PositionData.LatLong.GetDegMinSecStringFormat(out Lat, out Lon);
-                        this.listBoxDataBySSRCode.Items.Add("\tLat/Long:\t" + Lat + "/" + Lon);
+                        if (MyData.Mode3A_Code == this.comboBoxSSRCode.Items[this.comboBoxSSRCode.SelectedIndex].ToString())
+                        {
+                            ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I001DataItems[CAT01.ItemIDToIndex("010")].value;
 
-                        // Display Data
-                        CAT01I090Types.CAT01I090FlightLevelUserData FL_Data = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.I001DataItems[CAT01.ItemIDToIndex("090")].value;
-                        this.listBoxDataBySSRCode.Items.Add("\tMode Validated:\t" + FL_Data.Code_Validated.ToString());
-                        this.listBoxDataBySSRCode.Items.Add("\tMode Garbled:\t" + FL_Data.Code_Garbled.ToString());
-                        this.listBoxDataBySSRCode.Items.Add("\tFL:\t" + FL_Data.FlightLevel.ToString());
-                        this.listBoxDataBySSRCode.Items.Add("    ");
+                            // Display time
+                            string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                                SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                            this.listBoxDataBySSRCode.Items.Add("Rcvd Time: " + Time);
+
+                            CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates PositionData = (CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates)Msg.I001DataItems[CAT01.ItemIDToIndex("040")].value;
+                            this.listBoxDataBySSRCode.Items.Add("\tDistance:\t" + PositionData.Measured_Distance);
+                            this.listBoxDataBySSRCode.Items.Add("\tAzimuth:\t" + PositionData.Measured_Azimuth.ToString());
+                            string Lat, Lon;
+                            PositionData.LatLong.GetDegMinSecStringFormat(out Lat, out Lon);
+                            this.listBoxDataBySSRCode.Items.Add("\tLat/Long:\t" + Lat + "/" + Lon);
+
+                            // Display Data
+                            CAT01I090Types.CAT01I090FlightLevelUserData FL_Data = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.I001DataItems[CAT01.ItemIDToIndex("090")].value;
+                            this.listBoxDataBySSRCode.Items.Add("\tMode Validated:\t" + FL_Data.Code_Validated.ToString());
+                            this.listBoxDataBySSRCode.Items.Add("\tMode Garbled:\t" + FL_Data.Code_Garbled.ToString());
+                            this.listBoxDataBySSRCode.Items.Add("\tFL:\t" + FL_Data.FlightLevel.ToString());
+                            this.listBoxDataBySSRCode.Items.Add("    ");
+                        }
                     }
                 }
-            }
-            else if (MainASTERIXDataStorage.CAT48Message.Count > 0)
-            {
-                foreach (MainASTERIXDataStorage.CAT48Data Msg in MainASTERIXDataStorage.CAT48Message)
+                else if (MainASTERIXDataStorage.CAT48Message.Count > 0)
                 {
-                    CAT48I070Types.CAT48I070Mode3UserData MyData = (CAT48I070Types.CAT48I070Mode3UserData)Msg.I048DataItems[CAT48.ItemIDToIndex("070")].value;
-
-                    if (MyData.Mode3A_Code == this.comboBoxSSRCode.Items[this.comboBoxSSRCode.SelectedIndex].ToString())
+                    foreach (MainASTERIXDataStorage.CAT48Data Msg in MainASTERIXDataStorage.CAT48Message)
                     {
-                        ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I048DataItems[CAT48.ItemIDToIndex("010")].value;
+                        CAT48I070Types.CAT48I070Mode3UserData MyData = (CAT48I070Types.CAT48I070Mode3UserData)Msg.I048DataItems[CAT48.ItemIDToIndex("070")].value;
 
-                        // Display time
-                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
-                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
-                        this.listBoxDataBySSRCode.Items.Add("Rcvd Time: " + Time);
+                        if (MyData.Mode3A_Code == this.comboBoxSSRCode.Items[this.comboBoxSSRCode.SelectedIndex].ToString())
+                        {
+                            ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I048DataItems[CAT48.ItemIDToIndex("010")].value;
 
-                        // Display Data
-                        CAT48I240Types.CAT48I240ACID_Data ACID_String = (CAT48I240Types.CAT48I240ACID_Data)Msg.I048DataItems[CAT48.ItemIDToIndex("240")].value;
-                        this.listBoxDataBySSRCode.Items.Add("\t" + "Callsign:" + ACID_String.ACID);
-                       
-                        CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates PositionData = (CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates)Msg.I048DataItems[CAT48.ItemIDToIndex("040")].value;
-                        this.listBoxDataBySSRCode.Items.Add("\tDistance:\t" + PositionData.Measured_Distance);
-                        this.listBoxDataBySSRCode.Items.Add("\tAzimuth:\t" + PositionData.Measured_Azimuth.ToString());
-                        string Lat, Lon;
-                        PositionData.LatLong.GetDegMinSecStringFormat(out Lat, out Lon);
-                        this.listBoxDataBySSRCode.Items.Add("\tLat/Long:\t" + Lat + "/" + Lon);
-                       
-                        CAT48I090Types.CAT48I090FlightLevelUserData FL_Data = (CAT48I090Types.CAT48I090FlightLevelUserData)Msg.I048DataItems[CAT48.ItemIDToIndex("090")].value;
-                        this.listBoxDataBySSRCode.Items.Add("\tMode Validated:\t" + FL_Data.Code_Validated.ToString());
-                        this.listBoxDataBySSRCode.Items.Add("\tMode Garbled:\t" + FL_Data.Code_Garbled.ToString());
-                        this.listBoxDataBySSRCode.Items.Add("\tFL:\t" + FL_Data.FlightLevel.ToString());
-                        this.listBoxDataBySSRCode.Items.Add("    ");
+                            // Display time
+                            string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                                SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                            this.listBoxDataBySSRCode.Items.Add("Rcvd Time: " + Time);
+
+                            // Display Data
+                            CAT48I240Types.CAT48I240ACID_Data ACID_String = (CAT48I240Types.CAT48I240ACID_Data)Msg.I048DataItems[CAT48.ItemIDToIndex("240")].value;
+                            this.listBoxDataBySSRCode.Items.Add("\t" + "Callsign:" + ACID_String.ACID);
+
+                            CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates PositionData = (CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates)Msg.I048DataItems[CAT48.ItemIDToIndex("040")].value;
+                            this.listBoxDataBySSRCode.Items.Add("\tDistance:\t" + PositionData.Measured_Distance);
+                            this.listBoxDataBySSRCode.Items.Add("\tAzimuth:\t" + PositionData.Measured_Azimuth.ToString());
+                            string Lat, Lon;
+                            PositionData.LatLong.GetDegMinSecStringFormat(out Lat, out Lon);
+                            this.listBoxDataBySSRCode.Items.Add("\tLat/Long:\t" + Lat + "/" + Lon);
+
+                            CAT48I090Types.CAT48I090FlightLevelUserData FL_Data = (CAT48I090Types.CAT48I090FlightLevelUserData)Msg.I048DataItems[CAT48.ItemIDToIndex("090")].value;
+                            this.listBoxDataBySSRCode.Items.Add("\tMode Validated:\t" + FL_Data.Code_Validated.ToString());
+                            this.listBoxDataBySSRCode.Items.Add("\tMode Garbled:\t" + FL_Data.Code_Garbled.ToString());
+                            this.listBoxDataBySSRCode.Items.Add("\tFL:\t" + FL_Data.FlightLevel.ToString());
+                            this.listBoxDataBySSRCode.Items.Add("    ");
+                        }
                     }
                 }
-            }
+                else if (MainASTERIXDataStorage.CAT62Message.Count > 0)
+                {
+                    foreach (MainASTERIXDataStorage.CAT62Data Msg in MainASTERIXDataStorage.CAT62Message)
+                    {
+                        CAT62I060Types.CAT62060Mode3UserData MyData = (CAT62I060Types.CAT62060Mode3UserData)Msg.I062DataItems[CAT62.ItemIDToIndex("060")].value;
+
+                        if (MyData.Mode3A_Code == this.comboBoxSSRCode.Items[this.comboBoxSSRCode.SelectedIndex].ToString())
+                        {
+                            ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.I062DataItems[CAT62.ItemIDToIndex("010")].value;
+
+                            // TIME
+                            string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                                SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                            this.listBoxDataBySSRCode.Items.Add("Rcvd Time: " + Time);
+                            // TRACK NUMBER
+                            int TrackNumber = (int)Msg.I062DataItems[CAT62.ItemIDToIndex("040")].value;
+                            this.listBoxDataBySSRCode.Items.Add("\t" + "TRACK#:" + TrackNumber.ToString());
+                            // CALLSIGN
+                            CAT62I380Types.CAT62I380ACID_Data CAT62I380Data = (CAT62I380Types.CAT62I380ACID_Data)Msg.I062DataItems[CAT62.ItemIDToIndex("380")].value;
+                            this.listBoxDataBySSRCode.Items.Add("\t" + "Callsign:" + CAT62I380Data.ACID.ACID_String);
+                            // POSITION
+                            GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.I062DataItems[CAT62.ItemIDToIndex("105")].value;
+                            string Lat, Lon;
+                            LatLongData.GetDegMinSecStringFormat(out Lat, out Lon);
+                            this.listBoxDataBySSRCode.Items.Add("\tLat/Long:\t" + Lat + "/" + Lon);
+                            // FLIGHT LEVEL
+                            double FlightLevel = (double)Msg.I062DataItems[CAT62.ItemIDToIndex("136")].value;
+                            this.listBoxDataBySSRCode.Items.Add("\tFL:\t" + FlightLevel.ToString());
+                            this.listBoxDataBySSRCode.Items.Add("    ");
+                        }
+                    }
+                }
             }
             else
             {

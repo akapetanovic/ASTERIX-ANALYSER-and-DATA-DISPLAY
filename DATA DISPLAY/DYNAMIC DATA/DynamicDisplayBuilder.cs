@@ -105,8 +105,20 @@ namespace AsterixDisplayAnalyser
                         CAT62I060Types.CAT62060Mode3UserData Mode3AData = (CAT62I060Types.CAT62060Mode3UserData)Msg.I062DataItems[CAT62.ItemIDToIndex("060")].value;
                         // Get Lat/Long in decimal
                         GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.I062DataItems[CAT62.ItemIDToIndex("105")].value;
+                        double FlightLevel = (double)Msg.I062DataItems[CAT62.ItemIDToIndex("136")].value;
+                        CAT62I380Types.CAT62I380ACID_Data CAT62I380Data = (CAT62I380Types.CAT62I380ACID_Data)Msg.I062DataItems[CAT62.ItemIDToIndex("380")].value;
+
                         TargetType Target = new TargetType();
                         Target.ModeA = Mode3AData.Mode3A_Code;
+                        Target.ModeC = FlightLevel.ToString();
+                        if (CAT62I380Data != null)
+                        {
+                            if (CAT62I380Data.ACID.Is_Valid)
+                                Target.ACID_Modes = CAT62I380Data.ACID.ACID_String;
+                            else
+                                Target.ACID_Modes = "N/A";
+                        }
+
                         Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
                         Target.Lon = LatLongData.GetLatLongDecimal().LongitudeDecimal;
                         CurrentTargetList.Add(Target);
@@ -184,8 +196,19 @@ namespace AsterixDisplayAnalyser
                         CAT62I060Types.CAT62060Mode3UserData Mode3AData = (CAT62I060Types.CAT62060Mode3UserData)Msg.I062DataItems[CAT62.ItemIDToIndex("060")].value;
                         // Get Lat/Long in decimal
                         GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.I062DataItems[CAT62.ItemIDToIndex("105")].value;
+                        double FlightLevel = (double)Msg.I062DataItems[CAT62.ItemIDToIndex("136")].value;
+                        CAT62I380Types.CAT62I380ACID_Data CAT62I380Data = (CAT62I380Types.CAT62I380ACID_Data)Msg.I062DataItems[CAT62.ItemIDToIndex("380")].value;
+
                         TargetType Target = new TargetType();
                         Target.ModeA = Mode3AData.Mode3A_Code;
+                        Target.ModeC = FlightLevel.ToString();
+                        if (CAT62I380Data != null)
+                        {
+                            if (CAT62I380Data.ACID.Is_Valid)
+                                Target.ACID_Modes = CAT62I380Data.ACID.ACID_String;
+                            else
+                                Target.ACID_Modes = "N/A";
+                        }
                         Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
                         Target.Lon = LatLongData.GetLatLongDecimal().LongitudeDecimal;
                         CurrentTargetList.Add(Target);

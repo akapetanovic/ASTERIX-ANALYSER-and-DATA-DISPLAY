@@ -77,6 +77,14 @@ namespace AsterixDisplayAnalyser
 
         }
 
+        public void HandleNorthMarkMessage()
+        {
+            if (this.checkBoxSyncToNM.Checked == true)
+            {
+                this.backgroundWorker1.RunWorkerAsync();
+            }
+        }
+
         // This is a timer driven method which will update the main 
         // display box with the currently received data
         private void DataUpdateTimer_Tick(object sender, EventArgs e)
@@ -310,7 +318,7 @@ namespace AsterixDisplayAnalyser
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Asterix Sniffer 1.3 by Amer Kapetanovic\nakapetanovic@gmail.com", "About");
+            MessageBox.Show("Asterix Display/Sniffer 1.4 by Amer Kapetanovic\nakapetanovic@gmail.com", "About");
         }
 
         private void resetDataBufferToolStripMenuItem_Click(object sender, EventArgs e)
@@ -322,7 +330,6 @@ namespace AsterixDisplayAnalyser
                 buttonStopRun.Text = "Stopped";
                 this.progressBar1.Visible = false;
             }
-
 
             // Here reset the data buffer, this will empty data buffer.
             int NumOfItems = listBoxManFrame.Items.Count - 1;
@@ -510,7 +517,6 @@ namespace AsterixDisplayAnalyser
             Update_PlotTrack_Data();
         }
 
-
         private void Update_PlotTrack_Data()
         {
             // First clear all the data from the previous cycle.
@@ -677,11 +683,10 @@ namespace AsterixDisplayAnalyser
         {
             if (this.checkEnableDisplay.Checked == true)
             {
-
-
                 this.checkEnableDisplay.BackColor = Color.Green;
                 this.groupBoxSSRFilter.Enabled = true;
                 this.checkBoxFilterBySSR.Enabled = true;
+                this.checkBoxSyncToNM.Enabled = true;
 
                 if (SharedData.bool_Listen_for_Data == true)
                 {
@@ -699,7 +704,8 @@ namespace AsterixDisplayAnalyser
                 }
 
                 // Start the timer
-                this.PlotandTrackDisplayUpdateTimer.Enabled = true;
+                if (this.checkBoxSyncToNM.Checked == false)
+                    this.PlotandTrackDisplayUpdateTimer.Enabled = true;
 
                 // Call Update_PlotTrack_Data() twice in order to populate the display right
                 // away, then the timer will take over.
@@ -718,6 +724,7 @@ namespace AsterixDisplayAnalyser
                 this.groupBoxUpdateRate.Enabled = false;
                 this.checkBoxFilterBySSR.Enabled = false;
                 this.checkBoxFilterBySSR.Checked = false;
+                this.checkBoxSyncToNM.Enabled = false; ;
 
                 // Stop the timer
                 this.PlotandTrackDisplayUpdateTimer.Enabled = false;
@@ -820,7 +827,19 @@ namespace AsterixDisplayAnalyser
                     if (Msg.I048DataItems[CAT48.ItemIDToIndex("070")].CurrentlyPresent == true)
                     {
                         CAT48I070Types.CAT48I070Mode3UserData MyData = (CAT48I070Types.CAT48I070Mode3UserData)Msg.I048DataItems[CAT48.ItemIDToIndex("070")].value;
-
+                        int Result;
+                        if (int.TryParse(MyData.Mode3A_Code, out Result) == true)
+                            SSR_Code_Lookup[Result] = true;
+                    }
+                }
+            }
+            else if (MainASTERIXDataStorage.CAT62Message.Count > 0)
+            {
+                foreach (MainASTERIXDataStorage.CAT62Data Msg in MainASTERIXDataStorage.CAT62Message)
+                {
+                    if (Msg.I062DataItems[CAT62.ItemIDToIndex("060")].CurrentlyPresent == true)
+                    {
+                        CAT62I060Types.CAT62060Mode3UserData MyData = (CAT62I060Types.CAT62060Mode3UserData)Msg.I062DataItems[CAT62.ItemIDToIndex("060")].value;
                         int Result;
                         if (int.TryParse(MyData.Mode3A_Code, out Result) == true)
                             SSR_Code_Lookup[Result] = true;
@@ -1111,6 +1130,23 @@ namespace AsterixDisplayAnalyser
         {
             CAT_Decoder_Selector MY_CAT_Decoder_Selector = new CAT_Decoder_Selector();
             MY_CAT_Decoder_Selector.Show();
+        }
+
+        private void checkBoxSyncToNM_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBoxSyncToNM.Checked == true)
+            {
+                this.PlotandTrackDisplayUpdateTimer.Enabled = false;
+            }
+            else
+            {
+                this.PlotandTrackDisplayUpdateTimer.Enabled = true;
+            }
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Update_PlotTrack_Data();
         }
     }
 }

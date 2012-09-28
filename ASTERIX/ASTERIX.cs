@@ -108,6 +108,8 @@ namespace AsterixDisplayAnalyser
             // Loop forever
             while (!_shouldStop)
             {
+                
+              
                 // Do something only if user has requested so
                 if (SharedData.bool_Listen_for_Data)
                 {
@@ -139,6 +141,9 @@ namespace AsterixDisplayAnalyser
                             byte[] LocalSingle_ASTERIX_CAT_Buffer = new byte[LengthOfASTERIX_CAT];
                             Array.Copy(UDPBuffer, DataBufferIndexForThisExtraction, LocalSingle_ASTERIX_CAT_Buffer, 0, LengthOfASTERIX_CAT);
                             ExtractAndDecodeASTERIX_CAT_DataBlock(LocalSingle_ASTERIX_CAT_Buffer);
+
+                          
+                            
                             DataBufferIndexForThisExtraction = DataBufferIndexForThisExtraction + LengthOfASTERIX_CAT;
 
                             if (DataBufferIndexForThisExtraction < LenghtOfDataBuffer)

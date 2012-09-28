@@ -43,5 +43,24 @@ namespace AsterixDisplayAnalyser
         public static int Mach_Number = Bit_Ops.Bit2;
         public static int Barometric_Pressure_Setting = Bit_Ops.Bit1;
         public static int WORD3_FX_Extension_Indicator = Bit_Ops.Bit0;
+
+
+        /// <summary>
+        /// ////////////////////////////////////////////////////////////
+        /// // Here define all used data subfileds
+        /// ////////////////////////////////////////////////////////////
+        /// </summary>
+        public class CAT62ACIDType
+        {
+            public string ACID_String = "------";
+            public bool Is_Valid = false;
+        }
+
+        // Encapsulate the whole CAT62I380 data
+        // into one class
+        public class CAT62I380ACID_Data
+        {
+            public CAT62ACIDType ACID = new CAT62ACIDType();
+        }
     }
 }
