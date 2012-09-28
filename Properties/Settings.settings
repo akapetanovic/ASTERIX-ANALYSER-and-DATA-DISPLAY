@@ -41,5 +41,23 @@
     <Setting Name="CAT_244_Enabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="TrackCoast" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="UpdateRate" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4000</Value>
+    </Setting>
+    <Setting Name="DisplayEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FL_Filter_Enabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FL_Upper" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FL_Lower" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">700</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

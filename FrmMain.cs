@@ -70,11 +70,8 @@ namespace AsterixDisplayAnalyser
             this.progressBar1.Style = ProgressBarStyle.Marquee;
             this.progressBar1.MarqueeAnimationSpeed = 100; // 100msec
             this.progressBar1.Visible = false;
-        }
 
-        public static void Intitialize()
-        {
-
+            HandlePlotDisplayEnabledChanged();
         }
 
         public void HandleNorthMarkMessage()
@@ -134,7 +131,19 @@ namespace AsterixDisplayAnalyser
             toolTip1.ShowAlways = false;
             toolTip1.SetToolTip(this.labelTargetCount, "Number of targets since the last update cycle");
 
+            ToolTip toolTip3 = new ToolTip();
+            toolTip3.ShowAlways = false;
+            toolTip3.SetToolTip(this.labelTrackCoastLabel, "Number of update cycles before track is declared as lost");
 
+            ToolTip toolTip4 = new ToolTip();
+            toolTip4.ShowAlways = false;
+            toolTip4.SetToolTip(this.labelTrackCoast, "Number of update cycles before track is declared as lost");
+            this.labelTrackCoast.Text = Properties.Settings.Default.TrackCoast.ToString();
+            this.PlotandTrackDisplayUpdateTimer.Interval = Properties.Settings.Default.UpdateRate;
+            this.checkEnableDisplay.Checked = Properties.Settings.Default.DisplayEnabled;
+            this.checkBoxFLFilter.Checked = Properties.Settings.Default.FL_Filter_Enabled;
+            this.numericUpDownUpper.Value = Properties.Settings.Default.FL_Upper;
+            this.numericUpDownLower.Value = Properties.Settings.Default.FL_Lower;
         }
 
         private void InitializeMap()
@@ -162,7 +171,7 @@ namespace AsterixDisplayAnalyser
             DinamicOverlay = new GMapOverlay(gMapControl, "OverlayOne");
             gMapControl.Overlays.Add(DinamicOverlay);
 
-            this.label9.Text = "Current rate at: " + this.PlotandTrackDisplayUpdateTimer.Interval.ToString() + "ms";
+            this.labelDisplayUpdateRate.Text = "Update rate: " + this.PlotandTrackDisplayUpdateTimer.Interval.ToString() + "ms";
             this.comboBox1.Text = "Plain";
 
             // Now build static display
@@ -683,55 +692,65 @@ namespace AsterixDisplayAnalyser
         {
             if (this.checkEnableDisplay.Checked == true)
             {
-                this.checkEnableDisplay.BackColor = Color.Green;
-                this.groupBoxSSRFilter.Enabled = true;
                 this.checkBoxFilterBySSR.Enabled = true;
-                this.checkBoxSyncToNM.Enabled = true;
+                this.comboBoxSSRFilterBox.Enabled = true;
+                this.textBoxSSRCode.Enabled = true;
+                this.checkEnableDisplay.BackColor = Color.Green;
 
                 if (SharedData.bool_Listen_for_Data == true)
                 {
                     this.checkEnableDisplay.Text = "Live Enabled";
-                    this.groupBoxUpdateRate.Enabled = true;
-                    this.groupBoxUpdateRate.Enabled = true;
-                    this.textBoxUpdateRate.Enabled = true; ;
+                  
+                    // Start the timer if Sync to coast is not set
+                    if (this.checkBoxSyncToNM.Checked == false)
+                    {
+                        this.PlotandTrackDisplayUpdateTimer.Enabled = true;
+                        this.textBoxUpdateRate.Enabled = true;
+                        this.labelDisplayUpdateRate.Enabled = true;
+                    }
+                    else
+                    {
+                        this.PlotandTrackDisplayUpdateTimer.Enabled = false;
+                        this.textBoxUpdateRate.Enabled = false;
+                        this.labelDisplayUpdateRate.Enabled = false;
+                    }
+                  
+                    this.checkBoxSyncToNM.Enabled = true;
+                    this.textBox1TrackCoast.Enabled = true;
                 }
                 else
                 {
                     this.checkEnableDisplay.Text = "Passive Enabled";
-                    this.groupBoxUpdateRate.Enabled = false;
-                    this.groupBoxUpdateRate.Enabled = false;
                     this.textBoxUpdateRate.Enabled = false;
+                    this.checkBoxSyncToNM.Enabled = false;
+                    this.textBox1TrackCoast.Enabled = false;
                 }
 
-                // Start the timer
-                if (this.checkBoxSyncToNM.Checked == false)
-                    this.PlotandTrackDisplayUpdateTimer.Enabled = true;
-
-                // Call Update_PlotTrack_Data() twice in order to populate the display right
-                // away, then the timer will take over.
+                // Call Update_PlotTrack_Data() twice in order 
+                // to populate the display right away, 
+                // then the timer/North Mark will take over.
                 Update_PlotTrack_Data();
                 Update_PlotTrack_Data();
             }
             else
             {
                 FirstCycleDisplayEnabled = true;
-                this.checkEnableDisplay.Text = "Disabled";
-                this.checkEnableDisplay.BackColor = Color.Red;
-                this.checkBoxFilterBySSR.BackColor = Color.Transparent;
+                this.checkBoxFilterBySSR.Enabled = false;
+                this.comboBoxSSRFilterBox.Enabled = false;
                 this.textBoxSSRCode.Enabled = false;
                 this.textBoxUpdateRate.Enabled = false;
-                this.groupBoxSSRFilter.Enabled = false;
-                this.groupBoxUpdateRate.Enabled = false;
-                this.checkBoxFilterBySSR.Enabled = false;
-                this.checkBoxFilterBySSR.Checked = false;
-                this.checkBoxSyncToNM.Enabled = false; ;
-
-                // Stop the timer
-                this.PlotandTrackDisplayUpdateTimer.Enabled = false;
+                this.checkBoxSyncToNM.Enabled = false;
+                this.textBox1TrackCoast.Enabled = false;
+                this.checkEnableDisplay.BackColor = Color.Red;
+                this.checkEnableDisplay.Text = "Disabled";
 
                 // Clear the latest map display
-                DinamicOverlay.Markers.Clear();
+                if (DinamicOverlay != null)
+                    DinamicOverlay.Markers.Clear();
             }
+
+            Properties.Settings.Default.DisplayEnabled = this.checkEnableDisplay.Checked;
+            Properties.Settings.Default.Save();
         }
 
         private void textBoxUpdateRate_KeyPress(object sender, KeyPressEventArgs e)
@@ -746,13 +765,15 @@ namespace AsterixDisplayAnalyser
             {
                 e.Handled = true;
 
-                int UpdateRateinMS = 4000;
+                int UpdateRateinMS = Properties.Settings.Default.UpdateRate;
                 if (int.TryParse(this.textBoxUpdateRate.Text, out UpdateRateinMS) == true)
                 {
                     if (UpdateRateinMS > 0 && UpdateRateinMS < 100001)
                     {
+                        Properties.Settings.Default.UpdateRate = UpdateRateinMS;
+                        Properties.Settings.Default.Save();
                         this.PlotandTrackDisplayUpdateTimer.Interval = UpdateRateinMS;
-                        this.label9.Text = "Current rate at: " + this.PlotandTrackDisplayUpdateTimer.Interval.ToString() + "ms";
+                        this.labelDisplayUpdateRate.Text = "Update rate: " + this.PlotandTrackDisplayUpdateTimer.Interval.ToString() + "ms";
                         this.textBoxUpdateRate.Text = "";
                     }
                     else
@@ -1058,6 +1079,9 @@ namespace AsterixDisplayAnalyser
                 this.checkBoxFLFilter.Text = "Disabled";
                 this.checkBoxFLFilter.BackColor = Color.Transparent;
             }
+
+            Properties.Settings.Default.FL_Filter_Enabled = this.checkBoxFLFilter.Checked;
+            Properties.Settings.Default.Save();
         }
 
         private void tabMainTab_SelectedIndexChanged(object sender, EventArgs e)
@@ -1147,6 +1171,66 @@ namespace AsterixDisplayAnalyser
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Update_PlotTrack_Data();
+        }
+
+        private void textBox1TrackCoast_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            string allowedCharacterSet = "0123456789\b";    	   //Allowed character set
+
+            if (allowedCharacterSet.Contains(e.KeyChar.ToString()))
+            {
+
+            }
+            else if (e.KeyChar.ToString() == "\r")
+            {
+                e.Handled = true;
+
+                int TrackCoastCycle = Properties.Settings.Default.TrackCoast;
+                if (int.TryParse(this.textBox1TrackCoast.Text, out TrackCoastCycle) == true)
+                {
+                    if (TrackCoastCycle > 0 && TrackCoastCycle < 10)
+                    {
+                        Properties.Settings.Default.TrackCoast = TrackCoastCycle;
+                        Properties.Settings.Default.Save();
+                        this.labelTrackCoast.Text = Properties.Settings.Default.TrackCoast.ToString();
+                        this.textBox1TrackCoast.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter an integer in range of 0 to 10");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please enter an integer in range of 0 to 10");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please enter an integer in range of 10 to 10");
+            }
+        }
+
+        private void checkBoxSyncToNM_CheckedChanged_1(object sender, EventArgs e)
+        {
+            HandlePlotDisplayEnabledChanged();
+        }
+
+        private void groupBoxUpdateRate_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDownUpper_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.FL_Upper = this.numericUpDownUpper.Value;
+            Properties.Settings.Default.Save();
+        }
+
+        private void numericUpDownLower_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.FL_Lower = this.numericUpDownLower.Value;
+            Properties.Settings.Default.Save();
         }
     }
 }
