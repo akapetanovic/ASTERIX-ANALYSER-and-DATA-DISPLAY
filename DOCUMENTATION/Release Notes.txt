@@ -75,11 +75,12 @@ Version 1.4
 		380 Aircraft Derived Data
 			Subfield # 2: Target Identification
 
-  5. Improved display handling by addtion option to syn display update to the North Mark message (CAT02 for now). F
-     For CAT62 track is updated by just last received track update (Based on the 040). 
+  5. Improved display handling by adding an option to syn display update to the North Mark message (CAT02 for now). 
+     For CAT62 track is updated only by the last received track update (Based on the CAT062/040). 
 	 
-  6. For Tracks and Plots there is option to define Track Coast cycle (number of update cycle to keep the plot/track on the screen before
-     declaring it lost and removing it). The track/plot is marked as coast by XX.
+  6. For Tracks and Plots there is now an option to define Track Coast cycle (number of update cycles to keep the plot/track on the screen before
+     declaring it lost and removing it). The track/plot is marked as coast by ↘. However, all track/plot updates are buffered and can be visualised
+	 by using the passive display option.
 
 SO FAR THE FOLLOWING DECODERS ARE IMPLEMENTED
 

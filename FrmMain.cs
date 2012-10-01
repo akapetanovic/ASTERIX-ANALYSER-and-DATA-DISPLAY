@@ -48,6 +48,7 @@ namespace AsterixDisplayAnalyser
             InitializeComponent();
 
             SystemAdaptationDataSet.InitializeData();
+            DynamicDisplayBuilder.Initialise();
 
             // Here call constructor 
             // for each ASTERIX type
@@ -137,6 +138,7 @@ namespace AsterixDisplayAnalyser
             toolTip4.SetToolTip(this.labelTrackCoast, "Number of update cycles before track is declared as lost");
             this.labelTrackCoast.Text = Properties.Settings.Default.TrackCoast.ToString();
             this.PlotandTrackDisplayUpdateTimer.Interval = Properties.Settings.Default.UpdateRate;
+            this.labelDisplayUpdateRate.Text = "Update rate: " + this.PlotandTrackDisplayUpdateTimer.Interval.ToString() + "ms";
             this.checkEnableDisplay.Checked = Properties.Settings.Default.DisplayEnabled;
             this.checkBoxFLFilter.Checked = Properties.Settings.Default.FL_Filter_Enabled;
             this.numericUpDownUpper.Value = Properties.Settings.Default.FL_Upper;
@@ -563,7 +565,7 @@ namespace AsterixDisplayAnalyser
                             {
                                 GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
                                 MyMarker.ToolTipMode = MarkerTooltipMode.Always;
-                                MyMarker.ToolTipText = BuildLabelText(Target);
+                                MyMarker.ToolTipText = BuildLabelText(Target, true);
                                 SetLabelAttributes(ref MyMarker);
                                 DinamicOverlay.Markers.Add(MyMarker);
                             }
@@ -573,7 +575,7 @@ namespace AsterixDisplayAnalyser
                             GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
                             MyMarker.DisableRegionCheck = true;
                             MyMarker.ToolTipMode = MarkerTooltipMode.Always;
-                            MyMarker.ToolTipText = BuildLabelText(Target);
+                            MyMarker.ToolTipText = BuildLabelText(Target, true);
                             SetLabelAttributes(ref MyMarker);
                             DinamicOverlay.Markers.Add(MyMarker);
                         }
@@ -596,7 +598,7 @@ namespace AsterixDisplayAnalyser
                             {
                                 GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
                                 MyMarker.ToolTipMode = MarkerTooltipMode.Always;
-                                MyMarker.ToolTipText = BuildLabelText(Target);
+                                MyMarker.ToolTipText = BuildLabelText(Target, false);
                                 SetLabelAttributes(ref MyMarker);
                                 DinamicOverlay.Markers.Add(MyMarker);
                             }
@@ -605,7 +607,7 @@ namespace AsterixDisplayAnalyser
                         {
                             GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
                             MyMarker.ToolTipMode = MarkerTooltipMode.Always;
-                            MyMarker.ToolTipText = BuildLabelText(Target);
+                            MyMarker.ToolTipText = BuildLabelText(Target, false);
                             SetLabelAttributes(ref MyMarker);
                             DinamicOverlay.Markers.Add(MyMarker);
                         }
@@ -621,14 +623,30 @@ namespace AsterixDisplayAnalyser
         /// </summary>
         /// <param name="Target_In"></param>
         /// <returns></returns>
-        private string BuildLabelText(DynamicDisplayBuilder.TargetType Target_In)
+        private string BuildLabelText(DynamicDisplayBuilder.TargetType Target_In, bool Is_Live_Display)
         {
             string Label_Text_Out = "";
 
-            if (Target_In.ACID_Modes != null)
-                Label_Text_Out = Target_In.ModeA + "\n" + Target_In.ACID_Modes + "\n" + Target_In.ModeC;
+            if (Is_Live_Display)
+            {
+                string CoastIndicator;
+                if (Target_In.TrackTerminateTreshold > 1)
+                    CoastIndicator = " ↘";
+                else
+                    CoastIndicator = "";
+
+                if (Target_In.ACID_Modes != null)
+                    Label_Text_Out = Target_In.ModeA + CoastIndicator + "\n" + Target_In.ACID_Modes + "\n" + Target_In.ModeC;
+                else
+                    Label_Text_Out = Target_In.ModeA + CoastIndicator + "\n" + Target_In.ModeC;
+            }
             else
-                Label_Text_Out = Target_In.ModeA + "\n" + Target_In.ModeC;
+            {
+                if (Target_In.ACID_Modes != null)
+                    Label_Text_Out = Target_In.ModeA + "\n" + Target_In.ACID_Modes + "\n" + Target_In.ModeC;
+                else
+                    Label_Text_Out = Target_In.ModeA + "\n" + Target_In.ModeC;
+            }
 
             return Label_Text_Out;
         }
