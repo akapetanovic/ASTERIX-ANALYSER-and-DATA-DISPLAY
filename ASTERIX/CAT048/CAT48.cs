@@ -373,11 +373,11 @@ namespace AsterixDisplayAnalyser
 
             // The four possible FSPEC octets
             BitVector32 FourFSPECOctets = new BitVector32();
-            
+
             while ((DataBufferIndexForThisExtraction) < LengthOfDataBlockInBytes)
             {
-                // Assume that there will be no more than 100 bytes in one record
-                byte[] LocalSingleRecordBuffer = new byte[1000];
+                // Assume that there will be no more than 300 bytes in one record
+                byte[] LocalSingleRecordBuffer = new byte[3000];
 
                 Array.Copy(DataBlockBuffer, DataBufferIndexForThisExtraction, LocalSingleRecordBuffer, 0, (LengthOfDataBlockInBytes - DataBufferIndexForThisExtraction));
 
@@ -442,7 +442,7 @@ namespace AsterixDisplayAnalyser
                                 I048DataItems[ItemIDToIndex("140")].CurrentlyPresent = true;
                             }
                             else
-                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  140:F"; 
+                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  140:F";
 
                             // 020 Target Report Descriptor
                             if (FourFSPECOctets[Bit_Ops.Bit5] == true)
@@ -462,7 +462,7 @@ namespace AsterixDisplayAnalyser
                                 I048DataItems[ItemIDToIndex("040")].CurrentlyPresent = true;
                             }
                             else
-                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  040:F"; 
+                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  040:F";
 
                             // 070 Mode-3/A Code in Octal Representation
                             if (FourFSPECOctets[Bit_Ops.Bit3] == true)
@@ -492,7 +492,7 @@ namespace AsterixDisplayAnalyser
                                 I048DataItems[ItemIDToIndex("130")].CurrentlyPresent = true;
                             }
                             else
-                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  130:F"; 
+                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  130:F";
 
                             break;
                         case 2:
@@ -535,7 +535,7 @@ namespace AsterixDisplayAnalyser
                                 I048DataItems[ItemIDToIndex("161")].CurrentlyPresent = true;
                             }
                             else
-                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  161:F"; 
+                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  161:F";
 
                             // 042 Calculated Position in Cartesian Coordinates 
                             if (FourFSPECOctets[Bit_Ops.Bit11] == true)
@@ -555,7 +555,7 @@ namespace AsterixDisplayAnalyser
                                 I048DataItems[ItemIDToIndex("200")].CurrentlyPresent = true;
                             }
                             else
-                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  200:F"; 
+                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  200:F";
 
                             // 170 Track Status
                             if (FourFSPECOctets[Bit_Ops.Bit9] == true)
@@ -566,8 +566,8 @@ namespace AsterixDisplayAnalyser
                             }
                             else
                                 DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  170:F";
-                            
-                                break;
+
+                            break;
                         case 3:
 
                             // 210 Track Quality 
@@ -579,7 +579,7 @@ namespace AsterixDisplayAnalyser
                             }
                             else
                                 DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  210:F";
-                                
+
                             // 030 Warning/Error Conditions
                             if (FourFSPECOctets[Bit_Ops.Bit22] == true)
                             {
@@ -589,7 +589,7 @@ namespace AsterixDisplayAnalyser
                             }
                             else
                                 DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  030:F";
-                               
+
                             // 080 Mode-3/A Code Confidence Indicator
                             if (FourFSPECOctets[Bit_Ops.Bit21] == true)
                             {
@@ -638,7 +638,7 @@ namespace AsterixDisplayAnalyser
                                 I048DataItems[ItemIDToIndex("230")].CurrentlyPresent = true;
                             }
                             else
-                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  230:F";          
+                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  230:F";
 
                             break;
                         case 4:
@@ -652,7 +652,7 @@ namespace AsterixDisplayAnalyser
                             }
                             else
                                 DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  260:F";
-                                
+
                             // 55 Mode-1 Code in Octal Representation
                             if (FourFSPECOctets[Bit_Ops.Bit30] == true)
                             {
@@ -681,7 +681,7 @@ namespace AsterixDisplayAnalyser
                                 I048DataItems[ItemIDToIndex("065")].CurrentlyPresent = true;
                             }
                             else
-                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  65:F"; 
+                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  65:F";
 
                             // 60 Mode-2 Code Confidence Indicator
                             if (FourFSPECOctets[Bit_Ops.Bit27] == true)
@@ -692,7 +692,15 @@ namespace AsterixDisplayAnalyser
                             }
                             else
                                 DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  60:F";
-   
+
+
+                            if ((FourFSPECOctets[Bit_Ops.Bit26] == true) || (FourFSPECOctets[Bit_Ops.Bit25] == true)
+                                || (FourFSPECOctets[Bit_Ops.Bit24] == true))
+                            {
+                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  SPECIAL PURPOSE";
+                            }
+
+
                             break;
 
                         // Handle errors

@@ -196,7 +196,7 @@ namespace AsterixDisplayAnalyser
 
             // Hold individual records of the messages 
             // from an individual data block
-            string[] MessageData = new string[1000];
+            string[] MessageData = new string[3000];
 
             byte[] DataBlockNoCATandLEN = new byte[DataBlock.Length - 3];
 

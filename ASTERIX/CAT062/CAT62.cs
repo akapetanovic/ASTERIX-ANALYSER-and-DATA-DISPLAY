@@ -384,7 +384,7 @@ namespace AsterixDisplayAnalyser
             {
 
                 // Assume that there will be no more than 200 bytes in one record
-                byte[] LocalSingleRecordBuffer = new byte[2000];
+                byte[] LocalSingleRecordBuffer = new byte[3000];
 
                 Array.Copy(DataBlockBuffer, DataBufferIndexForThisExtraction, LocalSingleRecordBuffer, 0, (LengthOfDataBlockInBytes - DataBufferIndexForThisExtraction));
 

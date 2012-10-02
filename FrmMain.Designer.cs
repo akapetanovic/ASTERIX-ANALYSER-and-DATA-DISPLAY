@@ -145,6 +145,7 @@
             this.labelTargetCount = new System.Windows.Forms.Label();
             this.lblNumberofTargets = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBoxDisplayPSR = new System.Windows.Forms.CheckBox();
             this.numericUpDownUpper = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownLower = new System.Windows.Forms.NumericUpDown();
             this.checkBoxFLFilter = new System.Windows.Forms.CheckBox();
@@ -1144,7 +1145,7 @@
             // labelTargetCount
             // 
             this.labelTargetCount.AutoSize = true;
-            this.labelTargetCount.Location = new System.Drawing.Point(8, 638);
+            this.labelTargetCount.Location = new System.Drawing.Point(5, 661);
             this.labelTargetCount.Name = "labelTargetCount";
             this.labelTargetCount.Size = new System.Drawing.Size(72, 13);
             this.labelTargetCount.TabIndex = 25;
@@ -1153,7 +1154,7 @@
             // lblNumberofTargets
             // 
             this.lblNumberofTargets.AutoSize = true;
-            this.lblNumberofTargets.Location = new System.Drawing.Point(81, 638);
+            this.lblNumberofTargets.Location = new System.Drawing.Point(78, 661);
             this.lblNumberofTargets.Name = "lblNumberofTargets";
             this.lblNumberofTargets.Size = new System.Drawing.Size(13, 13);
             this.lblNumberofTargets.TabIndex = 24;
@@ -1162,16 +1163,28 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Black;
+            this.groupBox2.Controls.Add(this.checkBoxDisplayPSR);
             this.groupBox2.Controls.Add(this.numericUpDownUpper);
             this.groupBox2.Controls.Add(this.numericUpDownLower);
             this.groupBox2.Controls.Add(this.checkBoxFLFilter);
             this.groupBox2.ForeColor = System.Drawing.Color.Silver;
             this.groupBox2.Location = new System.Drawing.Point(6, 318);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(126, 80);
+            this.groupBox2.Size = new System.Drawing.Size(126, 103);
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "FL Filter";
+            // 
+            // checkBoxDisplayPSR
+            // 
+            this.checkBoxDisplayPSR.AutoSize = true;
+            this.checkBoxDisplayPSR.Location = new System.Drawing.Point(6, 80);
+            this.checkBoxDisplayPSR.Name = "checkBoxDisplayPSR";
+            this.checkBoxDisplayPSR.Size = new System.Drawing.Size(85, 17);
+            this.checkBoxDisplayPSR.TabIndex = 3;
+            this.checkBoxDisplayPSR.Text = "Display PSR";
+            this.checkBoxDisplayPSR.UseVisualStyleBackColor = true;
+            this.checkBoxDisplayPSR.CheckedChanged += new System.EventHandler(this.checkBoxDisplayPSR_CheckedChanged);
             // 
             // numericUpDownUpper
             // 
@@ -1236,7 +1249,7 @@
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.ForeColor = System.Drawing.Color.Silver;
-            this.groupBox1.Location = new System.Drawing.Point(6, 433);
+            this.groupBox1.Location = new System.Drawing.Point(3, 456);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(121, 65);
             this.groupBox1.TabIndex = 17;
@@ -1283,7 +1296,7 @@
             // 
             this.lblZoomLevel.AutoSize = true;
             this.lblZoomLevel.ForeColor = System.Drawing.Color.Silver;
-            this.lblZoomLevel.Location = new System.Drawing.Point(61, 417);
+            this.lblZoomLevel.Location = new System.Drawing.Point(60, 440);
             this.lblZoomLevel.Name = "lblZoomLevel";
             this.lblZoomLevel.Size = new System.Drawing.Size(13, 13);
             this.lblZoomLevel.TabIndex = 16;
@@ -1293,7 +1306,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.ForeColor = System.Drawing.Color.Silver;
-            this.label13.Location = new System.Drawing.Point(10, 588);
+            this.label13.Location = new System.Drawing.Point(7, 611);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(55, 13);
             this.label13.TabIndex = 15;
@@ -1311,7 +1324,7 @@
             "Google Terrain",
             "Google Hybrid",
             "Custom Built"});
-            this.comboBox1.Location = new System.Drawing.Point(10, 604);
+            this.comboBox1.Location = new System.Drawing.Point(7, 627);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 14;
@@ -1320,7 +1333,7 @@
             // button7
             // 
             this.button7.BackColor = System.Drawing.Color.DarkGray;
-            this.button7.Location = new System.Drawing.Point(53, 531);
+            this.button7.Location = new System.Drawing.Point(50, 554);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(26, 23);
             this.button7.TabIndex = 13;
@@ -1331,7 +1344,7 @@
             // button6
             // 
             this.button6.BackColor = System.Drawing.Color.DarkGray;
-            this.button6.Location = new System.Drawing.Point(46, 502);
+            this.button6.Location = new System.Drawing.Point(43, 525);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(42, 23);
             this.button6.TabIndex = 12;
@@ -1342,7 +1355,7 @@
             // button5
             // 
             this.button5.BackColor = System.Drawing.Color.DarkGray;
-            this.button5.Location = new System.Drawing.Point(46, 560);
+            this.button5.Location = new System.Drawing.Point(43, 583);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(42, 23);
             this.button5.TabIndex = 11;
@@ -1353,7 +1366,7 @@
             // button4
             // 
             this.button4.BackColor = System.Drawing.Color.DarkGray;
-            this.button4.Location = new System.Drawing.Point(6, 531);
+            this.button4.Location = new System.Drawing.Point(3, 554);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(42, 23);
             this.button4.TabIndex = 10;
@@ -1364,7 +1377,7 @@
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.DarkGray;
-            this.button3.Location = new System.Drawing.Point(84, 531);
+            this.button3.Location = new System.Drawing.Point(81, 554);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(42, 23);
             this.button3.TabIndex = 9;
@@ -1376,7 +1389,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.ForeColor = System.Drawing.Color.Silver;
-            this.label12.Location = new System.Drawing.Point(51, 404);
+            this.label12.Location = new System.Drawing.Point(50, 427);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(34, 13);
             this.label12.TabIndex = 8;
@@ -1385,7 +1398,7 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.DarkGray;
-            this.button2.Location = new System.Drawing.Point(91, 404);
+            this.button2.Location = new System.Drawing.Point(90, 427);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(42, 23);
             this.button2.TabIndex = 7;
@@ -1396,7 +1409,7 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.DarkGray;
-            this.button1.Location = new System.Drawing.Point(3, 404);
+            this.button1.Location = new System.Drawing.Point(2, 427);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(42, 23);
             this.button1.TabIndex = 6;
@@ -1487,7 +1500,6 @@
             this.labelTrackCoastLabel.Size = new System.Drawing.Size(67, 13);
             this.labelTrackCoastLabel.TabIndex = 3;
             this.labelTrackCoastLabel.Text = "Track coast:";
-          
             // 
             // labelDisplayUpdateRate
             // 
@@ -1919,6 +1931,7 @@
         private System.Windows.Forms.TextBox textBox1TrackCoast;
         private System.Windows.Forms.CheckBox checkBoxSyncToNM;
         private System.Windows.Forms.Timer NorthMarkerTimer;
+        private System.Windows.Forms.CheckBox checkBoxDisplayPSR;
     }
 }
 

@@ -7,5 +7,7 @@ namespace AsterixDisplayAnalyser
 {
     class CAT48I170Types
     {
+
+        public static int Word1_FX_Index = Bit_Ops.Bit0;
     }
 }

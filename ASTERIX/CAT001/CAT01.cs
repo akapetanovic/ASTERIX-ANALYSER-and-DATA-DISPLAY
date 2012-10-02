@@ -539,7 +539,7 @@ namespace AsterixDisplayAnalyser
         public string[] Decode(byte[] DataBlockBuffer, string Time, out int NumOfMessagesDecoded)
         {
             // Define output data buffer
-            string[] DataOut = new string[1000];
+            string[] DataOut = new string[3000];
 
             // Determine the size of the datablock
             int LengthOfDataBlockInBytes = DataBlockBuffer.Length;

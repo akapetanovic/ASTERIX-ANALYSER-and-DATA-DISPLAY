@@ -143,6 +143,7 @@ namespace AsterixDisplayAnalyser
             this.checkBoxFLFilter.Checked = Properties.Settings.Default.FL_Filter_Enabled;
             this.numericUpDownUpper.Value = Properties.Settings.Default.FL_Upper;
             this.numericUpDownLower.Value = Properties.Settings.Default.FL_Lower;
+            this.checkBoxDisplayPSR.Checked = Properties.Settings.Default.DisplayPSR;
 
             HandlePlotDisplayEnabledChanged();
         }
@@ -1247,6 +1248,12 @@ namespace AsterixDisplayAnalyser
                 North_Marker_Received = false;
                 Update_PlotTrack_Data(); 
             }
+        }
+
+        private void checkBoxDisplayPSR_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.DisplayPSR = this.checkBoxDisplayPSR.Checked;
+            Properties.Settings.Default.Save();
         }
     }
 }

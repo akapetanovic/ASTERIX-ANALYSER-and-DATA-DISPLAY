@@ -89,18 +89,22 @@ namespace AsterixDisplayAnalyser
                 }
             }
 
-            // Now append all the PSR tracks to the end of the display list
-            foreach (TargetType PSRTgtList in PSRTargetList)
+
+            if (Properties.Settings.Default.DisplayPSR == true)
             {
-                TargetType NewTarget = new TargetType();
-                NewTarget.ModeA = PSRTgtList.ModeA;
-                NewTarget.ModeC = PSRTgtList.ModeC;
-                NewTarget.ACID_Modes = PSRTgtList.ACID_Modes;
-                NewTarget.Lat = PSRTgtList.Lat;
-                NewTarget.Lon = PSRTgtList.Lon;
-                NewTarget.TrackNumber = PSRTgtList.TrackNumber;
-                NewTarget.TrackTerminateTreshold = 0;
-                CurrentTargetList.Add(NewTarget);
+                // Now append all the PSR tracks to the end of the display list
+                foreach (TargetType PSRTgtList in PSRTargetList)
+                {
+                    TargetType NewTarget = new TargetType();
+                    NewTarget.ModeA = PSRTgtList.ModeA;
+                    NewTarget.ModeC = PSRTgtList.ModeC;
+                    NewTarget.ACID_Modes = PSRTgtList.ACID_Modes;
+                    NewTarget.Lat = PSRTgtList.Lat;
+                    NewTarget.Lon = PSRTgtList.Lon;
+                    NewTarget.TrackNumber = PSRTgtList.TrackNumber;
+                    NewTarget.TrackTerminateTreshold = 0;
+                    CurrentTargetList.Add(NewTarget);
+                }
             }
         }
 

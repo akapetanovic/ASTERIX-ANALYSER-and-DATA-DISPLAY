@@ -58,14 +58,14 @@ Version 1.3.1
 
 Version 1.4
 
- 1. Added functionality to select what ASTERIX Categories to process. Retainable between user sessions.
+ 1. Added functionality to select what ASTERIX Categories to process.
 
  2. Fixed an issue related to handling data that contain more than one category in one data block. 
     This is based on the data sample from the following radars: monteplier, biarrits, and auch.
 
  3. All user selectable options are now retained between the sessions.
 
- 4. Support for CAT062: 
+ 4. Added support for CAT062: 
  
 		015 Service Identification
 		105 Calculated Track Position (WGS-84)
@@ -76,11 +76,16 @@ Version 1.4
 			Subfield # 2: Target Identification
 
   5. Improved display handling by adding an option to syn display update to the North Mark message (CAT02 for now). 
-     For CAT62 track is updated only by the last received track update (Based on the CAT062/040). 
+     For CAT62 displayed track is updated only by the last received track update during the last update cycle. (Based on the CAT062/040). 
+	 However, all track/plot updates are buffered and can be visualised
+	 by using the passive display option.
 	 
   6. For Tracks and Plots there is now an option to define Track Coast cycle (number of update cycles to keep the plot/track on the screen before
-     declaring it lost and removing it). The track/plot is marked as coast by ↘. However, all track/plot updates are buffered and can be visualised
-	 by using the passive display option.
+     declaring it lost and removing it). The track/plot is marked as coast by ↘. 
+
+  7. Added option to choose wether to display PSR plots.
+
+  8. Implemented additional fix in order to handle variable length Items for CAT48.
 
 SO FAR THE FOLLOWING DECODERS ARE IMPLEMENTED
 
