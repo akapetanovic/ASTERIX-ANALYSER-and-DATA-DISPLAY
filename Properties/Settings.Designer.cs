@@ -109,7 +109,7 @@ namespace AsterixDisplayAnalyser.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool CAT_034_Enabled {
             get {
                 return ((bool)(this["CAT_034_Enabled"]));

@@ -401,7 +401,9 @@ namespace AsterixDisplayAnalyser
 
         private void timeofDayToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-
+            FrmDetailedView MyDetailedView = new FrmDetailedView();
+            MyDetailedView.WhatToDisplay = FrmDetailedView.DisplayType.CAT34I030;
+            MyDetailedView.Show();
         }
 
         private void timeOfDayToolStripMenuItem_Click(object sender, EventArgs e)
@@ -413,13 +415,17 @@ namespace AsterixDisplayAnalyser
 
         private void messageTypeToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-
+            FrmDetailedView MyDetailedView = new FrmDetailedView();
+            MyDetailedView.WhatToDisplay = FrmDetailedView.DisplayType.CAT34I000;
+            MyDetailedView.Show();
         }
 
         private void sectorNumberToolStripMenuItem1_Click(object sender, EventArgs e)
         {
 
-
+            FrmDetailedView MyDetailedView = new FrmDetailedView();
+            MyDetailedView.WhatToDisplay = FrmDetailedView.DisplayType.CAT34I020;
+            MyDetailedView.Show();
         }
 
         private void targetReportDescriptorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -847,9 +853,9 @@ namespace AsterixDisplayAnalyser
             {
                 foreach (MainASTERIXDataStorage.CAT01Data Msg in MainASTERIXDataStorage.CAT01Message)
                 {
-                    if (Msg.I001DataItems[CAT01.ItemIDToIndex("070")].CurrentlyPresent == true)
+                    if (Msg.CAT01DataItems[CAT01.ItemIDToIndex("070")].CurrentlyPresent == true)
                     {
-                        CAT01I070Types.CAT01070Mode3UserData MyData = (CAT01I070Types.CAT01070Mode3UserData)Msg.I001DataItems[CAT01.ItemIDToIndex("070")].value;
+                        CAT01I070Types.CAT01070Mode3UserData MyData = (CAT01I070Types.CAT01070Mode3UserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("070")].value;
                         int Result;
                         if (int.TryParse(MyData.Mode3A_Code, out Result) == true)
                             SSR_Code_Lookup[Result] = true;
@@ -860,9 +866,9 @@ namespace AsterixDisplayAnalyser
             {
                 foreach (MainASTERIXDataStorage.CAT48Data Msg in MainASTERIXDataStorage.CAT48Message)
                 {
-                    if (Msg.I048DataItems[CAT48.ItemIDToIndex("070")].CurrentlyPresent == true)
+                    if (Msg.CAT48DataItems[CAT48.ItemIDToIndex("070")].CurrentlyPresent == true)
                     {
-                        CAT48I070Types.CAT48I070Mode3UserData MyData = (CAT48I070Types.CAT48I070Mode3UserData)Msg.I048DataItems[CAT48.ItemIDToIndex("070")].value;
+                        CAT48I070Types.CAT48I070Mode3UserData MyData = (CAT48I070Types.CAT48I070Mode3UserData)Msg.CAT48DataItems[CAT48.ItemIDToIndex("070")].value;
                         int Result;
                         if (int.TryParse(MyData.Mode3A_Code, out Result) == true)
                             SSR_Code_Lookup[Result] = true;
@@ -873,9 +879,9 @@ namespace AsterixDisplayAnalyser
             {
                 foreach (MainASTERIXDataStorage.CAT62Data Msg in MainASTERIXDataStorage.CAT62Message)
                 {
-                    if (Msg.I062DataItems[CAT62.ItemIDToIndex("060")].CurrentlyPresent == true)
+                    if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("060")].CurrentlyPresent == true)
                     {
-                        CAT62I060Types.CAT62060Mode3UserData MyData = (CAT62I060Types.CAT62060Mode3UserData)Msg.I062DataItems[CAT62.ItemIDToIndex("060")].value;
+                        CAT62I060Types.CAT62060Mode3UserData MyData = (CAT62I060Types.CAT62060Mode3UserData)Msg.CAT62DataItems[CAT62.ItemIDToIndex("060")].value;
                         int Result;
                         if (int.TryParse(MyData.Mode3A_Code, out Result) == true)
                             SSR_Code_Lookup[Result] = true;
@@ -1254,6 +1260,13 @@ namespace AsterixDisplayAnalyser
         {
             Properties.Settings.Default.DisplayPSR = this.checkBoxDisplayPSR.Checked;
             Properties.Settings.Default.Save();
+        }
+
+        private void antennaRotationPeriodToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FrmDetailedView MyDetailedView = new FrmDetailedView();
+            MyDetailedView.WhatToDisplay = FrmDetailedView.DisplayType.CAT34I041;
+            MyDetailedView.Show();
         }
     }
 }

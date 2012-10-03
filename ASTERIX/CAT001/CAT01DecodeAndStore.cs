@@ -271,7 +271,7 @@ namespace AsterixDisplayAnalyser
                 MyItem.ID = Item.ID;
                 MyItem.value = Item.value;
 
-                CAT01MessageData.I001DataItems.Add(MyItem);
+                CAT01MessageData.CAT01DataItems.Add(MyItem);
             }
 
             MainASTERIXDataStorage.CAT01Message.Add(CAT01MessageData);

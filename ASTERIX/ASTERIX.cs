@@ -248,7 +248,10 @@ namespace AsterixDisplayAnalyser
                     if (Properties.Settings.Default.CAT_034_Enabled == true)
                     {
                         CAT34 MyCAT34 = new CAT34();
-                        Common_Message_Data_String = Common_Message_Data_String + MyCAT34.Decode(DataBlock, Time);
+                        MessageData = MyCAT34.Decode(DataBlock, Time, out NumOfMsgsDecoded);
+
+                        for (int I = 0; I < NumOfMsgsDecoded; I++)
+                            SharedData.DataBox.Items.Add(Common_Message_Data_String + MessageData[I]);
                     }
                     break;
                 // Next version of Category 001: PSR Radar, M-SSR Radar, Mode-S Station

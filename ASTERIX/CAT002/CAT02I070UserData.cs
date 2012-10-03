@@ -9,7 +9,7 @@ namespace AsterixDisplayAnalyser
     {
         public static void DecodeCAT02I070(byte[] Data)
         {
-
+            CAT02.CurrentDataBufferOctalIndex = CAT02.CurrentDataBufferOctalIndex + 3;
         }
     }
 }

@@ -23,40 +23,82 @@ namespace AsterixDisplayAnalyser
             // Next version of Category 002: PSR Radar, M-SSR Radar, Mode-S Station
             //                                               Length in bytes
             //
-            // 1 I034/010 Data Source Identifier                2 
-            Decode034_010.Decode(Data);
-            // 2 I034/000 Message Type                          1
-            Decode034_000.Decode(Data);
+           
+            // I002/000, Message Type                        1
+            if (CAT34.I034DataItems[CAT34.ItemIDToIndex("000")].CurrentlyPresent == true)
+            {
+                CAT34I000UserData.DecodeCAT34I000(Data);
+            }
+          
             // 3 I034/030 Time-of-Day                           3
-            Decode034_030.Decode(Data);
+            if (CAT34.I034DataItems[CAT34.ItemIDToIndex("030")].CurrentlyPresent == true)
+            {
+                CAT34I030UserData.DecodeCAT34I030(Data);
+            }
             // 4 I034/020 Sector Number                         1
-            Decode034_020.Decode(Data);
+            if (CAT34.I034DataItems[CAT34.ItemIDToIndex("020")].CurrentlyPresent == true)
+            {
+                CAT34I020UserData.DecodeCAT34I020(Data);
+            }
             // 5 I034/041 Antenna Rotation Period               2
-            Decode034_041.Decode(Data);
+            if (CAT34.I034DataItems[CAT34.ItemIDToIndex("041")].CurrentlyPresent == true)
+            {
+                CAT34I041UserData.DecodeCAT34I041(Data);
+            }
             // 6 I034/050 System Configuration and Status       1+
-            Decode034_050.Decode(Data);
+            if (CAT34.I034DataItems[CAT34.ItemIDToIndex("050")].CurrentlyPresent == true)
+            {
+                CAT34I050UserData.DecodeCAT34I050(Data);
+            }
             // 7 I034/060 System Processing Mode                1+
-            Decode034_060.Decode(Data);
+            if (CAT34.I034DataItems[CAT34.ItemIDToIndex("060")].CurrentlyPresent == true)
+            {
+                CAT34I060UserData.DecodeCAT34I060(Data);
+            }
             // FX
 
             // 8 I034/070 Message Count Values                  1+2N
-            Decode034_070.Decode(Data);
+            if (CAT34.I034DataItems[CAT34.ItemIDToIndex("070")].CurrentlyPresent == true)
+            {
+                CAT34I070UserData.DecodeCAT34I070(Data);
+            }
             // 9 I034/100 Generic Polar Window                  8
-            Decode034_100.Decode(Data);
+            if (CAT34.I034DataItems[CAT34.ItemIDToIndex("100")].CurrentlyPresent == true)
+            {
+                CAT34I100UserData.DecodeCAT34I100(Data);
+            }
             // 10 I034/110 Data Filter                          1
-            Decode034_110.Decode(Data);
+            if (CAT34.I034DataItems[CAT34.ItemIDToIndex("110")].CurrentlyPresent == true)
+            {
+                CAT34I110UserData.DecodeCAT34I110(Data);
+            }
             // 11 I034/120 3D-Position of Data Source           8
-            Decode034_120.Decode(Data);
+            if (CAT34.I034DataItems[CAT34.ItemIDToIndex("120")].CurrentlyPresent == true)
+            {
+                CAT34I120UserData.DecodeCAT34I120(Data);
+            }
             // 12 I034/090 Collimation Error                    2
-            Decode034_090.Decode(Data);
-            // 13 RE-Data Item Reserved Expansion Field         1+1
-            
-            // 14 SP-Data Item Special Purpose Field            1+1
-            
-            // FX
+            if (CAT34.I034DataItems[CAT34.ItemIDToIndex("090")].CurrentlyPresent == true)
+            {
+                CAT34I090UserData.DecodeCAT34I090(Data);
+            }
 
-           
+            ////////////////////////////////////////////////////////////////////////////////////
+            // All CAT34 data has been decoded, so lets save off the message data to the global
+            // storage for latter usage
+
+            MainASTERIXDataStorage.CAT34Data CAT34MessageData = new MainASTERIXDataStorage.CAT34Data();
+            foreach (CAT34.CAT34DataItem Item in CAT34.I034DataItems)
+            {
+                CAT34.CAT34DataItem MyItem = new CAT34.CAT34DataItem();
+                MyItem.CurrentlyPresent = Item.CurrentlyPresent;
+                MyItem.Description = Item.Description;
+                MyItem.HasBeenPresent = Item.HasBeenPresent;
+                MyItem.ID = Item.ID;
+                MyItem.value = Item.value;
+                CAT34MessageData.CAT34DataItems.Add(MyItem);
+            }
+            MainASTERIXDataStorage.CAT34Message.Add(CAT34MessageData);
         }
-      
     }
 }

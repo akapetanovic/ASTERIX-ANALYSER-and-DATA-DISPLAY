@@ -191,7 +191,7 @@ namespace AsterixDisplayAnalyser
                 MyItem.ID = Item.ID;
                 MyItem.value = Item.value;
 
-                CAT48MessageData.I048DataItems.Add(MyItem);
+                CAT48MessageData.CAT48DataItems.Add(MyItem);
             }
             
             MainASTERIXDataStorage.CAT48Message.Add(CAT48MessageData);

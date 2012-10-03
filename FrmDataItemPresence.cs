@@ -90,12 +90,13 @@ namespace AsterixDisplayAnalyser
 
                             //string ingredient in sandwich
 
-                            foreach (CAT34.I034DataItem Item in CAT34.I034DataItemsLastValid)
+                            // Now retrieve data from the CAT001 class and populate
+                            // list for each UAP data item
+                            foreach (CAT34.CAT34DataItem Item in CAT34.I034DataItems)
                             {
                                 this.DataItemListBox.Items.Add(Item.ID + "     " + Item.Description);
-                                this.StatusListBox.Items.Add(Item.IsPresent.ToString());
+                                this.StatusListBox.Items.Add(Item.HasBeenPresent.ToString());
                             }
-
                             break;
                         }
 

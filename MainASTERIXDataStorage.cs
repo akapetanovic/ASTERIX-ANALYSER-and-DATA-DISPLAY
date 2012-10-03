@@ -20,7 +20,7 @@ namespace AsterixDisplayAnalyser
         // Define collection for CAT01 data items. This is where each data item will be stored 
         public class CAT01Data
         {
-            public System.Collections.Generic.List<CAT01.CAT01DataItem> I001DataItems = new System.Collections.Generic.List<CAT01.CAT01DataItem>();
+            public System.Collections.Generic.List<CAT01.CAT01DataItem> CAT01DataItems = new System.Collections.Generic.List<CAT01.CAT01DataItem>();
         }
 
         // This is the main storage of all CAT01 Messages
@@ -32,7 +32,7 @@ namespace AsterixDisplayAnalyser
         // Define collection for CAT02 data items. This is where each data item will be stored 
         public class CAT02Data
         {
-            public System.Collections.Generic.List<CAT02.CAT02DataItem> I002DataItems = new System.Collections.Generic.List<CAT02.CAT02DataItem>();
+            public System.Collections.Generic.List<CAT02.CAT02DataItem> CAT02DataItems = new System.Collections.Generic.List<CAT02.CAT02DataItem>();
         }
 
         // This is the main storage of all CAT02 Messages
@@ -44,19 +44,31 @@ namespace AsterixDisplayAnalyser
         // Define collection for CAT48 data items. This is where each data item will be stored 
         public class CAT48Data
         {
-            public System.Collections.Generic.List<CAT48.CAT48DataItem> I048DataItems = new System.Collections.Generic.List<CAT48.CAT48DataItem>();
+            public System.Collections.Generic.List<CAT48.CAT48DataItem> CAT48DataItems = new System.Collections.Generic.List<CAT48.CAT48DataItem>();
         }
 
         // This is the main storage of all CAT48 Messages
         public static System.Collections.Generic.List<CAT48Data> CAT48Message = new System.Collections.Generic.List<CAT48Data>();
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // CAT 34 Messages
+        //
+        // Define collection for CAT34 data items. This is where each data item will be stored 
+        public class CAT34Data
+        {
+            public System.Collections.Generic.List<CAT34.CAT34DataItem> CAT34DataItems = new System.Collections.Generic.List<CAT34.CAT34DataItem>();
+        }
+
+        // This is the main storage of all CAT48 Messages
+        public static System.Collections.Generic.List<CAT34Data> CAT34Message = new System.Collections.Generic.List<CAT34Data>();
+        
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // CAT 62 Messages
         //
         // Define collection for CAT62 data items. This is where each data item will be stored 
         public class CAT62Data
         {
-            public System.Collections.Generic.List<CAT62.CAT062DataItem> I062DataItems = new System.Collections.Generic.List<CAT62.CAT062DataItem>();
+            public System.Collections.Generic.List<CAT62.CAT062DataItem> CAT62DataItems = new System.Collections.Generic.List<CAT62.CAT062DataItem>();
         }
 
         // This is the main storage of all CAT62 Messages

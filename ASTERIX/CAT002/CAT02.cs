@@ -30,8 +30,6 @@ namespace AsterixDisplayAnalyser
 
     class CAT02
     {
-
-
         // Current data buffer Index
         public static int CurrentDataBufferOctalIndex = 0;
 
@@ -108,10 +106,6 @@ namespace AsterixDisplayAnalyser
         // Define collection of CAT002 data items. Used to store and retrieve basic data such as:
         // 
         public static System.Collections.Generic.List<CAT02DataItem> I002DataItems = new System.Collections.Generic.List<CAT02DataItem>();
-        // 1. Item presence
-        // 2. Item description
-        //
-        // Based on the data item identifed
 
         public static void Intitialize()
         {
@@ -199,7 +193,7 @@ namespace AsterixDisplayAnalyser
         public string[] Decode(byte[] DataBlockBuffer, string Time, out int NumOfMessagesDecoded)
         {
             // Define output data buffer
-            string[] DataOut = new string[1000];
+            string[] DataOut = new string[3000];
 
             // Determine the size of the datablock
             int LengthOfDataBlockInBytes = DataBlockBuffer.Length;
@@ -221,10 +215,10 @@ namespace AsterixDisplayAnalyser
             // Creates and initializes a BitVector32 with all bit flags set to FALSE.
             BitVector32 FourFSPECOctets = new BitVector32();
 
-            while ((DataBufferIndexForThisExtraction) < LengthOfDataBlockInBytes)
+            while (DataBufferIndexForThisExtraction < LengthOfDataBlockInBytes)
             {
                 // Assume that there will be no more than 1000 bytes in one record
-                byte[] LocalSingleRecordBuffer = new byte[1000];
+                byte[] LocalSingleRecordBuffer = new byte[3000];
 
                 Array.Copy(DataBlockBuffer, DataBufferIndexForThisExtraction, LocalSingleRecordBuffer, 0, (LengthOfDataBlockInBytes - DataBufferIndexForThisExtraction));
 

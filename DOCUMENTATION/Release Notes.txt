@@ -87,6 +87,11 @@ Version 1.4
 
   8. Implemented additional fix in order to handle variable length Items for CAT48.
 
+Version 1.4.1
+
+	1. Added support/decoders for CAT34 and CAT02
+	2. 
+
 SO FAR THE FOLLOWING DECODERS ARE IMPLEMENTED
 
 CAT01
@@ -94,12 +99,26 @@ CAT01
 		040 Measured Position in Polar Coordinates
 		070 Mode-3/A Code in Octal Representation
 		090 Mode-C Code in Binary Representation
+
+CAT02
+		000 Message Type                        
+        020 Sector Number                       
+        030 Time of Day                         
+        041 Antenna Rotation Period             
+
 CAT48
 		020 Target Report Descriptor
 		040 Measured Position in Slant Polar Coordinates
 		070 Mode-3/A Code in Octal Representation
 		090 Flight Level in Binary Representation
 		240 Aircraft Identification
+
+CAT34
+	    000 Message Type                          
+        030 Time-of-Day                           
+        020 Sector Number                         
+        041 Antenna Rotation Period               
+
 CAT62	
 		015 Service Identification
 		105 Calculated Track Position (WGS-84)
@@ -108,6 +127,7 @@ CAT62
 		136 Measured Flight Level 
 		380 Aircraft Derived Data
 			Subfield # 2: Target Identification
+
 
 PLANS FOR FUTURE UPDATES:
 

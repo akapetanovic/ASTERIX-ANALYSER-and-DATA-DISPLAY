@@ -675,7 +675,6 @@
             this.dataFilterToolStripMenuItem,
             this.dPositionOfDataSourceToolStripMenuItem,
             this.collimationErrorToolStripMenuItem1});
-            this.cAT034ToolStripMenuItem.Enabled = false;
             this.cAT034ToolStripMenuItem.Name = "cAT034ToolStripMenuItem";
             this.cAT034ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.cAT034ToolStripMenuItem.Text = "CAT034";
@@ -706,6 +705,7 @@
             this.antennaRotationPeriodToolStripMenuItem1.Name = "antennaRotationPeriodToolStripMenuItem1";
             this.antennaRotationPeriodToolStripMenuItem1.Size = new System.Drawing.Size(289, 22);
             this.antennaRotationPeriodToolStripMenuItem1.Text = "041 Antenna Rotation Period               ";
+            this.antennaRotationPeriodToolStripMenuItem1.Click += new System.EventHandler(this.antennaRotationPeriodToolStripMenuItem1_Click);
             // 
             // systemConfigurationAndStatusToolStripMenuItem
             // 
@@ -1738,7 +1738,7 @@
             this.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
-            this.Text = "AMER KAPETANOVIC - ASTERIX PLOT/TRACK DISPLAY and SNIFFER  1.3";
+            this.Text = "AMER KAPETANOVIC - ASTERIX PLOT/TRACK DISPLAY and SNIFFER  1.4";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.Resize += new System.EventHandler(this.FormMain_Resize);

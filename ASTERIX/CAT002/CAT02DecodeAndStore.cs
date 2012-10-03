@@ -17,7 +17,7 @@ namespace AsterixDisplayAnalyser
         // of the user to save the data in a file it desired.
         public static void Do(byte[] Data)
         {
-            BitExtractor BE = new BitExtractor();
+           // BitExtractor BE = new BitExtractor();
 
             // I002/000, Message Type                        1
             if (CAT02.I002DataItems[CAT02.ItemIDToIndex("000")].CurrentlyPresent == true)
@@ -81,24 +81,19 @@ namespace AsterixDisplayAnalyser
             }
 
             ////////////////////////////////////////////////////////////////////////////////////
-            // All CAT48 data has been decoded, so lets save off the message data to the global
+            // All CAT02 data has been decoded, so lets save off the message data to the global
             // storage for latter usage
-
             MainASTERIXDataStorage.CAT02Data CAT02MessageData = new MainASTERIXDataStorage.CAT02Data();
-
             foreach (CAT02.CAT02DataItem Item in CAT02.I002DataItems)
             {
                 CAT02.CAT02DataItem MyItem = new CAT02.CAT02DataItem();
-
                 MyItem.CurrentlyPresent = Item.CurrentlyPresent;
                 MyItem.Description = Item.Description;
                 MyItem.HasBeenPresent = Item.HasBeenPresent;
                 MyItem.ID = Item.ID;
                 MyItem.value = Item.value;
-
-                CAT02MessageData.I002DataItems.Add(MyItem);
+                CAT02MessageData.CAT02DataItems.Add(MyItem);
             }
-
             MainASTERIXDataStorage.CAT02Message.Add(CAT02MessageData);
         }
     }

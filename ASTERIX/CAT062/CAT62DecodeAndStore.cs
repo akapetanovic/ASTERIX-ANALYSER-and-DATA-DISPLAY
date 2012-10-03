@@ -204,7 +204,7 @@ namespace AsterixDisplayAnalyser
                 MyItem.HasBeenPresent = Item.HasBeenPresent;
                 MyItem.ID = Item.ID;
                 MyItem.value = Item.value;
-                CAT62MessageData.I062DataItems.Add(MyItem);
+                CAT62MessageData.CAT62DataItems.Add(MyItem);
             }
 
             MainASTERIXDataStorage.CAT62Message.Add(CAT62MessageData);
