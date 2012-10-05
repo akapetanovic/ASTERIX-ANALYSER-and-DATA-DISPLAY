@@ -25,6 +25,9 @@ namespace AsterixDisplayAnalyser
             // CAT 34
             CAT34I000, CAT34I020, CAT34I030, CAT34I041, CAT34I050, CAT34I060,
 
+            // CAT 62
+            CAT62I015, CAT62I105, CAT62I060, CAT62I040, CAT62I136, CAT62I380_SUBF2_ACID,
+
             Nothing
         };
 
@@ -138,7 +141,30 @@ namespace AsterixDisplayAnalyser
                     break;
                 // System Configuration and Status
                 case DisplayType.CAT34I050:
-
+                    break;
+                #endregion
+                //////////////////////////////////////////////////////////////////////////////////////
+                //                                      CAT 62 Data                                 //
+                //////////////////////////////////////////////////////////////////////////////////////
+                #region CAT62_Call_Display_Region
+                // MESSAGE TYPE                    
+                case DisplayType.CAT62I015:
+                    DisplayCAT62I015Data();
+                    break;
+                case DisplayType.CAT62I105:
+                    DisplayCAT62I105Data();
+                    break;
+                case DisplayType.CAT62I060:
+                    DisplayCAT62I060Data();
+                    break;
+                case DisplayType.CAT62I040:
+                    DisplayCAT62I040Data();
+                    break;
+                case DisplayType.CAT62I136:
+                    DisplayCAT62I136Data();
+                    break;
+                case DisplayType.CAT62I380_SUBF2_ACID:
+                    DisplayCAT62I380_SUBF2_ACIDData();
                     break;
                 #endregion
             }
@@ -770,6 +796,180 @@ namespace AsterixDisplayAnalyser
             else
             {
                 this.listBoxMainDataBox.Items.Add("No data of this CAT/Item was received !!!");
+            }
+        }
+        #endregion
+
+        #region CAT062_Display_Method_Region
+        private void DisplayCAT62I015Data()
+        {
+            if (MainASTERIXDataStorage.CAT62Message.Count > 0)
+            {
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT62Message[0].CAT62DataItems[CAT62.ItemIDToIndex("010")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT62Message[0].CAT62DataItems[CAT62.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
+                this.listBoxMainDataBox.Items.Add("    ");
+
+                // Here determine the flag indicating what data is to be shown
+                foreach (MainASTERIXDataStorage.CAT62Data Msg in MainASTERIXDataStorage.CAT62Message)
+                {
+                    if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("015")].value != null)
+                    {
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.CAT62DataItems[CAT62.ItemIDToIndex("010")].value;
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+                        int MyData = (int)Msg.CAT62DataItems[CAT62.ItemIDToIndex("015")].value;
+                        this.listBoxMainDataBox.Items.Add("\tService ID: " + MyData.ToString());
+                        this.listBoxMainDataBox.Items.Add("    ");
+                    }
+                }
+            }
+            else
+            {
+                this.listBoxMainDataBox.Items.Add("No data of this CAT/Item was received !!!");
+            }
+        }
+        private void DisplayCAT62I105Data()
+        {
+            if (MainASTERIXDataStorage.CAT62Message.Count > 0)
+            {
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT62Message[0].CAT62DataItems[CAT62.ItemIDToIndex("010")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT62Message[0].CAT62DataItems[CAT62.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
+                this.listBoxMainDataBox.Items.Add("    ");
+
+                // Here determine the flag indicating what data is to be shown
+                foreach (MainASTERIXDataStorage.CAT62Data Msg in MainASTERIXDataStorage.CAT62Message)
+                {
+                    if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("105")].value != null)
+                    {
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.CAT62DataItems[CAT62.ItemIDToIndex("010")].value;
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+                        GeoCordSystemDegMinSecUtilities.LatLongClass MyData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.CAT62DataItems[CAT62.ItemIDToIndex("105")].value;
+                        string Lat, Lon = "";
+                        MyData.GetDegMinSecStringFormat(out Lat, out Lon);
+                        this.listBoxMainDataBox.Items.Add("\tLat: " + Lat);
+                        this.listBoxMainDataBox.Items.Add("\tLon: " + Lon);
+                        this.listBoxMainDataBox.Items.Add("    ");
+                    }
+                }
+            }
+            else
+            {
+                this.listBoxMainDataBox.Items.Add("No data of this CAT/Item was received !!!");
+            }
+        }
+        private void DisplayCAT62I060Data()
+        {
+            if (MainASTERIXDataStorage.CAT62Message.Count > 0)
+            {
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT62Message[0].CAT62DataItems[CAT62.ItemIDToIndex("010")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT62Message[0].CAT62DataItems[CAT62.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
+                this.listBoxMainDataBox.Items.Add("    ");
+
+                // Here determine the flag indicating what data is to be shown
+                foreach (MainASTERIXDataStorage.CAT62Data Msg in MainASTERIXDataStorage.CAT62Message)
+                {
+                    if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("060")].value != null)
+                    {
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.CAT62DataItems[CAT62.ItemIDToIndex("010")].value;
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+                        CAT62I060Types.CAT62060Mode3UserData MyData = (CAT62I060Types.CAT62060Mode3UserData)Msg.CAT62DataItems[CAT62.ItemIDToIndex("060")].value;
+                        this.listBoxMainDataBox.Items.Add("\tMode 3A has changed: " + MyData.Mode_3A_Has_Changed.ToString());
+                        this.listBoxMainDataBox.Items.Add("\tMode 3A Code: " + MyData.Mode3A_Code);
+                        this.listBoxMainDataBox.Items.Add("    ");
+                    }
+
+                }
+            }
+        }
+        private void DisplayCAT62I040Data()
+        {
+            if (MainASTERIXDataStorage.CAT62Message.Count > 0)
+            {
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT62Message[0].CAT62DataItems[CAT62.ItemIDToIndex("010")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT62Message[0].CAT62DataItems[CAT62.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
+                this.listBoxMainDataBox.Items.Add("    ");
+
+                // Here determine the flag indicating what data is to be shown
+                foreach (MainASTERIXDataStorage.CAT62Data Msg in MainASTERIXDataStorage.CAT62Message)
+                {
+                    if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("040")].value != null)
+                    {
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.CAT62DataItems[CAT62.ItemIDToIndex("010")].value;
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+
+                        int MyData = (int)Msg.CAT62DataItems[CAT62.ItemIDToIndex("040")].value;
+                        this.listBoxMainDataBox.Items.Add("\tTrack Number: " + MyData.ToString());
+                        this.listBoxMainDataBox.Items.Add("    ");
+                    }
+                }
+            }
+        }
+        private void DisplayCAT62I136Data()
+        {
+            if (MainASTERIXDataStorage.CAT62Message.Count > 0)
+            {
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT62Message[0].CAT62DataItems[CAT62.ItemIDToIndex("010")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT62Message[0].CAT62DataItems[CAT62.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
+                this.listBoxMainDataBox.Items.Add("    ");
+
+                // Here determine the flag indicating what data is to be shown
+                foreach (MainASTERIXDataStorage.CAT62Data Msg in MainASTERIXDataStorage.CAT62Message)
+                {
+                    if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value != null)
+                    {
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.CAT62DataItems[CAT62.ItemIDToIndex("010")].value;
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+
+                        double MyData = (double)Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value;
+                        this.listBoxMainDataBox.Items.Add("\tMeasured FL: " + MyData.ToString());
+                        this.listBoxMainDataBox.Items.Add("    ");
+                    }
+                }
+            }
+        }
+        private void DisplayCAT62I380_SUBF2_ACIDData()
+        {
+            if (MainASTERIXDataStorage.CAT62Message.Count > 0)
+            {
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT62Message[0].CAT62DataItems[CAT62.ItemIDToIndex("010")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT62Message[0].CAT62DataItems[CAT62.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
+                this.listBoxMainDataBox.Items.Add("    ");
+
+                // Here determine the flag indicating what data is to be shown
+                foreach (MainASTERIXDataStorage.CAT62Data Msg in MainASTERIXDataStorage.CAT62Message)
+                {
+                    if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value != null)
+                    {
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.CAT62DataItems[CAT62.ItemIDToIndex("010")].value;
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+                        CAT62I380Types.CAT62I380ACID_Data MyData = (CAT62I380Types.CAT62I380ACID_Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
+                        this.listBoxMainDataBox.Items.Add("\tACID: " + MyData.ACID.ACID_String);
+                        this.listBoxMainDataBox.Items.Add("    ");
+                    }
+                }
             }
         }
         #endregion

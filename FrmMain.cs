@@ -146,6 +146,9 @@ namespace AsterixDisplayAnalyser
             this.checkBoxDisplayPSR.Checked = Properties.Settings.Default.DisplayPSR;
 
             HandlePlotDisplayEnabledChanged();
+
+          
+           
         }
 
         private void InitializeMap()
@@ -1048,6 +1051,8 @@ namespace AsterixDisplayAnalyser
         {
             if (DisplayAttributes.StaticDisplayBuildRequired)
             {
+               
+                
                 // Always check for the change to the background color
                 gMapControl.EmptyMapBackground = DisplayAttributes.GetDisplayAttribute(DisplayAttributes.DisplayItemsType.BackgroundColor).TextColor;
 
@@ -1058,6 +1063,8 @@ namespace AsterixDisplayAnalyser
 
                 StaticDisplayBuilder.Build(ref StaticOverlay);
                 DisplayAttributes.StaticDisplayBuildRequired = false;
+
+                gMapControl.MapProvider = GMapProviders.EmptyProvider;
             }
         }
 
@@ -1266,6 +1273,48 @@ namespace AsterixDisplayAnalyser
         {
             FrmDetailedView MyDetailedView = new FrmDetailedView();
             MyDetailedView.WhatToDisplay = FrmDetailedView.DisplayType.CAT34I041;
+            MyDetailedView.Show();
+        }
+
+        private void serviceIdentificationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmDetailedView MyDetailedView = new FrmDetailedView();
+            MyDetailedView.WhatToDisplay = FrmDetailedView.DisplayType.CAT62I015;
+            MyDetailedView.Show();
+        }
+
+        private void trackNumberToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FrmDetailedView MyDetailedView = new FrmDetailedView();
+            MyDetailedView.WhatToDisplay = FrmDetailedView.DisplayType.CAT62I040;
+            MyDetailedView.Show();
+        }
+
+        private void trackMode3ACodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmDetailedView MyDetailedView = new FrmDetailedView();
+            MyDetailedView.WhatToDisplay = FrmDetailedView.DisplayType.CAT62I060;
+            MyDetailedView.Show();
+        }
+
+        private void calculatedTrackPositionWGS84ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmDetailedView MyDetailedView = new FrmDetailedView();
+            MyDetailedView.WhatToDisplay = FrmDetailedView.DisplayType.CAT62I105;
+            MyDetailedView.Show();
+        }
+
+        private void measuredFlightLevelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmDetailedView MyDetailedView = new FrmDetailedView();
+            MyDetailedView.WhatToDisplay = FrmDetailedView.DisplayType.CAT62I136;
+            MyDetailedView.Show();
+        }
+
+        private void aircraftDerivedDataSUBF2ACIDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmDetailedView MyDetailedView = new FrmDetailedView();
+            MyDetailedView.WhatToDisplay = FrmDetailedView.DisplayType.CAT62I380_SUBF2_ACID;
             MyDetailedView.Show();
         }
     }

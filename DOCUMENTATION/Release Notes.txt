@@ -90,7 +90,8 @@ Version 1.4
 Version 1.4.1
 
 	1. Added support/decoders for CAT34 and CAT02
-	2. 
+	2. Added CAT62 to the Detailed View
+	3. 
 
 SO FAR THE FOLLOWING DECODERS ARE IMPLEMENTED
 

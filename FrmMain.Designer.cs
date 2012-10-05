@@ -122,6 +122,12 @@
             this.mode1CodeInOctalRepresentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mode1CodeConfidenceIndicatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cAT062ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.serviceIdentificationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trackNumberToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.trackMode3ACodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.calculatedTrackPositionWGS84ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.measuredFlightLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aircraftDerivedDataSUBF2ACIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cAT063ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cAT065ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cAT244ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -945,10 +951,58 @@
             // 
             // cAT062ToolStripMenuItem
             // 
-            this.cAT062ToolStripMenuItem.Enabled = false;
+            this.cAT062ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.serviceIdentificationToolStripMenuItem,
+            this.trackNumberToolStripMenuItem1,
+            this.trackMode3ACodeToolStripMenuItem,
+            this.calculatedTrackPositionWGS84ToolStripMenuItem,
+            this.measuredFlightLevelToolStripMenuItem,
+            this.aircraftDerivedDataSUBF2ACIDToolStripMenuItem});
             this.cAT062ToolStripMenuItem.Name = "cAT062ToolStripMenuItem";
             this.cAT062ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.cAT062ToolStripMenuItem.Text = "CAT062";
+            // 
+            // serviceIdentificationToolStripMenuItem
+            // 
+            this.serviceIdentificationToolStripMenuItem.Name = "serviceIdentificationToolStripMenuItem";
+            this.serviceIdentificationToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
+            this.serviceIdentificationToolStripMenuItem.Text = "015 Service Identification";
+            this.serviceIdentificationToolStripMenuItem.Click += new System.EventHandler(this.serviceIdentificationToolStripMenuItem_Click);
+            // 
+            // trackNumberToolStripMenuItem1
+            // 
+            this.trackNumberToolStripMenuItem1.Name = "trackNumberToolStripMenuItem1";
+            this.trackNumberToolStripMenuItem1.Size = new System.Drawing.Size(288, 22);
+            this.trackNumberToolStripMenuItem1.Text = "040 Track Number";
+            this.trackNumberToolStripMenuItem1.Click += new System.EventHandler(this.trackNumberToolStripMenuItem1_Click);
+            // 
+            // trackMode3ACodeToolStripMenuItem
+            // 
+            this.trackMode3ACodeToolStripMenuItem.Name = "trackMode3ACodeToolStripMenuItem";
+            this.trackMode3ACodeToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
+            this.trackMode3ACodeToolStripMenuItem.Text = "060 Track Mode 3/A Code ";
+            this.trackMode3ACodeToolStripMenuItem.Click += new System.EventHandler(this.trackMode3ACodeToolStripMenuItem_Click);
+            // 
+            // calculatedTrackPositionWGS84ToolStripMenuItem
+            // 
+            this.calculatedTrackPositionWGS84ToolStripMenuItem.Name = "calculatedTrackPositionWGS84ToolStripMenuItem";
+            this.calculatedTrackPositionWGS84ToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
+            this.calculatedTrackPositionWGS84ToolStripMenuItem.Text = "105 Calculated Track Position (WGS-84)";
+            this.calculatedTrackPositionWGS84ToolStripMenuItem.Click += new System.EventHandler(this.calculatedTrackPositionWGS84ToolStripMenuItem_Click);
+            // 
+            // measuredFlightLevelToolStripMenuItem
+            // 
+            this.measuredFlightLevelToolStripMenuItem.Name = "measuredFlightLevelToolStripMenuItem";
+            this.measuredFlightLevelToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
+            this.measuredFlightLevelToolStripMenuItem.Text = "136 Measured Flight Level";
+            this.measuredFlightLevelToolStripMenuItem.Click += new System.EventHandler(this.measuredFlightLevelToolStripMenuItem_Click);
+            // 
+            // aircraftDerivedDataSUBF2ACIDToolStripMenuItem
+            // 
+            this.aircraftDerivedDataSUBF2ACIDToolStripMenuItem.Name = "aircraftDerivedDataSUBF2ACIDToolStripMenuItem";
+            this.aircraftDerivedDataSUBF2ACIDToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
+            this.aircraftDerivedDataSUBF2ACIDToolStripMenuItem.Text = "380 Aircraft Derived Data SUBF#2 - ACID ";
+            this.aircraftDerivedDataSUBF2ACIDToolStripMenuItem.Click += new System.EventHandler(this.aircraftDerivedDataSUBF2ACIDToolStripMenuItem_Click);
             // 
             // cAT063ToolStripMenuItem1
             // 
@@ -1932,6 +1986,12 @@
         private System.Windows.Forms.CheckBox checkBoxSyncToNM;
         private System.Windows.Forms.Timer NorthMarkerTimer;
         private System.Windows.Forms.CheckBox checkBoxDisplayPSR;
+        private System.Windows.Forms.ToolStripMenuItem serviceIdentificationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem trackNumberToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem trackMode3ACodeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem calculatedTrackPositionWGS84ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem measuredFlightLevelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aircraftDerivedDataSUBF2ACIDToolStripMenuItem;
     }
 }
 
