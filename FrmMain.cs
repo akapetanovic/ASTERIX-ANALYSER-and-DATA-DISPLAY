@@ -147,8 +147,8 @@ namespace AsterixDisplayAnalyser
 
             HandlePlotDisplayEnabledChanged();
 
-          
-           
+
+
         }
 
         private void InitializeMap()
@@ -564,6 +564,7 @@ namespace AsterixDisplayAnalyser
 
                 foreach (DynamicDisplayBuilder.TargetType Target in TargetList)
                 {
+
                     if (Passes_Check_For_Flight_Level_Filter(Target.ModeC))
                     {
                         // If SSR code filtering is to be applied 
@@ -573,21 +574,20 @@ namespace AsterixDisplayAnalyser
                         {
                             if (Target.ModeA == this.textBoxSSRCode.Text)
                             {
-                                GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
-                                MyMarker.ToolTipMode = MarkerTooltipMode.Always;
-                                MyMarker.ToolTipText = BuildLabelText(Target, true);
-                                SetLabelAttributes(ref MyMarker);
-                                DinamicOverlay.Markers.Add(MyMarker);
+                                Target.MyMarker.ToolTipMode = MarkerTooltipMode.Always;
+                                Target.MyMarker.ToolTipText = BuildLabelText(Target, true);
+                                Target.MyMarker.Position = new PointLatLng(Target.Lat, Target.Lon);
+                                SetLabelAttributes(ref Target.MyMarker);
+                                DinamicOverlay.Markers.Add(Target.MyMarker);
                             }
                         }
                         else // No SSR filter so just display all of them
                         {
-                            GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
-                            MyMarker.DisableRegionCheck = true;
-                            MyMarker.ToolTipMode = MarkerTooltipMode.Always;
-                            MyMarker.ToolTipText = BuildLabelText(Target, true);
-                            SetLabelAttributes(ref MyMarker);
-                            DinamicOverlay.Markers.Add(MyMarker);
+                            Target.MyMarker.ToolTipMode = MarkerTooltipMode.Always;
+                            Target.MyMarker.ToolTipText = BuildLabelText(Target, true);
+                            Target.MyMarker.Position = new PointLatLng(Target.Lat, Target.Lon);
+                            SetLabelAttributes(ref Target.MyMarker);
+                            DinamicOverlay.Markers.Add(Target.MyMarker);
                         }
                     }
                 }
@@ -661,9 +661,27 @@ namespace AsterixDisplayAnalyser
             return Label_Text_Out;
         }
 
+        private void SetLabelAttributes(ref GMapMarkerImage Marker_In)
+        {
+            // Label Text Font and Size
+            Marker_In.ToolTip.Font = new Font(LabelAttributes.TextFont, LabelAttributes.TextSize,
+            FontStyle.Bold | FontStyle.Regular);
+            Marker_In.ToolTip.Foreground = new SolidBrush(LabelAttributes.TextColor);
+
+            // Label Border color
+            Marker_In.ToolTip.Stroke = new Pen(new SolidBrush(LabelAttributes.LineColor), LabelAttributes.LineWidth);
+            Marker_In.ToolTip.Stroke.DashStyle = LabelAttributes.LineStyle;
+
+            // Label background color
+            Marker_In.ToolTip.Fill = Brushes.Transparent;
+
+            // Align the text
+            Marker_In.ToolTip.Format.LineAlignment = StringAlignment.Center;
+            Marker_In.ToolTip.Format.Alignment = StringAlignment.Near;
+        }
+
         private void SetLabelAttributes(ref GMap.NET.WindowsForms.Markers.GMapMarkerCross Marker_In)
         {
-
             // Label Text Font and Size
             Marker_In.ToolTip.Font = new Font(LabelAttributes.TextFont, LabelAttributes.TextSize,
             FontStyle.Bold | FontStyle.Regular);
@@ -722,7 +740,7 @@ namespace AsterixDisplayAnalyser
                 if (SharedData.bool_Listen_for_Data == true)
                 {
                     this.checkEnableDisplay.Text = "Live Enabled";
-                  
+
                     // Start the timer if Sync to coast is not set
                     if (this.checkBoxSyncToNM.Checked == false)
                     {
@@ -738,7 +756,7 @@ namespace AsterixDisplayAnalyser
                         this.textBoxUpdateRate.Enabled = false;
                         this.labelDisplayUpdateRate.Enabled = false;
                     }
-                  
+
                     this.checkBoxSyncToNM.Enabled = true;
                     this.textBox1TrackCoast.Enabled = true;
                 }
@@ -1018,14 +1036,14 @@ namespace AsterixDisplayAnalyser
         // Update Mouse posistion on the control
         private void gMapControl_MouseMove(object sender, MouseEventArgs e)
         {
-            //if (e.Button == MouseButtons.Left && isDraggingMarker && currentMarker != null)
-            //{
-            //    currentMarker.Position = gMapControl.FromLocalToLatLng(e.X, e.Y);
-
-            //    currentMarker.ToolTip.Offset = new Point(e.X, e.Y);
-
-            //    gMapControl.Refresh();
-            //}
+            if (e.Button == MouseButtons.Left && isDraggingMarker && currentMarker != null)
+            {
+                PointLatLng MousePosition = gMapControl.FromLocalToLatLng(e.X, e.Y);
+                GPoint MarkerPositionLocal = gMapControl.FromLatLngToLocal(currentMarker.Position);
+                GPoint NewToolTipPosition = new GPoint(MarkerPositionLocal.X - e.X, MarkerPositionLocal.Y - e.Y);
+                currentMarker.ToolTip.Offset = new Point(NewToolTipPosition.X * -1, NewToolTipPosition.Y * -1);
+                gMapControl.Refresh();
+            }
 
         }
 
@@ -1051,8 +1069,8 @@ namespace AsterixDisplayAnalyser
         {
             if (DisplayAttributes.StaticDisplayBuildRequired)
             {
-               
-                
+
+
                 // Always check for the change to the background color
                 gMapControl.EmptyMapBackground = DisplayAttributes.GetDisplayAttribute(DisplayAttributes.DisplayItemsType.BackgroundColor).TextColor;
 
@@ -1146,6 +1164,7 @@ namespace AsterixDisplayAnalyser
                     GMapOverlay o = overlays[i];
                     if (o != null && o.IsVisibile)
                         foreach (GMapMarker m in o.Markers)
+                            // new Point((m.ToolTipPosition.X  + m.ToolTip.Offset.X), (m.ToolTipPosition.Y  + m.ToolTip.Offset.Y))
                             if (m.IsVisible && m.IsHitTestVisible && m.IsMouseOver)
                             {
                                 currentMarker = m;
@@ -1155,6 +1174,17 @@ namespace AsterixDisplayAnalyser
                 }
             }
 
+        }
+
+        bool IsOnToolTip(Point P, MouseEventArgs Mouse)
+        {
+            bool Is_On_Tool_Tip = false;
+
+            if (((Mouse.X > P.X) && (Mouse.X < (P.X + 50))) && ((Mouse.Y < P.Y) && (Mouse.Y < (P.Y + 50))))
+            {
+                Is_On_Tool_Tip = true;
+            }
+            return Is_On_Tool_Tip;
         }
 
         private void gMapControl_MouseUp(object sender, MouseEventArgs e)
@@ -1259,7 +1289,7 @@ namespace AsterixDisplayAnalyser
             if (North_Marker_Received == true)
             {
                 North_Marker_Received = false;
-                Update_PlotTrack_Data(); 
+                Update_PlotTrack_Data();
             }
         }
 

@@ -87,11 +87,11 @@ Version 1.4
 
   8. Implemented additional fix in order to handle variable length Items for CAT48.
 
-Version 1.4.1
+Version 1.5
 
 	1. Added support/decoders for CAT34 and CAT02
 	2. Added CAT62 to the Detailed View
-	3. 
+	3. Improved display to be able to move the lables
 
 SO FAR THE FOLLOWING DECODERS ARE IMPLEMENTED
 
@@ -128,13 +128,6 @@ CAT62
 		136 Measured Flight Level 
 		380 Aircraft Derived Data
 			Subfield # 2: Target Identification
-
-
-PLANS FOR FUTURE UPDATES:
-
-Version 1.5
-
-1. Improve display to be able to manupulate the lables (move it and make it interactive, ex: be able to enter CFL, ADES, etc..)
 
 
 Amer Kapetanovic (akapetanovic@gmail.com)

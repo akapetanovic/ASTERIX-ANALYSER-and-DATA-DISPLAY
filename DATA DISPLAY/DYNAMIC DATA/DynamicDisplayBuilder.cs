@@ -2,11 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GMap.NET.WindowsForms;
+using GMap.NET;
+using GMap.NET.MapProviders;
+using System.Drawing;
 
 namespace AsterixDisplayAnalyser
 {
     class DynamicDisplayBuilder
     {
+
+        static string FileName = @"C:\ASTERIX\IMAGES\radar.jpg";
+        static Image AircraftImage = Image.FromFile(FileName);
+
+        // Get radar display attributes
+        static DisplayAttributes.DisplayAttributesType RadarDisplayAttribute = DisplayAttributes.GetDisplayAttribute(DisplayAttributes.DisplayItemsType.Radar);
+
         public class TargetType
         {
             public string ModeA;
@@ -16,9 +27,12 @@ namespace AsterixDisplayAnalyser
             public double Lon;
             public int TrackNumber = -1;
             public int TrackTerminateTreshold = Properties.Settings.Default.TrackCoast;
+            // Image properties
+            public GMapMarkerImage MyMarker =
+                new GMapMarkerImage(new PointLatLng(0, 0), AircraftImage);
         }
 
-        // Keeps track of the data index from the lasts update of the 
+        // Keeps track of the data index from the last update of the 
         // display. Used in order to be able to extract only targets recived
         // since the last data update. 
         private static int LastDataIndex = 0;
@@ -41,6 +55,8 @@ namespace AsterixDisplayAnalyser
             {
                 GlobalTargetList.Add(new TargetType());
             }
+
+            AircraftImage = GraphicUtilities.ResizeImage(AircraftImage, new Size(RadarDisplayAttribute.ImageSize.Width, RadarDisplayAttribute.ImageSize.Height), false);
         }
 
         private static void UpdateGlobalList()
@@ -57,6 +73,7 @@ namespace AsterixDisplayAnalyser
                     GlobalTargetList[CurrentTarget.TrackNumber].Lon = CurrentTarget.Lon;
                     GlobalTargetList[CurrentTarget.TrackNumber].TrackNumber = CurrentTarget.TrackNumber;
                     GlobalTargetList[CurrentTarget.TrackNumber].TrackTerminateTreshold = CurrentTarget.TrackTerminateTreshold;
+
                 }
                 else
                 {
@@ -68,6 +85,7 @@ namespace AsterixDisplayAnalyser
                     GlobalTargetList[ModeAIndex].Lon = CurrentTarget.Lon;
                     GlobalTargetList[ModeAIndex].TrackNumber = CurrentTarget.TrackNumber;
                     GlobalTargetList[ModeAIndex].TrackTerminateTreshold = CurrentTarget.TrackTerminateTreshold;
+
                 }
             }
 
@@ -85,7 +103,13 @@ namespace AsterixDisplayAnalyser
                     NewTarget.Lon = GlobalTarget.Lon;
                     NewTarget.TrackNumber = GlobalTarget.TrackNumber;
                     NewTarget.TrackTerminateTreshold = GlobalTarget.TrackTerminateTreshold;
+                    NewTarget.MyMarker = GlobalTarget.MyMarker;
                     CurrentTargetList.Add(NewTarget);
+                }
+                else
+                {
+                    if (GlobalTarget.MyMarker.ToolTip != null)
+                        GlobalTarget.MyMarker.ToolTip.Offset = new Point(0, 0);
                 }
             }
 
@@ -103,6 +127,7 @@ namespace AsterixDisplayAnalyser
                     NewTarget.Lon = PSRTgtList.Lon;
                     NewTarget.TrackNumber = PSRTgtList.TrackNumber;
                     NewTarget.TrackTerminateTreshold = 0;
+                    NewTarget.MyMarker = PSRTgtList.MyMarker;
                     CurrentTargetList.Add(NewTarget);
                 }
             }
@@ -202,7 +227,6 @@ namespace AsterixDisplayAnalyser
                             Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
                             CurrentTargetList.Add(Target);
                         }
-
                     }
                 }
                 else if (MainASTERIXDataStorage.CAT62Message.Count > 0)
@@ -260,6 +284,7 @@ namespace AsterixDisplayAnalyser
                             Target.ModeC = "";
                             Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                             Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                            Target.MyMarker.Position = new PointLatLng(Target.Lat, Target.Lon);
                             PSRTargetList.Add(Target);
                         }
                         else if ((MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.No_Detection) && (MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.Unknown_Data))
