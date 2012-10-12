@@ -80,6 +80,11 @@ namespace AsterixDisplayAnalyser
             North_Marker_Received = true;
         }
 
+        public void UpdateDIsplay()
+        {
+            gMapControl.Refresh();
+        }
+
         // This is a timer driven method which will update the main 
         // display box with the currently received data
         private void DataUpdateTimer_Tick(object sender, EventArgs e)
@@ -651,6 +656,8 @@ namespace AsterixDisplayAnalyser
 
             if (Target_Data.ACID_Mode_S != null)
                 Label_Data.CALLSIGN_STRING = Target_Data.ACID_Mode_S;
+
+            Label_Data.MyTargetIndex = Target_Data.TrackNumber;
         }
 
         private string ApplyCModeHisterysis(string Mode_C_In)
@@ -690,6 +697,9 @@ namespace AsterixDisplayAnalyser
 
             Marker_In.ModeC_FONT = new Font(LabelAttributes.TextFont, LabelAttributes.TextSize,
             FontStyle.Bold | FontStyle.Regular);
+
+            Marker_In.CFL_FONT = new Font(LabelAttributes.TextFont, LabelAttributes.TextSize,
+           FontStyle.Bold | FontStyle.Regular);
 
 
             // Label Border color
@@ -1143,7 +1153,7 @@ namespace AsterixDisplayAnalyser
 
         private void gMapControl_MouseClick(object sender, MouseEventArgs e)
         {
-
+           
         }
 
         private void FormMain_Resize(object sender, EventArgs e)
@@ -1206,6 +1216,8 @@ namespace AsterixDisplayAnalyser
 
         private void gMapControl_MouseDown(object sender, MouseEventArgs e)
         {
+            // Check if the user is trying to move the lable. If so then flag it by 
+            // setting the flag isDraggingMareker to true
             if (e.Button == MouseButtons.Left && SharedData.bool_Listen_for_Data == true)
             {
                 GMapOverlay[] overlays = new GMapOverlay[] { DinamicOverlay };
@@ -1216,14 +1228,38 @@ namespace AsterixDisplayAnalyser
                         foreach (GMapMarker m in o.Markers)
                             if (m.IsVisible && m.IsHitTestVisible)
                             {
-                                PointLatLng MousePosition = gMapControl.FromLocalToLatLng(e.X, e.Y);
-                                GPoint MarkerPositionLocal = gMapControl.FromLatLngToLocal(m.Position);
-                                GPoint NewLabelPosition = new GPoint(MarkerPositionLocal.X - e.X, MarkerPositionLocal.Y - e.Y);
                                 if (MouseIsOnTheLabel(e, m))
                                 {
                                     currentMarker = m;
                                     isDraggingMarker = true;
                                     return;
+                                }
+                            }
+                }
+            }
+            else if (e.Button == MouseButtons.Right && SharedData.bool_Listen_for_Data == true)// 
+            {
+                // Check if the user clicked on the CFL field. If so then open up the dialog to
+                // let him/ger to modify/enter the CFL
+                GMapOverlay[] overlays = new GMapOverlay[] { DinamicOverlay };
+                for (int i = overlays.Length - 1; i >= 0; i--)
+                {
+                    GMapOverlay o = overlays[i];
+                    if (o != null && o.IsVisibile)
+                        foreach (GMapMarker m in o.Markers)
+                            if (m.IsVisible && m.IsHitTestVisible)
+                            {
+                                if (MouseIsOnTheCFL(e, m) )
+                                {
+                                    GMapTargetandLabel MyMarker = (GMapTargetandLabel)m;
+                                    if (MyMarker.MyTargetIndex != -1)
+                                    {
+                                        UpdateCFL MyForm = new UpdateCFL();
+                                        MyForm.TrackToUpdate = MyMarker.MyTargetIndex;
+                                        MyForm.StartPosition = FormStartPosition.Manual;
+                                        MyForm.Location = new Point(e.X + 175, e.Y + 65);
+                                        MyForm.Show();
+                                    }
                                 }
                             }
                 }
@@ -1234,6 +1270,13 @@ namespace AsterixDisplayAnalyser
         {
             GMapTargetandLabel MyMarker = (GMapTargetandLabel)Marker;
             Rectangle MyRectangle = new Rectangle(MyMarker.GetLabelStartingPoint().X, MyMarker.GetLabelStartingPoint().Y, MyMarker.GetLabelWidth(), MyMarker.GetLabelHeight());
+            return MyRectangle.Contains(new Point(Mouse.X, Mouse.Y));
+        }
+
+        bool MouseIsOnTheCFL(MouseEventArgs Mouse, GMapMarker Marker)
+        {
+            GMapTargetandLabel MyMarker = (GMapTargetandLabel)Marker;
+            Rectangle MyRectangle = new Rectangle(MyMarker.GetCFLStartPoint().X, MyMarker.GetCFLStartPoint().Y, 20,  10);
             return MyRectangle.Contains(new Point(Mouse.X, Mouse.Y));
         }
 

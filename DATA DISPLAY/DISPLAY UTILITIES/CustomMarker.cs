@@ -49,6 +49,11 @@ namespace AsterixDisplayAnalyser
 
     public class GMapTargetandLabel : GMap.NET.WindowsForms.GMapMarker
     {
+        
+        // Define an index of the track this marker is used for
+        // Needed to GUI is able to update the right track (CFL, XFL, etc..
+        public int MyTargetIndex = -1;
+        
         // Defines starting position of the label relative to the AC symbol
         public Point LabelOffset = new Point(25, 25);
 
@@ -81,6 +86,8 @@ namespace AsterixDisplayAnalyser
 
         // Define CFL attributes
         public Point CFL_OFFSET = new Point(2, 0);
+        private int CFL_START_X = 0;
+        private int CFL_START_Y = 0;
         public Brush CFL_BRUSH = Brushes.Green;
         public static FontFamily CFL_FONT_FAMILLY = FontFamily.GenericSansSerif;
         public Font CFL_FONT = new Font(CFL_FONT_FAMILLY, 10, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -91,6 +98,7 @@ namespace AsterixDisplayAnalyser
         {
             LabelOffset = new Point(25, 25);
             CFL_STRING = "---";
+            MyTargetIndex = -1;
         }
 
         public int GetLabelWidth()
@@ -101,7 +109,12 @@ namespace AsterixDisplayAnalyser
         public int GetLabelHeight()
         {
             return LabelHeight;
-        } 
+        }
+
+        public Point GetCFLStartPoint()
+        {
+            return new Point(CFL_START_X, CFL_START_Y);
+        }
 
         // Returns starting point of the label box
         public Point GetLabelStartingPoint()
@@ -147,8 +160,11 @@ namespace AsterixDisplayAnalyser
 
             // Draw CFL on the same line
             CFL_OFFSET.X = (ModeC_STRING.Length + 1) * (int)ModeC_FONT.Size;
-            g.DrawString(CFL_STRING, CFL_FONT, CFL_BRUSH, LabelStartPosition.X + CFL_OFFSET.X, LabelStartPosition.Y + LabelHeight);
-
+            CFL_OFFSET.Y = LabelStartPosition.Y + LabelHeight;
+            g.DrawString(CFL_STRING, CFL_FONT, CFL_BRUSH, LabelStartPosition.X + CFL_OFFSET.X, CFL_OFFSET.Y);
+            CFL_START_X = LabelStartPosition.X + CFL_OFFSET.X;
+            CFL_START_Y = CFL_OFFSET.Y;
+            
             LabelHeight = LabelHeight + (int)ModeC_FONT.Size + SpacingIndex * 2;
 
             if (ShowLabelBox == true)

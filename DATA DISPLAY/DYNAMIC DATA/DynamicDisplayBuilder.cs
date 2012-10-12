@@ -84,7 +84,7 @@ namespace AsterixDisplayAnalyser
                     GlobalTargetList[ModeAIndex].ACID_Mode_S = CurrentTarget.ACID_Mode_S;
                     GlobalTargetList[ModeAIndex].Lat = CurrentTarget.Lat;
                     GlobalTargetList[ModeAIndex].Lon = CurrentTarget.Lon;
-                    GlobalTargetList[ModeAIndex].TrackNumber = CurrentTarget.TrackNumber;
+                    GlobalTargetList[ModeAIndex].TrackNumber = ModeAIndex;
                     GlobalTargetList[ModeAIndex].TrackTerminateTreshold = CurrentTarget.TrackTerminateTreshold;
                 }
             }

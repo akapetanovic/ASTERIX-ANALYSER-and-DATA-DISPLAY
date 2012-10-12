@@ -95,6 +95,7 @@ Version 1.5
 	4. Added option to select Mode C to be displayed either as Flight Level or raw decoded value.
 	5. Added Flight Mode indicator (↑ or ↓ next to Mode C depending if Target is climbing or descending)
 	6. Improved display by displaying label box only for Targets covered by a mouse pointer.
+	7. Added functionality to enter a CFL into a label.
 
 SO FAR THE FOLLOWING DECODERS ARE IMPLEMENTED
 
