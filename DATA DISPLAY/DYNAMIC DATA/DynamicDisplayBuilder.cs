@@ -11,13 +11,6 @@ namespace AsterixDisplayAnalyser
 {
     class DynamicDisplayBuilder
     {
-
-        static string FileName = @"C:\ASTERIX\IMAGES\radar.jpg";
-        static Image AircraftImage = Image.FromFile(FileName);
-
-        // Get radar display attributes
-        static DisplayAttributes.DisplayAttributesType RadarDisplayAttribute = DisplayAttributes.GetDisplayAttribute(DisplayAttributes.DisplayItemsType.Radar);
-
         public class TargetType
         {
             public string ModeA;
@@ -28,8 +21,7 @@ namespace AsterixDisplayAnalyser
             public int TrackNumber = -1;
             public int TrackTerminateTreshold = Properties.Settings.Default.TrackCoast;
             // Image properties
-            public GMapMarkerImage MyMarker =
-                new GMapMarkerImage(new PointLatLng(0, 0), AircraftImage);
+            public GMapTargetandLabel MyMarker = new GMapTargetandLabel(new PointLatLng(0, 0));
         }
 
         // Keeps track of the data index from the last update of the 
@@ -49,14 +41,17 @@ namespace AsterixDisplayAnalyser
         private static System.Collections.Generic.List<TargetType> GlobalTargetList = new System.Collections.Generic.List<TargetType>();
         private static System.Collections.Generic.List<TargetType> PSRTargetList = new System.Collections.Generic.List<TargetType>();
 
+        public static void UpdateCFL(int Index, string CFL_Value)
+        {
+            GlobalTargetList[Index].MyMarker.CFL_STRING = CFL_Value;
+        }
+
         public static void Initialise()
         {
             for (int I = 0; I < 65536; I++)
             {
                 GlobalTargetList.Add(new TargetType());
             }
-
-            AircraftImage = GraphicUtilities.ResizeImage(AircraftImage, new Size(RadarDisplayAttribute.ImageSize.Width, RadarDisplayAttribute.ImageSize.Height), false);
         }
 
         private static void UpdateGlobalList()
@@ -73,7 +68,6 @@ namespace AsterixDisplayAnalyser
                     GlobalTargetList[CurrentTarget.TrackNumber].Lon = CurrentTarget.Lon;
                     GlobalTargetList[CurrentTarget.TrackNumber].TrackNumber = CurrentTarget.TrackNumber;
                     GlobalTargetList[CurrentTarget.TrackNumber].TrackTerminateTreshold = CurrentTarget.TrackTerminateTreshold;
-
                 }
                 else
                 {
@@ -85,7 +79,6 @@ namespace AsterixDisplayAnalyser
                     GlobalTargetList[ModeAIndex].Lon = CurrentTarget.Lon;
                     GlobalTargetList[ModeAIndex].TrackNumber = CurrentTarget.TrackNumber;
                     GlobalTargetList[ModeAIndex].TrackTerminateTreshold = CurrentTarget.TrackTerminateTreshold;
-
                 }
             }
 
@@ -108,11 +101,10 @@ namespace AsterixDisplayAnalyser
                 }
                 else
                 {
-                    if (GlobalTarget.MyMarker.ToolTip != null)
-                        GlobalTarget.MyMarker.ToolTip.Offset = new Point(0, 0);
+                    if (GlobalTarget.MyMarker != null)
+                        GlobalTarget.MyMarker.TerminateTarget();
                 }
             }
-
 
             if (Properties.Settings.Default.DisplayPSR == true)
             {
@@ -295,7 +287,6 @@ namespace AsterixDisplayAnalyser
                             Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
                             CurrentTargetList.Add(Target);
                         }
-
                     }
                 }
                 else if (MainASTERIXDataStorage.CAT48Message.Count > 0)
