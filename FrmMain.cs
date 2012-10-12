@@ -146,9 +146,6 @@ namespace AsterixDisplayAnalyser
             this.checkBoxDisplayPSR.Checked = Properties.Settings.Default.DisplayPSR;
 
             HandlePlotDisplayEnabledChanged();
-
-
-
         }
 
         private void InitializeMap()
@@ -641,20 +638,43 @@ namespace AsterixDisplayAnalyser
                 CoastIndicator = "";
 
             Label_Data.ModeA_CI_STRING = Target_Data.ModeA + CoastIndicator;
-            Label_Data.ModeC_STRING = Target_Data.ModeC;
 
-            if (Target_Data.ACID_Modes != null)
-                Label_Data.CALLSIGN_STRING = Target_Data.ACID_Modes;
+            Label_Data.ModeC_STRING = ApplyCModeHisterysis(Target_Data.ModeC);
+
+            if (Target_Data.ModeC_Previous_Cycle != null && Target_Data.ModeC != null && Target_Data.ModeC_Previous_Cycle != "")
+            {
+                if (double.Parse(Target_Data.ModeC_Previous_Cycle) > double.Parse(Target_Data.ModeC))
+                    Label_Data.ModeC_STRING = Label_Data.ModeC_STRING + "↓";
+                else if (double.Parse(Target_Data.ModeC_Previous_Cycle) < double.Parse(Target_Data.ModeC))
+                    Label_Data.ModeC_STRING = Label_Data.ModeC_STRING + "↑";
+            }
+
+            if (Target_Data.ACID_Mode_S != null)
+                Label_Data.CALLSIGN_STRING = Target_Data.ACID_Mode_S;
+        }
+
+        private string ApplyCModeHisterysis(string Mode_C_In)
+        {
+            string Result = Mode_C_In;
+
+            if (Properties.Settings.Default.DisplayModeC_As_FL == true)
+            {
+                double FL = double.Parse(Result);
+                int Truncated = (int)FL;
+                Result = Truncated.ToString();
+
+            }
+            return Result;
         }
 
         private string BuildPassiveLabelText(DynamicDisplayBuilder.TargetType Target_In)
         {
             string Label_Text_Out = "";
 
-            if (Target_In.ACID_Modes != null)
-                Label_Text_Out = Target_In.ModeA + "\n" + Target_In.ACID_Modes + "\n" + Target_In.ModeC;
+            if (Target_In.ACID_Mode_S != null)
+                Label_Text_Out = Target_In.ModeA + "\n" + Target_In.ACID_Mode_S + "\n" + ApplyCModeHisterysis(Target_In.ModeC);
             else
-                Label_Text_Out = Target_In.ModeA + "\n" + Target_In.ModeC;
+                Label_Text_Out = Target_In.ModeA + "\n" + ApplyCModeHisterysis(Target_In.ModeC);
 
             return Label_Text_Out;
         }
@@ -670,8 +690,8 @@ namespace AsterixDisplayAnalyser
 
             Marker_In.ModeC_FONT = new Font(LabelAttributes.TextFont, LabelAttributes.TextSize,
             FontStyle.Bold | FontStyle.Regular);
-            
-            
+
+
             // Label Border color
             //Marker_In.ToolTip.Stroke = new Pen(new SolidBrush(LabelAttributes.LineColor), LabelAttributes.LineWidth);
             //Marker_In.ToolTip.Stroke.DashStyle = LabelAttributes.LineStyle;
@@ -1049,6 +1069,33 @@ namespace AsterixDisplayAnalyser
                 MyMarker.LabelOffset = new Point(NewLabelPosition.X, NewLabelPosition.Y);
                 gMapControl.Refresh();
             }
+            else
+            {
+                GMapOverlay[] overlays = new GMapOverlay[] { DinamicOverlay };
+                for (int i = overlays.Length - 1; i >= 0; i--)
+                {
+                    GMapOverlay o = overlays[i];
+                    if (o != null && o.IsVisibile)
+                        foreach (GMapMarker m in o.Markers)
+                            if (m.IsVisible && m.IsHitTestVisible)
+                            {
+                                PointLatLng MousePosition = gMapControl.FromLocalToLatLng(e.X, e.Y);
+                                GPoint MarkerPositionLocal = gMapControl.FromLatLngToLocal(m.Position);
+                                GPoint NewLabelPosition = new GPoint(MarkerPositionLocal.X - e.X, MarkerPositionLocal.Y - e.Y);
+                                if (MouseIsOnTheLabel(e, m))
+                                {
+                                    GMapTargetandLabel MyMarker = (GMapTargetandLabel)m;
+                                    MyMarker.ShowLabelBox = true;
+                                    gMapControl.Refresh();
+                                }
+                                else
+                                {
+                                    GMapTargetandLabel MyMarker = (GMapTargetandLabel)m;
+                                    MyMarker.ShowLabelBox = false;
+                                }
+                            }
+                }
+            }
 
         }
 
@@ -1074,8 +1121,6 @@ namespace AsterixDisplayAnalyser
         {
             if (DisplayAttributes.StaticDisplayBuildRequired)
             {
-
-
                 // Always check for the change to the background color
                 gMapControl.EmptyMapBackground = DisplayAttributes.GetDisplayAttribute(DisplayAttributes.DisplayItemsType.BackgroundColor).TextColor;
 
@@ -1351,6 +1396,12 @@ namespace AsterixDisplayAnalyser
             FrmDetailedView MyDetailedView = new FrmDetailedView();
             MyDetailedView.WhatToDisplay = FrmDetailedView.DisplayType.CAT62I380_SUBF2_ACID;
             MyDetailedView.Show();
+        }
+
+        private void miscellaneousToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MisscelaneousSettings MyForm = new MisscelaneousSettings();
+            MyForm.Show();
         }
     }
 }

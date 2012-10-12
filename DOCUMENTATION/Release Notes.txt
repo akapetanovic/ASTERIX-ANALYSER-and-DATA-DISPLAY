@@ -91,7 +91,10 @@ Version 1.5
 
 	1. Added support/decoders for CAT34 and CAT02
 	2. Added CAT62 to the Detailed View
-	3. Improved display to be able to move the lables
+	3. Improved display to be able to move the labels and to get more professional look
+	4. Added option to select Mode C to be displayed either as Flight Level or raw decoded value.
+	5. Added Flight Mode indicator (↑ or ↓ next to Mode C depending if Target is climbing or descending)
+	6. Improved display by displaying label box only for Targets covered by a mouse pointer.
 
 SO FAR THE FOLLOWING DECODERS ARE IMPLEMENTED
 

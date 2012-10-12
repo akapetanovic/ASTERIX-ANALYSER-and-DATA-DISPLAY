@@ -53,9 +53,10 @@ namespace AsterixDisplayAnalyser
         public Point LabelOffset = new Point(25, 25);
 
         // Defines the size of the label
-        private int LabelWidth = 100;
+        private int LabelWidth = 70;
         private int LabelHeight = 50;
         private int SpacingIndex = 2;
+        public bool ShowLabelBox = false;
 
         // Define Mode A attributes + Coast Indicator
         public Point ModeA_CI_OFFSET = new Point(2, 0);
@@ -150,9 +151,13 @@ namespace AsterixDisplayAnalyser
 
             LabelHeight = LabelHeight + (int)ModeC_FONT.Size + SpacingIndex * 2;
 
-            // Add the final spacing index and draw the box
-            LabelHeight = LabelHeight + SpacingIndex * 2;
-            g.DrawRectangle(new Pen(new SolidBrush(LabelAttributes.LineColor), LabelAttributes.LineWidth), LabelStartPosition.X, LabelStartPosition.Y, LabelWidth, LabelHeight);
+            if (ShowLabelBox == true)
+            {
+                // Add the final spacing index and draw the box
+                LabelHeight = LabelHeight + SpacingIndex * 2;
+                g.DrawRectangle(new Pen(new SolidBrush(LabelAttributes.LineColor), LabelAttributes.LineWidth), LabelStartPosition.X, LabelStartPosition.Y, LabelWidth, LabelHeight);
+                //ShowLabelBox = false;
+            }
 
         }
     }

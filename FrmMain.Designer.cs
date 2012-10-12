@@ -197,6 +197,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tabMainTab = new System.Windows.Forms.TabControl();
             this.NorthMarkerTimer = new System.Windows.Forms.Timer(this.components);
+            this.miscellaneousToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -239,7 +240,8 @@
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.connectionSettingsToolStripMenuItem,
             this.colorDialogToolStripMenuItem,
-            this.cATDecoderSelectorToolStripMenuItem});
+            this.cATDecoderSelectorToolStripMenuItem,
+            this.miscellaneousToolStripMenuItem});
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
@@ -1780,6 +1782,13 @@
             // 
             this.NorthMarkerTimer.Tick += new System.EventHandler(this.NorthMarkerTimer_Tick);
             // 
+            // miscellaneousToolStripMenuItem
+            // 
+            this.miscellaneousToolStripMenuItem.Name = "miscellaneousToolStripMenuItem";
+            this.miscellaneousToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.miscellaneousToolStripMenuItem.Text = "Miscellaneous";
+            this.miscellaneousToolStripMenuItem.Click += new System.EventHandler(this.miscellaneousToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1992,6 +2001,7 @@
         private System.Windows.Forms.ToolStripMenuItem calculatedTrackPositionWGS84ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem measuredFlightLevelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aircraftDerivedDataSUBF2ACIDToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem miscellaneousToolStripMenuItem;
     }
 }
 

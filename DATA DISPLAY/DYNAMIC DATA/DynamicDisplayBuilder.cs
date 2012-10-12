@@ -15,7 +15,8 @@ namespace AsterixDisplayAnalyser
         {
             public string ModeA;
             public string ModeC;
-            public string ACID_Modes;
+            public string ModeC_Previous_Cycle;
+            public string ACID_Mode_S;
             public double Lat;
             public double Lon;
             public int TrackNumber = -1;
@@ -62,8 +63,11 @@ namespace AsterixDisplayAnalyser
                 if (CurrentTarget.TrackNumber != -1)
                 {
                     GlobalTargetList[CurrentTarget.TrackNumber].ModeA = CurrentTarget.ModeA;
+                    GlobalTargetList[CurrentTarget.TrackNumber].ModeC_Previous_Cycle = "";
+                    if (GlobalTargetList[CurrentTarget.TrackNumber].ModeC != null)
+                        GlobalTargetList[CurrentTarget.TrackNumber].ModeC_Previous_Cycle = "" + GlobalTargetList[CurrentTarget.TrackNumber].ModeC;
                     GlobalTargetList[CurrentTarget.TrackNumber].ModeC = CurrentTarget.ModeC;
-                    GlobalTargetList[CurrentTarget.TrackNumber].ACID_Modes = CurrentTarget.ACID_Modes;
+                    GlobalTargetList[CurrentTarget.TrackNumber].ACID_Mode_S = CurrentTarget.ACID_Mode_S;
                     GlobalTargetList[CurrentTarget.TrackNumber].Lat = CurrentTarget.Lat;
                     GlobalTargetList[CurrentTarget.TrackNumber].Lon = CurrentTarget.Lon;
                     GlobalTargetList[CurrentTarget.TrackNumber].TrackNumber = CurrentTarget.TrackNumber;
@@ -73,8 +77,11 @@ namespace AsterixDisplayAnalyser
                 {
                     int ModeAIndex = int.Parse(CurrentTarget.ModeA.ToString());
                     GlobalTargetList[ModeAIndex].ModeA = CurrentTarget.ModeA;
+                    GlobalTargetList[ModeAIndex].ModeC_Previous_Cycle = "";
+                    if (GlobalTargetList[ModeAIndex].ModeC != null)
+                        GlobalTargetList[ModeAIndex].ModeC_Previous_Cycle = "" + GlobalTargetList[ModeAIndex].ModeC;
                     GlobalTargetList[ModeAIndex].ModeC = CurrentTarget.ModeC;
-                    GlobalTargetList[ModeAIndex].ACID_Modes = CurrentTarget.ACID_Modes;
+                    GlobalTargetList[ModeAIndex].ACID_Mode_S = CurrentTarget.ACID_Mode_S;
                     GlobalTargetList[ModeAIndex].Lat = CurrentTarget.Lat;
                     GlobalTargetList[ModeAIndex].Lon = CurrentTarget.Lon;
                     GlobalTargetList[ModeAIndex].TrackNumber = CurrentTarget.TrackNumber;
@@ -90,8 +97,9 @@ namespace AsterixDisplayAnalyser
                     TargetType NewTarget = new TargetType();
                     GlobalTarget.TrackTerminateTreshold++;
                     NewTarget.ModeA = GlobalTarget.ModeA;
+                    NewTarget.ModeC_Previous_Cycle = GlobalTarget.ModeC_Previous_Cycle;
                     NewTarget.ModeC = GlobalTarget.ModeC;
-                    NewTarget.ACID_Modes = GlobalTarget.ACID_Modes;
+                    NewTarget.ACID_Mode_S = GlobalTarget.ACID_Mode_S;
                     NewTarget.Lat = GlobalTarget.Lat;
                     NewTarget.Lon = GlobalTarget.Lon;
                     NewTarget.TrackNumber = GlobalTarget.TrackNumber;
@@ -113,8 +121,9 @@ namespace AsterixDisplayAnalyser
                 {
                     TargetType NewTarget = new TargetType();
                     NewTarget.ModeA = PSRTgtList.ModeA;
+                    NewTarget.ModeC_Previous_Cycle = PSRTgtList.ModeC_Previous_Cycle;
                     NewTarget.ModeC = PSRTgtList.ModeC;
-                    NewTarget.ACID_Modes = PSRTgtList.ACID_Modes;
+                    NewTarget.ACID_Mode_S = PSRTgtList.ACID_Mode_S;
                     NewTarget.Lat = PSRTgtList.Lat;
                     NewTarget.Lon = PSRTgtList.Lon;
                     NewTarget.TrackNumber = PSRTgtList.TrackNumber;
@@ -196,7 +205,7 @@ namespace AsterixDisplayAnalyser
                         {
                             Target.ModeA = "PSR";
                             Target.ModeC = "";
-                            Target.ACID_Modes = "";
+                            Target.ACID_Mode_S = "";
                             Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                             Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
                             Target.TrackTerminateTreshold = 0;
@@ -209,11 +218,11 @@ namespace AsterixDisplayAnalyser
                             Target.ModeC = FlightLevelData.FlightLevel.ToString();
                             if (ACID_Mode_S != null)
                             {
-                                Target.ACID_Modes = ACID_Mode_S.ACID;
+                                Target.ACID_Mode_S = ACID_Mode_S.ACID;
                             }
                             else
                             {
-                                Target.ACID_Modes = "N/A";
+                                Target.ACID_Mode_S = "N/A";
                             }
                             Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                             Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
@@ -240,9 +249,9 @@ namespace AsterixDisplayAnalyser
                         if (CAT62I380Data != null)
                         {
                             if (CAT62I380Data.ACID.Is_Valid)
-                                Target.ACID_Modes = CAT62I380Data.ACID.ACID_String;
+                                Target.ACID_Mode_S = CAT62I380Data.ACID.ACID_String;
                             else
-                                Target.ACID_Modes = "N/A";
+                                Target.ACID_Mode_S = "N/A";
                         }
 
                         Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
@@ -313,7 +322,7 @@ namespace AsterixDisplayAnalyser
                         {
                             Target.ModeA = "PSR";
                             Target.ModeC = "";
-                            Target.ACID_Modes = "";
+                            Target.ACID_Mode_S = "";
                             Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                             Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
                             PSRTargetList.Add(Target);
@@ -325,11 +334,11 @@ namespace AsterixDisplayAnalyser
                             Target.ModeC = FlightLevelData.FlightLevel.ToString();
                             if (ACID_Mode_S != null)
                             {
-                                Target.ACID_Modes = ACID_Mode_S.ACID;
+                                Target.ACID_Mode_S = ACID_Mode_S.ACID;
                             }
                             else
                             {
-                                Target.ACID_Modes = "N/A";
+                                Target.ACID_Mode_S = "N/A";
                             }
                             Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                             Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
@@ -360,9 +369,9 @@ namespace AsterixDisplayAnalyser
                         if (CAT62I380Data != null)
                         {
                             if (CAT62I380Data.ACID.Is_Valid)
-                                Target.ACID_Modes = CAT62I380Data.ACID.ACID_String;
+                                Target.ACID_Mode_S = CAT62I380Data.ACID.ACID_String;
                             else
-                                Target.ACID_Modes = "N/A";
+                                Target.ACID_Mode_S = "N/A";
                         }
                         Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
                         Target.Lon = LatLongData.GetLatLongDecimal().LongitudeDecimal;

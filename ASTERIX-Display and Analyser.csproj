@@ -254,6 +254,12 @@
     <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\LabelAttributePicker.Designer.cs">
       <DependentUpon>LabelAttributePicker.cs</DependentUpon>
     </Compile>
+    <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\MisscelaneousSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\MisscelaneousSettings.Designer.cs">
+      <DependentUpon>MisscelaneousSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="DATA DISPLAY\DYNAMIC DATA\UpdateCFL.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -384,6 +390,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DATA DISPLAY\DISPLAY UTILITIES\LabelAttributePicker.resx">
       <DependentUpon>LabelAttributePicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DATA DISPLAY\DISPLAY UTILITIES\MisscelaneousSettings.resx">
+      <DependentUpon>MisscelaneousSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DATA DISPLAY\DYNAMIC DATA\UpdateCFL.resx">
       <DependentUpon>UpdateCFL.cs</DependentUpon>
