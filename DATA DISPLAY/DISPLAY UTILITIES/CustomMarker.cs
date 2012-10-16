@@ -58,7 +58,7 @@ namespace AsterixDisplayAnalyser
         public Point LabelOffset = new Point(25, 25);
 
         // Defines the size of the label
-        private int LabelWidth = 70;
+        private int LabelWidth = 90;
         private int LabelHeight = 50;
         private int SpacingIndex = 2;
         public bool ShowLabelBox = false;
@@ -134,11 +134,17 @@ namespace AsterixDisplayAnalyser
 
         public override void OnRender(Graphics g)
         {
-            // Dare AC Symbol
-            g.DrawRectangle(new Pen(new SolidBrush(LabelAttributes.LineColor), LabelAttributes.LineWidth), LocalPosition.X, LocalPosition.Y, 10, 10);   
+            Pen MyPen = new Pen(new SolidBrush(LabelAttributes.TargetColor), LabelAttributes.TargetSize);
+            MyPen.DashStyle = LabelAttributes.TargetStyle;
+            
+            // Draw AC Symbol
+            g.DrawRectangle(MyPen, LocalPosition.X, LocalPosition.Y, 10, 10);
+
+            MyPen = new Pen(new SolidBrush(LabelAttributes.LineColor), LabelAttributes.LineWidth);
+            MyPen.DashStyle = LabelAttributes.LineStyle;
             
             // Draw leader line
-            g.DrawLine(new Pen(new SolidBrush(LabelAttributes.LineColor), LabelAttributes.LineWidth), new Point(LocalPosition.X, LocalPosition.Y), new Point(LocalPosition.X - LabelOffset.X, LocalPosition.Y - LabelOffset.Y));
+            g.DrawLine(MyPen, new Point(LocalPosition.X, LocalPosition.Y), new Point(LocalPosition.X - LabelOffset.X, LocalPosition.Y - LabelOffset.Y));
 
             // Draw label box
             Point LabelStartPosition = GetLabelStartingPoint();
@@ -171,8 +177,7 @@ namespace AsterixDisplayAnalyser
             {
                 // Add the final spacing index and draw the box
                 LabelHeight = LabelHeight + SpacingIndex * 2;
-                g.DrawRectangle(new Pen(new SolidBrush(LabelAttributes.LineColor), LabelAttributes.LineWidth), LabelStartPosition.X, LabelStartPosition.Y, LabelWidth, LabelHeight);
-                //ShowLabelBox = false;
+                g.DrawRectangle(MyPen, LabelStartPosition.X, LabelStartPosition.Y, LabelWidth, LabelHeight);
             }
 
         }

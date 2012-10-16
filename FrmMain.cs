@@ -691,27 +691,19 @@ namespace AsterixDisplayAnalyser
             // Label Text Font and Size
             Marker_In.ModeA_CI_FONT = new Font(LabelAttributes.TextFont, LabelAttributes.TextSize,
             FontStyle.Bold | FontStyle.Regular);
+            Marker_In.ModeA_CI_BRUSH = new SolidBrush(LabelAttributes.TextColor);
 
             Marker_In.CALLSIGN_FONT = new Font(LabelAttributes.TextFont, LabelAttributes.TextSize,
             FontStyle.Bold | FontStyle.Regular);
+            Marker_In.CALLSIGN_BRUSH = new SolidBrush(LabelAttributes.TextColor);
 
             Marker_In.ModeC_FONT = new Font(LabelAttributes.TextFont, LabelAttributes.TextSize,
             FontStyle.Bold | FontStyle.Regular);
+            Marker_In.ModeC_BRUSH = new SolidBrush(LabelAttributes.TextColor);
 
             Marker_In.CFL_FONT = new Font(LabelAttributes.TextFont, LabelAttributes.TextSize,
-           FontStyle.Bold | FontStyle.Regular);
-
-
-            // Label Border color
-            //Marker_In.ToolTip.Stroke = new Pen(new SolidBrush(LabelAttributes.LineColor), LabelAttributes.LineWidth);
-            //Marker_In.ToolTip.Stroke.DashStyle = LabelAttributes.LineStyle;
-
-            // Label background color
-            //Marker_In.ToolTip.Fill = Brushes.Transparent;
-
-            // Align the text
-            //Marker_In.ToolTip.Format.LineAlignment = StringAlignment.Center;
-            //Marker_In.ToolTip.Format.Alignment = StringAlignment.Near;
+            FontStyle.Bold | FontStyle.Regular);
+            Marker_In.CFL_BRUSH = new SolidBrush(LabelAttributes.TextColor);
         }
 
         private void SetLabelAttributes(ref GMap.NET.WindowsForms.Markers.GMapMarkerCross Marker_In)
@@ -1153,7 +1145,7 @@ namespace AsterixDisplayAnalyser
 
         private void gMapControl_MouseClick(object sender, MouseEventArgs e)
         {
-           
+
         }
 
         private void FormMain_Resize(object sender, EventArgs e)
@@ -1249,7 +1241,7 @@ namespace AsterixDisplayAnalyser
                         foreach (GMapMarker m in o.Markers)
                             if (m.IsVisible && m.IsHitTestVisible)
                             {
-                                if (MouseIsOnTheCFL(e, m) )
+                                if (MouseIsOnTheCFL(e, m))
                                 {
                                     GMapTargetandLabel MyMarker = (GMapTargetandLabel)m;
                                     if (MyMarker.MyTargetIndex != -1)
@@ -1276,7 +1268,7 @@ namespace AsterixDisplayAnalyser
         bool MouseIsOnTheCFL(MouseEventArgs Mouse, GMapMarker Marker)
         {
             GMapTargetandLabel MyMarker = (GMapTargetandLabel)Marker;
-            Rectangle MyRectangle = new Rectangle(MyMarker.GetCFLStartPoint().X, MyMarker.GetCFLStartPoint().Y, 20,  10);
+            Rectangle MyRectangle = new Rectangle(MyMarker.GetCFLStartPoint().X, MyMarker.GetCFLStartPoint().Y, 20, 10);
             return MyRectangle.Contains(new Point(Mouse.X, Mouse.Y));
         }
 

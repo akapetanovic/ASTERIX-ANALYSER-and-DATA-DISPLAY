@@ -35,6 +35,7 @@
             this.connectionSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cATDecoderSelectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.miscellaneousToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetDataBufferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cAT001DataItemPresenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -197,7 +198,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tabMainTab = new System.Windows.Forms.TabControl();
             this.NorthMarkerTimer = new System.Windows.Forms.Timer(this.components);
-            this.miscellaneousToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -267,6 +267,13 @@
             this.cATDecoderSelectorToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.cATDecoderSelectorToolStripMenuItem.Text = "CAT Decoder Selector";
             this.cATDecoderSelectorToolStripMenuItem.Click += new System.EventHandler(this.cATDecoderSelectorToolStripMenuItem_Click);
+            // 
+            // miscellaneousToolStripMenuItem
+            // 
+            this.miscellaneousToolStripMenuItem.Name = "miscellaneousToolStripMenuItem";
+            this.miscellaneousToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.miscellaneousToolStripMenuItem.Text = "Miscellaneous";
+            this.miscellaneousToolStripMenuItem.Click += new System.EventHandler(this.miscellaneousToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -1782,13 +1789,6 @@
             // 
             this.NorthMarkerTimer.Tick += new System.EventHandler(this.NorthMarkerTimer_Tick);
             // 
-            // miscellaneousToolStripMenuItem
-            // 
-            this.miscellaneousToolStripMenuItem.Name = "miscellaneousToolStripMenuItem";
-            this.miscellaneousToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.miscellaneousToolStripMenuItem.Text = "Miscellaneous";
-            this.miscellaneousToolStripMenuItem.Click += new System.EventHandler(this.miscellaneousToolStripMenuItem_Click);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1801,7 +1801,7 @@
             this.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
-            this.Text = "AMER KAPETANOVIC - ASTERIX PLOT/TRACK DISPLAY and SNIFFER  1.4";
+            this.Text = "AMER KAPETANOVIC - ASTERIX PLOT/TRACK DISPLAY and SNIFFER  1.5";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.Resize += new System.EventHandler(this.FormMain_Resize);
