@@ -198,6 +198,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tabMainTab = new System.Windows.Forms.TabControl();
             this.NorthMarkerTimer = new System.Windows.Forms.Timer(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -222,6 +224,7 @@
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.Black;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
             this.settingsToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.detailedViewToolStripMenuItem,
@@ -1607,6 +1610,7 @@
             this.textBoxSSRCode.Name = "textBoxSSRCode";
             this.textBoxSSRCode.Size = new System.Drawing.Size(95, 20);
             this.textBoxSSRCode.TabIndex = 4;
+            this.textBoxSSRCode.TextChanged += new System.EventHandler(this.textBoxSSRCode_TextChanged);
             // 
             // label11
             // 
@@ -1788,6 +1792,23 @@
             // NorthMarkerTimer
             // 
             this.NorthMarkerTimer.Tick += new System.EventHandler(this.NorthMarkerTimer_Tick);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem});
+            this.toolStripMenuItem1.ForeColor = System.Drawing.Color.Silver;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(37, 20);
+            this.toolStripMenuItem1.Text = "File";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -2002,6 +2023,8 @@
         private System.Windows.Forms.ToolStripMenuItem measuredFlightLevelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aircraftDerivedDataSUBF2ACIDToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem miscellaneousToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
     }
 }
 

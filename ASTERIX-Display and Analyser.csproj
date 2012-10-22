@@ -247,6 +247,12 @@
     <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\DisplayItemSelection.Designer.cs">
       <DependentUpon>DisplayItemSelection.cs</DependentUpon>
     </Compile>
+    <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\FileReadProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\FileReadProgress.Designer.cs">
+      <DependentUpon>FileReadProgress.cs</DependentUpon>
+    </Compile>
     <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\GraphicUtilities.cs" />
     <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\LabelAttributePicker.cs">
       <SubType>Form</SubType>
@@ -387,6 +393,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DATA DISPLAY\DISPLAY UTILITIES\DisplayRightClickOptions.resx">
       <DependentUpon>DisplayRightClickOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DATA DISPLAY\DISPLAY UTILITIES\FileReadProgress.resx">
+      <DependentUpon>FileReadProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DATA DISPLAY\DISPLAY UTILITIES\LabelAttributePicker.resx">
       <DependentUpon>LabelAttributePicker.cs</DependentUpon>

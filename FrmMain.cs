@@ -196,16 +196,20 @@ namespace AsterixDisplayAnalyser
                 this.toolsToolStripMenuItem.Enabled = true;
                 this.dataBySSRCodeToolStripMenuItem.Enabled = true;
                 this.googleEarthToolStripMenuItem.Enabled = true;
+                openToolStripMenuItem.Enabled = true;
             }
             else
             {
                 SharedData.bool_Listen_for_Data = true;
+                ResetDataBuffers();
+                MainASTERIXDataStorage.ResetAllData();
                 buttonStopRun.Text = "Running";
                 this.progressBar1.Visible = true;
                 this.detailedViewToolStripMenuItem.Enabled = false;
                 this.toolsToolStripMenuItem.Enabled = false;
                 this.dataBySSRCodeToolStripMenuItem.Enabled = false;
                 this.googleEarthToolStripMenuItem.Enabled = false;
+                openToolStripMenuItem.Enabled = false;
             }
 
             HandlePlotDisplayEnabledChanged();
@@ -338,6 +342,11 @@ namespace AsterixDisplayAnalyser
         }
 
         private void resetDataBufferToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ResetDataBuffers();
+        }
+
+        private void ResetDataBuffers()
         {
             bool ListenigForForData = SharedData.bool_Listen_for_Data;
             if (SharedData.bool_Listen_for_Data == true)
@@ -885,6 +894,8 @@ namespace AsterixDisplayAnalyser
                 this.comboBoxSSRFilterBox.Enabled = false;
                 this.textBoxSSRCode.Enabled = false;
             }
+
+            Update_PlotTrack_Data();
         }
 
         private void comboBoxSSRFilterBox_MouseClick(object sender, MouseEventArgs e)
@@ -954,6 +965,7 @@ namespace AsterixDisplayAnalyser
         private void comboBoxSSRFilterBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             SSR_Filter_Last_Index = this.comboBoxSSRFilterBox.SelectedIndex;
+            Update_PlotTrack_Data();
         }
 
         private void gMapControl_Load(object sender, EventArgs e)
@@ -1071,7 +1083,7 @@ namespace AsterixDisplayAnalyser
                 MyMarker.LabelOffset = new Point(NewLabelPosition.X, NewLabelPosition.Y);
                 gMapControl.Refresh();
             }
-            else
+            else if (SharedData.bool_Listen_for_Data == true)
             {
                 GMapOverlay[] overlays = new GMapOverlay[] { DinamicOverlay };
                 for (int i = overlays.Length - 1; i >= 0; i--)
@@ -1180,6 +1192,8 @@ namespace AsterixDisplayAnalyser
 
             Properties.Settings.Default.FL_Filter_Enabled = this.checkBoxFLFilter.Checked;
             Properties.Settings.Default.Save();
+
+            Update_PlotTrack_Data();
         }
 
         private void tabMainTab_SelectedIndexChanged(object sender, EventArgs e)
@@ -1209,7 +1223,7 @@ namespace AsterixDisplayAnalyser
         private void gMapControl_MouseDown(object sender, MouseEventArgs e)
         {
             // Check if the user is trying to move the lable. If so then flag it by 
-            // setting the flag isDraggingMareker to true
+            // setting the flag isDraggingMarker to true
             if (e.Button == MouseButtons.Left && SharedData.bool_Listen_for_Data == true)
             {
                 GMapOverlay[] overlays = new GMapOverlay[] { DinamicOverlay };
@@ -1362,12 +1376,14 @@ namespace AsterixDisplayAnalyser
         {
             Properties.Settings.Default.FL_Upper = this.numericUpDownUpper.Value;
             Properties.Settings.Default.Save();
+            Update_PlotTrack_Data();
         }
 
         private void numericUpDownLower_ValueChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.FL_Lower = this.numericUpDownLower.Value;
             Properties.Settings.Default.Save();
+            Update_PlotTrack_Data();
         }
         private void NorthMarkerTimer_Tick(object sender, EventArgs e)
         {
@@ -1437,6 +1453,34 @@ namespace AsterixDisplayAnalyser
         {
             MisscelaneousSettings MyForm = new MisscelaneousSettings();
             MyForm.Show();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "ASTERIX Analyser Files|*.raw";
+            openFileDialog1.InitialDirectory = "Application.StartupPath";
+            openFileDialog1.Title = "Open File to Read";
+
+            if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
+            {
+                ResetDataBuffers();
+                MainASTERIXDataStorage.ResetAllData();
+                ASTERIX.DecodeAsterixData(openFileDialog1.FileName);
+
+                if (this.checkEnableDisplay.Checked == true)
+                    Update_PlotTrack_Data();
+            }
+        }
+
+        private void textBoxSSRCode_TextChanged(object sender, EventArgs e)
+        {
+            Update_PlotTrack_Data();
         }
     }
 }

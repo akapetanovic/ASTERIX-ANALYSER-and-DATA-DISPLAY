@@ -141,9 +141,7 @@ namespace AsterixDisplayAnalyser
                         {
                             byte[] LocalSingle_ASTERIX_CAT_Buffer = new byte[LengthOfASTERIX_CAT];
                             Array.Copy(UDPBuffer, DataBufferIndexForThisExtraction, LocalSingle_ASTERIX_CAT_Buffer, 0, LengthOfASTERIX_CAT);
-                            ExtractAndDecodeASTERIX_CAT_DataBlock(LocalSingle_ASTERIX_CAT_Buffer);
-
-
+                            ExtractAndDecodeASTERIX_CAT_DataBlock(LocalSingle_ASTERIX_CAT_Buffer, true);
 
                             DataBufferIndexForThisExtraction = DataBufferIndexForThisExtraction + LengthOfASTERIX_CAT;
 
@@ -158,7 +156,55 @@ namespace AsterixDisplayAnalyser
             }
         }
 
-        private static void ExtractAndDecodeASTERIX_CAT_DataBlock(byte[] DataBlock)
+        public static void DecodeAsterixData(string FileName)
+        {
+            try
+            {
+                // Open file for reading
+                System.IO.FileStream FileStream = new System.IO.FileStream(FileName, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+
+                // attach filestream to binary reader
+                System.IO.BinaryReader BinaryReader = new System.IO.BinaryReader(FileStream);
+
+                // get total byte length of the file
+                long TotalBytes = new System.IO.FileInfo(FileName).Length;
+                long Position = 0;
+
+                // Read the entire file/stream and pass each individual 
+                // message to the ASTERIX parser
+                FileReadProgress ProgressForm = new FileReadProgress();
+                ProgressForm.Show();
+                while (Position < TotalBytes && ProgressForm.AbortRequested)
+                {
+                    // First determine the size of the message
+                    // octet    data
+                    // 0        ASTERIX CATEGORY
+                    // 1 .. 2   LENGTH OF MESSAGE BLOCK
+                    byte[] Data_Block_Buffer = BinaryReader.ReadBytes((Int32)3);
+                    int LengthOfMessageBlock = ASTERIX.ExtractLengthOfDataBlockInBytes_Int(Data_Block_Buffer);
+
+                    BinaryReader.BaseStream.Position = BinaryReader.BaseStream.Position - 3;
+                    // Now read the message and pass it to the parser
+                    // for decoding
+                    Data_Block_Buffer = BinaryReader.ReadBytes((Int32)LengthOfMessageBlock);
+                    ExtractAndDecodeASTERIX_CAT_DataBlock(Data_Block_Buffer, false);
+                    Position = BinaryReader.BaseStream.Position;
+                }
+                ProgressForm.Close();
+
+                // close file reader
+                FileStream.Close();
+                FileStream.Dispose();
+                BinaryReader.Close();
+            }
+            catch (Exception Exception)
+            {
+                // Error
+                MessageBox.Show("Exception caught in process: {0}", Exception.ToString());
+            }
+        }
+
+        private static void ExtractAndDecodeASTERIX_CAT_DataBlock(byte[] DataBlock, bool Is_Live_Data)
         {
             // First thing is to store the time of the reception regardless of the category received
             string Time = DateTime.Now.Hour.ToString().PadLeft(2, '0') + ":" + DateTime.Now.Minute.ToString().PadLeft(2, '0') + ":" +
@@ -192,8 +238,12 @@ namespace AsterixDisplayAnalyser
             // 5. Asterix Category
             // 
             // 6. Append Category specifc data, done just below
-            string Common_Message_Data_String = Time + "     " + iep.ToString() + "        " + SharedData.CurrentMulticastAddress + ':' + SharedData.Current_Port.ToString() + "             " + LengthOfDataBlockInBytes.ToString() + "        " + Category + "           ";
-
+            
+            string Common_Message_Data_String;
+            if (Is_Live_Data == true)
+            Common_Message_Data_String = Time + "     " + iep.ToString() + "        " + SharedData.CurrentMulticastAddress + ':' + SharedData.Current_Port.ToString() + "             " + LengthOfDataBlockInBytes.ToString() + "        " + Category + "           ";
+            else
+            Common_Message_Data_String = Time + "     " + "Recorded" + "        " + "Recorded" + ':' + "Recorded" + "             " + LengthOfDataBlockInBytes.ToString() + "        " + Category + "           ";
             // Hold individual records of the messages 
             // from an individual data block
             string[] MessageData = new string[3000];

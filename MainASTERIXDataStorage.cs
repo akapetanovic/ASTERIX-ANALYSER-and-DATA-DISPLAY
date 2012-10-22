@@ -74,5 +74,15 @@ namespace AsterixDisplayAnalyser
         // This is the main storage of all CAT62 Messages
         public static System.Collections.Generic.List<CAT62Data> CAT62Message = new System.Collections.Generic.List<CAT62Data>();
 
+        // Define a method to reset all data buffers. The method is to used when switching beetween data sources.
+        public static void ResetAllData()
+        {
+            CAT01Message.Clear();
+            CAT02Message.Clear();
+            CAT48Message.Clear();
+            CAT34Message.Clear();
+            CAT62Message.Clear();
+        }
+
     }
 }
