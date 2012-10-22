@@ -11,8 +11,6 @@ namespace AsterixDisplayAnalyser
 {
     public partial class FileReadProgress : Form
     {
-        public bool AbortRequested = false;
-      
         public FileReadProgress()
         {
             InitializeComponent();
@@ -20,17 +18,26 @@ namespace AsterixDisplayAnalyser
 
         private void FileReadProgress_Load(object sender, EventArgs e)
         {
-
+            // Set up progress bar marguee
+            this.progressBar1.Step = 2;
+            this.progressBar1.Style = ProgressBarStyle.Marquee;
+            this.progressBar1.MarqueeAnimationSpeed = 50; // 100msec
+            this.progressBar1.Visible = true;
+            this.labelNotify.Text = "Reading...";
+            this.buttonOK.Enabled = false;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void NotifyFinishReading(string Message)
         {
-            AbortRequested = true;
+            this.labelNotify.Text = Message;
+            this.buttonOK.Enabled = true;
+            this.progressBar1.Visible = false;
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void buttonOK_Click(object sender, EventArgs e)
         {
-
+            this.Close();
+            this.Dispose();
         }
     }
 }

@@ -274,5 +274,17 @@ namespace AsterixDisplayAnalyser.Properties {
                 this["DisplayModeC_As_FL"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PopulateMainListBox {
+            get {
+                return ((bool)(this["PopulateMainListBox"]));
+            }
+            set {
+                this["PopulateMainListBox"] = value;
+            }
+        }
     }
 }

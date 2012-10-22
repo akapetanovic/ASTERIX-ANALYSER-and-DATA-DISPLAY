@@ -35,11 +35,13 @@ namespace AsterixDisplayAnalyser
 
         // Define the main listener thread
         Thread ListenForDataThread = new Thread(new ThreadStart(ASTERIX.ListenForData));
+        FileReadProgress ProgressForm;
 
         GMapMarker currentMarker = null;
         bool isDraggingMarker = false;
 
         bool North_Marker_Received = false;
+        string ReadDataReportMessage;
 
         public FormMain()
         {
@@ -123,6 +125,7 @@ namespace AsterixDisplayAnalyser
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            
             // Initialize Map
             InitializeMap();
 
@@ -141,6 +144,11 @@ namespace AsterixDisplayAnalyser
             ToolTip toolTip4 = new ToolTip();
             toolTip4.ShowAlways = false;
             toolTip4.SetToolTip(this.labelTrackCoast, "Number of update cycles before track is declared as lost");
+
+            ToolTip toolTip5 = new ToolTip();
+            toolTip4.ShowAlways = false;
+            toolTip4.SetToolTip(this.checkBoxFillListBox, "Check OFF for performance and when working with big data files");
+            
             this.labelTrackCoast.Text = Properties.Settings.Default.TrackCoast.ToString();
             this.PlotandTrackDisplayUpdateTimer.Interval = Properties.Settings.Default.UpdateRate;
             this.labelDisplayUpdateRate.Text = "Update rate: " + this.PlotandTrackDisplayUpdateTimer.Interval.ToString() + "ms";
@@ -149,6 +157,7 @@ namespace AsterixDisplayAnalyser
             this.numericUpDownUpper.Value = Properties.Settings.Default.FL_Upper;
             this.numericUpDownLower.Value = Properties.Settings.Default.FL_Lower;
             this.checkBoxDisplayPSR.Checked = Properties.Settings.Default.DisplayPSR;
+            this.checkBoxFillListBox.Checked = Properties.Settings.Default.PopulateMainListBox;
 
             HandlePlotDisplayEnabledChanged();
         }
@@ -550,40 +559,52 @@ namespace AsterixDisplayAnalyser
 
         private void Update_PlotTrack_Data()
         {
-            // First clear all the data from the previous cycle.
-            if (DinamicOverlay.Markers.Count > 0)
+            if (this.checkEnableDisplay.Checked == true)
             {
-                DinamicOverlay.Markers.Clear();
-            }
 
-            // Now get the data since the last cycle and display it on the map
-            DynamicDisplayBuilder DP = new DynamicDisplayBuilder();
-            System.Collections.Generic.List<DynamicDisplayBuilder.TargetType> TargetList = new System.Collections.Generic.List<DynamicDisplayBuilder.TargetType>();
-
-            // Here hanlde display od live data
-            if (SharedData.bool_Listen_for_Data == true)
-            {
-                DynamicDisplayBuilder.GetDisplayData(false, out TargetList);
-
-                if (FirstCycleDisplayEnabled)
+                // First clear all the data from the previous cycle.
+                if (DinamicOverlay.Markers.Count > 0)
                 {
-                    FirstCycleDisplayEnabled = false;
-                    TargetList.Clear();
+                    DinamicOverlay.Markers.Clear();
                 }
 
-                this.lblNumberofTargets.Text = TargetList.Count.ToString();
+                // Now get the data since the last cycle and display it on the map
+                DynamicDisplayBuilder DP = new DynamicDisplayBuilder();
+                System.Collections.Generic.List<DynamicDisplayBuilder.TargetType> TargetList = new System.Collections.Generic.List<DynamicDisplayBuilder.TargetType>();
 
-                foreach (DynamicDisplayBuilder.TargetType Target in TargetList)
+                // Here hanlde display od live data
+                if (SharedData.bool_Listen_for_Data == true)
                 {
+                    DynamicDisplayBuilder.GetDisplayData(false, out TargetList);
 
-                    if (Passes_Check_For_Flight_Level_Filter(Target.ModeC))
+                    if (FirstCycleDisplayEnabled)
                     {
-                        // If SSR code filtering is to be applied 
-                        if (this.checkBoxFilterBySSR.Enabled == true &&
-                            this.textBoxSSRCode.Enabled == true &&
-                            this.textBoxSSRCode.Text.Length == 4)
+                        FirstCycleDisplayEnabled = false;
+                        TargetList.Clear();
+                    }
+
+                    this.lblNumberofTargets.Text = TargetList.Count.ToString();
+
+                    foreach (DynamicDisplayBuilder.TargetType Target in TargetList)
+                    {
+
+                        if (Passes_Check_For_Flight_Level_Filter(Target.ModeC))
                         {
-                            if (Target.ModeA == this.textBoxSSRCode.Text)
+                            // If SSR code filtering is to be applied 
+                            if (this.checkBoxFilterBySSR.Enabled == true &&
+                                this.textBoxSSRCode.Enabled == true &&
+                                this.textBoxSSRCode.Text.Length == 4)
+                            {
+                                if (Target.ModeA == this.textBoxSSRCode.Text)
+                                {
+                                    Target.MyMarker.ToolTipMode = MarkerTooltipMode.Never;
+                                    Target.MyMarker.Position = new PointLatLng(Target.Lat, Target.Lon);
+                                    BuildDynamicLabelText(Target, ref Target.MyMarker);
+                                    SetLabelAttributes(ref Target.MyMarker);
+                                    DinamicOverlay.Markers.Add(Target.MyMarker);
+                                }
+                            }
+                            else // No SSR filter so just display all of them
                             {
                                 Target.MyMarker.ToolTipMode = MarkerTooltipMode.Never;
                                 Target.MyMarker.Position = new PointLatLng(Target.Lat, Target.Lon);
@@ -592,29 +613,29 @@ namespace AsterixDisplayAnalyser
                                 DinamicOverlay.Markers.Add(Target.MyMarker);
                             }
                         }
-                        else // No SSR filter so just display all of them
-                        {
-                            Target.MyMarker.ToolTipMode = MarkerTooltipMode.Never;
-                            Target.MyMarker.Position = new PointLatLng(Target.Lat, Target.Lon);
-                            BuildDynamicLabelText(Target, ref Target.MyMarker);
-                            SetLabelAttributes(ref Target.MyMarker);
-                            DinamicOverlay.Markers.Add(Target.MyMarker);
-                        }
                     }
                 }
-            }
-            else // Here handle display of passive display (buffered data)
-            {
-                DynamicDisplayBuilder.GetDisplayData(true, out TargetList);
-
-                foreach (DynamicDisplayBuilder.TargetType Target in TargetList)
+                else // Here handle display of passive display (buffered data)
                 {
-                    if (Passes_Check_For_Flight_Level_Filter(Target.ModeC))
+                    DynamicDisplayBuilder.GetDisplayData(true, out TargetList);
+
+                    foreach (DynamicDisplayBuilder.TargetType Target in TargetList)
                     {
-                        // If SSR code filtering is to be applied 
-                        if (this.checkBoxFilterBySSR.Checked == true && (this.comboBoxSSRFilterBox.Items.Count > 0))
+                        if (Passes_Check_For_Flight_Level_Filter(Target.ModeC))
                         {
-                            if (Target.ModeA == this.comboBoxSSRFilterBox.Items[SSR_Filter_Last_Index].ToString())
+                            // If SSR code filtering is to be applied 
+                            if (this.checkBoxFilterBySSR.Checked == true && (this.comboBoxSSRFilterBox.Items.Count > 0))
+                            {
+                                if (Target.ModeA == this.comboBoxSSRFilterBox.Items[SSR_Filter_Last_Index].ToString())
+                                {
+                                    GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
+                                    MyMarker.ToolTipMode = MarkerTooltipMode.Always;
+                                    MyMarker.ToolTipText = BuildPassiveLabelText(Target);
+                                    SetLabelAttributes(ref MyMarker);
+                                    DinamicOverlay.Markers.Add(MyMarker);
+                                }
+                            }
+                            else // No filter so just display all of them
                             {
                                 GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
                                 MyMarker.ToolTipMode = MarkerTooltipMode.Always;
@@ -622,14 +643,6 @@ namespace AsterixDisplayAnalyser
                                 SetLabelAttributes(ref MyMarker);
                                 DinamicOverlay.Markers.Add(MyMarker);
                             }
-                        }
-                        else // No filter so just display all of them
-                        {
-                            GMap.NET.WindowsForms.Markers.GMapMarkerCross MyMarker = new GMap.NET.WindowsForms.Markers.GMapMarkerCross(new PointLatLng(Target.Lat, Target.Lon));
-                            MyMarker.ToolTipMode = MarkerTooltipMode.Always;
-                            MyMarker.ToolTipText = BuildPassiveLabelText(Target);
-                            SetLabelAttributes(ref MyMarker);
-                            DinamicOverlay.Markers.Add(MyMarker);
                         }
                     }
                 }
@@ -1193,6 +1206,7 @@ namespace AsterixDisplayAnalyser
             Properties.Settings.Default.FL_Filter_Enabled = this.checkBoxFLFilter.Checked;
             Properties.Settings.Default.Save();
 
+
             Update_PlotTrack_Data();
         }
 
@@ -1471,16 +1485,35 @@ namespace AsterixDisplayAnalyser
             {
                 ResetDataBuffers();
                 MainASTERIXDataStorage.ResetAllData();
-                ASTERIX.DecodeAsterixData(openFileDialog1.FileName);
-
-                if (this.checkEnableDisplay.Checked == true)
-                    Update_PlotTrack_Data();
+                ProgressForm = new FileReadProgress();
+                ProgressForm.Show();
+                backgroundWorker1.RunWorkerAsync(openFileDialog1.FileName);
             }
         }
 
         private void textBoxSSRCode_TextChanged(object sender, EventArgs e)
         {
-            Update_PlotTrack_Data();
+                Update_PlotTrack_Data();
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // Read the entire file/stream and pass each individual 
+            // message to the ASTERIX parser
+            ReadDataReportMessage = ASTERIX.DecodeAsterixData((string)e.Argument);
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            ProgressForm.NotifyFinishReading(ReadDataReportMessage);
+            if (this.checkEnableDisplay.Checked == true)
+                Update_PlotTrack_Data();
+        }
+
+        private void checkBoxFillListBox_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.PopulateMainListBox = this.checkBoxFillListBox.Checked;
+            Properties.Settings.Default.Save();
         }
     }
 }

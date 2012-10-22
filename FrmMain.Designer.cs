@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.DataUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectionSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -198,8 +200,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tabMainTab = new System.Windows.Forms.TabControl();
             this.NorthMarkerTimer = new System.Windows.Forms.Timer(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.checkBoxFillListBox = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -236,6 +238,23 @@
             this.menuStrip1.Size = new System.Drawing.Size(1335, 24);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem});
+            this.toolStripMenuItem1.ForeColor = System.Drawing.Color.Silver;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(37, 20);
+            this.toolStripMenuItem1.Text = "File";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -1066,14 +1085,14 @@
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exportToolStripMenuItem.Text = "Earth Plot";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem1
             // 
             this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
-            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(125, 22);
+            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.settingsToolStripMenuItem1.Text = "GePath";
             this.settingsToolStripMenuItem1.Click += new System.EventHandler(this.settingsToolStripMenuItem1_Click);
             // 
@@ -1689,6 +1708,7 @@
             // tabPageAsterixMessages
             // 
             this.tabPageAsterixMessages.BackColor = System.Drawing.Color.Black;
+            this.tabPageAsterixMessages.Controls.Add(this.checkBoxFillListBox);
             this.tabPageAsterixMessages.Controls.Add(this.listBoxManFrame);
             this.tabPageAsterixMessages.Controls.Add(this.label3);
             this.tabPageAsterixMessages.Controls.Add(this.label1);
@@ -1793,22 +1813,21 @@
             // 
             this.NorthMarkerTimer.Tick += new System.EventHandler(this.NorthMarkerTimer_Tick);
             // 
-            // toolStripMenuItem1
+            // backgroundWorker1
             // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem});
-            this.toolStripMenuItem1.ForeColor = System.Drawing.Color.Silver;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(37, 20);
-            this.toolStripMenuItem1.Text = "File";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // openToolStripMenuItem
+            // checkBoxFillListBox
             // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.openToolStripMenuItem.Text = "Open";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.checkBoxFillListBox.AutoSize = true;
+            this.checkBoxFillListBox.Location = new System.Drawing.Point(1210, 2);
+            this.checkBoxFillListBox.Name = "checkBoxFillListBox";
+            this.checkBoxFillListBox.Size = new System.Drawing.Size(108, 17);
+            this.checkBoxFillListBox.TabIndex = 16;
+            this.checkBoxFillListBox.Text = "Populate List Box";
+            this.checkBoxFillListBox.UseVisualStyleBackColor = true;
+            this.checkBoxFillListBox.CheckedChanged += new System.EventHandler(this.checkBoxFillListBox_CheckedChanged);
             // 
             // FormMain
             // 
@@ -1822,7 +1841,7 @@
             this.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
-            this.Text = "AMER KAPETANOVIC - ASTERIX PLOT/TRACK DISPLAY and SNIFFER  1.5";
+            this.Text = "AMER KAPETANOVIC - ASTERIX PLOT/TRACK DISPLAY and SNIFFER  1.6";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.Resize += new System.EventHandler(this.FormMain_Resize);
@@ -2025,6 +2044,8 @@
         private System.Windows.Forms.ToolStripMenuItem miscellaneousToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.CheckBox checkBoxFillListBox;
     }
 }
 

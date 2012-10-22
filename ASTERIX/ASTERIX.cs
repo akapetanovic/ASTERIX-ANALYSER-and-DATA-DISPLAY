@@ -45,6 +45,8 @@ namespace AsterixDisplayAnalyser
         // Buffer to receive raw data
         private static byte[] UDPBuffer;
 
+      
+
         public static void CleanUp()
         {
             // If socket is opened then close it
@@ -156,8 +158,12 @@ namespace AsterixDisplayAnalyser
             }
         }
 
-        public static void DecodeAsterixData(string FileName)
+        public static string DecodeAsterixData(string FileName)
         {
+            long Position = 0;
+            // get total byte length of the file
+            long TotalBytes = new System.IO.FileInfo(FileName).Length;
+
             try
             {
                 // Open file for reading
@@ -166,15 +172,7 @@ namespace AsterixDisplayAnalyser
                 // attach filestream to binary reader
                 System.IO.BinaryReader BinaryReader = new System.IO.BinaryReader(FileStream);
 
-                // get total byte length of the file
-                long TotalBytes = new System.IO.FileInfo(FileName).Length;
-                long Position = 0;
-
-                // Read the entire file/stream and pass each individual 
-                // message to the ASTERIX parser
-                FileReadProgress ProgressForm = new FileReadProgress();
-                ProgressForm.Show();
-                while (Position < TotalBytes && ProgressForm.AbortRequested)
+                while (Position < TotalBytes)
                 {
                     // First determine the size of the message
                     // octet    data
@@ -190,7 +188,6 @@ namespace AsterixDisplayAnalyser
                     ExtractAndDecodeASTERIX_CAT_DataBlock(Data_Block_Buffer, false);
                     Position = BinaryReader.BaseStream.Position;
                 }
-                ProgressForm.Close();
 
                 // close file reader
                 FileStream.Close();
@@ -202,7 +199,10 @@ namespace AsterixDisplayAnalyser
                 // Error
                 MessageBox.Show("Exception caught in process: {0}", Exception.ToString());
             }
+
+            return "Read " + Position.ToString() + " of total " + TotalBytes.ToString() + " bytes";
         }
+
 
         private static void ExtractAndDecodeASTERIX_CAT_DataBlock(byte[] DataBlock, bool Is_Live_Data)
         {
@@ -238,12 +238,12 @@ namespace AsterixDisplayAnalyser
             // 5. Asterix Category
             // 
             // 6. Append Category specifc data, done just below
-            
+
             string Common_Message_Data_String;
             if (Is_Live_Data == true)
-            Common_Message_Data_String = Time + "     " + iep.ToString() + "        " + SharedData.CurrentMulticastAddress + ':' + SharedData.Current_Port.ToString() + "             " + LengthOfDataBlockInBytes.ToString() + "        " + Category + "           ";
+                Common_Message_Data_String = Time + "     " + iep.ToString() + "        " + SharedData.CurrentMulticastAddress + ':' + SharedData.Current_Port.ToString() + "             " + LengthOfDataBlockInBytes.ToString() + "        " + Category + "           ";
             else
-            Common_Message_Data_String = Time + "     " + "Recorded" + "        " + "Recorded" + ':' + "Recorded" + "             " + LengthOfDataBlockInBytes.ToString() + "        " + Category + "           ";
+                Common_Message_Data_String = Time + "     " + "Recorded" + "        " + "Recorded" + ':' + "Recorded" + "             " + LengthOfDataBlockInBytes.ToString() + "        " + Category + "           ";
             // Hold individual records of the messages 
             // from an individual data block
             string[] MessageData = new string[3000];
@@ -257,10 +257,9 @@ namespace AsterixDisplayAnalyser
             DataBlock = DataBlockNoCATandLEN;
 
             // Now do a switch based on the category received
-            int NumOfMsgsDecoded;
+            int NumOfMsgsDecoded = 0;
             switch (Category)
             {
-
                 // Monoradar Data Target Reports, from a Radar Surveillance System to an SDPS
                 // (plots and tracks from PSRs, SSRs, MSSRs, excluding Mode S and ground surveillance)
                 case "001":
@@ -268,10 +267,6 @@ namespace AsterixDisplayAnalyser
                     {
                         CAT01 MyCAT01 = new CAT01();
                         MessageData = MyCAT01.Decode(DataBlock, Time, out NumOfMsgsDecoded);
-
-                        for (int I = 0; I < NumOfMsgsDecoded; I++)
-                            SharedData.DataBox.Items.Add(Common_Message_Data_String + MessageData[I]);
-
                     }
                     break;
                 // Monoradar Service Messages (status, North marker, sector crossing messages)
@@ -280,9 +275,6 @@ namespace AsterixDisplayAnalyser
                     {
                         CAT02 MyCAT02 = new CAT02();
                         MessageData = MyCAT02.Decode(DataBlock, Time, out NumOfMsgsDecoded);
-
-                        for (int I = 0; I < NumOfMsgsDecoded; I++)
-                            SharedData.DataBox.Items.Add(Common_Message_Data_String + MessageData[I]);
                     }
                     break;
                 // Monoradar Derived Weather Information
@@ -290,7 +282,6 @@ namespace AsterixDisplayAnalyser
                     if (Properties.Settings.Default.CAT_008_Enabled == true)
                     {
                         CAT08 MyCAT08 = new CAT08();
-                        Common_Message_Data_String = Common_Message_Data_String + MyCAT08.Decode(DataBlock, Time);
                     }
                     break;
                 // Next version of Category 002: PSR Radar, M-SSR Radar, Mode-S Station
@@ -299,9 +290,6 @@ namespace AsterixDisplayAnalyser
                     {
                         CAT34 MyCAT34 = new CAT34();
                         MessageData = MyCAT34.Decode(DataBlock, Time, out NumOfMsgsDecoded);
-
-                        for (int I = 0; I < NumOfMsgsDecoded; I++)
-                            SharedData.DataBox.Items.Add(Common_Message_Data_String + MessageData[I]);
                     }
                     break;
                 // Next version of Category 001: PSR Radar, M-SSR Radar, Mode-S Station
@@ -309,11 +297,7 @@ namespace AsterixDisplayAnalyser
                     if (Properties.Settings.Default.CAT_048_Enabled == true)
                     {
                         CAT48 MyCAT48 = new CAT48();
-
                         MessageData = MyCAT48.Decode(DataBlock, Time, out NumOfMsgsDecoded);
-
-                        for (int I = 0; I < NumOfMsgsDecoded; I++)
-                            SharedData.DataBox.Items.Add(Common_Message_Data_String + MessageData[I]);
                     }
                     break;
                 // System Track Data(next version of Category 030 & 011, also applicable to non-ARTAS systems)
@@ -321,11 +305,7 @@ namespace AsterixDisplayAnalyser
                     if (Properties.Settings.Default.CAT_062_Enabled == true)
                     {
                         CAT62 MyCAT62 = new CAT62();
-
                         MessageData = MyCAT62.Decode(DataBlock, Time, out NumOfMsgsDecoded);
-
-                        for (int I = 0; I < NumOfMsgsDecoded; I++)
-                            SharedData.DataBox.Items.Add(Common_Message_Data_String + MessageData[I]);
                     }
                     break;
                 // Sensor Status Messages (SPDS)
@@ -333,7 +313,6 @@ namespace AsterixDisplayAnalyser
                     if (Properties.Settings.Default.CAT_063_Enabled == true)
                     {
                         CAT63 MyCAT63 = new CAT63();
-                        Common_Message_Data_String = Common_Message_Data_String + MyCAT63.Decode(DataBlock, Time);
                     }
                     break;
                 // SDPS Service Status Messages (SDPS)
@@ -341,7 +320,6 @@ namespace AsterixDisplayAnalyser
                     if (Properties.Settings.Default.CAT_065_Enabled == true)
                     {
                         CAT65 MyCAT65 = new CAT65();
-                        Common_Message_Data_String = Common_Message_Data_String + MyCAT65.Decode(DataBlock, Time);
                     }
                     break;
                 // Transmission of Reference Trajectory State Vectors
@@ -349,14 +327,18 @@ namespace AsterixDisplayAnalyser
                     if (Properties.Settings.Default.CAT_244_Enabled == true)
                     {
                         CAT244 MyCAT244 = new CAT244();
-                        Common_Message_Data_String = Common_Message_Data_String + MyCAT244.Decode(DataBlock, Time);
                     }
                     break;
                 // Handle unsupported data/categories
                 default:
-
                     Common_Message_Data_String = Common_Message_Data_String + " Unsupported category " + Category + " has been received";
                     break;
+            }
+
+            if (Properties.Settings.Default.PopulateMainListBox == true)
+            {
+                for (int I = 0; I < NumOfMsgsDecoded; I++)
+                    SharedData.DataBox.Items.Add(Common_Message_Data_String + MessageData[I]);
             }
         }
 

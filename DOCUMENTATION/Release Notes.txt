@@ -38,6 +38,14 @@ CAT62
 
 VERSION HISTORY
 
+Version 1.6
+
+	1. Added option to open an ASTERIX data recording (raw) format.
+	2. Fixed path to the export KML file (See User Manual)
+	3. Added option not to populate the main ListBox in the Asterix Messages tab. 
+	   This greatly improves performance when working with big data files and when
+	   only display mode is needed.
+
 Version 1.5
 
 	1. Added support/decoders for CAT34 and CAT02

@@ -28,58 +28,51 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.ProgressInfoLabel = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.labelNotify = new System.Windows.Forms.Label();
+            this.buttonOK = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // progressBar1
             // 
-            this.button1.Location = new System.Drawing.Point(16, 40);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(224, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Stop";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.progressBar1.Location = new System.Drawing.Point(16, 39);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(224, 47);
+            this.progressBar1.TabIndex = 1;
             // 
-            // label1
+            // labelNotify
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Processing: ";
+            this.labelNotify.AutoSize = true;
+            this.labelNotify.Location = new System.Drawing.Point(16, 20);
+            this.labelNotify.Name = "labelNotify";
+            this.labelNotify.Size = new System.Drawing.Size(56, 13);
+            this.labelNotify.TabIndex = 2;
+            this.labelNotify.Text = "Reading...";
             // 
-            // timer1
+            // buttonOK
             // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // ProgressInfoLabel
-            // 
-            this.ProgressInfoLabel.AutoSize = true;
-            this.ProgressInfoLabel.Location = new System.Drawing.Point(78, 13);
-            this.ProgressInfoLabel.Name = "ProgressInfoLabel";
-            this.ProgressInfoLabel.Size = new System.Drawing.Size(19, 13);
-            this.ProgressInfoLabel.TabIndex = 2;
-            this.ProgressInfoLabel.Text = "----";
+            this.buttonOK.Enabled = false;
+            this.buttonOK.Location = new System.Drawing.Point(16, 92);
+            this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Size = new System.Drawing.Size(224, 23);
+            this.buttonOK.TabIndex = 3;
+            this.buttonOK.Text = "OK";
+            this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // FileReadProgress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(252, 72);
-            this.Controls.Add(this.ProgressInfoLabel);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(252, 123);
+            this.Controls.Add(this.buttonOK);
+            this.Controls.Add(this.labelNotify);
+            this.Controls.Add(this.progressBar1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FileReadProgress";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Data input progress...";
             this.Load += new System.EventHandler(this.FileReadProgress_Load);
             this.ResumeLayout(false);
@@ -89,10 +82,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Label ProgressInfoLabel;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label labelNotify;
+        private System.Windows.Forms.Button buttonOK;
 
     }
 }
