@@ -74,10 +74,12 @@ namespace AsterixDisplayAnalyser
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             // Now open up the temporary file named act.in
             // Combine the new file name with the path
-            string FileName = System.IO.Path.Combine(@"C:\ASTERIX\", "Asterix.txt");
+            string FileName = System.IO.Path.Combine(@"C:\ASTERIX\", "Asterix_Export.txt");
 
             // We assume the file does not exist
             System.IO.File.WriteAllText(FileName, BuildExportedData());
+            MessageBox.Show("Data has been saved at C:\\ASTERIX\\Asterix_Export.txt");
+            this.Close();
         }
 
         private string BuildExportedData()

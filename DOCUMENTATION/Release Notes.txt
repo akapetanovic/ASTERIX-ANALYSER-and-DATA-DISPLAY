@@ -45,6 +45,7 @@ Version 1.6
 	3. Added option not to populate the main ListBox in the Asterix Messages tab. 
 	   This greatly improves performance when working with big data files and when
 	   only display mode is needed.
+	4. Modifed KML export option to save file at C:\ASTERIX\", "Asterix_Export.txt, and to provide outcome feedback.
 
 Version 1.5
 

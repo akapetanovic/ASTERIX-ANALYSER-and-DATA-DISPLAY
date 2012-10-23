@@ -191,6 +191,7 @@
             this.checkBoxFilterBySSR = new System.Windows.Forms.CheckBox();
             this.gMapControl = new GMap.NET.WindowsForms.GMapControl();
             this.tabPageAsterixMessages = new System.Windows.Forms.TabPage();
+            this.checkBoxFillListBox = new System.Windows.Forms.CheckBox();
             this.listBoxManFrame = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -201,7 +202,6 @@
             this.tabMainTab = new System.Windows.Forms.TabControl();
             this.NorthMarkerTimer = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.checkBoxFillListBox = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -252,7 +252,7 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -1085,14 +1085,14 @@
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.exportToolStripMenuItem.Text = "Earth Plot";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem1
             // 
             this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
-            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(125, 22);
             this.settingsToolStripMenuItem1.Text = "GePath";
             this.settingsToolStripMenuItem1.Click += new System.EventHandler(this.settingsToolStripMenuItem1_Click);
             // 
@@ -1723,6 +1723,17 @@
             this.tabPageAsterixMessages.TabIndex = 0;
             this.tabPageAsterixMessages.Text = "Asterix Messages";
             // 
+            // checkBoxFillListBox
+            // 
+            this.checkBoxFillListBox.AutoSize = true;
+            this.checkBoxFillListBox.Location = new System.Drawing.Point(1210, 2);
+            this.checkBoxFillListBox.Name = "checkBoxFillListBox";
+            this.checkBoxFillListBox.Size = new System.Drawing.Size(108, 17);
+            this.checkBoxFillListBox.TabIndex = 16;
+            this.checkBoxFillListBox.Text = "Populate List Box";
+            this.checkBoxFillListBox.UseVisualStyleBackColor = true;
+            this.checkBoxFillListBox.CheckedChanged += new System.EventHandler(this.checkBoxFillListBox_CheckedChanged);
+            // 
             // listBoxManFrame
             // 
             this.listBoxManFrame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -1817,17 +1828,6 @@
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
-            // 
-            // checkBoxFillListBox
-            // 
-            this.checkBoxFillListBox.AutoSize = true;
-            this.checkBoxFillListBox.Location = new System.Drawing.Point(1210, 2);
-            this.checkBoxFillListBox.Name = "checkBoxFillListBox";
-            this.checkBoxFillListBox.Size = new System.Drawing.Size(108, 17);
-            this.checkBoxFillListBox.TabIndex = 16;
-            this.checkBoxFillListBox.Text = "Populate List Box";
-            this.checkBoxFillListBox.UseVisualStyleBackColor = true;
-            this.checkBoxFillListBox.CheckedChanged += new System.EventHandler(this.checkBoxFillListBox_CheckedChanged);
             // 
             // FormMain
             // 

@@ -347,7 +347,7 @@ namespace AsterixDisplayAnalyser
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Asterix Display/Sniffer 1.4 by Amer Kapetanovic\nakapetanovic@gmail.com", "About");
+            MessageBox.Show("Asterix Display/Sniffer 1.6 by Amer Kapetanovic\nakapetanovic@gmail.com", "About");
         }
 
         private void resetDataBufferToolStripMenuItem_Click(object sender, EventArgs e)
@@ -619,6 +619,8 @@ namespace AsterixDisplayAnalyser
                 {
                     DynamicDisplayBuilder.GetDisplayData(true, out TargetList);
 
+                    this.lblNumberofTargets.Text = TargetList.Count.ToString();
+                    
                     foreach (DynamicDisplayBuilder.TargetType Target in TargetList)
                     {
                         if (Passes_Check_For_Flight_Level_Filter(Target.ModeC))
