@@ -7,11 +7,18 @@ using System.Net;
 using System.Net.Sockets;
 using System.Windows.Forms;
 using System.Threading;
+using System.IO;
 
 namespace AsterixDisplayAnalyser
 {
     static class ASTERIX
     {
+        // This flag indicates that recording of data
+        // just started
+        private static bool RecordingJustStarted = true;
+        private static Stream RecordingStream = null;
+        private static BinaryWriter RecordingBinaryWriter = null;
+
         // GIT TEST
         public class SIC_SAC_Time
         {
@@ -44,8 +51,6 @@ namespace AsterixDisplayAnalyser
         private static IPEndPoint iep;
         // Buffer to receive raw data
         private static byte[] UDPBuffer;
-
-      
 
         public static void CleanUp()
         {
@@ -111,8 +116,6 @@ namespace AsterixDisplayAnalyser
             // Loop forever
             while (!_shouldStop)
             {
-
-
                 // Do something only if user has requested so
                 if (SharedData.bool_Listen_for_Data)
                 {
@@ -152,6 +155,30 @@ namespace AsterixDisplayAnalyser
                                 Array.Copy(UDPBuffer, DataBufferIndexForThisExtraction, LocalSingle_ASTERIX_CAT_Buffer, 0, 3);
                                 LengthOfASTERIX_CAT = ASTERIX.ExtractLengthOfDataBlockInBytes_Int(LocalSingle_ASTERIX_CAT_Buffer);
                             }
+                        }
+
+                        // Check if recording is requested
+                        if (SharedData.DataRecordingRequested == true)
+                        {
+                            if (RecordingJustStarted == true)
+                            {
+                                RecordingJustStarted = false;
+                                string FileName = @"C:\ASTERIX\RECORDINGS\TEST.raw";
+                                Stream RecordingStream = new FileStream(FileName, FileMode.Create);
+                                RecordingBinaryWriter = new BinaryWriter(RecordingStream);
+                                // Set up the new file name and open up the stream
+                            }
+
+                            RecordingBinaryWriter.Write(UDPBuffer);
+                        }
+                        else if (RecordingJustStarted == false)
+                        {
+                            RecordingJustStarted = true;
+                            // Close the data stream
+                            if (RecordingBinaryWriter != null)
+                                RecordingBinaryWriter.Close();
+                            if (RecordingStream != null)
+                                RecordingStream.Close();
                         }
                     }
                 }

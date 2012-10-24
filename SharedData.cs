@@ -17,6 +17,12 @@ namespace AsterixDisplayAnalyser
         // the user interface.
         public static bool bool_Listen_for_Data = false;
 
+        // This boolean indicates if data recording is
+        // requested. If so then ASTERIX package will store
+        // all the received data in the C://ASTERX/RECORDING 
+        // directory
+        public static bool DataRecordingRequested = false;
+
         // This list box stores received data while the listener is
         // running. Once the data has been received the data is to be 
         // decoded and stored in appropriate format
@@ -24,8 +30,6 @@ namespace AsterixDisplayAnalyser
 
         // Used to convert feet to meeters
         public  static double FeetToMeeters = 0.3048;
-
-        
 
         ///////////////////////////////////////////////////////////////////////////
         //

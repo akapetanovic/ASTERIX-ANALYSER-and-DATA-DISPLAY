@@ -202,6 +202,8 @@
             this.tabMainTab = new System.Windows.Forms.TabControl();
             this.NorthMarkerTimer = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.checkBoxRecording = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -1829,12 +1831,37 @@
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
+            // checkBoxRecording
+            // 
+            this.checkBoxRecording.AutoSize = true;
+            this.checkBoxRecording.Enabled = false;
+            this.checkBoxRecording.ForeColor = System.Drawing.Color.White;
+            this.checkBoxRecording.Location = new System.Drawing.Point(925, 9);
+            this.checkBoxRecording.Name = "checkBoxRecording";
+            this.checkBoxRecording.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBoxRecording.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxRecording.TabIndex = 24;
+            this.checkBoxRecording.UseVisualStyleBackColor = true;
+            this.checkBoxRecording.CheckedChanged += new System.EventHandler(this.checkBoxRecording_CheckedChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(872, 9);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(56, 13);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "Recording";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1335, 882);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.checkBoxRecording);
             this.Controls.Add(this.groupBoxConnection);
             this.Controls.Add(this.tabMainTab);
             this.Controls.Add(this.menuStrip1);
@@ -2046,6 +2073,8 @@
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.CheckBox checkBoxFillListBox;
+        private System.Windows.Forms.CheckBox checkBoxRecording;
+        private System.Windows.Forms.Label label9;
     }
 }
 

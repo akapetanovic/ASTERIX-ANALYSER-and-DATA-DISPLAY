@@ -206,6 +206,8 @@ namespace AsterixDisplayAnalyser
                 this.dataBySSRCodeToolStripMenuItem.Enabled = true;
                 this.googleEarthToolStripMenuItem.Enabled = true;
                 openToolStripMenuItem.Enabled = true;
+                this.checkBoxRecording.Enabled = false;
+                this.checkBoxRecording.Checked = false;
             }
             else
             {
@@ -218,7 +220,8 @@ namespace AsterixDisplayAnalyser
                 this.toolsToolStripMenuItem.Enabled = false;
                 this.dataBySSRCodeToolStripMenuItem.Enabled = false;
                 this.googleEarthToolStripMenuItem.Enabled = false;
-                openToolStripMenuItem.Enabled = false;
+                openToolStripMenuItem.Enabled = true;
+                this.checkBoxRecording.Enabled = true;
             }
 
             HandlePlotDisplayEnabledChanged();
@@ -1516,6 +1519,11 @@ namespace AsterixDisplayAnalyser
         {
             Properties.Settings.Default.PopulateMainListBox = this.checkBoxFillListBox.Checked;
             Properties.Settings.Default.Save();
+        }
+
+        private void checkBoxRecording_CheckedChanged(object sender, EventArgs e)
+        {
+            SharedData.DataRecordingRequested = this.checkBoxRecording.Checked;
         }
     }
 }
