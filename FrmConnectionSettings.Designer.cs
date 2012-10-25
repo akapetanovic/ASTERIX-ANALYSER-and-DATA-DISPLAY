@@ -1,6 +1,6 @@
 ﻿namespace AsterixDisplayAnalyser
 {
-    partial class FrmSettings
+    partial class FrmConnectionSettings
     {
         /// <summary>
         /// Required designer variable.
@@ -393,7 +393,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmSettings";
-            this.Text = "Settings";
+            this.Text = "Connection Settings";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmSettings_FormClosed);
             this.Load += new System.EventHandler(this.FrmSettings_Load);
             this.menuStrip1.ResumeLayout(false);

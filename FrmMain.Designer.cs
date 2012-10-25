@@ -34,7 +34,6 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.connectionSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cATDecoderSelectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miscellaneousToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -149,6 +148,8 @@
             this.PlotandTrackDisplayUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.StaticDisplayTimer = new System.Windows.Forms.Timer(this.components);
             this.groupBoxConnection = new System.Windows.Forms.GroupBox();
+            this.labelLocalInterface = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.checkBoxRecording = new System.Windows.Forms.CheckBox();
             this.btnOpenConnection = new System.Windows.Forms.Button();
@@ -204,8 +205,7 @@
             this.tabMainTab = new System.Windows.Forms.TabControl();
             this.NorthMarkerTimer = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorkerLoadData = new System.ComponentModel.BackgroundWorker();
-            this.label16 = new System.Windows.Forms.Label();
-            this.labelLocalInterface = new System.Windows.Forms.Label();
+            this.recorderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -264,21 +264,14 @@
             // 
             this.settingsToolStripMenuItem.BackColor = System.Drawing.Color.Black;
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.connectionSettingsToolStripMenuItem,
             this.colorDialogToolStripMenuItem,
             this.cATDecoderSelectorToolStripMenuItem,
-            this.miscellaneousToolStripMenuItem});
+            this.miscellaneousToolStripMenuItem,
+            this.recorderToolStripMenuItem});
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // connectionSettingsToolStripMenuItem
-            // 
-            this.connectionSettingsToolStripMenuItem.Name = "connectionSettingsToolStripMenuItem";
-            this.connectionSettingsToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.connectionSettingsToolStripMenuItem.Text = "Connection Settings";
-            this.connectionSettingsToolStripMenuItem.Click += new System.EventHandler(this.connectionSettingsToolStripMenuItem_Click);
             // 
             // colorDialogToolStripMenuItem
             // 
@@ -1194,15 +1187,33 @@
             this.groupBoxConnection.TabStop = false;
             this.groupBoxConnection.Text = "Connection";
             // 
+            // labelLocalInterface
+            // 
+            this.labelLocalInterface.AutoSize = true;
+            this.labelLocalInterface.Location = new System.Drawing.Point(180, 27);
+            this.labelLocalInterface.Name = "labelLocalInterface";
+            this.labelLocalInterface.Size = new System.Drawing.Size(27, 13);
+            this.labelLocalInterface.TabIndex = 27;
+            this.labelLocalInterface.Text = "N/A";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(79, 28);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(81, 13);
+            this.label16.TabIndex = 26;
+            this.label16.Text = "Local Interface:";
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.Color.White;
             this.label9.Location = new System.Drawing.Point(20, 37);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(56, 13);
+            this.label9.Size = new System.Drawing.Size(42, 13);
             this.label9.TabIndex = 25;
-            this.label9.Text = "Recording";
+            this.label9.Text = "Record";
             // 
             // checkBoxRecording
             // 
@@ -1860,23 +1871,12 @@
             this.backgroundWorkerLoadData.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorkerLoadData.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // label16
+            // recorderToolStripMenuItem
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(79, 28);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(81, 13);
-            this.label16.TabIndex = 26;
-            this.label16.Text = "Local Interface:";
-            // 
-            // labelLocalInterface
-            // 
-            this.labelLocalInterface.AutoSize = true;
-            this.labelLocalInterface.Location = new System.Drawing.Point(180, 27);
-            this.labelLocalInterface.Name = "labelLocalInterface";
-            this.labelLocalInterface.Size = new System.Drawing.Size(27, 13);
-            this.labelLocalInterface.TabIndex = 27;
-            this.labelLocalInterface.Text = "N/A";
+            this.recorderToolStripMenuItem.Name = "recorderToolStripMenuItem";
+            this.recorderToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.recorderToolStripMenuItem.Text = "ASTERIX Recorder";
+            this.recorderToolStripMenuItem.Click += new System.EventHandler(this.recorderToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -1925,7 +1925,6 @@
         private System.Windows.Forms.Timer DataUpdateTimer;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem connectionSettingsToolStripMenuItem;
         private System.Windows.Forms.Button buttonStopRun;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cAT001DataItemPresenceToolStripMenuItem;
@@ -2099,6 +2098,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label labelLocalInterface;
+        private System.Windows.Forms.ToolStripMenuItem recorderToolStripMenuItem;
     }
 }
 

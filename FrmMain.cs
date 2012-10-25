@@ -43,6 +43,8 @@ namespace AsterixDisplayAnalyser
         bool North_Marker_Received = false;
         string ReadDataReportMessage;
 
+        private static FrmAsterixRecorder AsterixRecorder = new FrmAsterixRecorder();
+
         public FormMain()
         {
             System.Threading.Thread.Sleep(600);
@@ -123,7 +125,7 @@ namespace AsterixDisplayAnalyser
         // Display menu box to enable users to set up connection(s)
         private void connectionSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmSettings SettingDialog = new FrmSettings();
+            FrmConnectionSettings SettingDialog = new FrmConnectionSettings();
             SettingDialog.Visible = false;
             SettingDialog.Show(this);
             SettingDialog.Visible = true;
@@ -1234,7 +1236,7 @@ namespace AsterixDisplayAnalyser
 
         private void button8_Click(object sender, EventArgs e)
         {
-            FrmSettings SettingDialog = new FrmSettings();
+            FrmConnectionSettings SettingDialog = new FrmConnectionSettings();
             SettingDialog.Visible = false;
             SettingDialog.Owner = this;
             SettingDialog.Show(this);
@@ -1556,6 +1558,11 @@ namespace AsterixDisplayAnalyser
                 }
 
             }
+        }
+
+        private void recorderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AsterixRecorder.Visible = true;
         }
     }
 }

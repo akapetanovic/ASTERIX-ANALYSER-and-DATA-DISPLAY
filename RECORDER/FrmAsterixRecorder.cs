@@ -12,14 +12,12 @@ using System.Net.Sockets;
 
 namespace AsterixDisplayAnalyser
 {
-    public partial class FrmSettings : Form
+    public partial class FrmAsterixRecorder : Form
     {
-        public FrmSettings()
+        public FrmAsterixRecorder()
         {
             InitializeComponent();
         }
-
-
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -79,50 +77,50 @@ namespace AsterixDisplayAnalyser
             {
                 this.textBoxConnectionName.Text = this.textBoxConnectionName.Text.Replace(' ', '_');
                 string ConnInfo = this.textBoxConnectionName.Text;
-                this.listBoxConnName.Items.Add(ConnInfo);
+                this.checkedListBoxRecordingName.Items.Add(ConnInfo);
 
                 ConnInfo = this.textBoxInterfaceAddr.Text;
                 this.listBoxLocalAddr.Items.Add(ConnInfo);
-                
+
                 ConnInfo = this.txtboxIPAddress.Text;
                 this.listBoxIPAddress.Items.Add(ConnInfo);
 
                 ConnInfo = this.textboxPort.Text;
                 this.listBoxPort.Items.Add(ConnInfo);
+
+                ConnInfo = this.textBoxConnectionName.Text;
+                this.checkedListBoxRecordingName.Items.Add(ConnInfo);
             }
 
             // The last thing is to check if there is anything in the list, if so then enable the button
             // to allow setting an active multicast address
-            if (this.listBoxConnName.Items.Count > 0)
+            if (this.checkedListBoxRecordingName.Items.Count > 0)
             {
-                this.buttonSetAsActive.Enabled = true;
-                this.listBoxConnName.SelectedIndex = this.listBoxConnName.Items.Count - 1;
+                this.checkedListBoxRecordingName.SelectedIndex = this.checkedListBoxRecordingName.Items.Count - 1;
             }
+
+            if (checkedListBoxRecordingName.Items.Count == 5)
+                this.btnAdd.Enabled = false;
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
             // Code to remove the selected value from the list 
-            if (this.listBoxConnName.Items.Count > 0)
+            if (this.checkedListBoxRecordingName.Items.Count > 0)
             {
-                int IndexToDelete = this.listBoxConnName.SelectedIndex;
+                int IndexToDelete = this.checkedListBoxRecordingName.SelectedIndex;
 
-                this.listBoxConnName.Items.RemoveAt(IndexToDelete);
+                this.checkedListBoxRecordingName.Items.RemoveAt(IndexToDelete);
                 this.listBoxLocalAddr.Items.RemoveAt(IndexToDelete);
                 this.listBoxIPAddress.Items.RemoveAt(IndexToDelete);
                 this.listBoxPort.Items.RemoveAt(IndexToDelete);
 
-                if (this.listBoxConnName.Items.Count > 0)
+                if (this.checkedListBoxRecordingName.Items.Count > 0)
                 {
-                    this.listBoxConnName.SelectedIndex = this.listBoxConnName.Items.Count - 1;
-                    this.buttonSetAsActive.Enabled = true;
+                    this.checkedListBoxRecordingName.SelectedIndex = this.checkedListBoxRecordingName.Items.Count - 1;
+
                 }
             }
-
-            // The last thing is to check if there is anything in the list, if so then enable the button
-            // to allow setting an active multicast address
-            if (this.listBoxConnName.Items.Count == 0)
-                this.buttonSetAsActive.Enabled = false;
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -140,9 +138,9 @@ namespace AsterixDisplayAnalyser
                 {
                     StreamWriter wText = new StreamWriter(myStream);
 
-                    for (int SelectedIndex = 0; SelectedIndex < this.listBoxConnName.Items.Count; SelectedIndex++)
+                    for (int SelectedIndex = 0; SelectedIndex < this.checkedListBoxRecordingName.Items.Count; SelectedIndex++)
                     {
-                        string LineOfData = (string)this.listBoxConnName.Items[SelectedIndex] + " " + (string)this.listBoxLocalAddr.Items[SelectedIndex] + " " + (string)this.listBoxIPAddress.Items[SelectedIndex] + " " +
+                        string LineOfData = (string)this.checkedListBoxRecordingName.Items[SelectedIndex] + " " + (string)this.listBoxLocalAddr.Items[SelectedIndex] + " " + (string)this.listBoxIPAddress.Items[SelectedIndex] + " " +
                             (string)this.listBoxPort.Items[SelectedIndex];
                         wText.WriteLine(LineOfData);
                     }
@@ -163,9 +161,9 @@ namespace AsterixDisplayAnalyser
             if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
             {
                 // Here first clear the lists
-                for (int SelectedIndex = 0; SelectedIndex < this.listBoxConnName.Items.Count; SelectedIndex++)
+                for (int SelectedIndex = 0; SelectedIndex < this.checkedListBoxRecordingName.Items.Count; SelectedIndex++)
                 {
-                    this.listBoxConnName.Items.RemoveAt(SelectedIndex);
+                    this.checkedListBoxRecordingName.Items.RemoveAt(SelectedIndex);
                     this.listBoxLocalAddr.Items.RemoveAt(SelectedIndex);
                     this.listBoxIPAddress.Items.RemoveAt(SelectedIndex);
                     this.listBoxPort.Items.RemoveAt(SelectedIndex);
@@ -178,64 +176,42 @@ namespace AsterixDisplayAnalyser
                 {
                     Path = MyStreamReader.ReadLine();
                     string[] Splited = Path.Split(' ');
-                    this.listBoxConnName.Items.Add(Splited[0]);
+                    this.checkedListBoxRecordingName.Items.Add(Splited[0]);
                     this.listBoxLocalAddr.Items.Add(Splited[1]);
                     this.listBoxIPAddress.Items.Add(Splited[2]);
                     this.listBoxPort.Items.Add(Splited[3]);
+
+                    if (checkedListBoxRecordingName.Items.Count == 5)
+                    {
+                        this.btnAdd.Enabled = false;
+                        break;
+                    }
                 }
 
                 MyStreamReader.Close();
             }
             // The last thing is to check if there is anything in the list, if so then enable the button
             // to allow setting an active multicast address
-            if (this.listBoxConnName.Items.Count > 0)
+            if (this.checkedListBoxRecordingName.Items.Count > 0)
             {
-                this.listBoxConnName.SelectedIndex = this.listBoxConnName.Items.Count - 1;
-                this.buttonSetAsActive.Enabled = true;
+                this.checkedListBoxRecordingName.SelectedIndex = this.checkedListBoxRecordingName.Items.Count - 1;
+
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string ConnectionSettings = (string)this.listBoxConnName.Items[this.listBoxConnName.SelectedIndex];
-            SharedData.ConnName = (string)this.listBoxConnName.Items[this.listBoxConnName.SelectedIndex];
-            SharedData.CurrentInterfaceIPAddress = (string)this.listBoxLocalAddr.Items[this.listBoxConnName.SelectedIndex];
-            SharedData.CurrentMulticastAddress = (string)this.listBoxIPAddress.Items[this.listBoxConnName.SelectedIndex];
-            SharedData.Current_Port = int.Parse((string)this.listBoxPort.Items[this.listBoxConnName.SelectedIndex]);
 
-            this.labelConnName.Text = SharedData.ConnName;
-            this.labelLocalInterface.Text = SharedData.CurrentInterfaceIPAddress;
-            this.labelConnAddress.Text = SharedData.CurrentMulticastAddress;
-            this.labelPort.Text = SharedData.Current_Port.ToString();
-
-            FormMain parentForm = (FormMain)this.Owner;
-            parentForm.UpdateConnectionBoxInfo();
-
-            ASTERIX.ReinitializeSocket();
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            this.Close();
-        }
-
-        private void listBoxConnName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.listBoxIPAddress.Items.Count > this.listBoxConnName.SelectedIndex)
-                this.listBoxIPAddress.SelectedIndex = this.listBoxConnName.SelectedIndex;
-
-            if (this.listBoxPort.Items.Count > this.listBoxConnName.SelectedIndex)
-                this.listBoxPort.SelectedIndex = this.listBoxConnName.SelectedIndex;
-
-            if (this.listBoxLocalAddr.Items.Count > this.listBoxConnName.SelectedIndex)
-                this.listBoxLocalAddr.SelectedIndex = this.listBoxConnName.SelectedIndex;
-
         }
 
         private void listBoxIPAddress_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.listBoxConnName.Items.Count > this.listBoxIPAddress.SelectedIndex)
-                this.listBoxConnName.SelectedIndex = this.listBoxIPAddress.SelectedIndex;
+            if (this.checkedListBoxRecordingName.Items.Count > this.listBoxIPAddress.SelectedIndex)
+                this.checkedListBoxRecordingName.SelectedIndex = this.listBoxIPAddress.SelectedIndex;
 
             if (this.listBoxPort.Items.Count > this.listBoxIPAddress.SelectedIndex)
                 this.listBoxPort.SelectedIndex = this.listBoxIPAddress.SelectedIndex;
@@ -246,8 +222,8 @@ namespace AsterixDisplayAnalyser
 
         private void listBoxPort_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.listBoxConnName.Items.Count > this.listBoxPort.SelectedIndex)
-                this.listBoxConnName.SelectedIndex = this.listBoxPort.SelectedIndex;
+            if (this.checkedListBoxRecordingName.Items.Count > this.listBoxPort.SelectedIndex)
+                this.checkedListBoxRecordingName.SelectedIndex = this.listBoxPort.SelectedIndex;
 
             if (this.listBoxIPAddress.Items.Count > this.listBoxPort.SelectedIndex)
                 this.listBoxIPAddress.SelectedIndex = this.listBoxPort.SelectedIndex;
@@ -258,6 +234,8 @@ namespace AsterixDisplayAnalyser
 
         private void FrmSettings_Load(object sender, EventArgs e)
         {
+            this.ControlBox = false;
+            this.textBoxRecordDirectory.Text = Properties.Settings.Default.RecordingDirectory;
 
         }
 
@@ -269,14 +247,83 @@ namespace AsterixDisplayAnalyser
         private void listBoxLocalAddr_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            if (this.listBoxConnName.Items.Count > this.listBoxLocalAddr.SelectedIndex)
-                this.listBoxConnName.SelectedIndex = this.listBoxLocalAddr.SelectedIndex;
+            if (this.checkedListBoxRecordingName.Items.Count > this.listBoxLocalAddr.SelectedIndex)
+                this.checkedListBoxRecordingName.SelectedIndex = this.listBoxLocalAddr.SelectedIndex;
 
             if (this.listBoxIPAddress.Items.Count > this.listBoxLocalAddr.SelectedIndex)
                 this.listBoxIPAddress.SelectedIndex = this.listBoxLocalAddr.SelectedIndex;
 
             if (this.listBoxPort.Items.Count > this.listBoxLocalAddr.SelectedIndex)
                 this.listBoxPort.SelectedIndex = this.listBoxLocalAddr.SelectedIndex;
+        }
+
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkedListBoxRecordingName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.listBoxIPAddress.Items.Count > this.checkedListBoxRecordingName.SelectedIndex)
+                this.listBoxIPAddress.SelectedIndex = this.checkedListBoxRecordingName.SelectedIndex;
+
+            if (this.listBoxPort.Items.Count > this.checkedListBoxRecordingName.SelectedIndex)
+                this.listBoxPort.SelectedIndex = this.checkedListBoxRecordingName.SelectedIndex;
+
+            if (this.listBoxLocalAddr.Items.Count > this.checkedListBoxRecordingName.SelectedIndex)
+                this.listBoxLocalAddr.SelectedIndex = this.checkedListBoxRecordingName.SelectedIndex;
+
+            // Check if this item is checked
+            if (this.checkedListBoxRecordingName.GetItemChecked(this.checkedListBoxRecordingName.SelectedIndex))
+            {
+
+            }
+            else // No it is not checked
+            {
+
+            }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            FolderBrowserDialog FBD = new FolderBrowserDialog();
+
+            if (FBD.ShowDialog() == DialogResult.OK)
+            {
+                this.textBoxRecordDirectory.Text = FBD.SelectedPath;
+                Properties.Settings.Default.RecordingDirectory = this.textBoxRecordDirectory.Text;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // Code to remove the selected value from the list 
+            if (this.checkedListBoxRecordingName.Items.Count > 0)
+            {
+                int IndexToDelete = this.checkedListBoxRecordingName.SelectedIndex;
+
+                this.checkedListBoxRecordingName.Items.RemoveAt(IndexToDelete);
+                this.listBoxLocalAddr.Items.RemoveAt(IndexToDelete);
+                this.listBoxIPAddress.Items.RemoveAt(IndexToDelete);
+                this.listBoxPort.Items.RemoveAt(IndexToDelete);
+
+                if (this.checkedListBoxRecordingName.Items.Count > 0)
+                {
+                    this.checkedListBoxRecordingName.SelectedIndex = this.checkedListBoxRecordingName.Items.Count - 1;
+                }
+            }
+
+            if (checkedListBoxRecordingName.Items.Count < 5)
+                this.btnAdd.Enabled = true;
+            else
+                this.btnAdd.Enabled = false;
         }
     }
 }
