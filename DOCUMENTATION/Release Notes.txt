@@ -46,6 +46,7 @@ Version 1.6
 	   This greatly improves performance when working with big data files and when
 	   only display mode is needed.
 	4. Modifed KML export option to save file at C:\ASTERIX\", "Asterix_Export.txt, and to provide outcome feedback.
+	5. Added option to record ASTERIX data in raw format
 
 Version 1.5
 

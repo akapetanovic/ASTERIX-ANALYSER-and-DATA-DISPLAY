@@ -21,7 +21,11 @@ namespace AsterixDisplayAnalyser
         // requested. If so then ASTERIX package will store
         // all the received data in the C://ASTERX/RECORDING 
         // directory
-        public static bool DataRecordingRequested = false;
+        public static class DataRecordingClass
+        {
+            public static bool DataRecordingRequested = false;
+            public static string FilePathandName = "";
+        }
 
         // This list box stores received data while the listener is
         // running. Once the data has been received the data is to be 

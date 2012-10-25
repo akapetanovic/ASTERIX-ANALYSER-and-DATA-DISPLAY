@@ -125,7 +125,7 @@ namespace AsterixDisplayAnalyser
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            
+
             // Initialize Map
             InitializeMap();
 
@@ -148,7 +148,7 @@ namespace AsterixDisplayAnalyser
             ToolTip toolTip5 = new ToolTip();
             toolTip4.ShowAlways = false;
             toolTip4.SetToolTip(this.checkBoxFillListBox, "Check OFF for performance and when working with big data files");
-            
+
             this.labelTrackCoast.Text = Properties.Settings.Default.TrackCoast.ToString();
             this.PlotandTrackDisplayUpdateTimer.Interval = Properties.Settings.Default.UpdateRate;
             this.labelDisplayUpdateRate.Text = "Update rate: " + this.PlotandTrackDisplayUpdateTimer.Interval.ToString() + "ms";
@@ -158,6 +158,7 @@ namespace AsterixDisplayAnalyser
             this.numericUpDownLower.Value = Properties.Settings.Default.FL_Lower;
             this.checkBoxDisplayPSR.Checked = Properties.Settings.Default.DisplayPSR;
             this.checkBoxFillListBox.Checked = Properties.Settings.Default.PopulateMainListBox;
+            this.checkBoxSyncToNM.Checked = Properties.Settings.Default.SyncDisplayToNorthMark;
 
             HandlePlotDisplayEnabledChanged();
         }
@@ -220,7 +221,7 @@ namespace AsterixDisplayAnalyser
                 this.toolsToolStripMenuItem.Enabled = false;
                 this.dataBySSRCodeToolStripMenuItem.Enabled = false;
                 this.googleEarthToolStripMenuItem.Enabled = false;
-                openToolStripMenuItem.Enabled = true;
+                openToolStripMenuItem.Enabled = false;
                 this.checkBoxRecording.Enabled = true;
             }
 
@@ -356,11 +357,13 @@ namespace AsterixDisplayAnalyser
         private void resetDataBufferToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ResetDataBuffers();
+            MainASTERIXDataStorage.ResetAllData();
+            Update_PlotTrack_Data();
         }
 
         private void ResetDataBuffers()
         {
-            bool ListenigForForData = SharedData.bool_Listen_for_Data;
+            bool ListenigForData = SharedData.bool_Listen_for_Data;
             if (SharedData.bool_Listen_for_Data == true)
             {
                 SharedData.bool_Listen_for_Data = false;
@@ -385,7 +388,7 @@ namespace AsterixDisplayAnalyser
             CAT65.Intitialize();
             CAT244.Intitialize();
 
-            if (ListenigForForData == true)
+            if (ListenigForData == true)
             {
                 SharedData.bool_Listen_for_Data = true;
                 buttonStopRun.Text = "Running";
@@ -623,7 +626,7 @@ namespace AsterixDisplayAnalyser
                     DynamicDisplayBuilder.GetDisplayData(true, out TargetList);
 
                     this.lblNumberofTargets.Text = TargetList.Count.ToString();
-                    
+
                     foreach (DynamicDisplayBuilder.TargetType Target in TargetList)
                     {
                         if (Passes_Check_For_Flight_Level_Filter(Target.ModeC))
@@ -654,6 +657,7 @@ namespace AsterixDisplayAnalyser
             }
         }
 
+     
         /////////////////////////////////////////////////////////////////////////////////
         // This method builds the label text
         /// <summary>
@@ -825,7 +829,7 @@ namespace AsterixDisplayAnalyser
                 // to populate the display right away, 
                 // then the timer/North Mark will take over.
                 Update_PlotTrack_Data();
-                Update_PlotTrack_Data();
+               // Update_PlotTrack_Data();
             }
             else
             {
@@ -1170,7 +1174,7 @@ namespace AsterixDisplayAnalyser
 
         private void gMapControl_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+          
         }
 
         private void gMapControl_MouseClick(object sender, MouseEventArgs e)
@@ -1384,6 +1388,9 @@ namespace AsterixDisplayAnalyser
         private void checkBoxSyncToNM_CheckedChanged_1(object sender, EventArgs e)
         {
             HandlePlotDisplayEnabledChanged();
+
+            Properties.Settings.Default.SyncDisplayToNorthMark = this.checkBoxSyncToNM.Checked;
+            Properties.Settings.Default.Save();
         }
 
         private void groupBoxUpdateRate_Enter(object sender, EventArgs e)
@@ -1492,19 +1499,17 @@ namespace AsterixDisplayAnalyser
                 MainASTERIXDataStorage.ResetAllData();
                 ProgressForm = new FileReadProgress();
                 ProgressForm.Show();
-                backgroundWorker1.RunWorkerAsync(openFileDialog1.FileName);
+                backgroundWorkerLoadData.RunWorkerAsync(openFileDialog1.FileName);
             }
         }
 
         private void textBoxSSRCode_TextChanged(object sender, EventArgs e)
         {
-                Update_PlotTrack_Data();
+            Update_PlotTrack_Data();
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            // Read the entire file/stream and pass each individual 
-            // message to the ASTERIX parser
             ReadDataReportMessage = ASTERIX.DecodeAsterixData((string)e.Argument);
         }
 
@@ -1523,7 +1528,24 @@ namespace AsterixDisplayAnalyser
 
         private void checkBoxRecording_CheckedChanged(object sender, EventArgs e)
         {
-            SharedData.DataRecordingRequested = this.checkBoxRecording.Checked;
+            if (this.checkBoxRecording.Checked == true)
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "ASTERIX Analyser Files|*.raw";
+                saveFileDialog.InitialDirectory = "Application.StartupPath";
+                saveFileDialog.Title = "Select file location and file name";
+
+                if (saveFileDialog.ShowDialog() != DialogResult.Cancel)
+                {
+                    SharedData.DataRecordingClass.FilePathandName = saveFileDialog.FileName;
+                    SharedData.DataRecordingClass.DataRecordingRequested = true;
+                }
+                else
+                {
+                    this.checkBoxRecording.Checked = false;
+                }
+
+            }
         }
     }
 }

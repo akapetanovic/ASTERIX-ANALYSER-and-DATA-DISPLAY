@@ -158,13 +158,12 @@ namespace AsterixDisplayAnalyser
                         }
 
                         // Check if recording is requested
-                        if (SharedData.DataRecordingRequested == true)
+                        if (SharedData.DataRecordingClass.DataRecordingRequested == true)
                         {
                             if (RecordingJustStarted == true)
                             {
                                 RecordingJustStarted = false;
-                                string FileName = @"C:\ASTERIX\RECORDINGS\TEST.raw";
-                                Stream RecordingStream = new FileStream(FileName, FileMode.Create);
+                                Stream RecordingStream = new FileStream(SharedData.DataRecordingClass.FilePathandName, FileMode.Create);
                                 RecordingBinaryWriter = new BinaryWriter(RecordingStream);
                                 // Set up the new file name and open up the stream
                             }
