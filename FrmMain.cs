@@ -97,6 +97,11 @@ namespace AsterixDisplayAnalyser
                 listBoxManFrame.Items.Add(SharedData.DataBox.Items[i]);
             SharedData.DataBox.Items.Clear();
 
+            UpdateConnectionBoxInfo();
+        }
+
+        public void UpdateConnectionBoxInfo()
+        {
             this.labelActiveConnName.Text = SharedData.ConnName;
 
             string Port;
@@ -112,6 +117,7 @@ namespace AsterixDisplayAnalyser
             }
 
             this.labelConnIpAndPort.Text = SharedData.CurrentMulticastAddress.ToString() + " : " + Port;
+            this.labelLocalInterface.Text = SharedData.CurrentInterfaceIPAddress.ToString();
         }
 
         // Display menu box to enable users to set up connection(s)
@@ -657,7 +663,7 @@ namespace AsterixDisplayAnalyser
             }
         }
 
-     
+
         /////////////////////////////////////////////////////////////////////////////////
         // This method builds the label text
         /// <summary>
@@ -694,13 +700,15 @@ namespace AsterixDisplayAnalyser
         private string ApplyCModeHisterysis(string Mode_C_In)
         {
             string Result = Mode_C_In;
+            double FL;
 
             if (Properties.Settings.Default.DisplayModeC_As_FL == true)
             {
-                double FL = double.Parse(Result);
-                int Truncated = (int)FL;
-                Result = Truncated.ToString();
-
+                if (double.TryParse(Mode_C_In, out FL) == true)
+                {
+                    int Truncated = (int)FL;
+                    Result = Truncated.ToString();
+                }
             }
             return Result;
         }
@@ -829,7 +837,7 @@ namespace AsterixDisplayAnalyser
                 // to populate the display right away, 
                 // then the timer/North Mark will take over.
                 Update_PlotTrack_Data();
-               // Update_PlotTrack_Data();
+                // Update_PlotTrack_Data();
             }
             else
             {
@@ -1174,7 +1182,7 @@ namespace AsterixDisplayAnalyser
 
         private void gMapControl_KeyPress(object sender, KeyPressEventArgs e)
         {
-          
+
         }
 
         private void gMapControl_MouseClick(object sender, MouseEventArgs e)
@@ -1228,7 +1236,9 @@ namespace AsterixDisplayAnalyser
         {
             FrmSettings SettingDialog = new FrmSettings();
             SettingDialog.Visible = false;
+            SettingDialog.Owner = this;
             SettingDialog.Show(this);
+            SettingDialog.Location = System.Windows.Forms.Cursor.Position;
             SettingDialog.Visible = true;
         }
 

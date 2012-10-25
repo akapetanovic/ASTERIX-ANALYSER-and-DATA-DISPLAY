@@ -83,7 +83,7 @@ namespace AsterixDisplayAnalyser
             try
             {
                 sock = new UdpClient(SharedData.Current_Port);
-                sock.JoinMulticastGroup(IPAddress.Parse(SharedData.CurrentMulticastAddress), 50); // 50 is TTL value
+                sock.JoinMulticastGroup(IPAddress.Parse(SharedData.CurrentMulticastAddress), IPAddress.Parse(SharedData.CurrentInterfaceIPAddress)); // 50 is TTL value
                 iep = new IPEndPoint(IPAddress.Any, SharedData.Current_Port);
             }
             catch (Exception e)

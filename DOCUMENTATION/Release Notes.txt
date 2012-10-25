@@ -47,6 +47,7 @@ Version 1.6
 	   only display mode is needed.
 	4. Modifed KML export option to save file at C:\ASTERIX\", "Asterix_Export.txt, and to provide outcome feedback.
 	5. Added option to record ASTERIX data in raw format
+	6. Modified connection settings to specify local interface to use for receiving data. (Support for PCs with multiple LAN interafaces)
 
 Version 1.5
 

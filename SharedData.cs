@@ -37,9 +37,10 @@ namespace AsterixDisplayAnalyser
 
         ///////////////////////////////////////////////////////////////////////////
         //
-        // Here store the currently selected IP and Multicast address
+        // Here store connection parameters
         public static string ConnName = "N/A";
         public static string CurrentMulticastAddress = "N/A";
+        public static string CurrentInterfaceIPAddress = "N/A";
         public static int Current_Port = 0;
     }
 }

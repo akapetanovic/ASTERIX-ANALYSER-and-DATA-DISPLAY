@@ -28,13 +28,15 @@ namespace AsterixDisplayAnalyser
             // First make sure that all boxes are filled out
             if ((!string.IsNullOrEmpty(this.textBoxConnectionName.Text)) &&
                 (!string.IsNullOrEmpty(this.txtboxIPAddress.Text)) &&
+                 (!string.IsNullOrEmpty(this.textBoxInterfaceAddr.Text)) &&
                 (!string.IsNullOrEmpty(this.textboxPort.Text)))
             {
                 IPAddress IP;
+                IPAddress Multicast;
                 // Validate that a valid IP address is entered
-                if (IPAddress.TryParse(this.txtboxIPAddress.Text, out IP) != true)
+                if ((IPAddress.TryParse(this.txtboxIPAddress.Text, out Multicast) != true) || (IPAddress.TryParse(this.textBoxInterfaceAddr.Text, out IP) != true))
                 {
-                    MessageBox.Show("Not a valid IP addres");
+                    MessageBox.Show("Not a valid IP address");
                     Input_Validated = false;
                 }
                 else // Add a check that this is a valid multicast address
@@ -44,7 +46,7 @@ namespace AsterixDisplayAnalyser
                     // Open up a new socket with the net IP address and port number   
                     try
                     {
-                        TempSock.JoinMulticastGroup(IP, 50); // 50 is TTL value
+                        TempSock.JoinMulticastGroup(Multicast, 50); // 50 is TTL value
                     }
                     catch (Exception e1)
                     {
@@ -79,13 +81,14 @@ namespace AsterixDisplayAnalyser
                 string ConnInfo = this.textBoxConnectionName.Text;
                 this.listBoxConnName.Items.Add(ConnInfo);
 
+                ConnInfo = this.textBoxInterfaceAddr.Text;
+                this.listBoxLocalAddr.Items.Add(ConnInfo);
+                
                 ConnInfo = this.txtboxIPAddress.Text;
                 this.listBoxIPAddress.Items.Add(ConnInfo);
 
                 ConnInfo = this.textboxPort.Text;
                 this.listBoxPort.Items.Add(ConnInfo);
-
-
             }
 
             // The last thing is to check if there is anything in the list, if so then enable the button
@@ -94,20 +97,18 @@ namespace AsterixDisplayAnalyser
             {
                 this.buttonSetAsActive.Enabled = true;
                 this.listBoxConnName.SelectedIndex = this.listBoxConnName.Items.Count - 1;
-
             }
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-
-
             // Code to remove the selected value from the list 
             if (this.listBoxConnName.Items.Count > 0)
             {
                 int IndexToDelete = this.listBoxConnName.SelectedIndex;
 
                 this.listBoxConnName.Items.RemoveAt(IndexToDelete);
+                this.listBoxLocalAddr.Items.RemoveAt(IndexToDelete);
                 this.listBoxIPAddress.Items.RemoveAt(IndexToDelete);
                 this.listBoxPort.Items.RemoveAt(IndexToDelete);
 
@@ -141,7 +142,7 @@ namespace AsterixDisplayAnalyser
 
                     for (int SelectedIndex = 0; SelectedIndex < this.listBoxConnName.Items.Count; SelectedIndex++)
                     {
-                        string LineOfData = (string)this.listBoxConnName.Items[SelectedIndex] + " " + (string)this.listBoxIPAddress.Items[SelectedIndex] + " " +
+                        string LineOfData = (string)this.listBoxConnName.Items[SelectedIndex] + " " + (string)this.listBoxLocalAddr.Items[SelectedIndex] + " " + (string)this.listBoxIPAddress.Items[SelectedIndex] + " " +
                             (string)this.listBoxPort.Items[SelectedIndex];
                         wText.WriteLine(LineOfData);
                     }
@@ -165,6 +166,7 @@ namespace AsterixDisplayAnalyser
                 for (int SelectedIndex = 0; SelectedIndex < this.listBoxConnName.Items.Count; SelectedIndex++)
                 {
                     this.listBoxConnName.Items.RemoveAt(SelectedIndex);
+                    this.listBoxLocalAddr.Items.RemoveAt(SelectedIndex);
                     this.listBoxIPAddress.Items.RemoveAt(SelectedIndex);
                     this.listBoxPort.Items.RemoveAt(SelectedIndex);
                 }
@@ -177,8 +179,9 @@ namespace AsterixDisplayAnalyser
                     Path = MyStreamReader.ReadLine();
                     string[] Splited = Path.Split(' ');
                     this.listBoxConnName.Items.Add(Splited[0]);
-                    this.listBoxIPAddress.Items.Add(Splited[1]);
-                    this.listBoxPort.Items.Add(Splited[2]);
+                    this.listBoxLocalAddr.Items.Add(Splited[1]);
+                    this.listBoxIPAddress.Items.Add(Splited[2]);
+                    this.listBoxPort.Items.Add(Splited[3]);
                 }
 
                 MyStreamReader.Close();
@@ -196,12 +199,17 @@ namespace AsterixDisplayAnalyser
         {
             string ConnectionSettings = (string)this.listBoxConnName.Items[this.listBoxConnName.SelectedIndex];
             SharedData.ConnName = (string)this.listBoxConnName.Items[this.listBoxConnName.SelectedIndex];
+            SharedData.CurrentInterfaceIPAddress = (string)this.listBoxLocalAddr.Items[this.listBoxConnName.SelectedIndex];
             SharedData.CurrentMulticastAddress = (string)this.listBoxIPAddress.Items[this.listBoxConnName.SelectedIndex];
             SharedData.Current_Port = int.Parse((string)this.listBoxPort.Items[this.listBoxConnName.SelectedIndex]);
 
             this.labelConnName.Text = SharedData.ConnName;
+            this.labelLocalInterface.Text = SharedData.CurrentInterfaceIPAddress;
             this.labelConnAddress.Text = SharedData.CurrentMulticastAddress;
             this.labelPort.Text = SharedData.Current_Port.ToString();
+
+            FormMain parentForm = (FormMain)this.Owner;
+            parentForm.UpdateConnectionBoxInfo();
 
             ASTERIX.ReinitializeSocket();
         }
@@ -218,6 +226,10 @@ namespace AsterixDisplayAnalyser
 
             if (this.listBoxPort.Items.Count > this.listBoxConnName.SelectedIndex)
                 this.listBoxPort.SelectedIndex = this.listBoxConnName.SelectedIndex;
+
+            if (this.listBoxLocalAddr.Items.Count > this.listBoxConnName.SelectedIndex)
+                this.listBoxLocalAddr.SelectedIndex = this.listBoxConnName.SelectedIndex;
+
         }
 
         private void listBoxIPAddress_SelectedIndexChanged(object sender, EventArgs e)
@@ -227,6 +239,9 @@ namespace AsterixDisplayAnalyser
 
             if (this.listBoxPort.Items.Count > this.listBoxIPAddress.SelectedIndex)
                 this.listBoxPort.SelectedIndex = this.listBoxIPAddress.SelectedIndex;
+
+            if (this.listBoxLocalAddr.Items.Count > this.listBoxIPAddress.SelectedIndex)
+                this.listBoxLocalAddr.SelectedIndex = this.listBoxIPAddress.SelectedIndex;
         }
 
         private void listBoxPort_SelectedIndexChanged(object sender, EventArgs e)
@@ -236,6 +251,9 @@ namespace AsterixDisplayAnalyser
 
             if (this.listBoxIPAddress.Items.Count > this.listBoxPort.SelectedIndex)
                 this.listBoxIPAddress.SelectedIndex = this.listBoxPort.SelectedIndex;
+
+            if (this.listBoxLocalAddr.Items.Count > this.listBoxPort.SelectedIndex)
+                this.listBoxLocalAddr.SelectedIndex = this.listBoxPort.SelectedIndex;
         }
 
         private void FrmSettings_Load(object sender, EventArgs e)
@@ -246,6 +264,19 @@ namespace AsterixDisplayAnalyser
         private void FrmSettings_FormClosed(object sender, FormClosedEventArgs e)
         {
 
+        }
+
+        private void listBoxLocalAddr_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (this.listBoxConnName.Items.Count > this.listBoxLocalAddr.SelectedIndex)
+                this.listBoxConnName.SelectedIndex = this.listBoxLocalAddr.SelectedIndex;
+
+            if (this.listBoxIPAddress.Items.Count > this.listBoxLocalAddr.SelectedIndex)
+                this.listBoxIPAddress.SelectedIndex = this.listBoxLocalAddr.SelectedIndex;
+
+            if (this.listBoxPort.Items.Count > this.listBoxLocalAddr.SelectedIndex)
+                this.listBoxPort.SelectedIndex = this.listBoxLocalAddr.SelectedIndex;
         }
     }
 }

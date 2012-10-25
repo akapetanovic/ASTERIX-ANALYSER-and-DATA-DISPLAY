@@ -151,7 +151,7 @@
             this.groupBoxConnection = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.checkBoxRecording = new System.Windows.Forms.CheckBox();
-            this.button8 = new System.Windows.Forms.Button();
+            this.btnOpenConnection = new System.Windows.Forms.Button();
             this.tabPlotDisplay = new System.Windows.Forms.TabPage();
             this.labelTargetCount = new System.Windows.Forms.Label();
             this.lblNumberofTargets = new System.Windows.Forms.Label();
@@ -204,6 +204,8 @@
             this.tabMainTab = new System.Windows.Forms.TabControl();
             this.NorthMarkerTimer = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorkerLoadData = new System.ComponentModel.BackgroundWorker();
+            this.label16 = new System.Windows.Forms.Label();
+            this.labelLocalInterface = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -253,10 +255,9 @@
             // 
             // openToolStripMenuItem
             // 
-            this.openToolStripMenuItem.Enabled = false;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.openToolStripMenuItem.Text = "Open Asterix Recording";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
@@ -1122,16 +1123,16 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(79, 38);
+            this.label7.Location = new System.Drawing.Point(79, 44);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(101, 13);
+            this.label7.Size = new System.Drawing.Size(89, 13);
             this.label7.TabIndex = 17;
-            this.label7.Text = "Connection IP/Port:";
+            this.label7.Text = "Multicast IP/Port:";
             // 
             // labelConnIpAndPort
             // 
             this.labelConnIpAndPort.AutoSize = true;
-            this.labelConnIpAndPort.Location = new System.Drawing.Point(180, 37);
+            this.labelConnIpAndPort.Location = new System.Drawing.Point(180, 43);
             this.labelConnIpAndPort.Name = "labelConnIpAndPort";
             this.labelConnIpAndPort.Size = new System.Drawing.Size(56, 13);
             this.labelConnIpAndPort.TabIndex = 18;
@@ -1140,7 +1141,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(79, 16);
+            this.label8.Location = new System.Drawing.Point(79, 11);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(95, 13);
             this.label8.TabIndex = 19;
@@ -1149,7 +1150,7 @@
             // labelActiveConnName
             // 
             this.labelActiveConnName.AutoSize = true;
-            this.labelActiveConnName.Location = new System.Drawing.Point(180, 16);
+            this.labelActiveConnName.Location = new System.Drawing.Point(180, 11);
             this.labelActiveConnName.Name = "labelActiveConnName";
             this.labelActiveConnName.Size = new System.Drawing.Size(27, 13);
             this.labelActiveConnName.TabIndex = 20;
@@ -1174,9 +1175,11 @@
             // 
             // groupBoxConnection
             // 
+            this.groupBoxConnection.Controls.Add(this.labelLocalInterface);
+            this.groupBoxConnection.Controls.Add(this.label16);
             this.groupBoxConnection.Controls.Add(this.label9);
             this.groupBoxConnection.Controls.Add(this.checkBoxRecording);
-            this.groupBoxConnection.Controls.Add(this.button8);
+            this.groupBoxConnection.Controls.Add(this.btnOpenConnection);
             this.groupBoxConnection.Controls.Add(this.label8);
             this.groupBoxConnection.Controls.Add(this.buttonStopRun);
             this.groupBoxConnection.Controls.Add(this.progressBar1);
@@ -1184,9 +1187,9 @@
             this.groupBoxConnection.Controls.Add(this.labelActiveConnName);
             this.groupBoxConnection.Controls.Add(this.labelConnIpAndPort);
             this.groupBoxConnection.ForeColor = System.Drawing.Color.White;
-            this.groupBoxConnection.Location = new System.Drawing.Point(794, 3);
+            this.groupBoxConnection.Location = new System.Drawing.Point(794, 0);
             this.groupBoxConnection.Name = "groupBoxConnection";
-            this.groupBoxConnection.Size = new System.Drawing.Size(388, 57);
+            this.groupBoxConnection.Size = new System.Drawing.Size(388, 60);
             this.groupBoxConnection.TabIndex = 23;
             this.groupBoxConnection.TabStop = false;
             this.groupBoxConnection.Text = "Connection";
@@ -1214,16 +1217,16 @@
             this.checkBoxRecording.UseVisualStyleBackColor = true;
             this.checkBoxRecording.CheckedChanged += new System.EventHandler(this.checkBoxRecording_CheckedChanged);
             // 
-            // button8
+            // btnOpenConnection
             // 
-            this.button8.BackColor = System.Drawing.Color.DarkGray;
-            this.button8.Location = new System.Drawing.Point(6, 14);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(50, 21);
-            this.button8.TabIndex = 22;
-            this.button8.Text = "OPEN";
-            this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.btnOpenConnection.BackColor = System.Drawing.Color.DarkGray;
+            this.btnOpenConnection.Location = new System.Drawing.Point(6, 14);
+            this.btnOpenConnection.Name = "btnOpenConnection";
+            this.btnOpenConnection.Size = new System.Drawing.Size(50, 21);
+            this.btnOpenConnection.TabIndex = 22;
+            this.btnOpenConnection.Text = "OPEN";
+            this.btnOpenConnection.UseVisualStyleBackColor = false;
+            this.btnOpenConnection.Click += new System.EventHandler(this.button8_Click);
             // 
             // tabPlotDisplay
             // 
@@ -1857,6 +1860,24 @@
             this.backgroundWorkerLoadData.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorkerLoadData.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(79, 28);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(81, 13);
+            this.label16.TabIndex = 26;
+            this.label16.Text = "Local Interface:";
+            // 
+            // labelLocalInterface
+            // 
+            this.labelLocalInterface.AutoSize = true;
+            this.labelLocalInterface.Location = new System.Drawing.Point(180, 27);
+            this.labelLocalInterface.Name = "labelLocalInterface";
+            this.labelLocalInterface.Size = new System.Drawing.Size(27, 13);
+            this.labelLocalInterface.TabIndex = 27;
+            this.labelLocalInterface.Text = "N/A";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2053,7 +2074,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TabControl tabMainTab;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button btnOpenConnection;
         private System.Windows.Forms.Label lblNumberofTargets;
         private System.Windows.Forms.Label labelTargetCount;
         private System.Windows.Forms.ToolStripMenuItem cATDecoderSelectorToolStripMenuItem;
@@ -2076,6 +2097,8 @@
         private System.Windows.Forms.CheckBox checkBoxFillListBox;
         private System.Windows.Forms.CheckBox checkBoxRecording;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label labelLocalInterface;
     }
 }
 
