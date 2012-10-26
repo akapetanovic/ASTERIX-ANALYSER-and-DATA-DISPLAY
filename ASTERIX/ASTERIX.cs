@@ -83,7 +83,7 @@ namespace AsterixDisplayAnalyser
             try
             {
                 sock = new UdpClient(SharedData.Current_Port);
-                sock.JoinMulticastGroup(IPAddress.Parse(SharedData.CurrentMulticastAddress), IPAddress.Parse(SharedData.CurrentInterfaceIPAddress)); // 50 is TTL value
+                sock.JoinMulticastGroup(IPAddress.Parse(SharedData.CurrentMulticastAddress), IPAddress.Parse(SharedData.CurrentInterfaceIPAddress)); 
                 iep = new IPEndPoint(IPAddress.Any, SharedData.Current_Port);
             }
             catch (Exception e)
@@ -163,7 +163,7 @@ namespace AsterixDisplayAnalyser
                             if (RecordingJustStarted == true)
                             {
                                 RecordingJustStarted = false;
-                                Stream RecordingStream = new FileStream(SharedData.DataRecordingClass.FilePathandName, FileMode.Create);
+                                RecordingStream = new FileStream(SharedData.DataRecordingClass.FilePathandName, FileMode.Create);
                                 RecordingBinaryWriter = new BinaryWriter(RecordingStream);
                                 // Set up the new file name and open up the stream
                             }

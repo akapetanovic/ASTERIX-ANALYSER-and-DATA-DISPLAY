@@ -301,13 +301,193 @@ namespace AsterixDisplayAnalyser.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\ASTERIX")]
         public string RecordingDirectory {
             get {
                 return ((string)(this["RecordingDirectory"]));
             }
             set {
                 this["RecordingDirectory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string FrwdInterface1 {
+            get {
+                return ((string)(this["FrwdInterface1"]));
+            }
+            set {
+                this["FrwdInterface1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string FrwdInterface2 {
+            get {
+                return ((string)(this["FrwdInterface2"]));
+            }
+            set {
+                this["FrwdInterface2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string FrwdInterface3 {
+            get {
+                return ((string)(this["FrwdInterface3"]));
+            }
+            set {
+                this["FrwdInterface3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string FrwdInterface4 {
+            get {
+                return ((string)(this["FrwdInterface4"]));
+            }
+            set {
+                this["FrwdInterface4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string FrwdInterface5 {
+            get {
+                return ((string)(this["FrwdInterface5"]));
+            }
+            set {
+                this["FrwdInterface5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string FrwdMulticast1 {
+            get {
+                return ((string)(this["FrwdMulticast1"]));
+            }
+            set {
+                this["FrwdMulticast1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string FrwdMulticast2 {
+            get {
+                return ((string)(this["FrwdMulticast2"]));
+            }
+            set {
+                this["FrwdMulticast2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string FrwdMulticast3 {
+            get {
+                return ((string)(this["FrwdMulticast3"]));
+            }
+            set {
+                this["FrwdMulticast3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string FrwdMulticast4 {
+            get {
+                return ((string)(this["FrwdMulticast4"]));
+            }
+            set {
+                this["FrwdMulticast4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string FrwdMulticast5 {
+            get {
+                return ((string)(this["FrwdMulticast5"]));
+            }
+            set {
+                this["FrwdMulticast5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string FrwdPort1 {
+            get {
+                return ((string)(this["FrwdPort1"]));
+            }
+            set {
+                this["FrwdPort1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string FrwdPort2 {
+            get {
+                return ((string)(this["FrwdPort2"]));
+            }
+            set {
+                this["FrwdPort2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string FrwdPort3 {
+            get {
+                return ((string)(this["FrwdPort3"]));
+            }
+            set {
+                this["FrwdPort3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string FrwdPort4 {
+            get {
+                return ((string)(this["FrwdPort4"]));
+            }
+            set {
+                this["FrwdPort4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string FrwdPort5 {
+            get {
+                return ((string)(this["FrwdPort5"]));
+            }
+            set {
+                this["FrwdPort5"] = value;
             }
         }
     }
