@@ -15,11 +15,17 @@ namespace AsterixDisplayAnalyser
         private static bool KeepGoing = true;
         private static bool RequestStop = false;
 
-        // Define UDP connection variables
-        private static UdpClient sock;
-        private static IPEndPoint iep;
-        // Buffer to receive raw data
+        // Define UDP-Multicast RCV connection variables
+        private static UdpClient rcv_sock;
+        private static IPEndPoint rcv_iep;
+
+        // Define UDP-Multicast TX connection variables
+        private static UdpClient tx_sock;
+        private static IPEndPoint tx_iep;
+
+        // Same buffer is used for sending and receiving
         private static byte[] UDPBuffer;
+
         // File stream
         private static Stream RecordingStream = null;
         private static BinaryWriter RecordingBinaryWriter = null;
@@ -33,7 +39,7 @@ namespace AsterixDisplayAnalyser
         private static bool RecordingEnabled = false;
 
         // Constructor
-        public static void StartRecording(string FilePath,              // Path and file name 
+        public static bool StartRecording(string FilePath,              // Path and file name 
                                           IPAddress Interface_Addres,   // IP address of the interface where the data is expected
                                           IPAddress Multicast_Address,  // Multicast address of the expected data
                                           int PortNumber)               // Port number of the expected data
@@ -43,16 +49,15 @@ namespace AsterixDisplayAnalyser
                 // Open up a new socket with the net IP address and port number   
                 try
                 {
-                    sock = new UdpClient(PortNumber);
-                    sock.JoinMulticastGroup(Multicast_Address, Interface_Addres);
-                    iep = new IPEndPoint(IPAddress.Any, PortNumber);
+                    rcv_sock = new UdpClient(PortNumber);
+                    rcv_sock.JoinMulticastGroup(Multicast_Address, Interface_Addres);
+                    rcv_iep = new IPEndPoint(IPAddress.Any, PortNumber);
                 }
-                catch (Exception e)
+                catch
                 {
-                    MessageBox.Show("Error Rec Connection 1: " + e.ToString());
+                    MessageBox.Show("C1 RCV REC: Not possible! Make sure given IP address/port is a valid one on your system or not already used by some other process");
+                    return false;
                 }
-
-
 
                 KeepGoing = true;
                 RequestStop = false;
@@ -74,19 +79,29 @@ namespace AsterixDisplayAnalyser
             }
 
             BytesProcessed = 0;
+            return true;
         }
 
-        public static void StartForward(IPAddress Interface_Addres,  // IP address of the interface where the data is expected
+        public static bool StartForward(IPAddress Interface_Addres,  // IP address of the interface where the data is expected
                                        IPAddress Multicast_Address, // Multicast address of the expected data
                                        int PortNumber,
                                        IPAddress Frwd_Interface_Addres,  // IP address of the forward interface 
                                        IPAddress Frwd_Multicast_Address, // Multicast address of the forwarded data
                                        int Frwd_PortNumber)              // Port number of the forwarded data
         {
-
-
             // Open up outgoing socket
-
+            // Open up a new socket with the net IP address and port number   
+            try
+            {
+                tx_sock = new UdpClient(Frwd_PortNumber);
+                tx_sock.JoinMulticastGroup(Frwd_Multicast_Address, Frwd_Interface_Addres);
+                tx_iep = new IPEndPoint(Frwd_Multicast_Address, Frwd_PortNumber);
+            }
+            catch 
+            {
+                MessageBox.Show("C1 TX FRD: Not possible! Make sure given IP address/port is a valid one on your system or not already used by some other process");
+                return false;
+            }
 
             // Check if recording is already in place, if so then
             // do not create a new incoming connection
@@ -95,13 +110,14 @@ namespace AsterixDisplayAnalyser
                 // Open up a new socket with the net IP address and port number   
                 try
                 {
-                    sock = new UdpClient(PortNumber);
-                    sock.JoinMulticastGroup(Multicast_Address, Interface_Addres);
-                    iep = new IPEndPoint(IPAddress.Any, PortNumber);
+                    rcv_sock = new UdpClient(PortNumber);
+                    rcv_sock.JoinMulticastGroup(Multicast_Address, Interface_Addres);
+                    rcv_iep = new IPEndPoint(IPAddress.Any, PortNumber);
                 }
-                catch (Exception e)
+                catch 
                 {
-                    MessageBox.Show("Error Rec Connection 1: " + e.ToString());
+                    MessageBox.Show("C1 RVC FRD: Not possible! Make sure given IP address/port is a valid one on your system or not already used by some other process");
+                    return false;
                 }
 
                 KeepGoing = true;
@@ -111,6 +127,7 @@ namespace AsterixDisplayAnalyser
             }
 
             ForwardingEnabled = true;
+            return true;
         }
 
         private static void DOWork()
@@ -127,7 +144,7 @@ namespace AsterixDisplayAnalyser
                     {
                         // Lets receive data in an array of bytes 
                         // (an octet, of course composed of 8bits)
-                        UDPBuffer = sock.Receive(ref iep);
+                        UDPBuffer = rcv_sock.Receive(ref rcv_iep);
                         BytesProcessed = BytesProcessed + UDPBuffer.Length;
 
                         if (RecordingEnabled == true)
@@ -137,7 +154,7 @@ namespace AsterixDisplayAnalyser
                         // the data as soon as it is recived
                         if (ForwardingEnabled == true)
                         {
-
+                            tx_sock.Send(UDPBuffer, UDPBuffer.Length, tx_iep);
                         }
                     }
                     catch
@@ -153,42 +170,50 @@ namespace AsterixDisplayAnalyser
         // Terminates recording
         public static void StopRecording()
         {
-            if (ForwardingEnabled == false)
+            if (ListenForDataThread != null)
             {
-                RequestStop = true;
-                Thread.Sleep(200);
-                if (ListenForDataThread.IsAlive == true)
+                if (ForwardingEnabled == false)
                 {
-                    Cleanup();
-                    ListenForDataThread.Abort();
+                    RequestStop = true;
+                    Thread.Sleep(200);
+                    if (ListenForDataThread.IsAlive == true)
+                    {
+                        Cleanup();
+                        ListenForDataThread.Abort();
+                    }
                 }
-            }
-            else
-            {
-                RecordingBinaryWriter.Close();
-                RecordingStream.Close();
-                RecordingBinaryWriter.Dispose();
-                RecordingStream.Dispose();
-            }
+                else
+                {
+                    RecordingBinaryWriter.Close();
+                    RecordingStream.Close();
+                    RecordingBinaryWriter.Dispose();
+                    RecordingStream.Dispose();
+                }
 
-            RecordingEnabled = false;
+                RecordingEnabled = false;
+            }
         }
 
         // Terminates forwarding
         public static void StopForwarding()
         {
-            if (RecordingEnabled == false)
+            if (ListenForDataThread != null)
             {
-                RequestStop = true;
-                Thread.Sleep(200);
-                if (ListenForDataThread.IsAlive == true)
+                if (RecordingEnabled == false)
                 {
-                    Cleanup();
-                    ListenForDataThread.Abort();
+                    RequestStop = true;
+                    Thread.Sleep(200);
+                    if (ListenForDataThread.IsAlive == true)
+                    {
+                        Cleanup();
+                        ListenForDataThread.Abort();
+                    }
                 }
-            }
 
-            ForwardingEnabled = false;
+                ForwardingEnabled = false;
+                if (tx_sock != null)
+                    tx_sock.Close();
+            }
         }
 
         private static bool IsConnectionActive()
@@ -212,12 +237,20 @@ namespace AsterixDisplayAnalyser
         private static void Cleanup()
         {
             // Do a cleanup
-            if (sock != null)
-                sock.Close();
-            RecordingBinaryWriter.Close();
-            RecordingStream.Close();
-            RecordingBinaryWriter.Dispose();
-            RecordingStream.Dispose();
+            if (rcv_sock != null)
+                rcv_sock.Close();
+
+            if (tx_sock != null)
+                tx_sock.Close();
+
+            if (RecordingBinaryWriter != null)
+                RecordingBinaryWriter.Close();
+            if (RecordingStream != null)
+                RecordingStream.Close();
+            if (RecordingBinaryWriter != null)
+                RecordingBinaryWriter.Dispose();
+            if (RecordingStream != null)
+                RecordingStream.Dispose();
         }
 
         public static int GetBytesProcessed()

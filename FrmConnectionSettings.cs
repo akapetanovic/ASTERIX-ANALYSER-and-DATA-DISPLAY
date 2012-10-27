@@ -197,21 +197,20 @@ namespace AsterixDisplayAnalyser
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string ConnectionSettings = (string)this.listBoxConnName.Items[this.listBoxConnName.SelectedIndex];
             SharedData.ConnName = (string)this.listBoxConnName.Items[this.listBoxConnName.SelectedIndex];
             SharedData.CurrentInterfaceIPAddress = (string)this.listBoxLocalAddr.Items[this.listBoxConnName.SelectedIndex];
             SharedData.CurrentMulticastAddress = (string)this.listBoxIPAddress.Items[this.listBoxConnName.SelectedIndex];
             SharedData.Current_Port = int.Parse((string)this.listBoxPort.Items[this.listBoxConnName.SelectedIndex]);
 
-            this.labelConnName.Text = SharedData.ConnName;
-            this.labelLocalInterface.Text = SharedData.CurrentInterfaceIPAddress;
-            this.labelConnAddress.Text = SharedData.CurrentMulticastAddress;
-            this.labelPort.Text = SharedData.Current_Port.ToString();
-
-            FormMain parentForm = (FormMain)this.Owner;
-            parentForm.UpdateConnectionBoxInfo();
-
-            ASTERIX.ReinitializeSocket();
+            if (ASTERIX.ReinitializeSocket() == true)
+            {
+                this.labelConnName.Text = SharedData.ConnName;
+                this.labelLocalInterface.Text = SharedData.CurrentInterfaceIPAddress;
+                this.labelConnAddress.Text = SharedData.CurrentMulticastAddress;
+                this.labelPort.Text = SharedData.Current_Port.ToString();
+                FormMain parentForm = (FormMain)this.Owner;
+                parentForm.UpdateConnectionBoxInfo();
+            }
         }
 
         private void buttonClose_Click(object sender, EventArgs e)

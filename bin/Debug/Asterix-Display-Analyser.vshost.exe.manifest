@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Asterix-Display-Analyser.exe" size="369152">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Asterix-Display-Analyser.exe" size="377856">
       <assemblyIdentity name="Asterix-Display-Analyser" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>rycQR7pcixlPhuYa5MZkebKZBAg=</dsig:DigestValue>
+        <dsig:DigestValue>ngYDGVP5liNGB6hJgFTve2JyE8I=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -98,13 +98,13 @@
       <dsig:DigestValue>0zPw4Lwy4hKkmNnsUIxx0QFAXWM=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="DOCUMENTATION\Release Notes.txt" size="7220">
+  <file name="DOCUMENTATION\Release Notes.txt" size="7337">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>j8qa1W40qInUARliRDknM4FN1Mw=</dsig:DigestValue>
+      <dsig:DigestValue>dAs3oiGAOndBGmx1ckfIG4Cq4cA=</dsig:DigestValue>
     </hash>
   </file>
   <file name="README.txt" size="812">

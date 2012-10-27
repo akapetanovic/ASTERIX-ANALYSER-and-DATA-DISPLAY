@@ -37,6 +37,8 @@
             this.colorDialogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cATDecoderSelectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miscellaneousToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.recorderAndDataForwarderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetDataBufferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cAT001DataItemPresenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -205,7 +207,7 @@
             this.tabMainTab = new System.Windows.Forms.TabControl();
             this.NorthMarkerTimer = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorkerLoadData = new System.ComponentModel.BackgroundWorker();
-            this.recorderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.replayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -232,6 +234,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.settingsToolStripMenuItem,
+            this.toolStripMenuItem2,
             this.toolsToolStripMenuItem,
             this.detailedViewToolStripMenuItem,
             this.dataBySSRCodeToolStripMenuItem,
@@ -266,8 +269,7 @@
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.colorDialogToolStripMenuItem,
             this.cATDecoderSelectorToolStripMenuItem,
-            this.miscellaneousToolStripMenuItem,
-            this.recorderToolStripMenuItem});
+            this.miscellaneousToolStripMenuItem});
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
@@ -293,6 +295,24 @@
             this.miscellaneousToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.miscellaneousToolStripMenuItem.Text = "Miscellaneous";
             this.miscellaneousToolStripMenuItem.Click += new System.EventHandler(this.miscellaneousToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.recorderAndDataForwarderToolStripMenuItem,
+            this.replayToolStripMenuItem});
+            this.toolStripMenuItem2.ForeColor = System.Drawing.Color.Silver;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(48, 20);
+            this.toolStripMenuItem2.Text = "Tools";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
+            // recorderAndDataForwarderToolStripMenuItem
+            // 
+            this.recorderAndDataForwarderToolStripMenuItem.Name = "recorderAndDataForwarderToolStripMenuItem";
+            this.recorderAndDataForwarderToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.recorderAndDataForwarderToolStripMenuItem.Text = "Data Recorder and Forwarder";
+            this.recorderAndDataForwarderToolStripMenuItem.Click += new System.EventHandler(this.recorderAndDataForwarderToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -1871,12 +1891,11 @@
             this.backgroundWorkerLoadData.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorkerLoadData.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // recorderToolStripMenuItem
+            // replayToolStripMenuItem
             // 
-            this.recorderToolStripMenuItem.Name = "recorderToolStripMenuItem";
-            this.recorderToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.recorderToolStripMenuItem.Text = "ASTERIX Recorder";
-            this.recorderToolStripMenuItem.Click += new System.EventHandler(this.recorderToolStripMenuItem_Click);
+            this.replayToolStripMenuItem.Name = "replayToolStripMenuItem";
+            this.replayToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.replayToolStripMenuItem.Text = "Replay";
             // 
             // FormMain
             // 
@@ -2098,7 +2117,9 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label labelLocalInterface;
-        private System.Windows.Forms.ToolStripMenuItem recorderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem recorderAndDataForwarderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem replayToolStripMenuItem;
     }
 }
 

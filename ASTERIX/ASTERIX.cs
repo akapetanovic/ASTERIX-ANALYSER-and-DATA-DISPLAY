@@ -42,7 +42,7 @@ namespace AsterixDisplayAnalyser
         // member will be accessed by multiple threads.
         private static volatile bool _shouldStop = false;
 
-        // Saves of the time of reception
+        // Saves off the time of reception
         // used by decoders to stamp individual messages
         public static DateTime TimeOfReception;
 
@@ -61,7 +61,7 @@ namespace AsterixDisplayAnalyser
 
         // This is to be called by the FrmSettings to re-initialize
         // the socket 
-        public static void ReinitializeSocket()
+        public static bool ReinitializeSocket()
         {
             // Save the state of the flag that indicates that data is to be
             // acquired
@@ -86,15 +86,18 @@ namespace AsterixDisplayAnalyser
                 sock.JoinMulticastGroup(IPAddress.Parse(SharedData.CurrentMulticastAddress), IPAddress.Parse(SharedData.CurrentInterfaceIPAddress)); 
                 iep = new IPEndPoint(IPAddress.Any, SharedData.Current_Port);
             }
-            catch (Exception e)
+            catch
             {
-                MessageBox.Show("Error: " + e.ToString());
+                MessageBox.Show("ASTERIX ReinitializeSocket: Not possible! Make sure given IP address/port is a valid one on your system or not already used by some other process");
+                return false;
             }
 
             // Everything is done, now resume listening (data acqusition) if it was active
             // before new data was entered.
             if (Listen_for_Data_Was_On == true)
                 SharedData.bool_Listen_for_Data = true;
+
+            return true;
         }
 
         public static void RequestStop()

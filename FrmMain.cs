@@ -43,7 +43,7 @@ namespace AsterixDisplayAnalyser
         bool North_Marker_Received = false;
         string ReadDataReportMessage;
 
-        private static FrmAsterixRecorder AsterixRecorder = new FrmAsterixRecorder();
+        private static FrmAstxRecFrwdForm AsterixRecorder = new FrmAstxRecFrwdForm();
 
         public FormMain()
         {
@@ -1561,6 +1561,16 @@ namespace AsterixDisplayAnalyser
         }
 
         private void recorderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AsterixRecorder.Visible = true;
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void recorderAndDataForwarderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AsterixRecorder.Visible = true;
         }

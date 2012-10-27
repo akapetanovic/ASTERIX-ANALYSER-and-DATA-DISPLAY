@@ -50,6 +50,8 @@ Version 1.6
 		5.1 To record the data currently being displayed
 		5.1 Additionally to record up to 5 additional ASTERIX feeds at the same time.
 	6. Modified connection settings to specify local interface to use for receiving data. (Support for PCs with multiple LAN interafaces)
+	7. Added data forwarding option. This provides an option to forward up to five different data streams to a different or same physical interface
+	   on a desired multicast address and port.
 
 Version 1.5
 

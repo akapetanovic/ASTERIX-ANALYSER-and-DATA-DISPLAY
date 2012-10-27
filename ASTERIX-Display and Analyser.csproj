@@ -240,11 +240,11 @@
     <Compile Include="REC_AND_FORWARD\RecForwConnection3.cs" />
     <Compile Include="REC_AND_FORWARD\RecForwConnection4.cs" />
     <Compile Include="REC_AND_FORWARD\RecForwConnection2.cs" />
-    <Compile Include="REC_AND_FORWARD\FrmAsterixRecorder.cs">
+    <Compile Include="REC_AND_FORWARD\FrmAstxRecFrwdForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="REC_AND_FORWARD\FrmAsterixRecorder.Designer.cs">
-      <DependentUpon>FrmAsterixRecorder.cs</DependentUpon>
+    <Compile Include="REC_AND_FORWARD\FrmAstxRecFrwdForm.Designer.cs">
+      <DependentUpon>FrmAstxRecFrwdForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\DisplayAttributesPicker.cs">
       <SubType>Form</SubType>
@@ -397,8 +397,8 @@
     <EmbeddedResource Include="CAT_Decoder_Selector.resx">
       <DependentUpon>CAT_Decoder_Selector.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="REC_AND_FORWARD\FrmAsterixRecorder.resx">
-      <DependentUpon>FrmAsterixRecorder.cs</DependentUpon>
+    <EmbeddedResource Include="REC_AND_FORWARD\FrmAstxRecFrwdForm.resx">
+      <DependentUpon>FrmAstxRecFrwdForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DATA DISPLAY\DISPLAY UTILITIES\DisplayAttributesPicker.resx">
       <DependentUpon>DisplayAttributesPicker.cs</DependentUpon>

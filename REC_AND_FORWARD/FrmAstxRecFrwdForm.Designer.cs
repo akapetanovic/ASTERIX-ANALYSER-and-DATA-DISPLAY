@@ -1,6 +1,6 @@
 ﻿namespace AsterixDisplayAnalyser
 {
-    partial class FrmAsterixRecorder
+    partial class FrmAstxRecFrwdForm
     {
         /// <summary>
         /// Required designer variable.
@@ -59,15 +59,17 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label7 = new System.Windows.Forms.Label();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.lineShape11 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape10 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape9 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape5 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape4 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape8 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape7 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape6 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape5 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape4 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape3 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.label8 = new System.Windows.Forms.Label();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.progressBar3 = new System.Windows.Forms.ProgressBar();
@@ -108,12 +110,10 @@
             this.progressBarF2 = new System.Windows.Forms.ProgressBar();
             this.progressBarF1 = new System.Windows.Forms.ProgressBar();
             this.label20 = new System.Windows.Forms.Label();
-            this.lineShape10 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape11 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape12 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.button5 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -203,14 +203,14 @@
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.loadToolStripMenuItem.Text = "Open";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -307,6 +307,7 @@
             this.checkedListBoxRecordingName.TabIndex = 28;
             this.checkedListBoxRecordingName.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxRecordingName_ItemCheck);
             this.checkedListBoxRecordingName.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxRecordingName_SelectedIndexChanged);
+            this.checkedListBoxRecordingName.SelectedValueChanged += new System.EventHandler(this.checkedListBoxRecordingName_SelectedValueChanged);
             // 
             // button1
             // 
@@ -395,6 +396,22 @@
             this.shapeContainer1.TabIndex = 36;
             this.shapeContainer1.TabStop = false;
             // 
+            // lineShape11
+            // 
+            this.lineShape11.Name = "lineShape11";
+            this.lineShape11.X1 = 822;
+            this.lineShape11.X2 = 822;
+            this.lineShape11.Y1 = 141;
+            this.lineShape11.Y2 = 331;
+            // 
+            // lineShape10
+            // 
+            this.lineShape10.Name = "lineShape10";
+            this.lineShape10.X1 = 477;
+            this.lineShape10.X2 = 477;
+            this.lineShape10.Y1 = 142;
+            this.lineShape10.Y2 = 184;
+            // 
             // lineShape9
             // 
             this.lineShape9.Name = "lineShape9";
@@ -402,6 +419,30 @@
             this.lineShape9.X2 = 911;
             this.lineShape9.Y1 = 330;
             this.lineShape9.Y2 = 332;
+            // 
+            // lineShape5
+            // 
+            this.lineShape5.Name = "lineShape5";
+            this.lineShape5.X1 = 618;
+            this.lineShape5.X2 = 771;
+            this.lineShape5.Y1 = 20;
+            this.lineShape5.Y2 = 20;
+            // 
+            // lineShape4
+            // 
+            this.lineShape4.Name = "lineShape4";
+            this.lineShape4.X1 = -3;
+            this.lineShape4.X2 = 913;
+            this.lineShape4.Y1 = 142;
+            this.lineShape4.Y2 = 142;
+            // 
+            // lineShape1
+            // 
+            this.lineShape1.Name = "lineShape1";
+            this.lineShape1.X1 = -2;
+            this.lineShape1.X2 = 956;
+            this.lineShape1.Y1 = 184;
+            this.lineShape1.Y2 = 184;
             // 
             // lineShape8
             // 
@@ -427,22 +468,6 @@
             this.lineShape6.Y1 = 111;
             this.lineShape6.Y2 = 7;
             // 
-            // lineShape5
-            // 
-            this.lineShape5.Name = "lineShape5";
-            this.lineShape5.X1 = 618;
-            this.lineShape5.X2 = 771;
-            this.lineShape5.Y1 = 20;
-            this.lineShape5.Y2 = 20;
-            // 
-            // lineShape4
-            // 
-            this.lineShape4.Name = "lineShape4";
-            this.lineShape4.X1 = -3;
-            this.lineShape4.X2 = 913;
-            this.lineShape4.Y1 = 142;
-            this.lineShape4.Y2 = 142;
-            // 
             // lineShape3
             // 
             this.lineShape3.Name = "lineShape3";
@@ -458,14 +483,6 @@
             this.lineShape2.X2 = 423;
             this.lineShape2.Y1 = 323;
             this.lineShape2.Y2 = 7;
-            // 
-            // lineShape1
-            // 
-            this.lineShape1.Name = "lineShape1";
-            this.lineShape1.X1 = -2;
-            this.lineShape1.X2 = 956;
-            this.lineShape1.Y1 = 184;
-            this.lineShape1.Y2 = 184;
             // 
             // label8
             // 
@@ -610,6 +627,7 @@
             this.checkBoxF1.TabIndex = 51;
             this.checkBoxF1.Text = "-->";
             this.checkBoxF1.UseVisualStyleBackColor = true;
+            this.checkBoxF1.CheckedChanged += new System.EventHandler(this.checkBoxF1_CheckedChanged);
             // 
             // checkBoxF5
             // 
@@ -621,6 +639,7 @@
             this.checkBoxF5.TabIndex = 52;
             this.checkBoxF5.Text = "-->";
             this.checkBoxF5.UseVisualStyleBackColor = true;
+            this.checkBoxF5.CheckedChanged += new System.EventHandler(this.checkBoxF5_CheckedChanged);
             // 
             // checkBoxF4
             // 
@@ -632,6 +651,7 @@
             this.checkBoxF4.TabIndex = 53;
             this.checkBoxF4.Text = "-->";
             this.checkBoxF4.UseVisualStyleBackColor = true;
+            this.checkBoxF4.CheckedChanged += new System.EventHandler(this.checkBoxF4_CheckedChanged);
             // 
             // checkBoxF3
             // 
@@ -643,6 +663,7 @@
             this.checkBoxF3.TabIndex = 54;
             this.checkBoxF3.Text = "-->";
             this.checkBoxF3.UseVisualStyleBackColor = true;
+            this.checkBoxF3.CheckedChanged += new System.EventHandler(this.checkBoxF3_CheckedChanged);
             // 
             // checkBoxF2
             // 
@@ -654,6 +675,7 @@
             this.checkBoxF2.TabIndex = 55;
             this.checkBoxF2.Text = "-->";
             this.checkBoxF2.UseVisualStyleBackColor = true;
+            this.checkBoxF2.CheckedChanged += new System.EventHandler(this.checkBoxF2_CheckedChanged);
             // 
             // btnAddForwarding
             // 
@@ -686,6 +708,7 @@
             0,
             0,
             0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // label15
             // 
@@ -723,6 +746,7 @@
             this.listBoxForwardingInterface.Name = "listBoxForwardingInterface";
             this.listBoxForwardingInterface.Size = new System.Drawing.Size(102, 84);
             this.listBoxForwardingInterface.TabIndex = 63;
+            this.listBoxForwardingInterface.SelectedIndexChanged += new System.EventHandler(this.listBoxForwardingInterface_SelectedIndexChanged);
             // 
             // listBoxForwardingPort
             // 
@@ -733,6 +757,7 @@
             this.listBoxForwardingPort.Name = "listBoxForwardingPort";
             this.listBoxForwardingPort.Size = new System.Drawing.Size(41, 84);
             this.listBoxForwardingPort.TabIndex = 62;
+            this.listBoxForwardingPort.SelectedIndexChanged += new System.EventHandler(this.listBoxForwardingPort_SelectedIndexChanged);
             // 
             // listBoxForwardingMulticast
             // 
@@ -743,6 +768,7 @@
             this.listBoxForwardingMulticast.Name = "listBoxForwardingMulticast";
             this.listBoxForwardingMulticast.Size = new System.Drawing.Size(93, 84);
             this.listBoxForwardingMulticast.TabIndex = 61;
+            this.listBoxForwardingMulticast.SelectedIndexChanged += new System.EventHandler(this.listBoxForwardingMulticast_SelectedIndexChanged);
             // 
             // label18
             // 
@@ -866,22 +892,6 @@
             this.label20.TabIndex = 76;
             this.label20.Text = "Forwarding";
             // 
-            // lineShape10
-            // 
-            this.lineShape10.Name = "lineShape10";
-            this.lineShape10.X1 = 477;
-            this.lineShape10.X2 = 477;
-            this.lineShape10.Y1 = 142;
-            this.lineShape10.Y2 = 184;
-            // 
-            // lineShape11
-            // 
-            this.lineShape11.Name = "lineShape11";
-            this.lineShape11.X1 = 822;
-            this.lineShape11.X2 = 822;
-            this.lineShape11.Y1 = 141;
-            this.lineShape11.Y2 = 331;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.button5);
@@ -907,6 +917,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Add/Modify Connections";
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(428, 67);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(62, 23);
+            this.button5.TabIndex = 58;
+            this.button5.Text = "Clear";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // shapeContainer2
             // 
             this.shapeContainer2.Location = new System.Drawing.Point(3, 16);
@@ -931,17 +951,7 @@
             this.lineShape12.Y1 = 111;
             this.lineShape12.Y2 = 111;
             // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(428, 67);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(62, 23);
-            this.button5.TabIndex = 58;
-            this.button5.Text = "Clear";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // FrmAsterixRecorder
+            // FrmAstxRecFrwdForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1001,8 +1011,8 @@
             this.Controls.Add(this.shapeContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "FrmAsterixRecorder";
-            this.Text = "ASTERIX Recorder";
+            this.Name = "FrmAstxRecFrwdForm";
+            this.Text = "ASTERIX Recorder and Data Forwarder";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmSettings_FormClosed);
             this.Load += new System.EventHandler(this.FrmSettings_Load);
             this.VisibleChanged += new System.EventHandler(this.FrmAsterixRecorder_VisibleChanged);
