@@ -80,10 +80,27 @@ namespace AsterixDisplayAnalyser
                 //Set the placemark's style to the style we created above
                 pm.StyleUrl = "#myStyle";
 
-                //Now lets add some other properties to our placemark
-                pm.Name = Target.ModeA + "  " + Target.ModeC;
+
+                if (Properties.Settings.Default.GE_Show_ModeA)
+                {
+                    pm.Name = Target.ModeA;
+                }
+
+                if (Properties.Settings.Default.GE_Show_ModeC)
+                {
+                    if (Properties.Settings.Default.Show_ModeC_as_FL)
+                        pm.Name = pm.Name + "  " + "FL:" + Target.ModeC;
+                    else
+                        pm.Name = pm.Name + "  " + LevelInMeeters.ToString() + "m";
+                }
+
+                if (Properties.Settings.Default.GE_Show_ModeC)
+                {
+                    pm.Name = pm.Name + " " + Target.ACID_Mode_S;
+                }
+
                 pm.Snippet = "Snipet Test";
-                pm.Description = "Description Test";
+                pm.Description = "Blaa Bla Blaaaa";
 
                 //Finally, add the placemark to the document
                 doc.Features.Add(pm);
@@ -91,7 +108,6 @@ namespace AsterixDisplayAnalyser
 
             geKML kml = new geKML(doc);
            
-
             //Add supporting files to the KMZ (assuming it's going to be rendered as KMZ
             byte[] myFile = File.ReadAllBytes(@"C:\ASTERIX\GE\ac_image.png");
             kml.Files.Add("ac_image.png", myFile);

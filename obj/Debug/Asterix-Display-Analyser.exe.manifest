@@ -49,7 +49,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>nMW6NmG3hu11RNtrE/faYuuJGwM=</dsig:DigestValue>
+        <dsig:DigestValue>I5JFT5E79ksL1s4swvVnUBM2EIw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -122,13 +122,13 @@
       <dsig:DigestValue>NYNYRoYaf8QQeHU+5lGl5zGLk+E=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="DOCUMENTATION\Release Notes.txt" size="7529">
+  <file name="DOCUMENTATION\Release Notes.txt" size="7639">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>EzItSbTIiJj/AKU+tnYuNnWWDgQ=</dsig:DigestValue>
+      <dsig:DigestValue>qaXkH+RsKe90EyljOc0oRgxCwGQ=</dsig:DigestValue>
     </hash>
   </file>
   <file name="README.txt" size="812">
