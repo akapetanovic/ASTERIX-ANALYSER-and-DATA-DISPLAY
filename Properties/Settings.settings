@@ -119,5 +119,20 @@
     <Setting Name="FrwdPort5" Type="System.String" Scope="User">
       <Value Profile="(Default)">None</Value>
     </Setting>
+    <Setting Name="GE_Show_ModeA" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="GE_Show_ModeC" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="GE_Show_Show_Callsign" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Show_ModeC_as_FL" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="GE_Dest_Path" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\ASTERIX\GE</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

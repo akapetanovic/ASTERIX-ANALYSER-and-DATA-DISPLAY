@@ -1,0 +1,15 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+        <ul>
+            <li>If default values are specified the ToKML methods will not render those elements
+                to keep the file size to a minimum.&nbsp; </li>
+            <li>Abstract classes will not write beginning and end elements since they will be inherited
+                by other objects that will do that.&nbsp; They can, however, render shared elements
+                and attributes that are shared across the objects that inherit them.</li></ul>
+	
+	</body>
+</html>

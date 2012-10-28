@@ -52,6 +52,8 @@ Version 1.6
 	6. Modified connection settings to specify local interface to use for receiving data. (Support for PCs with multiple LAN interafaces)
 	7. Added data forwarding option. This provides an option to forward up to five different data streams to a different or same physical interface
 	   on a desired multicast address and port.
+	8. Included required GMap and KML librarises (.dll) in the project directory so all required code is in a bundle. 
+	9. Added option to provide live data to Google Earth (via Network Link) to display targets real time in 3D.
 
 Version 1.5
 

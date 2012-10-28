@@ -490,5 +490,65 @@ namespace AsterixDisplayAnalyser.Properties {
                 this["FrwdPort5"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool GE_Show_ModeA {
+            get {
+                return ((bool)(this["GE_Show_ModeA"]));
+            }
+            set {
+                this["GE_Show_ModeA"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool GE_Show_ModeC {
+            get {
+                return ((bool)(this["GE_Show_ModeC"]));
+            }
+            set {
+                this["GE_Show_ModeC"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool GE_Show_Show_Callsign {
+            get {
+                return ((bool)(this["GE_Show_Show_Callsign"]));
+            }
+            set {
+                this["GE_Show_Show_Callsign"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Show_ModeC_as_FL {
+            get {
+                return ((bool)(this["Show_ModeC_as_FL"]));
+            }
+            set {
+                this["Show_ModeC_as_FL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\ASTERIX\\GE")]
+        public string GE_Dest_Path {
+            get {
+                return ((string)(this["GE_Dest_Path"]));
+            }
+            set {
+                this["GE_Dest_Path"] = value;
+            }
+        }
     }
 }

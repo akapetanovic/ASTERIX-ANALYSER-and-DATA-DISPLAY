@@ -1,0 +1,29 @@
+8
+
+dir
+84
+http://ge-kml.svn.sourceforge.net/svnroot/ge-kml/KML/Dependencies
+http://ge-kml.svn.sourceforge.net/svnroot/ge-kml
+
+
+
+2007-05-29T16:51:38.964635Z
+81
+boseefus00001
+
+
+svn:special svn:externals svn:needs-lock
+
+ICSharpCode.SharpZipLib.dll
+file
+
+
+
+
+2007-02-13T06:48:11.903404Z
+76e5274c40dcc1d4dad91b616d53579b
+2007-05-29T16:51:38.964635Z
+81
+boseefus00001
+has-props
+

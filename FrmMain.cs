@@ -40,8 +40,26 @@ namespace AsterixDisplayAnalyser
         GMapMarker currentMarker = null;
         bool isDraggingMarker = false;
 
+        // Used to flag the reception of the NM message, that will
+        // then trigger update of the display
         bool North_Marker_Received = false;
         string ReadDataReportMessage;
+
+        // Google Earth flag/methods
+        //
+        private static bool Send_Data_To_Google_Earth = false;
+
+        public static bool Is_Sending_Data_To_Google_Earth()
+        {
+            return Send_Data_To_Google_Earth;
+        }
+        public static void Set_Sending_Data_To_Google_Earth(bool Is_Sending)
+        {
+            Send_Data_To_Google_Earth = Is_Sending;
+        }
+        /// <summary>
+        /// //////////////////////////////////////////////////////////////////////
+        /// </summary>
 
         private static FrmAstxRecFrwdForm AsterixRecorder = new FrmAstxRecFrwdForm();
 
@@ -167,6 +185,7 @@ namespace AsterixDisplayAnalyser
             this.checkBoxDisplayPSR.Checked = Properties.Settings.Default.DisplayPSR;
             this.checkBoxFillListBox.Checked = Properties.Settings.Default.PopulateMainListBox;
             this.checkBoxSyncToNM.Checked = Properties.Settings.Default.SyncDisplayToNorthMark;
+            comboBoxLiveDisplayMode.SelectedIndex = 0;
 
             HandlePlotDisplayEnabledChanged();
         }
@@ -599,6 +618,10 @@ namespace AsterixDisplayAnalyser
 
                     this.lblNumberofTargets.Text = TargetList.Count.ToString();
 
+                    bool Build_Local_Display = comboBoxLiveDisplayMode.Text != "Google Earth";
+                    bool Provide_To_Google_Earth = comboBoxLiveDisplayMode.Text != "Local";
+                    Asterix_To_KML_Provider ASTX_TO_KML = new Asterix_To_KML_Provider();
+                  
                     foreach (DynamicDisplayBuilder.TargetType Target in TargetList)
                     {
 
@@ -615,7 +638,12 @@ namespace AsterixDisplayAnalyser
                                     Target.MyMarker.Position = new PointLatLng(Target.Lat, Target.Lon);
                                     BuildDynamicLabelText(Target, ref Target.MyMarker);
                                     SetLabelAttributes(ref Target.MyMarker);
-                                    DinamicOverlay.Markers.Add(Target.MyMarker);
+
+                                    if (Build_Local_Display)
+                                        DinamicOverlay.Markers.Add(Target.MyMarker);
+
+                                    if (Provide_To_Google_Earth)
+                                        ASTX_TO_KML.AddNewTarget(Target);
                                 }
                             }
                             else // No SSR filter so just display all of them
@@ -624,10 +652,19 @@ namespace AsterixDisplayAnalyser
                                 Target.MyMarker.Position = new PointLatLng(Target.Lat, Target.Lon);
                                 BuildDynamicLabelText(Target, ref Target.MyMarker);
                                 SetLabelAttributes(ref Target.MyMarker);
-                                DinamicOverlay.Markers.Add(Target.MyMarker);
+
+                                if (Build_Local_Display)
+                                    DinamicOverlay.Markers.Add(Target.MyMarker);
+
+                                if (Provide_To_Google_Earth)
+                                    ASTX_TO_KML.AddNewTarget(Target);
                             }
                         }
                     }
+
+                    // Check if there were any items, if so then tell KML to build the file
+                    if (Provide_To_Google_Earth)
+                        ASTX_TO_KML.BuildKML();
                 }
                 else // Here handle display of passive display (buffered data)
                 {
@@ -797,7 +834,7 @@ namespace AsterixDisplayAnalyser
 
         private void HandlePlotDisplayEnabledChanged()
         {
-            if (this.checkEnableDisplay.Checked == true)
+            if (this.checkEnableDisplay.Checked == true || Send_Data_To_Google_Earth == true)
             {
                 this.checkBoxFilterBySSR.Enabled = true;
                 this.comboBoxSSRFilterBox.Enabled = true;
@@ -835,11 +872,7 @@ namespace AsterixDisplayAnalyser
                     this.textBox1TrackCoast.Enabled = false;
                 }
 
-                // Call Update_PlotTrack_Data() twice in order 
-                // to populate the display right away, 
-                // then the timer/North Mark will take over.
                 Update_PlotTrack_Data();
-                // Update_PlotTrack_Data();
             }
             else
             {
@@ -1573,6 +1606,23 @@ namespace AsterixDisplayAnalyser
         private void recorderAndDataForwarderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AsterixRecorder.Visible = true;
+        }
+
+        private void googleEarthToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            GoogleEarthProvider MyGE_Provider = new GoogleEarthProvider();
+            MyGE_Provider.Show();
+        }
+
+        private void googleEarthToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            GoogleEarthProvider MyGE_Provider = new GoogleEarthProvider();
+            MyGE_Provider.Show();
+        }
+
+        private void comboBoxLiveDisplayMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Update_PlotTrack_Data();
         }
     }
 }

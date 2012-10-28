@@ -1,0 +1,55 @@
+8
+
+dir
+79
+http://ge-kml.svn.sourceforge.net/svnroot/ge-kml/KML/obj
+http://ge-kml.svn.sourceforge.net/svnroot/ge-kml
+
+
+
+2007-05-29T16:18:37.339186Z
+79
+boseefus00001
+has-props
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+cc8a7147-4526-0410-8884-fd09b1677381
+
+Google.KML.csproj.FileList.txt
+file
+78
+
+
+
+2007-05-29T15:57:57.195155Z
+5b527db26a8b872ec561d522427292b2
+2007-05-29T12:18:22.492277Z
+75
+maksims
+
+Debug
+dir
+
+KML.csproj.FileList.txt
+file
+78
+
+
+
+2007-01-31T05:29:13.980762Z
+b1bcf2cb87ffd623ac531005907ddf50
+2007-01-05T06:39:18.785416Z
+1
+boseefus00001
+

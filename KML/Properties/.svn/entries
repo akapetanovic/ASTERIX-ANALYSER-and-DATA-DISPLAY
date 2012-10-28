@@ -1,0 +1,53 @@
+8
+
+dir
+84
+http://ge-kml.svn.sourceforge.net/svnroot/ge-kml/KML/Properties
+http://ge-kml.svn.sourceforge.net/svnroot/ge-kml
+
+
+
+2007-08-28T00:14:54.352570Z
+82
+boseefus00001
+has-props
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+cc8a7147-4526-0410-8884-fd09b1677381
+
+AssemblyInfo.cs
+file
+
+
+
+
+2007-08-28T19:54:42.534837Z
+fd89bd72449bbac33f1d88fdd1be8ffd
+2007-08-28T00:14:54.352570Z
+82
+boseefus00001
+
+vssver2.scc
+file
+
+
+
+
+2007-01-31T05:29:14.386351Z
+6875d0fec2593d792e5a8b2706af775d
+2007-01-05T06:39:18.785416Z
+1
+boseefus00001
+has-props
+

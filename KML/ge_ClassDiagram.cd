@@ -1,0 +1,611 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access">
+  <Font Name="Tahoma" Size="8.25" />
+  <Comment CommentText="Google Earth KML API .NET 2.0 v.1.0.0.0">
+    <Position X="1.389" Y="0.5" Height="0.333" Width="2.547" />
+  </Comment>
+  <Class Name="Google.KML.geObject">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geObject.cs</FileName>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAQAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geFeature">
+    <Position X="4.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geFeature.cs</FileName>
+      <HashCode>AEIAAAAAAAAhIAAAEAIAQAQAAAAAAAACAAAAAgAAAAY=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geContainer">
+    <Position X="5.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geContainer.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geSchemaField">
+    <Position X="14.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geSchemaField.cs</FileName>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <NestedTypes>
+      <Enum Name="Google.KML.geSchemaField.FieldTypes" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>geSchemaField.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+  </Class>
+  <Class Name="Google.KML.geFolder">
+    <Position X="6.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geFolder.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Google.KML.geContainer" FixedToPoint="true">
+      <Path>
+        <Point X="6.5" Y="7.266" />
+        <Point X="6.5" Y="8.062" />
+        <Point X="6.75" Y="8.062" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Google.KML.geDocument">
+    <Position X="6.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geDocument.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geSimpleField">
+    <Position X="15.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geSimpleField.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geSimpleArrayField">
+    <Position X="15.5" Y="8.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>geSimpleArrayField.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geObjField">
+    <Position X="15.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geObjField.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geObjArrayField">
+    <Position X="15.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geObjArrayField.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geOverlay">
+    <Position X="5.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geOverlay.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgAAAAAAEAAAQ=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Google.KML.geFeature" FixedToPoint="true">
+      <Path>
+        <Point X="5.5" Y="5.824" />
+        <Point X="5.5" Y="11.312" />
+        <Point X="5.75" Y="11.312" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Google.KML.geScreenOverlay">
+    <Position X="6.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geScreenOverlay.cs</FileName>
+      <HashCode>AAAAAAAAAAAAgIAAAAAAAAAAAAAAIAAAEAAAAAAAAQQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geGroundOverlay">
+    <Position X="6.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geGroundOverlay.cs</FileName>
+      <HashCode>AAAAAAAABAAAAAAAIAAAgAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <NestedTypes>
+      <Class Name="Google.KML.geGroundOverlay.geLatLonBox" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>geGroundOverlay.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+  </Class>
+  <Class Name="Google.KML.gePoint">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>gePoint.cs</FileName>
+      <HashCode>AAAAgAIABAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Public" Collapsed="true" />
+    </Compartments>
+    <InheritanceLine Type="Google.KML.geGeometry" FixedToPoint="true">
+      <Path>
+        <Point X="9" Y="3.408" />
+        <Point X="9" Y="3.835" />
+        <Point X="9.5" Y="3.835" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Google.KML.geLineString">
+    <Position X="9.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geLineString.cs</FileName>
+      <HashCode>AAAAgAIABAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Google.KML.geGeometry" FixedToPoint="true">
+      <Path>
+        <Point X="9" Y="3.408" />
+        <Point X="9" Y="5.375" />
+        <Point X="9.5" Y="5.375" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Google.KML.geLinearRing">
+    <Position X="9.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geLinearRing.cs</FileName>
+      <HashCode>AAAAgAIABAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.gePolygon">
+    <Position X="9.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>gePolygon.cs</FileName>
+      <HashCode>AAAAgAIABAAAAAAAAAAAAAAAAAEAAAAAAAACAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geMultiGeometry">
+    <Position X="9.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geMultiGeometry.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geModel">
+    <Position X="9.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geModel.cs</FileName>
+      <HashCode>AAAAAAAABQAAAAAAAAIAAAAAAAAAAAAAAAAAQAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Google.KML.geGeometry" FixedToPoint="true">
+      <Path>
+        <Point X="9" Y="3.408" />
+        <Point X="9" Y="13.188" />
+        <Point X="9.5" Y="13.188" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Google.KML.geNetworkLink">
+    <Position X="5.75" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geNetworkLink.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAQABAAAQ=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Google.KML.geFeature" FixedToPoint="true">
+      <Path>
+        <Point X="5.5" Y="5.824" />
+        <Point X="5.5" Y="17.812" />
+        <Point X="5.75" Y="17.812" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Google.KML.gePlacemark">
+    <Position X="5.75" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>gePlacemark.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAQ=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Google.KML.geFeature" FixedToPoint="true">
+      <Path>
+        <Point X="5.5" Y="5.824" />
+        <Point X="5.5" Y="19.625" />
+        <Point X="5.75" Y="19.625" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Google.KML.geBaloonStyle">
+    <Position X="2.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geBaloonStyle.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAQAACAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Google.KML.geObject" FixedToPoint="true">
+      <Path>
+        <Point X="12.75" Y="1.974" />
+        <Point X="12.75" Y="2.375" />
+        <Point X="2.24" Y="2.375" />
+        <Point X="2.24" Y="3.688" />
+        <Point X="2.5" Y="3.688" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Google.KML.geListStyle">
+    <Position X="2.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geListStyle.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAQAQAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <NestedTypes>
+      <Class Name="Google.KML.geListStyle.geItemIcon" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>geListStyle.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+  </Class>
+  <Class Name="Google.KML.geLink">
+    <Position X="2.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geLink.cs</FileName>
+      <HashCode>AAAAAABAAAAgAEAIAAAAAAAAAAAAAIBAAAAQAAQAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geIcon">
+    <Position X="2.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geIcon.cs</FileName>
+      <HashCode>AAAAAABAAAAgAEAIAAAAAAAAAAAAAIBAAAAQAAQAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geOrientation">
+    <Position X="2.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geOrientation.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAACIAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geLocation">
+    <Position X="2.5" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geLocation.cs</FileName>
+      <HashCode>AAAAAAAAAEAAAAAAAAAIgAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Google.KML.geObject" FixedToPoint="true">
+      <Path>
+        <Point X="12.75" Y="1.974" />
+        <Point X="12.75" Y="2.375" />
+        <Point X="2.24" Y="2.375" />
+        <Point X="2.24" Y="15.062" />
+        <Point X="2.5" Y="15.062" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Google.KML.geScale">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geScale.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAQAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Google.KML.geObject" FixedToPoint="true">
+      <Path>
+        <Point X="12.75" Y="1.974" />
+        <Point X="12.75" Y="2.375" />
+        <Point X="2.24" Y="2.375" />
+        <Point X="2.24" Y="3.562" />
+        <Point X="2" Y="3.562" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Google.KML.geColorStyle">
+    <Position X="11.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geColorStyle.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAgAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geLineStyle">
+    <Position X="12.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geLineStyle.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Google.KML.geColorStyle" FixedToPoint="true">
+      <Path>
+        <Point X="12.25" Y="4.344" />
+        <Point X="12.25" Y="5.188" />
+        <Point X="12.5" Y="5.188" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Google.KML.gePolyStyle">
+    <Position X="12.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>gePolyStyle.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAACAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Google.KML.geColorStyle" FixedToPoint="true">
+      <Path>
+        <Point X="12.25" Y="4.344" />
+        <Point X="12.25" Y="6.5" />
+        <Point X="12.5" Y="6.5" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Google.KML.geIconStyle">
+    <Position X="12.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geIconStyle.cs</FileName>
+      <HashCode>ABAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAEAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geLabelStyle">
+    <Position X="12.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geLabelStyle.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Google.KML.geColorStyle" FixedToPoint="true">
+      <Path>
+        <Point X="12.25" Y="4.344" />
+        <Point X="12.25" Y="10.062" />
+        <Point X="12.5" Y="10.062" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Google.KML.geStyle">
+    <Position X="18.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geStyle.cs</FileName>
+      <HashCode>AEAAAQAAAAAAAAAAABAAAAAAACIEAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Google.KML.geStyleSelector" FixedToPoint="true">
+      <Path>
+        <Point X="18.25" Y="3.408" />
+        <Point X="18.25" Y="4.375" />
+        <Point X="18.5" Y="4.375" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Google.KML.geTimeSpan">
+    <Position X="24.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geTimeSpan.cs</FileName>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Google.KML.geTimePrimitive" FixedToPoint="true">
+      <Path>
+        <Point X="24.25" Y="3.408" />
+        <Point X="24.25" Y="4.438" />
+        <Point X="24.5" Y="4.438" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Google.KML.geTimeStamp">
+    <Position X="24.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geTimeStamp.cs</FileName>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geBoundaryIs">
+    <Position X="20.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geBoundaryIs.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geInnerBoundaryIs">
+    <Position X="21.5" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>geInnerBoundaryIs.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geOuterBoundaryIs">
+    <Position X="21.5" Y="5.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>geOuterBoundaryIs.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geCoordinates">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geCoordinates.cs</FileName>
+      <HashCode>AAAAAAAAAEAAAAAAAAAIgAAAAAAIAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geKML">
+    <Position X="18" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geKML.cs</FileName>
+      <HashCode>AAgAAAAAAAAABAAAAAAAAAAAAAAAAAEAAAQAAAAQAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geLookAt">
+    <Position X="0.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geLookAt.cs</FileName>
+      <HashCode>AAAAAAAABEAACAAAAAAIgAAAAAAAAAAAAAAAACIAAAQ=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="Google.KML.geObject" FixedToPoint="true">
+      <Path>
+        <Point X="12.75" Y="1.974" />
+        <Point X="12.75" Y="2.375" />
+        <Point X="2.24" Y="2.375" />
+        <Point X="2.24" Y="8.375" />
+        <Point X="2" Y="8.375" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Google.KML.geRegion">
+    <Position X="0.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geRegion.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAgAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <NestedTypes>
+      <Class Name="Google.KML.geRegion.geLatLonAltBox" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>geRegion.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="Google.KML.geRegion.geLod" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>geRegion.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+  </Class>
+  <Class Name="Google.KML.geSchema">
+    <Position X="0.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geSchema.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAQAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geGeometry">
+    <Position X="8.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geGeometry.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geStyleSelector">
+    <Position X="17.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geStyleSelector.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Google.KML.geStyleMap">
+    <Position X="18.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geStyleMap.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+    <NestedTypes>
+      <Class Name="Google.KML.geStyleMap.gePair" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>geStyleMap.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <InheritanceLine Type="Google.KML.geStyleSelector" FixedToPoint="true">
+      <Path>
+        <Point X="18.25" Y="3.408" />
+        <Point X="18.25" Y="6.818" />
+        <Point X="18.5" Y="6.818" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="Google.KML.geTimePrimitive">
+    <Position X="23.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geTimePrimitive.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Google.KML.geAngle180">
+    <Position X="19.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geAngle180.cs</FileName>
+      <HashCode>ABAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Google.KML.geAngle360">
+    <Position X="21.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geAngle360.cs</FileName>
+      <HashCode>ABAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Google.KML.geAngle90">
+    <Position X="23.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geAngle90.cs</FileName>
+      <HashCode>ABAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Google.KML.geAnglePos90">
+    <Position X="19.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geAnglePos90.cs</FileName>
+      <HashCode>ABAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Google.KML.geVec2">
+    <Position X="23.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geVec2.cs</FileName>
+      <HashCode>AACAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Google.KML.geDateTime">
+    <Position X="25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geDateTime.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAABAAAAAAAAgQ=</HashCode>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Google.KML.geColor">
+    <Position X="21.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geColor.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="Google.KML.geAltitudeModeEnum">
+    <Position X="19.75" Y="11.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>geAltitudeModeEnum.cs</FileName>
+      <HashCode>AAAIAAAAAAAAAAAAQAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Google.KML.geViewRefreshEnum">
+    <Position X="25.75" Y="12" Width="2" />
+    <TypeIdentifier>
+      <FileName>geViewRefreshEnum.cs</FileName>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAABAAAAQAAAAAAAAAACAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Google.KML.geColorModeEnum">
+    <Position X="21.75" Y="11.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>geColorModeEnum.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAQAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Google.KML.geListItemTypeEnum">
+    <Position X="23.75" Y="12" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>geListItemTypeEnum.cs</FileName>
+      <HashCode>AAAAAAgAAAAIAAAEAAAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Google.KML.geRefreshModeEnum">
+    <Position X="19.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geRefreshModeEnum.cs</FileName>
+      <HashCode>gAABAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Google.KML.geStyleStateEnum">
+    <Position X="21.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geStyleStateEnum.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAABAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Google.KML.geUnitsEnum">
+    <Position X="23.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>geUnitsEnum.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+</ClassDiagram>

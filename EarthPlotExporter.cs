@@ -97,6 +97,7 @@ namespace AsterixDisplayAnalyser
                         CAT01I070Types.CAT01070Mode3UserData Mode3AData = (CAT01I070Types.CAT01070Mode3UserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("070")].value;
                         if (Mode3AData.Mode3A_Code == (string)this.comboBox1.Items[this.comboBox1.SelectedIndex])
                         {
+                            
                             // Get Lat/Long
                             CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates LatLongData = (CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates)Msg.CAT01DataItems[CAT01.ItemIDToIndex("040")].value;
                             // Get Flight Level
@@ -118,7 +119,6 @@ namespace AsterixDisplayAnalyser
                         CAT48I070Types.CAT48I070Mode3UserData Mode3AData = (CAT48I070Types.CAT48I070Mode3UserData)Msg.CAT48DataItems[CAT48.ItemIDToIndex("070")].value;
                         if (Mode3AData.Mode3A_Code == (string)this.comboBox1.Items[this.comboBox1.SelectedIndex])
                         {
-
                             // Get Lat/Long in decimal
                             CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates LatLongData = (CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates)Msg.CAT48DataItems[CAT48.ItemIDToIndex("040")].value;
                             // Get Flight Level
@@ -127,7 +127,7 @@ namespace AsterixDisplayAnalyser
                             double LevelInMeeters = (FlightLevelData.FlightLevel * 100.00) * SharedData.FeetToMeeters;
 
                             Data = Data + "P" + TargetNumber.ToString() + "," + "SSR" + Mode3AData.Mode3A_Code + "_" + TargetNumber.ToString() + "," + LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal.ToString() +
-                               "," + LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal.ToString() + "," + LevelInMeeters.ToString() + Environment.NewLine;
+                                "," + LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal.ToString() + "," + LevelInMeeters.ToString() + Environment.NewLine;
 
                             TargetNumber++;
                         }

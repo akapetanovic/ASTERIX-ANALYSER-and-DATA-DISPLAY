@@ -39,6 +39,7 @@
             this.miscellaneousToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.recorderAndDataForwarderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.replayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetDataBufferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cAT001DataItemPresenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -207,7 +208,8 @@
             this.tabMainTab = new System.Windows.Forms.TabControl();
             this.NorthMarkerTimer = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorkerLoadData = new System.ComponentModel.BackgroundWorker();
-            this.replayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.googleEarthToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.comboBoxLiveDisplayMode = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -269,6 +271,7 @@
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.colorDialogToolStripMenuItem,
             this.cATDecoderSelectorToolStripMenuItem,
+            this.googleEarthToolStripMenuItem2,
             this.miscellaneousToolStripMenuItem});
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.Silver;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
@@ -313,6 +316,13 @@
             this.recorderAndDataForwarderToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.recorderAndDataForwarderToolStripMenuItem.Text = "Data Recorder and Forwarder";
             this.recorderAndDataForwarderToolStripMenuItem.Click += new System.EventHandler(this.recorderAndDataForwarderToolStripMenuItem_Click);
+            // 
+            // replayToolStripMenuItem
+            // 
+            this.replayToolStripMenuItem.Enabled = false;
+            this.replayToolStripMenuItem.Name = "replayToolStripMenuItem";
+            this.replayToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.replayToolStripMenuItem.Text = "Replay";
             // 
             // toolsToolStripMenuItem
             // 
@@ -1292,7 +1302,7 @@
             // labelTargetCount
             // 
             this.labelTargetCount.AutoSize = true;
-            this.labelTargetCount.Location = new System.Drawing.Point(5, 661);
+            this.labelTargetCount.Location = new System.Drawing.Point(6, 686);
             this.labelTargetCount.Name = "labelTargetCount";
             this.labelTargetCount.Size = new System.Drawing.Size(72, 13);
             this.labelTargetCount.TabIndex = 25;
@@ -1301,7 +1311,7 @@
             // lblNumberofTargets
             // 
             this.lblNumberofTargets.AutoSize = true;
-            this.lblNumberofTargets.Location = new System.Drawing.Point(78, 661);
+            this.lblNumberofTargets.Location = new System.Drawing.Point(79, 686);
             this.lblNumberofTargets.Name = "lblNumberofTargets";
             this.lblNumberofTargets.Size = new System.Drawing.Size(13, 13);
             this.lblNumberofTargets.TabIndex = 24;
@@ -1315,7 +1325,7 @@
             this.groupBox2.Controls.Add(this.numericUpDownLower);
             this.groupBox2.Controls.Add(this.checkBoxFLFilter);
             this.groupBox2.ForeColor = System.Drawing.Color.Silver;
-            this.groupBox2.Location = new System.Drawing.Point(6, 318);
+            this.groupBox2.Location = new System.Drawing.Point(6, 341);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(126, 103);
             this.groupBox2.TabIndex = 19;
@@ -1396,7 +1406,7 @@
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.ForeColor = System.Drawing.Color.Silver;
-            this.groupBox1.Location = new System.Drawing.Point(3, 456);
+            this.groupBox1.Location = new System.Drawing.Point(3, 479);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(121, 65);
             this.groupBox1.TabIndex = 17;
@@ -1443,7 +1453,7 @@
             // 
             this.lblZoomLevel.AutoSize = true;
             this.lblZoomLevel.ForeColor = System.Drawing.Color.Silver;
-            this.lblZoomLevel.Location = new System.Drawing.Point(60, 440);
+            this.lblZoomLevel.Location = new System.Drawing.Point(60, 463);
             this.lblZoomLevel.Name = "lblZoomLevel";
             this.lblZoomLevel.Size = new System.Drawing.Size(13, 13);
             this.lblZoomLevel.TabIndex = 16;
@@ -1453,7 +1463,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.ForeColor = System.Drawing.Color.Silver;
-            this.label13.Location = new System.Drawing.Point(7, 611);
+            this.label13.Location = new System.Drawing.Point(8, 636);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(55, 13);
             this.label13.TabIndex = 15;
@@ -1471,7 +1481,7 @@
             "Google Terrain",
             "Google Hybrid",
             "Custom Built"});
-            this.comboBox1.Location = new System.Drawing.Point(7, 627);
+            this.comboBox1.Location = new System.Drawing.Point(8, 652);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 14;
@@ -1480,7 +1490,7 @@
             // button7
             // 
             this.button7.BackColor = System.Drawing.Color.DarkGray;
-            this.button7.Location = new System.Drawing.Point(50, 554);
+            this.button7.Location = new System.Drawing.Point(51, 579);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(26, 23);
             this.button7.TabIndex = 13;
@@ -1491,7 +1501,7 @@
             // button6
             // 
             this.button6.BackColor = System.Drawing.Color.DarkGray;
-            this.button6.Location = new System.Drawing.Point(43, 525);
+            this.button6.Location = new System.Drawing.Point(44, 550);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(42, 23);
             this.button6.TabIndex = 12;
@@ -1502,7 +1512,7 @@
             // button5
             // 
             this.button5.BackColor = System.Drawing.Color.DarkGray;
-            this.button5.Location = new System.Drawing.Point(43, 583);
+            this.button5.Location = new System.Drawing.Point(44, 608);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(42, 23);
             this.button5.TabIndex = 11;
@@ -1513,7 +1523,7 @@
             // button4
             // 
             this.button4.BackColor = System.Drawing.Color.DarkGray;
-            this.button4.Location = new System.Drawing.Point(3, 554);
+            this.button4.Location = new System.Drawing.Point(4, 579);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(42, 23);
             this.button4.TabIndex = 10;
@@ -1524,7 +1534,7 @@
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.DarkGray;
-            this.button3.Location = new System.Drawing.Point(81, 554);
+            this.button3.Location = new System.Drawing.Point(82, 579);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(42, 23);
             this.button3.TabIndex = 9;
@@ -1536,7 +1546,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.ForeColor = System.Drawing.Color.Silver;
-            this.label12.Location = new System.Drawing.Point(50, 427);
+            this.label12.Location = new System.Drawing.Point(50, 450);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(34, 13);
             this.label12.TabIndex = 8;
@@ -1545,7 +1555,7 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.DarkGray;
-            this.button2.Location = new System.Drawing.Point(90, 427);
+            this.button2.Location = new System.Drawing.Point(90, 450);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(42, 23);
             this.button2.TabIndex = 7;
@@ -1556,7 +1566,7 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.DarkGray;
-            this.button1.Location = new System.Drawing.Point(2, 427);
+            this.button1.Location = new System.Drawing.Point(2, 450);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(42, 23);
             this.button1.TabIndex = 6;
@@ -1567,13 +1577,14 @@
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.Color.Black;
+            this.groupBox3.Controls.Add(this.comboBoxLiveDisplayMode);
             this.groupBox3.Controls.Add(this.checkEnableDisplay);
             this.groupBox3.Controls.Add(this.groupBoxUpdateRate);
             this.groupBox3.Controls.Add(this.groupBoxSSRFilter);
             this.groupBox3.ForeColor = System.Drawing.Color.Silver;
             this.groupBox3.Location = new System.Drawing.Point(3, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(130, 308);
+            this.groupBox3.Size = new System.Drawing.Size(130, 329);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Plot/Track Display";
@@ -1599,7 +1610,7 @@
             this.groupBoxUpdateRate.Controls.Add(this.labelDisplayUpdateRate);
             this.groupBoxUpdateRate.Controls.Add(this.textBoxUpdateRate);
             this.groupBoxUpdateRate.ForeColor = System.Drawing.Color.Silver;
-            this.groupBoxUpdateRate.Location = new System.Drawing.Point(10, 176);
+            this.groupBoxUpdateRate.Location = new System.Drawing.Point(9, 201);
             this.groupBoxUpdateRate.Name = "groupBoxUpdateRate";
             this.groupBoxUpdateRate.Size = new System.Drawing.Size(110, 122);
             this.groupBoxUpdateRate.TabIndex = 3;
@@ -1676,7 +1687,7 @@
             this.groupBoxSSRFilter.Controls.Add(this.comboBoxSSRFilterBox);
             this.groupBoxSSRFilter.Controls.Add(this.checkBoxFilterBySSR);
             this.groupBoxSSRFilter.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.groupBoxSSRFilter.Location = new System.Drawing.Point(10, 42);
+            this.groupBoxSSRFilter.Location = new System.Drawing.Point(9, 67);
             this.groupBoxSSRFilter.Name = "groupBoxSSRFilter";
             this.groupBoxSSRFilter.Size = new System.Drawing.Size(110, 128);
             this.groupBoxSSRFilter.TabIndex = 4;
@@ -1891,11 +1902,25 @@
             this.backgroundWorkerLoadData.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorkerLoadData.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // replayToolStripMenuItem
+            // googleEarthToolStripMenuItem2
             // 
-            this.replayToolStripMenuItem.Name = "replayToolStripMenuItem";
-            this.replayToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.replayToolStripMenuItem.Text = "Replay";
+            this.googleEarthToolStripMenuItem2.Name = "googleEarthToolStripMenuItem2";
+            this.googleEarthToolStripMenuItem2.Size = new System.Drawing.Size(189, 22);
+            this.googleEarthToolStripMenuItem2.Text = "Google Earth";
+            this.googleEarthToolStripMenuItem2.Click += new System.EventHandler(this.googleEarthToolStripMenuItem2_Click);
+            // 
+            // comboBoxLiveDisplayMode
+            // 
+            this.comboBoxLiveDisplayMode.FormattingEnabled = true;
+            this.comboBoxLiveDisplayMode.Items.AddRange(new object[] {
+            "Local",
+            "Google Earth",
+            "Local & Google  E"});
+            this.comboBoxLiveDisplayMode.Location = new System.Drawing.Point(9, 40);
+            this.comboBoxLiveDisplayMode.Name = "comboBoxLiveDisplayMode";
+            this.comboBoxLiveDisplayMode.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxLiveDisplayMode.TabIndex = 5;
+            this.comboBoxLiveDisplayMode.SelectedIndexChanged += new System.EventHandler(this.comboBoxLiveDisplayMode_SelectedIndexChanged);
             // 
             // FormMain
             // 
@@ -2120,6 +2145,8 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem recorderAndDataForwarderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem replayToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem googleEarthToolStripMenuItem2;
+        private System.Windows.Forms.ComboBox comboBoxLiveDisplayMode;
     }
 }
 

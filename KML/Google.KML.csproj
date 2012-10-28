@@ -1,0 +1,134 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DB966B8B-28FF-4042-BE7E-587709C8569C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Google.KML</RootNamespace>
+    <AssemblyName>Google.KML</AssemblyName>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <ApplicationIcon>earth.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Google.KML.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Google.KML.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.1.271, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dependencies\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="geAltitudeModeEnum.cs" />
+    <Compile Include="geBaloonStyle.cs" />
+    <Compile Include="geBoundaryIs.cs" />
+    <Compile Include="geColorModeEnum.cs" />
+    <Compile Include="geDocument.cs" />
+    <Compile Include="geAngle180.cs" />
+    <Compile Include="geAngle360.cs" />
+    <Compile Include="geAngle90.cs" />
+    <Compile Include="geAnglePos90.cs" />
+    <Compile Include="geColor.cs" />
+    <Compile Include="geColorStyle.cs" />
+    <Compile Include="geCoordinates.cs" />
+    <Compile Include="geDateTime.cs" />
+    <Compile Include="geFolder.cs" />
+    <Compile Include="geContainer.cs" />
+    <Compile Include="geFeature.cs" />
+    <Compile Include="geInnerBoundaryIs.cs" />
+    <Compile Include="geKML.cs" />
+    <Compile Include="geListItemTypeEnum.cs" />
+    <Compile Include="geNetworkLinkControl.cs" />
+    <Compile Include="geObjArrayField.cs" />
+    <Compile Include="geObject.cs" />
+    <Compile Include="geGeometry.cs" />
+    <Compile Include="geObjField.cs" />
+    <Compile Include="geOverlay.cs" />
+    <Compile Include="geSchema.cs" />
+    <Compile Include="geSchemaField.cs" />
+    <Compile Include="geSimpleArrayField.cs" />
+    <Compile Include="geSimpleField.cs" />
+    <Compile Include="geStyleSelector.cs" />
+    <Compile Include="geStyleStateEnum.cs" />
+    <Compile Include="geTimePrimitive.cs" />
+    <Compile Include="geTimeSpan.cs" />
+    <Compile Include="geTimeStamp.cs" />
+    <Compile Include="geUnitsEnum.cs" />
+    <Compile Include="geUpdate.cs" />
+    <Compile Include="geVec2.cs" />
+    <Compile Include="geGroundOverlay.cs" />
+    <Compile Include="geIcon.cs" />
+    <Compile Include="geIconStyle.cs" />
+    <Compile Include="geLabelStyle.cs" />
+    <Compile Include="geLinearRing.cs" />
+    <Compile Include="geLineString.cs" />
+    <Compile Include="geLineStyle.cs" />
+    <Compile Include="geLink.cs" />
+    <Compile Include="geListStyle.cs" />
+    <Compile Include="geLocation.cs" />
+    <Compile Include="geLookAt.cs" />
+    <Compile Include="geModel.cs" />
+    <Compile Include="geMultiGeometry.cs" />
+    <Compile Include="geNetworkLink.cs" />
+    <Compile Include="geOrientation.cs" />
+    <Compile Include="geOuterBoundaryIs.cs" />
+    <Compile Include="gePlacemark.cs" />
+    <Compile Include="gePoint.cs" />
+    <Compile Include="gePolygon.cs" />
+    <Compile Include="gePolyStyle.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="geRefreshModeEnum.cs" />
+    <Compile Include="geRegion.cs" />
+    <Compile Include="geScale.cs" />
+    <Compile Include="geScreenOverlay.cs" />
+    <Compile Include="geStyle.cs" />
+    <Compile Include="geStyleMap.cs" />
+    <Compile Include="geViewRefreshEnum.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ge_ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="earth.ico" />
+    <Content Include="DeveloperNotes.htm" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

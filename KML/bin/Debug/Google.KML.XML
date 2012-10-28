@@ -1,0 +1,819 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Google.KML</name>
+    </assembly>
+    <members>
+        <member name="T:Google.KML.geAngle360">
+            <summary>
+            A double value that must be between -360 and 360
+            </summary>
+        </member>
+        <member name="T:Google.KML.geBaloonStyle">
+            <summary>
+            Represents the BaloonStyle Google Earth object
+            </summary>
+        </member>
+        <member name="T:Google.KML.geObject">
+            <summary>
+            The base abstract class for all ge objects
+            </summary>
+        </member>
+        <member name="F:Google.KML.geObject.ID">
+            <summary>
+            A unique identifier for this object
+            </summary>
+        </member>
+        <member name="F:Google.KML.geObject.TargetID">
+            <summary>
+            A pointer to an existing object that will be referenced during an update
+            </summary>
+        </member>
+        <member name="M:Google.KML.geObject.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            All ge objects should implement this method
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="F:Google.KML.geBaloonStyle.BgColor">
+            <summary>
+            The background color of the balloon
+            </summary>
+        </member>
+        <member name="F:Google.KML.geBaloonStyle.TextColor">
+            <summary>
+            The text color of the balloon
+            </summary>
+        </member>
+        <member name="F:Google.KML.geBaloonStyle.Text">
+            <summary>
+            Text that can override the Google supplied text that exists
+            in the balloon along with any description information
+            </summary>
+        </member>
+        <member name="M:Google.KML.geBaloonStyle.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object as KML, and calls upon any children to do the same
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geFeature">
+            <summary>
+            Represents the Feature abstract, one of the most important
+            elements in a KML.  This is what will be displayed.
+            </summary>
+        </member>
+        <member name="F:Google.KML.geFeature.Name">
+            <summary>
+            The name of the feature.  This will be the label that
+            is displayed in both the Places window and the Map window
+            </summary>
+        </member>
+        <member name="F:Google.KML.geFeature.Visibility">
+            <summary>
+            Defines whether to draw the feature in the map 
+            window by default.
+            </summary>
+        </member>
+        <member name="F:Google.KML.geFeature.Open">
+            <summary>
+            If the feature contains other features, defines whether
+            this feature is expanded by default or not.
+            </summary>
+        </member>
+        <member name="F:Google.KML.geFeature.Address">
+            <summary>
+            A street address
+            </summary>
+        </member>
+        <member name="F:Google.KML.geFeature.AddressDetails">
+            <summary>
+            A structured xAL street address
+            </summary>
+        </member>
+        <member name="F:Google.KML.geFeature.PhoneNumber">
+            <summary>
+            an RFC2806 formatted phone number
+            </summary>
+        </member>
+        <member name="F:Google.KML.geFeature.Snippet">
+            <summary>
+            Text that can be displayed under the icon in the 
+            places window, otherwise any description available
+            is shown
+            </summary>
+        </member>
+        <member name="F:Google.KML.geFeature.Description">
+            <summary>
+            The text that is displayed in the balloon.  Can be HTML
+            formatted text.  Special characters should be surrounded
+            by <![CDATA[ special chars here ]]>
+            </summary>
+        </member>
+        <member name="F:Google.KML.geFeature.LookAt">
+            <summary>
+            Where Google Earth should orient itself to look
+            at this feature
+            </summary>
+        </member>
+        <member name="F:Google.KML.geFeature.TimePrimitive">
+            <summary>
+            A specified time or range of times when this 
+            feature should be displayed.  Useful for 
+            showing/hiding features while looping over a 
+            given time.
+            </summary>
+        </member>
+        <member name="F:Google.KML.geFeature.StyleUrl">
+            <summary>
+            The style this feature should use, can be relative
+            to the document if there is one, or an http reference
+            </summary>
+        </member>
+        <member name="F:Google.KML.geFeature.StyleSelectors">
+            <summary>
+            A collection of styles that can be used by different
+            elements in this feature and child features
+            </summary>
+        </member>
+        <member name="F:Google.KML.geFeature.Region">
+            <summary>
+            Defines the user view bounding box for when features should be displayed
+            </summary>
+        </member>
+        <member name="M:Google.KML.geFeature.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object as KML, and calls upon any children to do the same
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geDocument">
+            <summary>
+            Represents the Document object
+            </summary>
+        </member>
+        <member name="T:Google.KML.geContainer">
+            <summary>
+            Represents the Container abstract and inherits the Feature abstract
+            </summary>
+        </member>
+        <member name="F:Google.KML.geContainer.Features">
+            <summary>
+            A collection of Features that can exist within the container
+            </summary>
+        </member>
+        <member name="M:Google.KML.geContainer.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object as KML, and calls upon any children to do the same
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="F:Google.KML.geDocument.Schemas">
+            <summary>
+            A collection of Schemas that can be applied to this
+            document
+            </summary>
+        </member>
+        <member name="M:Google.KML.geDocument.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object as KML, and calls upon any children to do the same
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.gePoint">
+            <summary>
+            A geographic location defined by longitude, latitude, and (optional) altitude. 
+            When a Point is contained by a Placemark, the point itself determines the position 
+            of the Placemark's name and icon. When a Point is extruded, it is connected to 
+            the ground with a line. This "tether" uses the current LineStyle.
+            </summary>
+        </member>
+        <member name="T:Google.KML.geGeometry">
+            <summary>
+            Represents the Geometry abstract class, which
+            right at the moment I have no idea why Google
+            has done this.  There is no singe thing
+            that the objects inheriting this can share.
+            There should perhaps be a seperate abstract for 
+            Point, LineString, LinearRing, and Polygon so that
+            they can at least share some properties.
+            </summary>
+        </member>
+        <member name="T:Google.KML.geListStyle">
+            <summary>
+            Represents the ListStyle object, or how icons should show up in the places window
+            </summary>
+        </member>
+        <member name="F:Google.KML.geListStyle.ItemIcons">
+            <summary>
+            The collection of icons to be used for this style
+            </summary>
+        </member>
+        <member name="F:Google.KML.geListStyle.BgColor">
+            <summary>
+            Background color for the snippet
+            </summary>
+        </member>
+        <member name="F:Google.KML.geListStyle.ListItemType">
+            <summary>
+            The type of item to display in the places window
+            </summary>
+        </member>
+        <member name="M:Google.KML.geListStyle.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object and any children as KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geListStyle.geItemIcon">
+            <summary>
+            Represents an ItemIcon, the icon that you see in the Places window
+            </summary>
+        </member>
+        <member name="M:Google.KML.geListStyle.geItemIcon.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object as KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geListStyle.geItemIcon.geItemIconStates">
+            <summary>
+            List the valid icon states
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Google.KML.geStyle" -->
+        <!-- Badly formed XML comment ignored for member "T:Google.KML.gePolygon" -->
+        <member name="M:Google.KML.gePolygon.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Render to KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geNetworkLink">
+            <summary>
+            References a local or remote KML/KMZ file
+            </summary>
+        </member>
+        <member name="M:Google.KML.geNetworkLink.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Render the object to KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geAngle180">
+            <summary>
+            An double value that must be between -180 and 180
+            </summary>
+        </member>
+        <member name="T:Google.KML.gePolyStyle">
+            <summary>
+            Specifies the drawing style for all polygons, including polygon 
+            extrusions (which look like the walls of buildings) and line extrusions 
+            (which look like solid fences). 
+            </summary>
+        </member>
+        <member name="T:Google.KML.geColorStyle">
+            <summary>
+            This is an abstract element and cannot be used directly in a KML file. It provides elements for specifying the color and color mode of extended style types.
+            </summary>
+        </member>
+        <member name="F:Google.KML.geColorStyle.Color">
+            <summary>
+            Color and opacity (alpha) values are expressed in hexadecimal notation.
+            </summary>
+            <remarks>
+            The range of values for any one color is 0 to 255 (00 to ff). For alpha, 00 is fully transparent and ff is fully opaque.
+            The order of expression is aabbggrr, where aa=alpha (00 to ff); bb=blue (00 to ff); gg=green (00 to ff); rr=red (00 to ff).
+            Default value is ffffffff.
+            </remarks>
+            <example>
+            If you want to apply a blue color with 50 percent opacity to an overlay, you would specify the following: <color>7fff0000</color>, where alpha=0x7f, blue=0xff, green=0x00, and red=0x00. 
+            </example>
+        </member>
+        <member name="F:Google.KML.geColorStyle.ColorMode">
+            <summary>
+            Values for colorMode are normal (no effect) and random. A value of random applies a random linear scale to the base color as follows.
+            </summary>
+            <remarks>
+            To achieve a truly random selection of colors, specify a base color of white (ffffffff). 
+            If you specify a single color component (for example, a value of ff0000ff for red), random color values for that one component (red) will be selected. In this case, the values would range from 00 (black) to ff (full red). 
+            If you specify values for two or for all three color components, a random linear scale is applied to each color component, with results ranging from black to the maximum values specified for each component. 
+            The opacity of a color comes from the alpha component of color and is never randomized. 
+            Default value is normal.
+            </remarks>
+        </member>
+        <member name="M:Google.KML.geColorStyle.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Google.KML.geColorStyle.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object as KML, and calls upon any children to do the same
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="F:Google.KML.gePolyStyle.Fill">
+            <summary>
+            Boolean value (default=1). Specifies whether to fill the polygon
+            </summary>
+        </member>
+        <member name="F:Google.KML.gePolyStyle.Outline">
+            <summary>
+            Boolean value (default=1). Specifies whether to outline the polygon. 
+            Polygon outlines use the current LineStyle. 
+            </summary>
+        </member>
+        <member name="M:Google.KML.gePolyStyle.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Render to KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geModel">
+            <summary>
+            A 3d object from a Collada (.dae) file
+            </summary>
+        </member>
+        <member name="M:Google.KML.geModel.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Render the object to KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="F:Google.KML.geIconStyle.Icon">
+            <summary>
+            The icon to display
+            </summary>
+        </member>
+        <member name="F:Google.KML.geIconStyle.Scale">
+            <summary>
+            relative size of the icon
+            </summary>
+        </member>
+        <member name="F:Google.KML.geIconStyle.HotSpot">
+            <summary>
+            The position of the icon bounding box around a point
+            </summary>
+        </member>
+        <member name="M:Google.KML.geIconStyle.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object and any children as KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geKML">
+            <summary>
+            This class will be the entry point for creating and 
+            organizing the KML output
+            </summary>
+        </member>
+        <member name="F:Google.KML.geKML.kmlRoot">
+            <summary>
+            We need a root KML object to start with.
+            The most common would be Features, Containers, or Overlays
+            </summary>
+        </member>
+        <member name="M:Google.KML.geKML.ToKML">
+            <summary>
+            Return a byte array that is the final KML file.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Google.KML.geKML.ToKMZ">
+            <summary>
+            Return the compressed version of the KML file (KMZ)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Google.KML.geAngle90">
+            <summary>
+            A double that must be between -90 and 90
+            </summary>
+        </member>
+        <member name="T:Google.KML.geOrientation">
+            <summary>
+            Describes rotation of a 3D model's coordinate system to position the object in Google Earth.
+            </summary>
+        </member>
+        <member name="F:Google.KML.geOrientation.Heading">
+            <summary>
+            Rotation about the z axis. A value of 0 (the default) equals North.
+            </summary>
+            <remarks>
+            A positive rotation is clockwise around the z axis and specified in degrees from 0 to ±180.
+            </remarks>
+        </member>
+        <member name="F:Google.KML.geOrientation.Tilt">
+            <summary>
+            Rotation about the x axis. Default equals to 0.
+            </summary>
+            <remarks>
+            A positive rotation is clockwise around the x axis and specified in degrees from 0 to ±180.
+            </remarks>
+        </member>
+        <member name="F:Google.KML.geOrientation.Roll">
+            <summary>
+            Rotation about the y axis. Default equals to 0.
+            </summary>
+            <remarks>
+            A positive rotation is clockwise around the y axis and specified in degrees from 0 to ±180.
+            </remarks>
+        </member>
+        <member name="M:Google.KML.geOrientation.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object to KML.
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geNetworkLinkControl">
+            <summary>
+            Controls the behavior of files fetched by a Network Link
+            </summary>
+        </member>
+        <member name="T:Google.KML.geGroundOverlay">
+            <summary>
+            Represents the GroundOverlay object for laying icons/images 
+            over the Google Earth terrain
+            </summary>
+        </member>
+        <member name="T:Google.KML.geOverlay">
+            <summary>
+            An abstract class for images that are drawn on the ground or on the screen
+            </summary>
+        </member>
+        <member name="M:Google.KML.geOverlay.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Render to KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="M:Google.KML.geGroundOverlay.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object and any children to KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geGroundOverlay.geLatLonBox">
+            <summary>
+            A Lat/Lon "Box" that is used in a GroundOverlay
+            to describe how to stretch the image over the
+            terrain.
+            </summary>
+        </member>
+        <member name="M:Google.KML.geGroundOverlay.geLatLonBox.#ctor(Google.KML.geAngle90,Google.KML.geAngle90,Google.KML.geAngle180,Google.KML.geAngle180)">
+            <summary>
+            Passes the constructor on to the N/S/E/W/Rotation
+            constructor with the Rotation value of 0
+            </summary>
+            <param name="north"></param>
+            <param name="south"></param>
+            <param name="east"></param>
+            <param name="west"></param>
+        </member>
+        <member name="M:Google.KML.geGroundOverlay.geLatLonBox.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object to KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geLabelStyle">
+            <summary>
+            Represents the LabelStyle object
+            </summary>
+        </member>
+        <member name="M:Google.KML.geLabelStyle.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object and any children as KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geColor">
+            <summary>
+            Used to convert .Net color objects to strings that Google Earth understands (AABBGGRR)
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Google.KML.geTimeSpan" -->
+        <member name="T:Google.KML.geObjField">
+            <summary>
+            A schema field for a pointer to a schema object. 
+            </summary>
+        </member>
+        <member name="M:Google.KML.geObjField.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Render this object to KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geAnglePos90">
+            <summary>
+            A double that must be between 0 an 90
+            </summary>
+        </member>
+        <member name="T:Google.KML.geLinearRing">
+            <summary>
+            Represents the LinearRing object
+            </summary>
+        </member>
+        <member name="M:Google.KML.geLinearRing.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object as and any children as KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Google.KML.geTimeStamp" -->
+        <member name="T:Google.KML.geObjArrayField">
+            <summary>
+            A schema field for an array of pointers to schema objects. 
+            </summary>
+        </member>
+        <member name="M:Google.KML.geObjArrayField.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders this object to KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geFolder">
+             <summary>
+             Represents a Folder object.  A container for many types of Google Earth Elements
+             </summary>
+            
+        </member>
+        <member name="M:Google.KML.geFolder.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object as KML, and calls upon any children to do the same
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geAltitudeModeEnum">
+            <summary>
+            A list of all possible values for AltitudeMode
+            </summary>
+        </member>
+        <member name="T:Google.KML.gePlacemark">
+            <summary>
+            A Placemark is a Feature with associated Geometry. In Google Earth, a 
+            Placemark appears as a list item in the Places panel. A Placemark with 
+            a Point has an icon associated with it that marks a point on the earth 
+            in the 3D viewer. (In the Google Earth 3D viewer, a Point Placemark is 
+            the only object you can click or roll over. Other Geometry objects do 
+            not have an icon in the 3D viewer. To give the user something to click, 
+            you would need to add a Point to the Polygon.)
+            </summary>
+        </member>
+        <member name="M:Google.KML.gePlacemark.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Render to KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="M:Google.KML.geLineString.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object and any children as KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geDateTime">
+            <summary>
+            Converts a .Net DateTime object to a strings that KML
+            can recognize
+            </summary>
+        </member>
+        <member name="M:Google.KML.geDateTime.ToKML">
+            <summary>
+            Renders the DateTime as a string for KML
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Google.KML.geLink">
+            <summary>
+            Represents the Link object
+            </summary>
+        </member>
+        <member name="F:Google.KML.geLink.Href">
+            <summary>
+            The location of external data
+            </summary>
+        </member>
+        <member name="M:Google.KML.geLink.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object and any children as KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geBoundaryIs">
+            <summary>
+            An abstract class that contains a LinearRing, this is not a Google Earth
+            defined Abstract, but it seemed natural for the InnerBoundaryIs and 
+            OuterBoundaryIs objects to share this.
+            </summary>
+        </member>
+        <member name="F:Google.KML.geBoundaryIs.LinearRing">
+            <summary>
+            The closed ring that defines a boundary.  The ring's
+            first and last point must be the same (closed)
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Google.KML.geScreenOverlay" -->
+        <member name="T:Google.KML.geMultiGeometry">
+            <summary>
+            A container for one or more geometry objects
+            </summary>
+        </member>
+        <member name="M:Google.KML.geMultiGeometry.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object to KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geLookAt">
+            <summary>
+            Defines the camera position while looking at a objects
+            </summary>
+        </member>
+        <member name="M:Google.KML.geLookAt.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object as KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geLocation">
+            <summary>
+            Represents the Location object for use in Models
+            </summary>
+        </member>
+        <member name="M:Google.KML.geLocation.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object as KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geLineStyle">
+            <summary>
+            Represents the LineStyle Object
+            </summary>
+        </member>
+        <member name="F:Google.KML.geLineStyle.Width">
+            <summary>
+            The width of the line to draw
+            </summary>
+        </member>
+        <member name="M:Google.KML.geLineStyle.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object and any children as KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="M:Google.KML.geInnerBoundaryIs.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object and any children to KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geIcon">
+            <summary>
+            Represents the Icon object
+            </summary>
+        </member>
+        <member name="F:Google.KML.geIcon.Href">
+            <summary>
+            The http, local file, or document relative address of the 
+            image to use as an icon/overlay
+            </summary>
+        </member>
+        <member name="F:Google.KML.geIcon.RefreshInterval">
+            <summary>
+            The number of seconds to wait before refreshing the image
+            </summary>
+        </member>
+        <member name="F:Google.KML.geIcon.RefreshMode">
+            <summary>
+            When to refresh the image
+            </summary>
+        </member>
+        <member name="F:Google.KML.geIcon.ViewBoundScale">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Google.KML.geIcon.ViewFormat">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Google.KML.geIcon.ViewRefreshMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Google.KML.geIcon.ViewRefreshTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Google.KML.geIcon.HttpQuery">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Google.KML.geIcon.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders this object and any children to KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geListItemTypeEnum">
+            <summary>
+            A list of valid values for ListItemType
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Google.KML.geRegion" -->
+        <member name="T:Google.KML.geRegion.geLatLonAltBox">
+            <summary>
+            A bounding box that describes an area of interest defined by geographic 
+            coordinates and altitudes
+            </summary>
+        </member>
+        <member name="T:Google.KML.geCoordinates">
+            <summary>
+            Represents the Coordinates property which contains
+            minimally a Lat/Lon, and optionally an Altitude.
+            </summary>
+        </member>
+        <member name="M:Google.KML.geCoordinates.#ctor(Google.KML.geAngle90,Google.KML.geAngle180)">
+            <summary>
+            This constructor will pass to the Lat/Lon/Alt constructor
+            assigning altitude the value of Single.NaN
+            </summary>
+            <param name="latitude"></param>
+            <param name="longitude"></param>
+        </member>
+        <member name="M:Google.KML.geCoordinates.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object as KML, and calls upon any children to do the same
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="M:Google.KML.geCoordinates.ToTuple">
+            <summary>
+            Returns only the Lon,Lat[,Alt] string without any KML elements
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Google.KML.geScale">
+            <summary>
+            Scales a model along the x, y, and z axes in the model's coordinate space
+            </summary>
+        </member>
+        <member name="F:Google.KML.geScale.x">
+            <summary>
+            x axis
+            </summary>
+        </member>
+        <member name="F:Google.KML.geScale.y">
+            <summary>
+            y axis
+            </summary>
+        </member>
+        <member name="F:Google.KML.geScale.z">
+            <summary>
+            z axis
+            </summary>
+        </member>
+        <member name="M:Google.KML.geScale.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders the object to KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geOuterBoundaryIs">
+            <summary>
+            Contains a linear ring
+            </summary>
+        </member>
+        <member name="M:Google.KML.geOuterBoundaryIs.#ctor(Google.KML.geLinearRing)">
+            <summary>
+            A LinearRing that defines the outer boundary
+            </summary>
+            <param name="linearRing"></param>
+        </member>
+        <member name="M:Google.KML.geOuterBoundaryIs.ToKML(System.Xml.XmlTextWriter)">
+            <summary>
+            Renders this object to KML
+            </summary>
+            <param name="kml"></param>
+        </member>
+        <member name="T:Google.KML.geSchema">
+            <summary>
+            Specifies a custom KML schema that is typically used to extend and add 
+            metadata to KML objects. The "name" attribute is required. Currently, 
+            the only value for parent is "Placemark." 
+            </summary>
+        </member>
+        <member name="T:Google.KML.geColorModeEnum">
+            <summary>
+            Lists all of the possible values for ColorMode
+            </summary>
+        </member>
+    </members>
+</doc>

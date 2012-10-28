@@ -1,0 +1,425 @@
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/svnroot/ge-kml/!svn/ver/82/KML
+END
+geSchema.cs
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svnroot/ge-kml/!svn/ver/31/KML/geSchema.cs
+END
+geNetworkLinkControl.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svnroot/ge-kml/!svn/ver/29/KML/geNetworkLinkControl.cs
+END
+ge_ClassDiagram.cd
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/ge-kml/!svn/ver/8/KML/ge_ClassDiagram.cd
+END
+geListItemTypeEnum.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svnroot/ge-kml/!svn/ver/1/KML/geListItemTypeEnum.cs
+END
+geOverlay.cs
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svnroot/ge-kml/!svn/ver/29/KML/geOverlay.cs
+END
+geLookAt.cs
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svnroot/ge-kml/!svn/ver/82/KML/geLookAt.cs
+END
+geOrientation.cs
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svnroot/ge-kml/!svn/ver/75/KML/geOrientation.cs
+END
+geDateTime.cs
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svnroot/ge-kml/!svn/ver/1/KML/geDateTime.cs
+END
+gePlacemark.cs
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svnroot/ge-kml/!svn/ver/30/KML/gePlacemark.cs
+END
+geLabelStyle.cs
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svnroot/ge-kml/!svn/ver/1/KML/geLabelStyle.cs
+END
+geModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svnroot/ge-kml/!svn/ver/28/KML/geModel.cs
+END
+gePolyStyle.cs
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svnroot/ge-kml/!svn/ver/30/KML/gePolyStyle.cs
+END
+geSchemaField.cs
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svnroot/ge-kml/!svn/ver/31/KML/geSchemaField.cs
+END
+DeveloperNotes.htm
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/ge-kml/!svn/ver/1/KML/DeveloperNotes.htm
+END
+geColorModeEnum.cs
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/ge-kml/!svn/ver/1/KML/geColorModeEnum.cs
+END
+geCoordinates.cs
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svnroot/ge-kml/!svn/ver/63/KML/geCoordinates.cs
+END
+geInnerBoundaryIs.cs
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svnroot/ge-kml/!svn/ver/1/KML/geInnerBoundaryIs.cs
+END
+geObjField.cs
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svnroot/ge-kml/!svn/ver/29/KML/geObjField.cs
+END
+geColor.cs
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svnroot/ge-kml/!svn/ver/1/KML/geColor.cs
+END
+geAngle360.cs
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svnroot/ge-kml/!svn/ver/63/KML/geAngle360.cs
+END
+geTimeSpan.cs
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svnroot/ge-kml/!svn/ver/31/KML/geTimeSpan.cs
+END
+geAnglePos90.cs
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svnroot/ge-kml/!svn/ver/63/KML/geAnglePos90.cs
+END
+geTimePrimitive.cs
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/ge-kml/!svn/ver/31/KML/geTimePrimitive.cs
+END
+geUnitsEnum.cs
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svnroot/ge-kml/!svn/ver/31/KML/geUnitsEnum.cs
+END
+geGeometry.cs
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svnroot/ge-kml/!svn/ver/1/KML/geGeometry.cs
+END
+earth.ico
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svnroot/ge-kml/!svn/ver/42/KML/earth.ico
+END
+geSimpleField.cs
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svnroot/ge-kml/!svn/ver/31/KML/geSimpleField.cs
+END
+geOuterBoundaryIs.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svnroot/ge-kml/!svn/ver/64/KML/geOuterBoundaryIs.cs
+END
+KML.sln
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svnroot/ge-kml/!svn/ver/1/KML/KML.sln
+END
+geAngle90.cs
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svnroot/ge-kml/!svn/ver/63/KML/geAngle90.cs
+END
+geColorStyle.cs
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svnroot/ge-kml/!svn/ver/75/KML/geColorStyle.cs
+END
+geVec2.cs
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svnroot/ge-kml/!svn/ver/31/KML/geVec2.cs
+END
+geGroundOverlay.cs
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/ge-kml/!svn/ver/82/KML/geGroundOverlay.cs
+END
+geStyle.cs
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svnroot/ge-kml/!svn/ver/31/KML/geStyle.cs
+END
+geStyleSelector.cs
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/ge-kml/!svn/ver/31/KML/geStyleSelector.cs
+END
+geTimeStamp.cs
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svnroot/ge-kml/!svn/ver/31/KML/geTimeStamp.cs
+END
+geMultiGeometry.cs
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/ge-kml/!svn/ver/29/KML/geMultiGeometry.cs
+END
+geObject.cs
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svnroot/ge-kml/!svn/ver/29/KML/geObject.cs
+END
+geNetworkLink.cs
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svnroot/ge-kml/!svn/ver/29/KML/geNetworkLink.cs
+END
+geLineStyle.cs
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svnroot/ge-kml/!svn/ver/1/KML/geLineStyle.cs
+END
+geIconStyle.cs
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svnroot/ge-kml/!svn/ver/1/KML/geIconStyle.cs
+END
+geFolder.cs
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svnroot/ge-kml/!svn/ver/1/KML/geFolder.cs
+END
+geLineString.cs
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svnroot/ge-kml/!svn/ver/52/KML/geLineString.cs
+END
+geBoundaryIs.cs
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svnroot/ge-kml/!svn/ver/1/KML/geBoundaryIs.cs
+END
+geKML.cs
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svnroot/ge-kml/!svn/ver/63/KML/geKML.cs
+END
+gePolygon.cs
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svnroot/ge-kml/!svn/ver/64/KML/gePolygon.cs
+END
+geScale.cs
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svnroot/ge-kml/!svn/ver/75/KML/geScale.cs
+END
+geSimpleArrayField.cs
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svnroot/ge-kml/!svn/ver/31/KML/geSimpleArrayField.cs
+END
+geLink.cs
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svnroot/ge-kml/!svn/ver/1/KML/geLink.cs
+END
+geStyleMap.cs
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svnroot/ge-kml/!svn/ver/31/KML/geStyleMap.cs
+END
+geAltitudeModeEnum.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svnroot/ge-kml/!svn/ver/1/KML/geAltitudeModeEnum.cs
+END
+geLocation.cs
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svnroot/ge-kml/!svn/ver/63/KML/geLocation.cs
+END
+Google.KML.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svnroot/ge-kml/!svn/ver/82/KML/Google.KML.csproj
+END
+geObjArrayField.cs
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/ge-kml/!svn/ver/29/KML/geObjArrayField.cs
+END
+geViewRefreshEnum.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svnroot/ge-kml/!svn/ver/31/KML/geViewRefreshEnum.cs
+END
+geDocument.cs
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svnroot/ge-kml/!svn/ver/1/KML/geDocument.cs
+END
+geAngle180.cs
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svnroot/ge-kml/!svn/ver/63/KML/geAngle180.cs
+END
+geScreenOverlay.cs
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svnroot/ge-kml/!svn/ver/31/KML/geScreenOverlay.cs
+END
+geUpdate.cs
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svnroot/ge-kml/!svn/ver/31/KML/geUpdate.cs
+END
+geContainer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svnroot/ge-kml/!svn/ver/1/KML/geContainer.cs
+END
+geRegion.cs
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svnroot/ge-kml/!svn/ver/63/KML/geRegion.cs
+END
+ChangeLog.txt
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svnroot/ge-kml/!svn/ver/82/KML/ChangeLog.txt
+END
+geStyleStateEnum.cs
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svnroot/ge-kml/!svn/ver/31/KML/geStyleStateEnum.cs
+END
+geRefreshModeEnum.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svnroot/ge-kml/!svn/ver/31/KML/geRefreshModeEnum.cs
+END
+geIcon.cs
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svnroot/ge-kml/!svn/ver/1/KML/geIcon.cs
+END
+gePoint.cs
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svnroot/ge-kml/!svn/ver/30/KML/gePoint.cs
+END
+geLinearRing.cs
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svnroot/ge-kml/!svn/ver/36/KML/geLinearRing.cs
+END
+geBaloonStyle.cs
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svnroot/ge-kml/!svn/ver/1/KML/geBaloonStyle.cs
+END
+geFeature.cs
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svnroot/ge-kml/!svn/ver/61/KML/geFeature.cs
+END
+geListStyle.cs
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svnroot/ge-kml/!svn/ver/1/KML/geListStyle.cs
+END

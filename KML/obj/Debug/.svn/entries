@@ -1,0 +1,98 @@
+8
+
+dir
+79
+http://ge-kml.svn.sourceforge.net/svnroot/ge-kml/KML/obj/Debug
+http://ge-kml.svn.sourceforge.net/svnroot/ge-kml
+
+
+
+2007-05-29T16:18:37.339186Z
+79
+boseefus00001
+has-props
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+cc8a7147-4526-0410-8884-fd09b1677381
+
+Google.KML.pdb
+file
+
+
+
+
+2007-05-29T03:27:11.013139Z
+ebfbb60ede77031e4975acbef0bdfd21
+2007-05-29T16:18:37.339186Z
+79
+boseefus00001
+has-props
+
+Refactor
+dir
+
+KML.pdb
+file
+78
+
+
+
+2007-01-31T05:29:13.918363Z
+84156dc1016fb66f3e2f52559a8f37fb
+2007-01-05T06:39:18.785416Z
+1
+boseefus00001
+has-props
+
+Google.KML.dll
+file
+
+
+
+
+2007-05-29T03:27:11.066144Z
+2c456695fe86b94463ea4e1cbd25d1cf
+2007-05-29T16:18:37.339186Z
+79
+boseefus00001
+has-props
+
+TempPE
+dir
+
+build.force
+file
+78
+
+
+
+2007-05-29T06:08:49.147698Z
+d41d8cd98f00b204e9800998ecf8427e
+2007-01-05T06:39:18.785416Z
+1
+boseefus00001
+
+KML.dll
+file
+78
+
+
+
+2007-01-31T05:29:13.965162Z
+b036d25726f72e0bccbf90d0bdca41ae
+2007-01-05T06:39:18.785416Z
+1
+boseefus00001
+has-props
+

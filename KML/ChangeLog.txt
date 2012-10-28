@@ -1,0 +1,38 @@
+* 2.1.0.1 - 2007-01-10:
+	- Updated the ge-kml version to reflect Google Earth's API version.  
+
+* 2.1.0.2 - 2007-01-30:
+	- Bug fix - geLineString was not rendering the coordinates element correctly. I had fixed this in the source code at one point, but somehow the change was lost.  Probably my mistake since I am new to SVN.  Thanks to bouquemann for finding these bugs.
+	- Started including source code with the binary distribution.
+	- Started including ChangeLog.txt with source.
+
+* 2.1.0.3 - 2007-02-13:
+	- Bug fix - geFeature was missing a Region property as defined in the Google Earth API.  The rest of the supporting classes for regions should all be there.  Thanks to Steve Hayles for finding this bug.
+
+* 2.1.0.4 - 2007-02-13:
+	- Bug fix - geRegion.geLatLonAltBox.ToKML() was missing the altitudeMode element.
+
+* 2.1.0.5 - 2007-02-14:
+	- Bug fix - Added the rendering part for the Region fix to geFeature.ToKML().
+ 
+* 2.1.0.6 - 2007-02-20:
+        - Added a geAngleXXX.ToString() overriding method that returns an InvariantCulture string representation
+of Value in order to support other languages.  For example some cultures will represent 4.563 as 4,563.  Since the Google API requires certain comma delimited formatting, especially with coordinates, this method will make sure the double is represented correctly.
+	- Modified all calls to geAngleXXX.Value.ToString() to geAngleXXX.ToString() to take advantage of the InvariantCulture change
+
+* 2.1.0.7 - 2007-05-25:
+        - Fixed gePolygon so that it can accept multiple geInnerBoundaryIs objcets for multiple "cutouts" in a polygon.  Thanks to Maksim Sestic for pointing this out.
+
+* 2.1.0.8 - 2007-05-28:
+	- Added WebExamples project to the source, not sure if this is proper to update the version, but I did anyway.
+	- Added WebExample1 to the WebExamples project
+	- Updated Example3 in the Examples (console) project.  Added an example of drawing a line to the example.
+	- Added the new KML.chm file to the source, Thanks to Maksim Sestic for getting involved in doing this.
+
+* 2.1.0.9 - 2007-08-27:
+	- Bug fix - Added "rotation" to the geLatLonBox object.  Thanks to peter for pointing out that I missed it.
+	- Bug fix - Changed "Lookat" to "LookAt" in geLookAt.  Thanks to peter for discovering the typo.
+	
+* 2.1.0.10 - 2007-08-28:
+	- Bug fix - Changed geIconStyle.HotSpot to geIconStyle.hotSpot.  Thanks peter.
+	

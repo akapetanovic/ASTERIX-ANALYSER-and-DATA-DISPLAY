@@ -65,11 +65,16 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GMap.NET.Core">
-      <HintPath>..\..\GMap\GMap.NET.Core.dll</HintPath>
+    <Reference Include="GMap.NET.Core, Version=1.6.0.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>GMap\GMap.NET.Core.dll</HintPath>
     </Reference>
-    <Reference Include="GMap.NET.WindowsForms">
-      <HintPath>..\..\GMap\GMap.NET.WindowsForms.dll</HintPath>
+    <Reference Include="GMap.NET.WindowsForms, Version=1.6.0.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>GMap\GMap.NET.WindowsForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.KML">
+      <HintPath>KML\bin\Release\Google.KML.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -235,7 +240,14 @@
     <Compile Include="CAT_Decoder_Selector.Designer.cs">
       <DependentUpon>CAT_Decoder_Selector.cs</DependentUpon>
     </Compile>
+    <Compile Include="GOOGLE EARTH\Asterix_To_KML_Provider.cs" />
     <Compile Include="REC_AND_FORWARD\AppendDateTime.cs" />
+    <Compile Include="GOOGLE EARTH\GoogleEarthProvider.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GOOGLE EARTH\GoogleEarthProvider.Designer.cs">
+      <DependentUpon>GoogleEarthProvider.cs</DependentUpon>
+    </Compile>
     <Compile Include="REC_AND_FORWARD\RecForwConnection5.cs" />
     <Compile Include="REC_AND_FORWARD\RecForwConnection3.cs" />
     <Compile Include="REC_AND_FORWARD\RecForwConnection4.cs" />
@@ -446,6 +458,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="GOOGLE EARTH\GoogleEarthProvider.resx">
+      <DependentUpon>GoogleEarthProvider.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewDataBySSRCode.resx">
       <DependentUpon>ViewDataBySSRCode.cs</DependentUpon>
     </EmbeddedResource>
