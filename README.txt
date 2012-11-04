@@ -5,7 +5,7 @@
 ---------------------------------------------------------------------------------------
 
 
-Please see User Manual.xx.docx that is included as part of the project in Visual Studio.
+Please see DOCUMENTATION\User Manual.docx that is included as part of the project in Visual Studio.
 For all specific questions please do not hesitate to contact me at akapetanovic@gmail.com
 
 Make sure that machine where software is running (WIN OS) localisation is set to English U.S.
