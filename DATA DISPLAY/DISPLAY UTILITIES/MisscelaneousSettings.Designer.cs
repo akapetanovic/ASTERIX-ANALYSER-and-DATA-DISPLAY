@@ -46,7 +46,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(149, 221);
+            this.ClientSize = new System.Drawing.Size(257, 41);
             this.Controls.Add(this.checkBoxDisplaModeasFL);
             this.Name = "MisscelaneousSettings";
             this.Text = "Misscelaneous Settings";

@@ -202,14 +202,9 @@ namespace AsterixDisplayAnalyser
             SharedData.CurrentMulticastAddress = (string)this.listBoxIPAddress.Items[this.listBoxConnName.SelectedIndex];
             SharedData.Current_Port = int.Parse((string)this.listBoxPort.Items[this.listBoxConnName.SelectedIndex]);
 
-            if (ASTERIX.ReinitializeSocket() == true)
+            if (ASTERIX.ReinitializeSocket() != true)
             {
-                this.labelConnName.Text = SharedData.ConnName;
-                this.labelLocalInterface.Text = SharedData.CurrentInterfaceIPAddress;
-                this.labelConnAddress.Text = SharedData.CurrentMulticastAddress;
-                this.labelPort.Text = SharedData.Current_Port.ToString();
-                FormMain parentForm = (FormMain)this.Owner;
-                parentForm.UpdateConnectionBoxInfo();
+                SharedData.ResetConnectionParameters();
             }
         }
 

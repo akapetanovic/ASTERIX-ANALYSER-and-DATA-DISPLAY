@@ -62,6 +62,7 @@ namespace AsterixDisplayAnalyser
         /// </summary>
 
         private static FrmAstxRecFrwdForm AsterixRecorder = new FrmAstxRecFrwdForm();
+        private static FrmReplayForm ReplayForm = new FrmReplayForm();
 
         public FormMain()
         {
@@ -188,6 +189,7 @@ namespace AsterixDisplayAnalyser
             comboBoxLiveDisplayMode.SelectedIndex = 0;
 
             HandlePlotDisplayEnabledChanged();
+
         }
 
         private void InitializeMap()
@@ -233,7 +235,8 @@ namespace AsterixDisplayAnalyser
                 this.toolsToolStripMenuItem.Enabled = true;
                 this.dataBySSRCodeToolStripMenuItem.Enabled = true;
                 this.googleEarthToolStripMenuItem.Enabled = true;
-                openToolStripMenuItem.Enabled = true;
+                this.openToolStripMenuItem.Enabled = true;
+                this.openAsterixReplayToolStripMenuItem.Enabled = true;
                 this.checkBoxRecording.Enabled = false;
                 this.checkBoxRecording.Checked = false;
             }
@@ -248,7 +251,8 @@ namespace AsterixDisplayAnalyser
                 this.toolsToolStripMenuItem.Enabled = false;
                 this.dataBySSRCodeToolStripMenuItem.Enabled = false;
                 this.googleEarthToolStripMenuItem.Enabled = false;
-                openToolStripMenuItem.Enabled = false;
+                this.openToolStripMenuItem.Enabled = false;
+                this.openAsterixReplayToolStripMenuItem.Enabled = false;
                 this.checkBoxRecording.Enabled = true;
             }
 
@@ -378,7 +382,7 @@ namespace AsterixDisplayAnalyser
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Asterix Display/Sniffer 1.6 by Amer Kapetanovic\nakapetanovic@gmail.com", "About");
+            MessageBox.Show("ASTERIX DISPLAY and ANALYSER  1.7 by Amer Kapetanovic\nakapetanovic@gmail.com", "About");
         }
 
         private void resetDataBufferToolStripMenuItem_Click(object sender, EventArgs e)
@@ -621,7 +625,7 @@ namespace AsterixDisplayAnalyser
                     bool Build_Local_Display = comboBoxLiveDisplayMode.Text != "Google Earth";
                     bool Provide_To_Google_Earth = comboBoxLiveDisplayMode.Text != "Local";
                     Asterix_To_KML_Provider ASTX_TO_KML = new Asterix_To_KML_Provider();
-                  
+
                     foreach (DynamicDisplayBuilder.TargetType Target in TargetList)
                     {
 
@@ -1534,7 +1538,7 @@ namespace AsterixDisplayAnalyser
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "ASTERIX Analyser Files|*.raw";
+            openFileDialog1.Filter = "ASTERIX Analyser Raw|*.raw";
             openFileDialog1.InitialDirectory = "Application.StartupPath";
             openFileDialog1.Title = "Open File to Read";
 
@@ -1576,7 +1580,12 @@ namespace AsterixDisplayAnalyser
             if (this.checkBoxRecording.Checked == true)
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "ASTERIX Analyser Files|*.raw";
+
+                if (Properties.Settings.Default.RecordActiveInRaw == true)
+                    saveFileDialog.Filter = "ASTERIX Analyser Raw|*.raw";
+                else
+                    saveFileDialog.Filter = "ASTERIX Analyser Replay|*.rply";
+
                 saveFileDialog.InitialDirectory = "Application.StartupPath";
                 saveFileDialog.Title = "Select file location and file name";
 
@@ -1589,8 +1598,13 @@ namespace AsterixDisplayAnalyser
                 {
                     this.checkBoxRecording.Checked = false;
                 }
-
             }
+            else
+            {
+                SharedData.DataRecordingClass.DataRecordingRequested = false;
+            }
+
+            this.checkBoxRecordInRaw.Enabled = (this.checkBoxRecording.Checked == false);
         }
 
         private void recorderToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1623,6 +1637,30 @@ namespace AsterixDisplayAnalyser
         private void comboBoxLiveDisplayMode_SelectedIndexChanged(object sender, EventArgs e)
         {
             Update_PlotTrack_Data();
+        }
+
+        private void replayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReplayForm.Visible = true;
+        }
+
+        private void checkBoxRecordInRaw_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.RecordActiveInRaw = this.checkBoxRecordInRaw.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void openAsterixReplayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "ASTERIX Analyser Replay|*.rply";
+            openFileDialog1.InitialDirectory = "Application.StartupPath";
+            openFileDialog1.Title = "Open File to Read";
+
+            if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
+            {
+
+            }
         }
     }
 }

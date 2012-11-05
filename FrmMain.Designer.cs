@@ -36,6 +36,7 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cATDecoderSelectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.googleEarthToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.miscellaneousToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.recorderAndDataForwarderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -153,9 +154,9 @@
             this.groupBoxConnection = new System.Windows.Forms.GroupBox();
             this.labelLocalInterface = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.btnOpenConnection = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.checkBoxRecording = new System.Windows.Forms.CheckBox();
-            this.btnOpenConnection = new System.Windows.Forms.Button();
             this.tabPlotDisplay = new System.Windows.Forms.TabPage();
             this.labelTargetCount = new System.Windows.Forms.Label();
             this.lblNumberofTargets = new System.Windows.Forms.Label();
@@ -181,6 +182,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.comboBoxLiveDisplayMode = new System.Windows.Forms.ComboBox();
             this.checkEnableDisplay = new System.Windows.Forms.CheckBox();
             this.groupBoxUpdateRate = new System.Windows.Forms.GroupBox();
             this.checkBoxSyncToNM = new System.Windows.Forms.CheckBox();
@@ -208,8 +210,12 @@
             this.tabMainTab = new System.Windows.Forms.TabControl();
             this.NorthMarkerTimer = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorkerLoadData = new System.ComponentModel.BackgroundWorker();
-            this.googleEarthToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.comboBoxLiveDisplayMode = new System.Windows.Forms.ComboBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.checkBoxRecordInRaw = new System.Windows.Forms.CheckBox();
+            this.openAsterixReplayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnStartStopFileReplay = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -222,6 +228,8 @@
             this.groupBoxSSRFilter.SuspendLayout();
             this.tabPageAsterixMessages.SuspendLayout();
             this.tabMainTab.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // DataUpdateTimer
@@ -251,7 +259,8 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem});
+            this.openToolStripMenuItem,
+            this.openAsterixReplayToolStripMenuItem});
             this.toolStripMenuItem1.ForeColor = System.Drawing.Color.Silver;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(37, 20);
@@ -261,8 +270,8 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.openToolStripMenuItem.Text = "Open Asterix Recording";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.openToolStripMenuItem.Text = "Open Asterix Raw";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
@@ -292,6 +301,13 @@
             this.cATDecoderSelectorToolStripMenuItem.Text = "CAT Decoder Selector";
             this.cATDecoderSelectorToolStripMenuItem.Click += new System.EventHandler(this.cATDecoderSelectorToolStripMenuItem_Click);
             // 
+            // googleEarthToolStripMenuItem2
+            // 
+            this.googleEarthToolStripMenuItem2.Name = "googleEarthToolStripMenuItem2";
+            this.googleEarthToolStripMenuItem2.Size = new System.Drawing.Size(189, 22);
+            this.googleEarthToolStripMenuItem2.Text = "Google Earth";
+            this.googleEarthToolStripMenuItem2.Click += new System.EventHandler(this.googleEarthToolStripMenuItem2_Click);
+            // 
             // miscellaneousToolStripMenuItem
             // 
             this.miscellaneousToolStripMenuItem.Name = "miscellaneousToolStripMenuItem";
@@ -319,10 +335,10 @@
             // 
             // replayToolStripMenuItem
             // 
-            this.replayToolStripMenuItem.Enabled = false;
             this.replayToolStripMenuItem.Name = "replayToolStripMenuItem";
             this.replayToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.replayToolStripMenuItem.Text = "Replay";
+            this.replayToolStripMenuItem.Click += new System.EventHandler(this.replayToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -1200,8 +1216,6 @@
             // 
             this.groupBoxConnection.Controls.Add(this.labelLocalInterface);
             this.groupBoxConnection.Controls.Add(this.label16);
-            this.groupBoxConnection.Controls.Add(this.label9);
-            this.groupBoxConnection.Controls.Add(this.checkBoxRecording);
             this.groupBoxConnection.Controls.Add(this.btnOpenConnection);
             this.groupBoxConnection.Controls.Add(this.label8);
             this.groupBoxConnection.Controls.Add(this.buttonStopRun);
@@ -1235,11 +1249,22 @@
             this.label16.TabIndex = 26;
             this.label16.Text = "Local Interface:";
             // 
+            // btnOpenConnection
+            // 
+            this.btnOpenConnection.BackColor = System.Drawing.Color.DarkGray;
+            this.btnOpenConnection.Location = new System.Drawing.Point(6, 14);
+            this.btnOpenConnection.Name = "btnOpenConnection";
+            this.btnOpenConnection.Size = new System.Drawing.Size(67, 21);
+            this.btnOpenConnection.TabIndex = 22;
+            this.btnOpenConnection.Text = "OPEN";
+            this.btnOpenConnection.UseVisualStyleBackColor = false;
+            this.btnOpenConnection.Click += new System.EventHandler(this.button8_Click);
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(20, 37);
+            this.label9.Location = new System.Drawing.Point(22, 18);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(42, 13);
             this.label9.TabIndex = 25;
@@ -1250,24 +1275,13 @@
             this.checkBoxRecording.AutoSize = true;
             this.checkBoxRecording.Enabled = false;
             this.checkBoxRecording.ForeColor = System.Drawing.Color.White;
-            this.checkBoxRecording.Location = new System.Drawing.Point(6, 37);
+            this.checkBoxRecording.Location = new System.Drawing.Point(5, 18);
             this.checkBoxRecording.Name = "checkBoxRecording";
             this.checkBoxRecording.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBoxRecording.Size = new System.Drawing.Size(15, 14);
             this.checkBoxRecording.TabIndex = 24;
             this.checkBoxRecording.UseVisualStyleBackColor = true;
             this.checkBoxRecording.CheckedChanged += new System.EventHandler(this.checkBoxRecording_CheckedChanged);
-            // 
-            // btnOpenConnection
-            // 
-            this.btnOpenConnection.BackColor = System.Drawing.Color.DarkGray;
-            this.btnOpenConnection.Location = new System.Drawing.Point(6, 14);
-            this.btnOpenConnection.Name = "btnOpenConnection";
-            this.btnOpenConnection.Size = new System.Drawing.Size(50, 21);
-            this.btnOpenConnection.TabIndex = 22;
-            this.btnOpenConnection.Text = "OPEN";
-            this.btnOpenConnection.UseVisualStyleBackColor = false;
-            this.btnOpenConnection.Click += new System.EventHandler(this.button8_Click);
             // 
             // tabPlotDisplay
             // 
@@ -1589,6 +1603,19 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Plot/Track Display";
             // 
+            // comboBoxLiveDisplayMode
+            // 
+            this.comboBoxLiveDisplayMode.FormattingEnabled = true;
+            this.comboBoxLiveDisplayMode.Items.AddRange(new object[] {
+            "Local",
+            "Google Earth",
+            "Local & Google  E"});
+            this.comboBoxLiveDisplayMode.Location = new System.Drawing.Point(9, 40);
+            this.comboBoxLiveDisplayMode.Name = "comboBoxLiveDisplayMode";
+            this.comboBoxLiveDisplayMode.Size = new System.Drawing.Size(110, 21);
+            this.comboBoxLiveDisplayMode.TabIndex = 5;
+            this.comboBoxLiveDisplayMode.SelectedIndexChanged += new System.EventHandler(this.comboBoxLiveDisplayMode_SelectedIndexChanged);
+            // 
             // checkEnableDisplay
             // 
             this.checkEnableDisplay.AutoSize = true;
@@ -1753,6 +1780,7 @@
             this.gMapControl.BackColor = System.Drawing.Color.Black;
             this.gMapControl.Bearing = 0F;
             this.gMapControl.CanDragMap = true;
+            this.gMapControl.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.gMapControl.GrayScaleMode = false;
             this.gMapControl.LevelsKeepInMemmory = 5;
             this.gMapControl.Location = new System.Drawing.Point(139, 6);
@@ -1902,25 +1930,66 @@
             this.backgroundWorkerLoadData.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorkerLoadData.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // googleEarthToolStripMenuItem2
+            // groupBox4
             // 
-            this.googleEarthToolStripMenuItem2.Name = "googleEarthToolStripMenuItem2";
-            this.googleEarthToolStripMenuItem2.Size = new System.Drawing.Size(189, 22);
-            this.googleEarthToolStripMenuItem2.Text = "Google Earth";
-            this.googleEarthToolStripMenuItem2.Click += new System.EventHandler(this.googleEarthToolStripMenuItem2_Click);
+            this.groupBox4.Controls.Add(this.label17);
+            this.groupBox4.Controls.Add(this.checkBoxRecordInRaw);
+            this.groupBox4.Controls.Add(this.label9);
+            this.groupBox4.Controls.Add(this.checkBoxRecording);
+            this.groupBox4.ForeColor = System.Drawing.Color.White;
+            this.groupBox4.Location = new System.Drawing.Point(697, 0);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(91, 60);
+            this.groupBox4.TabIndex = 24;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Recording";
             // 
-            // comboBoxLiveDisplayMode
+            // label17
             // 
-            this.comboBoxLiveDisplayMode.FormattingEnabled = true;
-            this.comboBoxLiveDisplayMode.Items.AddRange(new object[] {
-            "Local",
-            "Google Earth",
-            "Local & Google  E"});
-            this.comboBoxLiveDisplayMode.Location = new System.Drawing.Point(9, 40);
-            this.comboBoxLiveDisplayMode.Name = "comboBoxLiveDisplayMode";
-            this.comboBoxLiveDisplayMode.Size = new System.Drawing.Size(110, 21);
-            this.comboBoxLiveDisplayMode.TabIndex = 5;
-            this.comboBoxLiveDisplayMode.SelectedIndexChanged += new System.EventHandler(this.comboBoxLiveDisplayMode_SelectedIndexChanged);
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(22, 38);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(61, 13);
+            this.label17.TabIndex = 27;
+            this.label17.Text = "Raw format";
+            // 
+            // checkBoxRecordInRaw
+            // 
+            this.checkBoxRecordInRaw.AutoSize = true;
+            this.checkBoxRecordInRaw.Location = new System.Drawing.Point(6, 38);
+            this.checkBoxRecordInRaw.Name = "checkBoxRecordInRaw";
+            this.checkBoxRecordInRaw.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxRecordInRaw.TabIndex = 26;
+            this.checkBoxRecordInRaw.UseVisualStyleBackColor = true;
+            this.checkBoxRecordInRaw.CheckedChanged += new System.EventHandler(this.checkBoxRecordInRaw_CheckedChanged);
+            // 
+            // openAsterixReplayToolStripMenuItem
+            // 
+            this.openAsterixReplayToolStripMenuItem.Name = "openAsterixReplayToolStripMenuItem";
+            this.openAsterixReplayToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.openAsterixReplayToolStripMenuItem.Text = "Open Asterix Replay";
+            this.openAsterixReplayToolStripMenuItem.Click += new System.EventHandler(this.openAsterixReplayToolStripMenuItem_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.btnStartStopFileReplay);
+            this.groupBox5.ForeColor = System.Drawing.Color.White;
+            this.groupBox5.Location = new System.Drawing.Point(584, 0);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(107, 60);
+            this.groupBox5.TabIndex = 25;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "File Replay";
+            // 
+            // btnStartStopFileReplay
+            // 
+            this.btnStartStopFileReplay.BackColor = System.Drawing.Color.DarkGray;
+            this.btnStartStopFileReplay.Location = new System.Drawing.Point(6, 15);
+            this.btnStartStopFileReplay.Name = "btnStartStopFileReplay";
+            this.btnStartStopFileReplay.Size = new System.Drawing.Size(95, 20);
+            this.btnStartStopFileReplay.TabIndex = 0;
+            this.btnStartStopFileReplay.Text = "Start";
+            this.btnStartStopFileReplay.UseVisualStyleBackColor = false;
             // 
             // FormMain
             // 
@@ -1928,13 +1997,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1189, 781);
+            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBoxConnection);
             this.Controls.Add(this.tabMainTab);
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
-            this.Text = "AMER KAPETANOVIC - ASTERIX PLOT/TRACK DISPLAY and SNIFFER  1.6";
+            this.Text = "AMER KAPETANOVIC - ASTERIX DISPLAY and ANALYSER  1.7";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.Resize += new System.EventHandler(this.FormMain_Resize);
@@ -1959,6 +2030,9 @@
             this.tabPageAsterixMessages.ResumeLayout(false);
             this.tabPageAsterixMessages.PerformLayout();
             this.tabMainTab.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2147,6 +2221,12 @@
         private System.Windows.Forms.ToolStripMenuItem replayToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem googleEarthToolStripMenuItem2;
         private System.Windows.Forms.ComboBox comboBoxLiveDisplayMode;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.CheckBox checkBoxRecordInRaw;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ToolStripMenuItem openAsterixReplayToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button btnStartStopFileReplay;
     }
 }
 

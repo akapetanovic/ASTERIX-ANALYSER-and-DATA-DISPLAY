@@ -240,6 +240,12 @@
     <Compile Include="CAT_Decoder_Selector.Designer.cs">
       <DependentUpon>CAT_Decoder_Selector.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmDebug.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDebug.Designer.cs">
+      <DependentUpon>FrmDebug.cs</DependentUpon>
+    </Compile>
     <Compile Include="GOOGLE EARTH\Asterix_To_KML_Provider.cs" />
     <Compile Include="REC_AND_FORWARD\AppendDateTime.cs" />
     <Compile Include="GOOGLE EARTH\GoogleEarthProvider.cs">
@@ -399,6 +405,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DATA DISPLAY\STATIC DATA\StaticDisplayBuilder.cs" />
     <Compile Include="REC_AND_FORWARD\RecForwConnection1.cs" />
+    <Compile Include="REPLAY\AsterixReplay.cs" />
+    <Compile Include="REPLAY\FrmReplayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="REPLAY\FrmReplayForm.Designer.cs">
+      <DependentUpon>FrmReplayForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="ViewDataBySSRCode.cs">
       <SubType>Form</SubType>
@@ -408,6 +421,9 @@
     </Compile>
     <EmbeddedResource Include="CAT_Decoder_Selector.resx">
       <DependentUpon>CAT_Decoder_Selector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDebug.resx">
+      <DependentUpon>FrmDebug.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="REC_AND_FORWARD\FrmAstxRecFrwdForm.resx">
       <DependentUpon>FrmAstxRecFrwdForm.cs</DependentUpon>
@@ -460,6 +476,9 @@
     </Compile>
     <EmbeddedResource Include="GOOGLE EARTH\GoogleEarthProvider.resx">
       <DependentUpon>GoogleEarthProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REPLAY\FrmReplayForm.resx">
+      <DependentUpon>FrmReplayForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewDataBySSRCode.resx">
       <DependentUpon>ViewDataBySSRCode.cs</DependentUpon>
@@ -524,6 +543,7 @@
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

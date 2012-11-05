@@ -63,7 +63,8 @@ C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA D
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\bin\Debug\ICSharpCode.SharpZipLib.dll
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\bin\Debug\GMap.NET.Core.xml
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\bin\Debug\GMap.NET.WindowsForms.xml
-C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\ASTERIX-Display and Analyser.csprojResolveAssemblyReference.cache
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmAstxRecFrwdForm.resources
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmConnectionSettings.resources
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.GoogleEarthProvider.resources
+C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmReplayForm.resources
+C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmDebug.resources

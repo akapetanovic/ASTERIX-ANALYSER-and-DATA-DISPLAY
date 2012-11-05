@@ -8,7 +8,10 @@ namespace AsterixDisplayAnalyser
 {
     public static class SharedData
     {
-        
+
+        // DUBUG CODE
+       // public static FrmDebug DebugFrame = new FrmDebug();
+
         // Define type for ASTERIX categories supported.
         public enum Supported_Asterix_CAT_Type { Undefined, CAT001, CAT002, CAT008, CAT034, CAT048, CAT062, CAT063, CAT065, CAT244 };
 
@@ -33,7 +36,7 @@ namespace AsterixDisplayAnalyser
         public static ListBox DataBox = new ListBox();
 
         // Used to convert feet to meeters
-        public  static double FeetToMeeters = 0.3048;
+        public static double FeetToMeeters = 0.3048;
 
         ///////////////////////////////////////////////////////////////////////////
         //
@@ -42,5 +45,13 @@ namespace AsterixDisplayAnalyser
         public static string CurrentMulticastAddress = "N/A";
         public static string CurrentInterfaceIPAddress = "N/A";
         public static int Current_Port = 0;
+
+        public static void ResetConnectionParameters()
+        {
+            ConnName = "N/A";
+            CurrentMulticastAddress = "N/A";
+            CurrentInterfaceIPAddress = "N/A";
+            Current_Port = 0;
+        }
     }
 }

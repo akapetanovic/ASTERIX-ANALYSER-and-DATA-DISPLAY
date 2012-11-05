@@ -13,6 +13,9 @@ namespace AsterixDisplayAnalyser
 {
     static class ASTERIX
     {
+        // Declare one 
+        private static DateTime LastDataBlockDateTime;
+
         // This flag indicates that recording of data
         // just started
         private static bool RecordingJustStarted = true;
@@ -66,6 +69,7 @@ namespace AsterixDisplayAnalyser
             // Save the state of the flag that indicates that data is to be
             // acquired
             bool Listen_for_Data_Was_On = SharedData.bool_Listen_for_Data;
+            bool Reinitialize_Result = true;
 
             // If data is being acquired then stop 
             // acquistion and wait for a 1 second
@@ -83,13 +87,13 @@ namespace AsterixDisplayAnalyser
             try
             {
                 sock = new UdpClient(SharedData.Current_Port);
-                sock.JoinMulticastGroup(IPAddress.Parse(SharedData.CurrentMulticastAddress), IPAddress.Parse(SharedData.CurrentInterfaceIPAddress)); 
+                sock.JoinMulticastGroup(IPAddress.Parse(SharedData.CurrentMulticastAddress), IPAddress.Parse(SharedData.CurrentInterfaceIPAddress));
                 iep = new IPEndPoint(IPAddress.Any, SharedData.Current_Port);
             }
             catch
             {
                 MessageBox.Show("ASTERIX ReinitializeSocket: Not possible! Make sure given IP address/port is a valid one on your system or not already used by some other process");
-                return false;
+                Reinitialize_Result = false;
             }
 
             // Everything is done, now resume listening (data acqusition) if it was active
@@ -97,7 +101,7 @@ namespace AsterixDisplayAnalyser
             if (Listen_for_Data_Was_On == true)
                 SharedData.bool_Listen_for_Data = true;
 
-            return true;
+            return Reinitialize_Result;
         }
 
         public static void RequestStop()
@@ -160,7 +164,7 @@ namespace AsterixDisplayAnalyser
                             }
                         }
 
-                        // Check if recording is requested
+                        // Check if recording of the currently live connection is requested
                         if (SharedData.DataRecordingClass.DataRecordingRequested == true)
                         {
                             if (RecordingJustStarted == true)
@@ -168,10 +172,36 @@ namespace AsterixDisplayAnalyser
                                 RecordingJustStarted = false;
                                 RecordingStream = new FileStream(SharedData.DataRecordingClass.FilePathandName, FileMode.Create);
                                 RecordingBinaryWriter = new BinaryWriter(RecordingStream);
-                                // Set up the new file name and open up the stream
+                                LastDataBlockDateTime = DateTime.Now;
                             }
 
-                            RecordingBinaryWriter.Write(UDPBuffer);
+                            // Determine the type of the recording
+                            if (Properties.Settings.Default.RecordActiveInRaw == true)
+                            {
+                                // Just record in the raw format with not headers added
+                                RecordingBinaryWriter.Write(UDPBuffer);
+                            }
+                            else // Here add headers
+                            {
+                                TimeSpan TimeDiff = DateTime.Now - LastDataBlockDateTime;
+                                LastDataBlockDateTime = DateTime.Now;
+                                // Header 1: Size of the original data block
+                                // Header 2: The time between two data blocks (current and the last one)
+                                //-----------------------------------------------------------------------
+                                // Header 1 // Header 2
+                                // ----------------------------------------------------------------------
+                                // 4 bytes  // 4 bytes 
+                                // First add the size of the data block, not including the two headers
+
+                                // Block size
+                                RecordingBinaryWriter.Write(UDPBuffer.Length);
+                                // Time between last and this block
+                                RecordingBinaryWriter.Write(TimeDiff.Milliseconds);
+                                // Now write the data block
+                                RecordingBinaryWriter.Write(UDPBuffer);
+
+                                //SharedData.DebugFrame.SetValue("Size: " + UDPBuffer.Length.ToString() + " Time: " + TimeDiff.Milliseconds.ToString());
+                            }
                         }
                         else if (RecordingJustStarted == false)
                         {
@@ -181,6 +211,8 @@ namespace AsterixDisplayAnalyser
                                 RecordingBinaryWriter.Close();
                             if (RecordingStream != null)
                                 RecordingStream.Close();
+
+                           // SharedData.DebugFrame.ShowDialog();
                         }
                     }
                 }

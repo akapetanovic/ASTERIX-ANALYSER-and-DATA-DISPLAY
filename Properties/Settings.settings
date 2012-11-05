@@ -134,5 +134,8 @@
     <Setting Name="GE_Dest_Path" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\ASTERIX\GE</Value>
     </Setting>
+    <Setting Name="RecordActiveInRaw" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
