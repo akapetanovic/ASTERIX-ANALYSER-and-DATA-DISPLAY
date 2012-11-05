@@ -5,29 +5,46 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace AsterixDisplayAnalyser
 {
     class AsterixReplay
     {
-        public static FileReplay File_Replay = new FileReplay();
-        public static LANReplay LAN_Replay = new LANReplay();
+        // Defines possible Replay statuses
+        public enum ReplayStatus { Disconnected, Connected, Replaying, Paused };
 
         /// <summary>
         /// ///////
         /// </summary>
-        public  class LANReplay
+        public static class LANReplay
         {
+            // Thread control
+            private static bool KeepGoing = true;
+            private static bool RequestStop = false;
+            // Define the main listener thread
+            private static Thread ReplayThread;
+
+            // Replay Status varable
+            private static ReplayStatus Replay_Status = ReplayStatus.Disconnected;
+
             // Define UDP-Multicast TX connection variables
             private static UdpClient tx_sock;
             private static IPEndPoint tx_iep;
 
+            // File handling
+            private static System.IO.FileStream FileStream = null;
+            private static System.IO.BinaryReader BinaryReader = null;
+            private static long TotalFileSizeBytes = 0;
+
             // Tries to connect, if succefull returns true, otherwise returns false.
             // Upon succesfull connection each succesfull call to Send will send provided
-            // data to the LAN
-            public bool Connect(IPAddress Interface_Addres_IN,   // IP address of the interface where the data is expected
-                                IPAddress Multicast_Address_IN,  // Multicast address of the expected data
-                                int PortNumber_IN)               // Port number of the expected data
+            // data to the LAN. It also opens up the provided xxx.rply file. True is returned anly if all provided data
+            // is OK
+            public static bool Connect(string FilePath,                  // Path and file name 
+                                        IPAddress Interface_Addres_IN,   // IP address of the interface where the data is expected
+                                        IPAddress Multicast_Address_IN,  // Multicast address of the expected data
+                                        int PortNumber_IN)               // Port number of the expected data
             {
                 bool Result = true;
 
@@ -45,13 +62,163 @@ namespace AsterixDisplayAnalyser
                     Result = false;
                 }
 
+                // Open up data source file
+                try
+                {
+                    TotalFileSizeBytes = new System.IO.FileInfo(FilePath).Length;
+                    // Open file for reading
+                    System.IO.FileStream FileStream = new System.IO.FileStream(FilePath, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+
+                    // attach filestream to binary reader
+                    System.IO.BinaryReader BinaryReader = new System.IO.BinaryReader(FileStream);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+
+                // Check if there is any data in the file
+                if (TotalFileSizeBytes == 0)
+                {
+                    MessageBox.Show("Empty file, please select another one");
+                    Result = false;
+                }
+
+                // If everything is OK so far set the status to connected
+                if (Result == true)
+                    SetStatus(ReplayStatus.Connected);
+
                 return Result;
             }
 
-            // To be called opon succefull Connect
-            public void Send(byte[] UDPBuffer)
+            // Call to stop replay and release resources
+            public static void Disconnect()
             {
-                tx_sock.Send(UDPBuffer, UDPBuffer.Length, tx_iep);
+                SetStatus(ReplayStatus.Disconnected);
+            }
+            // Call to pause the replay
+            public static void Pause()
+            {
+                if (Replay_Status != ReplayStatus.Disconnected)
+                SetStatus(ReplayStatus.Paused);
+            }
+            // Call to start the replay
+            public static void Start()
+            {
+               if (Replay_Status != ReplayStatus.Disconnected)
+                SetStatus(ReplayStatus.Replaying);
+            }
+            // Return replay status
+            public static ReplayStatus GetCurrentStatus()
+            {
+                return Replay_Status;
+            }
+            
+            // Status change handler
+            private static void SetStatus(ReplayStatus Status)
+            {
+                // If status desired is already reached do nothing
+                if (Status != Replay_Status)
+                {
+                    switch (Replay_Status)
+                    {
+                        case AsterixReplay.ReplayStatus.Disconnected:
+                            StopThread();
+                            break;
+                        case AsterixReplay.ReplayStatus.Connected:
+                            KeepGoing = true;
+                            RequestStop = false;
+                            ReplayThread = new Thread(new ThreadStart(DOWork));
+                            ReplayThread.Start();
+                            break;
+                        case AsterixReplay.ReplayStatus.Paused:
+                            Replay_Status = ReplayStatus.Paused;
+                            break;
+                        case AsterixReplay.ReplayStatus.Replaying:
+                            Replay_Status = ReplayStatus.Replaying;
+                            break;
+                    }
+                }
+            }
+            // Called by the thread to handle the work
+            private static void DOWork()
+            {
+                long FilePosition = 0;
+
+                // Loop until either until the end of file is reached or user requested to stop
+                while ((KeepGoing == true) && (FilePosition < TotalFileSizeBytes))
+                {
+                    // OK user requested that we terminate 
+                    // recording, so lets do it
+                    if (RequestStop == true) 
+                        KeepGoing = false;
+                    else
+                    {
+                        // If not paused
+                        if (Replay_Status == ReplayStatus.Replaying)
+                        {
+                            try
+                            {
+                                // Lets determine the size of the block
+                                byte[] Data_Block_Buffer = BinaryReader.ReadBytes((Int32)1);
+                                int BlockSize = Data_Block_Buffer[(Int32)1];
+
+                                // Now determine the time since the last data block
+                                Data_Block_Buffer = BinaryReader.ReadBytes((Int32)1);
+                                int TimeBetweenMessages = Data_Block_Buffer[(Int32)1];
+
+                                // Now read the data block as indicated by the size
+                                Data_Block_Buffer = BinaryReader.ReadBytes(BlockSize);
+                                
+                                // Wait the same time as in the orignal data set
+                                Thread.Sleep(TimeBetweenMessages);
+
+                                // Send the data to the specifed interface/multicast address/port
+                                tx_sock.Send(Data_Block_Buffer, Data_Block_Buffer.Length, tx_iep);
+
+                            }
+                            catch(Exception e)
+                            {
+                                MessageBox.Show(e.Message);
+                            }
+
+                        }
+                    }
+                }
+                Cleanup();
+            }
+            // Terminates recording
+            private static void StopThread()
+            {
+                if (ReplayThread != null)
+                {
+                    RequestStop = true;
+                    Thread.Sleep(200);
+                    if (ReplayThread.IsAlive == true)
+                    {
+                        Cleanup();
+                        ReplayThread.Abort();
+                    }
+                }
+            }
+            // Stops replay and releases resources
+            private static void Cleanup()
+            {
+
+                if (tx_sock != null)
+                    tx_sock.Close();
+
+                if (BinaryReader != null)
+                    BinaryReader.Close();
+                if (FileStream != null)
+                    FileStream.Close();
+                if (BinaryReader != null)
+                    BinaryReader.Dispose();
+                if (FileStream != null)
+                    FileStream.Dispose();
+
+                TotalFileSizeBytes = 0;
+                Replay_Status = ReplayStatus.Disconnected;
             }
         }
 
@@ -60,7 +227,7 @@ namespace AsterixDisplayAnalyser
         /// </summary>
         public class FileReplay
         {
-            private string FilePath;  // Path and file name 
+            //private string FilePath;  // Path and file name 
         }
     }
 }

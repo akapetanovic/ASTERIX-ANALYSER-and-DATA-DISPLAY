@@ -33,6 +33,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openAsterixReplayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cATDecoderSelectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -213,8 +214,9 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label17 = new System.Windows.Forms.Label();
             this.checkBoxRecordInRaw = new System.Windows.Forms.CheckBox();
-            this.openAsterixReplayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.labelFileToReplay = new System.Windows.Forms.Label();
+            this.progressBarReplayActive = new System.Windows.Forms.ProgressBar();
             this.btnStartStopFileReplay = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
@@ -273,6 +275,13 @@
             this.openToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.openToolStripMenuItem.Text = "Open Asterix Raw";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // openAsterixReplayToolStripMenuItem
+            // 
+            this.openAsterixReplayToolStripMenuItem.Name = "openAsterixReplayToolStripMenuItem";
+            this.openAsterixReplayToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.openAsterixReplayToolStripMenuItem.Text = "Open Asterix Replay";
+            this.openAsterixReplayToolStripMenuItem.Click += new System.EventHandler(this.openAsterixReplayToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -1151,7 +1160,7 @@
             // 
             this.buttonStopRun.BackColor = System.Drawing.Color.DarkGray;
             this.buttonStopRun.Enabled = false;
-            this.buttonStopRun.Location = new System.Drawing.Point(301, 9);
+            this.buttonStopRun.Location = new System.Drawing.Point(290, 8);
             this.buttonStopRun.Name = "buttonStopRun";
             this.buttonStopRun.Size = new System.Drawing.Size(81, 23);
             this.buttonStopRun.TabIndex = 16;
@@ -1197,7 +1206,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(301, 38);
+            this.progressBar1.Location = new System.Drawing.Point(290, 39);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(81, 13);
             this.progressBar1.TabIndex = 21;
@@ -1214,6 +1223,7 @@
             // 
             // groupBoxConnection
             // 
+            this.groupBoxConnection.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.groupBoxConnection.Controls.Add(this.labelLocalInterface);
             this.groupBoxConnection.Controls.Add(this.label16);
             this.groupBoxConnection.Controls.Add(this.btnOpenConnection);
@@ -1224,9 +1234,9 @@
             this.groupBoxConnection.Controls.Add(this.labelActiveConnName);
             this.groupBoxConnection.Controls.Add(this.labelConnIpAndPort);
             this.groupBoxConnection.ForeColor = System.Drawing.Color.White;
-            this.groupBoxConnection.Location = new System.Drawing.Point(794, 0);
+            this.groupBoxConnection.Location = new System.Drawing.Point(798, 0);
             this.groupBoxConnection.Name = "groupBoxConnection";
-            this.groupBoxConnection.Size = new System.Drawing.Size(388, 60);
+            this.groupBoxConnection.Size = new System.Drawing.Size(384, 60);
             this.groupBoxConnection.TabIndex = 23;
             this.groupBoxConnection.TabStop = false;
             this.groupBoxConnection.Text = "Connection";
@@ -1932,6 +1942,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.label17);
             this.groupBox4.Controls.Add(this.checkBoxRecordInRaw);
             this.groupBox4.Controls.Add(this.label9);
@@ -1963,15 +1974,11 @@
             this.checkBoxRecordInRaw.UseVisualStyleBackColor = true;
             this.checkBoxRecordInRaw.CheckedChanged += new System.EventHandler(this.checkBoxRecordInRaw_CheckedChanged);
             // 
-            // openAsterixReplayToolStripMenuItem
-            // 
-            this.openAsterixReplayToolStripMenuItem.Name = "openAsterixReplayToolStripMenuItem";
-            this.openAsterixReplayToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.openAsterixReplayToolStripMenuItem.Text = "Open Asterix Replay";
-            this.openAsterixReplayToolStripMenuItem.Click += new System.EventHandler(this.openAsterixReplayToolStripMenuItem_Click);
-            // 
             // groupBox5
             // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.labelFileToReplay);
+            this.groupBox5.Controls.Add(this.progressBarReplayActive);
             this.groupBox5.Controls.Add(this.btnStartStopFileReplay);
             this.groupBox5.ForeColor = System.Drawing.Color.White;
             this.groupBox5.Location = new System.Drawing.Point(584, 0);
@@ -1979,17 +1986,36 @@
             this.groupBox5.Size = new System.Drawing.Size(107, 60);
             this.groupBox5.TabIndex = 25;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "File Replay";
+            this.groupBox5.Text = "Local File Replay";
+            // 
+            // labelFileToReplay
+            // 
+            this.labelFileToReplay.AutoSize = true;
+            this.labelFileToReplay.Location = new System.Drawing.Point(6, 43);
+            this.labelFileToReplay.Name = "labelFileToReplay";
+            this.labelFileToReplay.Size = new System.Drawing.Size(27, 13);
+            this.labelFileToReplay.TabIndex = 2;
+            this.labelFileToReplay.Text = "N/A";
+            // 
+            // progressBarReplayActive
+            // 
+            this.progressBarReplayActive.Location = new System.Drawing.Point(36, 19);
+            this.progressBarReplayActive.Name = "progressBarReplayActive";
+            this.progressBarReplayActive.Size = new System.Drawing.Size(62, 18);
+            this.progressBarReplayActive.TabIndex = 1;
             // 
             // btnStartStopFileReplay
             // 
             this.btnStartStopFileReplay.BackColor = System.Drawing.Color.DarkGray;
+            this.btnStartStopFileReplay.Enabled = false;
             this.btnStartStopFileReplay.Location = new System.Drawing.Point(6, 15);
             this.btnStartStopFileReplay.Name = "btnStartStopFileReplay";
-            this.btnStartStopFileReplay.Size = new System.Drawing.Size(95, 20);
+            this.btnStartStopFileReplay.Size = new System.Drawing.Size(95, 26);
             this.btnStartStopFileReplay.TabIndex = 0;
             this.btnStartStopFileReplay.Text = "Start";
+            this.btnStartStopFileReplay.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnStartStopFileReplay.UseVisualStyleBackColor = false;
+            this.btnStartStopFileReplay.Click += new System.EventHandler(this.btnStartStopFileReplay_Click);
             // 
             // FormMain
             // 
@@ -2033,6 +2059,7 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2227,6 +2254,8 @@
         private System.Windows.Forms.ToolStripMenuItem openAsterixReplayToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button btnStartStopFileReplay;
+        private System.Windows.Forms.ProgressBar progressBarReplayActive;
+        private System.Windows.Forms.Label labelFileToReplay;
     }
 }
 

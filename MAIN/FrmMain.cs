@@ -186,6 +186,7 @@ namespace AsterixDisplayAnalyser
             this.checkBoxDisplayPSR.Checked = Properties.Settings.Default.DisplayPSR;
             this.checkBoxFillListBox.Checked = Properties.Settings.Default.PopulateMainListBox;
             this.checkBoxSyncToNM.Checked = Properties.Settings.Default.SyncDisplayToNorthMark;
+            this.checkBoxRecordInRaw.Checked = Properties.Settings.Default.RecordActiveInRaw;
             comboBoxLiveDisplayMode.SelectedIndex = 0;
 
             HandlePlotDisplayEnabledChanged();
@@ -239,6 +240,9 @@ namespace AsterixDisplayAnalyser
                 this.openAsterixReplayToolStripMenuItem.Enabled = true;
                 this.checkBoxRecording.Enabled = false;
                 this.checkBoxRecording.Checked = false;
+
+                if (this.labelFileToReplay.Text != "N/A")
+                    btnStartStopFileReplay.Enabled = true;
             }
             else
             {
@@ -254,6 +258,7 @@ namespace AsterixDisplayAnalyser
                 this.openToolStripMenuItem.Enabled = false;
                 this.openAsterixReplayToolStripMenuItem.Enabled = false;
                 this.checkBoxRecording.Enabled = true;
+                btnStartStopFileReplay.Enabled = false;
             }
 
             HandlePlotDisplayEnabledChanged();
@@ -1659,8 +1664,14 @@ namespace AsterixDisplayAnalyser
 
             if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
             {
-
+                this.labelFileToReplay.Text = openFileDialog1.SafeFileName;
+                btnStartStopFileReplay.Enabled = true;
             }
+        }
+
+        private void btnStartStopFileReplay_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

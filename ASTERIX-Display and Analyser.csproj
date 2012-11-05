@@ -234,16 +234,16 @@
     <Compile Include="ASTERIX\CAT062\CAT62I380Types.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I295Types.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I340Types.cs" />
-    <Compile Include="CAT_Decoder_Selector.cs">
+    <Compile Include="MAIN\CAT_Decoder_Selector.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CAT_Decoder_Selector.Designer.cs">
+    <Compile Include="MAIN\CAT_Decoder_Selector.Designer.cs">
       <DependentUpon>CAT_Decoder_Selector.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmDebug.cs">
+    <Compile Include="MAIN\FrmDebug.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmDebug.Designer.cs">
+    <Compile Include="MAIN\FrmDebug.Designer.cs">
       <DependentUpon>FrmDebug.cs</DependentUpon>
     </Compile>
     <Compile Include="GOOGLE EARTH\Asterix_To_KML_Provider.cs" />
@@ -321,10 +321,10 @@
     <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\DisplayRightClickOptions.Designer.cs">
       <DependentUpon>DisplayRightClickOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="EarthPlotExporter.cs">
+    <Compile Include="MAIN\EarthPlotExporter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EarthPlotExporter.Designer.cs">
+    <Compile Include="MAIN\EarthPlotExporter.Designer.cs">
       <DependentUpon>EarthPlotExporter.cs</DependentUpon>
     </Compile>
     <Compile Include="DATA DISPLAY\DYNAMIC DATA\DynamicDisplayBuilder.cs" />
@@ -374,34 +374,34 @@
     <Compile Include="ASTERIX\CAT063\CAT63.cs" />
     <Compile Include="ASTERIX\CAT065\CAT65.cs" />
     <Compile Include="MIKE GAVANGHAN - GEODETIC\Ellipsoid.cs" />
-    <Compile Include="GeoCordSystem.cs" />
+    <Compile Include="MAIN\GeoCordSystem.cs" />
     <Compile Include="MIKE GAVANGHAN - GEODETIC\GeodeticCalculator.cs" />
     <Compile Include="MIKE GAVANGHAN - GEODETIC\GeodeticCurve.cs" />
     <Compile Include="MIKE GAVANGHAN - GEODETIC\GeodeticMeasurement.cs" />
     <Compile Include="MIKE GAVANGHAN - GEODETIC\GlobalCoordinates.cs" />
     <Compile Include="MIKE GAVANGHAN - GEODETIC\GlobalPosition.cs" />
     <Compile Include="DATA SET\SystemAdaptationDataSet.cs" />
-    <Compile Include="BitExtractor.cs" />
-    <Compile Include="FrmDataItemPresence.cs">
+    <Compile Include="MAIN\BitExtractor.cs" />
+    <Compile Include="MAIN\FrmDataItemPresence.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmDataItemPresence.Designer.cs">
+    <Compile Include="MAIN\FrmDataItemPresence.Designer.cs">
       <DependentUpon>FrmDataItemPresence.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmDetailedView.cs">
+    <Compile Include="MAIN\FrmDetailedView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmDetailedView.Designer.cs">
+    <Compile Include="MAIN\FrmDetailedView.Designer.cs">
       <DependentUpon>FrmDetailedView.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmMain.cs">
+    <Compile Include="MAIN\FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmMain.Designer.cs">
+    <Compile Include="MAIN\FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainASTERIXDataStorage.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="MAIN\MainASTERIXDataStorage.cs" />
+    <Compile Include="MAIN\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DATA DISPLAY\STATIC DATA\StaticDisplayBuilder.cs" />
     <Compile Include="REC_AND_FORWARD\RecForwConnection1.cs" />
@@ -412,17 +412,17 @@
     <Compile Include="REPLAY\FrmReplayForm.Designer.cs">
       <DependentUpon>FrmReplayForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs" />
-    <Compile Include="ViewDataBySSRCode.cs">
+    <Compile Include="MAIN\Settings.cs" />
+    <Compile Include="MAIN\ViewDataBySSRCode.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ViewDataBySSRCode.Designer.cs">
+    <Compile Include="MAIN\ViewDataBySSRCode.Designer.cs">
       <DependentUpon>ViewDataBySSRCode.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CAT_Decoder_Selector.resx">
+    <EmbeddedResource Include="MAIN\CAT_Decoder_Selector.resx">
       <DependentUpon>CAT_Decoder_Selector.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmDebug.resx">
+    <EmbeddedResource Include="MAIN\FrmDebug.resx">
       <DependentUpon>FrmDebug.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="REC_AND_FORWARD\FrmAstxRecFrwdForm.resx">
@@ -449,16 +449,16 @@
     <EmbeddedResource Include="DATA DISPLAY\DYNAMIC DATA\UpdateCFL.resx">
       <DependentUpon>UpdateCFL.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EarthPlotExporter.resx">
+    <EmbeddedResource Include="MAIN\EarthPlotExporter.resx">
       <DependentUpon>EarthPlotExporter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmDataItemPresence.resx">
+    <EmbeddedResource Include="MAIN\FrmDataItemPresence.resx">
       <DependentUpon>FrmDataItemPresence.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmDetailedView.resx">
+    <EmbeddedResource Include="MAIN\FrmDetailedView.resx">
       <DependentUpon>FrmDetailedView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmMain.resx">
+    <EmbeddedResource Include="MAIN\FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -466,7 +466,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmConnectionSettings.resx">
+    <EmbeddedResource Include="MAIN\FrmConnectionSettings.resx">
       <DependentUpon>FrmConnectionSettings.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -480,10 +480,10 @@
     <EmbeddedResource Include="REPLAY\FrmReplayForm.resx">
       <DependentUpon>FrmReplayForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ViewDataBySSRCode.resx">
+    <EmbeddedResource Include="MAIN\ViewDataBySSRCode.resx">
       <DependentUpon>ViewDataBySSRCode.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="MAIN\app.config" />
     <None Include="DATA SAMPLES\jahorinaJan_cat.48" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -494,13 +494,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="FrmConnectionSettings.cs">
+    <Compile Include="MAIN\FrmConnectionSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmConnectionSettings.Designer.cs">
+    <Compile Include="MAIN\FrmConnectionSettings.Designer.cs">
       <DependentUpon>FrmConnectionSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="SharedData.cs" />
+    <Compile Include="MAIN\SharedData.cs" />
     <None Include="DOCUMENTATION\User Manual.docx" />
   </ItemGroup>
   <ItemGroup>
@@ -528,7 +528,7 @@
   <ItemGroup>
     <Content Include="DOCUMENTATION\Release Notes.txt" />
     <Content Include="Resources\radar.jpg" />
-    <Content Include="README.txt" />
+    <Content Include="MAIN\README.txt" />
     <None Include="Resources\waypoint.jpg" />
   </ItemGroup>
   <ItemGroup>

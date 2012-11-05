@@ -40,7 +40,10 @@ VERSION HISTORY
 
 Version 1.7
 
-	1. Implemented data replay functionality
+	1. Implemented LAN data replay functionality (Data is sent on the LAN)
+	2. Implemented Local file replay (data is handled from the file W/O sending to the LAN)
+	3. Enhanced recording to support replay (each data block gets proprietary header).
+	4. PLANNED (Implement xxx.rply to .raw converter)
 
 Version 1.6
 

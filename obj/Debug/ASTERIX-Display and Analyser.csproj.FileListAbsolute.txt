@@ -68,3 +68,5 @@ C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA D
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.GoogleEarthProvider.resources
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmReplayForm.resources
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmDebug.resources
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmDebug.resources
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmReplayForm.resources
