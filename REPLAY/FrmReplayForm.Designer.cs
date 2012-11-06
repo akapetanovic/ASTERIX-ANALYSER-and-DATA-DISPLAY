@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtboxIPAddress = new System.Windows.Forms.TextBox();
@@ -46,6 +47,10 @@
             this.lblFileSize = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.timerMonitorReplay = new System.Windows.Forms.Timer(this.components);
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblBytesSent = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -160,7 +165,7 @@
             // 
             this.btnConnectDisconnect.Location = new System.Drawing.Point(15, 195);
             this.btnConnectDisconnect.Name = "btnConnectDisconnect";
-            this.btnConnectDisconnect.Size = new System.Drawing.Size(63, 23);
+            this.btnConnectDisconnect.Size = new System.Drawing.Size(89, 23);
             this.btnConnectDisconnect.TabIndex = 34;
             this.btnConnectDisconnect.Text = "Connect";
             this.btnConnectDisconnect.UseVisualStyleBackColor = true;
@@ -169,9 +174,9 @@
             // btnStartPause
             // 
             this.btnStartPause.Enabled = false;
-            this.btnStartPause.Location = new System.Drawing.Point(84, 195);
+            this.btnStartPause.Location = new System.Drawing.Point(110, 195);
             this.btnStartPause.Name = "btnStartPause";
-            this.btnStartPause.Size = new System.Drawing.Size(66, 23);
+            this.btnStartPause.Size = new System.Drawing.Size(89, 23);
             this.btnStartPause.TabIndex = 35;
             this.btnStartPause.Text = "Start";
             this.btnStartPause.UseVisualStyleBackColor = true;
@@ -181,7 +186,7 @@
             // 
             this.progressBar1.Location = new System.Drawing.Point(15, 224);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(265, 23);
+            this.progressBar1.Size = new System.Drawing.Size(184, 23);
             this.progressBar1.Step = 2;
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 36;
@@ -207,7 +212,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(286, 224);
+            this.button2.Location = new System.Drawing.Point(208, 224);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(71, 23);
             this.button2.TabIndex = 39;
@@ -215,11 +220,47 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // timerMonitorReplay
+            // 
+            this.timerMonitorReplay.Interval = 1000;
+            this.timerMonitorReplay.Tick += new System.EventHandler(this.timerMonitorReplay_Tick);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(205, 200);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(63, 13);
+            this.label4.TabIndex = 40;
+            this.label4.Text = "Processed: ";
+            // 
+            // lblBytesSent
+            // 
+            this.lblBytesSent.AutoSize = true;
+            this.lblBytesSent.Location = new System.Drawing.Point(261, 200);
+            this.lblBytesSent.Name = "lblBytesSent";
+            this.lblBytesSent.Size = new System.Drawing.Size(42, 13);
+            this.lblBytesSent.TabIndex = 41;
+            this.lblBytesSent.Text = "0 Bytes";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(285, 224);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 42;
+            this.button1.Text = "Minimize";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FrmReplayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(366, 256);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.lblBytesSent);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lblFileSize);
@@ -233,6 +274,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmReplayForm";
             this.Text = "ASTERIX Replay ";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.ReplayForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -263,5 +305,9 @@
         private System.Windows.Forms.Label lblFileSize;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Timer timerMonitorReplay;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblBytesSent;
+        private System.Windows.Forms.Button button1;
     }
 }

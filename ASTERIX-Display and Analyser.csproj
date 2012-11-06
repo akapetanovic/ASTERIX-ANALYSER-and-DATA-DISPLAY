@@ -483,6 +483,7 @@
     <EmbeddedResource Include="MAIN\ViewDataBySSRCode.resx">
       <DependentUpon>ViewDataBySSRCode.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="MAIN\app.config" />
     <None Include="DATA SAMPLES\jahorinaJan_cat.48" />
     <None Include="Properties\Settings.settings">

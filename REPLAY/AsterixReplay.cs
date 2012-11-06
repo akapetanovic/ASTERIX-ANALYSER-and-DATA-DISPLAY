@@ -36,6 +36,7 @@ namespace AsterixDisplayAnalyser
             private static System.IO.FileStream FileStream = null;
             private static System.IO.BinaryReader BinaryReader = null;
             private static long TotalFileSizeBytes = 0;
+            private static long FilePosition;
 
             // Tries to connect, if succefull returns true, otherwise returns false.
             // Upon succesfull connection each succesfull call to Send will send provided
@@ -52,7 +53,7 @@ namespace AsterixDisplayAnalyser
                 // Open up a new socket with the net IP address and port number   
                 try
                 {
-                    tx_sock = new UdpClient(PortNumber_IN);
+                    tx_sock = new UdpClient();
                     tx_sock.JoinMulticastGroup(Multicast_Address_IN, Interface_Addres_IN);
                     tx_iep = new IPEndPoint(Multicast_Address_IN, PortNumber_IN);
                 }
@@ -67,10 +68,10 @@ namespace AsterixDisplayAnalyser
                 {
                     TotalFileSizeBytes = new System.IO.FileInfo(FilePath).Length;
                     // Open file for reading
-                    System.IO.FileStream FileStream = new System.IO.FileStream(FilePath, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+                    FileStream = new System.IO.FileStream(FilePath, System.IO.FileMode.Open, System.IO.FileAccess.Read);
 
                     // attach filestream to binary reader
-                    System.IO.BinaryReader BinaryReader = new System.IO.BinaryReader(FileStream);
+                    BinaryReader = new System.IO.BinaryReader(FileStream);
                 }
                 catch (Exception e)
                 {
@@ -120,7 +121,7 @@ namespace AsterixDisplayAnalyser
                 // If status desired is already reached do nothing
                 if (Status != Replay_Status)
                 {
-                    switch (Replay_Status)
+                    switch (Status)
                     {
                         case AsterixReplay.ReplayStatus.Disconnected:
                             StopThread();
@@ -130,6 +131,7 @@ namespace AsterixDisplayAnalyser
                             RequestStop = false;
                             ReplayThread = new Thread(new ThreadStart(DOWork));
                             ReplayThread.Start();
+                            Replay_Status = ReplayStatus.Connected;
                             break;
                         case AsterixReplay.ReplayStatus.Paused:
                             Replay_Status = ReplayStatus.Paused;
@@ -143,7 +145,7 @@ namespace AsterixDisplayAnalyser
             // Called by the thread to handle the work
             private static void DOWork()
             {
-                long FilePosition = 0;
+               FilePosition = 0;
 
                 // Loop until either until the end of file is reached or user requested to stop
                 while ((KeepGoing == true) && (FilePosition < TotalFileSizeBytes))
@@ -160,21 +162,20 @@ namespace AsterixDisplayAnalyser
                             try
                             {
                                 // Lets determine the size of the block
-                                byte[] Data_Block_Buffer = BinaryReader.ReadBytes((Int32)1);
-                                int BlockSize = Data_Block_Buffer[(Int32)1];
-
+                                int BlockSize = BinaryReader.ReadInt32();
                                 // Now determine the time since the last data block
-                                Data_Block_Buffer = BinaryReader.ReadBytes((Int32)1);
-                                int TimeBetweenMessages = Data_Block_Buffer[(Int32)1];
-
+                                int TimeBetweenMessages = BinaryReader.ReadInt32();
                                 // Now read the data block as indicated by the size
-                                Data_Block_Buffer = BinaryReader.ReadBytes(BlockSize);
+                                byte [] Data_Block_Buffer = BinaryReader.ReadBytes(BlockSize);
                                 
                                 // Wait the same time as in the orignal data set
                                 Thread.Sleep(TimeBetweenMessages);
 
                                 // Send the data to the specifed interface/multicast address/port
                                 tx_sock.Send(Data_Block_Buffer, Data_Block_Buffer.Length, tx_iep);
+
+                                // Assign file position
+                                FilePosition = BinaryReader.BaseStream.Position;
 
                             }
                             catch(Exception e)
@@ -185,6 +186,10 @@ namespace AsterixDisplayAnalyser
                         }
                     }
                 }
+
+                FrmReplayForm ReplayForm = Application.OpenForms["FrmReplayForm"] as FrmReplayForm;
+                ReplayForm.NotifyReplayCompleted();
+
                 Cleanup();
             }
             // Terminates recording
@@ -219,6 +224,11 @@ namespace AsterixDisplayAnalyser
 
                 TotalFileSizeBytes = 0;
                 Replay_Status = ReplayStatus.Disconnected;
+            }
+
+            public static long GetBytesProcessedSoFar()
+            {
+                return FilePosition;
             }
         }
 

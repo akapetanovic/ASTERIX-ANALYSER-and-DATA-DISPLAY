@@ -37,9 +37,12 @@ namespace AsterixDisplayAnalyser
 
         private static bool ForwardingEnabled = false;
         private static bool RecordingEnabled = false;
+        private static bool ReplayFormatRequested = false; 
+        private static DateTime LastDataBlockDateTime;
 
         // Constructor
-        public static bool StartRecording(string FilePath,              // Path and file name 
+        public static bool StartRecording(bool Is_ReplayFormat,
+                                          string FilePath,              // Path and file name 
                                           IPAddress Interface_Addres,   // IP address of the interface where the data is expected
                                           IPAddress Multicast_Address,  // Multicast address of the expected data
                                           int PortNumber)               // Port number of the expected data
@@ -49,9 +52,13 @@ namespace AsterixDisplayAnalyser
                 // Open up a new socket with the net IP address and port number   
                 try
                 {
-                    rcv_sock = new UdpClient(PortNumber);
-                    rcv_sock.JoinMulticastGroup(Multicast_Address, Interface_Addres);
+                    rcv_sock = new UdpClient();
+                    rcv_sock.ExclusiveAddressUse = false;
                     rcv_iep = new IPEndPoint(IPAddress.Any, PortNumber);
+                    rcv_sock.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+                    rcv_sock.ExclusiveAddressUse = false;
+                    rcv_sock.Client.Bind(rcv_iep);
+                    rcv_sock.JoinMulticastGroup(Multicast_Address, Interface_Addres);
                 }
                 catch
                 {
@@ -66,8 +73,10 @@ namespace AsterixDisplayAnalyser
             }
 
             RecordingEnabled = true;
+            ReplayFormatRequested = Is_ReplayFormat;
+            LastDataBlockDateTime = DateTime.Now;
+            
             // Open up the stream
-
             try
             {
                 RecordingStream = new FileStream(FilePath, FileMode.Create);
@@ -93,11 +102,12 @@ namespace AsterixDisplayAnalyser
             // Open up a new socket with the net IP address and port number   
             try
             {
-                tx_sock = new UdpClient(Frwd_PortNumber);
+                tx_sock = new UdpClient();
                 tx_sock.JoinMulticastGroup(Frwd_Multicast_Address, Frwd_Interface_Addres);
                 tx_iep = new IPEndPoint(Frwd_Multicast_Address, Frwd_PortNumber);
+               
             }
-            catch 
+            catch
             {
                 MessageBox.Show("C1 TX FRD: Not possible! Make sure given IP address/port is a valid one on your system or not already used by some other process");
                 return false;
@@ -114,7 +124,7 @@ namespace AsterixDisplayAnalyser
                     rcv_sock.JoinMulticastGroup(Multicast_Address, Interface_Addres);
                     rcv_iep = new IPEndPoint(IPAddress.Any, PortNumber);
                 }
-                catch 
+                catch
                 {
                     MessageBox.Show("C1 RVC FRD: Not possible! Make sure given IP address/port is a valid one on your system or not already used by some other process");
                     return false;
@@ -148,7 +158,31 @@ namespace AsterixDisplayAnalyser
                         BytesProcessed = BytesProcessed + UDPBuffer.Length;
 
                         if (RecordingEnabled == true)
-                            RecordingBinaryWriter.Write(UDPBuffer);
+                        {
+                            if (ReplayFormatRequested == true)
+                            {
+                                TimeSpan TimeDiff = DateTime.Now - LastDataBlockDateTime;
+                                LastDataBlockDateTime = DateTime.Now;
+                                // Header 1: Size of the original data block
+                                // Header 2: The time between two data blocks (current and the last one)
+                                //-----------------------------------------------------------------------
+                                // Header 1 // Header 2
+                                // ----------------------------------------------------------------------
+                                // 4 bytes  // 4 bytes 
+                                // First add the size of the data block, not including the two headers
+
+                                // Block size
+                                RecordingBinaryWriter.Write(UDPBuffer.Length);
+                                // Time between last and this block
+                                RecordingBinaryWriter.Write(TimeDiff.Milliseconds);
+                                // Now write the data block
+                                RecordingBinaryWriter.Write(UDPBuffer);
+                            }
+                            else
+                            {
+                                RecordingBinaryWriter.Write(UDPBuffer);
+                            }
+                        }
 
                         // If forwarding enable then forward
                         // the data as soon as it is recived

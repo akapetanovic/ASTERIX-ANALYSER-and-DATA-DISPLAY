@@ -367,19 +367,29 @@ namespace AsterixDisplayAnalyser
                 this.timer1.Stop();
         }
 
+        private string GetFileExtension(bool IsReplay)
+        {
+            if (IsReplay)
+                return ".rply";
+            else
+                return ".raw";
+        }
+        
         private void checkedListBoxRecordingName_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             // Check if this item is checked
             if (e.NewValue == CheckState.Checked)
             {
                 AppendDateTime DateTimeAppend = new AppendDateTime();
-                string path_and_name = this.textBoxRecordDirectory.Text + "\\" + DateTimeAppend.ApendDateandTimeToFront(this.checkedListBoxRecordingName.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString() + ".raw");
+                string path_and_name = this.textBoxRecordDirectory.Text + "\\" + DateTimeAppend.ApendDateandTimeToFront(this.checkedListBoxRecordingName.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString());
+                
                 switch (this.checkedListBoxRecordingName.SelectedIndex)
                 {
                     case 0:
                         if (RecForwConnection1.IsRecordingEnabled() == false)
                         {
-                            if (RecForwConnection1.StartRecording(path_and_name,
+                            if (RecForwConnection1.StartRecording(this.chkBoxReplayFormatEnabled1.Checked,
+                                   path_and_name + GetFileExtension(this.chkBoxReplayFormatEnabled1.Checked),
                                    IPAddress.Parse(this.listBoxLocalAddr.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                    IPAddress.Parse(this.listBoxIPAddress.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                   int.Parse(this.listBoxPort.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString())) == false)
@@ -389,7 +399,7 @@ namespace AsterixDisplayAnalyser
                             else
                             {
                                 progressBar1.Visible = true;
-                                this.checkBoxReplay1.Enabled = false;
+                                this.chkBoxReplayFormatEnabled1.Enabled = false;
                             }
 
                         }
@@ -397,7 +407,8 @@ namespace AsterixDisplayAnalyser
                     case 1:
                         if (RecForwConnection2.IsRecordingEnabled() == false)
                         {
-                            if (RecForwConnection2.StartRecording(path_and_name,
+                            if (RecForwConnection2.StartRecording(this.chkBoxReplayFormatEnabled2.Checked,
+                                path_and_name + GetFileExtension(this.chkBoxReplayFormatEnabled2.Checked),
                                    IPAddress.Parse(this.listBoxLocalAddr.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                    IPAddress.Parse(this.listBoxIPAddress.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                   int.Parse(this.listBoxPort.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString())) == false)
@@ -407,7 +418,7 @@ namespace AsterixDisplayAnalyser
                             else
                             {
                                 progressBar2.Visible = true;
-                                this.checkBoxReplay2.Enabled = false;
+                                this.chkBoxReplayFormatEnabled2.Enabled = false;
                             }
 
                         }
@@ -415,7 +426,8 @@ namespace AsterixDisplayAnalyser
                     case 2:
                         if (RecForwConnection3.IsRecordingEnabled() == false)
                         {
-                            if (RecForwConnection3.StartRecording(path_and_name,
+                            if (RecForwConnection3.StartRecording(this.chkBoxReplayFormatEnabled3.Checked,
+                                path_and_name + GetFileExtension(this.chkBoxReplayFormatEnabled3.Checked),
                                    IPAddress.Parse(this.listBoxLocalAddr.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                    IPAddress.Parse(this.listBoxIPAddress.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                   int.Parse(this.listBoxPort.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString())) == false)
@@ -425,7 +437,7 @@ namespace AsterixDisplayAnalyser
                             else
                             {
                                 progressBar3.Visible = true;
-                                this.checkBoxReplay3.Enabled = false;
+                                this.chkBoxReplayFormatEnabled3.Enabled = false;
                             }
 
                         }
@@ -433,7 +445,8 @@ namespace AsterixDisplayAnalyser
                     case 3:
                         if (RecForwConnection4.IsRecordingEnabled() == false)
                         {
-                            if (RecForwConnection4.StartRecording(path_and_name,
+                            if (RecForwConnection4.StartRecording(this.chkBoxReplayFormatEnabled4.Checked,
+                                path_and_name + GetFileExtension(this.chkBoxReplayFormatEnabled4.Checked),
                                    IPAddress.Parse(this.listBoxLocalAddr.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                    IPAddress.Parse(this.listBoxIPAddress.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                   int.Parse(this.listBoxPort.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString())) == false)
@@ -443,7 +456,7 @@ namespace AsterixDisplayAnalyser
                             else
                             {
                                 progressBar4.Visible = true;
-                                this.checkBoxReplay4.Enabled = false;
+                                this.chkBoxReplayFormatEnabled4.Enabled = false;
                             }
 
                         }
@@ -451,7 +464,8 @@ namespace AsterixDisplayAnalyser
                     case 4:
                         if (RecForwConnection5.IsRecordingEnabled() == false)
                         {
-                            if (RecForwConnection5.StartRecording(path_and_name,
+                            if (RecForwConnection5.StartRecording(this.chkBoxReplayFormatEnabled5.Checked,
+                                path_and_name + GetFileExtension(this.chkBoxReplayFormatEnabled5.Checked),
                                    IPAddress.Parse(this.listBoxLocalAddr.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                    IPAddress.Parse(this.listBoxIPAddress.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                   int.Parse(this.listBoxPort.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString())) == false)
@@ -461,7 +475,7 @@ namespace AsterixDisplayAnalyser
                             else
                             {
                                 progressBar5.Visible = true;
-                                this.checkBoxReplay5.Enabled = false;
+                                this.chkBoxReplayFormatEnabled5.Enabled = false;
                             }
 
                         }
@@ -479,7 +493,7 @@ namespace AsterixDisplayAnalyser
                         {
                             RecForwConnection1.StopRecording();
                             progressBar1.Visible = false;
-                            this.checkBoxReplay1.Enabled = true;
+                            this.chkBoxReplayFormatEnabled1.Enabled = true;
                         }
                         break;
                     case 1:
@@ -487,7 +501,7 @@ namespace AsterixDisplayAnalyser
                         {
                             RecForwConnection2.StopRecording();
                             progressBar2.Visible = false;
-                            this.checkBoxReplay2.Enabled = true;
+                            this.chkBoxReplayFormatEnabled2.Enabled = true;
                         }
                         break;
                     case 2:
@@ -495,7 +509,7 @@ namespace AsterixDisplayAnalyser
                         {
                             RecForwConnection3.StopRecording();
                             progressBar3.Visible = false;
-                            this.checkBoxReplay3.Enabled = true;
+                            this.chkBoxReplayFormatEnabled3.Enabled = true;
                         }
                         break;
                     case 3:
@@ -503,7 +517,7 @@ namespace AsterixDisplayAnalyser
                         {
                             RecForwConnection4.StopRecording();
                             progressBar4.Visible = false;
-                            this.checkBoxReplay4.Enabled = true;
+                            this.chkBoxReplayFormatEnabled4.Enabled = true;
                         }
                         break;
                     case 4:
@@ -511,7 +525,7 @@ namespace AsterixDisplayAnalyser
                         {
                             RecForwConnection5.StopRecording();
                             progressBar5.Visible = false;
-                            this.checkBoxReplay5.Enabled = true;
+                            this.chkBoxReplayFormatEnabled5.Enabled = true;
                         }
                         break;
                     default:
@@ -947,6 +961,11 @@ namespace AsterixDisplayAnalyser
                 RecForwConnection5.StopForwarding();
                 this.progressBarF5.Visible = false;
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

@@ -13,15 +13,27 @@ namespace AsterixDisplayAnalyser
 {
     public partial class FrmReplayForm : Form
     {
+
+        private static bool ReplayHasCompleted = false;
+        
         public FrmReplayForm()
         {
             InitializeComponent();
         }
 
+
+         public void NotifyReplayCompleted()
+         {
+             ReplayHasCompleted = true;
+         }
+
         // Do not provide lower/max/close buttons
         private void ReplayForm_Load(object sender, EventArgs e)
         {
             this.ControlBox = false;
+            this.textBoxInterfaceAddr.Text = Properties.Settings.Default.ReplayInterface;
+            this.txtboxIPAddress.Text = Properties.Settings.Default.ReplayMulticast;
+            this.textboxPort.Text = Properties.Settings.Default.ReplayPort;
         }
 
         // Handle file open dialog
@@ -35,7 +47,7 @@ namespace AsterixDisplayAnalyser
             if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
             {
                 this.labelSourceFile.Text = openFileDialog1.FileName;
-                this.lblFileSize.Text = new System.IO.FileInfo(openFileDialog1.FileName).Length.ToString() + " Byes";
+                this.lblFileSize.Text = new System.IO.FileInfo(openFileDialog1.FileName).Length.ToString() + " Bytes";
             }
         }
 
@@ -116,11 +128,18 @@ namespace AsterixDisplayAnalyser
                     // Input has been validated, so lets connect to the provided multicast address and interface
                     if (Input_Validated == true)
                     {
+                        // Syntatically all the provided data is valid, so save it off so it persists over the sessions
+                        Properties.Settings.Default.ReplayInterface = this.textBoxInterfaceAddr.Text;
+                        Properties.Settings.Default.ReplayMulticast = this.txtboxIPAddress.Text;
+                        Properties.Settings.Default.ReplayPort = this.textboxPort.Text;
+                        Properties.Settings.Default.Save();
+
                         if (AsterixReplay.LANReplay.Connect(labelSourceFile.Text, IP, Multicast, PortNumber) == true)
                         {
                             this.btnStartPause.Enabled = true;
                             this.btnStartPause.Text = "Start";
                             this.btnConnectDisconnect.Text = "Disconnect";
+                            lblBytesSent.Text = "0 Bytes";
                         }
                         else
                         {
@@ -136,6 +155,7 @@ namespace AsterixDisplayAnalyser
                 case AsterixReplay.ReplayStatus.Replaying:
                     AsterixReplay.LANReplay.Disconnect();
                     this.btnStartPause.Text = "Start";
+                    this.btnConnectDisconnect.Text = "Connect";
                     this.btnStartPause.Enabled = false;
                     this.progressBar1.Visible = false;
                     break;
@@ -151,14 +171,38 @@ namespace AsterixDisplayAnalyser
             {
                 AsterixReplay.LANReplay.Start();
                 this.btnStartPause.Text = "Pause";
-                this.progressBar1.Visible = false;
+                this.progressBar1.Visible = true;
+                timerMonitorReplay.Enabled = true;
             }
             else if (AsterixReplay.LANReplay.GetCurrentStatus() == AsterixReplay.ReplayStatus.Replaying)
             {
                 AsterixReplay.LANReplay.Pause();
                 this.btnStartPause.Text = "Start";
-                this.progressBar1.Visible = true;
+                this.progressBar1.Visible = false;
+                timerMonitorReplay.Enabled = false;
             }
+        }
+
+        private void timerMonitorReplay_Tick(object sender, EventArgs e)
+        {
+            if (ReplayHasCompleted == true)
+            {
+                this.btnStartPause.Text = "Start";
+                this.btnConnectDisconnect.Text = "Connect";
+                this.btnStartPause.Enabled = false;
+                this.progressBar1.Visible = false;
+                timerMonitorReplay.Enabled = false;
+                ReplayHasCompleted = false;
+            }
+            else
+            {
+                lblBytesSent.Text = AsterixReplay.LANReplay.GetBytesProcessedSoFar().ToString() + " Bytes";
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

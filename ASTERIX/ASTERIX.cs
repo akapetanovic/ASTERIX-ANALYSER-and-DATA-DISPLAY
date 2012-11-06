@@ -86,9 +86,13 @@ namespace AsterixDisplayAnalyser
             // Open up a new socket with the net IP address and port number   
             try
             {
-                sock = new UdpClient(SharedData.Current_Port);
-                sock.JoinMulticastGroup(IPAddress.Parse(SharedData.CurrentMulticastAddress), IPAddress.Parse(SharedData.CurrentInterfaceIPAddress));
+                sock = new UdpClient();
+                sock.ExclusiveAddressUse = false;
                 iep = new IPEndPoint(IPAddress.Any, SharedData.Current_Port);
+                sock.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+                sock.ExclusiveAddressUse = false;
+                sock.Client.Bind(iep);
+                sock.JoinMulticastGroup(IPAddress.Parse(SharedData.CurrentMulticastAddress), IPAddress.Parse(SharedData.CurrentInterfaceIPAddress));
             }
             catch
             {
@@ -199,8 +203,6 @@ namespace AsterixDisplayAnalyser
                                 RecordingBinaryWriter.Write(TimeDiff.Milliseconds);
                                 // Now write the data block
                                 RecordingBinaryWriter.Write(UDPBuffer);
-
-                                //SharedData.DebugFrame.SetValue("Size: " + UDPBuffer.Length.ToString() + " Time: " + TimeDiff.Milliseconds.ToString());
                             }
                         }
                         else if (RecordingJustStarted == false)
@@ -211,8 +213,6 @@ namespace AsterixDisplayAnalyser
                                 RecordingBinaryWriter.Close();
                             if (RecordingStream != null)
                                 RecordingStream.Close();
-
-                           // SharedData.DebugFrame.ShowDialog();
                         }
                     }
                 }

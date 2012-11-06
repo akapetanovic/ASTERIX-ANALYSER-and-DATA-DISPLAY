@@ -99,11 +99,11 @@
             this.listBoxForwardingMulticast = new System.Windows.Forms.ListBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.checkBoxReplay1 = new System.Windows.Forms.CheckBox();
-            this.checkBoxReplay5 = new System.Windows.Forms.CheckBox();
-            this.checkBoxReplay4 = new System.Windows.Forms.CheckBox();
-            this.checkBoxReplay3 = new System.Windows.Forms.CheckBox();
-            this.checkBoxReplay2 = new System.Windows.Forms.CheckBox();
+            this.chkBoxReplayFormatEnabled1 = new System.Windows.Forms.CheckBox();
+            this.chkBoxReplayFormatEnabled5 = new System.Windows.Forms.CheckBox();
+            this.chkBoxReplayFormatEnabled4 = new System.Windows.Forms.CheckBox();
+            this.chkBoxReplayFormatEnabled3 = new System.Windows.Forms.CheckBox();
+            this.chkBoxReplayFormatEnabled2 = new System.Windows.Forms.CheckBox();
             this.progressBarF5 = new System.Windows.Forms.ProgressBar();
             this.progressBarF4 = new System.Windows.Forms.ProgressBar();
             this.progressBarF3 = new System.Windows.Forms.ProgressBar();
@@ -114,6 +114,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape12 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.button6 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -331,7 +332,7 @@
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(4, 335);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(899, 32);
+            this.button2.Size = new System.Drawing.Size(447, 32);
             this.button2.TabIndex = 31;
             this.button2.Text = "Close";
             this.button2.UseVisualStyleBackColor = true;
@@ -788,50 +789,50 @@
             this.label19.TabIndex = 65;
             this.label19.Text = "Replay Fmt";
             // 
-            // checkBoxReplay1
+            // chkBoxReplayFormatEnabled1
             // 
-            this.checkBoxReplay1.AutoSize = true;
-            this.checkBoxReplay1.Location = new System.Drawing.Point(433, 189);
-            this.checkBoxReplay1.Name = "checkBoxReplay1";
-            this.checkBoxReplay1.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxReplay1.TabIndex = 66;
-            this.checkBoxReplay1.UseVisualStyleBackColor = true;
+            this.chkBoxReplayFormatEnabled1.AutoSize = true;
+            this.chkBoxReplayFormatEnabled1.Location = new System.Drawing.Point(433, 189);
+            this.chkBoxReplayFormatEnabled1.Name = "chkBoxReplayFormatEnabled1";
+            this.chkBoxReplayFormatEnabled1.Size = new System.Drawing.Size(15, 14);
+            this.chkBoxReplayFormatEnabled1.TabIndex = 66;
+            this.chkBoxReplayFormatEnabled1.UseVisualStyleBackColor = true;
             // 
-            // checkBoxReplay5
+            // chkBoxReplayFormatEnabled5
             // 
-            this.checkBoxReplay5.AutoSize = true;
-            this.checkBoxReplay5.Location = new System.Drawing.Point(433, 257);
-            this.checkBoxReplay5.Name = "checkBoxReplay5";
-            this.checkBoxReplay5.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxReplay5.TabIndex = 67;
-            this.checkBoxReplay5.UseVisualStyleBackColor = true;
+            this.chkBoxReplayFormatEnabled5.AutoSize = true;
+            this.chkBoxReplayFormatEnabled5.Location = new System.Drawing.Point(433, 257);
+            this.chkBoxReplayFormatEnabled5.Name = "chkBoxReplayFormatEnabled5";
+            this.chkBoxReplayFormatEnabled5.Size = new System.Drawing.Size(15, 14);
+            this.chkBoxReplayFormatEnabled5.TabIndex = 67;
+            this.chkBoxReplayFormatEnabled5.UseVisualStyleBackColor = true;
             // 
-            // checkBoxReplay4
+            // chkBoxReplayFormatEnabled4
             // 
-            this.checkBoxReplay4.AutoSize = true;
-            this.checkBoxReplay4.Location = new System.Drawing.Point(433, 240);
-            this.checkBoxReplay4.Name = "checkBoxReplay4";
-            this.checkBoxReplay4.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxReplay4.TabIndex = 68;
-            this.checkBoxReplay4.UseVisualStyleBackColor = true;
+            this.chkBoxReplayFormatEnabled4.AutoSize = true;
+            this.chkBoxReplayFormatEnabled4.Location = new System.Drawing.Point(433, 240);
+            this.chkBoxReplayFormatEnabled4.Name = "chkBoxReplayFormatEnabled4";
+            this.chkBoxReplayFormatEnabled4.Size = new System.Drawing.Size(15, 14);
+            this.chkBoxReplayFormatEnabled4.TabIndex = 68;
+            this.chkBoxReplayFormatEnabled4.UseVisualStyleBackColor = true;
             // 
-            // checkBoxReplay3
+            // chkBoxReplayFormatEnabled3
             // 
-            this.checkBoxReplay3.AutoSize = true;
-            this.checkBoxReplay3.Location = new System.Drawing.Point(433, 223);
-            this.checkBoxReplay3.Name = "checkBoxReplay3";
-            this.checkBoxReplay3.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxReplay3.TabIndex = 69;
-            this.checkBoxReplay3.UseVisualStyleBackColor = true;
+            this.chkBoxReplayFormatEnabled3.AutoSize = true;
+            this.chkBoxReplayFormatEnabled3.Location = new System.Drawing.Point(433, 223);
+            this.chkBoxReplayFormatEnabled3.Name = "chkBoxReplayFormatEnabled3";
+            this.chkBoxReplayFormatEnabled3.Size = new System.Drawing.Size(15, 14);
+            this.chkBoxReplayFormatEnabled3.TabIndex = 69;
+            this.chkBoxReplayFormatEnabled3.UseVisualStyleBackColor = true;
             // 
-            // checkBoxReplay2
+            // chkBoxReplayFormatEnabled2
             // 
-            this.checkBoxReplay2.AutoSize = true;
-            this.checkBoxReplay2.Location = new System.Drawing.Point(433, 206);
-            this.checkBoxReplay2.Name = "checkBoxReplay2";
-            this.checkBoxReplay2.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxReplay2.TabIndex = 70;
-            this.checkBoxReplay2.UseVisualStyleBackColor = true;
+            this.chkBoxReplayFormatEnabled2.AutoSize = true;
+            this.chkBoxReplayFormatEnabled2.Location = new System.Drawing.Point(433, 206);
+            this.chkBoxReplayFormatEnabled2.Name = "chkBoxReplayFormatEnabled2";
+            this.chkBoxReplayFormatEnabled2.Size = new System.Drawing.Size(15, 14);
+            this.chkBoxReplayFormatEnabled2.TabIndex = 70;
+            this.chkBoxReplayFormatEnabled2.UseVisualStyleBackColor = true;
             // 
             // progressBarF5
             // 
@@ -951,11 +952,23 @@
             this.lineShape12.Y1 = 111;
             this.lineShape12.Y2 = 111;
             // 
+            // button6
+            // 
+            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.Location = new System.Drawing.Point(458, 335);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(447, 32);
+            this.button6.TabIndex = 78;
+            this.button6.Text = "Minimize";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // FrmAstxRecFrwdForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(908, 369);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.progressBarF5);
@@ -963,11 +976,11 @@
             this.Controls.Add(this.progressBarF3);
             this.Controls.Add(this.progressBarF2);
             this.Controls.Add(this.progressBarF1);
-            this.Controls.Add(this.checkBoxReplay2);
-            this.Controls.Add(this.checkBoxReplay3);
-            this.Controls.Add(this.checkBoxReplay4);
-            this.Controls.Add(this.checkBoxReplay5);
-            this.Controls.Add(this.checkBoxReplay1);
+            this.Controls.Add(this.chkBoxReplayFormatEnabled2);
+            this.Controls.Add(this.chkBoxReplayFormatEnabled3);
+            this.Controls.Add(this.chkBoxReplayFormatEnabled4);
+            this.Controls.Add(this.chkBoxReplayFormatEnabled5);
+            this.Controls.Add(this.chkBoxReplayFormatEnabled1);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.listBoxForwardingInterface);
@@ -1013,6 +1026,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmAstxRecFrwdForm";
             this.Text = "ASTERIX Recorder and Data Forwarder";
+            this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmSettings_FormClosed);
             this.Load += new System.EventHandler(this.FrmSettings_Load);
             this.VisibleChanged += new System.EventHandler(this.FrmAsterixRecorder_VisibleChanged);
@@ -1096,11 +1110,11 @@
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape9;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.CheckBox checkBoxReplay1;
-        private System.Windows.Forms.CheckBox checkBoxReplay5;
-        private System.Windows.Forms.CheckBox checkBoxReplay4;
-        private System.Windows.Forms.CheckBox checkBoxReplay3;
-        private System.Windows.Forms.CheckBox checkBoxReplay2;
+        private System.Windows.Forms.CheckBox chkBoxReplayFormatEnabled1;
+        private System.Windows.Forms.CheckBox chkBoxReplayFormatEnabled5;
+        private System.Windows.Forms.CheckBox chkBoxReplayFormatEnabled4;
+        private System.Windows.Forms.CheckBox chkBoxReplayFormatEnabled3;
+        private System.Windows.Forms.CheckBox chkBoxReplayFormatEnabled2;
         private System.Windows.Forms.ProgressBar progressBarF5;
         private System.Windows.Forms.ProgressBar progressBarF4;
         private System.Windows.Forms.ProgressBar progressBarF3;
@@ -1113,5 +1127,6 @@
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer2;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape12;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
     }
 }
