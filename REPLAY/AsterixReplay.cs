@@ -27,6 +27,8 @@ namespace AsterixDisplayAnalyser
 
             // Replay Status varable
             private static ReplayStatus Replay_Status = ReplayStatus.Disconnected;
+            // Replay speed
+            private static int ReplaySpeed = 1;
 
             // Define UDP-Multicast TX connection variables
             private static UdpClient tx_sock;
@@ -168,8 +170,9 @@ namespace AsterixDisplayAnalyser
                                 // Now read the data block as indicated by the size
                                 byte [] Data_Block_Buffer = BinaryReader.ReadBytes(BlockSize);
                                 
-                                // Wait the same time as in the orignal data set
-                                Thread.Sleep(TimeBetweenMessages);
+                                // Wait the same time as in the orignal data set or faster as indicated by the 
+                                // replay speed factor
+                                Thread.Sleep(TimeBetweenMessages / ReplaySpeed);
 
                                 // Send the data to the specifed interface/multicast address/port
                                 tx_sock.Send(Data_Block_Buffer, Data_Block_Buffer.Length, tx_iep);
@@ -229,6 +232,11 @@ namespace AsterixDisplayAnalyser
             public static long GetBytesProcessedSoFar()
             {
                 return FilePosition;
+            }
+
+            public static void SetReplaySpeed (int Speed)
+            {
+                ReplaySpeed = Speed;
             }
         }
 

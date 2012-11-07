@@ -419,6 +419,12 @@
     <Compile Include="MAIN\ViewDataBySSRCode.Designer.cs">
       <DependentUpon>ViewDataBySSRCode.cs</DependentUpon>
     </Compile>
+    <Compile Include="REPLAY\FrmReplayToRaw.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="REPLAY\FrmReplayToRaw.Designer.cs">
+      <DependentUpon>FrmReplayToRaw.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MAIN\CAT_Decoder_Selector.resx">
       <DependentUpon>CAT_Decoder_Selector.cs</DependentUpon>
     </EmbeddedResource>
@@ -483,9 +489,12 @@
     <EmbeddedResource Include="MAIN\ViewDataBySSRCode.resx">
       <DependentUpon>ViewDataBySSRCode.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="REPLAY\FrmReplayToRaw.resx">
+      <DependentUpon>FrmReplayToRaw.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="DATA SAMPLES\Jahorina.rply" />
     <None Include="MAIN\app.config" />
-    <None Include="DATA SAMPLES\jahorinaJan_cat.48" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

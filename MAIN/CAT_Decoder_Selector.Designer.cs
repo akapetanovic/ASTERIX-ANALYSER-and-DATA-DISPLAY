@@ -54,6 +54,7 @@
             // checkBox008
             // 
             this.checkBox008.AutoSize = true;
+            this.checkBox008.Enabled = false;
             this.checkBox008.Location = new System.Drawing.Point(12, 48);
             this.checkBox008.Name = "checkBox008";
             this.checkBox008.Size = new System.Drawing.Size(68, 17);
@@ -98,6 +99,7 @@
             // checkBox063
             // 
             this.checkBox063.AutoSize = true;
+            this.checkBox063.Enabled = false;
             this.checkBox063.Location = new System.Drawing.Point(12, 120);
             this.checkBox063.Name = "checkBox063";
             this.checkBox063.Size = new System.Drawing.Size(68, 17);
@@ -109,6 +111,7 @@
             // checkBox065
             // 
             this.checkBox065.AutoSize = true;
+            this.checkBox065.Enabled = false;
             this.checkBox065.Location = new System.Drawing.Point(12, 138);
             this.checkBox065.Name = "checkBox065";
             this.checkBox065.Size = new System.Drawing.Size(68, 17);
@@ -120,6 +123,7 @@
             // checkBox244
             // 
             this.checkBox244.AutoSize = true;
+            this.checkBox244.Enabled = false;
             this.checkBox244.Location = new System.Drawing.Point(12, 156);
             this.checkBox244.Name = "checkBox244";
             this.checkBox244.Size = new System.Drawing.Size(68, 17);

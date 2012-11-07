@@ -40,10 +40,12 @@ VERSION HISTORY
 
 Version 1.7
 
-	1. Implemented LAN data replay functionality (Data is sent on the LAN)
-	2. Implemented Local file replay (data is handled from the file W/O sending to the LAN)
-	3. Enhanced recording to support replay (each data block gets proprietary header).
-	4. PLANNED (Implement xxx.rply to .raw converter)
+	1. Implemented LAN data replay functionality (ASTERIX data is sent on the LAN)
+		1.1 Replay speed adjustable from original to up to 10 times faster.
+	2. Enhanced recording to support replay (each data block gets proprietary header that enables replay in real time).
+	3. Enhanced connection/replay/record/forward dialogs to pre-fill available network interfaces (its IP addresses)
+	4. Added DISPLAY FROZEN message (when data is expected and no received for over 2 seconds).
+	5. Added CLOCK display
 
 Version 1.6
 

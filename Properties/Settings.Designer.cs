@@ -566,18 +566,6 @@ namespace AsterixDisplayAnalyser.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ReplayInterface {
-            get {
-                return ((string)(this["ReplayInterface"]));
-            }
-            set {
-                this["ReplayInterface"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ReplayMulticast {
             get {
                 return ((string)(this["ReplayMulticast"]));

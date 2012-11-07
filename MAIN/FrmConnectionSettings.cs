@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Net.NetworkInformation;
 
 namespace AsterixDisplayAnalyser
 {
@@ -28,13 +29,13 @@ namespace AsterixDisplayAnalyser
             // First make sure that all boxes are filled out
             if ((!string.IsNullOrEmpty(this.textBoxConnectionName.Text)) &&
                 (!string.IsNullOrEmpty(this.txtboxIPAddress.Text)) &&
-                 (!string.IsNullOrEmpty(this.textBoxInterfaceAddr.Text)) &&
+                 (!string.IsNullOrEmpty(this.comboBoxNetworkInterface.Text)) &&
                 (!string.IsNullOrEmpty(this.textboxPort.Text)))
             {
                 IPAddress IP;
                 IPAddress Multicast;
                 // Validate that a valid IP address is entered
-                if ((IPAddress.TryParse(this.txtboxIPAddress.Text, out Multicast) != true) || (IPAddress.TryParse(this.textBoxInterfaceAddr.Text, out IP) != true))
+                if ((IPAddress.TryParse(this.txtboxIPAddress.Text, out Multicast) != true) || (IPAddress.TryParse(this.comboBoxNetworkInterface.Text, out IP) != true))
                 {
                     MessageBox.Show("Not a valid IP address");
                     Input_Validated = false;
@@ -81,7 +82,7 @@ namespace AsterixDisplayAnalyser
                 string ConnInfo = this.textBoxConnectionName.Text;
                 this.listBoxConnName.Items.Add(ConnInfo);
 
-                ConnInfo = this.textBoxInterfaceAddr.Text;
+                ConnInfo = this.comboBoxNetworkInterface.Text;
                 this.listBoxLocalAddr.Items.Add(ConnInfo);
                 
                 ConnInfo = this.txtboxIPAddress.Text;
@@ -252,7 +253,23 @@ namespace AsterixDisplayAnalyser
 
         private void FrmSettings_Load(object sender, EventArgs e)
         {
-
+            foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                {
+                    Console.WriteLine(ni.Name);
+                    foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
+                    {
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        {
+                            //Console.WriteLine(ip.Address.ToString());
+                            comboBoxNetworkInterface.Items.Add(ip.Address.ToString());
+                        }
+                    }
+                }
+            }
+            if (comboBoxNetworkInterface.Items.Count > 0)
+                comboBoxNetworkInterface.SelectedIndex = 0;
         }
 
         private void FrmSettings_FormClosed(object sender, FormClosedEventArgs e)

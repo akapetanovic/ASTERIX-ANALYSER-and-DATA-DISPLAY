@@ -159,6 +159,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.checkBoxRecording = new System.Windows.Forms.CheckBox();
             this.tabPlotDisplay = new System.Windows.Forms.TabPage();
+            this.labelFrozeDisplay = new System.Windows.Forms.Label();
             this.labelTargetCount = new System.Windows.Forms.Label();
             this.lblNumberofTargets = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -215,9 +216,11 @@
             this.label17 = new System.Windows.Forms.Label();
             this.checkBoxRecordInRaw = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.labelFileToReplay = new System.Windows.Forms.Label();
+            this.labelBytesReplayed = new System.Windows.Forms.Label();
             this.progressBarReplayActive = new System.Windows.Forms.ProgressBar();
             this.btnStartStopFileReplay = new System.Windows.Forms.Button();
+            this.labelClock = new System.Windows.Forms.Label();
+            this.replayToRawToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -328,7 +331,8 @@
             // 
             this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.recorderAndDataForwarderToolStripMenuItem,
-            this.replayToolStripMenuItem});
+            this.replayToolStripMenuItem,
+            this.replayToRawToolStripMenuItem});
             this.toolStripMenuItem2.ForeColor = System.Drawing.Color.Silver;
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(48, 20);
@@ -1296,6 +1300,7 @@
             // tabPlotDisplay
             // 
             this.tabPlotDisplay.BackColor = System.Drawing.SystemColors.Desktop;
+            this.tabPlotDisplay.Controls.Add(this.labelFrozeDisplay);
             this.tabPlotDisplay.Controls.Add(this.labelTargetCount);
             this.tabPlotDisplay.Controls.Add(this.lblNumberofTargets);
             this.tabPlotDisplay.Controls.Add(this.groupBox2);
@@ -1322,6 +1327,18 @@
             this.tabPlotDisplay.Text = "Plot Display";
             this.tabPlotDisplay.SizeChanged += new System.EventHandler(this.tabPlotDisplay_SizeChanged);
             this.tabPlotDisplay.Click += new System.EventHandler(this.tabPlotDisplay_Click);
+            // 
+            // labelFrozeDisplay
+            // 
+            this.labelFrozeDisplay.AutoSize = true;
+            this.labelFrozeDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFrozeDisplay.ForeColor = System.Drawing.Color.Red;
+            this.labelFrozeDisplay.Location = new System.Drawing.Point(591, 332);
+            this.labelFrozeDisplay.Name = "labelFrozeDisplay";
+            this.labelFrozeDisplay.Size = new System.Drawing.Size(263, 31);
+            this.labelFrozeDisplay.TabIndex = 26;
+            this.labelFrozeDisplay.Text = "FROZEN DISPLAY";
+            this.labelFrozeDisplay.Visible = false;
             // 
             // labelTargetCount
             // 
@@ -1977,45 +1994,63 @@
             // groupBox5
             // 
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox5.Controls.Add(this.labelFileToReplay);
+            this.groupBox5.Controls.Add(this.labelBytesReplayed);
             this.groupBox5.Controls.Add(this.progressBarReplayActive);
             this.groupBox5.Controls.Add(this.btnStartStopFileReplay);
             this.groupBox5.ForeColor = System.Drawing.Color.White;
             this.groupBox5.Location = new System.Drawing.Point(584, 0);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(107, 60);
+            this.groupBox5.Size = new System.Drawing.Size(109, 60);
             this.groupBox5.TabIndex = 25;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Local File Replay";
+            this.groupBox5.Text = "Replay";
             // 
-            // labelFileToReplay
+            // labelBytesReplayed
             // 
-            this.labelFileToReplay.AutoSize = true;
-            this.labelFileToReplay.Location = new System.Drawing.Point(6, 43);
-            this.labelFileToReplay.Name = "labelFileToReplay";
-            this.labelFileToReplay.Size = new System.Drawing.Size(27, 13);
-            this.labelFileToReplay.TabIndex = 2;
-            this.labelFileToReplay.Text = "N/A";
+            this.labelBytesReplayed.AutoSize = true;
+            this.labelBytesReplayed.Location = new System.Drawing.Point(6, 43);
+            this.labelBytesReplayed.Name = "labelBytesReplayed";
+            this.labelBytesReplayed.Size = new System.Drawing.Size(27, 13);
+            this.labelBytesReplayed.TabIndex = 2;
+            this.labelBytesReplayed.Text = "N/A";
             // 
             // progressBarReplayActive
             // 
-            this.progressBarReplayActive.Location = new System.Drawing.Point(36, 19);
+            this.progressBarReplayActive.Location = new System.Drawing.Point(40, 19);
             this.progressBarReplayActive.Name = "progressBarReplayActive";
             this.progressBarReplayActive.Size = new System.Drawing.Size(62, 18);
+            this.progressBarReplayActive.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBarReplayActive.TabIndex = 1;
             // 
             // btnStartStopFileReplay
             // 
             this.btnStartStopFileReplay.BackColor = System.Drawing.Color.DarkGray;
-            this.btnStartStopFileReplay.Enabled = false;
-            this.btnStartStopFileReplay.Location = new System.Drawing.Point(6, 15);
+            this.btnStartStopFileReplay.Location = new System.Drawing.Point(4, 15);
             this.btnStartStopFileReplay.Name = "btnStartStopFileReplay";
-            this.btnStartStopFileReplay.Size = new System.Drawing.Size(95, 26);
+            this.btnStartStopFileReplay.Size = new System.Drawing.Size(102, 26);
             this.btnStartStopFileReplay.TabIndex = 0;
-            this.btnStartStopFileReplay.Text = "Start";
+            this.btnStartStopFileReplay.Text = "Show";
             this.btnStartStopFileReplay.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnStartStopFileReplay.UseVisualStyleBackColor = false;
             this.btnStartStopFileReplay.Click += new System.EventHandler(this.btnStartStopFileReplay_Click);
+            // 
+            // labelClock
+            // 
+            this.labelClock.AutoSize = true;
+            this.labelClock.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelClock.ForeColor = System.Drawing.Color.Lime;
+            this.labelClock.Location = new System.Drawing.Point(173, 31);
+            this.labelClock.Name = "labelClock";
+            this.labelClock.Size = new System.Drawing.Size(83, 25);
+            this.labelClock.TabIndex = 27;
+            this.labelClock.Text = "CLOCK";
+            // 
+            // replayToRawToolStripMenuItem
+            // 
+            this.replayToRawToolStripMenuItem.Name = "replayToRawToolStripMenuItem";
+            this.replayToRawToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.replayToRawToolStripMenuItem.Text = "Replay to Raw";
+            this.replayToRawToolStripMenuItem.Click += new System.EventHandler(this.replayToRawToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -2023,6 +2058,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1189, 781);
+            this.Controls.Add(this.labelClock);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBoxConnection);
@@ -2255,7 +2291,10 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button btnStartStopFileReplay;
         private System.Windows.Forms.ProgressBar progressBarReplayActive;
-        private System.Windows.Forms.Label labelFileToReplay;
+        private System.Windows.Forms.Label labelBytesReplayed;
+        private System.Windows.Forms.Label labelFrozeDisplay;
+        private System.Windows.Forms.Label labelClock;
+        private System.Windows.Forms.ToolStripMenuItem replayToRawToolStripMenuItem;
     }
 }
 

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Net.NetworkInformation;
 
 namespace AsterixDisplayAnalyser
 {
@@ -26,13 +27,13 @@ namespace AsterixDisplayAnalyser
             // First make sure that all boxes are filled out
             if ((!string.IsNullOrEmpty(this.textBoxConnectionName.Text)) &&
                 (!string.IsNullOrEmpty(this.txtboxIPAddress.Text)) &&
-                 (!string.IsNullOrEmpty(this.textBoxInterfaceAddr.Text)) &&
+                 (!string.IsNullOrEmpty(this.comboBoxNetworkInterface.Text)) &&
                 (!string.IsNullOrEmpty(this.textboxPort.Text)))
             {
                 IPAddress IP;
                 IPAddress Multicast;
                 // Validate that a valid IP address is entered
-                if ((IPAddress.TryParse(this.txtboxIPAddress.Text, out Multicast) != true) || (IPAddress.TryParse(this.textBoxInterfaceAddr.Text, out IP) != true))
+                if ((IPAddress.TryParse(this.txtboxIPAddress.Text, out Multicast) != true) || (IPAddress.TryParse(this.comboBoxNetworkInterface.Text, out IP) != true))
                 {
                     MessageBox.Show("Not a valid IP address");
                     Input_Validated = false;
@@ -76,7 +77,7 @@ namespace AsterixDisplayAnalyser
                 string ConnInfo = this.textBoxConnectionName.Text;
                 this.checkedListBoxRecordingName.Items.Add(ConnInfo);
 
-                ConnInfo = this.textBoxInterfaceAddr.Text;
+                ConnInfo = this.comboBoxNetworkInterface.Text;
                 this.listBoxLocalAddr.Items.Add(ConnInfo);
 
                 ConnInfo = this.txtboxIPAddress.Text;
@@ -255,6 +256,22 @@ namespace AsterixDisplayAnalyser
             this.listBoxForwardingInterface.SelectedIndex = 0;
             this.listBoxForwardingMulticast.SelectedIndex = 0;
             this.listBoxForwardingPort.SelectedIndex = 0;
+
+            foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                {
+                    foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
+                    {
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        {
+                            comboBoxNetworkInterface.Items.Add(ip.Address.ToString());
+                        }
+                    }
+                }
+            }
+            if (comboBoxNetworkInterface.Items.Count > 0)
+                comboBoxNetworkInterface.SelectedIndex = 0;
         }
 
         private void FrmSettings_FormClosed(object sender, FormClosedEventArgs e)
@@ -388,8 +405,8 @@ namespace AsterixDisplayAnalyser
                     case 0:
                         if (RecForwConnection1.IsRecordingEnabled() == false)
                         {
-                            if (RecForwConnection1.StartRecording(this.chkBoxReplayFormatEnabled1.Checked,
-                                   path_and_name + GetFileExtension(this.chkBoxReplayFormatEnabled1.Checked),
+                            if (RecForwConnection1.StartRecording(!this.chkBoxReplayFormatEnabled1.Checked,
+                                   path_and_name + GetFileExtension(!this.chkBoxReplayFormatEnabled1.Checked),
                                    IPAddress.Parse(this.listBoxLocalAddr.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                    IPAddress.Parse(this.listBoxIPAddress.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                   int.Parse(this.listBoxPort.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString())) == false)
@@ -407,8 +424,8 @@ namespace AsterixDisplayAnalyser
                     case 1:
                         if (RecForwConnection2.IsRecordingEnabled() == false)
                         {
-                            if (RecForwConnection2.StartRecording(this.chkBoxReplayFormatEnabled2.Checked,
-                                path_and_name + GetFileExtension(this.chkBoxReplayFormatEnabled2.Checked),
+                            if (RecForwConnection2.StartRecording(!this.chkBoxReplayFormatEnabled2.Checked,
+                                path_and_name + GetFileExtension(!this.chkBoxReplayFormatEnabled2.Checked),
                                    IPAddress.Parse(this.listBoxLocalAddr.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                    IPAddress.Parse(this.listBoxIPAddress.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                   int.Parse(this.listBoxPort.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString())) == false)
@@ -426,8 +443,8 @@ namespace AsterixDisplayAnalyser
                     case 2:
                         if (RecForwConnection3.IsRecordingEnabled() == false)
                         {
-                            if (RecForwConnection3.StartRecording(this.chkBoxReplayFormatEnabled3.Checked,
-                                path_and_name + GetFileExtension(this.chkBoxReplayFormatEnabled3.Checked),
+                            if (RecForwConnection3.StartRecording(!this.chkBoxReplayFormatEnabled3.Checked,
+                                path_and_name + GetFileExtension(!this.chkBoxReplayFormatEnabled3.Checked),
                                    IPAddress.Parse(this.listBoxLocalAddr.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                    IPAddress.Parse(this.listBoxIPAddress.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                   int.Parse(this.listBoxPort.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString())) == false)
@@ -445,8 +462,8 @@ namespace AsterixDisplayAnalyser
                     case 3:
                         if (RecForwConnection4.IsRecordingEnabled() == false)
                         {
-                            if (RecForwConnection4.StartRecording(this.chkBoxReplayFormatEnabled4.Checked,
-                                path_and_name + GetFileExtension(this.chkBoxReplayFormatEnabled4.Checked),
+                            if (RecForwConnection4.StartRecording(!this.chkBoxReplayFormatEnabled4.Checked,
+                                path_and_name + GetFileExtension(!this.chkBoxReplayFormatEnabled4.Checked),
                                    IPAddress.Parse(this.listBoxLocalAddr.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                    IPAddress.Parse(this.listBoxIPAddress.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                   int.Parse(this.listBoxPort.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString())) == false)
@@ -464,8 +481,8 @@ namespace AsterixDisplayAnalyser
                     case 4:
                         if (RecForwConnection5.IsRecordingEnabled() == false)
                         {
-                            if (RecForwConnection5.StartRecording(this.chkBoxReplayFormatEnabled5.Checked,
-                                path_and_name + GetFileExtension(this.chkBoxReplayFormatEnabled5.Checked),
+                            if (RecForwConnection5.StartRecording(!this.chkBoxReplayFormatEnabled5.Checked,
+                                path_and_name + GetFileExtension(!this.chkBoxReplayFormatEnabled5.Checked),
                                    IPAddress.Parse(this.listBoxLocalAddr.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                    IPAddress.Parse(this.listBoxIPAddress.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
                                   int.Parse(this.listBoxPort.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString())) == false)
@@ -589,13 +606,13 @@ namespace AsterixDisplayAnalyser
 
                 // First make sure that all required boxes are filled out
                 if ((!string.IsNullOrEmpty(this.txtboxIPAddress.Text)) &&
-                     (!string.IsNullOrEmpty(this.textBoxInterfaceAddr.Text)) &&
+                     (!string.IsNullOrEmpty(this.comboBoxNetworkInterface.Text)) &&
                     (!string.IsNullOrEmpty(this.textboxPort.Text)))
                 {
                     IPAddress IP;
                     IPAddress Multicast;
                     // Validate that a valid IP address is entered
-                    if ((IPAddress.TryParse(this.txtboxIPAddress.Text, out Multicast) != true) || (IPAddress.TryParse(this.textBoxInterfaceAddr.Text, out IP) != true))
+                    if ((IPAddress.TryParse(this.txtboxIPAddress.Text, out Multicast) != true) || (IPAddress.TryParse(this.comboBoxNetworkInterface.Text, out IP) != true))
                     {
                         MessageBox.Show("Not a valid IP address");
                         Input_Validated = false;
@@ -635,7 +652,7 @@ namespace AsterixDisplayAnalyser
 
                 if (Input_Validated == true)
                 {
-                    this.listBoxForwardingInterface.Items[(int)this.numericUpDown1.Value - 1] = this.textBoxInterfaceAddr.Text;
+                    this.listBoxForwardingInterface.Items[(int)this.numericUpDown1.Value - 1] = this.comboBoxNetworkInterface.Text;
                     this.listBoxForwardingMulticast.Items[(int)this.numericUpDown1.Value - 1] = this.txtboxIPAddress.Text;
                     this.listBoxForwardingPort.Items[(int)this.numericUpDown1.Value - 1] = this.textboxPort.Text;
 
@@ -643,26 +660,26 @@ namespace AsterixDisplayAnalyser
                     switch ((int)this.numericUpDown1.Value)
                     {
                         case 1:
-                            Properties.Settings.Default.FrwdInterface1 = this.textBoxInterfaceAddr.Text;
+                            Properties.Settings.Default.FrwdInterface1 = this.comboBoxNetworkInterface.Text;
                             Properties.Settings.Default.FrwdMulticast1 = this.txtboxIPAddress.Text;
                             Properties.Settings.Default.FrwdPort1 = this.textboxPort.Text;
                             break;
-                        case 2: Properties.Settings.Default.FrwdInterface2 = this.textBoxInterfaceAddr.Text;
+                        case 2: Properties.Settings.Default.FrwdInterface2 = this.comboBoxNetworkInterface.Text;
                             Properties.Settings.Default.FrwdMulticast2 = this.txtboxIPAddress.Text;
                             Properties.Settings.Default.FrwdPort2 = this.textboxPort.Text;
                             break;
                         case 3:
-                            Properties.Settings.Default.FrwdInterface3 = this.textBoxInterfaceAddr.Text;
+                            Properties.Settings.Default.FrwdInterface3 = this.comboBoxNetworkInterface.Text;
                             Properties.Settings.Default.FrwdMulticast3 = this.txtboxIPAddress.Text;
                             Properties.Settings.Default.FrwdPort3 = this.textboxPort.Text;
                             break;
                         case 4:
-                            Properties.Settings.Default.FrwdInterface4 = this.textBoxInterfaceAddr.Text;
+                            Properties.Settings.Default.FrwdInterface4 = this.comboBoxNetworkInterface.Text;
                             Properties.Settings.Default.FrwdMulticast4 = this.txtboxIPAddress.Text;
                             Properties.Settings.Default.FrwdPort4 = this.textboxPort.Text;
                             break;
                         case 5:
-                            Properties.Settings.Default.FrwdInterface5 = this.textBoxInterfaceAddr.Text;
+                            Properties.Settings.Default.FrwdInterface5 = this.comboBoxNetworkInterface.Text;
                             Properties.Settings.Default.FrwdMulticast5 = this.txtboxIPAddress.Text;
                             Properties.Settings.Default.FrwdPort5 = this.textboxPort.Text;
                             break;

@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
+using System.Net.NetworkInformation;
 
 namespace AsterixDisplayAnalyser
 {
@@ -15,24 +16,42 @@ namespace AsterixDisplayAnalyser
     {
 
         private static bool ReplayHasCompleted = false;
-        
+
         public FrmReplayForm()
         {
             InitializeComponent();
         }
 
 
-         public void NotifyReplayCompleted()
-         {
-             ReplayHasCompleted = true;
-         }
+        public void NotifyReplayCompleted()
+        {
+            ReplayHasCompleted = true;
+        }
 
         // Do not provide lower/max/close buttons
         private void ReplayForm_Load(object sender, EventArgs e)
         {
             this.ControlBox = false;
-            this.textBoxInterfaceAddr.Text = Properties.Settings.Default.ReplayInterface;
+
+            foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                {
+                    foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
+                    {
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        {
+                            comboBoxNetworkInterface.Items.Add(ip.Address.ToString());
+                        }
+                    }
+                }
+            }
+            if (comboBoxNetworkInterface.Items.Count > 0)
+                comboBoxNetworkInterface.SelectedIndex = 0;
+
             this.txtboxIPAddress.Text = Properties.Settings.Default.ReplayMulticast;
+
+
             this.textboxPort.Text = Properties.Settings.Default.ReplayPort;
         }
 
@@ -81,12 +100,12 @@ namespace AsterixDisplayAnalyser
 
                         // First make sure that all boxes are filled out
                         if ((!string.IsNullOrEmpty(this.txtboxIPAddress.Text)) &&
-                             (!string.IsNullOrEmpty(this.textBoxInterfaceAddr.Text)) &&
+                             (!string.IsNullOrEmpty(this.comboBoxNetworkInterface.Text)) &&
                             (!string.IsNullOrEmpty(this.textboxPort.Text)))
                         {
 
                             // Validate that a valid IP address is entered
-                            if ((IPAddress.TryParse(this.txtboxIPAddress.Text, out Multicast) != true) || (IPAddress.TryParse(this.textBoxInterfaceAddr.Text, out IP) != true))
+                            if ((IPAddress.TryParse(this.txtboxIPAddress.Text, out Multicast) != true) || (IPAddress.TryParse(this.comboBoxNetworkInterface.Text, out IP) != true))
                             {
                                 MessageBox.Show("Not a valid IP address");
                                 Input_Validated = false;
@@ -129,7 +148,6 @@ namespace AsterixDisplayAnalyser
                     if (Input_Validated == true)
                     {
                         // Syntatically all the provided data is valid, so save it off so it persists over the sessions
-                        Properties.Settings.Default.ReplayInterface = this.textBoxInterfaceAddr.Text;
                         Properties.Settings.Default.ReplayMulticast = this.txtboxIPAddress.Text;
                         Properties.Settings.Default.ReplayPort = this.textboxPort.Text;
                         Properties.Settings.Default.Save();
@@ -203,6 +221,107 @@ namespace AsterixDisplayAnalyser
         private void button1_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnSetConnection_Click(object sender, EventArgs e)
+        {
+            bool Input_Validated = true;
+            IPAddress IP = IPAddress.Any;
+            IPAddress Multicast = IPAddress.Any;
+            int PortNumber = 2222;
+
+
+            // First make sure that all boxes are filled out
+            if ((!string.IsNullOrEmpty(this.txtboxIPAddress.Text)) &&
+                 (!string.IsNullOrEmpty(this.comboBoxNetworkInterface.Text)) &&
+                (!string.IsNullOrEmpty(this.textboxPort.Text)))
+            {
+
+                // Validate that a valid IP address is entered
+                if ((IPAddress.TryParse(this.txtboxIPAddress.Text, out Multicast) != true) || (IPAddress.TryParse(this.comboBoxNetworkInterface.Text, out IP) != true))
+                {
+                    MessageBox.Show("Not a valid IP address");
+                    Input_Validated = false;
+                }
+                else // Add a check that this is a valid multicast address
+                {
+                    UdpClient TempSock;
+                    TempSock = new UdpClient(2222);// Port does not matter
+                    // Open up a new socket with the net IP address and port number   
+                    try
+                    {
+                        TempSock.JoinMulticastGroup(Multicast, 50); // 50 is TTL value
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Not valid Multicast address (has to be in range 224.0.0.0 to 239.255.255.255");
+                        Input_Validated = false;
+                    }
+                    if (TempSock != null)
+                        TempSock.Close();
+                }
+
+                if (int.TryParse(this.textboxPort.Text, out PortNumber) && (PortNumber >= 1 && PortNumber <= 65535))
+                {
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Port number");
+                    Input_Validated = false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please fill out all data fileds");
+                Input_Validated = false;
+            }
+
+
+            // Input has been validated, so lets connect to the provided multicast address and interface
+            if (Input_Validated == true)
+            {
+                // Syntatically all the provided data is valid, so save it off so it persists over the sessions
+                Properties.Settings.Default.ReplayMulticast = this.txtboxIPAddress.Text;
+                Properties.Settings.Default.ReplayPort = this.textboxPort.Text;
+                Properties.Settings.Default.Save();
+
+                SharedData.ConnName = "Loc Replay";
+                SharedData.CurrentInterfaceIPAddress = this.comboBoxNetworkInterface.Text;
+                SharedData.CurrentMulticastAddress = this.txtboxIPAddress.Text;
+                SharedData.Current_Port = int.Parse(this.textboxPort.Text);
+
+                if (ASTERIX.ReinitializeSocket() != true)
+                {
+                    SharedData.ResetConnectionParameters();
+                }
+            }
+        }
+
+        private void ValidateInputConnectionParameters()
+        {
+            if (this.textboxPort.Text.Length > 0 && this.txtboxIPAddress.Text.Length > 0 && this.comboBoxNetworkInterface.Text.Length > 0)
+                this.btnSetConnection.Enabled = true;
+            else
+                this.btnSetConnection.Enabled = false;
+        }
+        private void textboxPort_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputConnectionParameters();
+        }
+
+        private void txtboxIPAddress_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputConnectionParameters();
+        }
+
+        private void comboBoxNetworkInterface_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputConnectionParameters();
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+              AsterixReplay.LANReplay.SetReplaySpeed((int)this.numericUpDown1.Value);
         }
     }
 }

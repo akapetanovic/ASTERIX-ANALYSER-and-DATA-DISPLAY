@@ -13,8 +13,8 @@ namespace AsterixDisplayAnalyser
 {
     static class ASTERIX
     {
-        // Declare one 
-        private static DateTime LastDataBlockDateTime;
+        private static DateTime LastDataBlockDateTimeForRecording;
+        private static DateTime LastDataBlockDateTimeForStalleData;
 
         // This flag indicates that recording of data
         // just started
@@ -115,6 +115,12 @@ namespace AsterixDisplayAnalyser
                 sock.Close();
         }
 
+        // Returns time passed since the last data block was received
+        public static TimeSpan GetTimeSpanSinceLastDataBlockRecived()
+        {
+            return (DateTime.Now - LastDataBlockDateTimeForStalleData);
+        }
+
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // The method that gets invoked as a thread when a Connect button is 
         // pressed. It will listen on a given multicast address and store messages in the 
@@ -136,6 +142,7 @@ namespace AsterixDisplayAnalyser
                         // Lets receive data in an array of bytes 
                         // (an octet, of course composed of 8bits)
                         UDPBuffer = sock.Receive(ref iep);
+                        LastDataBlockDateTimeForStalleData = DateTime.Now;
                     }
                     catch
                     {
@@ -176,7 +183,7 @@ namespace AsterixDisplayAnalyser
                                 RecordingJustStarted = false;
                                 RecordingStream = new FileStream(SharedData.DataRecordingClass.FilePathandName, FileMode.Create);
                                 RecordingBinaryWriter = new BinaryWriter(RecordingStream);
-                                LastDataBlockDateTime = DateTime.Now;
+                                LastDataBlockDateTimeForRecording = DateTime.Now;
                             }
 
                             // Determine the type of the recording
@@ -187,8 +194,8 @@ namespace AsterixDisplayAnalyser
                             }
                             else // Here add headers
                             {
-                                TimeSpan TimeDiff = DateTime.Now - LastDataBlockDateTime;
-                                LastDataBlockDateTime = DateTime.Now;
+                                TimeSpan TimeDiff = DateTime.Now - LastDataBlockDateTimeForRecording;
+                                LastDataBlockDateTimeForRecording = DateTime.Now;
                                 // Header 1: Size of the original data block
                                 // Header 2: The time between two data blocks (current and the last one)
                                 //-----------------------------------------------------------------------

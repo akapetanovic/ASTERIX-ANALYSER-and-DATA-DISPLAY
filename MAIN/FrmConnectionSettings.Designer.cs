@@ -45,24 +45,14 @@
             this.textBoxConnectionName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.buttonSetAsActive = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.labelLocalInterface = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.labelPort = new System.Windows.Forms.Label();
-            this.labelConnAddress = new System.Windows.Forms.Label();
-            this.labelConnName = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.buttonClose = new System.Windows.Forms.Button();
             this.listBoxIPAddress = new System.Windows.Forms.ListBox();
             this.listBoxPort = new System.Windows.Forms.ListBox();
-            this.textBoxInterfaceAddr = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.listBoxLocalAddr = new System.Windows.Forms.ListBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.comboBoxNetworkInterface = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -213,98 +203,9 @@
             this.buttonSetAsActive.UseVisualStyleBackColor = true;
             this.buttonSetAsActive.Click += new System.EventHandler(this.button1_Click);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.labelLocalInterface);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.labelPort);
-            this.groupBox1.Controls.Add(this.labelConnAddress);
-            this.groupBox1.Controls.Add(this.labelConnName);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Location = new System.Drawing.Point(3, 335);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(276, 122);
-            this.groupBox1.TabIndex = 18;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Active connection";
-            // 
-            // labelLocalInterface
-            // 
-            this.labelLocalInterface.AutoSize = true;
-            this.labelLocalInterface.Location = new System.Drawing.Point(98, 47);
-            this.labelLocalInterface.Name = "labelLocalInterface";
-            this.labelLocalInterface.Size = new System.Drawing.Size(27, 13);
-            this.labelLocalInterface.TabIndex = 7;
-            this.labelLocalInterface.Text = "N/A";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(19, 47);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(81, 13);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "Local Interface:";
-            // 
-            // labelPort
-            // 
-            this.labelPort.AutoSize = true;
-            this.labelPort.Location = new System.Drawing.Point(98, 91);
-            this.labelPort.Name = "labelPort";
-            this.labelPort.Size = new System.Drawing.Size(27, 13);
-            this.labelPort.TabIndex = 5;
-            this.labelPort.Text = "N/A";
-            // 
-            // labelConnAddress
-            // 
-            this.labelConnAddress.AutoSize = true;
-            this.labelConnAddress.Location = new System.Drawing.Point(98, 69);
-            this.labelConnAddress.Name = "labelConnAddress";
-            this.labelConnAddress.Size = new System.Drawing.Size(27, 13);
-            this.labelConnAddress.TabIndex = 4;
-            this.labelConnAddress.Text = "N/A";
-            // 
-            // labelConnName
-            // 
-            this.labelConnName.AutoSize = true;
-            this.labelConnName.Location = new System.Drawing.Point(98, 25);
-            this.labelConnName.Name = "labelConnName";
-            this.labelConnName.Size = new System.Drawing.Size(27, 13);
-            this.labelConnName.TabIndex = 3;
-            this.labelConnName.Text = "N/A";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(19, 91);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(29, 13);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "Port:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(19, 69);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(77, 13);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Multicast Addr:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(19, 25);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(38, 13);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Name:";
-            // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(3, 463);
+            this.buttonClose.Location = new System.Drawing.Point(3, 335);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(276, 23);
             this.buttonClose.TabIndex = 19;
@@ -329,13 +230,6 @@
             this.listBoxPort.Size = new System.Drawing.Size(41, 108);
             this.listBoxPort.TabIndex = 21;
             this.listBoxPort.SelectedIndexChanged += new System.EventHandler(this.listBoxPort_SelectedIndexChanged);
-            // 
-            // textBoxInterfaceAddr
-            // 
-            this.textBoxInterfaceAddr.Location = new System.Drawing.Point(129, 59);
-            this.textBoxInterfaceAddr.Name = "textBoxInterfaceAddr";
-            this.textBoxInterfaceAddr.Size = new System.Drawing.Size(143, 20);
-            this.textBoxInterfaceAddr.TabIndex = 22;
             // 
             // label11
             // 
@@ -364,19 +258,26 @@
             this.label12.TabIndex = 25;
             this.label12.Text = "Local Addr";
             // 
-            // FrmSettings
+            // comboBoxNetworkInterface
+            // 
+            this.comboBoxNetworkInterface.FormattingEnabled = true;
+            this.comboBoxNetworkInterface.Location = new System.Drawing.Point(129, 59);
+            this.comboBoxNetworkInterface.Name = "comboBoxNetworkInterface";
+            this.comboBoxNetworkInterface.Size = new System.Drawing.Size(143, 21);
+            this.comboBoxNetworkInterface.TabIndex = 26;
+            // 
+            // FrmConnectionSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 489);
+            this.ClientSize = new System.Drawing.Size(284, 367);
+            this.Controls.Add(this.comboBoxNetworkInterface);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.listBoxLocalAddr);
-            this.Controls.Add(this.textBoxInterfaceAddr);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.listBoxPort);
             this.Controls.Add(this.listBoxIPAddress);
             this.Controls.Add(this.buttonClose);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonSetAsActive);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBoxConnectionName);
@@ -392,14 +293,12 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "FrmSettings";
+            this.Name = "FrmConnectionSettings";
             this.Text = "Connection Settings";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmSettings_FormClosed);
             this.Load += new System.EventHandler(this.FrmSettings_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -424,21 +323,12 @@
         private System.Windows.Forms.TextBox textBoxConnectionName;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttonSetAsActive;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label labelPort;
-        private System.Windows.Forms.Label labelConnAddress;
-        private System.Windows.Forms.Label labelConnName;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.ListBox listBoxIPAddress;
         private System.Windows.Forms.ListBox listBoxPort;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label labelLocalInterface;
-        private System.Windows.Forms.TextBox textBoxInterfaceAddr;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ListBox listBoxLocalAddr;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox comboBoxNetworkInterface;
     }
 }

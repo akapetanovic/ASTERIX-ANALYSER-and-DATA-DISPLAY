@@ -112,13 +112,27 @@ namespace AsterixDisplayAnalyser
         // display box with the currently received data
         private void DataUpdateTimer_Tick(object sender, EventArgs e)
         {
-
             int count = SharedData.DataBox.Items.Count;
             for (int i = 0; i < count; i++)
                 listBoxManFrame.Items.Add(SharedData.DataBox.Items[i]);
             SharedData.DataBox.Items.Clear();
 
             UpdateConnectionBoxInfo();
+
+            if (AsterixReplay.LANReplay.GetCurrentStatus() == AsterixReplay.ReplayStatus.Replaying)
+            {
+                labelBytesReplayed.Text = AsterixReplay.LANReplay.GetBytesProcessedSoFar().ToString() + " Bytes";
+                this.progressBarReplayActive.Visible = true;
+            }
+            else
+            {
+                this.progressBarReplayActive.Visible = false;
+                labelBytesReplayed.Text = "N/A";
+            }
+
+            this.labelClock.Text = DateTime.Now.ToLongTimeString();
+
+            this.labelFrozeDisplay.Visible = (this.checkEnableDisplay.Checked && SharedData.bool_Listen_for_Data && (ASTERIX.GetTimeSpanSinceLastDataBlockRecived().Seconds > 2));
         }
 
         public void UpdateConnectionBoxInfo()
@@ -240,9 +254,7 @@ namespace AsterixDisplayAnalyser
                 this.openAsterixReplayToolStripMenuItem.Enabled = true;
                 this.checkBoxRecording.Enabled = false;
                 this.checkBoxRecording.Checked = false;
-
-                if (this.labelFileToReplay.Text != "N/A")
-                    btnStartStopFileReplay.Enabled = true;
+                
             }
             else
             {
@@ -258,7 +270,7 @@ namespace AsterixDisplayAnalyser
                 this.openToolStripMenuItem.Enabled = false;
                 this.openAsterixReplayToolStripMenuItem.Enabled = false;
                 this.checkBoxRecording.Enabled = true;
-                btnStartStopFileReplay.Enabled = false;
+               
             }
 
             HandlePlotDisplayEnabledChanged();
@@ -1646,7 +1658,13 @@ namespace AsterixDisplayAnalyser
 
         private void replayToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReplayForm.Visible = true;
+            ReplayForm.Location = System.Windows.Forms.Cursor.Position;
+            if (ReplayForm.WindowState == FormWindowState.Minimized)
+                ReplayForm.WindowState = FormWindowState.Normal;
+            else
+            {
+                ReplayForm.Visible = true;
+            }
         }
 
         private void checkBoxRecordInRaw_CheckedChanged(object sender, EventArgs e)
@@ -1664,14 +1682,25 @@ namespace AsterixDisplayAnalyser
 
             if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
             {
-                this.labelFileToReplay.Text = openFileDialog1.SafeFileName;
-                btnStartStopFileReplay.Enabled = true;
+                this.labelBytesReplayed.Text = openFileDialog1.SafeFileName;
             }
         }
 
         private void btnStartStopFileReplay_Click(object sender, EventArgs e)
         {
+            if (ReplayForm.WindowState == FormWindowState.Minimized)
+                ReplayForm.WindowState = FormWindowState.Normal;
+            else
+            {
+                ReplayForm.Visible = true;
+            }
+            ReplayForm.Location = System.Windows.Forms.Cursor.Position;
+        }
 
+        private void replayToRawToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmReplayForm RtoR = new FrmReplayForm();
+            RtoR.Show();
         }
     }
 }

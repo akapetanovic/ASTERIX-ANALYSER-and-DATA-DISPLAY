@@ -34,8 +34,8 @@
             this.txtboxIPAddress = new System.Windows.Forms.TextBox();
             this.textboxPort = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBoxInterfaceAddr = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBoxNetworkInterface = new System.Windows.Forms.ComboBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,9 +50,12 @@
             this.timerMonitorReplay = new System.Windows.Forms.Timer(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.lblBytesSent = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSetConnection = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -79,6 +82,7 @@
             this.txtboxIPAddress.Name = "txtboxIPAddress";
             this.txtboxIPAddress.Size = new System.Drawing.Size(203, 20);
             this.txtboxIPAddress.TabIndex = 24;
+            this.txtboxIPAddress.TextChanged += new System.EventHandler(this.txtboxIPAddress_TextChanged);
             // 
             // textboxPort
             // 
@@ -86,6 +90,7 @@
             this.textboxPort.Name = "textboxPort";
             this.textboxPort.Size = new System.Drawing.Size(203, 20);
             this.textboxPort.TabIndex = 26;
+            this.textboxPort.TextChanged += new System.EventHandler(this.textboxPort_TextChanged);
             // 
             // label11
             // 
@@ -96,16 +101,9 @@
             this.label11.TabIndex = 29;
             this.label11.Text = "Local Interface Addr:";
             // 
-            // textBoxInterfaceAddr
-            // 
-            this.textBoxInterfaceAddr.Location = new System.Drawing.Point(128, 29);
-            this.textBoxInterfaceAddr.Name = "textBoxInterfaceAddr";
-            this.textBoxInterfaceAddr.Size = new System.Drawing.Size(203, 20);
-            this.textBoxInterfaceAddr.TabIndex = 28;
-            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBoxInterfaceAddr);
+            this.groupBox1.Controls.Add(this.comboBoxNetworkInterface);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label2);
@@ -118,13 +116,22 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Destination Parameters";
             // 
+            // comboBoxNetworkInterface
+            // 
+            this.comboBoxNetworkInterface.FormattingEnabled = true;
+            this.comboBoxNetworkInterface.Location = new System.Drawing.Point(128, 29);
+            this.comboBoxNetworkInterface.Name = "comboBoxNetworkInterface";
+            this.comboBoxNetworkInterface.Size = new System.Drawing.Size(203, 21);
+            this.comboBoxNetworkInterface.TabIndex = 30;
+            this.comboBoxNetworkInterface.TextChanged += new System.EventHandler(this.comboBoxNetworkInterface_TextChanged);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(366, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(362, 24);
             this.menuStrip1.TabIndex = 31;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -184,9 +191,9 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(15, 224);
+            this.progressBar1.Location = new System.Drawing.Point(15, 246);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(184, 23);
+            this.progressBar1.Size = new System.Drawing.Size(253, 23);
             this.progressBar1.Step = 2;
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 36;
@@ -212,9 +219,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(208, 224);
+            this.button2.Location = new System.Drawing.Point(274, 246);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(71, 23);
+            this.button2.Size = new System.Drawing.Size(78, 23);
             this.button2.TabIndex = 39;
             this.button2.Text = "Close";
             this.button2.UseVisualStyleBackColor = true;
@@ -228,7 +235,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(205, 200);
+            this.label4.Location = new System.Drawing.Point(15, 230);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(63, 13);
             this.label4.TabIndex = 40;
@@ -237,28 +244,63 @@
             // lblBytesSent
             // 
             this.lblBytesSent.AutoSize = true;
-            this.lblBytesSent.Location = new System.Drawing.Point(261, 200);
+            this.lblBytesSent.Location = new System.Drawing.Point(71, 230);
             this.lblBytesSent.Name = "lblBytesSent";
             this.lblBytesSent.Size = new System.Drawing.Size(42, 13);
             this.lblBytesSent.TabIndex = 41;
             this.lblBytesSent.Text = "0 Bytes";
             // 
-            // button1
+            // btnSetConnection
             // 
-            this.button1.Location = new System.Drawing.Point(285, 224);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 42;
-            this.button1.Text = "Minimize";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnSetConnection.Enabled = false;
+            this.btnSetConnection.Location = new System.Drawing.Point(264, 27);
+            this.btnSetConnection.Name = "btnSetConnection";
+            this.btnSetConnection.Size = new System.Drawing.Size(88, 38);
+            this.btnSetConnection.TabIndex = 43;
+            this.btnSetConnection.Text = "Set Input Connection";
+            this.btnSetConnection.UseVisualStyleBackColor = true;
+            this.btnSetConnection.Click += new System.EventHandler(this.btnSetConnection_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(205, 200);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(57, 13);
+            this.label6.TabIndex = 44;
+            this.label6.Text = "Speed:  X ";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(268, 198);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(36, 20);
+            this.numericUpDown1.TabIndex = 45;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // FrmReplayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(366, 256);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(362, 276);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.btnSetConnection);
             this.Controls.Add(this.lblBytesSent);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.button2);
@@ -280,6 +322,7 @@
             this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -292,7 +335,6 @@
         private System.Windows.Forms.TextBox txtboxIPAddress;
         private System.Windows.Forms.TextBox textboxPort;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBoxInterfaceAddr;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -308,6 +350,9 @@
         private System.Windows.Forms.Timer timerMonitorReplay;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblBytesSent;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox comboBoxNetworkInterface;
+        private System.Windows.Forms.Button btnSetConnection;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

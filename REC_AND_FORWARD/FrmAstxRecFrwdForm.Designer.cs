@@ -45,7 +45,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.listBoxIPAddress = new System.Windows.Forms.ListBox();
             this.listBoxPort = new System.Windows.Forms.ListBox();
-            this.textBoxInterfaceAddr = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.listBoxLocalAddr = new System.Windows.Forms.ListBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -111,6 +110,7 @@
             this.progressBarF1 = new System.Windows.Forms.ProgressBar();
             this.label20 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBoxNetworkInterface = new System.Windows.Forms.ComboBox();
             this.button5 = new System.Windows.Forms.Button();
             this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape12 = new Microsoft.VisualBasic.PowerPacks.LineShape();
@@ -261,13 +261,6 @@
             this.listBoxPort.Size = new System.Drawing.Size(41, 84);
             this.listBoxPort.TabIndex = 21;
             this.listBoxPort.SelectedIndexChanged += new System.EventHandler(this.listBoxPort_SelectedIndexChanged);
-            // 
-            // textBoxInterfaceAddr
-            // 
-            this.textBoxInterfaceAddr.Location = new System.Drawing.Point(120, 51);
-            this.textBoxInterfaceAddr.Name = "textBoxInterfaceAddr";
-            this.textBoxInterfaceAddr.Size = new System.Drawing.Size(203, 20);
-            this.textBoxInterfaceAddr.TabIndex = 22;
             // 
             // label11
             // 
@@ -785,9 +778,9 @@
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(414, 167);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(60, 13);
+            this.label19.Size = new System.Drawing.Size(61, 13);
             this.label19.TabIndex = 65;
-            this.label19.Text = "Replay Fmt";
+            this.label19.Text = "Raw format";
             // 
             // chkBoxReplayFormatEnabled1
             // 
@@ -895,6 +888,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboBoxNetworkInterface);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Controls.Add(this.button3);
@@ -909,7 +903,6 @@
             this.groupBox1.Controls.Add(this.textboxPort);
             this.groupBox1.Controls.Add(this.textBoxConnectionName);
             this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.textBoxInterfaceAddr);
             this.groupBox1.Controls.Add(this.shapeContainer2);
             this.groupBox1.Location = new System.Drawing.Point(51, 3);
             this.groupBox1.Name = "groupBox1";
@@ -917,6 +910,14 @@
             this.groupBox1.TabIndex = 77;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Add/Modify Connections";
+            // 
+            // comboBoxNetworkInterface
+            // 
+            this.comboBoxNetworkInterface.FormattingEnabled = true;
+            this.comboBoxNetworkInterface.Location = new System.Drawing.Point(120, 48);
+            this.comboBoxNetworkInterface.Name = "comboBoxNetworkInterface";
+            this.comboBoxNetworkInterface.Size = new System.Drawing.Size(203, 21);
+            this.comboBoxNetworkInterface.TabIndex = 59;
             // 
             // button5
             // 
@@ -1058,7 +1059,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ListBox listBoxIPAddress;
         private System.Windows.Forms.ListBox listBoxPort;
-        private System.Windows.Forms.TextBox textBoxInterfaceAddr;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ListBox listBoxLocalAddr;
         private System.Windows.Forms.Label label12;
@@ -1128,5 +1128,6 @@
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape12;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.ComboBox comboBoxNetworkInterface;
     }
 }
