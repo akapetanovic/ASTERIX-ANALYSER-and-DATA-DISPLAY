@@ -130,7 +130,11 @@ namespace AsterixDisplayAnalyser
                 labelBytesReplayed.Text = "N/A";
             }
 
-            this.labelClock.Text = DateTime.Now.ToLongTimeString();
+            if (checkBoxIs_UTC.Checked)
+                this.labelClock.Text = DateTime.UtcNow.ToLongTimeString();
+            else
+                this.labelClock.Text = DateTime.Now.ToLongTimeString();
+
 
             this.labelFrozeDisplay.Visible = (this.checkEnableDisplay.Checked && SharedData.bool_Listen_for_Data && (ASTERIX.GetTimeSpanSinceLastDataBlockRecived().Seconds > 2));
         }
@@ -166,7 +170,6 @@ namespace AsterixDisplayAnalyser
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-
             // Initialize Map
             InitializeMap();
 
@@ -251,10 +254,9 @@ namespace AsterixDisplayAnalyser
                 this.dataBySSRCodeToolStripMenuItem.Enabled = true;
                 this.googleEarthToolStripMenuItem.Enabled = true;
                 this.openToolStripMenuItem.Enabled = true;
-                this.openAsterixReplayToolStripMenuItem.Enabled = true;
                 this.checkBoxRecording.Enabled = false;
                 this.checkBoxRecording.Checked = false;
-                
+
             }
             else
             {
@@ -268,9 +270,8 @@ namespace AsterixDisplayAnalyser
                 this.dataBySSRCodeToolStripMenuItem.Enabled = false;
                 this.googleEarthToolStripMenuItem.Enabled = false;
                 this.openToolStripMenuItem.Enabled = false;
-                this.openAsterixReplayToolStripMenuItem.Enabled = false;
                 this.checkBoxRecording.Enabled = true;
-               
+
             }
 
             HandlePlotDisplayEnabledChanged();
@@ -1699,7 +1700,7 @@ namespace AsterixDisplayAnalyser
 
         private void replayToRawToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmReplayForm RtoR = new FrmReplayForm();
+            FrmReplayToRaw RtoR = new FrmReplayToRaw();
             RtoR.Show();
         }
     }

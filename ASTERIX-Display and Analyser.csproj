@@ -493,6 +493,7 @@
       <DependentUpon>FrmReplayToRaw.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="DATA SAMPLES\Jahorina.raw" />
     <None Include="DATA SAMPLES\Jahorina.rply" />
     <None Include="MAIN\app.config" />
     <None Include="Properties\Settings.settings">

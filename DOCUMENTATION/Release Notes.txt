@@ -1,4 +1,4 @@
-﻿Release Notes
+﻿RELEASE NOTES
 
 SO FAR THE FOLLOWING DECODERS ARE IMPLEMENTED
 
@@ -41,11 +41,13 @@ VERSION HISTORY
 Version 1.7
 
 	1. Implemented LAN data replay functionality (ASTERIX data is sent on the LAN)
-		1.1 Replay speed adjustable from original to up to 10 times faster.
-	2. Enhanced recording to support replay (each data block gets proprietary header that enables replay in real time).
+		1.1 ASTERIX Replay speed adjustable from original to up to 10 times faster.
+	2. Enhanced recording to support replay ("replay" format where each data block gets proprietary header that enables replay in real time).
 	3. Enhanced connection/replay/record/forward dialogs to pre-fill available network interfaces (its IP addresses)
 	4. Added DISPLAY FROZEN message (when data is expected and no received for over 2 seconds).
-	5. Added CLOCK display
+	5. Added "Replay" to "Raw" ASTERIX recording conversion tool
+	6. Added CLOCK display (Local or UTC)
+	7. Fixed bug on Recording and Forwarding GUI related to Forward checkbox.
 
 Version 1.6
 

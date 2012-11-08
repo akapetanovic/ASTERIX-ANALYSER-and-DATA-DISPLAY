@@ -256,22 +256,6 @@ namespace AsterixDisplayAnalyser
             this.listBoxForwardingInterface.SelectedIndex = 0;
             this.listBoxForwardingMulticast.SelectedIndex = 0;
             this.listBoxForwardingPort.SelectedIndex = 0;
-
-            foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
-            {
-                if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
-                {
-                    foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
-                    {
-                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                        {
-                            comboBoxNetworkInterface.Items.Add(ip.Address.ToString());
-                        }
-                    }
-                }
-            }
-            if (comboBoxNetworkInterface.Items.Count > 0)
-                comboBoxNetworkInterface.SelectedIndex = 0;
         }
 
         private void FrmSettings_FormClosed(object sender, FormClosedEventArgs e)
@@ -382,6 +366,24 @@ namespace AsterixDisplayAnalyser
                 this.timer1.Start();
             else
                 this.timer1.Stop();
+
+            comboBoxNetworkInterface.Items.Clear();
+
+            foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                {
+                    foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
+                    {
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        {
+                            comboBoxNetworkInterface.Items.Add(ip.Address.ToString());
+                        }
+                    }
+                }
+            }
+            if (comboBoxNetworkInterface.Items.Count > 0)
+                comboBoxNetworkInterface.SelectedIndex = 0;
         }
 
         private string GetFileExtension(bool IsReplay)
@@ -690,6 +692,8 @@ namespace AsterixDisplayAnalyser
                     this.listBoxForwardingInterface.SelectedIndex = (int)this.numericUpDown1.Value - 1;
                     this.listBoxForwardingMulticast.SelectedIndex = (int)this.numericUpDown1.Value - 1;
                     this.listBoxForwardingPort.SelectedIndex = (int)this.numericUpDown1.Value - 1;
+
+                    UpdateForwardingCheckBoxes();
                 }
             }
         }
@@ -732,6 +736,7 @@ namespace AsterixDisplayAnalyser
                 this.listBoxForwardingInterface.Items[(int)this.numericUpDown1.Value - 1] = "None";
                 this.listBoxForwardingMulticast.Items[(int)this.numericUpDown1.Value - 1] = "None";
                 this.listBoxForwardingPort.Items[(int)this.numericUpDown1.Value - 1] = "None";
+                UpdateForwardingCheckBoxes();
             }
         }
 
@@ -743,27 +748,27 @@ namespace AsterixDisplayAnalyser
             this.checkBoxF4.Enabled = false;
             this.checkBoxF5.Enabled = false;
 
-            for (int I = 1; I <= this.checkedListBoxRecordingName.Items.Count; I++)
+            for (int I = 0; I < this.checkedListBoxRecordingName.Items.Count; I++)
             {
                 switch (I)
                 {
-                    case 1:
+                    case 0:
                         if ((string)listBoxForwardingInterface.Items[0] != "None")
                             this.checkBoxF1.Enabled = true;
                         break;
-                    case 2:
+                    case 1:
                         if ((string)listBoxForwardingInterface.Items[1] != "None")
                             this.checkBoxF2.Enabled = true;
                         break;
-                    case 3:
+                    case 2:
                         if ((string)listBoxForwardingInterface.Items[2] != "None")
                             this.checkBoxF3.Enabled = true;
                         break;
-                    case 4:
+                    case 3:
                         if ((string)listBoxForwardingInterface.Items[3] != "None")
                             this.checkBoxF4.Enabled = true;
                         break;
-                    case 5:
+                    case 4:
                         if ((string)listBoxForwardingInterface.Items[4] != "None")
                             this.checkBoxF5.Enabled = true;
                         break;

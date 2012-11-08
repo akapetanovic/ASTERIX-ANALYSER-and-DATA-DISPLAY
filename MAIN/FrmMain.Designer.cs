@@ -33,7 +33,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openAsterixReplayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cATDecoderSelectorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +41,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.recorderAndDataForwarderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.replayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.replayToRawToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetDataBufferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cAT001DataItemPresenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -220,7 +220,7 @@
             this.progressBarReplayActive = new System.Windows.Forms.ProgressBar();
             this.btnStartStopFileReplay = new System.Windows.Forms.Button();
             this.labelClock = new System.Windows.Forms.Label();
-            this.replayToRawToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBoxIs_UTC = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -264,8 +264,7 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.openAsterixReplayToolStripMenuItem});
+            this.openToolStripMenuItem});
             this.toolStripMenuItem1.ForeColor = System.Drawing.Color.Silver;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(37, 20);
@@ -275,16 +274,9 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.openToolStripMenuItem.Text = "Open Asterix Raw";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
-            // 
-            // openAsterixReplayToolStripMenuItem
-            // 
-            this.openAsterixReplayToolStripMenuItem.Name = "openAsterixReplayToolStripMenuItem";
-            this.openAsterixReplayToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.openAsterixReplayToolStripMenuItem.Text = "Open Asterix Replay";
-            this.openAsterixReplayToolStripMenuItem.Click += new System.EventHandler(this.openAsterixReplayToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -352,6 +344,13 @@
             this.replayToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.replayToolStripMenuItem.Text = "Replay";
             this.replayToolStripMenuItem.Click += new System.EventHandler(this.replayToolStripMenuItem_Click);
+            // 
+            // replayToRawToolStripMenuItem
+            // 
+            this.replayToRawToolStripMenuItem.Name = "replayToRawToolStripMenuItem";
+            this.replayToRawToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.replayToRawToolStripMenuItem.Text = "Replay to Raw";
+            this.replayToRawToolStripMenuItem.Click += new System.EventHandler(this.replayToRawToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -479,7 +478,7 @@
             this.warningErrorConditionsToolStripMenuItem,
             this.presenceOfXPulseToolStripMenuItem});
             this.cAT001ToolStripMenuItem.Name = "cAT001ToolStripMenuItem";
-            this.cAT001ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.cAT001ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cAT001ToolStripMenuItem.Text = "CAT001";
             // 
             // targetReportDescriptorToolStripMenuItem
@@ -594,7 +593,7 @@
             this.collimationErrorToolStripMenuItem,
             this.warningErrorConditionsToolStripMenuItem1});
             this.cAT002ToolStripMenuItem.Name = "cAT002ToolStripMenuItem";
-            this.cAT002ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.cAT002ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cAT002ToolStripMenuItem.Text = "CAT002";
             // 
             // messageTypeToolStripMenuItem
@@ -683,7 +682,7 @@
             this.sequenceOfWeatherVectorsInSPFNotationToolStripMenuItem});
             this.cAT008ToolStripMenuItem1.Enabled = false;
             this.cAT008ToolStripMenuItem1.Name = "cAT008ToolStripMenuItem1";
-            this.cAT008ToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
+            this.cAT008ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.cAT008ToolStripMenuItem1.Text = "CAT008";
             // 
             // messageTypeToolStripMenuItem1
@@ -769,7 +768,7 @@
             this.dPositionOfDataSourceToolStripMenuItem,
             this.collimationErrorToolStripMenuItem1});
             this.cAT034ToolStripMenuItem.Name = "cAT034ToolStripMenuItem";
-            this.cAT034ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.cAT034ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cAT034ToolStripMenuItem.Text = "CAT034";
             // 
             // messageTypeToolStripMenuItem2
@@ -869,7 +868,7 @@
             this.mode1CodeInOctalRepresentationToolStripMenuItem,
             this.mode1CodeConfidenceIndicatorToolStripMenuItem});
             this.cAT048ToolStripMenuItem.Name = "cAT048ToolStripMenuItem";
-            this.cAT048ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.cAT048ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cAT048ToolStripMenuItem.Text = "CAT048";
             // 
             // timeofDayToolStripMenuItem3
@@ -1046,7 +1045,7 @@
             this.measuredFlightLevelToolStripMenuItem,
             this.aircraftDerivedDataSUBF2ACIDToolStripMenuItem});
             this.cAT062ToolStripMenuItem.Name = "cAT062ToolStripMenuItem";
-            this.cAT062ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.cAT062ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cAT062ToolStripMenuItem.Text = "CAT062";
             // 
             // serviceIdentificationToolStripMenuItem
@@ -1095,21 +1094,21 @@
             // 
             this.cAT063ToolStripMenuItem1.Enabled = false;
             this.cAT063ToolStripMenuItem1.Name = "cAT063ToolStripMenuItem1";
-            this.cAT063ToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
+            this.cAT063ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.cAT063ToolStripMenuItem1.Text = "CAT063";
             // 
             // cAT065ToolStripMenuItem
             // 
             this.cAT065ToolStripMenuItem.Enabled = false;
             this.cAT065ToolStripMenuItem.Name = "cAT065ToolStripMenuItem";
-            this.cAT065ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.cAT065ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cAT065ToolStripMenuItem.Text = "CAT065";
             // 
             // cAT244ToolStripMenuItem
             // 
             this.cAT244ToolStripMenuItem.Enabled = false;
             this.cAT244ToolStripMenuItem.Name = "cAT244ToolStripMenuItem";
-            this.cAT244ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.cAT244ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cAT244ToolStripMenuItem.Text = "CAT244";
             // 
             // dataBySSRCodeToolStripMenuItem
@@ -2039,18 +2038,22 @@
             this.labelClock.AutoSize = true;
             this.labelClock.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelClock.ForeColor = System.Drawing.Color.Lime;
-            this.labelClock.Location = new System.Drawing.Point(173, 31);
+            this.labelClock.Location = new System.Drawing.Point(217, 28);
             this.labelClock.Name = "labelClock";
             this.labelClock.Size = new System.Drawing.Size(83, 25);
             this.labelClock.TabIndex = 27;
             this.labelClock.Text = "CLOCK";
             // 
-            // replayToRawToolStripMenuItem
+            // checkBoxIs_UTC
             // 
-            this.replayToRawToolStripMenuItem.Name = "replayToRawToolStripMenuItem";
-            this.replayToRawToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.replayToRawToolStripMenuItem.Text = "Replay to Raw";
-            this.replayToRawToolStripMenuItem.Click += new System.EventHandler(this.replayToRawToolStripMenuItem_Click);
+            this.checkBoxIs_UTC.AutoSize = true;
+            this.checkBoxIs_UTC.ForeColor = System.Drawing.Color.Silver;
+            this.checkBoxIs_UTC.Location = new System.Drawing.Point(173, 34);
+            this.checkBoxIs_UTC.Name = "checkBoxIs_UTC";
+            this.checkBoxIs_UTC.Size = new System.Drawing.Size(48, 17);
+            this.checkBoxIs_UTC.TabIndex = 28;
+            this.checkBoxIs_UTC.Text = "UTC";
+            this.checkBoxIs_UTC.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
@@ -2058,6 +2061,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1189, 781);
+            this.Controls.Add(this.checkBoxIs_UTC);
             this.Controls.Add(this.labelClock);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -2067,7 +2071,7 @@
             this.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
-            this.Text = "AMER KAPETANOVIC - ASTERIX DISPLAY and ANALYSER  1.7";
+            this.Text = "AMER KAPETANOVIC - ASTERIX DARR  1.7";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.Resize += new System.EventHandler(this.FormMain_Resize);
@@ -2287,7 +2291,6 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox checkBoxRecordInRaw;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ToolStripMenuItem openAsterixReplayToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button btnStartStopFileReplay;
         private System.Windows.Forms.ProgressBar progressBarReplayActive;
@@ -2295,6 +2298,7 @@
         private System.Windows.Forms.Label labelFrozeDisplay;
         private System.Windows.Forms.Label labelClock;
         private System.Windows.Forms.ToolStripMenuItem replayToRawToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBoxIs_UTC;
     }
 }
 

@@ -297,6 +297,7 @@
             this.Text = "Connection Settings";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmSettings_FormClosed);
             this.Load += new System.EventHandler(this.FrmSettings_Load);
+            this.VisibleChanged += new System.EventHandler(this.FrmConnectionSettings_VisibleChanged);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

@@ -32,26 +32,7 @@ namespace AsterixDisplayAnalyser
         private void ReplayForm_Load(object sender, EventArgs e)
         {
             this.ControlBox = false;
-
-            foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
-            {
-                if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
-                {
-                    foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
-                    {
-                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                        {
-                            comboBoxNetworkInterface.Items.Add(ip.Address.ToString());
-                        }
-                    }
-                }
-            }
-            if (comboBoxNetworkInterface.Items.Count > 0)
-                comboBoxNetworkInterface.SelectedIndex = 0;
-
             this.txtboxIPAddress.Text = Properties.Settings.Default.ReplayMulticast;
-
-
             this.textboxPort.Text = Properties.Settings.Default.ReplayPort;
         }
 
@@ -322,6 +303,26 @@ namespace AsterixDisplayAnalyser
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
               AsterixReplay.LANReplay.SetReplaySpeed((int)this.numericUpDown1.Value);
+        }
+
+        private void FrmReplayForm_VisibleChanged(object sender, EventArgs e)
+        {
+            comboBoxNetworkInterface.Items.Clear();
+            foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                {
+                    foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
+                    {
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        {
+                            comboBoxNetworkInterface.Items.Add(ip.Address.ToString());
+                        }
+                    }
+                }
+            }
+            if (comboBoxNetworkInterface.Items.Count > 0)
+                comboBoxNetworkInterface.SelectedIndex = 0;
         }
     }
 }

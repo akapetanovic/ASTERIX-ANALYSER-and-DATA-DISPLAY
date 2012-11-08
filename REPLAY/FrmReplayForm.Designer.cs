@@ -318,6 +318,7 @@
             this.Text = "ASTERIX Replay ";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.ReplayForm_Load);
+            this.VisibleChanged += new System.EventHandler(this.FrmReplayForm_VisibleChanged);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
