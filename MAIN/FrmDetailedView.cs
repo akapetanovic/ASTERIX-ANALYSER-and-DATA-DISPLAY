@@ -141,6 +141,7 @@ namespace AsterixDisplayAnalyser
                     break;
                 // System Configuration and Status
                 case DisplayType.CAT34I050:
+                    DisplayCAT34I050Data();
                     break;
                 #endregion
                 //////////////////////////////////////////////////////////////////////////////////////
@@ -798,6 +799,84 @@ namespace AsterixDisplayAnalyser
                 this.listBoxMainDataBox.Items.Add("No data of this CAT/Item was received !!!");
             }
         }
+        private void DisplayCAT34I050Data()
+        {
+            if (MainASTERIXDataStorage.CAT34Message.Count > 0)
+            {
+                this.listBoxMainDataBox.Items.Add("Detailed view of: " + MainASTERIXDataStorage.CAT34Message[0].CAT34DataItems[CAT02.ItemIDToIndex("010")].Description);
+                ASTERIX.SIC_SAC_Time SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)MainASTERIXDataStorage.CAT34Message[0].CAT34DataItems[CAT02.ItemIDToIndex("010")].value;
+                this.listBoxMainDataBox.Items.Add("SIC/SAC: " + SIC_SAC_TIME.SIC.ToString() + "/" + SIC_SAC_TIME.SAC.ToString());
+                this.listBoxMainDataBox.Items.Add("    ");
+
+                // Here determine the flag indicating what data is to be shown
+                foreach (MainASTERIXDataStorage.CAT34Data Msg in MainASTERIXDataStorage.CAT34Message)
+                {
+                    if (Msg.CAT34DataItems[CAT34.ItemIDToIndex("050")].value != null)
+                    {
+                        SIC_SAC_TIME = (ASTERIX.SIC_SAC_Time)Msg.CAT34DataItems[CAT34.ItemIDToIndex("010")].value;
+
+                        // Display time
+                        string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
+                            SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
+                        this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
+
+                        CAT34I050Types.CAT34I050UserData CAT35I050Data = (CAT34I050Types.CAT34I050UserData)Msg.CAT34DataItems[CAT34.ItemIDToIndex("050")].value;
+                        if (CAT35I050Data.COM_Data.Data_Present == true)
+                        {
+                            this.listBoxMainDataBox.Items.Add(" COM Subfield");
+                            this.listBoxMainDataBox.Items.Add("   System NOGO: " + CAT35I050Data.COM_Data.System_is_NOGO.ToString());
+                            this.listBoxMainDataBox.Items.Add("   RDPC-2 Selected: " + CAT35I050Data.COM_Data.RDPC2_Selected.ToString());
+                            this.listBoxMainDataBox.Items.Add("   Reset of RDPC: " + CAT35I050Data.COM_Data.RDPC_Reset.ToString());
+                            this.listBoxMainDataBox.Items.Add("   Overload in RDP: " + CAT35I050Data.COM_Data.RDP_Overloaded.ToString());
+                            this.listBoxMainDataBox.Items.Add("   Overload in XMT: " + CAT35I050Data.COM_Data.Transmision_Sys_Overloaded.ToString());
+                            this.listBoxMainDataBox.Items.Add("   RMC Disconnected: " + CAT35I050Data.COM_Data.Monitor_Sys_Disconected.ToString());
+                            this.listBoxMainDataBox.Items.Add("   Time Src Invalid: " + CAT35I050Data.COM_Data.Time_Source_Invalid.ToString());
+                        }
+                        this.listBoxMainDataBox.Items.Add("    ");
+                        
+                        if (CAT35I050Data.PSR_Data.Data_Present == true)
+                        {
+                            this.listBoxMainDataBox.Items.Add(" PSR Subfield");
+                            this.listBoxMainDataBox.Items.Add("   ANT-2 Selected: " + CAT35I050Data.PSR_Data.Ant_2_Selected.ToString());
+                            this.listBoxMainDataBox.Items.Add("   Channel selected: " + CAT35I050Data.PSR_Data.CH_Status.ToString());
+                            this.listBoxMainDataBox.Items.Add("   Overloaded: " + CAT35I050Data.PSR_Data.PSR_Overloaded.ToString());
+                            this.listBoxMainDataBox.Items.Add("   RMC Disconnected: " + CAT35I050Data.PSR_Data.Monitor_Sys_Disconected.ToString());
+                        }
+                        this.listBoxMainDataBox.Items.Add("    ");
+                        
+                        if (CAT35I050Data.SSR_Data.Data_Present == true)
+                        {
+                            this.listBoxMainDataBox.Items.Add(" SSR Subfield");
+                            this.listBoxMainDataBox.Items.Add("   ANT-2 Selected: " + CAT35I050Data.SSR_Data.Ant_2_Selected.ToString());
+                            this.listBoxMainDataBox.Items.Add("   Channel selected: " + CAT35I050Data.SSR_Data.CH_Status.ToString());
+                            this.listBoxMainDataBox.Items.Add("   Overloaded: " + CAT35I050Data.SSR_Data.SSR_Overloaded.ToString());
+                            this.listBoxMainDataBox.Items.Add("   RMC Disconnected: " + CAT35I050Data.SSR_Data.Monitor_Sys_Disconected.ToString());
+                        }
+                        this.listBoxMainDataBox.Items.Add("    ");
+                        
+                        if (CAT35I050Data.MDS_Data.Data_Present == true)
+                        {
+                            this.listBoxMainDataBox.Items.Add(" MDS Subfield");
+                            this.listBoxMainDataBox.Items.Add("   ANT-2 Selected: " + CAT35I050Data.MDS_Data.Ant_2_Selected.ToString());
+                            this.listBoxMainDataBox.Items.Add("   Channel selected: " + CAT35I050Data.MDS_Data.CH_Status.ToString());
+                            this.listBoxMainDataBox.Items.Add("   Overloaded: " + CAT35I050Data.MDS_Data.ModeS_Overloaded.ToString());
+                            this.listBoxMainDataBox.Items.Add("   RMC Disconnected: " + CAT35I050Data.MDS_Data.Monitor_Sys_Disconected.ToString());
+                            this.listBoxMainDataBox.Items.Add("   CH2 Sel Surrv Cor: " + CAT35I050Data.MDS_Data.CH2_For_Coordination_In_Use.ToString());
+                            this.listBoxMainDataBox.Items.Add("   CH2 Sel Data Link: " + CAT35I050Data.MDS_Data.CH2_For_DataLink_In_Use.ToString());
+                            this.listBoxMainDataBox.Items.Add("   Overl Surrv Cor: " + CAT35I050Data.MDS_Data.Coordination_Func_Overload.ToString());
+                            this.listBoxMainDataBox.Items.Add("   Overl Data Link: " + CAT35I050Data.MDS_Data.DataLink_Func_Overload.ToString());
+                        }
+                        this.listBoxMainDataBox.Items.Add("    ");
+                    }
+                }
+            }
+            else
+            {
+                this.listBoxMainDataBox.Items.Add("No data of this CAT/Item was received !!!");
+            }
+        }
+        
+       
         #endregion
 
         #region CAT062_Display_Method_Region

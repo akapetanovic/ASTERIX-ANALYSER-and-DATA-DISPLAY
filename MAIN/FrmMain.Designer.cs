@@ -804,39 +804,46 @@
             this.systemConfigurationAndStatusToolStripMenuItem.Name = "systemConfigurationAndStatusToolStripMenuItem";
             this.systemConfigurationAndStatusToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
             this.systemConfigurationAndStatusToolStripMenuItem.Text = "050 System Configuration and Status       ";
+            this.systemConfigurationAndStatusToolStripMenuItem.Click += new System.EventHandler(this.systemConfigurationAndStatusToolStripMenuItem_Click);
             // 
             // systemProcessingModeToolStripMenuItem
             // 
+            this.systemProcessingModeToolStripMenuItem.Enabled = false;
             this.systemProcessingModeToolStripMenuItem.Name = "systemProcessingModeToolStripMenuItem";
             this.systemProcessingModeToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
             this.systemProcessingModeToolStripMenuItem.Text = "060 System Processing Mode                ";
             // 
             // messageCountValuesToolStripMenuItem
             // 
+            this.messageCountValuesToolStripMenuItem.Enabled = false;
             this.messageCountValuesToolStripMenuItem.Name = "messageCountValuesToolStripMenuItem";
             this.messageCountValuesToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
             this.messageCountValuesToolStripMenuItem.Text = "070 Message Count Values";
             // 
             // genericPolarWindowToolStripMenuItem
             // 
+            this.genericPolarWindowToolStripMenuItem.Enabled = false;
             this.genericPolarWindowToolStripMenuItem.Name = "genericPolarWindowToolStripMenuItem";
             this.genericPolarWindowToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
             this.genericPolarWindowToolStripMenuItem.Text = "100 Generic Polar Window                  ";
             // 
             // dataFilterToolStripMenuItem
             // 
+            this.dataFilterToolStripMenuItem.Enabled = false;
             this.dataFilterToolStripMenuItem.Name = "dataFilterToolStripMenuItem";
             this.dataFilterToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
             this.dataFilterToolStripMenuItem.Text = "110 Data Filter                          ";
             // 
             // dPositionOfDataSourceToolStripMenuItem
             // 
+            this.dPositionOfDataSourceToolStripMenuItem.Enabled = false;
             this.dPositionOfDataSourceToolStripMenuItem.Name = "dPositionOfDataSourceToolStripMenuItem";
             this.dPositionOfDataSourceToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
             this.dPositionOfDataSourceToolStripMenuItem.Text = "120 3D-Position of Data Source";
             // 
             // collimationErrorToolStripMenuItem1
             // 
+            this.collimationErrorToolStripMenuItem1.Enabled = false;
             this.collimationErrorToolStripMenuItem1.Name = "collimationErrorToolStripMenuItem1";
             this.collimationErrorToolStripMenuItem1.Size = new System.Drawing.Size(289, 22);
             this.collimationErrorToolStripMenuItem1.Text = "090 Collimation Error";

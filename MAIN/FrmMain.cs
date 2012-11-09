@@ -500,7 +500,6 @@ namespace AsterixDisplayAnalyser
 
         private void sectorNumberToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
             FrmDetailedView MyDetailedView = new FrmDetailedView();
             MyDetailedView.WhatToDisplay = FrmDetailedView.DisplayType.CAT34I020;
             MyDetailedView.Show();
@@ -1702,6 +1701,13 @@ namespace AsterixDisplayAnalyser
         {
             FrmReplayToRaw RtoR = new FrmReplayToRaw();
             RtoR.Show();
+        }
+
+        private void systemConfigurationAndStatusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmDetailedView MyDetailedView = new FrmDetailedView();
+            MyDetailedView.WhatToDisplay = FrmDetailedView.DisplayType.CAT34I050;
+            MyDetailedView.Show();
         }
     }
 }

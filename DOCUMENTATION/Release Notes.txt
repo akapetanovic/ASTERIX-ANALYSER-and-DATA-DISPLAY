@@ -25,7 +25,8 @@ CAT34
 	    000 Message Type                          
         030 Time-of-Day                           
         020 Sector Number                         
-        041 Antenna Rotation Period               
+        041 Antenna Rotation Period    
+		050 System Configuration and Status           
 
 CAT62	
 		015 Service Identification
@@ -48,6 +49,7 @@ Version 1.7
 	5. Added "Replay" to "Raw" ASTERIX recording conversion tool
 	6. Added CLOCK display (Local or UTC)
 	7. Fixed bug on Recording and Forwarding GUI related to Forward checkbox.
+	8. Added decoder for CAT043 System Configuration and Status. 
 
 Version 1.6
 
