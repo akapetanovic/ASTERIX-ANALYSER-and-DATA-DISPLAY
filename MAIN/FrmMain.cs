@@ -1527,9 +1527,8 @@ namespace AsterixDisplayAnalyser
             else // Data is not stale, then process it.
             {
 
-                if ( > 0)
+                if (MainASTERIXDataStorage.CAT34Message.Count > 0)
                 {
-
                     MainASTERIXDataStorage.CAT34Data Msg = MainASTERIXDataStorage.CAT34Message[MainASTERIXDataStorage.CAT34Message.Count - 1];
                     //this.comboBoxCOM_Top_Status
                     //this.comboBoxCOM_RDPC_Selected
