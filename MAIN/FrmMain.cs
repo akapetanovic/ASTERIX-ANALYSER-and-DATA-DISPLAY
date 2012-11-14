@@ -58,11 +58,6 @@ namespace AsterixDisplayAnalyser
             Send_Data_To_Google_Earth = Is_Sending;
         }
 
-        private class StatusComboBoxItem
-        {
-            Color Background_Color;
-            string Text;
-        }
         /// <summary>
         /// //////////////////////////////////////////////////////////////////////
         /// </summary>
@@ -141,7 +136,6 @@ namespace AsterixDisplayAnalyser
             else
                 this.labelClock.Text = DateTime.Now.ToLongTimeString();
 
-
             this.labelFrozeDisplay.Visible = (this.checkEnableDisplay.Checked && SharedData.bool_Listen_for_Data && (ASTERIX.GetTimeSpanSinceLastDataBlockRecived().Seconds > 2));
         }
 
@@ -213,23 +207,36 @@ namespace AsterixDisplayAnalyser
             comboBoxLiveDisplayMode.SelectedIndex = 0;
 
             HandlePlotDisplayEnabledChanged();
+
         }
 
+        // This method populates combo box with a color coded message. 
+        // "R XXXXX" in red and removes first two characters
+        // "G XXXXX" in green and removes the first two characters
+        // "W XXXXX" in white and removes the first two characters
         private void DrawStringandRectangleinComboBox(object sender, DrawItemEventArgs e)
         {
             Graphics g = e.Graphics;
             Rectangle rect = e.Bounds;
             if (e.Index >= 0)
             {
-                string n = ((ComboBox)sender).Items[e.Index].
-                Font f = new Font("Arial", 9, FontStyle.Regular);
-                Color c = Color.FromName(n);
-                Brush b = new SolidBrush(c);
+                string n = ((ComboBox)sender).Items[e.Index].ToString();
+                Font f = new Font("Arial", 8, FontStyle.Bold);
+                Color c;
+                if (n[0] == 'R')
+                    c = Color.Red;
+                else if (n[0] == 'G')
+                    c = Color.Green;
+                else
+                    c = Color.WhiteSmoke;
 
-                g.DrawString(n, f, Brushes.Black, rect.X, rect.Top);
+                n = n.Remove(0, 2);
+                Brush b = new SolidBrush(c);
 
                 g.FillRectangle(b, rect.X, rect.Y,
                                 rect.Width, rect.Height);
+
+                g.DrawString(n, f, Brushes.Black, rect.X, rect.Top);
             }
         }
 
@@ -895,13 +902,10 @@ namespace AsterixDisplayAnalyser
                         this.PlotandTrackDisplayUpdateTimer.Enabled = true;
                         this.textBoxUpdateRate.Enabled = true;
                         this.labelDisplayUpdateRate.Enabled = true;
-                        this.NorthMarkerTimer.Enabled = false;
                     }
                     else
                     {
                         this.PlotandTrackDisplayUpdateTimer.Enabled = false;
-                        this.NorthMarkerTimer.Enabled = true;
-                        this.textBoxUpdateRate.Enabled = false;
                         this.labelDisplayUpdateRate.Enabled = false;
                     }
 
@@ -1505,7 +1509,36 @@ namespace AsterixDisplayAnalyser
             if (North_Marker_Received == true)
             {
                 North_Marker_Received = false;
-                Update_PlotTrack_Data();
+                HandleSystemStatusCAT34I50();
+
+                if (this.checkBoxSyncToNM.Checked == true)
+                    Update_PlotTrack_Data();
+            }
+        }
+
+        private void HandleSystemStatusCAT34I50()
+        {
+            // Check if data is stale and handle the condition
+            if (this.labelFrozeDisplay.Visible == true)
+            {
+                this.Name = "NO DATA !!!";
+                this.groupBoxSysStatCAT34One.Enabled = false;
+            }
+            else // Data is not stale, then process it.
+            {
+
+                if ( > 0)
+                {
+
+                    MainASTERIXDataStorage.CAT34Data Msg = MainASTERIXDataStorage.CAT34Message[MainASTERIXDataStorage.CAT34Message.Count - 1];
+                    //this.comboBoxCOM_Top_Status
+                    //this.comboBoxCOM_RDPC_Selected
+                    //this.comboBoxCOM_RDPC_Reset
+                    //this.comboBoxCOM_RDP_Overload
+                    //this.comboBoxCOM_Transmit_Overload
+                    //this.comboBoxCOM_MON_Sys_Disconect
+                    //this.comboBoxCOM_Time_Source_Status
+                }
             }
         }
 
@@ -1776,6 +1809,11 @@ namespace AsterixDisplayAnalyser
         private void comboBoxTop_Status_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void comboBoxCOM_Top_Status_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            DrawStringandRectangleinComboBox(sender, e);
         }
     }
 }
