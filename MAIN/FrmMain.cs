@@ -57,6 +57,12 @@ namespace AsterixDisplayAnalyser
         {
             Send_Data_To_Google_Earth = Is_Sending;
         }
+
+        private class StatusComboBoxItem
+        {
+            Color Background_Color;
+            string Text;
+        }
         /// <summary>
         /// //////////////////////////////////////////////////////////////////////
         /// </summary>
@@ -207,7 +213,24 @@ namespace AsterixDisplayAnalyser
             comboBoxLiveDisplayMode.SelectedIndex = 0;
 
             HandlePlotDisplayEnabledChanged();
+        }
 
+        private void DrawStringandRectangleinComboBox(object sender, DrawItemEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Rectangle rect = e.Bounds;
+            if (e.Index >= 0)
+            {
+                string n = ((ComboBox)sender).Items[e.Index].
+                Font f = new Font("Arial", 9, FontStyle.Regular);
+                Color c = Color.FromName(n);
+                Brush b = new SolidBrush(c);
+
+                g.DrawString(n, f, Brushes.Black, rect.X, rect.Top);
+
+                g.FillRectangle(b, rect.X, rect.Y,
+                                rect.Width, rect.Height);
+            }
         }
 
         private void InitializeMap()
@@ -1708,6 +1731,51 @@ namespace AsterixDisplayAnalyser
             FrmDetailedView MyDetailedView = new FrmDetailedView();
             MyDetailedView.WhatToDisplay = FrmDetailedView.DisplayType.CAT34I050;
             MyDetailedView.Show();
+        }
+
+        private void tabPageSysStatus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBoxDisplayStatus_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBoxDisplaySSR_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBoxOneModeS_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBoxOneCOM_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listViewCOM_NOGO_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxTop_Status_DrawItem(object sender, DrawItemEventArgs e)
+        {
+
+        }
+
+        private void comboBoxTop_Status_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

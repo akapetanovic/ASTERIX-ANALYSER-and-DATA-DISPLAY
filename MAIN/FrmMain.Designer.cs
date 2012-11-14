@@ -210,6 +210,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tabMainTab = new System.Windows.Forms.TabControl();
+            this.tabPageSysStatus = new System.Windows.Forms.TabPage();
+            this.groupBoxOne = new System.Windows.Forms.GroupBox();
+            this.groupBoxOnePSR = new System.Windows.Forms.GroupBox();
+            this.groupBoxOneModeS = new System.Windows.Forms.GroupBox();
+            this.groupBoxOneSSR = new System.Windows.Forms.GroupBox();
+            this.groupBoxOneCOM = new System.Windows.Forms.GroupBox();
             this.NorthMarkerTimer = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorkerLoadData = new System.ComponentModel.BackgroundWorker();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -233,6 +239,8 @@
             this.groupBoxSSRFilter.SuspendLayout();
             this.tabPageAsterixMessages.SuspendLayout();
             this.tabMainTab.SuspendLayout();
+            this.tabPageSysStatus.SuspendLayout();
+            this.groupBoxOne.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
@@ -478,7 +486,7 @@
             this.warningErrorConditionsToolStripMenuItem,
             this.presenceOfXPulseToolStripMenuItem});
             this.cAT001ToolStripMenuItem.Name = "cAT001ToolStripMenuItem";
-            this.cAT001ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cAT001ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.cAT001ToolStripMenuItem.Text = "CAT001";
             // 
             // targetReportDescriptorToolStripMenuItem
@@ -593,7 +601,7 @@
             this.collimationErrorToolStripMenuItem,
             this.warningErrorConditionsToolStripMenuItem1});
             this.cAT002ToolStripMenuItem.Name = "cAT002ToolStripMenuItem";
-            this.cAT002ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cAT002ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.cAT002ToolStripMenuItem.Text = "CAT002";
             // 
             // messageTypeToolStripMenuItem
@@ -682,7 +690,7 @@
             this.sequenceOfWeatherVectorsInSPFNotationToolStripMenuItem});
             this.cAT008ToolStripMenuItem1.Enabled = false;
             this.cAT008ToolStripMenuItem1.Name = "cAT008ToolStripMenuItem1";
-            this.cAT008ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.cAT008ToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
             this.cAT008ToolStripMenuItem1.Text = "CAT008";
             // 
             // messageTypeToolStripMenuItem1
@@ -768,7 +776,7 @@
             this.dPositionOfDataSourceToolStripMenuItem,
             this.collimationErrorToolStripMenuItem1});
             this.cAT034ToolStripMenuItem.Name = "cAT034ToolStripMenuItem";
-            this.cAT034ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cAT034ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.cAT034ToolStripMenuItem.Text = "CAT034";
             // 
             // messageTypeToolStripMenuItem2
@@ -875,7 +883,7 @@
             this.mode1CodeInOctalRepresentationToolStripMenuItem,
             this.mode1CodeConfidenceIndicatorToolStripMenuItem});
             this.cAT048ToolStripMenuItem.Name = "cAT048ToolStripMenuItem";
-            this.cAT048ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cAT048ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.cAT048ToolStripMenuItem.Text = "CAT048";
             // 
             // timeofDayToolStripMenuItem3
@@ -1052,7 +1060,7 @@
             this.measuredFlightLevelToolStripMenuItem,
             this.aircraftDerivedDataSUBF2ACIDToolStripMenuItem});
             this.cAT062ToolStripMenuItem.Name = "cAT062ToolStripMenuItem";
-            this.cAT062ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cAT062ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.cAT062ToolStripMenuItem.Text = "CAT062";
             // 
             // serviceIdentificationToolStripMenuItem
@@ -1101,21 +1109,21 @@
             // 
             this.cAT063ToolStripMenuItem1.Enabled = false;
             this.cAT063ToolStripMenuItem1.Name = "cAT063ToolStripMenuItem1";
-            this.cAT063ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.cAT063ToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
             this.cAT063ToolStripMenuItem1.Text = "CAT063";
             // 
             // cAT065ToolStripMenuItem
             // 
             this.cAT065ToolStripMenuItem.Enabled = false;
             this.cAT065ToolStripMenuItem.Name = "cAT065ToolStripMenuItem";
-            this.cAT065ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cAT065ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.cAT065ToolStripMenuItem.Text = "CAT065";
             // 
             // cAT244ToolStripMenuItem
             // 
             this.cAT244ToolStripMenuItem.Enabled = false;
             this.cAT244ToolStripMenuItem.Name = "cAT244ToolStripMenuItem";
-            this.cAT244ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cAT244ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.cAT244ToolStripMenuItem.Text = "CAT244";
             // 
             // dataBySSRCodeToolStripMenuItem
@@ -1945,6 +1953,7 @@
             // 
             this.tabMainTab.Controls.Add(this.tabPlotDisplay);
             this.tabMainTab.Controls.Add(this.tabPageAsterixMessages);
+            this.tabMainTab.Controls.Add(this.tabPageSysStatus);
             this.tabMainTab.Location = new System.Drawing.Point(6, 44);
             this.tabMainTab.Name = "tabMainTab";
             this.tabMainTab.SelectedIndex = 0;
@@ -1953,6 +1962,76 @@
             this.tabMainTab.TabIndex = 1;
             this.tabMainTab.SelectedIndexChanged += new System.EventHandler(this.tabMainTab_SelectedIndexChanged);
             this.tabMainTab.SizeChanged += new System.EventHandler(this.tabMainTab_SizeChanged);
+            // 
+            // tabPageSysStatus
+            // 
+            this.tabPageSysStatus.BackColor = System.Drawing.Color.Black;
+            this.tabPageSysStatus.Controls.Add(this.groupBoxOne);
+            this.tabPageSysStatus.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSysStatus.Name = "tabPageSysStatus";
+            this.tabPageSysStatus.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageSysStatus.Size = new System.Drawing.Size(1168, 708);
+            this.tabPageSysStatus.TabIndex = 2;
+            this.tabPageSysStatus.Text = "System Status";
+            this.tabPageSysStatus.Click += new System.EventHandler(this.tabPageSysStatus_Click);
+            // 
+            // groupBoxOne
+            // 
+            this.groupBoxOne.Controls.Add(this.groupBoxOnePSR);
+            this.groupBoxOne.Controls.Add(this.groupBoxOneModeS);
+            this.groupBoxOne.Controls.Add(this.groupBoxOneSSR);
+            this.groupBoxOne.Controls.Add(this.groupBoxOneCOM);
+            this.groupBoxOne.ForeColor = System.Drawing.Color.White;
+            this.groupBoxOne.Location = new System.Drawing.Point(6, 6);
+            this.groupBoxOne.Name = "groupBoxOne";
+            this.groupBoxOne.Size = new System.Drawing.Size(181, 696);
+            this.groupBoxOne.TabIndex = 0;
+            this.groupBoxOne.TabStop = false;
+            this.groupBoxOne.Text = "One";
+            this.groupBoxOne.Enter += new System.EventHandler(this.groupBoxDisplayStatus_Enter);
+            // 
+            // groupBoxOnePSR
+            // 
+            this.groupBoxOnePSR.ForeColor = System.Drawing.Color.White;
+            this.groupBoxOnePSR.Location = new System.Drawing.Point(6, 485);
+            this.groupBoxOnePSR.Name = "groupBoxOnePSR";
+            this.groupBoxOnePSR.Size = new System.Drawing.Size(161, 133);
+            this.groupBoxOnePSR.TabIndex = 4;
+            this.groupBoxOnePSR.TabStop = false;
+            this.groupBoxOnePSR.Text = "PSR";
+            // 
+            // groupBoxOneModeS
+            // 
+            this.groupBoxOneModeS.ForeColor = System.Drawing.Color.White;
+            this.groupBoxOneModeS.Location = new System.Drawing.Point(6, 346);
+            this.groupBoxOneModeS.Name = "groupBoxOneModeS";
+            this.groupBoxOneModeS.Size = new System.Drawing.Size(161, 133);
+            this.groupBoxOneModeS.TabIndex = 3;
+            this.groupBoxOneModeS.TabStop = false;
+            this.groupBoxOneModeS.Text = "Mode - S";
+            this.groupBoxOneModeS.Enter += new System.EventHandler(this.groupBoxOneModeS_Enter);
+            // 
+            // groupBoxOneSSR
+            // 
+            this.groupBoxOneSSR.ForeColor = System.Drawing.Color.White;
+            this.groupBoxOneSSR.Location = new System.Drawing.Point(6, 207);
+            this.groupBoxOneSSR.Name = "groupBoxOneSSR";
+            this.groupBoxOneSSR.Size = new System.Drawing.Size(161, 133);
+            this.groupBoxOneSSR.TabIndex = 2;
+            this.groupBoxOneSSR.TabStop = false;
+            this.groupBoxOneSSR.Text = "SSR";
+            this.groupBoxOneSSR.Enter += new System.EventHandler(this.groupBoxDisplaySSR_Enter);
+            // 
+            // groupBoxOneCOM
+            // 
+            this.groupBoxOneCOM.ForeColor = System.Drawing.Color.White;
+            this.groupBoxOneCOM.Location = new System.Drawing.Point(6, 19);
+            this.groupBoxOneCOM.Name = "groupBoxOneCOM";
+            this.groupBoxOneCOM.Size = new System.Drawing.Size(161, 182);
+            this.groupBoxOneCOM.TabIndex = 1;
+            this.groupBoxOneCOM.TabStop = false;
+            this.groupBoxOneCOM.Text = "Common";
+            this.groupBoxOneCOM.Enter += new System.EventHandler(this.groupBoxOneCOM_Enter);
             // 
             // NorthMarkerTimer
             // 
@@ -2045,7 +2124,7 @@
             this.labelClock.AutoSize = true;
             this.labelClock.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelClock.ForeColor = System.Drawing.Color.Lime;
-            this.labelClock.Location = new System.Drawing.Point(217, 28);
+            this.labelClock.Location = new System.Drawing.Point(251, 22);
             this.labelClock.Name = "labelClock";
             this.labelClock.Size = new System.Drawing.Size(83, 25);
             this.labelClock.TabIndex = 27;
@@ -2055,7 +2134,7 @@
             // 
             this.checkBoxIs_UTC.AutoSize = true;
             this.checkBoxIs_UTC.ForeColor = System.Drawing.Color.Silver;
-            this.checkBoxIs_UTC.Location = new System.Drawing.Point(173, 34);
+            this.checkBoxIs_UTC.Location = new System.Drawing.Point(207, 28);
             this.checkBoxIs_UTC.Name = "checkBoxIs_UTC";
             this.checkBoxIs_UTC.Size = new System.Drawing.Size(48, 17);
             this.checkBoxIs_UTC.TabIndex = 28;
@@ -2103,6 +2182,8 @@
             this.tabPageAsterixMessages.ResumeLayout(false);
             this.tabPageAsterixMessages.PerformLayout();
             this.tabMainTab.ResumeLayout(false);
+            this.tabPageSysStatus.ResumeLayout(false);
+            this.groupBoxOne.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -2306,6 +2387,12 @@
         private System.Windows.Forms.Label labelClock;
         private System.Windows.Forms.ToolStripMenuItem replayToRawToolStripMenuItem;
         private System.Windows.Forms.CheckBox checkBoxIs_UTC;
+        private System.Windows.Forms.TabPage tabPageSysStatus;
+        private System.Windows.Forms.GroupBox groupBoxOne;
+        private System.Windows.Forms.GroupBox groupBoxOneCOM;
+        private System.Windows.Forms.GroupBox groupBoxOnePSR;
+        private System.Windows.Forms.GroupBox groupBoxOneModeS;
+        private System.Windows.Forms.GroupBox groupBoxOneSSR;
     }
 }
 
