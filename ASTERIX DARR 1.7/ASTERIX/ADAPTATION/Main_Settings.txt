@@ -1,4 +1,0 @@
-# System origin defined as position in decimal degrees
-#
-SYS_ORIGIN,44.05267,17.6769
-BACKGROUND,Black	
