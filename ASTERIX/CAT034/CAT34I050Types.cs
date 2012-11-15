@@ -32,6 +32,7 @@ namespace AsterixDisplayAnalyser
             public bool Transmision_Sys_Overloaded = false;
             public bool Monitor_Sys_Disconected = false;
             public bool Time_Source_Invalid = false;
+
         }
 
         public class PSR
@@ -52,6 +53,7 @@ namespace AsterixDisplayAnalyser
             public bool SSR_Overloaded = false;
             public Channel_Status CH_Status = Channel_Status.No_Channel;
             public bool Monitor_Sys_Disconected = false;
+
         }
 
         public class MDS
@@ -66,6 +68,7 @@ namespace AsterixDisplayAnalyser
             public bool CH2_For_DataLink_In_Use = false;
             public bool Coordination_Func_Overload = false;
             public bool DataLink_Func_Overload = false;
+
         }
 
         public class CAT34I050UserData

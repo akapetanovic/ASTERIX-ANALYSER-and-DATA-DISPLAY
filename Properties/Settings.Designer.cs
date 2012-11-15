@@ -586,5 +586,17 @@ namespace AsterixDisplayAnalyser.Properties {
                 this["ReplayPort"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SystMonEnabled {
+            get {
+                return ((bool)(this["SystMonEnabled"]));
+            }
+            set {
+                this["SystMonEnabled"] = value;
+            }
+        }
     }
 }
