@@ -211,14 +211,15 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tabMainTab = new System.Windows.Forms.TabControl();
             this.tabPageSysStatus = new System.Windows.Forms.TabPage();
+            this.checkBoxSystMonEnabled = new System.Windows.Forms.CheckBox();
             this.groupBoxSysStatCAT34One = new System.Windows.Forms.GroupBox();
             this.groupBoxOnePSR = new System.Windows.Forms.GroupBox();
-            this.comboBox13 = new System.Windows.Forms.ComboBox();
-            this.comboBox14 = new System.Windows.Forms.ComboBox();
-            this.comboBox15 = new System.Windows.Forms.ComboBox();
-            this.comboBox16 = new System.Windows.Forms.ComboBox();
-            this.comboBox17 = new System.Windows.Forms.ComboBox();
+            this.comboBoxPSR_Mon_Sys_Disconect = new System.Windows.Forms.ComboBox();
+            this.comboBoxPSR_Overloaded = new System.Windows.Forms.ComboBox();
+            this.comboBoxPSR_Antenna_Selected = new System.Windows.Forms.ComboBox();
+            this.comboBoxPSR_Channel_Status = new System.Windows.Forms.ComboBox();
             this.groupBoxOneModeS = new System.Windows.Forms.GroupBox();
+            this.comboBoxMDS_Comm_Overload = new System.Windows.Forms.ComboBox();
             this.comboBoxMDS_DataLink_Overload = new System.Windows.Forms.ComboBox();
             this.comboBoxMDS_Ch_For_DataLink = new System.Windows.Forms.ComboBox();
             this.comboBoxMDS_Ch_For_Cord = new System.Windows.Forms.ComboBox();
@@ -250,8 +251,7 @@
             this.btnStartStopFileReplay = new System.Windows.Forms.Button();
             this.labelClock = new System.Windows.Forms.Label();
             this.checkBoxIs_UTC = new System.Windows.Forms.CheckBox();
-            this.comboBoxMDS_Comm_Overload = new System.Windows.Forms.ComboBox();
-            this.checkBoxSystMonEnabled = new System.Windows.Forms.CheckBox();
+            this.btnAckowledgeRadar1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -1367,7 +1367,7 @@
             this.tabPlotDisplay.Padding = new System.Windows.Forms.Padding(3);
             this.tabPlotDisplay.Size = new System.Drawing.Size(1168, 708);
             this.tabPlotDisplay.TabIndex = 1;
-            this.tabPlotDisplay.Text = "Plot Display";
+            this.tabPlotDisplay.Text = "Track/Plot Display";
             this.tabPlotDisplay.SizeChanged += new System.EventHandler(this.tabPlotDisplay_SizeChanged);
             this.tabPlotDisplay.Click += new System.EventHandler(this.tabPlotDisplay_Click);
             // 
@@ -2002,11 +2002,24 @@
             this.tabPageSysStatus.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageSysStatus.Size = new System.Drawing.Size(1168, 708);
             this.tabPageSysStatus.TabIndex = 2;
-            this.tabPageSysStatus.Text = "System Status (CAT034)";
+            this.tabPageSysStatus.Text = "System Status";
             this.tabPageSysStatus.Click += new System.EventHandler(this.tabPageSysStatus_Click);
+            // 
+            // checkBoxSystMonEnabled
+            // 
+            this.checkBoxSystMonEnabled.AutoSize = true;
+            this.checkBoxSystMonEnabled.ForeColor = System.Drawing.Color.White;
+            this.checkBoxSystMonEnabled.Location = new System.Drawing.Point(11, 7);
+            this.checkBoxSystMonEnabled.Name = "checkBoxSystMonEnabled";
+            this.checkBoxSystMonEnabled.Size = new System.Drawing.Size(152, 17);
+            this.checkBoxSystMonEnabled.TabIndex = 1;
+            this.checkBoxSystMonEnabled.Text = "SYS Monitoring ENABLED";
+            this.checkBoxSystMonEnabled.UseVisualStyleBackColor = true;
+            this.checkBoxSystMonEnabled.CheckedChanged += new System.EventHandler(this.checkBoxSystMonEnabled_CheckedChanged);
             // 
             // groupBoxSysStatCAT34One
             // 
+            this.groupBoxSysStatCAT34One.Controls.Add(this.btnAckowledgeRadar1);
             this.groupBoxSysStatCAT34One.Controls.Add(this.groupBoxOnePSR);
             this.groupBoxSysStatCAT34One.Controls.Add(this.groupBoxOneModeS);
             this.groupBoxSysStatCAT34One.Controls.Add(this.groupBoxOneSSR);
@@ -2017,73 +2030,66 @@
             this.groupBoxSysStatCAT34One.Size = new System.Drawing.Size(276, 675);
             this.groupBoxSysStatCAT34One.TabIndex = 0;
             this.groupBoxSysStatCAT34One.TabStop = false;
-            this.groupBoxSysStatCAT34One.Text = "NO DATA !!!";
+            this.groupBoxSysStatCAT34One.Text = "CAT034/I050";
             this.groupBoxSysStatCAT34One.Enter += new System.EventHandler(this.groupBoxDisplayStatus_Enter);
             // 
             // groupBoxOnePSR
             // 
-            this.groupBoxOnePSR.Controls.Add(this.comboBox13);
-            this.groupBoxOnePSR.Controls.Add(this.comboBox14);
-            this.groupBoxOnePSR.Controls.Add(this.comboBox15);
-            this.groupBoxOnePSR.Controls.Add(this.comboBox16);
-            this.groupBoxOnePSR.Controls.Add(this.comboBox17);
+            this.groupBoxOnePSR.Controls.Add(this.comboBoxPSR_Mon_Sys_Disconect);
+            this.groupBoxOnePSR.Controls.Add(this.comboBoxPSR_Overloaded);
+            this.groupBoxOnePSR.Controls.Add(this.comboBoxPSR_Antenna_Selected);
+            this.groupBoxOnePSR.Controls.Add(this.comboBoxPSR_Channel_Status);
             this.groupBoxOnePSR.ForeColor = System.Drawing.Color.White;
-            this.groupBoxOnePSR.Location = new System.Drawing.Point(5, 537);
+            this.groupBoxOnePSR.Location = new System.Drawing.Point(5, 555);
             this.groupBoxOnePSR.Name = "groupBoxOnePSR";
-            this.groupBoxOnePSR.Size = new System.Drawing.Size(264, 135);
+            this.groupBoxOnePSR.Size = new System.Drawing.Size(264, 114);
             this.groupBoxOnePSR.TabIndex = 4;
             this.groupBoxOnePSR.TabStop = false;
             this.groupBoxOnePSR.Text = "PSR";
             // 
-            // comboBox13
+            // comboBoxPSR_Mon_Sys_Disconect
             // 
-            this.comboBox13.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBox13.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox13.ItemHeight = 12;
-            this.comboBox13.Location = new System.Drawing.Point(6, 111);
-            this.comboBox13.Name = "comboBox13";
-            this.comboBox13.Size = new System.Drawing.Size(250, 18);
-            this.comboBox13.TabIndex = 14;
+            this.comboBoxPSR_Mon_Sys_Disconect.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBoxPSR_Mon_Sys_Disconect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPSR_Mon_Sys_Disconect.ItemHeight = 12;
+            this.comboBoxPSR_Mon_Sys_Disconect.Location = new System.Drawing.Point(6, 88);
+            this.comboBoxPSR_Mon_Sys_Disconect.Name = "comboBoxPSR_Mon_Sys_Disconect";
+            this.comboBoxPSR_Mon_Sys_Disconect.Size = new System.Drawing.Size(250, 18);
+            this.comboBoxPSR_Mon_Sys_Disconect.TabIndex = 16;
+            this.comboBoxPSR_Mon_Sys_Disconect.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxPSR_Mon_Sys_Disconect_DrawItem);
             // 
-            // comboBox14
+            // comboBoxPSR_Overloaded
             // 
-            this.comboBox14.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBox14.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox14.ItemHeight = 12;
-            this.comboBox14.Location = new System.Drawing.Point(6, 88);
-            this.comboBox14.Name = "comboBox14";
-            this.comboBox14.Size = new System.Drawing.Size(250, 18);
-            this.comboBox14.TabIndex = 16;
+            this.comboBoxPSR_Overloaded.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBoxPSR_Overloaded.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPSR_Overloaded.ItemHeight = 12;
+            this.comboBoxPSR_Overloaded.Location = new System.Drawing.Point(6, 65);
+            this.comboBoxPSR_Overloaded.Name = "comboBoxPSR_Overloaded";
+            this.comboBoxPSR_Overloaded.Size = new System.Drawing.Size(250, 18);
+            this.comboBoxPSR_Overloaded.TabIndex = 15;
+            this.comboBoxPSR_Overloaded.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxPSR_Overloaded_DrawItem);
             // 
-            // comboBox15
+            // comboBoxPSR_Antenna_Selected
             // 
-            this.comboBox15.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBox15.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox15.ItemHeight = 12;
-            this.comboBox15.Location = new System.Drawing.Point(6, 65);
-            this.comboBox15.Name = "comboBox15";
-            this.comboBox15.Size = new System.Drawing.Size(250, 18);
-            this.comboBox15.TabIndex = 15;
+            this.comboBoxPSR_Antenna_Selected.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBoxPSR_Antenna_Selected.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPSR_Antenna_Selected.ItemHeight = 12;
+            this.comboBoxPSR_Antenna_Selected.Location = new System.Drawing.Point(6, 42);
+            this.comboBoxPSR_Antenna_Selected.Name = "comboBoxPSR_Antenna_Selected";
+            this.comboBoxPSR_Antenna_Selected.Size = new System.Drawing.Size(250, 18);
+            this.comboBoxPSR_Antenna_Selected.TabIndex = 13;
+            this.comboBoxPSR_Antenna_Selected.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxPSR_Antenna_Selected_DrawItem);
             // 
-            // comboBox16
+            // comboBoxPSR_Channel_Status
             // 
-            this.comboBox16.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBox16.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox16.ItemHeight = 12;
-            this.comboBox16.Location = new System.Drawing.Point(6, 42);
-            this.comboBox16.Name = "comboBox16";
-            this.comboBox16.Size = new System.Drawing.Size(250, 18);
-            this.comboBox16.TabIndex = 13;
-            // 
-            // comboBox17
-            // 
-            this.comboBox17.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBox17.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox17.ItemHeight = 12;
-            this.comboBox17.Location = new System.Drawing.Point(6, 19);
-            this.comboBox17.Name = "comboBox17";
-            this.comboBox17.Size = new System.Drawing.Size(250, 18);
-            this.comboBox17.TabIndex = 12;
+            this.comboBoxPSR_Channel_Status.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBoxPSR_Channel_Status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPSR_Channel_Status.ItemHeight = 12;
+            this.comboBoxPSR_Channel_Status.Location = new System.Drawing.Point(6, 19);
+            this.comboBoxPSR_Channel_Status.Name = "comboBoxPSR_Channel_Status";
+            this.comboBoxPSR_Channel_Status.Size = new System.Drawing.Size(250, 18);
+            this.comboBoxPSR_Channel_Status.TabIndex = 12;
+            this.comboBoxPSR_Channel_Status.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxPSR_Channel_Status_DrawItem);
             // 
             // groupBoxOneModeS
             // 
@@ -2096,83 +2102,101 @@
             this.groupBoxOneModeS.Controls.Add(this.comboBoxMDS_Antena_Selected);
             this.groupBoxOneModeS.Controls.Add(this.comboBoxMDS_Channel_Status);
             this.groupBoxOneModeS.ForeColor = System.Drawing.Color.White;
-            this.groupBoxOneModeS.Location = new System.Drawing.Point(6, 327);
+            this.groupBoxOneModeS.Location = new System.Drawing.Point(5, 345);
             this.groupBoxOneModeS.Name = "groupBoxOneModeS";
-            this.groupBoxOneModeS.Size = new System.Drawing.Size(263, 205);
+            this.groupBoxOneModeS.Size = new System.Drawing.Size(263, 204);
             this.groupBoxOneModeS.TabIndex = 3;
             this.groupBoxOneModeS.TabStop = false;
             this.groupBoxOneModeS.Text = "Mode - S";
             this.groupBoxOneModeS.Enter += new System.EventHandler(this.groupBoxOneModeS_Enter);
+            // 
+            // comboBoxMDS_Comm_Overload
+            // 
+            this.comboBoxMDS_Comm_Overload.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBoxMDS_Comm_Overload.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMDS_Comm_Overload.ItemHeight = 12;
+            this.comboBoxMDS_Comm_Overload.Location = new System.Drawing.Point(6, 180);
+            this.comboBoxMDS_Comm_Overload.Name = "comboBoxMDS_Comm_Overload";
+            this.comboBoxMDS_Comm_Overload.Size = new System.Drawing.Size(250, 18);
+            this.comboBoxMDS_Comm_Overload.TabIndex = 20;
+            this.comboBoxMDS_Comm_Overload.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxMDS_Comm_Overload_DrawItem);
             // 
             // comboBoxMDS_DataLink_Overload
             // 
             this.comboBoxMDS_DataLink_Overload.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxMDS_DataLink_Overload.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMDS_DataLink_Overload.ItemHeight = 12;
-            this.comboBoxMDS_DataLink_Overload.Location = new System.Drawing.Point(6, 163);
+            this.comboBoxMDS_DataLink_Overload.Location = new System.Drawing.Point(7, 157);
             this.comboBoxMDS_DataLink_Overload.Name = "comboBoxMDS_DataLink_Overload";
             this.comboBoxMDS_DataLink_Overload.Size = new System.Drawing.Size(250, 18);
             this.comboBoxMDS_DataLink_Overload.TabIndex = 19;
+            this.comboBoxMDS_DataLink_Overload.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxMDS_DataLink_Overload_DrawItem);
             // 
             // comboBoxMDS_Ch_For_DataLink
             // 
             this.comboBoxMDS_Ch_For_DataLink.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxMDS_Ch_For_DataLink.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMDS_Ch_For_DataLink.ItemHeight = 12;
-            this.comboBoxMDS_Ch_For_DataLink.Location = new System.Drawing.Point(6, 139);
+            this.comboBoxMDS_Ch_For_DataLink.Location = new System.Drawing.Point(7, 134);
             this.comboBoxMDS_Ch_For_DataLink.Name = "comboBoxMDS_Ch_For_DataLink";
             this.comboBoxMDS_Ch_For_DataLink.Size = new System.Drawing.Size(250, 18);
             this.comboBoxMDS_Ch_For_DataLink.TabIndex = 17;
+            this.comboBoxMDS_Ch_For_DataLink.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxMDS_Ch_For_DataLink_DrawItem);
             // 
             // comboBoxMDS_Ch_For_Cord
             // 
             this.comboBoxMDS_Ch_For_Cord.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxMDS_Ch_For_Cord.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMDS_Ch_For_Cord.ItemHeight = 12;
-            this.comboBoxMDS_Ch_For_Cord.Location = new System.Drawing.Point(6, 115);
+            this.comboBoxMDS_Ch_For_Cord.Location = new System.Drawing.Point(7, 111);
             this.comboBoxMDS_Ch_For_Cord.Name = "comboBoxMDS_Ch_For_Cord";
             this.comboBoxMDS_Ch_For_Cord.Size = new System.Drawing.Size(250, 18);
             this.comboBoxMDS_Ch_For_Cord.TabIndex = 14;
+            this.comboBoxMDS_Ch_For_Cord.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxMDS_Ch_For_Cord_DrawItem);
             // 
             // comboBoxMDS_Mon_Sys_Disconect
             // 
             this.comboBoxMDS_Mon_Sys_Disconect.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxMDS_Mon_Sys_Disconect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMDS_Mon_Sys_Disconect.ItemHeight = 12;
-            this.comboBoxMDS_Mon_Sys_Disconect.Location = new System.Drawing.Point(6, 91);
+            this.comboBoxMDS_Mon_Sys_Disconect.Location = new System.Drawing.Point(7, 88);
             this.comboBoxMDS_Mon_Sys_Disconect.Name = "comboBoxMDS_Mon_Sys_Disconect";
             this.comboBoxMDS_Mon_Sys_Disconect.Size = new System.Drawing.Size(250, 18);
             this.comboBoxMDS_Mon_Sys_Disconect.TabIndex = 16;
+            this.comboBoxMDS_Mon_Sys_Disconect.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxMDS_Mon_Sys_Disconect_DrawItem);
             // 
             // ccomboBoxMDS_Overoaded
             // 
             this.ccomboBoxMDS_Overoaded.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.ccomboBoxMDS_Overoaded.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ccomboBoxMDS_Overoaded.ItemHeight = 12;
-            this.ccomboBoxMDS_Overoaded.Location = new System.Drawing.Point(6, 67);
+            this.ccomboBoxMDS_Overoaded.Location = new System.Drawing.Point(7, 65);
             this.ccomboBoxMDS_Overoaded.Name = "ccomboBoxMDS_Overoaded";
             this.ccomboBoxMDS_Overoaded.Size = new System.Drawing.Size(250, 18);
             this.ccomboBoxMDS_Overoaded.TabIndex = 15;
+            this.ccomboBoxMDS_Overoaded.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ccomboBoxMDS_Overoaded_DrawItem);
             // 
             // comboBoxMDS_Antena_Selected
             // 
             this.comboBoxMDS_Antena_Selected.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxMDS_Antena_Selected.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMDS_Antena_Selected.ItemHeight = 12;
-            this.comboBoxMDS_Antena_Selected.Location = new System.Drawing.Point(6, 43);
+            this.comboBoxMDS_Antena_Selected.Location = new System.Drawing.Point(7, 42);
             this.comboBoxMDS_Antena_Selected.Name = "comboBoxMDS_Antena_Selected";
             this.comboBoxMDS_Antena_Selected.Size = new System.Drawing.Size(250, 18);
             this.comboBoxMDS_Antena_Selected.TabIndex = 13;
+            this.comboBoxMDS_Antena_Selected.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxMDS_Antena_Selected_DrawItem);
             // 
             // comboBoxMDS_Channel_Status
             // 
             this.comboBoxMDS_Channel_Status.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxMDS_Channel_Status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMDS_Channel_Status.ItemHeight = 12;
-            this.comboBoxMDS_Channel_Status.Location = new System.Drawing.Point(6, 19);
+            this.comboBoxMDS_Channel_Status.Location = new System.Drawing.Point(7, 19);
             this.comboBoxMDS_Channel_Status.Name = "comboBoxMDS_Channel_Status";
             this.comboBoxMDS_Channel_Status.Size = new System.Drawing.Size(250, 18);
             this.comboBoxMDS_Channel_Status.TabIndex = 12;
+            this.comboBoxMDS_Channel_Status.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxMDS_Channel_Status_DrawItem);
             // 
             // groupBoxOneSSR
             // 
@@ -2181,7 +2205,7 @@
             this.groupBoxOneSSR.Controls.Add(this.comboBoxSSR_Antenna_Selected);
             this.groupBoxOneSSR.Controls.Add(this.comboBoxSSR_Channel_Status);
             this.groupBoxOneSSR.ForeColor = System.Drawing.Color.White;
-            this.groupBoxOneSSR.Location = new System.Drawing.Point(6, 205);
+            this.groupBoxOneSSR.Location = new System.Drawing.Point(5, 223);
             this.groupBoxOneSSR.Name = "groupBoxOneSSR";
             this.groupBoxOneSSR.Size = new System.Drawing.Size(263, 116);
             this.groupBoxOneSSR.TabIndex = 2;
@@ -2198,6 +2222,7 @@
             this.comboBoxSSR_Mon_Sys_Disconect.Name = "comboBoxSSR_Mon_Sys_Disconect";
             this.comboBoxSSR_Mon_Sys_Disconect.Size = new System.Drawing.Size(250, 18);
             this.comboBoxSSR_Mon_Sys_Disconect.TabIndex = 11;
+            this.comboBoxSSR_Mon_Sys_Disconect.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxSSR_Mon_Sys_Disconect_DrawItem);
             // 
             // comboBoxSSR_Overloaded
             // 
@@ -2208,6 +2233,7 @@
             this.comboBoxSSR_Overloaded.Name = "comboBoxSSR_Overloaded";
             this.comboBoxSSR_Overloaded.Size = new System.Drawing.Size(250, 18);
             this.comboBoxSSR_Overloaded.TabIndex = 10;
+            this.comboBoxSSR_Overloaded.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxSSR_Overloaded_DrawItem);
             // 
             // comboBoxSSR_Antenna_Selected
             // 
@@ -2218,6 +2244,7 @@
             this.comboBoxSSR_Antenna_Selected.Name = "comboBoxSSR_Antenna_Selected";
             this.comboBoxSSR_Antenna_Selected.Size = new System.Drawing.Size(250, 18);
             this.comboBoxSSR_Antenna_Selected.TabIndex = 8;
+            this.comboBoxSSR_Antenna_Selected.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxSSR_Antenna_Selected_DrawItem);
             // 
             // comboBoxSSR_Channel_Status
             // 
@@ -2228,6 +2255,7 @@
             this.comboBoxSSR_Channel_Status.Name = "comboBoxSSR_Channel_Status";
             this.comboBoxSSR_Channel_Status.Size = new System.Drawing.Size(250, 18);
             this.comboBoxSSR_Channel_Status.TabIndex = 7;
+            this.comboBoxSSR_Channel_Status.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxSSR_Channel_Status_DrawItem);
             // 
             // groupBoxOneCOM
             // 
@@ -2239,7 +2267,7 @@
             this.groupBoxOneCOM.Controls.Add(this.comboBoxCOM_RDPC_Reset);
             this.groupBoxOneCOM.Controls.Add(this.comboBoxCOM_Top_Status);
             this.groupBoxOneCOM.ForeColor = System.Drawing.Color.White;
-            this.groupBoxOneCOM.Location = new System.Drawing.Point(7, 19);
+            this.groupBoxOneCOM.Location = new System.Drawing.Point(5, 37);
             this.groupBoxOneCOM.Name = "groupBoxOneCOM";
             this.groupBoxOneCOM.Size = new System.Drawing.Size(263, 180);
             this.groupBoxOneCOM.TabIndex = 1;
@@ -2433,27 +2461,16 @@
             this.checkBoxIs_UTC.Text = "UTC";
             this.checkBoxIs_UTC.UseVisualStyleBackColor = true;
             // 
-            // comboBoxMDS_Comm_Overload
+            // btnAckowledgeRadar1
             // 
-            this.comboBoxMDS_Comm_Overload.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBoxMDS_Comm_Overload.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxMDS_Comm_Overload.ItemHeight = 12;
-            this.comboBoxMDS_Comm_Overload.Location = new System.Drawing.Point(6, 187);
-            this.comboBoxMDS_Comm_Overload.Name = "comboBoxMDS_Comm_Overload";
-            this.comboBoxMDS_Comm_Overload.Size = new System.Drawing.Size(250, 18);
-            this.comboBoxMDS_Comm_Overload.TabIndex = 20;
-            // 
-            // checkBoxSystMonEnabled
-            // 
-            this.checkBoxSystMonEnabled.AutoSize = true;
-            this.checkBoxSystMonEnabled.ForeColor = System.Drawing.Color.White;
-            this.checkBoxSystMonEnabled.Location = new System.Drawing.Point(11, 7);
-            this.checkBoxSystMonEnabled.Name = "checkBoxSystMonEnabled";
-            this.checkBoxSystMonEnabled.Size = new System.Drawing.Size(152, 17);
-            this.checkBoxSystMonEnabled.TabIndex = 1;
-            this.checkBoxSystMonEnabled.Text = "SYS Monitoring ENABLED";
-            this.checkBoxSystMonEnabled.UseVisualStyleBackColor = true;
-            this.checkBoxSystMonEnabled.CheckedChanged += new System.EventHandler(this.checkBoxSystMonEnabled_CheckedChanged);
+            this.btnAckowledgeRadar1.BackColor = System.Drawing.Color.Black;
+            this.btnAckowledgeRadar1.Location = new System.Drawing.Point(93, 14);
+            this.btnAckowledgeRadar1.Name = "btnAckowledgeRadar1";
+            this.btnAckowledgeRadar1.Size = new System.Drawing.Size(85, 23);
+            this.btnAckowledgeRadar1.TabIndex = 5;
+            this.btnAckowledgeRadar1.Text = "Acknowledge";
+            this.btnAckowledgeRadar1.UseVisualStyleBackColor = false;
+            this.btnAckowledgeRadar1.Click += new System.EventHandler(this.btnAckowledgeRadar1_Click);
             // 
             // FormMain
             // 
@@ -2723,11 +2740,10 @@
         private System.Windows.Forms.ComboBox comboBoxSSR_Overloaded;
         private System.Windows.Forms.ComboBox comboBoxSSR_Antenna_Selected;
         private System.Windows.Forms.ComboBox comboBoxSSR_Channel_Status;
-        private System.Windows.Forms.ComboBox comboBox13;
-        private System.Windows.Forms.ComboBox comboBox14;
-        private System.Windows.Forms.ComboBox comboBox15;
-        private System.Windows.Forms.ComboBox comboBox16;
-        private System.Windows.Forms.ComboBox comboBox17;
+        private System.Windows.Forms.ComboBox comboBoxPSR_Mon_Sys_Disconect;
+        private System.Windows.Forms.ComboBox comboBoxPSR_Overloaded;
+        private System.Windows.Forms.ComboBox comboBoxPSR_Antenna_Selected;
+        private System.Windows.Forms.ComboBox comboBoxPSR_Channel_Status;
         private System.Windows.Forms.ComboBox comboBoxMDS_Ch_For_Cord;
         private System.Windows.Forms.ComboBox comboBoxMDS_Mon_Sys_Disconect;
         private System.Windows.Forms.ComboBox ccomboBoxMDS_Overoaded;
@@ -2737,6 +2753,7 @@
         private System.Windows.Forms.ComboBox comboBoxMDS_Ch_For_DataLink;
         private System.Windows.Forms.ComboBox comboBoxMDS_Comm_Overload;
         private System.Windows.Forms.CheckBox checkBoxSystMonEnabled;
+        private System.Windows.Forms.Button btnAckowledgeRadar1;
     }
 }
 

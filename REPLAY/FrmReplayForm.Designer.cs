@@ -253,11 +253,11 @@
             // btnSetConnection
             // 
             this.btnSetConnection.Enabled = false;
-            this.btnSetConnection.Location = new System.Drawing.Point(264, 27);
+            this.btnSetConnection.Location = new System.Drawing.Point(235, 46);
             this.btnSetConnection.Name = "btnSetConnection";
-            this.btnSetConnection.Size = new System.Drawing.Size(88, 38);
+            this.btnSetConnection.Size = new System.Drawing.Size(117, 25);
             this.btnSetConnection.TabIndex = 43;
-            this.btnSetConnection.Text = "Set Input Connection";
+            this.btnSetConnection.Text = "Set LAN Connection";
             this.btnSetConnection.UseVisualStyleBackColor = true;
             this.btnSetConnection.Click += new System.EventHandler(this.btnSetConnection_Click);
             // 
