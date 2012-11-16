@@ -42,6 +42,10 @@ VERSION HISTORY
 Version 1.8
 
 	1. Implemented System Status Display (via CAT34 Item 050)
+	2. Fixed bug that sometimes caused a constraint error when stoping/starting data acquring W/O 
+	   reinitialising socket.
+	3. Modifed Track/Plot display to display CALLSIGN only when available. (To prevent clutter when no Mode-S is avalable)
+	4. Added option to draw Runways/Taxiways/Parking places as overlays with all applicable attributes.
 
 Version 1.7
 
@@ -168,6 +172,6 @@ Version 1.0
 1.	This is the first release with a limited message categories implemented so far. Each new release will be implemented additional categories (those planned already included in SW, but disabled). It is planned that in the next release the documentation will also be updated to keep detailed track of the implemented vs. planned functionality.
 2.	Currently there is a significant drop of the messages as I do not check the total size of the received buffer returned from sock.Receive… against the total size of an individual ASTERIX message, resulting in only one message being extracted from each return of sock.Receive…. This, for sure, will get fixed in the next release. 
 
-Do not hesitate to contact me should you have any questions at:
+Do not hesitate to contact me should you have any questions or discover any bug:
 
 Amer Kapetanovic (akapetanovic@gmail.com)

@@ -99,6 +99,23 @@ namespace AsterixDisplayAnalyser
         public static System.Collections.Generic.List<SectorBorder> SectorBorderDataSet = new System.Collections.Generic.List<SectorBorder>();
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Define runway data type
+        public class RunwayBorder
+        {
+            public string RunwayName;
+            public System.Collections.Generic.List<GeoCordSystemDegMinSecUtilities.LatLongClass> RunwayBorderPoints = new System.Collections.Generic.List<GeoCordSystemDegMinSecUtilities.LatLongClass>();
+
+            public RunwayBorder(string S_Name, System.Collections.Generic.List<GeoCordSystemDegMinSecUtilities.LatLongClass> S_Points)
+            {
+                RunwayName = S_Name;
+                RunwayBorderPoints = S_Points;
+            }
+        }
+        public static System.Collections.Generic.List<RunwayBorder> RunwayBorderDataSet = new System.Collections.Generic.List<RunwayBorder>();
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
         public static void InitializeData()
         {
             DisplayAttributes.Load();

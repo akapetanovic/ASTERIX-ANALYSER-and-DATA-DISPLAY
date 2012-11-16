@@ -307,6 +307,7 @@ namespace AsterixDisplayAnalyser
                 this.checkBoxRecording.Enabled = false;
                 this.checkBoxRecording.Checked = false;
                 HandleNoDataForCAT034I050(false);
+
             }
             else
             {
@@ -321,7 +322,6 @@ namespace AsterixDisplayAnalyser
                 this.googleEarthToolStripMenuItem.Enabled = false;
                 this.openToolStripMenuItem.Enabled = false;
                 this.checkBoxRecording.Enabled = true;
-
             }
 
             HandlePlotDisplayEnabledChanged();
@@ -475,6 +475,9 @@ namespace AsterixDisplayAnalyser
             for (int Index = NumOfItems; Index >= 0; Index--)
                 listBoxManFrame.Items.RemoveAt(Index);
 
+            DynamicDisplayBuilder.ResetGetDataIndex = 0;
+            DynamicDisplayBuilder.Initialise();
+            
             // Reset data buffer for each
             // category
             CAT01.Intitialize();
@@ -1560,8 +1563,6 @@ namespace AsterixDisplayAnalyser
                 /////////////////////////////////////////////////////////////////////////////////////////////////////
                 // COM BLOCK
                 /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                // First check that data for COM part is present for this cycle
                 if (MyCAT34I050UserData.COM_Data.Data_Present)
                 {
                     if ((MyCAT34I050UserData_Last_Cycle.COM_Data.Data_Present == false) || (MyCAT34I050UserData.COM_Data.System_is_NOGO != MyCAT34I050UserData_Last_Cycle.COM_Data.System_is_NOGO))
@@ -1687,9 +1688,9 @@ namespace AsterixDisplayAnalyser
                     if ((MyCAT34I050UserData_Last_Cycle.SSR_Data.Data_Present == false) || (MyCAT34I050UserData.SSR_Data.SSR_Overloaded != MyCAT34I050UserData_Last_Cycle.SSR_Data.SSR_Overloaded))
                     {
                         if (MyCAT34I050UserData.SSR_Data.SSR_Overloaded)
-                            this.comboBoxSSR_Overloaded.Items.Insert(0, "R " + Time_String + " Overload");
+                            this.comboBoxSSR_Overloaded.Items.Insert(0, "R " + Time_String + " SYS Overload");
                         else
-                            this.comboBoxSSR_Overloaded.Items.Insert(0, "G " + Time_String + " NO Overload");
+                            this.comboBoxSSR_Overloaded.Items.Insert(0, "G " + Time_String + " NO SYS Overload");
 
                         this.comboBoxSSR_Overloaded.SelectedIndex = 0;
                     }
@@ -1723,12 +1724,179 @@ namespace AsterixDisplayAnalyser
                 /////////////////////////////////////////////////////////////////////////////////////////////////////
                 // MDS BLOCK
                 /////////////////////////////////////////////////////////////////////////////////////////////////////
+                if (MyCAT34I050UserData.MDS_Data.Data_Present)
+                {
+                    if ((MyCAT34I050UserData_Last_Cycle.MDS_Data.Data_Present == false) || (MyCAT34I050UserData.MDS_Data.CH_Status != MyCAT34I050UserData_Last_Cycle.MDS_Data.CH_Status))
+                    {
+                        if (MyCAT34I050UserData.MDS_Data.CH_Status == CAT34I050Types.MDS.Channel_Status.No_Channel)
+                            this.comboBoxMDS_Channel_Status.Items.Insert(0, "R " + Time_String + " NO Channel");
+                        else if (MyCAT34I050UserData.MDS_Data.CH_Status == CAT34I050Types.MDS.Channel_Status.Illegal_Combination)
+                            this.comboBoxMDS_Channel_Status.Items.Insert(0, "R " + Time_String + " Illegal CH combination");
+                        else if (MyCAT34I050UserData.MDS_Data.CH_Status == CAT34I050Types.MDS.Channel_Status.Channel_A)
+                            this.comboBoxMDS_Channel_Status.Items.Insert(0, "G " + Time_String + " Channel A");
+                        else
+                            this.comboBoxMDS_Channel_Status.Items.Insert(0, "G " + Time_String + " Channel B");
+
+                        this.comboBoxMDS_Channel_Status.SelectedIndex = 0;
+                    }
+
+                    if ((MyCAT34I050UserData_Last_Cycle.MDS_Data.Data_Present == false) || (MyCAT34I050UserData.MDS_Data.Ant_2_Selected != MyCAT34I050UserData_Last_Cycle.MDS_Data.Ant_2_Selected))
+                    {
+                        if (MyCAT34I050UserData.MDS_Data.Ant_2_Selected)
+                            this.comboBoxMDS_Antena_Selected.Items.Insert(0, "W " + Time_String + " Antenna 2 selected");
+                        else
+                            this.comboBoxMDS_Antena_Selected.Items.Insert(0, "W " + Time_String + " Antenna 1 selected");
+
+                        this.comboBoxMDS_Antena_Selected.SelectedIndex = 0;
+                    }
+
+                    if ((MyCAT34I050UserData_Last_Cycle.SSR_Data.Data_Present == false) || (MyCAT34I050UserData.SSR_Data.SSR_Overloaded != MyCAT34I050UserData_Last_Cycle.SSR_Data.SSR_Overloaded))
+                    {
+                        if (MyCAT34I050UserData.MDS_Data.ModeS_Overloaded)
+                            this.ccomboBoxMDS_Overoaded.Items.Insert(0, "R " + Time_String + " SYS Overload");
+                        else
+                            this.ccomboBoxMDS_Overoaded.Items.Insert(0, "G " + Time_String + " NO SYS Overload");
+
+                        this.ccomboBoxMDS_Overoaded.SelectedIndex = 0;
+                    }
+
+                    if ((MyCAT34I050UserData_Last_Cycle.MDS_Data.Data_Present == false) || (MyCAT34I050UserData.MDS_Data.Monitor_Sys_Disconected != MyCAT34I050UserData_Last_Cycle.MDS_Data.Monitor_Sys_Disconected))
+                    {
+                        if (MyCAT34I050UserData.MDS_Data.Monitor_Sys_Disconected)
+                            this.comboBoxMDS_Mon_Sys_Disconect.Items.Insert(0, "R " + Time_String + " MON sys disconnect");
+                        else
+                            this.comboBoxMDS_Mon_Sys_Disconect.Items.Insert(0, "G " + Time_String + " MON sys connect");
+
+                        this.comboBoxMDS_Mon_Sys_Disconect.SelectedIndex = 0;
+                    }
+
+                    if ((MyCAT34I050UserData_Last_Cycle.MDS_Data.Data_Present == false) || (MyCAT34I050UserData.MDS_Data.CH2_For_Coordination_In_Use != MyCAT34I050UserData_Last_Cycle.MDS_Data.CH2_For_Coordination_In_Use))
+                    {
+                        if (MyCAT34I050UserData.MDS_Data.CH2_For_Coordination_In_Use)
+                            this.comboBoxMDS_Ch_For_Cord.Items.Insert(0, "W " + Time_String + " CH#2 for Coordination");
+                        else
+                            this.comboBoxMDS_Ch_For_Cord.Items.Insert(0, "G " + Time_String + " CH#1 for Coordination");
+
+                        this.comboBoxMDS_Ch_For_Cord.SelectedIndex = 0;
+                    }
+
+                    if ((MyCAT34I050UserData_Last_Cycle.MDS_Data.Data_Present == false) || (MyCAT34I050UserData.MDS_Data.CH2_For_DataLink_In_Use != MyCAT34I050UserData_Last_Cycle.MDS_Data.CH2_For_DataLink_In_Use))
+                    {
+                        if (MyCAT34I050UserData.MDS_Data.CH2_For_DataLink_In_Use)
+                            this.comboBoxMDS_Ch_For_Cord.Items.Insert(0, "W " + Time_String + " CH#2 for Data Link");
+                        else
+                            this.comboBoxMDS_Ch_For_Cord.Items.Insert(0, "W " + Time_String + " CH#1 for Data Link");
+
+                        this.comboBoxMDS_Ch_For_Cord.SelectedIndex = 0;
+                    }
+
+                    if ((MyCAT34I050UserData_Last_Cycle.MDS_Data.Data_Present == false) || (MyCAT34I050UserData.MDS_Data.DataLink_Func_Overload != MyCAT34I050UserData_Last_Cycle.MDS_Data.CH2_For_DataLink_In_Use))
+                    {
+                        if (MyCAT34I050UserData.MDS_Data.DataLink_Func_Overload)
+                            this.comboBoxMDS_DataLink_Overload.Items.Insert(0, "R " + Time_String + " Overload Data Link");
+                        else
+                            this.comboBoxMDS_DataLink_Overload.Items.Insert(0, "G " + Time_String + " NO Overload Data Link");
+
+                        this.comboBoxMDS_DataLink_Overload.SelectedIndex = 0;
+                    }
+
+                    if ((MyCAT34I050UserData_Last_Cycle.MDS_Data.Data_Present == false) || (MyCAT34I050UserData.MDS_Data.Coordination_Func_Overload != MyCAT34I050UserData_Last_Cycle.MDS_Data.Coordination_Func_Overload))
+                    {
+                        if (MyCAT34I050UserData.MDS_Data.Coordination_Func_Overload)
+                            this.comboBoxMDS_Comm_Overload.Items.Insert(0, "R " + Time_String + " Overload Coordination");
+                        else
+                            this.comboBoxMDS_Comm_Overload.Items.Insert(0, "G " + Time_String + " NO Overload Coordination");
+
+                        this.comboBoxMDS_Comm_Overload.SelectedIndex = 0;
+                    }
+                }
+                else
+                {
+                    if ((MyCAT34I050UserData_Last_Cycle.MDS_Data.Data_Present == true) && (MyCAT34I050UserData.MDS_Data.Data_Present == false))
+                    {
+                        this.comboBoxMDS_Channel_Status.Items.Insert(0, "W " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " NO MDS DATA");
+                        this.comboBoxMDS_Channel_Status.SelectedIndex = 0;
+                        this.comboBoxMDS_Antena_Selected.Items.Insert(0, "W " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " NO MDS DATA");
+                        this.comboBoxMDS_Antena_Selected.SelectedIndex = 0;
+                        this.ccomboBoxMDS_Overoaded.Items.Insert(0, "W " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " NO MDS DATA");
+                        this.ccomboBoxMDS_Overoaded.SelectedIndex = 0;
+                        this.comboBoxMDS_Mon_Sys_Disconect.Items.Insert(0, "W " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " NO MDS DATA");
+                        this.comboBoxMDS_Mon_Sys_Disconect.SelectedIndex = 0;
+                        this.comboBoxMDS_Ch_For_Cord.Items.Insert(0, "W " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " NO MDS DATA");
+                        this.comboBoxMDS_Ch_For_Cord.SelectedIndex = 0;
+                        this.comboBoxMDS_Ch_For_DataLink.Items.Insert(0, "W " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " NO MDS DATA");
+                        this.comboBoxMDS_Ch_For_DataLink.SelectedIndex = 0;
+                        this.comboBoxMDS_DataLink_Overload.Items.Insert(0, "W " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " NO MDS DATA");
+                        this.comboBoxMDS_DataLink_Overload.SelectedIndex = 0;
+                        this.comboBoxMDS_Comm_Overload.Items.Insert(0, "W " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " NO MDS DATA");
+                        this.comboBoxMDS_Comm_Overload.SelectedIndex = 0;
+                    }
+                }
 
 
                 /////////////////////////////////////////////////////////////////////////////////////////////////////
                 // PSR BLOCK
                 /////////////////////////////////////////////////////////////////////////////////////////////////////
+                if (MyCAT34I050UserData.PSR_Data.Data_Present)
+                {
+                    if ((MyCAT34I050UserData_Last_Cycle.PSR_Data.Data_Present == false) || (MyCAT34I050UserData.PSR_Data.CH_Status != MyCAT34I050UserData_Last_Cycle.PSR_Data.CH_Status))
+                    {
+                        if (MyCAT34I050UserData.PSR_Data.CH_Status == CAT34I050Types.PSR.Channel_Status.No_Channel)
+                            this.comboBoxPSR_Channel_Status.Items.Insert(0, "R " + Time_String + " NO Channel");
+                        else if (MyCAT34I050UserData.PSR_Data.CH_Status == CAT34I050Types.PSR.Channel_Status.Channel_A_and_B)
+                            this.comboBoxPSR_Channel_Status.Items.Insert(0, "R " + Time_String + "  Channel A & B");
+                        else if (MyCAT34I050UserData.PSR_Data.CH_Status == CAT34I050Types.PSR.Channel_Status.Channel_A)
+                            this.comboBoxPSR_Channel_Status.Items.Insert(0, "G " + Time_String + " Channel A");
+                        else
+                            this.comboBoxPSR_Channel_Status.Items.Insert(0, "G " + Time_String + " Channel B");
 
+                        this.comboBoxPSR_Channel_Status.SelectedIndex = 0;
+                    }
+
+                    if ((MyCAT34I050UserData_Last_Cycle.PSR_Data.Data_Present == false) || (MyCAT34I050UserData.PSR_Data.Ant_2_Selected != MyCAT34I050UserData_Last_Cycle.PSR_Data.Ant_2_Selected))
+                    {
+                        if (MyCAT34I050UserData.PSR_Data.Ant_2_Selected)
+                            this.comboBoxPSR_Antenna_Selected.Items.Insert(0, "W " + Time_String + " Antenna 2 selected");
+                        else
+                            this.comboBoxPSR_Antenna_Selected.Items.Insert(0, "W " + Time_String + " Antenna 1 selected");
+
+                        this.comboBoxPSR_Antenna_Selected.SelectedIndex = 0;
+                    }
+
+                    if ((MyCAT34I050UserData_Last_Cycle.PSR_Data.Data_Present == false) || (MyCAT34I050UserData.PSR_Data.PSR_Overloaded != MyCAT34I050UserData_Last_Cycle.PSR_Data.PSR_Overloaded))
+                    {
+                        if (MyCAT34I050UserData.PSR_Data.PSR_Overloaded)
+                            this.comboBoxPSR_Overloaded.Items.Insert(0, "R " + Time_String + " SYS Overload");
+                        else
+                            this.comboBoxPSR_Overloaded.Items.Insert(0, "G " + Time_String + " NO SYS Overload");
+
+                        this.comboBoxPSR_Overloaded.SelectedIndex = 0;
+                    }
+
+                    if ((MyCAT34I050UserData_Last_Cycle.PSR_Data.Data_Present == false) || (MyCAT34I050UserData.PSR_Data.Monitor_Sys_Disconected != MyCAT34I050UserData_Last_Cycle.PSR_Data.Monitor_Sys_Disconected))
+                    {
+                        if (MyCAT34I050UserData.PSR_Data.Monitor_Sys_Disconected)
+                            this.comboBoxPSR_Mon_Sys_Disconect.Items.Insert(0, "R " + Time_String + " MON sys disconnect");
+                        else
+                            this.comboBoxPSR_Mon_Sys_Disconect.Items.Insert(0, "G " + Time_String + " MON sys connect");
+
+                        this.comboBoxPSR_Mon_Sys_Disconect.SelectedIndex = 0;
+                    }
+                }
+                else
+                {
+                    if ((MyCAT34I050UserData_Last_Cycle.PSR_Data.Data_Present == true) && (MyCAT34I050UserData.PSR_Data.Data_Present == false))
+                    {
+                        this.comboBoxPSR_Channel_Status.Items.Insert(0, "W " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " NO PSR DATA");
+                        this.comboBoxPSR_Channel_Status.SelectedIndex = 0;
+                        this.comboBoxPSR_Antenna_Selected.Items.Insert(0, "W " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " NO PSR DATA");
+                        this.comboBoxPSR_Antenna_Selected.SelectedIndex = 0;
+                        this.comboBoxPSR_Overloaded.Items.Insert(0, "W " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " NO PSR DATA");
+                        this.comboBoxPSR_Overloaded.SelectedIndex = 0;
+                        this.comboBoxPSR_Mon_Sys_Disconect.Items.Insert(0, "W " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " NO PSR DATA");
+                        this.comboBoxPSR_Mon_Sys_Disconect.SelectedIndex = 0;
+                    }
+                }
 
                 // Sync the data for this cycle
                 MyCAT34I050UserData_Last_Cycle = MyCAT34I050UserData;

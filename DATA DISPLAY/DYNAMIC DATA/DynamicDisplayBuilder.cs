@@ -32,7 +32,7 @@ namespace AsterixDisplayAnalyser
 
         // This method is to be used to reset the data index when the main data buffer is reseted
         // and a new block of data is te be recived.
-        public int ResetGetDataIndex
+        public static int ResetGetDataIndex
         {
             get { return LastDataIndex; }
             set { LastDataIndex = 0; }
@@ -49,6 +49,7 @@ namespace AsterixDisplayAnalyser
 
         public static void Initialise()
         {
+            GlobalTargetList.Clear();
             for (int I = 0; I < 65536; I++)
             {
                 GlobalTargetList.Add(new TargetType());

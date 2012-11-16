@@ -14,7 +14,7 @@ namespace AsterixDisplayAnalyser
         public static bool StaticDisplayBuildRequired = false;
 
         // Define all available data display items
-        public enum DisplayItemsType { Radar, Waypoint, StateBorder, BackgroundColor, SectorBorder };
+        public enum DisplayItemsType { Radar, Waypoint, StateBorder, BackgroundColor, SectorBorder, RunwayBorder };
 
 
         // Define type for the possibloe display attributes.
@@ -73,6 +73,10 @@ namespace AsterixDisplayAnalyser
             DataItem = new DisplayAttributesType();
             DataItem.ItemName = "SectorBorder";
             DisplayAttributeDataSet.Add(DataItem);
+            // RunwayBorder 5
+            DataItem = new DisplayAttributesType();
+            DataItem.ItemName = "RunwayBorder";
+            DisplayAttributeDataSet.Add(DataItem);
         }
 
         // Returns list index based on the enumerated type.
@@ -96,6 +100,9 @@ namespace AsterixDisplayAnalyser
                     break;
                 case DisplayItemsType.SectorBorder:
                     Index = 4;
+                    break;
+                case DisplayItemsType.RunwayBorder:
+                    Index = 5;
                     break;
                 default:
                     break;

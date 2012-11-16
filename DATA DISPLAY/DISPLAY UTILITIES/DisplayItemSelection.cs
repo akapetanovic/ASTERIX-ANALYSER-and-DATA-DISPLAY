@@ -19,6 +19,7 @@ namespace AsterixDisplayAnalyser
             this.checkBoxWaypoints.Checked = Properties.Settings.Default.Waypoints;
             this.checkBoxRadars.Checked = Properties.Settings.Default.Radars;
             this.checkBoxSectors.Checked = Properties.Settings.Default.Sectors;
+            this.checkBoxRunways.Checked = Properties.Settings.Default.Runways;
         }
 
         private void checkBoxStateBorder_CheckedChanged(object sender, EventArgs e)
@@ -57,6 +58,13 @@ namespace AsterixDisplayAnalyser
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void checkBoxRunways_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Runways = this.checkBoxRunways.Checked;
+            Properties.Settings.Default.Save();
+            DisplayAttributes.StaticDisplayBuildRequired = true;
         }
     }
 }

@@ -234,6 +234,8 @@
     <Compile Include="ASTERIX\CAT062\CAT62I380Types.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I295Types.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I340Types.cs" />
+    <Compile Include="DATA DISPLAY\STATIC DATA\RunwayBorderDisplay.cs" />
+    <Compile Include="DATA SET\LoadRunwayBoundaries.cs" />
     <Compile Include="MAIN\CAT_Decoder_Selector.cs">
       <SubType>Form</SubType>
     </Compile>

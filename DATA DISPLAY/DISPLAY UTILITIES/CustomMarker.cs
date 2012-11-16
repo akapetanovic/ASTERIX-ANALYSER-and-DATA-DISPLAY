@@ -155,11 +155,15 @@ namespace AsterixDisplayAnalyser
 
             // Draw ModeA and coast indicator
             g.DrawString(ModeA_CI_STRING, ModeA_CI_FONT, ModeA_CI_BRUSH, LabelStartPosition.X + ModeA_CI_OFFSET.X, LabelStartPosition.Y + SpacingIndex);
-            LabelHeight = LabelHeight + (int)ModeA_CI_FONT.Size + SpacingIndex * 2; 
-            
-            // Draw CALLSIGN
-            g.DrawString(CALLSIGN_STRING, CALLSIGN_FONT, CALLSIGN_BRUSH, LabelStartPosition.X + CALLSIGN_OFFSET.X, LabelStartPosition.Y + LabelHeight);
-            LabelHeight = LabelHeight + (int)CALLSIGN_FONT.Size + SpacingIndex * 2; 
+            LabelHeight = LabelHeight + (int)ModeA_CI_FONT.Size + SpacingIndex * 2;
+
+
+            if (CALLSIGN_STRING != "--------")
+            {
+                // Draw CALLSIGN
+                g.DrawString(CALLSIGN_STRING, CALLSIGN_FONT, CALLSIGN_BRUSH, LabelStartPosition.X + CALLSIGN_OFFSET.X, LabelStartPosition.Y + LabelHeight);
+                LabelHeight = LabelHeight + (int)CALLSIGN_FONT.Size + SpacingIndex * 2;
+            }
             
             // Draw ModeC
             g.DrawString(ModeC_STRING, ModeC_FONT, ModeC_BRUSH, LabelStartPosition.X + ModeC_OFFSET.X, LabelStartPosition.Y + LabelHeight);

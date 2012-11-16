@@ -25,6 +25,9 @@ namespace AsterixDisplayAnalyser
 
             if (Properties.Settings.Default.Sectors)
                 SectorBorderDisplay.Build(ref Overlay);
+
+            if (Properties.Settings.Default.Runways)
+                RunwayBorderDisplay.Build(ref Overlay);
         }
     }
 }
