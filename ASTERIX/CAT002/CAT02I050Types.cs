@@ -7,5 +7,7 @@ namespace AsterixDisplayAnalyser
 {
     class CAT02I050Types
     {
+
+
     }
 }

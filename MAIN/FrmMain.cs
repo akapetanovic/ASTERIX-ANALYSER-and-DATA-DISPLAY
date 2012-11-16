@@ -1546,6 +1546,12 @@ namespace AsterixDisplayAnalyser
             {
                 MainASTERIXDataStorage.CAT34Data Msg = MainASTERIXDataStorage.CAT34Message[MainASTERIXDataStorage.CAT34Message.Count - 1];
 
+                // Get the antenna rotation period
+                if (Msg.CAT34DataItems[CAT34.ItemIDToIndex("041")].CurrentlyPresent)
+                    this.labelAntenaPeriod034.Text = (string)((double)Msg.CAT34DataItems[CAT34.ItemIDToIndex("041")].value).ToString();
+                else
+                    this.labelAntenaPeriod034.Text = "N/A";
+
                 // Get the latest System Configuration and Status message
                 CAT34I050Types.CAT34I050UserData MyCAT34I050UserData = (CAT34I050Types.CAT34I050UserData)Msg.CAT34DataItems[CAT34.ItemIDToIndex("050")].value;
 
@@ -1791,6 +1797,8 @@ namespace AsterixDisplayAnalyser
                 this.comboBoxPSR_Mon_Sys_Disconect.Items.Insert(0, "R " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " NO DATA");
                 this.comboBoxPSR_Mon_Sys_Disconect.SelectedIndex = 0;
 
+
+                this.labelAntenaPeriod034.Text = "N/A";
                 MyCAT34I050UserData_Last_Cycle = new CAT34I050Types.CAT34I050UserData();
             }
         }
@@ -2144,7 +2152,7 @@ namespace AsterixDisplayAnalyser
                 this.checkBoxSystMonEnabled.Text = "System Monitoring ENABLED";
                 Properties.Settings.Default.SystMonEnabled = this.checkBoxSystMonEnabled.Checked;
                 Properties.Settings.Default.Save();
-                groupBoxSysStatCAT34One.Enabled = true;
+                groupBoxSysStatCAT34.Enabled = true;
             }
             else
             {
@@ -2152,7 +2160,7 @@ namespace AsterixDisplayAnalyser
                 Properties.Settings.Default.SystMonEnabled = this.checkBoxSystMonEnabled.Checked;
                 Properties.Settings.Default.Save();
                 HandleNoDataForCAT034I050(true);
-                groupBoxSysStatCAT34One.Enabled = false;
+                groupBoxSysStatCAT34.Enabled = false;
             }
         }
 

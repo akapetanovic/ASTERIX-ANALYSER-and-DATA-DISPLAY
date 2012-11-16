@@ -7,8 +7,6 @@ namespace AsterixDisplayAnalyser
 {
     class CAT02I050UserData
     {
-
-
         public static void DecodeCAT02I050(byte[] Data)
         {
 
