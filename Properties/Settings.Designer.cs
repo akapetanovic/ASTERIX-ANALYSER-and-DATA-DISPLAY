@@ -610,5 +610,17 @@ namespace AsterixDisplayAnalyser.Properties {
                 this["Runways"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DisplayPosInDecimals {
+            get {
+                return ((bool)(this["DisplayPosInDecimals"]));
+            }
+            set {
+                this["DisplayPosInDecimals"] = value;
+            }
+        }
     }
 }

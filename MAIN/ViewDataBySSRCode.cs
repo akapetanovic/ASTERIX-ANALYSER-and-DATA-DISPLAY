@@ -174,7 +174,7 @@ namespace AsterixDisplayAnalyser
                             int TrackNumber = (int)Msg.CAT62DataItems[CAT62.ItemIDToIndex("040")].value;
                             this.listBoxDataBySSRCode.Items.Add("\t" + "TRACK#:" + TrackNumber.ToString());
                             // CALLSIGN
-                            CAT62I380Types.CAT62I380ACID_Data CAT62I380Data = (CAT62I380Types.CAT62I380ACID_Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
+                            CAT62I380Types.CAT62I380Data CAT62I380Data = (CAT62I380Types.CAT62I380Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
                             this.listBoxDataBySSRCode.Items.Add("\t" + "Callsign:" + CAT62I380Data.ACID.ACID_String);
                             // POSITION
                             GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.CAT62DataItems[CAT62.ItemIDToIndex("105")].value;

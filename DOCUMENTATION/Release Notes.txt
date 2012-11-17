@@ -33,9 +33,15 @@ CAT62
 		105 Calculated Track Position (WGS-84)
 		060 Track Mode 3/A Code
 		040 Track Number
-		136 Measured Flight Level 
+		136 Measured Flight Level
 		380 Aircraft Derived Data
-			Subfield # 2: Target Identification
+			Subfield # 2:  Target Identification
+			Subfiled # 3:  Magnetic Heading
+			Subfiled # 5:  True Airspeed (TAS)
+			Subfiled # 17: Track Angle
+			Subfiled # 26: Indicated Airspeed (IAS)
+			Subfiled # 27: Mach Number
+			
 
 VERSION HISTORY
 
@@ -46,6 +52,14 @@ Version 1.8
 	   reinitialising socket.
 	3. Modifed Track/Plot display to display CALLSIGN only when available. (To prevent clutter when no Mode-S is avalable)
 	4. Added option to draw Runways/Taxiways/Parking places as overlays with all applicable attributes.
+	5. Modifed to enable map moving by using UP/DOWN/LEFT/RIGHT keys.
+	   Added option to zoom in/zoom out using +/- keys. 
+	   Also modifed to enable middle mouse button to be used for zoom-in/out and moving maps (reccomended way)
+	6. Added LAT/LONG readout of the current mouse position. 
+	7. Fixed zoom and display center readout so it gets synced on every change.
+	8. Added option to easely switch between full screen track/plot display or the original with side bar tools.
+	9. Added option to display "Extended label" that displays (HDG, TRK, IAS, TAS, MACH) for selected track label (CAT62 for now)
+
 
 Version 1.7
 

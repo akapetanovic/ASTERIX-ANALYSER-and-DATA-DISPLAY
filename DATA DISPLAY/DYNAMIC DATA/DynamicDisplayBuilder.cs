@@ -13,12 +13,29 @@ namespace AsterixDisplayAnalyser
     {
         public class TargetType
         {
+            /// <summary>
+            /// ////////////////////////////////////////////////
+            /// Track Label Items
+            /// </summary>
             public string ModeA;
             public string ModeC;
             public string ModeC_Previous_Cycle;
             public string ACID_Mode_S;
             public double Lat;
             public double Lon;
+            /// <summary>
+            /// ////////////////////////////////////////////////////
+            /// Extended label items )Applcable to CAT48 and CAT62
+            /// </summary>
+            public string TAS;
+            public string IAS;
+            public string MACH;
+            public string M_HDG;
+            public string TRK;
+            /// <summary>
+            /// ////////////////////////////////////////////////////
+            /// Internal stuff
+            /// </summary>
             public int TrackNumber = -1;
             public int TrackTerminateTreshold = Properties.Settings.Default.TrackCoast;
             // Image properties
@@ -69,6 +86,11 @@ namespace AsterixDisplayAnalyser
                         GlobalTargetList[CurrentTarget.TrackNumber].ModeC_Previous_Cycle = "" + GlobalTargetList[CurrentTarget.TrackNumber].ModeC;
                     GlobalTargetList[CurrentTarget.TrackNumber].ModeC = CurrentTarget.ModeC;
                     GlobalTargetList[CurrentTarget.TrackNumber].ACID_Mode_S = CurrentTarget.ACID_Mode_S;
+                    GlobalTargetList[CurrentTarget.TrackNumber].M_HDG = CurrentTarget.M_HDG;
+                    GlobalTargetList[CurrentTarget.TrackNumber].IAS = CurrentTarget.IAS;
+                    GlobalTargetList[CurrentTarget.TrackNumber].TRK = CurrentTarget.TRK;
+                    GlobalTargetList[CurrentTarget.TrackNumber].MACH = CurrentTarget.MACH;
+                    GlobalTargetList[CurrentTarget.TrackNumber].TAS = CurrentTarget.TAS;
                     GlobalTargetList[CurrentTarget.TrackNumber].Lat = CurrentTarget.Lat;
                     GlobalTargetList[CurrentTarget.TrackNumber].Lon = CurrentTarget.Lon;
                     GlobalTargetList[CurrentTarget.TrackNumber].TrackNumber = CurrentTarget.TrackNumber;
@@ -83,6 +105,11 @@ namespace AsterixDisplayAnalyser
                         GlobalTargetList[ModeAIndex].ModeC_Previous_Cycle = "" + GlobalTargetList[ModeAIndex].ModeC;
                     GlobalTargetList[ModeAIndex].ModeC = CurrentTarget.ModeC;
                     GlobalTargetList[ModeAIndex].ACID_Mode_S = CurrentTarget.ACID_Mode_S;
+                    GlobalTargetList[ModeAIndex].M_HDG = CurrentTarget.M_HDG;
+                    GlobalTargetList[ModeAIndex].IAS = CurrentTarget.IAS;
+                    GlobalTargetList[ModeAIndex].TRK = CurrentTarget.TRK;
+                    GlobalTargetList[ModeAIndex].MACH = CurrentTarget.MACH;
+                    GlobalTargetList[ModeAIndex].TAS = CurrentTarget.TAS;
                     GlobalTargetList[ModeAIndex].Lat = CurrentTarget.Lat;
                     GlobalTargetList[ModeAIndex].Lon = CurrentTarget.Lon;
                     GlobalTargetList[ModeAIndex].TrackNumber = ModeAIndex;
@@ -101,6 +128,11 @@ namespace AsterixDisplayAnalyser
                     NewTarget.ModeC_Previous_Cycle = GlobalTarget.ModeC_Previous_Cycle;
                     NewTarget.ModeC = GlobalTarget.ModeC;
                     NewTarget.ACID_Mode_S = GlobalTarget.ACID_Mode_S;
+                    NewTarget.TRK = GlobalTarget.TRK;
+                    NewTarget.TAS = GlobalTarget.TAS;
+                    NewTarget.MACH = GlobalTarget.MACH;
+                    NewTarget.M_HDG = GlobalTarget.M_HDG;
+                    NewTarget.IAS = GlobalTarget.IAS;                   
                     NewTarget.Lat = GlobalTarget.Lat;
                     NewTarget.Lon = GlobalTarget.Lon;
                     NewTarget.TrackNumber = GlobalTarget.TrackNumber;
@@ -121,10 +153,7 @@ namespace AsterixDisplayAnalyser
                 foreach (TargetType PSRTgtList in PSRTargetList)
                 {
                     TargetType NewTarget = new TargetType();
-                    NewTarget.ModeA = PSRTgtList.ModeA;
                     NewTarget.ModeC_Previous_Cycle = PSRTgtList.ModeC_Previous_Cycle;
-                    NewTarget.ModeC = PSRTgtList.ModeC;
-                    NewTarget.ACID_Mode_S = PSRTgtList.ACID_Mode_S;
                     NewTarget.Lat = PSRTgtList.Lat;
                     NewTarget.Lon = PSRTgtList.Lon;
                     NewTarget.TrackNumber = PSRTgtList.TrackNumber;
@@ -242,8 +271,9 @@ namespace AsterixDisplayAnalyser
                         // Get Lat/Long in decimal
                         GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.CAT62DataItems[CAT62.ItemIDToIndex("105")].value;
                         double FlightLevel = (double)Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value;
-                        CAT62I380Types.CAT62I380ACID_Data CAT62I380Data = (CAT62I380Types.CAT62I380ACID_Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
+                        CAT62I380Types.CAT62I380Data CAT62I380Data = (CAT62I380Types.CAT62I380Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
 
+                        
                         TargetType Target = new TargetType();
                         Target.ModeA = Mode3AData.Mode3A_Code;
                         Target.ModeC = FlightLevel.ToString();
@@ -253,6 +283,31 @@ namespace AsterixDisplayAnalyser
                                 Target.ACID_Mode_S = CAT62I380Data.ACID.ACID_String;
                             else
                                 Target.ACID_Mode_S = "N/A";
+
+                            if (CAT62I380Data.TAS.Is_Valid)
+                                Target.TAS = CAT62I380Data.TAS.TAS.ToString();
+                            else
+                                Target.TAS = "N/A";
+
+                            if (CAT62I380Data.IAS.Is_Valid)
+                                Target.IAS = CAT62I380Data.IAS.IAS.ToString();
+                            else
+                                Target.IAS = "N/A";
+
+                            if (CAT62I380Data.MACH.Is_Valid)
+                                Target.MACH = CAT62I380Data.MACH.MACH.ToString();
+                            else
+                                Target.MACH = "N/A";
+
+                            if (CAT62I380Data.M_HDG.Is_Valid)
+                                Target.M_HDG = CAT62I380Data.M_HDG.M_HDG.ToString();
+                            else
+                                Target.M_HDG = "N/A";
+
+                            if (CAT62I380Data.TRK.Is_Valid)
+                                Target.TRK = CAT62I380Data.TRK.TRK.ToString();
+                            else
+                                Target.TRK = "N/A";
                         }
 
                         Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
@@ -362,7 +417,7 @@ namespace AsterixDisplayAnalyser
                         // Get Lat/Long in decimal
                         GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.CAT62DataItems[CAT62.ItemIDToIndex("105")].value;
                         double FlightLevel = (double)Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value;
-                        CAT62I380Types.CAT62I380ACID_Data CAT62I380Data = (CAT62I380Types.CAT62I380ACID_Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
+                        CAT62I380Types.CAT62I380Data CAT62I380Data = (CAT62I380Types.CAT62I380Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
 
                         TargetType Target = new TargetType();
                         Target.ModeA = Mode3AData.Mode3A_Code;
@@ -373,7 +428,33 @@ namespace AsterixDisplayAnalyser
                                 Target.ACID_Mode_S = CAT62I380Data.ACID.ACID_String;
                             else
                                 Target.ACID_Mode_S = "N/A";
+
+                            if (CAT62I380Data.TAS.Is_Valid)
+                                Target.TAS = CAT62I380Data.TAS.TAS.ToString();
+                            else
+                                Target.TAS = "N/A";
+
+                            if (CAT62I380Data.IAS.Is_Valid)
+                                Target.IAS = CAT62I380Data.IAS.IAS.ToString();
+                            else
+                                Target.IAS = "N/A";
+
+                            if (CAT62I380Data.MACH.Is_Valid)
+                                Target.MACH = CAT62I380Data.MACH.MACH.ToString();
+                            else
+                                Target.MACH = "N/A";
+
+                            if (CAT62I380Data.M_HDG.Is_Valid)
+                                Target.M_HDG = CAT62I380Data.M_HDG.M_HDG.ToString();
+                            else
+                                Target.M_HDG = "N/A";
+
+                            if (CAT62I380Data.TRK.Is_Valid)
+                                Target.TRK = CAT62I380Data.TRK.TRK.ToString();
+                            else
+                                Target.TRK = "N/A";
                         }
+
                         Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
                         Target.Lon = LatLongData.GetLatLongDecimal().LongitudeDecimal;
                         CurrentTargetList.Add(Target);

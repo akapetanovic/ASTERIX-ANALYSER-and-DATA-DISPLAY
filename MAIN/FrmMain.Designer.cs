@@ -159,6 +159,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.checkBoxRecording = new System.Windows.Forms.CheckBox();
             this.tabPlotDisplay = new System.Windows.Forms.TabPage();
+            this.labelLat_Long = new System.Windows.Forms.Label();
             this.labelFrozeDisplay = new System.Windows.Forms.Label();
             this.labelTargetCount = new System.Windows.Forms.Label();
             this.lblNumberofTargets = new System.Windows.Forms.Label();
@@ -254,6 +255,8 @@
             this.btnStartStopFileReplay = new System.Windows.Forms.Button();
             this.labelClock = new System.Windows.Forms.Label();
             this.checkBoxIs_UTC = new System.Windows.Forms.CheckBox();
+            this.extendedLabelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBoxFullscreen = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -363,7 +366,8 @@
             this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.recorderAndDataForwarderToolStripMenuItem,
             this.replayToolStripMenuItem,
-            this.replayToRawToolStripMenuItem});
+            this.replayToRawToolStripMenuItem,
+            this.extendedLabelToolStripMenuItem});
             this.toolStripMenuItem2.ForeColor = System.Drawing.Color.Silver;
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(48, 20);
@@ -517,7 +521,7 @@
             this.warningErrorConditionsToolStripMenuItem,
             this.presenceOfXPulseToolStripMenuItem});
             this.cAT001ToolStripMenuItem.Name = "cAT001ToolStripMenuItem";
-            this.cAT001ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.cAT001ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cAT001ToolStripMenuItem.Text = "CAT001";
             // 
             // targetReportDescriptorToolStripMenuItem
@@ -632,7 +636,7 @@
             this.collimationErrorToolStripMenuItem,
             this.warningErrorConditionsToolStripMenuItem1});
             this.cAT002ToolStripMenuItem.Name = "cAT002ToolStripMenuItem";
-            this.cAT002ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.cAT002ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cAT002ToolStripMenuItem.Text = "CAT002";
             // 
             // messageTypeToolStripMenuItem
@@ -721,7 +725,7 @@
             this.sequenceOfWeatherVectorsInSPFNotationToolStripMenuItem});
             this.cAT008ToolStripMenuItem1.Enabled = false;
             this.cAT008ToolStripMenuItem1.Name = "cAT008ToolStripMenuItem1";
-            this.cAT008ToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
+            this.cAT008ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.cAT008ToolStripMenuItem1.Text = "CAT008";
             // 
             // messageTypeToolStripMenuItem1
@@ -807,7 +811,7 @@
             this.dPositionOfDataSourceToolStripMenuItem,
             this.collimationErrorToolStripMenuItem1});
             this.cAT034ToolStripMenuItem.Name = "cAT034ToolStripMenuItem";
-            this.cAT034ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.cAT034ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cAT034ToolStripMenuItem.Text = "CAT034";
             // 
             // messageTypeToolStripMenuItem2
@@ -914,7 +918,7 @@
             this.mode1CodeInOctalRepresentationToolStripMenuItem,
             this.mode1CodeConfidenceIndicatorToolStripMenuItem});
             this.cAT048ToolStripMenuItem.Name = "cAT048ToolStripMenuItem";
-            this.cAT048ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.cAT048ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cAT048ToolStripMenuItem.Text = "CAT048";
             // 
             // timeofDayToolStripMenuItem3
@@ -1091,7 +1095,7 @@
             this.measuredFlightLevelToolStripMenuItem,
             this.aircraftDerivedDataSUBF2ACIDToolStripMenuItem});
             this.cAT062ToolStripMenuItem.Name = "cAT062ToolStripMenuItem";
-            this.cAT062ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.cAT062ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cAT062ToolStripMenuItem.Text = "CAT062";
             // 
             // serviceIdentificationToolStripMenuItem
@@ -1140,21 +1144,21 @@
             // 
             this.cAT063ToolStripMenuItem1.Enabled = false;
             this.cAT063ToolStripMenuItem1.Name = "cAT063ToolStripMenuItem1";
-            this.cAT063ToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
+            this.cAT063ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.cAT063ToolStripMenuItem1.Text = "CAT063";
             // 
             // cAT065ToolStripMenuItem
             // 
             this.cAT065ToolStripMenuItem.Enabled = false;
             this.cAT065ToolStripMenuItem.Name = "cAT065ToolStripMenuItem";
-            this.cAT065ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.cAT065ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cAT065ToolStripMenuItem.Text = "CAT065";
             // 
             // cAT244ToolStripMenuItem
             // 
             this.cAT244ToolStripMenuItem.Enabled = false;
             this.cAT244ToolStripMenuItem.Name = "cAT244ToolStripMenuItem";
-            this.cAT244ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.cAT244ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cAT244ToolStripMenuItem.Text = "CAT244";
             // 
             // dataBySSRCodeToolStripMenuItem
@@ -1345,7 +1349,9 @@
             // tabPlotDisplay
             // 
             this.tabPlotDisplay.BackColor = System.Drawing.SystemColors.Desktop;
+            this.tabPlotDisplay.Controls.Add(this.labelLat_Long);
             this.tabPlotDisplay.Controls.Add(this.labelFrozeDisplay);
+            this.tabPlotDisplay.Controls.Add(this.gMapControl);
             this.tabPlotDisplay.Controls.Add(this.labelTargetCount);
             this.tabPlotDisplay.Controls.Add(this.lblNumberofTargets);
             this.tabPlotDisplay.Controls.Add(this.groupBox2);
@@ -1362,7 +1368,6 @@
             this.tabPlotDisplay.Controls.Add(this.button2);
             this.tabPlotDisplay.Controls.Add(this.button1);
             this.tabPlotDisplay.Controls.Add(this.groupBox3);
-            this.tabPlotDisplay.Controls.Add(this.gMapControl);
             this.tabPlotDisplay.ForeColor = System.Drawing.Color.White;
             this.tabPlotDisplay.Location = new System.Drawing.Point(4, 22);
             this.tabPlotDisplay.Name = "tabPlotDisplay";
@@ -1373,12 +1378,23 @@
             this.tabPlotDisplay.SizeChanged += new System.EventHandler(this.tabPlotDisplay_SizeChanged);
             this.tabPlotDisplay.Click += new System.EventHandler(this.tabPlotDisplay_Click);
             // 
+            // labelLat_Long
+            // 
+            this.labelLat_Long.AutoSize = true;
+            this.labelLat_Long.BackColor = System.Drawing.Color.Silver;
+            this.labelLat_Long.ForeColor = System.Drawing.Color.Black;
+            this.labelLat_Long.Location = new System.Drawing.Point(571, 695);
+            this.labelLat_Long.Name = "labelLat_Long";
+            this.labelLat_Long.Size = new System.Drawing.Size(27, 13);
+            this.labelLat_Long.TabIndex = 27;
+            this.labelLat_Long.Text = "N/A";
+            // 
             // labelFrozeDisplay
             // 
             this.labelFrozeDisplay.AutoSize = true;
             this.labelFrozeDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelFrozeDisplay.ForeColor = System.Drawing.Color.Red;
-            this.labelFrozeDisplay.Location = new System.Drawing.Point(591, 332);
+            this.labelFrozeDisplay.Location = new System.Drawing.Point(542, 359);
             this.labelFrozeDisplay.Name = "labelFrozeDisplay";
             this.labelFrozeDisplay.Size = new System.Drawing.Size(263, 31);
             this.labelFrozeDisplay.TabIndex = 26;
@@ -1494,7 +1510,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.Silver;
             this.groupBox1.Location = new System.Drawing.Point(3, 479);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(121, 65);
+            this.groupBox1.Size = new System.Drawing.Size(129, 65);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Display Center";
@@ -1502,7 +1518,8 @@
             // lblCenterLon
             // 
             this.lblCenterLon.AutoSize = true;
-            this.lblCenterLon.Location = new System.Drawing.Point(37, 35);
+            this.lblCenterLon.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCenterLon.Location = new System.Drawing.Point(25, 35);
             this.lblCenterLon.Name = "lblCenterLon";
             this.lblCenterLon.Size = new System.Drawing.Size(66, 13);
             this.lblCenterLon.TabIndex = 3;
@@ -1511,7 +1528,8 @@
             // lblCenterLat
             // 
             this.lblCenterLat.AutoSize = true;
-            this.lblCenterLat.Location = new System.Drawing.Point(37, 20);
+            this.lblCenterLat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCenterLat.Location = new System.Drawing.Point(25, 20);
             this.lblCenterLat.Name = "lblCenterLat";
             this.lblCenterLat.Size = new System.Drawing.Size(63, 13);
             this.lblCenterLat.TabIndex = 2;
@@ -1520,7 +1538,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(9, 35);
+            this.label15.Location = new System.Drawing.Point(2, 35);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(28, 13);
             this.label15.TabIndex = 1;
@@ -1529,7 +1547,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(9, 20);
+            this.label14.Location = new System.Drawing.Point(2, 20);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(25, 13);
             this.label14.TabIndex = 0;
@@ -1558,6 +1576,7 @@
             // comboBox1
             // 
             this.comboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.ForeColor = System.Drawing.Color.Black;
             this.comboBox1.FormattingEnabled = true;
@@ -1668,9 +1687,9 @@
             this.groupBox3.Controls.Add(this.groupBoxUpdateRate);
             this.groupBox3.Controls.Add(this.groupBoxSSRFilter);
             this.groupBox3.ForeColor = System.Drawing.Color.Silver;
-            this.groupBox3.Location = new System.Drawing.Point(3, 6);
+            this.groupBox3.Location = new System.Drawing.Point(3, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(130, 329);
+            this.groupBox3.Size = new System.Drawing.Size(130, 335);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Plot/Track Display";
@@ -1849,29 +1868,30 @@
             // 
             // gMapControl
             // 
-            this.gMapControl.BackColor = System.Drawing.Color.Black;
+            this.gMapControl.BackColor = System.Drawing.Color.White;
             this.gMapControl.Bearing = 0F;
             this.gMapControl.CanDragMap = true;
-            this.gMapControl.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.gMapControl.ForeColor = System.Drawing.Color.Black;
             this.gMapControl.GrayScaleMode = false;
             this.gMapControl.LevelsKeepInMemmory = 5;
-            this.gMapControl.Location = new System.Drawing.Point(139, 6);
+            this.gMapControl.Location = new System.Drawing.Point(139, 3);
             this.gMapControl.MarkersEnabled = true;
             this.gMapControl.MaxZoom = 2;
             this.gMapControl.MinZoom = 2;
-            this.gMapControl.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            this.gMapControl.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionWithoutCenter;
             this.gMapControl.Name = "gMapControl";
             this.gMapControl.NegativeMode = false;
             this.gMapControl.PolygonsEnabled = true;
             this.gMapControl.RetryLoadTile = 0;
             this.gMapControl.RoutesEnabled = true;
             this.gMapControl.ShowTileGridLines = false;
-            this.gMapControl.Size = new System.Drawing.Size(1033, 699);
+            this.gMapControl.Size = new System.Drawing.Size(1028, 702);
             this.gMapControl.TabIndex = 0;
             this.gMapControl.Zoom = 0D;
             this.gMapControl.OnMarkerEnter += new GMap.NET.WindowsForms.MarkerEnter(this.gMapControl_OnMarkerEnter);
+            this.gMapControl.OnMapDrag += new GMap.NET.MapDrag(this.gMapControl_OnMapDrag);
+            this.gMapControl.OnMapZoomChanged += new GMap.NET.MapZoomChanged(this.gMapControl_OnMapZoomChanged);
             this.gMapControl.Load += new System.EventHandler(this.gMapControl_Load);
-            this.gMapControl.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.gMapControl_KeyPress);
             this.gMapControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseClick);
             this.gMapControl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseDoubleClick);
             this.gMapControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseDown);
@@ -2477,7 +2497,7 @@
             this.labelClock.AutoSize = true;
             this.labelClock.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelClock.ForeColor = System.Drawing.Color.Lime;
-            this.labelClock.Location = new System.Drawing.Point(251, 22);
+            this.labelClock.Location = new System.Drawing.Point(49, 16);
             this.labelClock.Name = "labelClock";
             this.labelClock.Size = new System.Drawing.Size(83, 25);
             this.labelClock.TabIndex = 27;
@@ -2487,12 +2507,31 @@
             // 
             this.checkBoxIs_UTC.AutoSize = true;
             this.checkBoxIs_UTC.ForeColor = System.Drawing.Color.Silver;
-            this.checkBoxIs_UTC.Location = new System.Drawing.Point(207, 24);
+            this.checkBoxIs_UTC.Location = new System.Drawing.Point(6, 23);
             this.checkBoxIs_UTC.Name = "checkBoxIs_UTC";
             this.checkBoxIs_UTC.Size = new System.Drawing.Size(48, 17);
             this.checkBoxIs_UTC.TabIndex = 28;
             this.checkBoxIs_UTC.Text = "UTC";
             this.checkBoxIs_UTC.UseVisualStyleBackColor = true;
+            // 
+            // extendedLabelToolStripMenuItem
+            // 
+            this.extendedLabelToolStripMenuItem.Name = "extendedLabelToolStripMenuItem";
+            this.extendedLabelToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.extendedLabelToolStripMenuItem.Text = "Extended Label";
+            this.extendedLabelToolStripMenuItem.Click += new System.EventHandler(this.extendedLabelToolStripMenuItem_Click);
+            // 
+            // checkBoxFullscreen
+            // 
+            this.checkBoxFullscreen.AutoSize = true;
+            this.checkBoxFullscreen.ForeColor = System.Drawing.Color.Silver;
+            this.checkBoxFullscreen.Location = new System.Drawing.Point(289, 32);
+            this.checkBoxFullscreen.Name = "checkBoxFullscreen";
+            this.checkBoxFullscreen.Size = new System.Drawing.Size(77, 17);
+            this.checkBoxFullscreen.TabIndex = 30;
+            this.checkBoxFullscreen.Text = "Full screen";
+            this.checkBoxFullscreen.UseVisualStyleBackColor = true;
+            this.checkBoxFullscreen.CheckedChanged += new System.EventHandler(this.checkBoxFullscreen_CheckedChanged);
             // 
             // FormMain
             // 
@@ -2500,6 +2539,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1189, 781);
+            this.Controls.Add(this.checkBoxFullscreen);
             this.Controls.Add(this.checkBoxIs_UTC);
             this.Controls.Add(this.labelClock);
             this.Controls.Add(this.groupBox5);
@@ -2508,11 +2548,13 @@
             this.Controls.Add(this.tabMainTab);
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
             this.Text = "AMER KAPETANOVIC - ASTERIX DARR  1.8";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
             this.Load += new System.EventHandler(this.FormMain_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.Resize += new System.EventHandler(this.FormMain_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -2779,6 +2821,9 @@
         private System.Windows.Forms.Button btnAckowledgeRadar34;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label labelAntenaPeriod034;
+        private System.Windows.Forms.Label labelLat_Long;
+        private System.Windows.Forms.ToolStripMenuItem extendedLabelToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBoxFullscreen;
     }
 }
 

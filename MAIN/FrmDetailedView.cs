@@ -1044,7 +1044,7 @@ namespace AsterixDisplayAnalyser
                         string Time = SIC_SAC_TIME.TimeofReception.Hour.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Minute.ToString().PadLeft(2, '0') + ":" +
                             SIC_SAC_TIME.TimeofReception.Second.ToString().PadLeft(2, '0') + ":" + SIC_SAC_TIME.TimeofReception.Millisecond.ToString().PadLeft(3, '0');
                         this.listBoxMainDataBox.Items.Add("Rcvd Time: " + Time);
-                        CAT62I380Types.CAT62I380ACID_Data MyData = (CAT62I380Types.CAT62I380ACID_Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
+                        CAT62I380Types.CAT62I380Data MyData = (CAT62I380Types.CAT62I380Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
                         this.listBoxMainDataBox.Items.Add("\tACID: " + MyData.ACID.ACID_String);
                         this.listBoxMainDataBox.Items.Add("    ");
                     }

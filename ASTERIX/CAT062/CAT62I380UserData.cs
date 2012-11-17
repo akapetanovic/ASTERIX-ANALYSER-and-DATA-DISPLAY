@@ -10,11 +10,52 @@ namespace AsterixDisplayAnalyser
 
         public static void DecodeCAT62I380(byte[] Data)
         {
+            ///////////////////////////////////////////////////////////////
+            // Track_Angle and Magnetic Heading DECODE CONSTANTS
+            double TA_MA_1 = 360.0 / Math.Pow(2.0, 16.0); // LSB
+            double TA_MA_2 = TA_MA_1 * 2.0;
+            double TA_MA_3 = TA_MA_2 * 2.0;
+            double TA_MA_4 = TA_MA_3 * 2.0;
+            double TA_MA_5 = TA_MA_4 * 2.0;
+            double TA_MA_6 = TA_MA_5 * 2.0;
+            double TA_MA_7 = TA_MA_6 * 2.0;
+            double TA_MA_8 = TA_MA_7 * 2.0;
+            double TA_MA_9 = TA_MA_8 * 2.0;
+            double TA_MA_10 = TA_MA_9 * 2.0;
+            double TA_MA_11 = TA_MA_10 * 2.0;
+            double TA_MA_12 = TA_MA_11 * 2.0;
+            double TA_MA_13 = TA_MA_12 * 2.0;
+            double TA_MA_14 = TA_MA_13 * 2.0;
+            double TA_MA_15 = TA_MA_14 * 2.0;
+            double TA_MA_16 = TA_MA_15 * 2.0; // MSB
+            ///////////////////////////////////////////////////////////////////
+
+            ///////////////////////////////////////////////////////////////////
+            // MACH NUMBER DECODE CONSTANTS
+            double MN_1 = 0.008;
+            double MN_2 = MN_1 * 2.0;
+            double MN_3 = MN_2 * 2.0;
+            double MN_4 = MN_3 * 2.0;
+            double MN_5 = MN_4 * 2.0;
+            double MN_6 = MN_5 * 2.0;
+            double MN_7 = MN_6 * 2.0;
+            double MN_8 = MN_7 * 2.0;
+            double MN_9 = MN_8 * 2.0;
+            double MN_10 = MN_9 * 2.0;
+            double MN_11 = MN_10 * 2.0;
+            double MN_12 = MN_11 * 2.0;
+            double MN_13 = MN_12 * 2.0;
+            double MN_14 = MN_13 * 2.0;
+            double MN_15 = MN_14 * 2.0;
+            double MN_16 = MN_15 * 2.0;
+
+            ///////////////////////////////////////////////////////////////////
+
             // Define a global record for all data, then down there depending on the avalability of each field
             // populate specific items. Each item has validity flag that needs to be set for each available data
             // item for this message
-            CAT62I380Types.CAT62I380ACID_Data CAT62DataRecord = new CAT62I380Types.CAT62I380ACID_Data();
-            
+            CAT62I380Types.CAT62I380Data CAT62DataRecord = new CAT62I380Types.CAT62I380Data();
+
             // Get an instance of bit ops
             Bit_Ops WORD0 = new Bit_Ops();
             Bit_Ops WORD1 = new Bit_Ops();
@@ -153,11 +194,52 @@ namespace AsterixDisplayAnalyser
                     Decode6BitASCII(Char6.DWord[Bit_Ops.Bits0_7_Of_DWord]) +
                     Decode6BitASCII(Char7.DWord[Bit_Ops.Bits0_7_Of_DWord]) +
                     Decode6BitASCII(Char8.DWord[Bit_Ops.Bits0_7_Of_DWord]);
-                
+
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 6;
             }
             if (WORD0.DWord[CAT62I380Types.Magnetic_Heading] == true)
             {
+
+                Bit_Ops BO = new Bit_Ops();
+                BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 1];
+                BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
+
+                double TA = 0.0;
+                if (BO.DWord[Bit_Ops.Bit0])
+                    TA = TA_MA_1;
+                if (BO.DWord[Bit_Ops.Bit1])
+                    TA = TA + TA_MA_2;
+                if (BO.DWord[Bit_Ops.Bit2])
+                    TA = TA + TA_MA_3;
+                if (BO.DWord[Bit_Ops.Bit3])
+                    TA = TA + TA_MA_4;
+                if (BO.DWord[Bit_Ops.Bit4])
+                    TA = TA + TA_MA_5;
+                if (BO.DWord[Bit_Ops.Bit5])
+                    TA = TA + TA_MA_6;
+                if (BO.DWord[Bit_Ops.Bit6])
+                    TA = TA + TA_MA_7;
+                if (BO.DWord[Bit_Ops.Bit7])
+                    TA = TA + TA_MA_8;
+                if (BO.DWord[Bit_Ops.Bit8])
+                    TA = TA + TA_MA_9;
+                if (BO.DWord[Bit_Ops.Bit9])
+                    TA = TA + TA_MA_10;
+                if (BO.DWord[Bit_Ops.Bit10])
+                    TA = TA + TA_MA_11;
+                if (BO.DWord[Bit_Ops.Bit11])
+                    TA = TA + TA_MA_12;
+                if (BO.DWord[Bit_Ops.Bit12])
+                    TA = TA + TA_MA_13;
+                if (BO.DWord[Bit_Ops.Bit13])
+                    TA = TA + TA_MA_14;
+                if (BO.DWord[Bit_Ops.Bit14])
+                    TA = TA + TA_MA_15;
+                if (BO.DWord[Bit_Ops.Bit15])
+                    TA = TA + TA_MA_16;
+
+                CAT62DataRecord.M_HDG.Is_Valid = true;
+                CAT62DataRecord.M_HDG.M_HDG = TA;
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
             if (WORD0.DWord[CAT62I380Types.Indicated_Airspeed_Mach_Number] == true)
@@ -166,6 +248,14 @@ namespace AsterixDisplayAnalyser
             }
             if (WORD0.DWord[CAT62I380Types.True_Airspeed] == true)
             {
+                Bit_Ops BO = new Bit_Ops();
+                BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 1];
+                BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
+
+                CAT62DataRecord.TAS.Is_Valid = true;
+                int Result = BO.DWord[Bit_Ops.Bits0_15_Of_DWord];
+                CAT62DataRecord.TAS.TAS = Result;
+
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
             if (WORD0.DWord[CAT62I380Types.Selected_Altitude] == true)
@@ -219,6 +309,46 @@ namespace AsterixDisplayAnalyser
             }
             if (WORD2.DWord[CAT62I380Types.Track_Angle] == true)
             {
+                Bit_Ops BO = new Bit_Ops();
+                BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 1];
+                BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
+
+                double TA = 0.0;
+                if (BO.DWord[Bit_Ops.Bit0])
+                    TA = TA_MA_1;
+                if (BO.DWord[Bit_Ops.Bit1])
+                    TA = TA + TA_MA_2;
+                if (BO.DWord[Bit_Ops.Bit2])
+                    TA = TA + TA_MA_3;
+                if (BO.DWord[Bit_Ops.Bit3])
+                    TA = TA + TA_MA_4;
+                if (BO.DWord[Bit_Ops.Bit4])
+                    TA = TA + TA_MA_5;
+                if (BO.DWord[Bit_Ops.Bit5])
+                    TA = TA + TA_MA_6;
+                if (BO.DWord[Bit_Ops.Bit6])
+                    TA = TA + TA_MA_7;
+                if (BO.DWord[Bit_Ops.Bit7])
+                    TA = TA + TA_MA_8;
+                if (BO.DWord[Bit_Ops.Bit8])
+                    TA = TA + TA_MA_9;
+                if (BO.DWord[Bit_Ops.Bit9])
+                    TA = TA + TA_MA_10;
+                if (BO.DWord[Bit_Ops.Bit10])
+                    TA = TA + TA_MA_11;
+                if (BO.DWord[Bit_Ops.Bit11])
+                    TA = TA + TA_MA_12;
+                if (BO.DWord[Bit_Ops.Bit12])
+                    TA = TA + TA_MA_13;
+                if (BO.DWord[Bit_Ops.Bit13])
+                    TA = TA + TA_MA_14;
+                if (BO.DWord[Bit_Ops.Bit14])
+                    TA = TA + TA_MA_15;
+                if (BO.DWord[Bit_Ops.Bit15])
+                    TA = TA + TA_MA_16;
+
+                CAT62DataRecord.TRK.Is_Valid = true;
+                CAT62DataRecord.TRK.TRK = TA;
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
             if (WORD2.DWord[CAT62I380Types.Ground_Speed] == true)
@@ -259,10 +389,58 @@ namespace AsterixDisplayAnalyser
             }
             if (WORD3.DWord[CAT62I380Types.Indicated_Airspeed] == true)
             {
+                Bit_Ops BO = new Bit_Ops();
+                BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 1];
+                BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
+
+                CAT62DataRecord.IAS.Is_Valid = true;
+                int Result = BO.DWord[Bit_Ops.Bits0_15_Of_DWord];
+                CAT62DataRecord.IAS.IAS = Result;
+
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
             if (WORD3.DWord[CAT62I380Types.Mach_Number] == true)
             {
+                Bit_Ops BO = new Bit_Ops();
+                BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 1];
+                BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
+
+                double MN = 0.0;
+                if (BO.DWord[Bit_Ops.Bit0])
+                    MN = MN_1;
+                if (BO.DWord[Bit_Ops.Bit1])
+                    MN = MN + MN_2;
+                if (BO.DWord[Bit_Ops.Bit2])
+                    MN = MN + MN_3;
+                if (BO.DWord[Bit_Ops.Bit3])
+                    MN = MN + MN_4;
+                if (BO.DWord[Bit_Ops.Bit4])
+                    MN = MN + MN_5;
+                if (BO.DWord[Bit_Ops.Bit5])
+                    MN = MN + MN_6;
+                if (BO.DWord[Bit_Ops.Bit6])
+                    MN = MN + MN_7;
+                if (BO.DWord[Bit_Ops.Bit7])
+                    MN = MN + MN_8;
+                if (BO.DWord[Bit_Ops.Bit8])
+                    MN = MN + MN_9;
+                if (BO.DWord[Bit_Ops.Bit9])
+                    MN = MN + MN_10;
+                if (BO.DWord[Bit_Ops.Bit10])
+                    MN = MN + MN_11;
+                if (BO.DWord[Bit_Ops.Bit11])
+                    MN = MN + MN_12;
+                if (BO.DWord[Bit_Ops.Bit12])
+                    MN = MN + MN_13;
+                if (BO.DWord[Bit_Ops.Bit13])
+                    MN = MN + MN_14;
+                if (BO.DWord[Bit_Ops.Bit14])
+                    MN = MN + MN_15;
+                if (BO.DWord[Bit_Ops.Bit15])
+                    MN = MN + MN_16;
+
+                CAT62DataRecord.MACH.Is_Valid = true;
+                CAT62DataRecord.MACH.MACH = MN;
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
             if (WORD3.DWord[CAT62I380Types.Barometric_Pressure_Setting] == true)

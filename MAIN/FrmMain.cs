@@ -18,6 +18,17 @@ namespace AsterixDisplayAnalyser
 
     public partial class FormMain : Form
     {
+        ////////////////////////
+        // DEBUG SECTION
+
+        //public static int DebugX = 50;
+        //public static int DebugY = 30;
+        //Debug MyDebug = new Debug();
+
+        ////////////////////////
+
+        
+        
         // Static Map Overlay
         GMapOverlay StaticOverlay;
         // Dynamic Map Overlay
@@ -40,6 +51,7 @@ namespace AsterixDisplayAnalyser
 
         GMapMarker currentMarker = null;
         bool isDraggingMarker = false;
+
 
         // Used to flag the reception of the NM message, that will
         // then trigger update of the display
@@ -67,6 +79,7 @@ namespace AsterixDisplayAnalyser
 
         private static FrmAstxRecFrwdForm AsterixRecorder = new FrmAstxRecFrwdForm();
         private static FrmReplayForm ReplayForm = new FrmReplayForm();
+        private static FrmExtendedLabel ExtendedLabel = new FrmExtendedLabel();
 
         public FormMain()
         {
@@ -185,6 +198,8 @@ namespace AsterixDisplayAnalyser
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+           // MyDebug.Show();
+            
             // Initialize Map
             InitializeMap();
 
@@ -264,8 +279,9 @@ namespace AsterixDisplayAnalyser
         {
             // Set system origin position
             gMapControl.Position = new PointLatLng(SystemAdaptationDataSet.SystemOriginPoint.Lat, SystemAdaptationDataSet.SystemOriginPoint.Lng);
-            this.lblCenterLat.Text = gMapControl.Position.Lat.ToString();
-            this.lblCenterLon.Text = gMapControl.Position.Lng.ToString();
+            UpdatelblCenter();
+
+            gMapControl.DragButton = System.Windows.Forms.MouseButtons.Middle;
 
             // Choose MAP provider and MAP mode
             gMapControl.MapProvider = GMapProviders.GoogleTerrainMap;
@@ -477,7 +493,7 @@ namespace AsterixDisplayAnalyser
 
             DynamicDisplayBuilder.ResetGetDataIndex = 0;
             DynamicDisplayBuilder.Initialise();
-            
+
             // Reset data buffer for each
             // category
             CAT01.Intitialize();
@@ -808,6 +824,13 @@ namespace AsterixDisplayAnalyser
                 Label_Data.CALLSIGN_STRING = Target_Data.ACID_Mode_S;
 
             Label_Data.MyTargetIndex = Target_Data.TrackNumber;
+
+            // At the end move extended lable data to the marker, so it is ready for dynamic manipulation by the client
+            Label_Data.TRK = Target_Data.TRK;
+            Label_Data.M_HDG = Target_Data.M_HDG;
+            Label_Data.IAS = Target_Data.IAS;
+            Label_Data.MACH = Target_Data.MACH;
+            Label_Data.TAS = Target_Data.TAS;
         }
 
         private string ApplyCModeHisterysis(string Mode_C_In)
@@ -1112,28 +1135,18 @@ namespace AsterixDisplayAnalyser
         private void button2_Click(object sender, EventArgs e)
         {
             gMapControl.Zoom = gMapControl.Zoom + 1;
+
             this.lblZoomLevel.Text = gMapControl.Zoom.ToString();
         }
 
         private void button1_Click_2(object sender, EventArgs e)
         {
             gMapControl.Zoom = gMapControl.Zoom - 1;
+
             this.lblZoomLevel.Text = gMapControl.Zoom.ToString();
         }
 
         private void button6_Click(object sender, EventArgs e)
-        {
-            if (gMapControl.Zoom > 10)
-                gMapControl.Position = new PointLatLng(gMapControl.Position.Lat + 0.1, gMapControl.Position.Lng);
-            else if (gMapControl.Zoom > 8)
-                gMapControl.Position = new PointLatLng(gMapControl.Position.Lat + 0.2, gMapControl.Position.Lng);
-            else
-                gMapControl.Position = new PointLatLng(gMapControl.Position.Lat + 0.5, gMapControl.Position.Lng);
-            this.lblCenterLat.Text = gMapControl.Position.Lat.ToString();
-            this.lblCenterLon.Text = gMapControl.Position.Lng.ToString();
-        }
-
-        private void button5_Click(object sender, EventArgs e)
         {
             if (gMapControl.Zoom > 10)
                 gMapControl.Position = new PointLatLng(gMapControl.Position.Lat - 0.1, gMapControl.Position.Lng);
@@ -1141,11 +1154,45 @@ namespace AsterixDisplayAnalyser
                 gMapControl.Position = new PointLatLng(gMapControl.Position.Lat - 0.2, gMapControl.Position.Lng);
             else
                 gMapControl.Position = new PointLatLng(gMapControl.Position.Lat - 0.5, gMapControl.Position.Lng);
-            this.lblCenterLat.Text = gMapControl.Position.Lat.ToString();
-            this.lblCenterLon.Text = gMapControl.Position.Lng.ToString();
+
+            UpdatelblCenter();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+            if (gMapControl.Zoom > 10)
+                gMapControl.Position = new PointLatLng(gMapControl.Position.Lat + 0.1, gMapControl.Position.Lng);
+            else if (gMapControl.Zoom > 8)
+                gMapControl.Position = new PointLatLng(gMapControl.Position.Lat + 0.2, gMapControl.Position.Lng);
+            else
+                gMapControl.Position = new PointLatLng(gMapControl.Position.Lat + 0.5, gMapControl.Position.Lng);
+
+            UpdatelblCenter();
         }
 
         private void button4_Click(object sender, EventArgs e)
+        {
+
+            if (gMapControl.Zoom > 10)
+                gMapControl.Position = new PointLatLng(gMapControl.Position.Lat, gMapControl.Position.Lng + 0.1);
+            if (gMapControl.Zoom > 8)
+                gMapControl.Position = new PointLatLng(gMapControl.Position.Lat, gMapControl.Position.Lng + 0.2);
+            else
+                gMapControl.Position = new PointLatLng(gMapControl.Position.Lat, gMapControl.Position.Lng + 0.5);
+            UpdatelblCenter();
+        }
+
+        private void UpdatelblCenter()
+        {
+            GeoCordSystemDegMinSecUtilities.LatLongClass ToConvert = new GeoCordSystemDegMinSecUtilities.LatLongClass(gMapControl.Position.Lat, gMapControl.Position.Lng);
+            string Latitude_S, Longitude_S;
+            ToConvert.GetDegMinSecStringFormat(out Latitude_S, out Longitude_S);
+            this.lblCenterLat.Text = Latitude_S;
+            this.lblCenterLon.Text = Longitude_S;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
         {
             if (gMapControl.Zoom > 10)
                 gMapControl.Position = new PointLatLng(gMapControl.Position.Lat, gMapControl.Position.Lng - 0.1);
@@ -1153,27 +1200,16 @@ namespace AsterixDisplayAnalyser
                 gMapControl.Position = new PointLatLng(gMapControl.Position.Lat, gMapControl.Position.Lng - 0.2);
             else
                 gMapControl.Position = new PointLatLng(gMapControl.Position.Lat, gMapControl.Position.Lng - 0.5);
-            this.lblCenterLat.Text = gMapControl.Position.Lat.ToString();
-            this.lblCenterLon.Text = gMapControl.Position.Lng.ToString();
-        }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (gMapControl.Zoom > 10)
-                gMapControl.Position = new PointLatLng(gMapControl.Position.Lat, gMapControl.Position.Lng + 0.1);
-            if (gMapControl.Zoom > 8)
-                gMapControl.Position = new PointLatLng(gMapControl.Position.Lat, gMapControl.Position.Lng + 0.2);
-            else
-                gMapControl.Position = new PointLatLng(gMapControl.Position.Lat, gMapControl.Position.Lng + 0.5);
-            this.lblCenterLat.Text = gMapControl.Position.Lat.ToString();
-            this.lblCenterLon.Text = gMapControl.Position.Lng.ToString();
+
+            UpdatelblCenter();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             gMapControl.Position = new PointLatLng(44.05267, 17.6769);
-            this.lblCenterLat.Text = gMapControl.Position.Lat.ToString();
-            this.lblCenterLon.Text = gMapControl.Position.Lng.ToString();
+
+            UpdatelblCenter();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -1210,6 +1246,21 @@ namespace AsterixDisplayAnalyser
         // Update Mouse posistion on the control
         private void gMapControl_MouseMove(object sender, MouseEventArgs e)
         {
+            PointLatLng Test = gMapControl.FromLocalToLatLng(e.X, e.Y);
+            this.labelLat_Long.Location = new Point(this.labelLat_Long.Location.X, (this.gMapControl.Size.Height - 4));
+
+            if (Properties.Settings.Default.DisplayPosInDecimals)
+            {
+                this.labelLat_Long.Text = Test.Lat + " " + Test.Lng;
+            }
+            else
+            {
+                GeoCordSystemDegMinSecUtilities.LatLongClass ToConvert = new GeoCordSystemDegMinSecUtilities.LatLongClass(Test.Lat, Test.Lng);
+                string Latitude_S, Longitude_S;
+                ToConvert.GetDegMinSecStringFormat(out Latitude_S, out Longitude_S);
+                this.labelLat_Long.Text = Latitude_S + " " + Longitude_S;
+            }
+
             if (e.Button == MouseButtons.Left && isDraggingMarker && currentMarker != null)
             {
                 PointLatLng MousePosition = gMapControl.FromLocalToLatLng(e.X, e.Y);
@@ -1221,6 +1272,7 @@ namespace AsterixDisplayAnalyser
             }
             else if (SharedData.bool_Listen_for_Data == true)
             {
+                bool Mouse_Not_Over_Label = true;
                 GMapOverlay[] overlays = new GMapOverlay[] { DinamicOverlay };
                 for (int i = overlays.Length - 1; i >= 0; i--)
                 {
@@ -1237,16 +1289,40 @@ namespace AsterixDisplayAnalyser
                                     GMapTargetandLabel MyMarker = (GMapTargetandLabel)m;
                                     MyMarker.ShowLabelBox = true;
                                     gMapControl.Refresh();
+
+                                    ///////////////////////////////////////////////////
+                                    // OK this must be the lable where the mouse is
+                                    if (ExtendedLabel.Visible)
+                                    {
+                                        Mouse_Not_Over_Label = false;
+                                        HandleExtendedLabel(MyMarker);
+                                    }
                                 }
                                 else
                                 {
                                     GMapTargetandLabel MyMarker = (GMapTargetandLabel)m;
                                     MyMarker.ShowLabelBox = false;
                                 }
+
                             }
+
+                    if (Mouse_Not_Over_Label)
+                        ExtendedLabel.DefaultAll();
                 }
             }
+        }
 
+        private void HandleExtendedLabel(GMapTargetandLabel MarkerData)
+        {
+            //////////////////////////////////////
+            // First set title to Track ID
+            ExtendedLabel.Text = MarkerData.ModeA_CI_STRING + "/" + MarkerData.CALLSIGN_STRING;
+            // Now set the values
+            ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.HDG, MarkerData.M_HDG);
+            ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.IAS, MarkerData.IAS);
+            ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.MACH, MarkerData.MACH);
+            ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.TAS, MarkerData.TAS);
+            ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.TRK, MarkerData.TRK);
         }
 
         private void aircraftAddressToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1284,11 +1360,6 @@ namespace AsterixDisplayAnalyser
 
                 gMapControl.MapProvider = GMapProviders.EmptyProvider;
             }
-        }
-
-        private void gMapControl_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
         }
 
         private void gMapControl_MouseClick(object sender, MouseEventArgs e)
@@ -1354,7 +1425,13 @@ namespace AsterixDisplayAnalyser
             {
                 DisplayRightClickOptions MyForm = new DisplayRightClickOptions();
                 MyForm.StartPosition = FormStartPosition.Manual;
-                MyForm.Location = new Point(e.X + 75, e.Y + 150);
+                Point relativeToForm = this.PointToScreen(new Point(e.X, e.Y));
+
+                if (this.checkBoxFullscreen.Checked)
+                    MyForm.Location = new Point(relativeToForm.X - 25, relativeToForm.Y + 55);
+                else
+                    MyForm.Location = new Point(relativeToForm.X + 95, relativeToForm.Y + 55);
+
                 MyForm.Show();
             }
         }
@@ -1402,12 +1479,18 @@ namespace AsterixDisplayAnalyser
                                         UpdateCFL MyForm = new UpdateCFL();
                                         MyForm.TrackToUpdate = MyMarker.MyTargetIndex;
                                         MyForm.StartPosition = FormStartPosition.Manual;
-                                        MyForm.Location = new Point(e.X + 175, e.Y + 65);
+                                        Point relativeToForm = this.PointToScreen(new Point(e.X, e.Y));
+                                        if (this.checkBoxFullscreen.Checked)
+                                            MyForm.Location = new Point(relativeToForm.X, relativeToForm.Y + 65);
+                                        else
+                                            MyForm.Location = new Point(relativeToForm.X + 140, relativeToForm.Y + 65);
                                         MyForm.Show();
                                     }
                                 }
                             }
                 }
+
+
             }
         }
 
@@ -2416,6 +2499,126 @@ namespace AsterixDisplayAnalyser
         {
             DrawStringandRectangleinComboBox(sender, e);
         }
+
+        private void gMapControl_OnMapZoomChanged()
+        {
+            this.lblZoomLevel.Text = gMapControl.Zoom.ToString();
+        }
+
+        private void gMapControl_OnMapDrag()
+        {
+            UpdatelblCenter();
+        }
+
+        // Handle custom key presses
+        private void FormMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (gMapControl.Visible)
+            {
+                if (e.KeyCode == Keys.Up)
+                {
+                    if (gMapControl.Zoom > 12)
+                        gMapControl.Position = new PointLatLng(gMapControl.Position.Lat + 0.005, gMapControl.Position.Lng);
+                    else if (gMapControl.Zoom > 10)
+                        gMapControl.Position = new PointLatLng(gMapControl.Position.Lat + 0.05, gMapControl.Position.Lng);
+                    else if (gMapControl.Zoom > 8)
+                        gMapControl.Position = new PointLatLng(gMapControl.Position.Lat + 0.2, gMapControl.Position.Lng);
+                    else
+                        gMapControl.Position = new PointLatLng(gMapControl.Position.Lat + 0.5, gMapControl.Position.Lng);
+                    UpdatelblCenter();
+                    e.Handled = true;
+                }
+                else if (e.KeyCode == Keys.Down)
+                {
+                    if (gMapControl.Zoom > 12)
+                        gMapControl.Position = new PointLatLng(gMapControl.Position.Lat - 0.005, gMapControl.Position.Lng);
+                    else if (gMapControl.Zoom > 10)
+                        gMapControl.Position = new PointLatLng(gMapControl.Position.Lat - 0.05, gMapControl.Position.Lng);
+                    else if (gMapControl.Zoom > 8)
+                        gMapControl.Position = new PointLatLng(gMapControl.Position.Lat - 0.2, gMapControl.Position.Lng);
+                    else
+                        gMapControl.Position = new PointLatLng(gMapControl.Position.Lat - 0.5, gMapControl.Position.Lng);
+                    UpdatelblCenter();
+                    e.Handled = true;
+                }
+                else if (e.KeyCode == Keys.Left)
+                {
+                    if (gMapControl.Zoom > 12)
+                        gMapControl.Position = new PointLatLng(gMapControl.Position.Lat, gMapControl.Position.Lng - 0.005);
+                    else if (gMapControl.Zoom > 10)
+                        gMapControl.Position = new PointLatLng(gMapControl.Position.Lat, gMapControl.Position.Lng - 0.05);
+                    else if (gMapControl.Zoom > 8)
+                        gMapControl.Position = new PointLatLng(gMapControl.Position.Lat, gMapControl.Position.Lng - 0.2);
+                    else
+                        gMapControl.Position = new PointLatLng(gMapControl.Position.Lat, gMapControl.Position.Lng - 0.5);
+                    UpdatelblCenter();
+                    e.Handled = true;
+
+                }
+                else if (e.KeyCode == Keys.Right)
+                {
+                    if (gMapControl.Zoom > 12)
+                        gMapControl.Position = new PointLatLng(gMapControl.Position.Lat, gMapControl.Position.Lng + 0.005);
+                    else if (gMapControl.Zoom > 10)
+                        gMapControl.Position = new PointLatLng(gMapControl.Position.Lat, gMapControl.Position.Lng + 0.05);
+                    if (gMapControl.Zoom > 8)
+                        gMapControl.Position = new PointLatLng(gMapControl.Position.Lat, gMapControl.Position.Lng + 0.2);
+                    else
+                        gMapControl.Position = new PointLatLng(gMapControl.Position.Lat, gMapControl.Position.Lng + 0.5);
+                    UpdatelblCenter();
+                    e.Handled = true;
+                }
+                else if (e.KeyCode == Keys.Add)
+                {
+                    gMapControl.Zoom = gMapControl.Zoom + 1;
+                    this.lblZoomLevel.Text = gMapControl.Zoom.ToString();
+                    e.Handled = true;
+                }
+                else if (e.KeyCode == Keys.Subtract)
+                {
+                    gMapControl.Zoom = gMapControl.Zoom - 1;
+                    this.lblZoomLevel.Text = gMapControl.Zoom.ToString();
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void extendedLabelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExtendedLabel.Visible = true;
+        }
+
+        private void button8_Click_1(object sender, EventArgs e)
+        {
+            if (gMapControl.Location.X != 0)
+                gMapControl.Location = new Point(0, 0);
+            else
+                gMapControl.Location = new Point(136, 0);
+        }
+
+        private void checkBoxFullscreen_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBoxFullscreen.Checked)
+            {
+                gMapControl.Location = new Point(0, 0);
+                gMapControl.Width = this.Width - 35;
+            }
+            else
+            {
+                gMapControl.Location = new Point(136, 0);
+                gMapControl.Width = this.Width - 170;
+            }
+        }
+
+        private void debugToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+
+
     }
 }
 

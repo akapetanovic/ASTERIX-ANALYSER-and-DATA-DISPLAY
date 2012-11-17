@@ -93,7 +93,18 @@ namespace AsterixDisplayAnalyser
         public Font CFL_FONT = new Font(CFL_FONT_FAMILLY, 10, FontStyle.Regular, GraphicsUnit.Pixel);
         public string CFL_STRING = "---";
         
-        // To be called once the tracks is terminated
+        
+        ////////////////////////////////////////////////////////////
+        // These are Extended label data items.
+        // 
+        public string TAS = "N/A";
+        public string IAS = "N/A";
+        public string MACH = "N/A";
+        public string M_HDG = "N/A";
+        public string TRK = "N/A";
+        ///////////////////////////////////////////////////////////
+        
+        // To be called once the track is terminated
         public void TerminateTarget()
         {
             LabelOffset = new Point(25, 25);

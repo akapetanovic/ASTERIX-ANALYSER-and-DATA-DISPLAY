@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.checkBoxDisplaModeasFL = new System.Windows.Forms.CheckBox();
+            this.checkBoxDisplayPosInDecimals = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // checkBoxDisplaModeasFL
@@ -42,11 +43,23 @@
             this.checkBoxDisplaModeasFL.UseVisualStyleBackColor = true;
             this.checkBoxDisplaModeasFL.CheckedChanged += new System.EventHandler(this.checkBoxDisplaModeasFL_CheckedChanged);
             // 
+            // checkBoxDisplayPosInDecimals
+            // 
+            this.checkBoxDisplayPosInDecimals.AutoSize = true;
+            this.checkBoxDisplayPosInDecimals.Location = new System.Drawing.Point(12, 35);
+            this.checkBoxDisplayPosInDecimals.Name = "checkBoxDisplayPosInDecimals";
+            this.checkBoxDisplayPosInDecimals.Size = new System.Drawing.Size(154, 17);
+            this.checkBoxDisplayPosInDecimals.TabIndex = 1;
+            this.checkBoxDisplayPosInDecimals.Text = "Display position in decimals";
+            this.checkBoxDisplayPosInDecimals.UseVisualStyleBackColor = true;
+            this.checkBoxDisplayPosInDecimals.CheckedChanged += new System.EventHandler(this.checkBoxDisplayPosInDecimals_CheckedChanged);
+            // 
             // MisscelaneousSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(257, 41);
+            this.ClientSize = new System.Drawing.Size(257, 62);
+            this.Controls.Add(this.checkBoxDisplayPosInDecimals);
             this.Controls.Add(this.checkBoxDisplaModeasFL);
             this.Name = "MisscelaneousSettings";
             this.Text = "Misscelaneous Settings";
@@ -59,5 +72,6 @@
         #endregion
 
         private System.Windows.Forms.CheckBox checkBoxDisplaModeasFL;
+        private System.Windows.Forms.CheckBox checkBoxDisplayPosInDecimals;
     }
 }

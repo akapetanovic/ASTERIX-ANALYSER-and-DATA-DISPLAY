@@ -45,6 +45,8 @@ namespace AsterixDisplayAnalyser
         public static int WORD3_FX_Extension_Indicator = Bit_Ops.Bit0;
 
 
+
+
         /// <summary>
         /// ////////////////////////////////////////////////////////////
         /// // Here define all used data subfileds
@@ -56,11 +58,46 @@ namespace AsterixDisplayAnalyser
             public bool Is_Valid = false;
         }
 
+        public class CAT62TASType
+        {
+            public int TAS = 0;
+            public bool Is_Valid = false;
+        }
+
+        public class CAT62IASType
+        {
+            public int IAS = 0;
+            public bool Is_Valid = false;
+        }
+
+        public class CAT62MACHType
+        {
+            public double MACH = 0.0;
+            public bool Is_Valid = false;
+        }
+
+        public class CAT62TrackAngleType
+        {
+            public double TRK = 0.0;
+            public bool Is_Valid = false;
+        }
+
+        public class CAT62MagneticHeadingType
+        {
+            public double M_HDG = 0.0;
+            public bool Is_Valid = false;
+        }
+
         // Encapsulate the whole CAT62I380 data
         // into one class
-        public class CAT62I380ACID_Data
+        public class CAT62I380Data
         {
             public CAT62ACIDType ACID = new CAT62ACIDType();
+            public CAT62TASType TAS = new CAT62TASType();
+            public CAT62IASType IAS = new CAT62IASType();
+            public CAT62MACHType MACH = new CAT62MACHType();
+            public CAT62TrackAngleType TRK = new CAT62TrackAngleType();
+            public CAT62MagneticHeadingType M_HDG = new CAT62MagneticHeadingType();
         }
     }
 }
