@@ -9,19 +9,14 @@ using System.Windows.Forms;
 
 namespace AsterixDisplayAnalyser
 {
-    public partial class Debug : Form
+    public partial class FrmAbout : Form
     {
-        public Debug()
+        public FrmAbout()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void Debug_Load(object sender, EventArgs e)
+        private void FrmAbout_Load(object sender, EventArgs e)
         {
 
         }

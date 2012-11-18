@@ -107,7 +107,7 @@
             // 
             this.labelEXT_TAS.AutoSize = true;
             this.labelEXT_TAS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelEXT_TAS.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.labelEXT_TAS.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.labelEXT_TAS.Location = new System.Drawing.Point(50, 9);
             this.labelEXT_TAS.Name = "labelEXT_TAS";
             this.labelEXT_TAS.Size = new System.Drawing.Size(30, 13);
@@ -118,7 +118,7 @@
             // 
             this.labelEXT_MCH.AutoSize = true;
             this.labelEXT_MCH.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelEXT_MCH.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.labelEXT_MCH.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.labelEXT_MCH.Location = new System.Drawing.Point(50, 53);
             this.labelEXT_MCH.Name = "labelEXT_MCH";
             this.labelEXT_MCH.Size = new System.Drawing.Size(30, 13);
@@ -129,7 +129,7 @@
             // 
             this.labelEXT_HDG.AutoSize = true;
             this.labelEXT_HDG.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelEXT_HDG.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.labelEXT_HDG.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.labelEXT_HDG.Location = new System.Drawing.Point(50, 75);
             this.labelEXT_HDG.Name = "labelEXT_HDG";
             this.labelEXT_HDG.Size = new System.Drawing.Size(30, 13);
@@ -140,7 +140,7 @@
             // 
             this.labelEXT_TRK.AutoSize = true;
             this.labelEXT_TRK.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelEXT_TRK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.labelEXT_TRK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.labelEXT_TRK.Location = new System.Drawing.Point(50, 98);
             this.labelEXT_TRK.Name = "labelEXT_TRK";
             this.labelEXT_TRK.Size = new System.Drawing.Size(30, 13);
@@ -151,7 +151,7 @@
             // 
             this.labelEXT_IAS.AutoSize = true;
             this.labelEXT_IAS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelEXT_IAS.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.labelEXT_IAS.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.labelEXT_IAS.Location = new System.Drawing.Point(50, 31);
             this.labelEXT_IAS.Name = "labelEXT_IAS";
             this.labelEXT_IAS.Size = new System.Drawing.Size(30, 13);
@@ -175,7 +175,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmExtendedLabel";

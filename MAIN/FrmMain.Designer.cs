@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.DataUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +43,7 @@
             this.recorderAndDataForwarderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.replayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.replayToRawToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.extendedLabelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetDataBufferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cAT001DataItemPresenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -161,6 +163,7 @@
             this.tabPlotDisplay = new System.Windows.Forms.TabPage();
             this.labelLat_Long = new System.Windows.Forms.Label();
             this.labelFrozeDisplay = new System.Windows.Forms.Label();
+            this.gMapControl = new GMap.NET.WindowsForms.GMapControl();
             this.labelTargetCount = new System.Windows.Forms.Label();
             this.lblNumberofTargets = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -175,7 +178,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.lblZoomLevel = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxMapType = new System.Windows.Forms.ComboBox();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -200,7 +203,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.comboBoxSSRFilterBox = new System.Windows.Forms.ComboBox();
             this.checkBoxFilterBySSR = new System.Windows.Forms.CheckBox();
-            this.gMapControl = new GMap.NET.WindowsForms.GMapControl();
             this.tabPageAsterixMessages = new System.Windows.Forms.TabPage();
             this.checkBoxFillListBox = new System.Windows.Forms.CheckBox();
             this.listBoxManFrame = new System.Windows.Forms.ListBox();
@@ -255,7 +257,6 @@
             this.btnStartStopFileReplay = new System.Windows.Forms.Button();
             this.labelClock = new System.Windows.Forms.Label();
             this.checkBoxIs_UTC = new System.Windows.Forms.CheckBox();
-            this.extendedLabelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBoxFullscreen = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
@@ -395,6 +396,13 @@
             this.replayToRawToolStripMenuItem.Text = "Replay to Raw";
             this.replayToRawToolStripMenuItem.Click += new System.EventHandler(this.replayToRawToolStripMenuItem_Click);
             // 
+            // extendedLabelToolStripMenuItem
+            // 
+            this.extendedLabelToolStripMenuItem.Name = "extendedLabelToolStripMenuItem";
+            this.extendedLabelToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.extendedLabelToolStripMenuItem.Text = "Extended Label";
+            this.extendedLabelToolStripMenuItem.Click += new System.EventHandler(this.extendedLabelToolStripMenuItem_Click);
+            // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.BackColor = System.Drawing.Color.Black;
@@ -521,7 +529,7 @@
             this.warningErrorConditionsToolStripMenuItem,
             this.presenceOfXPulseToolStripMenuItem});
             this.cAT001ToolStripMenuItem.Name = "cAT001ToolStripMenuItem";
-            this.cAT001ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cAT001ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.cAT001ToolStripMenuItem.Text = "CAT001";
             // 
             // targetReportDescriptorToolStripMenuItem
@@ -636,7 +644,7 @@
             this.collimationErrorToolStripMenuItem,
             this.warningErrorConditionsToolStripMenuItem1});
             this.cAT002ToolStripMenuItem.Name = "cAT002ToolStripMenuItem";
-            this.cAT002ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cAT002ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.cAT002ToolStripMenuItem.Text = "CAT002";
             // 
             // messageTypeToolStripMenuItem
@@ -725,7 +733,7 @@
             this.sequenceOfWeatherVectorsInSPFNotationToolStripMenuItem});
             this.cAT008ToolStripMenuItem1.Enabled = false;
             this.cAT008ToolStripMenuItem1.Name = "cAT008ToolStripMenuItem1";
-            this.cAT008ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.cAT008ToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
             this.cAT008ToolStripMenuItem1.Text = "CAT008";
             // 
             // messageTypeToolStripMenuItem1
@@ -811,7 +819,7 @@
             this.dPositionOfDataSourceToolStripMenuItem,
             this.collimationErrorToolStripMenuItem1});
             this.cAT034ToolStripMenuItem.Name = "cAT034ToolStripMenuItem";
-            this.cAT034ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cAT034ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.cAT034ToolStripMenuItem.Text = "CAT034";
             // 
             // messageTypeToolStripMenuItem2
@@ -918,7 +926,7 @@
             this.mode1CodeInOctalRepresentationToolStripMenuItem,
             this.mode1CodeConfidenceIndicatorToolStripMenuItem});
             this.cAT048ToolStripMenuItem.Name = "cAT048ToolStripMenuItem";
-            this.cAT048ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cAT048ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.cAT048ToolStripMenuItem.Text = "CAT048";
             // 
             // timeofDayToolStripMenuItem3
@@ -1095,7 +1103,7 @@
             this.measuredFlightLevelToolStripMenuItem,
             this.aircraftDerivedDataSUBF2ACIDToolStripMenuItem});
             this.cAT062ToolStripMenuItem.Name = "cAT062ToolStripMenuItem";
-            this.cAT062ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cAT062ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.cAT062ToolStripMenuItem.Text = "CAT062";
             // 
             // serviceIdentificationToolStripMenuItem
@@ -1144,21 +1152,21 @@
             // 
             this.cAT063ToolStripMenuItem1.Enabled = false;
             this.cAT063ToolStripMenuItem1.Name = "cAT063ToolStripMenuItem1";
-            this.cAT063ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.cAT063ToolStripMenuItem1.Size = new System.Drawing.Size(115, 22);
             this.cAT063ToolStripMenuItem1.Text = "CAT063";
             // 
             // cAT065ToolStripMenuItem
             // 
             this.cAT065ToolStripMenuItem.Enabled = false;
             this.cAT065ToolStripMenuItem.Name = "cAT065ToolStripMenuItem";
-            this.cAT065ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cAT065ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.cAT065ToolStripMenuItem.Text = "CAT065";
             // 
             // cAT244ToolStripMenuItem
             // 
             this.cAT244ToolStripMenuItem.Enabled = false;
             this.cAT244ToolStripMenuItem.Name = "cAT244ToolStripMenuItem";
-            this.cAT244ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cAT244ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.cAT244ToolStripMenuItem.Text = "CAT244";
             // 
             // dataBySSRCodeToolStripMenuItem
@@ -1213,6 +1221,7 @@
             // 
             this.buttonStopRun.BackColor = System.Drawing.Color.DarkGray;
             this.buttonStopRun.Enabled = false;
+            this.buttonStopRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonStopRun.Location = new System.Drawing.Point(290, 8);
             this.buttonStopRun.Name = "buttonStopRun";
             this.buttonStopRun.Size = new System.Drawing.Size(81, 23);
@@ -1315,6 +1324,7 @@
             // btnOpenConnection
             // 
             this.btnOpenConnection.BackColor = System.Drawing.Color.DarkGray;
+            this.btnOpenConnection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOpenConnection.Location = new System.Drawing.Point(6, 14);
             this.btnOpenConnection.Name = "btnOpenConnection";
             this.btnOpenConnection.Size = new System.Drawing.Size(67, 21);
@@ -1326,6 +1336,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label9.ForeColor = System.Drawing.Color.White;
             this.label9.Location = new System.Drawing.Point(22, 18);
             this.label9.Name = "label9";
@@ -1358,7 +1369,7 @@
             this.tabPlotDisplay.Controls.Add(this.groupBox1);
             this.tabPlotDisplay.Controls.Add(this.lblZoomLevel);
             this.tabPlotDisplay.Controls.Add(this.label13);
-            this.tabPlotDisplay.Controls.Add(this.comboBox1);
+            this.tabPlotDisplay.Controls.Add(this.comboBoxMapType);
             this.tabPlotDisplay.Controls.Add(this.button7);
             this.tabPlotDisplay.Controls.Add(this.button6);
             this.tabPlotDisplay.Controls.Add(this.button5);
@@ -1401,6 +1412,38 @@
             this.labelFrozeDisplay.Text = "FROZEN DISPLAY";
             this.labelFrozeDisplay.Visible = false;
             // 
+            // gMapControl
+            // 
+            this.gMapControl.BackColor = System.Drawing.Color.White;
+            this.gMapControl.Bearing = 0F;
+            this.gMapControl.CanDragMap = true;
+            this.gMapControl.ForeColor = System.Drawing.Color.Black;
+            this.gMapControl.GrayScaleMode = false;
+            this.gMapControl.LevelsKeepInMemmory = 5;
+            this.gMapControl.Location = new System.Drawing.Point(139, 3);
+            this.gMapControl.MarkersEnabled = true;
+            this.gMapControl.MaxZoom = 2;
+            this.gMapControl.MinZoom = 2;
+            this.gMapControl.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionWithoutCenter;
+            this.gMapControl.Name = "gMapControl";
+            this.gMapControl.NegativeMode = false;
+            this.gMapControl.PolygonsEnabled = true;
+            this.gMapControl.RetryLoadTile = 0;
+            this.gMapControl.RoutesEnabled = true;
+            this.gMapControl.ShowTileGridLines = false;
+            this.gMapControl.Size = new System.Drawing.Size(1028, 702);
+            this.gMapControl.TabIndex = 0;
+            this.gMapControl.Zoom = 0D;
+            this.gMapControl.OnMarkerEnter += new GMap.NET.WindowsForms.MarkerEnter(this.gMapControl_OnMarkerEnter);
+            this.gMapControl.OnMapDrag += new GMap.NET.MapDrag(this.gMapControl_OnMapDrag);
+            this.gMapControl.OnMapZoomChanged += new GMap.NET.MapZoomChanged(this.gMapControl_OnMapZoomChanged);
+            this.gMapControl.Load += new System.EventHandler(this.gMapControl_Load);
+            this.gMapControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseClick);
+            this.gMapControl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseDoubleClick);
+            this.gMapControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseDown);
+            this.gMapControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseMove);
+            this.gMapControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseUp);
+            // 
             // labelTargetCount
             // 
             this.labelTargetCount.AutoSize = true;
@@ -1426,6 +1469,7 @@
             this.groupBox2.Controls.Add(this.numericUpDownUpper);
             this.groupBox2.Controls.Add(this.numericUpDownLower);
             this.groupBox2.Controls.Add(this.checkBoxFLFilter);
+            this.groupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox2.ForeColor = System.Drawing.Color.Silver;
             this.groupBox2.Location = new System.Drawing.Point(6, 341);
             this.groupBox2.Name = "groupBox2";
@@ -1437,17 +1481,19 @@
             // checkBoxDisplayPSR
             // 
             this.checkBoxDisplayPSR.AutoSize = true;
+            this.checkBoxDisplayPSR.BackColor = System.Drawing.Color.Transparent;
             this.checkBoxDisplayPSR.Location = new System.Drawing.Point(6, 80);
             this.checkBoxDisplayPSR.Name = "checkBoxDisplayPSR";
             this.checkBoxDisplayPSR.Size = new System.Drawing.Size(85, 17);
             this.checkBoxDisplayPSR.TabIndex = 3;
             this.checkBoxDisplayPSR.Text = "Display PSR";
-            this.checkBoxDisplayPSR.UseVisualStyleBackColor = true;
+            this.checkBoxDisplayPSR.UseVisualStyleBackColor = false;
             this.checkBoxDisplayPSR.CheckedChanged += new System.EventHandler(this.checkBoxDisplayPSR_CheckedChanged);
             // 
             // numericUpDownUpper
             // 
             this.numericUpDownUpper.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.numericUpDownUpper.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.numericUpDownUpper.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDownUpper.Increment = new decimal(new int[] {
             100,
@@ -1461,7 +1507,7 @@
             0,
             0});
             this.numericUpDownUpper.Name = "numericUpDownUpper";
-            this.numericUpDownUpper.Size = new System.Drawing.Size(45, 20);
+            this.numericUpDownUpper.Size = new System.Drawing.Size(45, 16);
             this.numericUpDownUpper.TabIndex = 2;
             this.numericUpDownUpper.Value = new decimal(new int[] {
             700,
@@ -1473,6 +1519,7 @@
             // numericUpDownLower
             // 
             this.numericUpDownLower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.numericUpDownLower.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.numericUpDownLower.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDownLower.Increment = new decimal(new int[] {
             100,
@@ -1486,19 +1533,20 @@
             0,
             0});
             this.numericUpDownLower.Name = "numericUpDownLower";
-            this.numericUpDownLower.Size = new System.Drawing.Size(45, 20);
+            this.numericUpDownLower.Size = new System.Drawing.Size(45, 16);
             this.numericUpDownLower.TabIndex = 1;
             this.numericUpDownLower.ValueChanged += new System.EventHandler(this.numericUpDownLower_ValueChanged);
             // 
             // checkBoxFLFilter
             // 
             this.checkBoxFLFilter.AutoSize = true;
+            this.checkBoxFLFilter.BackColor = System.Drawing.Color.Transparent;
             this.checkBoxFLFilter.Location = new System.Drawing.Point(6, 32);
             this.checkBoxFLFilter.Name = "checkBoxFLFilter";
             this.checkBoxFLFilter.Size = new System.Drawing.Size(67, 17);
             this.checkBoxFLFilter.TabIndex = 0;
             this.checkBoxFLFilter.Text = "Disabled";
-            this.checkBoxFLFilter.UseVisualStyleBackColor = true;
+            this.checkBoxFLFilter.UseVisualStyleBackColor = false;
             this.checkBoxFLFilter.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // groupBox1
@@ -1573,28 +1621,30 @@
             this.label13.TabIndex = 15;
             this.label13.Text = "Map Type";
             // 
-            // comboBox1
+            // comboBoxMapType
             // 
-            this.comboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.ForeColor = System.Drawing.Color.Black;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.comboBoxMapType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.comboBoxMapType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMapType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxMapType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxMapType.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxMapType.FormattingEnabled = true;
+            this.comboBoxMapType.Items.AddRange(new object[] {
             "Google Plain",
             "Google Satellite",
             "Google Terrain",
             "Google Hybrid",
             "Custom Built"});
-            this.comboBox1.Location = new System.Drawing.Point(8, 652);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 14;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBoxMapType.Location = new System.Drawing.Point(8, 652);
+            this.comboBoxMapType.Name = "comboBoxMapType";
+            this.comboBoxMapType.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxMapType.TabIndex = 14;
+            this.comboBoxMapType.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // button7
             // 
             this.button7.BackColor = System.Drawing.Color.DarkGray;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Location = new System.Drawing.Point(51, 579);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(26, 23);
@@ -1606,6 +1656,7 @@
             // button6
             // 
             this.button6.BackColor = System.Drawing.Color.DarkGray;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Location = new System.Drawing.Point(44, 550);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(42, 23);
@@ -1617,6 +1668,7 @@
             // button5
             // 
             this.button5.BackColor = System.Drawing.Color.DarkGray;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Location = new System.Drawing.Point(44, 608);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(42, 23);
@@ -1628,6 +1680,7 @@
             // button4
             // 
             this.button4.BackColor = System.Drawing.Color.DarkGray;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Location = new System.Drawing.Point(4, 579);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(42, 23);
@@ -1639,6 +1692,7 @@
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.DarkGray;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Location = new System.Drawing.Point(82, 579);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(42, 23);
@@ -1660,6 +1714,8 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.DarkGray;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(90, 450);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(42, 23);
@@ -1671,7 +1727,9 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.DarkGray;
-            this.button1.Location = new System.Drawing.Point(2, 450);
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(6, 450);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(42, 23);
             this.button1.TabIndex = 6;
@@ -1696,6 +1754,7 @@
             // 
             // comboBoxLiveDisplayMode
             // 
+            this.comboBoxLiveDisplayMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxLiveDisplayMode.FormattingEnabled = true;
             this.comboBoxLiveDisplayMode.Items.AddRange(new object[] {
             "Local",
@@ -1741,6 +1800,7 @@
             this.checkBoxSyncToNM.AutoSize = true;
             this.checkBoxSyncToNM.BackColor = System.Drawing.Color.Transparent;
             this.checkBoxSyncToNM.Enabled = false;
+            this.checkBoxSyncToNM.ForeColor = System.Drawing.SystemColors.ActiveBorder;
             this.checkBoxSyncToNM.Location = new System.Drawing.Point(8, 58);
             this.checkBoxSyncToNM.Name = "checkBoxSyncToNM";
             this.checkBoxSyncToNM.Size = new System.Drawing.Size(82, 17);
@@ -1752,6 +1812,7 @@
             // textBox1TrackCoast
             // 
             this.textBox1TrackCoast.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.textBox1TrackCoast.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox1TrackCoast.Enabled = false;
             this.textBox1TrackCoast.Location = new System.Drawing.Point(6, 94);
             this.textBox1TrackCoast.Name = "textBox1TrackCoast";
@@ -1789,6 +1850,7 @@
             // textBoxUpdateRate
             // 
             this.textBoxUpdateRate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.textBoxUpdateRate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxUpdateRate.Enabled = false;
             this.textBoxUpdateRate.Location = new System.Drawing.Point(6, 32);
             this.textBoxUpdateRate.Name = "textBoxUpdateRate";
@@ -1815,6 +1877,7 @@
             // textBoxSSRCode
             // 
             this.textBoxSSRCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.textBoxSSRCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxSSRCode.Enabled = false;
             this.textBoxSSRCode.Location = new System.Drawing.Point(7, 101);
             this.textBoxSSRCode.Name = "textBoxSSRCode";
@@ -1844,6 +1907,7 @@
             // 
             this.comboBoxSSRFilterBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.comboBoxSSRFilterBox.Enabled = false;
+            this.comboBoxSSRFilterBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxSSRFilterBox.ForeColor = System.Drawing.SystemColors.Desktop;
             this.comboBoxSSRFilterBox.FormattingEnabled = true;
             this.comboBoxSSRFilterBox.Location = new System.Drawing.Point(5, 56);
@@ -1858,45 +1922,14 @@
             this.checkBoxFilterBySSR.AutoSize = true;
             this.checkBoxFilterBySSR.BackColor = System.Drawing.Color.Transparent;
             this.checkBoxFilterBySSR.Enabled = false;
+            this.checkBoxFilterBySSR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBoxFilterBySSR.Location = new System.Drawing.Point(5, 19);
             this.checkBoxFilterBySSR.Name = "checkBoxFilterBySSR";
-            this.checkBoxFilterBySSR.Size = new System.Drawing.Size(67, 17);
+            this.checkBoxFilterBySSR.Size = new System.Drawing.Size(64, 17);
             this.checkBoxFilterBySSR.TabIndex = 0;
             this.checkBoxFilterBySSR.Text = "Disabled";
             this.checkBoxFilterBySSR.UseVisualStyleBackColor = false;
             this.checkBoxFilterBySSR.CheckedChanged += new System.EventHandler(this.checkBoxFilterBySSR_CheckedChanged);
-            // 
-            // gMapControl
-            // 
-            this.gMapControl.BackColor = System.Drawing.Color.White;
-            this.gMapControl.Bearing = 0F;
-            this.gMapControl.CanDragMap = true;
-            this.gMapControl.ForeColor = System.Drawing.Color.Black;
-            this.gMapControl.GrayScaleMode = false;
-            this.gMapControl.LevelsKeepInMemmory = 5;
-            this.gMapControl.Location = new System.Drawing.Point(139, 3);
-            this.gMapControl.MarkersEnabled = true;
-            this.gMapControl.MaxZoom = 2;
-            this.gMapControl.MinZoom = 2;
-            this.gMapControl.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionWithoutCenter;
-            this.gMapControl.Name = "gMapControl";
-            this.gMapControl.NegativeMode = false;
-            this.gMapControl.PolygonsEnabled = true;
-            this.gMapControl.RetryLoadTile = 0;
-            this.gMapControl.RoutesEnabled = true;
-            this.gMapControl.ShowTileGridLines = false;
-            this.gMapControl.Size = new System.Drawing.Size(1028, 702);
-            this.gMapControl.TabIndex = 0;
-            this.gMapControl.Zoom = 0D;
-            this.gMapControl.OnMarkerEnter += new GMap.NET.WindowsForms.MarkerEnter(this.gMapControl_OnMarkerEnter);
-            this.gMapControl.OnMapDrag += new GMap.NET.MapDrag(this.gMapControl_OnMapDrag);
-            this.gMapControl.OnMapZoomChanged += new GMap.NET.MapZoomChanged(this.gMapControl_OnMapZoomChanged);
-            this.gMapControl.Load += new System.EventHandler(this.gMapControl_Load);
-            this.gMapControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseClick);
-            this.gMapControl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseDoubleClick);
-            this.gMapControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseDown);
-            this.gMapControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseMove);
-            this.gMapControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseUp);
             // 
             // tabPageAsterixMessages
             // 
@@ -2005,6 +2038,7 @@
             this.tabMainTab.Controls.Add(this.tabPlotDisplay);
             this.tabMainTab.Controls.Add(this.tabPageSysStatus);
             this.tabMainTab.Controls.Add(this.tabPageAsterixMessages);
+            this.tabMainTab.HotTrack = true;
             this.tabMainTab.Location = new System.Drawing.Point(6, 44);
             this.tabMainTab.Name = "tabMainTab";
             this.tabMainTab.SelectedIndex = 0;
@@ -2078,6 +2112,7 @@
             // btnAckowledgeRadar34
             // 
             this.btnAckowledgeRadar34.BackColor = System.Drawing.Color.Black;
+            this.btnAckowledgeRadar34.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAckowledgeRadar34.Location = new System.Drawing.Point(180, 14);
             this.btnAckowledgeRadar34.Name = "btnAckowledgeRadar34";
             this.btnAckowledgeRadar34.Size = new System.Drawing.Size(88, 23);
@@ -2104,6 +2139,7 @@
             // 
             this.comboBoxPSR_Mon_Sys_Disconect.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxPSR_Mon_Sys_Disconect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPSR_Mon_Sys_Disconect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxPSR_Mon_Sys_Disconect.ItemHeight = 12;
             this.comboBoxPSR_Mon_Sys_Disconect.Location = new System.Drawing.Point(6, 88);
             this.comboBoxPSR_Mon_Sys_Disconect.Name = "comboBoxPSR_Mon_Sys_Disconect";
@@ -2115,6 +2151,7 @@
             // 
             this.comboBoxPSR_Overloaded.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxPSR_Overloaded.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPSR_Overloaded.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxPSR_Overloaded.ItemHeight = 12;
             this.comboBoxPSR_Overloaded.Location = new System.Drawing.Point(6, 65);
             this.comboBoxPSR_Overloaded.Name = "comboBoxPSR_Overloaded";
@@ -2126,6 +2163,7 @@
             // 
             this.comboBoxPSR_Antenna_Selected.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxPSR_Antenna_Selected.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPSR_Antenna_Selected.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxPSR_Antenna_Selected.ItemHeight = 12;
             this.comboBoxPSR_Antenna_Selected.Location = new System.Drawing.Point(6, 42);
             this.comboBoxPSR_Antenna_Selected.Name = "comboBoxPSR_Antenna_Selected";
@@ -2137,6 +2175,7 @@
             // 
             this.comboBoxPSR_Channel_Status.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxPSR_Channel_Status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPSR_Channel_Status.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxPSR_Channel_Status.ItemHeight = 12;
             this.comboBoxPSR_Channel_Status.Location = new System.Drawing.Point(6, 19);
             this.comboBoxPSR_Channel_Status.Name = "comboBoxPSR_Channel_Status";
@@ -2167,6 +2206,7 @@
             // 
             this.comboBoxMDS_Comm_Overload.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxMDS_Comm_Overload.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMDS_Comm_Overload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxMDS_Comm_Overload.ItemHeight = 12;
             this.comboBoxMDS_Comm_Overload.Location = new System.Drawing.Point(6, 180);
             this.comboBoxMDS_Comm_Overload.Name = "comboBoxMDS_Comm_Overload";
@@ -2178,6 +2218,7 @@
             // 
             this.comboBoxMDS_DataLink_Overload.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxMDS_DataLink_Overload.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMDS_DataLink_Overload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxMDS_DataLink_Overload.ItemHeight = 12;
             this.comboBoxMDS_DataLink_Overload.Location = new System.Drawing.Point(7, 157);
             this.comboBoxMDS_DataLink_Overload.Name = "comboBoxMDS_DataLink_Overload";
@@ -2189,6 +2230,7 @@
             // 
             this.comboBoxMDS_Ch_For_DataLink.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxMDS_Ch_For_DataLink.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMDS_Ch_For_DataLink.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxMDS_Ch_For_DataLink.ItemHeight = 12;
             this.comboBoxMDS_Ch_For_DataLink.Location = new System.Drawing.Point(7, 134);
             this.comboBoxMDS_Ch_For_DataLink.Name = "comboBoxMDS_Ch_For_DataLink";
@@ -2200,6 +2242,7 @@
             // 
             this.comboBoxMDS_Ch_For_Cord.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxMDS_Ch_For_Cord.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMDS_Ch_For_Cord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxMDS_Ch_For_Cord.ItemHeight = 12;
             this.comboBoxMDS_Ch_For_Cord.Location = new System.Drawing.Point(7, 111);
             this.comboBoxMDS_Ch_For_Cord.Name = "comboBoxMDS_Ch_For_Cord";
@@ -2211,6 +2254,7 @@
             // 
             this.comboBoxMDS_Mon_Sys_Disconect.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxMDS_Mon_Sys_Disconect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMDS_Mon_Sys_Disconect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxMDS_Mon_Sys_Disconect.ItemHeight = 12;
             this.comboBoxMDS_Mon_Sys_Disconect.Location = new System.Drawing.Point(7, 88);
             this.comboBoxMDS_Mon_Sys_Disconect.Name = "comboBoxMDS_Mon_Sys_Disconect";
@@ -2222,6 +2266,7 @@
             // 
             this.ccomboBoxMDS_Overoaded.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.ccomboBoxMDS_Overoaded.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ccomboBoxMDS_Overoaded.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ccomboBoxMDS_Overoaded.ItemHeight = 12;
             this.ccomboBoxMDS_Overoaded.Location = new System.Drawing.Point(7, 65);
             this.ccomboBoxMDS_Overoaded.Name = "ccomboBoxMDS_Overoaded";
@@ -2233,6 +2278,7 @@
             // 
             this.comboBoxMDS_Antena_Selected.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxMDS_Antena_Selected.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMDS_Antena_Selected.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxMDS_Antena_Selected.ItemHeight = 12;
             this.comboBoxMDS_Antena_Selected.Location = new System.Drawing.Point(7, 42);
             this.comboBoxMDS_Antena_Selected.Name = "comboBoxMDS_Antena_Selected";
@@ -2244,6 +2290,7 @@
             // 
             this.comboBoxMDS_Channel_Status.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxMDS_Channel_Status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMDS_Channel_Status.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxMDS_Channel_Status.ItemHeight = 12;
             this.comboBoxMDS_Channel_Status.Location = new System.Drawing.Point(7, 19);
             this.comboBoxMDS_Channel_Status.Name = "comboBoxMDS_Channel_Status";
@@ -2270,6 +2317,7 @@
             // 
             this.comboBoxSSR_Mon_Sys_Disconect.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxSSR_Mon_Sys_Disconect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSSR_Mon_Sys_Disconect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxSSR_Mon_Sys_Disconect.ItemHeight = 12;
             this.comboBoxSSR_Mon_Sys_Disconect.Location = new System.Drawing.Point(6, 88);
             this.comboBoxSSR_Mon_Sys_Disconect.Name = "comboBoxSSR_Mon_Sys_Disconect";
@@ -2281,6 +2329,7 @@
             // 
             this.comboBoxSSR_Overloaded.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxSSR_Overloaded.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSSR_Overloaded.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxSSR_Overloaded.ItemHeight = 12;
             this.comboBoxSSR_Overloaded.Location = new System.Drawing.Point(6, 65);
             this.comboBoxSSR_Overloaded.Name = "comboBoxSSR_Overloaded";
@@ -2292,6 +2341,7 @@
             // 
             this.comboBoxSSR_Antenna_Selected.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxSSR_Antenna_Selected.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSSR_Antenna_Selected.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxSSR_Antenna_Selected.ItemHeight = 12;
             this.comboBoxSSR_Antenna_Selected.Location = new System.Drawing.Point(6, 42);
             this.comboBoxSSR_Antenna_Selected.Name = "comboBoxSSR_Antenna_Selected";
@@ -2303,6 +2353,7 @@
             // 
             this.comboBoxSSR_Channel_Status.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxSSR_Channel_Status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxSSR_Channel_Status.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxSSR_Channel_Status.ItemHeight = 12;
             this.comboBoxSSR_Channel_Status.Location = new System.Drawing.Point(6, 19);
             this.comboBoxSSR_Channel_Status.Name = "comboBoxSSR_Channel_Status";
@@ -2332,6 +2383,7 @@
             // 
             this.comboBoxCOM_Time_Source_Status.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxCOM_Time_Source_Status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCOM_Time_Source_Status.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxCOM_Time_Source_Status.ItemHeight = 12;
             this.comboBoxCOM_Time_Source_Status.Location = new System.Drawing.Point(8, 157);
             this.comboBoxCOM_Time_Source_Status.Name = "comboBoxCOM_Time_Source_Status";
@@ -2343,6 +2395,7 @@
             // 
             this.comboBoxCOM_MON_Sys_Disconect.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxCOM_MON_Sys_Disconect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCOM_MON_Sys_Disconect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxCOM_MON_Sys_Disconect.ItemHeight = 12;
             this.comboBoxCOM_MON_Sys_Disconect.Location = new System.Drawing.Point(8, 134);
             this.comboBoxCOM_MON_Sys_Disconect.Name = "comboBoxCOM_MON_Sys_Disconect";
@@ -2354,6 +2407,7 @@
             // 
             this.comboBoxCOM_RDPC_Selected.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxCOM_RDPC_Selected.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCOM_RDPC_Selected.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxCOM_RDPC_Selected.ItemHeight = 12;
             this.comboBoxCOM_RDPC_Selected.Location = new System.Drawing.Point(8, 42);
             this.comboBoxCOM_RDPC_Selected.Name = "comboBoxCOM_RDPC_Selected";
@@ -2365,6 +2419,7 @@
             // 
             this.comboBoxCOM_Transmit_Overload.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxCOM_Transmit_Overload.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCOM_Transmit_Overload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxCOM_Transmit_Overload.ItemHeight = 12;
             this.comboBoxCOM_Transmit_Overload.Location = new System.Drawing.Point(8, 111);
             this.comboBoxCOM_Transmit_Overload.Name = "comboBoxCOM_Transmit_Overload";
@@ -2376,6 +2431,7 @@
             // 
             this.comboBoxCOM_RDP_Overload.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxCOM_RDP_Overload.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCOM_RDP_Overload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxCOM_RDP_Overload.ItemHeight = 12;
             this.comboBoxCOM_RDP_Overload.Location = new System.Drawing.Point(8, 88);
             this.comboBoxCOM_RDP_Overload.Name = "comboBoxCOM_RDP_Overload";
@@ -2387,6 +2443,7 @@
             // 
             this.comboBoxCOM_RDPC_Reset.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxCOM_RDPC_Reset.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCOM_RDPC_Reset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxCOM_RDPC_Reset.ItemHeight = 12;
             this.comboBoxCOM_RDPC_Reset.Location = new System.Drawing.Point(8, 65);
             this.comboBoxCOM_RDPC_Reset.Name = "comboBoxCOM_RDPC_Reset";
@@ -2398,6 +2455,7 @@
             // 
             this.comboBoxCOM_Top_Status.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxCOM_Top_Status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCOM_Top_Status.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxCOM_Top_Status.ItemHeight = 12;
             this.comboBoxCOM_Top_Status.Location = new System.Drawing.Point(8, 19);
             this.comboBoxCOM_Top_Status.Name = "comboBoxCOM_Top_Status";
@@ -2433,6 +2491,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
+            this.label17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label17.Location = new System.Drawing.Point(22, 38);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(61, 13);
@@ -2483,6 +2542,7 @@
             // btnStartStopFileReplay
             // 
             this.btnStartStopFileReplay.BackColor = System.Drawing.Color.DarkGray;
+            this.btnStartStopFileReplay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStartStopFileReplay.Location = new System.Drawing.Point(4, 15);
             this.btnStartStopFileReplay.Name = "btnStartStopFileReplay";
             this.btnStartStopFileReplay.Size = new System.Drawing.Size(102, 26);
@@ -2506,31 +2566,26 @@
             // checkBoxIs_UTC
             // 
             this.checkBoxIs_UTC.AutoSize = true;
+            this.checkBoxIs_UTC.BackColor = System.Drawing.Color.Transparent;
             this.checkBoxIs_UTC.ForeColor = System.Drawing.Color.Silver;
             this.checkBoxIs_UTC.Location = new System.Drawing.Point(6, 23);
             this.checkBoxIs_UTC.Name = "checkBoxIs_UTC";
             this.checkBoxIs_UTC.Size = new System.Drawing.Size(48, 17);
             this.checkBoxIs_UTC.TabIndex = 28;
             this.checkBoxIs_UTC.Text = "UTC";
-            this.checkBoxIs_UTC.UseVisualStyleBackColor = true;
-            // 
-            // extendedLabelToolStripMenuItem
-            // 
-            this.extendedLabelToolStripMenuItem.Name = "extendedLabelToolStripMenuItem";
-            this.extendedLabelToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.extendedLabelToolStripMenuItem.Text = "Extended Label";
-            this.extendedLabelToolStripMenuItem.Click += new System.EventHandler(this.extendedLabelToolStripMenuItem_Click);
+            this.checkBoxIs_UTC.UseVisualStyleBackColor = false;
             // 
             // checkBoxFullscreen
             // 
             this.checkBoxFullscreen.AutoSize = true;
-            this.checkBoxFullscreen.ForeColor = System.Drawing.Color.Silver;
-            this.checkBoxFullscreen.Location = new System.Drawing.Point(289, 32);
+            this.checkBoxFullscreen.BackColor = System.Drawing.Color.Transparent;
+            this.checkBoxFullscreen.ForeColor = System.Drawing.SystemColors.ActiveBorder;
+            this.checkBoxFullscreen.Location = new System.Drawing.Point(205, 27);
             this.checkBoxFullscreen.Name = "checkBoxFullscreen";
             this.checkBoxFullscreen.Size = new System.Drawing.Size(77, 17);
             this.checkBoxFullscreen.TabIndex = 30;
             this.checkBoxFullscreen.Text = "Full screen";
-            this.checkBoxFullscreen.UseVisualStyleBackColor = true;
+            this.checkBoxFullscreen.UseVisualStyleBackColor = false;
             this.checkBoxFullscreen.CheckedChanged += new System.EventHandler(this.checkBoxFullscreen_CheckedChanged);
             // 
             // FormMain
@@ -2548,6 +2603,7 @@
             this.Controls.Add(this.tabMainTab);
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
@@ -2717,7 +2773,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lblZoomLevel;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxMapType;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;

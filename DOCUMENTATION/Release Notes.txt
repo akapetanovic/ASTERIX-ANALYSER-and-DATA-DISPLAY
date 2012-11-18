@@ -36,11 +36,11 @@ CAT62
 		136 Measured Flight Level
 		380 Aircraft Derived Data
 			Subfield # 2:  Target Identification
-			Subfiled # 3:  Magnetic Heading
-			Subfiled # 5:  True Airspeed (TAS)
-			Subfiled # 17: Track Angle
-			Subfiled # 26: Indicated Airspeed (IAS)
-			Subfiled # 27: Mach Number
+			Subfield # 3:  Magnetic Heading
+			Subfield # 5:  True Airspeed (TAS)
+			Subfield # 17: Track Angle
+			Subfield # 26: Indicated Airspeed (IAS)
+			Subfield # 27: Mach Number
 			
 
 VERSION HISTORY
@@ -58,7 +58,8 @@ Version 1.8
 	6. Added LAT/LONG readout of the current mouse position. 
 	7. Fixed zoom and display center readout so it gets synced on every change.
 	8. Added option to easely switch between full screen track/plot display or the original with side bar tools.
-	9. Added option to display "Extended label" that displays (HDG, TRK, IAS, TAS, MACH) for selected track label (CAT62 for now)
+	9. Added option to display "Extended label" that displays (HDG, TRK, IAS, TAS, MACH) for selected track label (CAT62/380 for now)
+	10. Added CAT062 to Google Export option.
 
 
 Version 1.7

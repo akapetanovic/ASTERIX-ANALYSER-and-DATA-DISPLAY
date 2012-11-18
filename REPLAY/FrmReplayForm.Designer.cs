@@ -46,13 +46,13 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.lblFileSize = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.timerMonitorReplay = new System.Windows.Forms.Timer(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.lblBytesSent = new System.Windows.Forms.Label();
             this.btnSetConnection = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -127,6 +127,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -170,30 +171,34 @@
             // 
             // btnConnectDisconnect
             // 
+            this.btnConnectDisconnect.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnConnectDisconnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConnectDisconnect.Location = new System.Drawing.Point(15, 195);
             this.btnConnectDisconnect.Name = "btnConnectDisconnect";
             this.btnConnectDisconnect.Size = new System.Drawing.Size(89, 23);
             this.btnConnectDisconnect.TabIndex = 34;
             this.btnConnectDisconnect.Text = "Connect";
-            this.btnConnectDisconnect.UseVisualStyleBackColor = true;
+            this.btnConnectDisconnect.UseVisualStyleBackColor = false;
             this.btnConnectDisconnect.Click += new System.EventHandler(this.btnStartStop_Click);
             // 
             // btnStartPause
             // 
+            this.btnStartPause.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnStartPause.Enabled = false;
+            this.btnStartPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStartPause.Location = new System.Drawing.Point(110, 195);
             this.btnStartPause.Name = "btnStartPause";
             this.btnStartPause.Size = new System.Drawing.Size(89, 23);
             this.btnStartPause.TabIndex = 35;
             this.btnStartPause.Text = "Start";
-            this.btnStartPause.UseVisualStyleBackColor = true;
+            this.btnStartPause.UseVisualStyleBackColor = false;
             this.btnStartPause.Click += new System.EventHandler(this.btnStartPause_Click);
             // 
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(15, 246);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(253, 23);
+            this.progressBar1.Size = new System.Drawing.Size(268, 23);
             this.progressBar1.Step = 2;
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 36;
@@ -216,16 +221,6 @@
             this.label5.Size = new System.Drawing.Size(49, 13);
             this.label5.TabIndex = 38;
             this.label5.Text = "File Size:";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(274, 246);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(78, 23);
-            this.button2.TabIndex = 39;
-            this.button2.Text = "Close";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // timerMonitorReplay
             // 
@@ -252,13 +247,15 @@
             // 
             // btnSetConnection
             // 
+            this.btnSetConnection.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnSetConnection.Enabled = false;
+            this.btnSetConnection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSetConnection.Location = new System.Drawing.Point(235, 46);
             this.btnSetConnection.Name = "btnSetConnection";
             this.btnSetConnection.Size = new System.Drawing.Size(117, 25);
             this.btnSetConnection.TabIndex = 43;
             this.btnSetConnection.Text = "Set LAN Connection";
-            this.btnSetConnection.UseVisualStyleBackColor = true;
+            this.btnSetConnection.UseVisualStyleBackColor = false;
             this.btnSetConnection.Click += new System.EventHandler(this.btnSetConnection_Click);
             // 
             // label6
@@ -293,17 +290,30 @@
             0});
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(287, 246);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(65, 23);
+            this.button1.TabIndex = 46;
+            this.button1.Text = "Close";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // FrmReplayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(362, 276);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnSetConnection);
             this.Controls.Add(this.lblBytesSent);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lblFileSize);
             this.Controls.Add(this.progressBar1);
@@ -313,6 +323,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmReplayForm";
             this.Text = "ASTERIX Replay ";
@@ -347,7 +358,6 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label lblFileSize;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Timer timerMonitorReplay;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblBytesSent;
@@ -355,5 +365,6 @@
         private System.Windows.Forms.Button btnSetConnection;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Button button1;
     }
 }

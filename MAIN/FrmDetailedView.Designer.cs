@@ -43,8 +43,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(481, 447);
             this.Controls.Add(this.listBoxMainDataBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmDetailedView";
             this.Text = "Data Item Detailed View";
             this.Load += new System.EventHandler(this.FrmDetailedView_Load);

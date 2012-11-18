@@ -55,6 +55,17 @@ namespace AsterixDisplayAnalyser
                         SSR_Code_Lookup[Result] = true;
                 }
             }
+            else if (MainASTERIXDataStorage.CAT62Message.Count > 0)
+            {
+                foreach (MainASTERIXDataStorage.CAT62Data Msg in MainASTERIXDataStorage.CAT62Message)
+                {
+                    CAT62I060Types.CAT62060Mode3UserData MyData = (CAT62I060Types.CAT62060Mode3UserData)Msg.CAT62DataItems[CAT62.ItemIDToIndex("060")].value;
+
+                    int Result;
+                    if (int.TryParse(MyData.Mode3A_Code, out Result) == true)
+                        SSR_Code_Lookup[Result] = true;
+                }
+            }
 
             this.comboBox1.Items.Clear();
             for (int I = 0; I < SSR_Code_Lookup.Length; I++)

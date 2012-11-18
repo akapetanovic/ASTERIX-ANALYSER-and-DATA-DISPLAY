@@ -71,6 +71,11 @@ namespace AsterixDisplayAnalyser
             Send_Data_To_Google_Earth = Is_Sending;
         }
 
+        public static void ShowExtendedLabel()
+        {
+            ExtendedLabel.Visible = true;
+        }
+
         CAT34I050Types.CAT34I050UserData MyCAT34I050UserData_Last_Cycle = new CAT34I050Types.CAT34I050UserData();
 
         /// <summary>
@@ -302,7 +307,7 @@ namespace AsterixDisplayAnalyser
             gMapControl.Overlays.Add(DinamicOverlay);
 
             this.labelDisplayUpdateRate.Text = "Update rate: " + this.PlotandTrackDisplayUpdateTimer.Interval.ToString() + "ms";
-            this.comboBox1.Text = "Plain";
+            this.comboBoxMapType.Text = "Plain";
 
             // Now build static display
             StaticDisplayBuilder.Build(ref StaticOverlay);
@@ -466,7 +471,8 @@ namespace AsterixDisplayAnalyser
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("ASTERIX DISPLAY and ANALYSER  1.7 by Amer Kapetanovic\nakapetanovic@gmail.com", "About");
+            FrmAbout FAbout = new FrmAbout();
+            FAbout.ShowDialog();
         }
 
         private void resetDataBufferToolStripMenuItem_Click(object sender, EventArgs e)
@@ -826,6 +832,8 @@ namespace AsterixDisplayAnalyser
             Label_Data.MyTargetIndex = Target_Data.TrackNumber;
 
             // At the end move extended lable data to the marker, so it is ready for dynamic manipulation by the client
+            
+            //Round HDG and TRK
             Label_Data.TRK = Target_Data.TRK;
             Label_Data.M_HDG = Target_Data.M_HDG;
             Label_Data.IAS = Target_Data.IAS;
@@ -1214,23 +1222,23 @@ namespace AsterixDisplayAnalyser
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.comboBox1.Text == "Google Plain")
+            if (this.comboBoxMapType.Text == "Google Plain")
             {
                 gMapControl.MapProvider = GMapProviders.GoogleMap;
             }
-            else if (this.comboBox1.Text == "Google Satellite")
+            else if (this.comboBoxMapType.Text == "Google Satellite")
             {
                 gMapControl.MapProvider = GMapProviders.GoogleSatelliteMap;
             }
-            else if (this.comboBox1.Text == "Google Terrain")
+            else if (this.comboBoxMapType.Text == "Google Terrain")
             {
                 gMapControl.MapProvider = GMapProviders.GoogleTerrainMap;
             }
-            else if (this.comboBox1.Text == "Google Hybrid")
+            else if (this.comboBoxMapType.Text == "Google Hybrid")
             {
                 gMapControl.MapProvider = GMapProviders.GoogleHybridMap;
             }
-            else if (this.comboBox1.Text == "Custom Built")
+            else if (this.comboBoxMapType.Text == "Custom Built")
             {
                 gMapControl.MapProvider = GMapProviders.EmptyProvider;
 

@@ -248,19 +248,13 @@
     <Compile Include="MAIN\CAT_Decoder_Selector.Designer.cs">
       <DependentUpon>CAT_Decoder_Selector.cs</DependentUpon>
     </Compile>
-    <Compile Include="MAIN\Debug.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MAIN\Debug.Designer.cs">
-      <DependentUpon>Debug.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MAIN\FrmDebug.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MAIN\FrmDebug.Designer.cs">
-      <DependentUpon>FrmDebug.cs</DependentUpon>
-    </Compile>
     <Compile Include="GOOGLE EARTH\Asterix_To_KML_Provider.cs" />
+    <Compile Include="MAIN\FrmAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MAIN\FrmAbout.Designer.cs">
+      <DependentUpon>FrmAbout.cs</DependentUpon>
+    </Compile>
     <Compile Include="REC_AND_FORWARD\AppendDateTime.cs" />
     <Compile Include="GOOGLE EARTH\GoogleEarthProvider.cs">
       <SubType>Form</SubType>
@@ -335,10 +329,10 @@
     <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\DisplayRightClickOptions.Designer.cs">
       <DependentUpon>DisplayRightClickOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="MAIN\EarthPlotExporter.cs">
+    <Compile Include="GOOGLE EARTH\EarthPlotExporter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MAIN\EarthPlotExporter.Designer.cs">
+    <Compile Include="GOOGLE EARTH\EarthPlotExporter.Designer.cs">
       <DependentUpon>EarthPlotExporter.cs</DependentUpon>
     </Compile>
     <Compile Include="DATA DISPLAY\DYNAMIC DATA\DynamicDisplayBuilder.cs" />
@@ -445,11 +439,8 @@
     <EmbeddedResource Include="MAIN\CAT_Decoder_Selector.resx">
       <DependentUpon>CAT_Decoder_Selector.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MAIN\Debug.resx">
-      <DependentUpon>Debug.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MAIN\FrmDebug.resx">
-      <DependentUpon>FrmDebug.cs</DependentUpon>
+    <EmbeddedResource Include="MAIN\FrmAbout.resx">
+      <DependentUpon>FrmAbout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="REC_AND_FORWARD\FrmAstxRecFrwdForm.resx">
       <DependentUpon>FrmAstxRecFrwdForm.cs</DependentUpon>
@@ -475,7 +466,7 @@
     <EmbeddedResource Include="DATA DISPLAY\DYNAMIC DATA\UpdateCFL.resx">
       <DependentUpon>UpdateCFL.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MAIN\EarthPlotExporter.resx">
+    <EmbeddedResource Include="GOOGLE EARTH\EarthPlotExporter.resx">
       <DependentUpon>EarthPlotExporter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MAIN\FrmDataItemPresence.resx">
@@ -513,6 +504,7 @@
       <DependentUpon>FrmReplayToRaw.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="DATA SAMPLES\ARTAS.rply" />
     <None Include="DATA SAMPLES\Jahorina.raw" />
     <None Include="DATA SAMPLES\Jahorina.rply" />
     <None Include="MAIN\app.config" />
@@ -558,6 +550,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DOCUMENTATION\Release Notes.txt" />
+    <Content Include="Resources\DARR.ico" />
     <Content Include="Resources\radar.jpg" />
     <Content Include="MAIN\README.txt" />
     <None Include="Resources\waypoint.jpg" />

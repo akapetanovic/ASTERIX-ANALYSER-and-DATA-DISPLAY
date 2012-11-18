@@ -45,7 +45,6 @@
             this.textBoxConnectionName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.buttonSetAsActive = new System.Windows.Forms.Button();
-            this.buttonClose = new System.Windows.Forms.Button();
             this.listBoxIPAddress = new System.Windows.Forms.ListBox();
             this.listBoxPort = new System.Windows.Forms.ListBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -75,14 +74,14 @@
             // 
             // txtboxIPAddress
             // 
-            this.txtboxIPAddress.Location = new System.Drawing.Point(129, 86);
+            this.txtboxIPAddress.Location = new System.Drawing.Point(136, 86);
             this.txtboxIPAddress.Name = "txtboxIPAddress";
             this.txtboxIPAddress.Size = new System.Drawing.Size(143, 20);
             this.txtboxIPAddress.TabIndex = 1;
             // 
             // textboxPort
             // 
-            this.textboxPort.Location = new System.Drawing.Point(129, 113);
+            this.textboxPort.Location = new System.Drawing.Point(136, 113);
             this.textboxPort.Name = "textboxPort";
             this.textboxPort.Size = new System.Drawing.Size(143, 20);
             this.textboxPort.TabIndex = 2;
@@ -116,26 +115,31 @@
             // 
             // btnAdd
             // 
+            this.btnAdd.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Location = new System.Drawing.Point(3, 140);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(276, 23);
             this.btnAdd.TabIndex = 3;
             this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnRemove
             // 
+            this.btnRemove.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRemove.Location = new System.Drawing.Point(144, 306);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(135, 23);
             this.btnRemove.TabIndex = 10;
             this.btnRemove.Text = "Delete";
-            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.UseVisualStyleBackColor = false;
             this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -178,7 +182,7 @@
             // 
             // textBoxConnectionName
             // 
-            this.textBoxConnectionName.Location = new System.Drawing.Point(129, 32);
+            this.textBoxConnectionName.Location = new System.Drawing.Point(136, 32);
             this.textBoxConnectionName.Name = "textBoxConnectionName";
             this.textBoxConnectionName.Size = new System.Drawing.Size(143, 20);
             this.textBoxConnectionName.TabIndex = 0;
@@ -194,24 +198,16 @@
             // 
             // buttonSetAsActive
             // 
+            this.buttonSetAsActive.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.buttonSetAsActive.Enabled = false;
+            this.buttonSetAsActive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSetAsActive.Location = new System.Drawing.Point(3, 306);
             this.buttonSetAsActive.Name = "buttonSetAsActive";
             this.buttonSetAsActive.Size = new System.Drawing.Size(135, 23);
             this.buttonSetAsActive.TabIndex = 17;
             this.buttonSetAsActive.Text = "Set as active";
-            this.buttonSetAsActive.UseVisualStyleBackColor = true;
+            this.buttonSetAsActive.UseVisualStyleBackColor = false;
             this.buttonSetAsActive.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // buttonClose
-            // 
-            this.buttonClose.Location = new System.Drawing.Point(3, 335);
-            this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(276, 23);
-            this.buttonClose.TabIndex = 19;
-            this.buttonClose.Text = "Close";
-            this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // listBoxIPAddress
             // 
@@ -261,7 +257,7 @@
             // comboBoxNetworkInterface
             // 
             this.comboBoxNetworkInterface.FormattingEnabled = true;
-            this.comboBoxNetworkInterface.Location = new System.Drawing.Point(129, 59);
+            this.comboBoxNetworkInterface.Location = new System.Drawing.Point(136, 59);
             this.comboBoxNetworkInterface.Name = "comboBoxNetworkInterface";
             this.comboBoxNetworkInterface.Size = new System.Drawing.Size(143, 21);
             this.comboBoxNetworkInterface.TabIndex = 26;
@@ -270,14 +266,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 367);
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ClientSize = new System.Drawing.Size(284, 334);
             this.Controls.Add(this.comboBoxNetworkInterface);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.listBoxLocalAddr);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.listBoxPort);
             this.Controls.Add(this.listBoxIPAddress);
-            this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonSetAsActive);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBoxConnectionName);
@@ -292,6 +288,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmConnectionSettings";
             this.Text = "Connection Settings";
@@ -324,7 +321,6 @@
         private System.Windows.Forms.TextBox textBoxConnectionName;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttonSetAsActive;
-        private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.ListBox listBoxIPAddress;
         private System.Windows.Forms.ListBox listBoxPort;
         private System.Windows.Forms.Label label11;

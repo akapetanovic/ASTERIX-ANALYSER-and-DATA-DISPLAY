@@ -37,7 +37,6 @@
             this.checkBox065 = new System.Windows.Forms.CheckBox();
             this.checkBox244 = new System.Windows.Forms.CheckBox();
             this.checkBox001 = new System.Windows.Forms.CheckBox();
-            this.buttonOK = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // checkBox002
@@ -143,22 +142,12 @@
             this.checkBox001.UseVisualStyleBackColor = true;
             this.checkBox001.CheckedChanged += new System.EventHandler(this.checkBox001_CheckedChanged);
             // 
-            // buttonOK
-            // 
-            this.buttonOK.Location = new System.Drawing.Point(12, 175);
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(68, 23);
-            this.buttonOK.TabIndex = 10;
-            this.buttonOK.Text = "OK";
-            this.buttonOK.UseVisualStyleBackColor = true;
-            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-            // 
             // CAT_Decoder_Selector
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(202, 210);
-            this.Controls.Add(this.buttonOK);
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ClientSize = new System.Drawing.Size(200, 179);
             this.Controls.Add(this.checkBox001);
             this.Controls.Add(this.checkBox244);
             this.Controls.Add(this.checkBox065);
@@ -168,6 +157,7 @@
             this.Controls.Add(this.checkBox034);
             this.Controls.Add(this.checkBox008);
             this.Controls.Add(this.checkBox002);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CAT_Decoder_Selector";
@@ -189,6 +179,5 @@
         private System.Windows.Forms.CheckBox checkBox065;
         private System.Windows.Forms.CheckBox checkBox244;
         private System.Windows.Forms.CheckBox checkBox001;
-        private System.Windows.Forms.Button buttonOK;
     }
 }

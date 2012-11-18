@@ -96,6 +96,7 @@
             // comboBoxTextColorChoice
             // 
             this.comboBoxTextColorChoice.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBoxTextColorChoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxTextColorChoice.FormattingEnabled = true;
             this.comboBoxTextColorChoice.Location = new System.Drawing.Point(50, 19);
             this.comboBoxTextColorChoice.Name = "comboBoxTextColorChoice";
@@ -132,6 +133,7 @@
             // 
             // comboBoxDataItem
             // 
+            this.comboBoxDataItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxDataItem.FormattingEnabled = true;
             this.comboBoxDataItem.Location = new System.Drawing.Point(73, 19);
             this.comboBoxDataItem.Name = "comboBoxDataItem";
@@ -141,12 +143,14 @@
             // 
             // btnUpdate
             // 
+            this.btnUpdate.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.Location = new System.Drawing.Point(146, 627);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(93, 23);
             this.btnUpdate.TabIndex = 4;
             this.btnUpdate.Text = "Update Display";
-            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // label
@@ -189,6 +193,7 @@
             // comboBoxAreaPolygonColorChoice
             // 
             this.comboBoxAreaPolygonColorChoice.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBoxAreaPolygonColorChoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxAreaPolygonColorChoice.FormattingEnabled = true;
             this.comboBoxAreaPolygonColorChoice.Location = new System.Drawing.Point(47, 26);
             this.comboBoxAreaPolygonColorChoice.Name = "comboBoxAreaPolygonColorChoice";
@@ -231,6 +236,7 @@
             // 
             // comboBoxLineStyleChoice
             // 
+            this.comboBoxLineStyleChoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxLineStyleChoice.FormattingEnabled = true;
             this.comboBoxLineStyleChoice.Items.AddRange(new object[] {
             "Solid",
@@ -263,6 +269,7 @@
             // comboBoxLineColorChoice
             // 
             this.comboBoxLineColorChoice.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBoxLineColorChoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxLineColorChoice.FormattingEnabled = true;
             this.comboBoxLineColorChoice.Location = new System.Drawing.Point(50, 22);
             this.comboBoxLineColorChoice.Name = "comboBoxLineColorChoice";
@@ -282,6 +289,7 @@
             // 
             // comboBoxLineWidth
             // 
+            this.comboBoxLineWidth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxLineWidth.FormattingEnabled = true;
             this.comboBoxLineWidth.Items.AddRange(new object[] {
             "1",
@@ -346,6 +354,7 @@
             // 
             // comboBoxTextFontChoice
             // 
+            this.comboBoxTextFontChoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxTextFontChoice.FormattingEnabled = true;
             this.comboBoxTextFontChoice.Location = new System.Drawing.Point(50, 46);
             this.comboBoxTextFontChoice.Name = "comboBoxTextFontChoice";
@@ -364,6 +373,7 @@
             // 
             // comboBoxTextSizeChoice
             // 
+            this.comboBoxTextSizeChoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxTextSizeChoice.FormattingEnabled = true;
             this.comboBoxTextSizeChoice.Items.AddRange(new object[] {
             "1",
@@ -433,6 +443,7 @@
             // 
             // numericUpDown_Y
             // 
+            this.numericUpDown_Y.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numericUpDown_Y.Location = new System.Drawing.Point(20, 14);
             this.numericUpDown_Y.Name = "numericUpDown_Y";
             this.numericUpDown_Y.Size = new System.Drawing.Size(39, 20);
@@ -446,6 +457,7 @@
             // 
             // numericUpDown_X
             // 
+            this.numericUpDown_X.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numericUpDown_X.Location = new System.Drawing.Point(60, 76);
             this.numericUpDown_X.Name = "numericUpDown_X";
             this.numericUpDown_X.Size = new System.Drawing.Size(39, 20);
@@ -509,6 +521,7 @@
             // comboBoxBackgroundColor
             // 
             this.comboBoxBackgroundColor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBoxBackgroundColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxBackgroundColor.FormattingEnabled = true;
             this.comboBoxBackgroundColor.Location = new System.Drawing.Point(54, 17);
             this.comboBoxBackgroundColor.Name = "comboBoxBackgroundColor";
@@ -535,22 +548,26 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(15, 626);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(93, 23);
             this.button1.TabIndex = 7;
             this.button1.Text = "Close";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Location = new System.Drawing.Point(277, 627);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(93, 23);
             this.button2.TabIndex = 8;
             this.button2.Text = "Save Settings";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // groupBox5
@@ -574,6 +591,7 @@
             // 
             // txtLonMM
             // 
+            this.txtLonMM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtLonMM.Location = new System.Drawing.Point(92, 41);
             this.txtLonMM.Name = "txtLonMM";
             this.txtLonMM.Size = new System.Drawing.Size(24, 20);
@@ -581,6 +599,7 @@
             // 
             // txtLonSS
             // 
+            this.txtLonSS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtLonSS.Location = new System.Drawing.Point(121, 41);
             this.txtLonSS.Name = "txtLonSS";
             this.txtLonSS.Size = new System.Drawing.Size(24, 20);
@@ -588,6 +607,7 @@
             // 
             // txtLonDDD
             // 
+            this.txtLonDDD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtLonDDD.Location = new System.Drawing.Point(63, 41);
             this.txtLonDDD.Name = "txtLonDDD";
             this.txtLonDDD.Size = new System.Drawing.Size(24, 20);
@@ -595,6 +615,7 @@
             // 
             // comboBoxLonDirection
             // 
+            this.comboBoxLonDirection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxLonDirection.FormattingEnabled = true;
             this.comboBoxLonDirection.Items.AddRange(new object[] {
             "E",
@@ -606,6 +627,7 @@
             // 
             // txtLatMM
             // 
+            this.txtLatMM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtLatMM.Location = new System.Drawing.Point(92, 16);
             this.txtLatMM.Name = "txtLatMM";
             this.txtLatMM.Size = new System.Drawing.Size(24, 20);
@@ -613,6 +635,7 @@
             // 
             // txtLatSS
             // 
+            this.txtLatSS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtLatSS.Location = new System.Drawing.Point(121, 16);
             this.txtLatSS.Name = "txtLatSS";
             this.txtLatSS.Size = new System.Drawing.Size(24, 20);
@@ -620,6 +643,7 @@
             // 
             // txtLatDDD
             // 
+            this.txtLatDDD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtLatDDD.Location = new System.Drawing.Point(63, 16);
             this.txtLatDDD.Name = "txtLatDDD";
             this.txtLatDDD.Size = new System.Drawing.Size(24, 20);
@@ -627,6 +651,7 @@
             // 
             // comboBoxLatDirection
             // 
+            this.comboBoxLatDirection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxLatDirection.FormattingEnabled = true;
             this.comboBoxLatDirection.Items.AddRange(new object[] {
             "N",
@@ -658,6 +683,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(384, 656);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox3);
@@ -665,6 +691,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnUpdate);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "DisplayAttibutePicker";
             this.Text = "Display Attribute Picker";
             this.TopMost = true;

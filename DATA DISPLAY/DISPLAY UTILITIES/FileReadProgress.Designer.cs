@@ -51,19 +51,23 @@
             // 
             // buttonOK
             // 
+            this.buttonOK.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.buttonOK.Enabled = false;
+            this.buttonOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonOK.ForeColor = System.Drawing.SystemColors.ControlText;
             this.buttonOK.Location = new System.Drawing.Point(16, 92);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(224, 23);
             this.buttonOK.TabIndex = 3;
             this.buttonOK.Text = "OK";
-            this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.UseVisualStyleBackColor = false;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // FileReadProgress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(252, 123);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.labelNotify);

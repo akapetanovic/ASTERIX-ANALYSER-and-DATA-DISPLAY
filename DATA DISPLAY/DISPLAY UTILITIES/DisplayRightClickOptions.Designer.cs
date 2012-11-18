@@ -31,51 +31,74 @@
             this.btnDisplaySettings = new System.Windows.Forms.Button();
             this.btnItemsDisplay = new System.Windows.Forms.Button();
             this.btnLabelAttributes = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDisplaySettings
             // 
+            this.btnDisplaySettings.BackColor = System.Drawing.Color.Black;
+            this.btnDisplaySettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDisplaySettings.ForeColor = System.Drawing.Color.Silver;
             this.btnDisplaySettings.Location = new System.Drawing.Point(0, 3);
             this.btnDisplaySettings.Name = "btnDisplaySettings";
             this.btnDisplaySettings.Size = new System.Drawing.Size(101, 23);
             this.btnDisplaySettings.TabIndex = 0;
             this.btnDisplaySettings.Text = "Display Attributes";
-            this.btnDisplaySettings.UseVisualStyleBackColor = true;
+            this.btnDisplaySettings.UseVisualStyleBackColor = false;
             this.btnDisplaySettings.Click += new System.EventHandler(this.btnDisplaySettings_Click);
             // 
             // btnItemsDisplay
             // 
+            this.btnItemsDisplay.BackColor = System.Drawing.Color.Black;
+            this.btnItemsDisplay.ForeColor = System.Drawing.Color.Silver;
             this.btnItemsDisplay.Location = new System.Drawing.Point(0, 61);
             this.btnItemsDisplay.Name = "btnItemsDisplay";
             this.btnItemsDisplay.Size = new System.Drawing.Size(101, 23);
             this.btnItemsDisplay.TabIndex = 1;
             this.btnItemsDisplay.Text = "Display Items";
-            this.btnItemsDisplay.UseVisualStyleBackColor = true;
+            this.btnItemsDisplay.UseVisualStyleBackColor = false;
             this.btnItemsDisplay.Click += new System.EventHandler(this.btnItemsDisplay_Click);
             // 
             // btnLabelAttributes
             // 
+            this.btnLabelAttributes.BackColor = System.Drawing.Color.Black;
+            this.btnLabelAttributes.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLabelAttributes.ForeColor = System.Drawing.Color.Silver;
             this.btnLabelAttributes.Location = new System.Drawing.Point(0, 32);
             this.btnLabelAttributes.Name = "btnLabelAttributes";
             this.btnLabelAttributes.Size = new System.Drawing.Size(101, 23);
             this.btnLabelAttributes.TabIndex = 2;
             this.btnLabelAttributes.Text = "Label Attributes";
-            this.btnLabelAttributes.UseVisualStyleBackColor = true;
+            this.btnLabelAttributes.UseVisualStyleBackColor = false;
             this.btnLabelAttributes.Click += new System.EventHandler(this.btnLabelAttributes_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Black;
+            this.button1.ForeColor = System.Drawing.Color.Silver;
+            this.button1.Location = new System.Drawing.Point(0, 90);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(101, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Extended Label";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // DisplayRightClickOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(104, 92);
+            this.BackColor = System.Drawing.Color.Black;
+            this.ClientSize = new System.Drawing.Size(104, 112);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnLabelAttributes);
             this.Controls.Add(this.btnItemsDisplay);
             this.Controls.Add(this.btnDisplaySettings);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(110, 120);
+            this.MaximumSize = new System.Drawing.Size(110, 140);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(110, 120);
+            this.MinimumSize = new System.Drawing.Size(110, 140);
             this.Name = "DisplayRightClickOptions";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -91,5 +114,6 @@
         private System.Windows.Forms.Button btnDisplaySettings;
         private System.Windows.Forms.Button btnItemsDisplay;
         private System.Windows.Forms.Button btnLabelAttributes;
+        private System.Windows.Forms.Button button1;
     }
 }

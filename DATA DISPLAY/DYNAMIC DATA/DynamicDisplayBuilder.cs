@@ -27,11 +27,11 @@ namespace AsterixDisplayAnalyser
             /// ////////////////////////////////////////////////////
             /// Extended label items )Applcable to CAT48 and CAT62
             /// </summary>
-            public string TAS;
-            public string IAS;
-            public string MACH;
-            public string M_HDG;
-            public string TRK;
+            public string TAS = "N/A";
+            public string IAS = "N/A";
+            public string MACH = "N/A";
+            public string M_HDG = "N/A";
+            public string TRK = "N/A";
             /// <summary>
             /// ////////////////////////////////////////////////////
             /// Internal stuff
@@ -440,17 +440,17 @@ namespace AsterixDisplayAnalyser
                                 Target.IAS = "N/A";
 
                             if (CAT62I380Data.MACH.Is_Valid)
-                                Target.MACH = CAT62I380Data.MACH.MACH.ToString();
+                                Target.MACH = Math.Round(CAT62I380Data.MACH.MACH, 2).ToString();
                             else
                                 Target.MACH = "N/A";
 
                             if (CAT62I380Data.M_HDG.Is_Valid)
-                                Target.M_HDG = CAT62I380Data.M_HDG.M_HDG.ToString();
+                                Target.M_HDG = Math.Round(CAT62I380Data.M_HDG.M_HDG).ToString();
                             else
                                 Target.M_HDG = "N/A";
 
                             if (CAT62I380Data.TRK.Is_Valid)
-                                Target.TRK = CAT62I380Data.TRK.TRK.ToString();
+                                Target.TRK = Math.Round(CAT62I380Data.TRK.TRK).ToString();
                             else
                                 Target.TRK = "N/A";
                         }

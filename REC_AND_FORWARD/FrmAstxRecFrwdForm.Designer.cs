@@ -172,16 +172,19 @@
             // 
             // btnAdd
             // 
+            this.btnAdd.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Location = new System.Drawing.Point(360, 44);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(62, 23);
             this.btnAdd.TabIndex = 3;
             this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -305,12 +308,14 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(4, 278);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(76, 51);
             this.button1.TabIndex = 29;
             this.button1.Text = "Choose Destination Folder";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // textBoxRecordDirectory
@@ -322,23 +327,27 @@
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(4, 335);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(447, 32);
             this.button2.TabIndex = 31;
             this.button2.Text = "Close";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
+            this.button3.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Location = new System.Drawing.Point(360, 67);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(62, 23);
             this.button3.TabIndex = 32;
             this.button3.Text = "Remove";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // progressBar1
@@ -565,12 +574,14 @@
             // 
             // button4
             // 
+            this.button4.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Location = new System.Drawing.Point(372, 278);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(76, 51);
             this.button4.TabIndex = 46;
             this.button4.Text = "Open Destination Folder";
-            this.button4.UseVisualStyleBackColor = true;
+            this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // label9
@@ -673,12 +684,14 @@
             // 
             // btnAddForwarding
             // 
+            this.btnAddForwarding.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.btnAddForwarding.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddForwarding.Location = new System.Drawing.Point(428, 44);
             this.btnAddForwarding.Name = "btnAddForwarding";
             this.btnAddForwarding.Size = new System.Drawing.Size(62, 23);
             this.btnAddForwarding.TabIndex = 56;
             this.btnAddForwarding.Text = "Add";
-            this.btnAddForwarding.UseVisualStyleBackColor = true;
+            this.btnAddForwarding.UseVisualStyleBackColor = false;
             this.btnAddForwarding.Click += new System.EventHandler(this.btnAddForwarding_Click);
             // 
             // numericUpDown1
@@ -921,12 +934,14 @@
             // 
             // button5
             // 
+            this.button5.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Location = new System.Drawing.Point(428, 67);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(62, 23);
             this.button5.TabIndex = 58;
             this.button5.Text = "Clear";
-            this.button5.UseVisualStyleBackColor = true;
+            this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // shapeContainer2
@@ -955,19 +970,22 @@
             // 
             // button6
             // 
+            this.button6.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button6.Location = new System.Drawing.Point(458, 335);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(447, 32);
             this.button6.TabIndex = 78;
             this.button6.Text = "Minimize";
-            this.button6.UseVisualStyleBackColor = true;
+            this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // FrmAstxRecFrwdForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(908, 369);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.groupBox1);
@@ -1023,7 +1041,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.shapeContainer1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmAstxRecFrwdForm";
             this.Text = "ASTERIX Recorder and Data Forwarder";

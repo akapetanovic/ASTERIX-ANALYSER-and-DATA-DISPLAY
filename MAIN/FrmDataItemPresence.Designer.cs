@@ -84,17 +84,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(443, 482);
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.ClientSize = new System.Drawing.Size(443, 471);
             this.Controls.Add(this.StatusListBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DataItemListBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmDataItemPresence";
             this.Text = " Data Item Presence:";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmDataItemPresence_FormClosed);
             this.Load += new System.EventHandler(this.FrmDataItemPresence_Load);
             this.Shown += new System.EventHandler(this.FrmDataItemPresence_Shown);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmDataItemPresence_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

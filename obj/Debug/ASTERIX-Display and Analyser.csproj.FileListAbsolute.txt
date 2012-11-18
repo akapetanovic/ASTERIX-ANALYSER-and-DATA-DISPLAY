@@ -47,7 +47,6 @@ C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DI
 C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\GMap.NET.WindowsForms.xml
 C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.CAT_Decoder_Selector.resources
-C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmDebug.resources
 C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmAstxRecFrwdForm.resources
 C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.DisplayAttibutePicker.resources
 C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.DisplayItemSelection.resources
@@ -73,4 +72,4 @@ C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DI
 C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\Asterix-Display-Analyser.exe
 C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\Asterix-Display-Analyser.pdb
 C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmExtendedLabel.resources
-C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.Debug.resources
+C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmAbout.resources

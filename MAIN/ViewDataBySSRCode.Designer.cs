@@ -44,6 +44,7 @@
             // 
             // comboBoxSSRCode
             // 
+            this.comboBoxSSRCode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxSSRCode.FormattingEnabled = true;
             this.comboBoxSSRCode.Location = new System.Drawing.Point(79, 13);
             this.comboBoxSSRCode.Name = "comboBoxSSRCode";
@@ -63,10 +64,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(427, 454);
             this.Controls.Add(this.listBoxDataBySSRCode);
             this.Controls.Add(this.comboBoxSSRCode);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ViewDataBySSRCode";
             this.Text = "View Data By SSRCode";
             this.Load += new System.EventHandler(this.ViewDataBySSRCode_Load);
