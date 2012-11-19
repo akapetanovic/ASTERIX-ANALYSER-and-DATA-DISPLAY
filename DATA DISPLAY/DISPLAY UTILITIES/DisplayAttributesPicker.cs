@@ -60,23 +60,25 @@ namespace AsterixDisplayAnalyser
         private void PopulateForm()
         {
 
-           // Populate the display origin
-           GeoCordSystemDegMinSecUtilities.LatLongClass LatLon = new GeoCordSystemDegMinSecUtilities.LatLongClass(SystemAdaptationDataSet.SystemOriginPoint.Lat, SystemAdaptationDataSet.SystemOriginPoint.Lng);
-           this.txtLatDDD.Text = LatLon.GetDegMinSec().Latitude.Deg.ToString();
-           this.txtLatMM.Text = LatLon.GetDegMinSec().Latitude.Min.ToString();
-           this.txtLatSS.Text = LatLon.GetDegMinSec().Latitude.Sec.ToString();
-           if (LatLon.GetDegMinSec().Latitude.Prefix == GeoCordSystemDegMinSecUtilities.LatLongPrefix.N)
-               this.comboBoxLatDirection.SelectedIndex = 0;
-           else
-               this.comboBoxLatDirection.SelectedIndex = 1;
+            // Populate the display origin
+            GeoCordSystemDegMinSecUtilities.LatLongClass LatLon = new GeoCordSystemDegMinSecUtilities.LatLongClass(SystemAdaptationDataSet.SystemOriginPoint.Lat, SystemAdaptationDataSet.SystemOriginPoint.Lng);
+            this.txtLatDDD.Text = LatLon.GetDegMinSec().Latitude.Deg.ToString();
+            this.txtLatMM.Text = LatLon.GetDegMinSec().Latitude.Min.ToString();
+            int Int_Sec = (int)LatLon.GetDegMinSec().Latitude.Sec;
+            this.txtLatSS.Text = Int_Sec.ToString();
+            if (LatLon.GetDegMinSec().Latitude.Prefix == GeoCordSystemDegMinSecUtilities.LatLongPrefix.N)
+                this.comboBoxLatDirection.SelectedIndex = 0;
+            else
+                this.comboBoxLatDirection.SelectedIndex = 1;
 
-           this.txtLonDDD.Text = LatLon.GetDegMinSec().Longitude.Deg.ToString();
-           this.txtLonMM.Text = LatLon.GetDegMinSec().Longitude.Min.ToString();
-           this.txtLonSS.Text = LatLon.GetDegMinSec().Longitude.Sec.ToString();
-           if (LatLon.GetDegMinSec().Longitude.Prefix == GeoCordSystemDegMinSecUtilities.LatLongPrefix.E)
-               this.comboBoxLonDirection.SelectedIndex = 0;
-           else
-               this.comboBoxLonDirection.SelectedIndex = 1;
+            this.txtLonDDD.Text = LatLon.GetDegMinSec().Longitude.Deg.ToString();
+            this.txtLonMM.Text = LatLon.GetDegMinSec().Longitude.Min.ToString();
+            Int_Sec = (int)LatLon.GetDegMinSec().Longitude.Sec;
+            this.txtLonSS.Text = Int_Sec.ToString();
+            if (LatLon.GetDegMinSec().Longitude.Prefix == GeoCordSystemDegMinSecUtilities.LatLongPrefix.E)
+                this.comboBoxLonDirection.SelectedIndex = 0;
+            else
+                this.comboBoxLonDirection.SelectedIndex = 1;
 
             // Load all display items and set it to the first one in the list
             // and it will cause the selected index to change that will then trigger
@@ -208,10 +210,37 @@ namespace AsterixDisplayAnalyser
             NewDisplayAttribute.LineWidth = int.Parse(this.comboBoxLineWidth.Text);
             NewDisplayAttribute.LineColor = Color.FromName(this.comboBoxLineColorChoice.Text);
             NewDisplayAttribute.LineStyle = DisplayAttributes.GetLineStypefromString(this.comboBoxLineStyleChoice.Text);
-            
+
             NewDisplayAttribute.AreaPolygonColor = Color.FromName(this.comboBoxAreaPolygonColorChoice.Text);
             NewDisplayAttribute.ImageSize = new Size((int)this.numericUpDown_X.Value, (int)this.numericUpDown_Y.Value);
             DisplayAttributes.SetDisplayAttribute((DisplayAttributes.DisplayItemsType)Enum.Parse(typeof(DisplayAttributes.DisplayItemsType), NewDisplayAttribute.ItemName, true), NewDisplayAttribute);
+
+           // Always update the background color as well
+            NewDisplayAttribute = new DisplayAttributes.DisplayAttributesType();
+            NewDisplayAttribute.TextColor = Color.FromName(this.comboBoxBackgroundColor.Text);
+            NewDisplayAttribute.ItemName = "BackgroundColor";
+            DisplayAttributes.SetDisplayAttribute(DisplayAttributes.DisplayItemsType.BackgroundColor, NewDisplayAttribute); 
+            
+            // Populate the display origin
+            GeoCordSystemDegMinSecUtilities.LatLongPrefix LatPrefix;
+            GeoCordSystemDegMinSecUtilities.LatLongPrefix LoNPrefix;
+
+            if (this.comboBoxLatDirection.SelectedIndex == 0)
+                LatPrefix = GeoCordSystemDegMinSecUtilities.LatLongPrefix.N;
+            else
+                LatPrefix = GeoCordSystemDegMinSecUtilities.LatLongPrefix.W;
+
+            if (this.comboBoxLonDirection.SelectedIndex == 0)
+                LoNPrefix = GeoCordSystemDegMinSecUtilities.LatLongPrefix.E;
+            else
+                LoNPrefix = GeoCordSystemDegMinSecUtilities.LatLongPrefix.S;
+
+            GeoCordSystemDegMinSecUtilities.LatLongClass LatLon =
+                new GeoCordSystemDegMinSecUtilities.LatLongClass(int.Parse(this.txtLatDDD.Text), int.Parse(this.txtLatMM.Text), int.Parse(this.txtLatSS.Text), LatPrefix,
+                    int.Parse(this.txtLonDDD.Text), int.Parse(this.txtLonMM.Text), int.Parse(this.txtLonSS.Text), LoNPrefix);
+
+            SystemAdaptationDataSet.SystemOrigin = new GMap.NET.PointLatLng(LatLon.GetLatLongDecimal().LatitudeDecimal, LatLon.GetLatLongDecimal().LongitudeDecimal);
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -285,7 +314,7 @@ namespace AsterixDisplayAnalyser
             {
                 // Create pen.
                 Pen MyPen = new Pen(Color.FromName(this.comboBoxLineColorChoice.Text), int.Parse(this.comboBoxLineWidth.Text));
-                
+
                 // Set line style
                 MyPen.DashStyle = DisplayAttributes.GetLineStypefromString(this.comboBoxLineStyleChoice.Text);
 
@@ -321,7 +350,7 @@ namespace AsterixDisplayAnalyser
             // Draw line to screen.
             Graphics MyGraphics = this.panelAreaPolygonColor.CreateGraphics();
             panelAreaPolygonColor.Refresh();
-          
+
             SolidBrush myBrush = new SolidBrush(Color.FromName(this.comboBoxAreaPolygonColorChoice.Text));
             Point[] MyPoints = { new Point(10, 10), new Point(10, 40), new Point(40, 40), new Point(40, 10), new Point(10, 10) };
             MyGraphics.FillPolygon(myBrush, MyPoints);

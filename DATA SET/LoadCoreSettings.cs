@@ -15,6 +15,16 @@ namespace AsterixDisplayAnalyser
             char[] delimiterChars = { ',', '\t' };
             StreamReader MyStreamReader;
 
+            string ItemName;
+            int LatDeg;
+            int LatMin;
+            int LatSec;
+            GeoCordSystemDegMinSecUtilities.LatLongPrefix LatPrefix;
+            int LonDeg;
+            int LonMin;
+            int LonSec;
+            GeoCordSystemDegMinSecUtilities.LatLongPrefix LonPrefix;
+
             /////////////////////////////////////////////////////////////////////////
             // First set the system origin
             /////////////////////////////////////////////////////////////////////////
@@ -32,16 +42,63 @@ namespace AsterixDisplayAnalyser
                         switch (words[0])
                         {
                             case "SYS_ORIGIN":
+                                ItemName = words[0];
 
-                                double Lat;
-                                double Lon;
-
-                                if (Double.TryParse(words[1], out Lat) == false)
+                                // Get Latitude
+                                if (int.TryParse(words[1], out LatDeg) == false)
                                     throw Bad_Main_Settings;
-                                if (Double.TryParse(words[2], out Lon) == false)
+                                if (int.TryParse(words[2], out LatMin) == false)
+                                    throw Bad_Main_Settings;
+                                if (int.TryParse(words[3], out LatSec) == false)
                                     throw Bad_Main_Settings;
 
-                                SystemAdaptationDataSet.SystemOrigin = new GMap.NET.PointLatLng(Lat, Lon);
+                                switch (words[4])
+                                {
+                                    case "E":
+                                        LatPrefix = GeoCordSystemDegMinSecUtilities.LatLongPrefix.E;
+                                        break;
+                                    case "W":
+                                        LatPrefix = GeoCordSystemDegMinSecUtilities.LatLongPrefix.W;
+                                        break;
+                                    case "N":
+                                        LatPrefix = GeoCordSystemDegMinSecUtilities.LatLongPrefix.N;
+                                        break;
+                                    case "S":
+                                        LatPrefix = GeoCordSystemDegMinSecUtilities.LatLongPrefix.S;
+                                        break;
+                                    default:
+                                        throw Bad_Main_Settings;
+                                }
+
+                                // Get Longitude
+                                if (int.TryParse(words[5], out LonDeg) == false)
+                                    throw Bad_Main_Settings;
+                                if (int.TryParse(words[6], out LonMin) == false)
+                                    throw Bad_Main_Settings;
+                                if (int.TryParse(words[7], out LonSec) == false)
+                                    throw Bad_Main_Settings;
+
+                                switch (words[8])
+                                {
+                                    case "E":
+                                        LonPrefix = GeoCordSystemDegMinSecUtilities.LatLongPrefix.E;
+                                        break;
+                                    case "W":
+                                        LonPrefix = GeoCordSystemDegMinSecUtilities.LatLongPrefix.W;
+                                        break;
+                                    case "N":
+                                        LonPrefix = GeoCordSystemDegMinSecUtilities.LatLongPrefix.N;
+                                        break;
+                                    case "S":
+                                        LonPrefix = GeoCordSystemDegMinSecUtilities.LatLongPrefix.S;
+                                        break;
+                                    default:
+                                        throw Bad_Main_Settings;
+                                }
+
+                                GeoCordSystemDegMinSecUtilities.LatLongClass T = new GeoCordSystemDegMinSecUtilities.LatLongClass(LatDeg, LatMin, LatSec,
+                            LatPrefix, LonDeg, LonMin, LonSec, LonPrefix);
+                                SystemAdaptationDataSet.SystemOrigin = new GMap.NET.PointLatLng(T.GetLatLongDecimal().LatitudeDecimal, T.GetLatLongDecimal().LongitudeDecimal);
 
                                 break;
 
@@ -51,8 +108,6 @@ namespace AsterixDisplayAnalyser
                                 DisplayAttributeBackground.TextColor = System.Drawing.Color.FromName(words[1]);
                                 DisplayAttributes.SetDisplayAttribute(DisplayAttributes.DisplayItemsType.BackgroundColor, DisplayAttributeBackground);
                                 break;
-                            default:
-                                throw Bad_Main_Settings;
                         }
                     }
                 }

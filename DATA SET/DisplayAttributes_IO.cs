@@ -49,6 +49,10 @@ namespace AsterixDisplayAnalyser
 
         public static void Save()
         {
+            string BackgroundColor = "Black";
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            // HANLDE Display Attributes First
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             string FileName;
             FileName = @"C:\ASTERIX\ADAPTATION\DisplayAttributes.txt";
             DisplayAttributes.DisplayAttributesType DisplayAttribute = new DisplayAttributes.DisplayAttributesType();
@@ -66,10 +70,14 @@ namespace AsterixDisplayAnalyser
                     DisplayAttributesStream = DisplayAttributesStream + DataItem.TextColor.Name + ',';
                     DisplayAttributesStream = DisplayAttributesStream + DataItem.LineWidth.ToString() + ',';
                     DisplayAttributesStream = DisplayAttributesStream + DataItem.LineColor.Name + ',';
-                    DisplayAttributesStream = DisplayAttributesStream + DataItem.LineStyle.ToString() +',';
+                    DisplayAttributesStream = DisplayAttributesStream + DataItem.LineStyle.ToString() + ',';
                     DisplayAttributesStream = DisplayAttributesStream + DataItem.AreaPolygonColor.Name + ',';
                     DisplayAttributesStream = DisplayAttributesStream + DataItem.ImageSize.Width.ToString() + ',';
                     DisplayAttributesStream = DisplayAttributesStream + DataItem.ImageSize.Height.ToString() + Environment.NewLine;
+                }
+                else
+                {
+                    BackgroundColor = DataItem.TextColor.Name;
                 }
             }
 
@@ -83,15 +91,59 @@ namespace AsterixDisplayAnalyser
             {
                 // write a line of text to the file
                 tw.Write(DisplayAttributesStream);
-                MessageBox.Show("Data set succefully saved");
+                MessageBox.Show("DisplayAttributes succefully saved");
             }
-            catch(System.IO.IOException e)
+            catch (System.IO.IOException e)
             {
                 MessageBox.Show(e.Message);
             }
 
             // close the stream
             tw.Close();
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            // HANLDE MainSettings First
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            FileName = @"C:\ASTERIX\ADAPTATION\Main_Settings.txt";
+            DisplayAttributesStream = "# System center is : Deg (int), Min (int), Sec (int), Prefix (E/W/N/S)" + Environment.NewLine;
+
+            GeoCordSystemDegMinSecUtilities.LatLongClass LatLon = new GeoCordSystemDegMinSecUtilities.LatLongClass(SystemAdaptationDataSet.SystemOriginPoint.Lat, SystemAdaptationDataSet.SystemOriginPoint.Lng);
+            int Int_Lat_Sec = (int)LatLon.GetDegMinSec().Latitude.Sec;
+            string LatPrefix = "N";
+            if (LatLon.GetDegMinSec().Latitude.Prefix == GeoCordSystemDegMinSecUtilities.LatLongPrefix.S)
+                LatPrefix = "S";
+            int Int_Lon_Sec = (int)LatLon.GetDegMinSec().Longitude.Sec;
+            string LonPrefix = "E";
+            if (LatLon.GetDegMinSec().Longitude.Prefix == GeoCordSystemDegMinSecUtilities.LatLongPrefix.W)
+                LonPrefix = "W";
+
+            // 44,6,0,N,20,0,0,E
+            DisplayAttributesStream = DisplayAttributesStream + "SYS_ORIGIN," +
+                LatLon.GetDegMinSec().Latitude.Deg.ToString() + ',' + LatLon.GetDegMinSec().Latitude.Min.ToString() + ',' + Int_Lat_Sec.ToString() + ',' + LatPrefix + ',' +
+                LatLon.GetDegMinSec().Longitude.Deg.ToString() + ',' + LatLon.GetDegMinSec().Longitude.Min.ToString() + ',' + Int_Lon_Sec.ToString() + ',' + LonPrefix + 
+                Environment.NewLine; ;
+
+            DisplayAttributesStream = DisplayAttributesStream + "BACKGROUND," + BackgroundColor;
+
+            // create a writer and open the file
+            tw = new StreamWriter(FileName);
+
+            try
+            {
+                // write a line of text to the file
+                tw.Write(DisplayAttributesStream);
+                MessageBox.Show("Main_Settings succefully saved");
+            }
+            catch (System.IO.IOException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            // close the stream
+            tw.Close();
+
         }
     }
 }

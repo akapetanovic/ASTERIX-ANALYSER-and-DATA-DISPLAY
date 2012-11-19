@@ -45,6 +45,13 @@ CAT62
 
 VERSION HISTORY
 
+Version 1.9 
+
+	1. Fixed issue of track/plots not showing all the way to east of the center point.
+	   The issue was with the Area of Interest. Now it is increased and should not be any problems even for big countrie
+	2. Fixed issue with Mode-S (CAT48 and CAt62) where a CALLSIGN would get displayed for non Mode-S equipped A/C.
+	3. Fixed isses of not being able to use GUI to set center point (display) and background color.
+
 Version 1.8
 
 	1. Implemented System Status Display (via CAT34 Item 050)

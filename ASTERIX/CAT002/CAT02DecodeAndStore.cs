@@ -95,6 +95,7 @@ namespace AsterixDisplayAnalyser
                 CAT02MessageData.CAT02DataItems.Add(MyItem);
             }
             MainASTERIXDataStorage.CAT02Message.Add(CAT02MessageData);
+            CAT02.Intitialize();
         }
     }
 }

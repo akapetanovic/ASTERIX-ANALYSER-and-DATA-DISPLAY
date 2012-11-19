@@ -27,8 +27,8 @@ namespace AsterixDisplayAnalyser
 
         ////////////////////////
 
-        
-        
+
+
         // Static Map Overlay
         GMapOverlay StaticOverlay;
         // Dynamic Map Overlay
@@ -52,6 +52,7 @@ namespace AsterixDisplayAnalyser
         GMapMarker currentMarker = null;
         bool isDraggingMarker = false;
 
+        public static bool SystemCenterUpdated = false;
 
         // Used to flag the reception of the NM message, that will
         // then trigger update of the display
@@ -203,9 +204,11 @@ namespace AsterixDisplayAnalyser
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-           // MyDebug.Show();
-            
+            // MyDebug.Show();
+
             // Initialize Map
+            gMapControl.Width = 2000;
+            gMapControl.Width = 2000;
             InitializeMap();
 
             ToolTip toolTip1 = new ToolTip();
@@ -295,7 +298,7 @@ namespace AsterixDisplayAnalyser
 
             // Set MIN/MAX for the ZOOM function
             gMapControl.MinZoom = 0;
-            gMapControl.MaxZoom = 20;
+            gMapControl.MaxZoom = 30;
             // Default ZOOM
             gMapControl.Zoom = 8;
             this.lblZoomLevel.Text = gMapControl.Zoom.ToString();
@@ -820,10 +823,17 @@ namespace AsterixDisplayAnalyser
 
             if (Target_Data.ModeC_Previous_Cycle != null && Target_Data.ModeC != null && Target_Data.ModeC_Previous_Cycle != "")
             {
-                if (double.Parse(Target_Data.ModeC_Previous_Cycle) > double.Parse(Target_Data.ModeC))
-                    Label_Data.ModeC_STRING = Label_Data.ModeC_STRING + "↓";
-                else if (double.Parse(Target_Data.ModeC_Previous_Cycle) < double.Parse(Target_Data.ModeC))
-                    Label_Data.ModeC_STRING = Label_Data.ModeC_STRING + "↑";
+                try
+                {
+                    if (double.Parse(Target_Data.ModeC_Previous_Cycle) > double.Parse(Target_Data.ModeC))
+                        Label_Data.ModeC_STRING = Label_Data.ModeC_STRING + "↓";
+                    else if (double.Parse(Target_Data.ModeC_Previous_Cycle) < double.Parse(Target_Data.ModeC))
+                        Label_Data.ModeC_STRING = Label_Data.ModeC_STRING + "↑";
+                }
+                catch
+                {
+                    Label_Data.ModeC_STRING = "---";
+                }
             }
 
             if (Target_Data.ACID_Mode_S != null)
@@ -832,7 +842,7 @@ namespace AsterixDisplayAnalyser
             Label_Data.MyTargetIndex = Target_Data.TrackNumber;
 
             // At the end move extended lable data to the marker, so it is ready for dynamic manipulation by the client
-            
+
             //Round HDG and TRK
             Label_Data.TRK = Target_Data.TRK;
             Label_Data.M_HDG = Target_Data.M_HDG;
@@ -1215,8 +1225,12 @@ namespace AsterixDisplayAnalyser
 
         private void button7_Click(object sender, EventArgs e)
         {
-            gMapControl.Position = new PointLatLng(44.05267, 17.6769);
+            UpdateSystemCenter();
+        }
 
+        private void UpdateSystemCenter()
+        {
+            gMapControl.Position = new PointLatLng(SystemAdaptationDataSet.SystemOrigin.Lat, SystemAdaptationDataSet.SystemOrigin.Lng);
             UpdatelblCenter();
         }
 
@@ -1366,6 +1380,8 @@ namespace AsterixDisplayAnalyser
                 StaticDisplayBuilder.Build(ref StaticOverlay);
                 DisplayAttributes.StaticDisplayBuildRequired = false;
 
+                UpdateSystemCenter();
+
                 gMapControl.MapProvider = GMapProviders.EmptyProvider;
             }
         }
@@ -1378,6 +1394,8 @@ namespace AsterixDisplayAnalyser
         private void FormMain_Resize(object sender, EventArgs e)
         {
             this.tabMainTab.Size = new Size(this.Size.Width - 16, this.Size.Height - 90);
+            this.labelTemp.Text = gMapControl.Bounds.Width.ToString();
+
 
         }
 
@@ -2619,6 +2637,11 @@ namespace AsterixDisplayAnalyser
         }
 
         private void debugToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelTemp_Click(object sender, EventArgs e)
         {
 
         }

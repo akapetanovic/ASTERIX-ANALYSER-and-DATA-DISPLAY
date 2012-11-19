@@ -275,6 +275,8 @@ namespace AsterixDisplayAnalyser
             }
 
             MainASTERIXDataStorage.CAT01Message.Add(CAT01MessageData);
+            CAT01.Intitialize();
+
         }
     }
 }

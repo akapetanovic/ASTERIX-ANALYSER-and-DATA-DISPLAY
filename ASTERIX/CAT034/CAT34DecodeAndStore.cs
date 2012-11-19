@@ -99,6 +99,7 @@ namespace AsterixDisplayAnalyser
                 CAT34MessageData.CAT34DataItems.Add(MyItem);
             }
             MainASTERIXDataStorage.CAT34Message.Add(CAT34MessageData);
+            CAT34.Intitialize();
         }
     }
 }

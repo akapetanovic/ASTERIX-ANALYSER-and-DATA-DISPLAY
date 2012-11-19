@@ -195,6 +195,7 @@ namespace AsterixDisplayAnalyser
             }
             
             MainASTERIXDataStorage.CAT48Message.Add(CAT48MessageData);
+            CAT48.Intitialize();
         }
 
     }
