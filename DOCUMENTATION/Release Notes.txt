@@ -51,6 +51,7 @@ Version 1.9
 	   The issue was with the Area of Interest. Now it is increased and should not be any problems even for big countrie
 	2. Fixed issue with Mode-S (CAT48 and CAt62) where a CALLSIGN would get displayed for non Mode-S equipped A/C.
 	3. Fixed isses of not being able to use GUI to set center point (display) and background color.
+	4. Completed implementation of Google Export (KML) of CAT-062
 
 Version 1.8
 

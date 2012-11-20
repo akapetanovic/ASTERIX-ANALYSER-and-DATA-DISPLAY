@@ -897,6 +897,18 @@ namespace AsterixDisplayAnalyser
             Marker_In.CFL_FONT = new Font(LabelAttributes.TextFont, LabelAttributes.TextSize,
             FontStyle.Bold | FontStyle.Regular);
             Marker_In.CFL_BRUSH = new SolidBrush(LabelAttributes.TextColor);
+
+            Marker_In.A_HDG_FONT = new Font(LabelAttributes.TextFont, LabelAttributes.TextSize,
+            FontStyle.Bold | FontStyle.Regular);
+            Marker_In.A_HDG_BRUSH = new SolidBrush(LabelAttributes.TextColor);
+
+            Marker_In.A_ROC_FONT = new Font(LabelAttributes.TextFont, LabelAttributes.TextSize,
+            FontStyle.Bold | FontStyle.Regular);
+            Marker_In.A_ROC_BRUSH = new SolidBrush(LabelAttributes.TextColor);
+
+            Marker_In.A_SPD_FONT = new Font(LabelAttributes.TextFont, LabelAttributes.TextSize,
+            FontStyle.Bold | FontStyle.Regular);
+            Marker_In.A_SPD_BRUSH = new SolidBrush(LabelAttributes.TextColor);
         }
 
         private void SetLabelAttributes(ref GMap.NET.WindowsForms.Markers.GMapMarkerCross Marker_In)
@@ -1394,9 +1406,7 @@ namespace AsterixDisplayAnalyser
         private void FormMain_Resize(object sender, EventArgs e)
         {
             this.tabMainTab.Size = new Size(this.Size.Width - 16, this.Size.Height - 90);
-            this.labelTemp.Text = gMapControl.Bounds.Width.ToString();
-
-
+ 
         }
 
         private void tabMainTab_SizeChanged(object sender, EventArgs e)
@@ -1530,7 +1540,7 @@ namespace AsterixDisplayAnalyser
         bool MouseIsOnTheCFL(MouseEventArgs Mouse, GMapMarker Marker)
         {
             GMapTargetandLabel MyMarker = (GMapTargetandLabel)Marker;
-            Rectangle MyRectangle = new Rectangle(MyMarker.GetCFLStartPoint().X, MyMarker.GetCFLStartPoint().Y, 20, 10);
+            Rectangle MyRectangle = new Rectangle(MyMarker.GetCFLStartPoint().X, MyMarker.GetCFLStartPoint().Y, 20, 15);
             return MyRectangle.Contains(new Point(Mouse.X, Mouse.Y));
         }
 

@@ -257,7 +257,7 @@ namespace AsterixDisplayAnalyser
                         {
                             if (Mode3AData != null)
                             {
-                                if (Mode3AData.Code_Validated == CAT48I070Types.Code_Validation_Type.Code_Not_Validated)
+                                if (Mode3AData.Code_Validated == CAT48I070Types.Code_Validation_Type.Code_Validated)
                                 {
                                     Target.ModeA = Mode3AData.Mode3A_Code;
 
@@ -294,7 +294,6 @@ namespace AsterixDisplayAnalyser
                         CAT62I060Types.CAT62060Mode3UserData Mode3AData = (CAT62I060Types.CAT62060Mode3UserData)Msg.CAT62DataItems[CAT62.ItemIDToIndex("060")].value;
                         // Get Lat/Long in decimal
                         GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.CAT62DataItems[CAT62.ItemIDToIndex("105")].value;
-                        double FlightLevel = (double)Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value;
                         CAT62I380Types.CAT62I380Data CAT62I380Data = (CAT62I380Types.CAT62I380Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
 
                         TargetType Target = new TargetType();
@@ -303,11 +302,20 @@ namespace AsterixDisplayAnalyser
                         {
                             Target.ModeA = Mode3AData.Mode3A_Code;
 
-                            try
+                            if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value != null)
                             {
-                                Target.ModeC = FlightLevel.ToString();
+                                try
+                                {
+                                    double FlightLevel = (double)Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value;
+                                    Target.ModeC = FlightLevel.ToString();
+                                }
+                                catch
+                                {
+                                    Target.ModeC = "---";
+                                }
+
                             }
-                            catch
+                            else
                             {
                                 Target.ModeC = "---";
                             }
@@ -482,7 +490,9 @@ namespace AsterixDisplayAnalyser
                         CAT62I060Types.CAT62060Mode3UserData Mode3AData = (CAT62I060Types.CAT62060Mode3UserData)Msg.CAT62DataItems[CAT62.ItemIDToIndex("060")].value;
                         // Get Lat/Long in decimal
                         GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.CAT62DataItems[CAT62.ItemIDToIndex("105")].value;
-                        double FlightLevel = (double)Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value;
+
+                     
+                        
                         CAT62I380Types.CAT62I380Data CAT62I380Data = (CAT62I380Types.CAT62I380Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
 
                         TargetType Target = new TargetType();
@@ -490,14 +500,25 @@ namespace AsterixDisplayAnalyser
                         if (Mode3AData != null)
                         {
                             Target.ModeA = Mode3AData.Mode3A_Code;
-                            try
+
+                            if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value != null)
                             {
-                                Target.ModeC = FlightLevel.ToString();
+                                try
+                                {
+                                    double FlightLevel = (double)Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value;
+                                    Target.ModeC = FlightLevel.ToString();
+                                }
+                                catch
+                                {
+                                    Target.ModeC = "---";
+                                }
+
                             }
-                            catch
+                            else
                             {
                                 Target.ModeC = "---";
                             }
+                           
                             if (CAT62I380Data != null)
                             {
                                 if (CAT62I380Data.ACID.Is_Valid)

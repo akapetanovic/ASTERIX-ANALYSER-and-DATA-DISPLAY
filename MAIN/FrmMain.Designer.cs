@@ -258,7 +258,6 @@
             this.labelClock = new System.Windows.Forms.Label();
             this.checkBoxIs_UTC = new System.Windows.Forms.CheckBox();
             this.checkBoxFullscreen = new System.Windows.Forms.CheckBox();
-            this.labelTemp = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBoxConnection.SuspendLayout();
             this.tabPlotDisplay.SuspendLayout();
@@ -2590,23 +2589,12 @@
             this.checkBoxFullscreen.UseVisualStyleBackColor = false;
             this.checkBoxFullscreen.CheckedChanged += new System.EventHandler(this.checkBoxFullscreen_CheckedChanged);
             // 
-            // labelTemp
-            // 
-            this.labelTemp.AutoSize = true;
-            this.labelTemp.Location = new System.Drawing.Point(354, 28);
-            this.labelTemp.Name = "labelTemp";
-            this.labelTemp.Size = new System.Drawing.Size(41, 13);
-            this.labelTemp.TabIndex = 31;
-            this.labelTemp.Text = "label19";
-            this.labelTemp.Click += new System.EventHandler(this.labelTemp_Click);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1189, 781);
-            this.Controls.Add(this.labelTemp);
             this.Controls.Add(this.checkBoxFullscreen);
             this.Controls.Add(this.checkBoxIs_UTC);
             this.Controls.Add(this.labelClock);
@@ -2893,7 +2881,6 @@
         private System.Windows.Forms.Label labelLat_Long;
         private System.Windows.Forms.ToolStripMenuItem extendedLabelToolStripMenuItem;
         private System.Windows.Forms.CheckBox checkBoxFullscreen;
-        private System.Windows.Forms.Label labelTemp;
     }
 }
 

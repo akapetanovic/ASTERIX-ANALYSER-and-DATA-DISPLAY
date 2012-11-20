@@ -19,7 +19,7 @@ namespace AsterixDisplayAnalyser
         // Define a lookup table for all possible SSR codes, well even more
         // then all possible but lets keep it simple.
         private bool[] SSR_Code_Lookup = new bool[7778];
-        
+
         public EarthPlotExporter()
         {
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace AsterixDisplayAnalyser
             // data
             for (int I = 0; I < SSR_Code_Lookup.Length; I++)
                 SSR_Code_Lookup[I] = false;
-            
+
             // On load determine what SSR codes are present end populate the combo box
             if (MainASTERIXDataStorage.CAT01Message.Count > 0)
             {
@@ -40,8 +40,11 @@ namespace AsterixDisplayAnalyser
                 {
                     CAT01I070Types.CAT01070Mode3UserData MyData = (CAT01I070Types.CAT01070Mode3UserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("070")].value;
                     int Result;
-                    if (int.TryParse(MyData.Mode3A_Code, out Result) == true)
-                        SSR_Code_Lookup[Result] = true;
+                    if (MyData != null)
+                    {
+                        if (int.TryParse(MyData.Mode3A_Code, out Result) == true)
+                            SSR_Code_Lookup[Result] = true;
+                    }
                 }
             }
             else if (MainASTERIXDataStorage.CAT48Message.Count > 0)
@@ -51,8 +54,11 @@ namespace AsterixDisplayAnalyser
                     CAT48I070Types.CAT48I070Mode3UserData MyData = (CAT48I070Types.CAT48I070Mode3UserData)Msg.CAT48DataItems[CAT48.ItemIDToIndex("070")].value;
 
                     int Result;
-                    if (int.TryParse(MyData.Mode3A_Code, out Result) == true)
-                        SSR_Code_Lookup[Result] = true;
+                    if (MyData != null)
+                    {
+                        if (int.TryParse(MyData.Mode3A_Code, out Result) == true)
+                            SSR_Code_Lookup[Result] = true;
+                    }
                 }
             }
             else if (MainASTERIXDataStorage.CAT62Message.Count > 0)
@@ -62,8 +68,11 @@ namespace AsterixDisplayAnalyser
                     CAT62I060Types.CAT62060Mode3UserData MyData = (CAT62I060Types.CAT62060Mode3UserData)Msg.CAT62DataItems[CAT62.ItemIDToIndex("060")].value;
 
                     int Result;
-                    if (int.TryParse(MyData.Mode3A_Code, out Result) == true)
-                        SSR_Code_Lookup[Result] = true;
+                    if (MyData != null)
+                    {
+                        if (int.TryParse(MyData.Mode3A_Code, out Result) == true)
+                            SSR_Code_Lookup[Result] = true;
+                    }
                 }
             }
 
@@ -75,7 +84,7 @@ namespace AsterixDisplayAnalyser
             }
 
             if (this.comboBox1.Items.Count > 0)
-            this.comboBox1.SelectedIndex = 0;
+                this.comboBox1.SelectedIndex = 0;
 
             this.labelNumberofCodes.Text = this.comboBox1.Items.Count.ToString();
         }
@@ -106,20 +115,26 @@ namespace AsterixDisplayAnalyser
                     foreach (MainASTERIXDataStorage.CAT01Data Msg in MainASTERIXDataStorage.CAT01Message)
                     {
                         CAT01I070Types.CAT01070Mode3UserData Mode3AData = (CAT01I070Types.CAT01070Mode3UserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("070")].value;
-                        if (Mode3AData.Mode3A_Code == (string)this.comboBox1.Items[this.comboBox1.SelectedIndex])
+                        if (Mode3AData != null)
                         {
-                            
-                            // Get Lat/Long
-                            CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates LatLongData = (CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates)Msg.CAT01DataItems[CAT01.ItemIDToIndex("040")].value;
-                            // Get Flight Level
-                            CAT01I090Types.CAT01I090FlightLevelUserData FlightLevelData = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("090")].value;
+                            if (Mode3AData.Code_Validated == CAT01I070Types.Code_Validation_Type.Code_Validated)
+                            {
+                                if (Mode3AData.Mode3A_Code == (string)this.comboBox1.Items[this.comboBox1.SelectedIndex])
+                                {
 
-                            double LevelInMeeters = (FlightLevelData.FlightLevel * 100.00) * SharedData.FeetToMeeters;
+                                    // Get Lat/Long
+                                    CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates LatLongData = (CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates)Msg.CAT01DataItems[CAT01.ItemIDToIndex("040")].value;
+                                    // Get Flight Level
+                                    CAT01I090Types.CAT01I090FlightLevelUserData FlightLevelData = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("090")].value;
 
-                            Data = Data + "P" + TargetNumber.ToString() + "," + "SSR" + Mode3AData.Mode3A_Code + "_" + TargetNumber.ToString() + "," + LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal.ToString() +
-                               "," + LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal.ToString() + "," + LevelInMeeters.ToString() + Environment.NewLine;
+                                    double LevelInMeeters = (FlightLevelData.FlightLevel * 100.00) * SharedData.FeetToMeeters;
 
-                            TargetNumber++;
+                                    Data = Data + "P" + TargetNumber.ToString() + "," + "SSR" + Mode3AData.Mode3A_Code + "_" + TargetNumber.ToString() + "," + LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal.ToString() +
+                                       "," + LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal.ToString() + "," + LevelInMeeters.ToString() + Environment.NewLine;
+
+                                    TargetNumber++;
+                                }
+                            }
                         }
                     }
                 }
@@ -128,19 +143,61 @@ namespace AsterixDisplayAnalyser
                     foreach (MainASTERIXDataStorage.CAT48Data Msg in MainASTERIXDataStorage.CAT48Message)
                     {
                         CAT48I070Types.CAT48I070Mode3UserData Mode3AData = (CAT48I070Types.CAT48I070Mode3UserData)Msg.CAT48DataItems[CAT48.ItemIDToIndex("070")].value;
-                        if (Mode3AData.Mode3A_Code == (string)this.comboBox1.Items[this.comboBox1.SelectedIndex])
+                        if (Mode3AData != null)
                         {
-                            // Get Lat/Long in decimal
-                            CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates LatLongData = (CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates)Msg.CAT48DataItems[CAT48.ItemIDToIndex("040")].value;
-                            // Get Flight Level
-                            CAT48I090Types.CAT48I090FlightLevelUserData FlightLevelData = (CAT48I090Types.CAT48I090FlightLevelUserData)Msg.CAT48DataItems[CAT48.ItemIDToIndex("090")].value;
+                            if (Mode3AData.Code_Validated == CAT48I070Types.Code_Validation_Type.Code_Validated)
+                            {
+                                if (Mode3AData.Mode3A_Code == (string)this.comboBox1.Items[this.comboBox1.SelectedIndex])
+                                {
+                                    // Get Lat/Long in decimal
+                                    CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates LatLongData = (CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates)Msg.CAT48DataItems[CAT48.ItemIDToIndex("040")].value;
+                                    // Get Flight Level
+                                    CAT48I090Types.CAT48I090FlightLevelUserData FlightLevelData = (CAT48I090Types.CAT48I090FlightLevelUserData)Msg.CAT48DataItems[CAT48.ItemIDToIndex("090")].value;
 
-                            double LevelInMeeters = (FlightLevelData.FlightLevel * 100.00) * SharedData.FeetToMeeters;
+                                    double LevelInMeeters = (FlightLevelData.FlightLevel * 100.00) * SharedData.FeetToMeeters;
 
-                            Data = Data + "P" + TargetNumber.ToString() + "," + "SSR" + Mode3AData.Mode3A_Code + "_" + TargetNumber.ToString() + "," + LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal.ToString() +
-                                "," + LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal.ToString() + "," + LevelInMeeters.ToString() + Environment.NewLine;
+                                    Data = Data + "P" + TargetNumber.ToString() + "," + "SSR" + Mode3AData.Mode3A_Code + "_" + TargetNumber.ToString() + "," + LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal.ToString() +
+                                        "," + LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal.ToString() + "," + LevelInMeeters.ToString() + Environment.NewLine;
 
-                            TargetNumber++;
+                                    TargetNumber++;
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (MainASTERIXDataStorage.CAT62Message.Count > 0)
+                {
+                    foreach (MainASTERIXDataStorage.CAT62Data Msg in MainASTERIXDataStorage.CAT62Message)
+                    {
+                        CAT62I060Types.CAT62060Mode3UserData Mode3AData = (CAT62I060Types.CAT62060Mode3UserData)Msg.CAT62DataItems[CAT62.ItemIDToIndex("060")].value;
+
+                        if (Mode3AData != null)
+                        {
+                            if (Mode3AData.Mode3A_Code == (string)this.comboBox1.Items[this.comboBox1.SelectedIndex])
+                            {
+                                // Get Lat/Long in decimal
+                                GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.CAT62DataItems[CAT62.ItemIDToIndex("105")].value;
+
+                                double FlightLevelData = 0.0;
+                                if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value != null)
+                                {
+                                    try
+                                    {
+                                        // Get Flight Level
+                                        FlightLevelData = (double)Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value;
+                                    }
+                                    catch
+                                    {
+
+                                    }
+                                }
+
+                                double LevelInMeeters = (FlightLevelData * 100.00) * SharedData.FeetToMeeters;
+                                Data = Data + "P" + TargetNumber.ToString() + "," + "SSR" + Mode3AData.Mode3A_Code + "_" + TargetNumber.ToString() + "," + LatLongData.GetLatLongDecimal().LongitudeDecimal.ToString() +
+                                    "," + LatLongData.GetLatLongDecimal().LatitudeDecimal.ToString() + "," + LevelInMeeters.ToString() + Environment.NewLine;
+
+                                TargetNumber++;
+                            }
                         }
                     }
                 }
@@ -153,17 +210,24 @@ namespace AsterixDisplayAnalyser
                     foreach (MainASTERIXDataStorage.CAT01Data Msg in MainASTERIXDataStorage.CAT01Message)
                     {
                         CAT01I070Types.CAT01070Mode3UserData Mode3AData = (CAT01I070Types.CAT01070Mode3UserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("070")].value;
-                        if (Mode3AData.Mode3A_Code == (string)this.comboBox1.Items[this.comboBox1.SelectedIndex])
+
+                        if (Mode3AData != null)
                         {
-                            // Get Lat/Long
-                            CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates LatLongData = (CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates)Msg.CAT01DataItems[CAT01.ItemIDToIndex("040")].value;
-                            // Get Flight Level
-                            CAT01I090Types.CAT01I090FlightLevelUserData FlightLevelData = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("090")].value;
+                            if (Mode3AData.Code_Validated == CAT01I070Types.Code_Validation_Type.Code_Validated)
+                            {
+                                if (Mode3AData.Mode3A_Code == (string)this.comboBox1.Items[this.comboBox1.SelectedIndex])
+                                {
+                                    // Get Lat/Long
+                                    CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates LatLongData = (CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates)Msg.CAT01DataItems[CAT01.ItemIDToIndex("040")].value;
+                                    // Get Flight Level
+                                    CAT01I090Types.CAT01I090FlightLevelUserData FlightLevelData = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("090")].value;
 
-                            double LevelInMeeters = (FlightLevelData.FlightLevel * 100.00) * SharedData.FeetToMeeters;
+                                    double LevelInMeeters = (FlightLevelData.FlightLevel * 100.00) * SharedData.FeetToMeeters;
 
-                            Data = Data + LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal.ToString() +
-                               "," + LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal.ToString() + "," + LevelInMeeters.ToString() + Environment.NewLine;
+                                    Data = Data + LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal.ToString() +
+                                       "," + LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal.ToString() + "," + LevelInMeeters.ToString() + Environment.NewLine;
+                                }
+                            }
                         }
                     }
                 }
@@ -172,18 +236,62 @@ namespace AsterixDisplayAnalyser
                     foreach (MainASTERIXDataStorage.CAT48Data Msg in MainASTERIXDataStorage.CAT48Message)
                     {
                         CAT48I070Types.CAT48I070Mode3UserData Mode3AData = (CAT48I070Types.CAT48I070Mode3UserData)Msg.CAT48DataItems[CAT48.ItemIDToIndex("070")].value;
-                        if (Mode3AData.Mode3A_Code == (string)this.comboBox1.Items[this.comboBox1.SelectedIndex])
+                        if (Mode3AData != null)
                         {
+                            if (Mode3AData.Code_Validated == CAT48I070Types.Code_Validation_Type.Code_Validated)
+                            {
 
-                            // Get Lat/Long in decimal
-                            CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates LatLongData = (CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates)Msg.CAT48DataItems[CAT48.ItemIDToIndex("040")].value;
-                            // Get Flight Level
-                            CAT48I090Types.CAT48I090FlightLevelUserData FlightLevelData = (CAT48I090Types.CAT48I090FlightLevelUserData)Msg.CAT48DataItems[CAT48.ItemIDToIndex("090")].value;
+                                if (Mode3AData.Mode3A_Code == (string)this.comboBox1.Items[this.comboBox1.SelectedIndex])
+                                {
 
-                            double LevelInMeeters = (FlightLevelData.FlightLevel * 100.00) * SharedData.FeetToMeeters;
+                                    // Get Lat/Long in decimal
+                                    CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates LatLongData = (CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates)Msg.CAT48DataItems[CAT48.ItemIDToIndex("040")].value;
+                                    // Get Flight Level
+                                    CAT48I090Types.CAT48I090FlightLevelUserData FlightLevelData = (CAT48I090Types.CAT48I090FlightLevelUserData)Msg.CAT48DataItems[CAT48.ItemIDToIndex("090")].value;
 
-                            Data = Data + LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal.ToString() +
-                               "," + LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal.ToString() + "," + LevelInMeeters.ToString() + Environment.NewLine;
+                                    double LevelInMeeters = (FlightLevelData.FlightLevel * 100.00) * SharedData.FeetToMeeters;
+
+                                    Data = Data + LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal.ToString() +
+                                       "," + LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal.ToString() + "," + LevelInMeeters.ToString() + Environment.NewLine;
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (MainASTERIXDataStorage.CAT62Message.Count > 0)
+                {
+                    foreach (MainASTERIXDataStorage.CAT62Data Msg in MainASTERIXDataStorage.CAT62Message)
+                    {
+                        CAT62I060Types.CAT62060Mode3UserData Mode3AData = (CAT62I060Types.CAT62060Mode3UserData)Msg.CAT62DataItems[CAT62.ItemIDToIndex("060")].value;
+
+                        if (Mode3AData != null)
+                        {
+                            if (Mode3AData.Mode3A_Code == (string)this.comboBox1.Items[this.comboBox1.SelectedIndex])
+                            {
+                                // Get Lat/Long in decimal
+                                GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.CAT62DataItems[CAT62.ItemIDToIndex("105")].value;
+
+                                double FlightLevelData = 0.0;
+                                if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value != null)
+                                {
+                                    try
+                                    {
+                                        // Get Flight Level
+                                        FlightLevelData = (double)Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value;
+                                    }
+                                    catch
+                                    {
+
+                                    }
+                                }
+
+                                double LevelInMeeters = (FlightLevelData * 100.00) * SharedData.FeetToMeeters;
+
+                                Data = Data + LatLongData.GetLatLongDecimal().LongitudeDecimal.ToString() +
+                          "," + LatLongData.GetLatLongDecimal().LatitudeDecimal.ToString() + "," + LevelInMeeters.ToString() + Environment.NewLine;
+
+                                TargetNumber++;
+                            }
                         }
                     }
                 }

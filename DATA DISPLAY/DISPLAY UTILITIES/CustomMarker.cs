@@ -92,6 +92,27 @@ namespace AsterixDisplayAnalyser
         public static FontFamily CFL_FONT_FAMILLY = FontFamily.GenericSansSerif;
         public Font CFL_FONT = new Font(CFL_FONT_FAMILLY, 10, FontStyle.Regular, GraphicsUnit.Pixel);
         public string CFL_STRING = "---";
+
+        // Define Assigned HDG attributes
+        public Point A_HDG_OFFSET = new Point(2, 0);
+        public Brush A_HDG_BRUSH = Brushes.Green;
+        public static FontFamily A_HDG_FONT_FAMILLY = FontFamily.GenericSansSerif;
+        public Font A_HDG_FONT = new Font(A_HDG_FONT_FAMILLY, 10, FontStyle.Regular, GraphicsUnit.Pixel);
+        public string A_HDG_STRING = "h---";
+
+        // Define Assigned SPD attributes
+        public Point A_SPD_OFFSET = new Point(2, 0);
+        public Brush A_SPD_BRUSH = Brushes.Green;
+        public static FontFamily A_SPD_FONT_FAMILLY = FontFamily.GenericSansSerif;
+        public Font A_SPD_FONT = new Font(A_SPD_FONT_FAMILLY, 10, FontStyle.Regular, GraphicsUnit.Pixel);
+        public string A_SPD_STRING = "s---";
+
+        // Define Assigned ROC attributes
+        public Point A_ROC_OFFSET = new Point(2, 0);
+        public Brush A_ROC_BRUSH = Brushes.Green;
+        public static FontFamily A_ROC_FONT_FAMILLY = FontFamily.GenericSansSerif;
+        public Font A_ROC_FONT = new Font(A_ROC_FONT_FAMILLY, 10, FontStyle.Regular, GraphicsUnit.Pixel);
+        public string A_ROC_STRING = "R---";
         
         
         ////////////////////////////////////////////////////////////
@@ -180,7 +201,7 @@ namespace AsterixDisplayAnalyser
             g.DrawString(ModeC_STRING, ModeC_FONT, ModeC_BRUSH, LabelStartPosition.X + ModeC_OFFSET.X, LabelStartPosition.Y + LabelHeight);
 
             // Draw CFL on the same line
-            CFL_OFFSET.X = (ModeC_STRING.Length + 1) * (int)ModeC_FONT.Size;
+            CFL_OFFSET.X = (ModeC_STRING.Length + 0) * (int)ModeC_FONT.Size;
             CFL_OFFSET.Y = LabelStartPosition.Y + LabelHeight;
             g.DrawString(CFL_STRING, CFL_FONT, CFL_BRUSH, LabelStartPosition.X + CFL_OFFSET.X, CFL_OFFSET.Y);
             CFL_START_X = LabelStartPosition.X + CFL_OFFSET.X;
@@ -190,6 +211,25 @@ namespace AsterixDisplayAnalyser
 
             if (ShowLabelBox == true)
             {
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //  DRAW Assigned HDG, SPD and ROC
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                
+                // HDG
+                g.DrawString(A_HDG_STRING, A_HDG_FONT, A_HDG_BRUSH, LabelStartPosition.X + A_HDG_OFFSET.X, LabelStartPosition.Y + LabelHeight);
+               
+                // SPD
+                A_SPD_OFFSET.X = A_HDG_STRING.Length * (int)A_HDG_FONT.Size;
+                A_SPD_OFFSET.Y = LabelStartPosition.Y + LabelHeight;
+                g.DrawString(A_SPD_STRING, A_SPD_FONT, A_SPD_BRUSH, LabelStartPosition.X + A_SPD_OFFSET.X, A_SPD_OFFSET.Y);
+             
+                // ROC
+                //A_ROC_OFFSET.X = A_SPD_OFFSET.X + A_SPD_OFFSET.X + A_SPD_STRING.Length * (int)A_SPD_FONT.Size;
+                //A_ROC_OFFSET.Y = LabelStartPosition.Y + LabelHeight;
+               // g.DrawString(A_ROC_STRING, A_ROC_FONT, A_ROC_BRUSH, LabelStartPosition.X + A_ROC_OFFSET.X, A_ROC_OFFSET.Y);
+              
+                LabelHeight = LabelHeight + (int)A_SPD_FONT.Size + SpacingIndex * 2;
+
                 // Add the final spacing index and draw the box
                 LabelHeight = LabelHeight + SpacingIndex * 2;
                 g.DrawRectangle(MyPen, LabelStartPosition.X, LabelStartPosition.Y, LabelWidth, LabelHeight);
