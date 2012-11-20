@@ -191,33 +191,36 @@ namespace AsterixDisplayAnalyser
                         CAT01I090Types.CAT01I090FlightLevelUserData FlightLevelData = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("090")].value;
 
                         TargetType Target = new TargetType();
-                        if (MyCAT01I020UserData.Type_Of_Radar_Detection == CAT01I020Types.Radar_Detection_Type.Primary)
+                        if (MyCAT01I020UserData != null)
                         {
-                            Target.ModeA = "PSR";
-                            Target.ModeC = "";
-                            Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
-                            Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
-                            Target.TrackTerminateTreshold = 0;
-                            PSRTargetList.Add(Target);
-                        }
-                        else if ((MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.No_Detection) && (MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.Unknown_Data))
-                        {
-                            if (Mode3AData != null)
+                            if (MyCAT01I020UserData.Type_Of_Radar_Detection == CAT01I020Types.Radar_Detection_Type.Primary)
                             {
-                                if (Mode3AData.Code_Validated == CAT01I070Types.Code_Validation_Type.Code_Validated)
+                                Target.ModeA = "PSR";
+                                Target.ModeC = "";
+                                Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
+                                Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                Target.TrackTerminateTreshold = 0;
+                                PSRTargetList.Add(Target);
+                            }
+                            else if ((MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.No_Detection) && (MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.Unknown_Data))
+                            {
+                                if (Mode3AData != null)
                                 {
-                                    Target.ModeA = Mode3AData.Mode3A_Code;
-                                    if (FlightLevelData != null)
-                                        if (FlightLevelData.Code_Validated == CAT01I090Types.Code_Validation_Type.Code_Validated)
-                                            Target.ModeC = FlightLevelData.FlightLevel.ToString();
+                                    if (Mode3AData.Code_Validated == CAT01I070Types.Code_Validation_Type.Code_Validated)
+                                    {
+                                        Target.ModeA = Mode3AData.Mode3A_Code;
+                                        if (FlightLevelData != null)
+                                            if (FlightLevelData.Code_Validated == CAT01I090Types.Code_Validation_Type.Code_Validated)
+                                                Target.ModeC = FlightLevelData.FlightLevel.ToString();
+                                            else
+                                                Target.ModeC = "---";
                                         else
                                             Target.ModeC = "---";
-                                    else
-                                        Target.ModeC = "---";
 
-                                    Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
-                                    Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
-                                    CurrentTargetList.Add(Target);
+                                        Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
+                                        Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                        CurrentTargetList.Add(Target);
+                                    }
                                 }
                             }
                         }
@@ -225,7 +228,6 @@ namespace AsterixDisplayAnalyser
                 }
                 else if (MainASTERIXDataStorage.CAT48Message.Count > 0)
                 {
-
                     for (int Start_Idx = 0; Start_Idx < MainASTERIXDataStorage.CAT48Message.Count; Start_Idx++)
                     {
                         MainASTERIXDataStorage.CAT48Data Msg = MainASTERIXDataStorage.CAT48Message[Start_Idx];
@@ -242,43 +244,47 @@ namespace AsterixDisplayAnalyser
                         CAT48I240Types.CAT48I240ACID_Data ACID_Mode_S = (CAT48I240Types.CAT48I240ACID_Data)Msg.CAT48DataItems[CAT48.ItemIDToIndex("240")].value;
 
                         TargetType Target = new TargetType();
-                        if ((MyCAT48I020UserData.Type_Of_Report == CAT48I020Types.Type_Of_Report_Type.Single_PSR) || (MyCAT48I020UserData.Type_Of_Report == CAT48I020Types.Type_Of_Report_Type.Mode_S_Roll_Call_PSR))
-                        {
-                            Target.ModeA = "PSR";
-                            Target.ModeC = "";
-                            Target.ACID_Mode_S = "";
-                            Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
-                            Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
-                            Target.TrackTerminateTreshold = 0;
-                            PSRTargetList.Add(Target);
-                        }
-                        else if ((MyCAT48I020UserData.Type_Of_Report != CAT48I020Types.Type_Of_Report_Type.No_Detection) &&
-                        (MyCAT48I020UserData.Type_Of_Report != CAT48I020Types.Type_Of_Report_Type.Unknown_Data))
-                        {
-                            if (Mode3AData != null)
-                            {
-                                if (Mode3AData.Code_Validated == CAT48I070Types.Code_Validation_Type.Code_Validated)
-                                {
-                                    Target.ModeA = Mode3AData.Mode3A_Code;
 
-                                    if (FlightLevelData != null)
+                        if (MyCAT48I020UserData != null)
+                        {
+                            if ((MyCAT48I020UserData.Type_Of_Report == CAT48I020Types.Type_Of_Report_Type.Single_PSR) || (MyCAT48I020UserData.Type_Of_Report == CAT48I020Types.Type_Of_Report_Type.Mode_S_Roll_Call_PSR))
+                            {
+                                Target.ModeA = "PSR";
+                                Target.ModeC = "";
+                                Target.ACID_Mode_S = "";
+                                Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
+                                Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                Target.TrackTerminateTreshold = 0;
+                                PSRTargetList.Add(Target);
+                            }
+                            else if ((MyCAT48I020UserData.Type_Of_Report != CAT48I020Types.Type_Of_Report_Type.No_Detection) &&
+                            (MyCAT48I020UserData.Type_Of_Report != CAT48I020Types.Type_Of_Report_Type.Unknown_Data))
+                            {
+                                if (Mode3AData != null)
+                                {
+                                    if (Mode3AData.Code_Validated == CAT48I070Types.Code_Validation_Type.Code_Validated)
                                     {
-                                        if (FlightLevelData.Code_Validated == CAT48I090Types.Code_Validation_Type.Code_Validated)
-                                            Target.ModeC = FlightLevelData.FlightLevel.ToString();
+                                        Target.ModeA = Mode3AData.Mode3A_Code;
+
+                                        if (FlightLevelData != null)
+                                        {
+                                            if (FlightLevelData.Code_Validated == CAT48I090Types.Code_Validation_Type.Code_Validated)
+                                                Target.ModeC = FlightLevelData.FlightLevel.ToString();
+                                            else
+                                                Target.ModeC = "---";
+                                        }
                                         else
                                             Target.ModeC = "---";
+
+                                        if (ACID_Mode_S != null)
+                                            Target.ACID_Mode_S = ACID_Mode_S.ACID;
+                                        else
+                                            Target.ACID_Mode_S = "N/A";
+
+                                        Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
+                                        Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                        CurrentTargetList.Add(Target);
                                     }
-                                    else
-                                        Target.ModeC = "---";
-
-                                    if (ACID_Mode_S != null)
-                                        Target.ACID_Mode_S = ACID_Mode_S.ACID;
-                                    else
-                                        Target.ACID_Mode_S = "N/A";
-
-                                    Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
-                                    Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
-                                    CurrentTargetList.Add(Target);
                                 }
                             }
                         }
@@ -290,12 +296,9 @@ namespace AsterixDisplayAnalyser
                     for (int Start_Idx = 0; Start_Idx < MainASTERIXDataStorage.CAT62Message.Count; Start_Idx++)
                     {
                         MainASTERIXDataStorage.CAT62Data Msg = MainASTERIXDataStorage.CAT62Message[Start_Idx];
-
                         CAT62I060Types.CAT62060Mode3UserData Mode3AData = (CAT62I060Types.CAT62060Mode3UserData)Msg.CAT62DataItems[CAT62.ItemIDToIndex("060")].value;
-                        // Get Lat/Long in decimal
                         GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.CAT62DataItems[CAT62.ItemIDToIndex("105")].value;
                         CAT62I380Types.CAT62I380Data CAT62I380Data = (CAT62I380Types.CAT62I380Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
-
                         TargetType Target = new TargetType();
 
                         if (Mode3AData != null)
@@ -313,7 +316,6 @@ namespace AsterixDisplayAnalyser
                                 {
                                     Target.ModeC = "---";
                                 }
-
                             }
                             else
                             {
@@ -379,35 +381,38 @@ namespace AsterixDisplayAnalyser
                         CAT01I090Types.CAT01I090FlightLevelUserData FlightLevelData = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("090")].value;
 
                         TargetType Target = new TargetType();
-                        if (MyCAT01I020UserData.Type_Of_Radar_Detection == CAT01I020Types.Radar_Detection_Type.Primary)
+                        if (MyCAT01I020UserData != null)
                         {
-                            Target.ModeA = "PSR";
-                            Target.ModeC = "";
-                            Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
-                            Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
-                            Target.MyMarker.Position = new PointLatLng(Target.Lat, Target.Lon);
-                            PSRTargetList.Add(Target);
-                        }
-                        else if ((MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.No_Detection) && (MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.Unknown_Data))
-                        {
-
-                            if (Mode3AData != null)
+                            if (MyCAT01I020UserData.Type_Of_Radar_Detection == CAT01I020Types.Radar_Detection_Type.Primary)
                             {
-                                if (Mode3AData.Code_Validated == CAT01I070Types.Code_Validation_Type.Code_Validated)
-                                {
-                                    Target.ModeA = Mode3AData.Mode3A_Code;
+                                Target.ModeA = "PSR";
+                                Target.ModeC = "";
+                                Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
+                                Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                Target.MyMarker.Position = new PointLatLng(Target.Lat, Target.Lon);
+                                PSRTargetList.Add(Target);
+                            }
+                            else if ((MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.No_Detection) && (MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.Unknown_Data))
+                            {
 
-                                    if (FlightLevelData != null)
-                                        if (FlightLevelData.Code_Validated == CAT01I090Types.Code_Validation_Type.Code_Validated)
-                                            Target.ModeC = FlightLevelData.FlightLevel.ToString();
+                                if (Mode3AData != null)
+                                {
+                                    if (Mode3AData.Code_Validated == CAT01I070Types.Code_Validation_Type.Code_Validated)
+                                    {
+                                        Target.ModeA = Mode3AData.Mode3A_Code;
+
+                                        if (FlightLevelData != null)
+                                            if (FlightLevelData.Code_Validated == CAT01I090Types.Code_Validation_Type.Code_Validated)
+                                                Target.ModeC = FlightLevelData.FlightLevel.ToString();
+                                            else
+                                                Target.ModeC = "---";
                                         else
                                             Target.ModeC = "---";
-                                    else
-                                        Target.ModeC = "---";
 
-                                    Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
-                                    Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
-                                    CurrentTargetList.Add(Target);
+                                        Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
+                                        Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                        CurrentTargetList.Add(Target);
+                                    }
                                 }
                             }
                         }
@@ -415,7 +420,6 @@ namespace AsterixDisplayAnalyser
                 }
                 else if (MainASTERIXDataStorage.CAT48Message.Count > 0)
                 {
-
                     for (int Start_Idx = LastDataIndex; Start_Idx < MainASTERIXDataStorage.CAT48Message.Count; Start_Idx++)
                     {
                         LastDataIndex++;
@@ -432,47 +436,50 @@ namespace AsterixDisplayAnalyser
                         CAT48I240Types.CAT48I240ACID_Data ACID_Mode_S = (CAT48I240Types.CAT48I240ACID_Data)Msg.CAT48DataItems[CAT48.ItemIDToIndex("240")].value;
 
                         TargetType Target = new TargetType();
-                        if ((MyCAT48I020UserData.Type_Of_Report == CAT48I020Types.Type_Of_Report_Type.Single_PSR) ||
-                            (MyCAT48I020UserData.Type_Of_Report == CAT48I020Types.Type_Of_Report_Type.Mode_S_Roll_Call_PSR))
+                        if (MyCAT48I020UserData != null)
                         {
-                            Target.ModeA = "PSR";
-                            Target.ModeC = "";
-                            Target.ACID_Mode_S = "";
-                            Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
-                            Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
-                            PSRTargetList.Add(Target);
-                        }
-                        else if ((MyCAT48I020UserData.Type_Of_Report != CAT48I020Types.Type_Of_Report_Type.No_Detection) &&
-                         (MyCAT48I020UserData.Type_Of_Report != CAT48I020Types.Type_Of_Report_Type.Unknown_Data))
-                        {
-
-                            if (Mode3AData != null)
+                            if ((MyCAT48I020UserData.Type_Of_Report == CAT48I020Types.Type_Of_Report_Type.Single_PSR) ||
+                                (MyCAT48I020UserData.Type_Of_Report == CAT48I020Types.Type_Of_Report_Type.Mode_S_Roll_Call_PSR))
                             {
-                                if (Mode3AData.Code_Validated == CAT48I070Types.Code_Validation_Type.Code_Validated)
-                                {
-                                    Target.ModeA = Mode3AData.Mode3A_Code;
+                                Target.ModeA = "PSR";
+                                Target.ModeC = "";
+                                Target.ACID_Mode_S = "";
+                                Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
+                                Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                PSRTargetList.Add(Target);
+                            }
+                            else if ((MyCAT48I020UserData.Type_Of_Report != CAT48I020Types.Type_Of_Report_Type.No_Detection) &&
+                             (MyCAT48I020UserData.Type_Of_Report != CAT48I020Types.Type_Of_Report_Type.Unknown_Data))
+                            {
 
-                                    if (FlightLevelData != null)
+                                if (Mode3AData != null)
+                                {
+                                    if (Mode3AData.Code_Validated == CAT48I070Types.Code_Validation_Type.Code_Validated)
                                     {
-                                        if (FlightLevelData.Code_Validated == CAT48I090Types.Code_Validation_Type.Code_Validated)
-                                            Target.ModeC = FlightLevelData.FlightLevel.ToString();
+                                        Target.ModeA = Mode3AData.Mode3A_Code;
+
+                                        if (FlightLevelData != null)
+                                        {
+                                            if (FlightLevelData.Code_Validated == CAT48I090Types.Code_Validation_Type.Code_Validated)
+                                                Target.ModeC = FlightLevelData.FlightLevel.ToString();
+                                            else
+                                                Target.ModeC = "---";
+                                        }
                                         else
                                             Target.ModeC = "---";
-                                    }
-                                    else
-                                        Target.ModeC = "---";
 
-                                    if (ACID_Mode_S != null)
-                                    {
-                                        Target.ACID_Mode_S = ACID_Mode_S.ACID;
+                                        if (ACID_Mode_S != null)
+                                        {
+                                            Target.ACID_Mode_S = ACID_Mode_S.ACID;
+                                        }
+                                        else
+                                        {
+                                            Target.ACID_Mode_S = "N/A";
+                                        }
+                                        Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
+                                        Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                        CurrentTargetList.Add(Target);
                                     }
-                                    else
-                                    {
-                                        Target.ACID_Mode_S = "N/A";
-                                    }
-                                    Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
-                                    Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
-                                    CurrentTargetList.Add(Target);
                                 }
                             }
                         }
@@ -491,8 +498,6 @@ namespace AsterixDisplayAnalyser
                         // Get Lat/Long in decimal
                         GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.CAT62DataItems[CAT62.ItemIDToIndex("105")].value;
 
-                     
-                        
                         CAT62I380Types.CAT62I380Data CAT62I380Data = (CAT62I380Types.CAT62I380Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
 
                         TargetType Target = new TargetType();
@@ -512,13 +517,12 @@ namespace AsterixDisplayAnalyser
                                 {
                                     Target.ModeC = "---";
                                 }
-
                             }
                             else
                             {
                                 Target.ModeC = "---";
                             }
-                           
+
                             if (CAT62I380Data != null)
                             {
                                 if (CAT62I380Data.ACID.Is_Valid)

@@ -208,7 +208,7 @@ namespace AsterixDisplayAnalyser
 
             // Initialize Map
             gMapControl.Width = 2000;
-            gMapControl.Width = 2000;
+            gMapControl.Height = 2000;
             InitializeMap();
 
             ToolTip toolTip1 = new ToolTip();
