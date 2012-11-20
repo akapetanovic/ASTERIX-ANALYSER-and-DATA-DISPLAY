@@ -187,172 +187,208 @@ namespace AsterixDisplayAnalyser
         // Based on the data item identifer
 
 
-        public static void Intitialize()
+        public static void Intitialize(bool Hard_Reset)
         {
-            I062DataItems.Clear();
+            if (!Hard_Reset)
+            {
+                foreach (CAT62.CAT062DataItem Item in CAT62.I062DataItems)
+                    Item.value = null;
+            }
+            else
+            {
 
-            // I062/010 Data Source Identifier 
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("010")].ID = "010";
-            I062DataItems[ItemIDToIndex("010")].Description = "Data Source Identifier";
-            I062DataItems[ItemIDToIndex("010")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("010")].CurrentlyPresent = false;
-            // I062/015 Service Identification 
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("015")].ID = "015";
-            I062DataItems[ItemIDToIndex("015")].Description = "Service Identification";
-            I062DataItems[ItemIDToIndex("015")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("015")].CurrentlyPresent = false;
-            // I062/070 Time Of Track Information
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("070")].ID = "070";
-            I062DataItems[ItemIDToIndex("070")].Description = "Time Of Track Information";
-            I062DataItems[ItemIDToIndex("070")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("070")].CurrentlyPresent = false;
-            // I062/105 Calculated Track Position (WGS-84)
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("105")].ID = "105";
-            I062DataItems[ItemIDToIndex("105")].Description = "Calculated Track Position (WGS-84)";
-            I062DataItems[ItemIDToIndex("105")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("105")].CurrentlyPresent = false;
-            // I062/100 Calculated Track Position (Cartesian)
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("100")].ID = "100";
-            I062DataItems[ItemIDToIndex("100")].Description = "Data Source Identifier";
-            I062DataItems[ItemIDToIndex("100")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("100")].CurrentlyPresent = false;
-            // I062/185 Calculated Track Velocity (Cartesian) 
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("185")].ID = "185";
-            I062DataItems[ItemIDToIndex("185")].Description = "Calculated Track Velocity (Cartesian)";
-            I062DataItems[ItemIDToIndex("185")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("185")].CurrentlyPresent = false;
-            // I062/210 Calculated Acceleration (Cartesian)
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("210")].ID = "210";
-            I062DataItems[ItemIDToIndex("210")].Description = "Calculated Acceleration (Cartesian)";
-            I062DataItems[ItemIDToIndex("210")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("210")].CurrentlyPresent = false;
-            // I062/060 Track Mode 3/A Code
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("060")].ID = "060";
-            I062DataItems[ItemIDToIndex("060")].Description = " Track Mode 3/A Code";
-            I062DataItems[ItemIDToIndex("060")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("060")].CurrentlyPresent = false;    
-            // I062/245 Target Identification 
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("245")].ID = "245";
-            I062DataItems[ItemIDToIndex("245")].Description = "Target Identification";
-            I062DataItems[ItemIDToIndex("245")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("245")].CurrentlyPresent = false;  
-            // I062/380 Aircraft Derived Data
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("380")].ID = "380";
-            I062DataItems[ItemIDToIndex("380")].Description = "Aircraft Derived Data";
-            I062DataItems[ItemIDToIndex("380")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("380")].CurrentlyPresent = false;   
-            // I062/040 Track Number
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("040")].ID = "040";
-            I062DataItems[ItemIDToIndex("040")].Description = "Track Number";
-            I062DataItems[ItemIDToIndex("040")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("040")].CurrentlyPresent = false;            
-            // I062/080 Track Status
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("080")].ID = "080";
-            I062DataItems[ItemIDToIndex("080")].Description = "Track Status";
-            I062DataItems[ItemIDToIndex("080")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("080")].CurrentlyPresent = false;            
-            // I062/290 System Track Update Ages 
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("290")].ID = "290";
-            I062DataItems[ItemIDToIndex("290")].Description = "System Track Update Ages";
-            I062DataItems[ItemIDToIndex("290")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("290")].CurrentlyPresent = false;
-            // I062/200 Mode of Movement 
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("200")].ID = "200";
-            I062DataItems[ItemIDToIndex("200")].Description = "Mode of Movement";
-            I062DataItems[ItemIDToIndex("200")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("200")].CurrentlyPresent = false;       
-            // I062/295 Track Data Ages 
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("295")].ID = "295";
-            I062DataItems[ItemIDToIndex("295")].Description = "Track Data Ages";
-            I062DataItems[ItemIDToIndex("295")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("295")].CurrentlyPresent = false;       
-            // I062/136 Measured Flight Level  
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("136")].ID = "136";
-            I062DataItems[ItemIDToIndex("136")].Description = "Measured Flight Level";
-            I062DataItems[ItemIDToIndex("136")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("136")].CurrentlyPresent = false; 
-            // I062/130 Calculated Track Geometric Altitude 
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("130")].ID = "130";
-            I062DataItems[ItemIDToIndex("130")].Description = "Calculated Track Geometric Altitude";
-            I062DataItems[ItemIDToIndex("130")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("130")].CurrentlyPresent = false;
-            // I062/135 Calculated Track Barometric Altitude 
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("135")].ID = "135";
-            I062DataItems[ItemIDToIndex("135")].Description = "Calculated Track Barometric Altitude ";
-            I062DataItems[ItemIDToIndex("135")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("135")].CurrentlyPresent = false;
-            // I062/220 Calculated Rate Of Climb/Descent
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("220")].ID = "220";
-            I062DataItems[ItemIDToIndex("220")].Description = "Calculated Rate Of Climb/Descent";
-            I062DataItems[ItemIDToIndex("220")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("220")].CurrentlyPresent = false;
-            // I062/390 Flight Plan Related Data 
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("390")].ID = "390";
-            I062DataItems[ItemIDToIndex("390")].Description = "Flight Plan Related Data";
-            I062DataItems[ItemIDToIndex("390")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("390")].CurrentlyPresent = false;
-            // I062/270 Target Size & Orientation 
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("270")].ID = "270";
-            I062DataItems[ItemIDToIndex("270")].Description = "Target Size & Orientation";
-            I062DataItems[ItemIDToIndex("270")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("270")].CurrentlyPresent = false;
-            // I062/300 Vehicle Fleet Identification 
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("300")].ID = "300";
-            I062DataItems[ItemIDToIndex("300")].Description = "Vehicle Fleet Identification";
-            I062DataItems[ItemIDToIndex("300")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("300")].CurrentlyPresent = false;
-            // I062/110 Mode 5 Data reports & Extended Mode 1 Code  
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("110")].ID = "110";
-            I062DataItems[ItemIDToIndex("110")].Description = "Mode 5 Data reports & Extended Mode 1 Code";
-            I062DataItems[ItemIDToIndex("110")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("110")].CurrentlyPresent = false;
-            // I062/120 Track Mode 2 Code 
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("120")].ID = "120";
-            I062DataItems[ItemIDToIndex("120")].Description = "Track Mode 2 Code";
-            I062DataItems[ItemIDToIndex("120")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("120")].CurrentlyPresent = false;     
-            // I062/510 Composed Track Number 
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("510")].ID = "510";
-            I062DataItems[ItemIDToIndex("510")].Description = "Composed Track Number";
-            I062DataItems[ItemIDToIndex("510")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("510")].CurrentlyPresent = false;  
-            // I062/500 Estimated Accuracies 
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("500")].ID = "500";
-            I062DataItems[ItemIDToIndex("500")].Description = "Estimated Accuracies";
-            I062DataItems[ItemIDToIndex("500")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("500")].CurrentlyPresent = false;  
-            // I062/340 Measured Information 
-            I062DataItems.Add(new CAT062DataItem());
-            I062DataItems[ItemIDToIndex("340")].ID = "340";
-            I062DataItems[ItemIDToIndex("340")].Description = "Measured Information";
-            I062DataItems[ItemIDToIndex("340")].HasBeenPresent = false;
-            I062DataItems[ItemIDToIndex("340")].CurrentlyPresent = false;
+                I062DataItems.Clear();
+
+                // I062/010 Data Source Identifier 
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("010")].ID = "010";
+                I062DataItems[ItemIDToIndex("010")].Description = "Data Source Identifier";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("010")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("010")].CurrentlyPresent = false;
+                // I062/015 Service Identification 
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("015")].ID = "015";
+                I062DataItems[ItemIDToIndex("015")].Description = "Service Identification";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("015")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("015")].CurrentlyPresent = false;
+                // I062/070 Time Of Track Information
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("070")].ID = "070";
+                I062DataItems[ItemIDToIndex("070")].Description = "Time Of Track Information";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("070")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("070")].CurrentlyPresent = false;
+                // I062/105 Calculated Track Position (WGS-84)
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("105")].ID = "105";
+                I062DataItems[ItemIDToIndex("105")].Description = "Calculated Track Position (WGS-84)";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("105")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("105")].CurrentlyPresent = false;
+                // I062/100 Calculated Track Position (Cartesian)
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("100")].ID = "100";
+                I062DataItems[ItemIDToIndex("100")].Description = "Data Source Identifier";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("100")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("100")].CurrentlyPresent = false;
+                // I062/185 Calculated Track Velocity (Cartesian) 
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("185")].ID = "185";
+                I062DataItems[ItemIDToIndex("185")].Description = "Calculated Track Velocity (Cartesian)";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("185")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("185")].CurrentlyPresent = false;
+                // I062/210 Calculated Acceleration (Cartesian)
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("210")].ID = "210";
+                I062DataItems[ItemIDToIndex("210")].Description = "Calculated Acceleration (Cartesian)";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("210")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("210")].CurrentlyPresent = false;
+                // I062/060 Track Mode 3/A Code
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("060")].ID = "060";
+                I062DataItems[ItemIDToIndex("060")].Description = " Track Mode 3/A Code";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("060")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("060")].CurrentlyPresent = false;
+                // I062/245 Target Identification 
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("245")].ID = "245";
+                I062DataItems[ItemIDToIndex("245")].Description = "Target Identification";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("245")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("245")].CurrentlyPresent = false;
+                // I062/380 Aircraft Derived Data
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("380")].ID = "380";
+                I062DataItems[ItemIDToIndex("380")].Description = "Aircraft Derived Data";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("380")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("380")].CurrentlyPresent = false;
+                // I062/040 Track Number
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("040")].ID = "040";
+                I062DataItems[ItemIDToIndex("040")].Description = "Track Number";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("040")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("040")].CurrentlyPresent = false;
+                // I062/080 Track Status
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("080")].ID = "080";
+                I062DataItems[ItemIDToIndex("080")].Description = "Track Status";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("080")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("080")].CurrentlyPresent = false;
+                // I062/290 System Track Update Ages 
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("290")].ID = "290";
+                I062DataItems[ItemIDToIndex("290")].Description = "System Track Update Ages";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("290")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("290")].CurrentlyPresent = false;
+                // I062/200 Mode of Movement 
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("200")].ID = "200";
+                I062DataItems[ItemIDToIndex("200")].Description = "Mode of Movement";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("200")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("200")].CurrentlyPresent = false;
+                // I062/295 Track Data Ages 
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("295")].ID = "295";
+                I062DataItems[ItemIDToIndex("295")].Description = "Track Data Ages";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("295")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("295")].CurrentlyPresent = false;
+                // I062/136 Measured Flight Level  
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("136")].ID = "136";
+                I062DataItems[ItemIDToIndex("136")].Description = "Measured Flight Level";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("136")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("136")].CurrentlyPresent = false;
+                // I062/130 Calculated Track Geometric Altitude 
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("130")].ID = "130";
+                I062DataItems[ItemIDToIndex("130")].Description = "Calculated Track Geometric Altitude";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("130")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("130")].CurrentlyPresent = false;
+                // I062/135 Calculated Track Barometric Altitude 
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("135")].ID = "135";
+                I062DataItems[ItemIDToIndex("135")].Description = "Calculated Track Barometric Altitude ";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("135")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("135")].CurrentlyPresent = false;
+                // I062/220 Calculated Rate Of Climb/Descent
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("220")].ID = "220";
+                I062DataItems[ItemIDToIndex("220")].Description = "Calculated Rate Of Climb/Descent";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("220")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("220")].CurrentlyPresent = false;
+                // I062/390 Flight Plan Related Data 
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("390")].ID = "390";
+                I062DataItems[ItemIDToIndex("390")].Description = "Flight Plan Related Data";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("390")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("390")].CurrentlyPresent = false;
+                // I062/270 Target Size & Orientation 
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("270")].ID = "270";
+                I062DataItems[ItemIDToIndex("270")].Description = "Target Size & Orientation";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("270")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("270")].CurrentlyPresent = false;
+                // I062/300 Vehicle Fleet Identification 
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("300")].ID = "300";
+                I062DataItems[ItemIDToIndex("300")].Description = "Vehicle Fleet Identification";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("300")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("300")].CurrentlyPresent = false;
+                // I062/110 Mode 5 Data reports & Extended Mode 1 Code  
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("110")].ID = "110";
+                I062DataItems[ItemIDToIndex("110")].Description = "Mode 5 Data reports & Extended Mode 1 Code";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("110")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("110")].CurrentlyPresent = false;
+                // I062/120 Track Mode 2 Code 
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("120")].ID = "120";
+                I062DataItems[ItemIDToIndex("120")].Description = "Track Mode 2 Code";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("120")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("120")].CurrentlyPresent = false;
+                // I062/510 Composed Track Number 
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("510")].ID = "510";
+                I062DataItems[ItemIDToIndex("510")].Description = "Composed Track Number";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("510")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("510")].CurrentlyPresent = false;
+                // I062/500 Estimated Accuracies 
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("500")].ID = "500";
+                I062DataItems[ItemIDToIndex("500")].Description = "Estimated Accuracies";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("500")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("500")].CurrentlyPresent = false;
+                // I062/340 Measured Information 
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("340")].ID = "340";
+                I062DataItems[ItemIDToIndex("340")].Description = "Measured Information";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("340")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("340")].CurrentlyPresent = false;
+            }
         }
 
         public string[] Decode(byte[] DataBlockBuffer, string Time, out int NumOfMessagesDecoded)
@@ -422,7 +458,7 @@ namespace AsterixDisplayAnalyser
                 //
                 I062DataItems[ItemIDToIndex("010")].value =
                     new ASTERIX.SIC_SAC_Time(LocalSingleRecordBuffer[SIC_Index], LocalSingleRecordBuffer[SAC_Index], ASTERIX.TimeOfReception);
-           
+
                 // Loop for each FSPEC and determine what data item is present
                 for (int FSPEC_Index = 1; FSPEC_Index <= FSPEC_Length; FSPEC_Index++)
                 {
@@ -440,7 +476,7 @@ namespace AsterixDisplayAnalyser
                             }
                             else
                             {
-                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  010:F"; 
+                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  010:F";
                                 I062DataItems[ItemIDToIndex("010")].CurrentlyPresent = false;
                             }
 

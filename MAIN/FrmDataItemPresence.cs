@@ -175,9 +175,7 @@ namespace AsterixDisplayAnalyser
         // as next time it is shown it shows fresh data.
         private void FrmDataItemPresence_FormClosed(object sender, FormClosedEventArgs e)
         {
-           // DataItemListBox.Items.Count
-
-
+          
         }
     }
 }

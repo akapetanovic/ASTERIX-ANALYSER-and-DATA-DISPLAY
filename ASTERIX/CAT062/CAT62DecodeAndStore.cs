@@ -208,7 +208,7 @@ namespace AsterixDisplayAnalyser
             }
 
             MainASTERIXDataStorage.CAT62Message.Add(CAT62MessageData);
-            CAT62.Intitialize();
+            CAT62.Intitialize(false);
         }
     }
 }

@@ -98,12 +98,12 @@ namespace AsterixDisplayAnalyser
 
             // Here call constructor 
             // for each ASTERIX type
-            CAT01.Intitialize();
-            CAT02.Intitialize();
+            CAT01.Intitialize(true);
+            CAT02.Intitialize(true);
             CAT08.Intitialize();
-            CAT34.Intitialize();
-            CAT48.Intitialize();
-            CAT62.Intitialize();
+            CAT34.Intitialize(true);
+            CAT48.Intitialize(true);
+            CAT62.Intitialize(true);
             CAT63.Intitialize();
             CAT65.Intitialize();
             CAT244.Intitialize();
@@ -505,12 +505,12 @@ namespace AsterixDisplayAnalyser
 
             // Reset data buffer for each
             // category
-            CAT01.Intitialize();
-            CAT02.Intitialize();
+            CAT01.Intitialize(true);
+            CAT02.Intitialize(true);
             CAT08.Intitialize();
-            CAT34.Intitialize();
-            CAT48.Intitialize();
-            CAT62.Intitialize();
+            CAT34.Intitialize(true);
+            CAT48.Intitialize(true);
+            CAT62.Intitialize(true);
             CAT63.Intitialize();
             CAT65.Intitialize();
             CAT244.Intitialize();
@@ -1406,7 +1406,7 @@ namespace AsterixDisplayAnalyser
         private void FormMain_Resize(object sender, EventArgs e)
         {
             this.tabMainTab.Size = new Size(this.Size.Width - 16, this.Size.Height - 90);
- 
+
         }
 
         private void tabMainTab_SizeChanged(object sender, EventArgs e)
@@ -1523,9 +1523,40 @@ namespace AsterixDisplayAnalyser
                                         MyForm.Show();
                                     }
                                 }
+                                else if (MouseIsOnTheHDG(e, m))
+                                {
+                                    GMapTargetandLabel MyMarker = (GMapTargetandLabel)m;
+                                    if (MyMarker.MyTargetIndex != -1)
+                                    {
+                                        UpdateHDG MyForm = new UpdateHDG();
+                                        MyForm.TrackToUpdate = MyMarker.MyTargetIndex;
+                                        MyForm.StartPosition = FormStartPosition.Manual;
+                                        Point relativeToForm = this.PointToScreen(new Point(e.X, e.Y));
+                                        if (this.checkBoxFullscreen.Checked)
+                                            MyForm.Location = new Point(relativeToForm.X, relativeToForm.Y + 65);
+                                        else
+                                            MyForm.Location = new Point(relativeToForm.X + 140, relativeToForm.Y + 65);
+                                        MyForm.Show();
+                                    }
+                                }
+                                else if (MouseIsOnTheSPD(e, m))
+                                {
+                                    GMapTargetandLabel MyMarker = (GMapTargetandLabel)m;
+                                    if (MyMarker.MyTargetIndex != -1)
+                                    {
+                                        UpdateSPD MyForm = new UpdateSPD();
+                                        MyForm.TrackToUpdate = MyMarker.MyTargetIndex;
+                                        MyForm.StartPosition = FormStartPosition.Manual;
+                                        Point relativeToForm = this.PointToScreen(new Point(e.X, e.Y));
+                                        if (this.checkBoxFullscreen.Checked)
+                                            MyForm.Location = new Point(relativeToForm.X, relativeToForm.Y + 65);
+                                        else
+                                            MyForm.Location = new Point(relativeToForm.X + 140, relativeToForm.Y + 65);
+                                        MyForm.Show();
+                                    }
+                                }
                             }
                 }
-
 
             }
         }
@@ -1541,6 +1572,20 @@ namespace AsterixDisplayAnalyser
         {
             GMapTargetandLabel MyMarker = (GMapTargetandLabel)Marker;
             Rectangle MyRectangle = new Rectangle(MyMarker.GetCFLStartPoint().X, MyMarker.GetCFLStartPoint().Y, 20, 15);
+            return MyRectangle.Contains(new Point(Mouse.X, Mouse.Y));
+        }
+
+        bool MouseIsOnTheHDG(MouseEventArgs Mouse, GMapMarker Marker)
+        {
+            GMapTargetandLabel MyMarker = (GMapTargetandLabel)Marker;
+            Rectangle MyRectangle = new Rectangle(MyMarker.GetHDGStartPoint().X, MyMarker.GetHDGStartPoint().Y, 20, 15);
+            return MyRectangle.Contains(new Point(Mouse.X, Mouse.Y));
+        }
+
+        bool MouseIsOnTheSPD(MouseEventArgs Mouse, GMapMarker Marker)
+        {
+            GMapTargetandLabel MyMarker = (GMapTargetandLabel)Marker;
+            Rectangle MyRectangle = new Rectangle(MyMarker.GetSPDStartPoint().X, MyMarker.GetSPDStartPoint().Y, 20, 15);
             return MyRectangle.Contains(new Point(Mouse.X, Mouse.Y));
         }
 

@@ -6,6 +6,7 @@ using GMap.NET.WindowsForms;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace AsterixDisplayAnalyser
 {
@@ -61,8 +62,19 @@ namespace AsterixDisplayAnalyser
 
         public static void UpdateCFL(int Index, string CFL_Value)
         {
-            GlobalTargetList[Index].MyMarker.CFL_STRING = CFL_Value;
+            GlobalTargetList[Index].MyMarker.CFL_STRING = ' ' + CFL_Value;
         }
+
+        public static void UpdateHDG(int Index, string HDG_Value)
+        {
+            GlobalTargetList[Index].MyMarker.A_HDG_STRING =  'h' + HDG_Value;
+        }
+
+        public static void UpdateSPD(int Index, string SPD_Value)
+        {
+            GlobalTargetList[Index].MyMarker.A_SPD_STRING= 's' + SPD_Value;
+        }
+
 
         public static void Initialise()
         {
@@ -268,10 +280,17 @@ namespace AsterixDisplayAnalyser
 
                                         if (FlightLevelData != null)
                                         {
-                                            if (FlightLevelData.Code_Validated == CAT48I090Types.Code_Validation_Type.Code_Validated)
-                                                Target.ModeC = FlightLevelData.FlightLevel.ToString();
-                                            else
-                                                Target.ModeC = "---";
+                                            try
+                                            {
+                                                if (FlightLevelData.Code_Validated == CAT48I090Types.Code_Validation_Type.Code_Validated)
+                                                    Target.ModeC = FlightLevelData.FlightLevel.ToString();
+                                                else
+                                                    Target.ModeC = "---";
+                                            }
+                                            catch
+                                            {
+                                                MessageBox.Show("Dynamic Display Builder, CAT48, Flight Level");
+                                            }
                                         }
                                         else
                                             Target.ModeC = "---";

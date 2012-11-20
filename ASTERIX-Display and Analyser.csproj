@@ -243,6 +243,18 @@
     <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\ExtendedLabel.Designer.cs">
       <DependentUpon>ExtendedLabel.cs</DependentUpon>
     </Compile>
+    <Compile Include="DATA DISPLAY\DYNAMIC DATA\UpdateHDG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DATA DISPLAY\DYNAMIC DATA\UpdateHDG.Designer.cs">
+      <DependentUpon>UpdateHDG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DATA DISPLAY\DYNAMIC DATA\UpdateSPD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DATA DISPLAY\DYNAMIC DATA\UpdateSPD.Designer.cs">
+      <DependentUpon>UpdateSPD.cs</DependentUpon>
+    </Compile>
     <Compile Include="DATA DISPLAY\STATIC DATA\RunwayBorderDisplay.cs" />
     <Compile Include="DATA SET\LoadRunwayBoundaries.cs" />
     <Compile Include="MAIN\CAT_Decoder_Selector.cs">
@@ -438,6 +450,12 @@
     </Compile>
     <EmbeddedResource Include="DATA DISPLAY\DISPLAY UTILITIES\ExtendedLabel.resx">
       <DependentUpon>ExtendedLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DATA DISPLAY\DYNAMIC DATA\UpdateHDG.resx">
+      <DependentUpon>UpdateHDG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DATA DISPLAY\DYNAMIC DATA\UpdateSPD.resx">
+      <DependentUpon>UpdateSPD.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MAIN\CAT_Decoder_Selector.resx">
       <DependentUpon>CAT_Decoder_Selector.cs</DependentUpon>

@@ -91,10 +91,12 @@ namespace AsterixDisplayAnalyser
         public Brush CFL_BRUSH = Brushes.Green;
         public static FontFamily CFL_FONT_FAMILLY = FontFamily.GenericSansSerif;
         public Font CFL_FONT = new Font(CFL_FONT_FAMILLY, 10, FontStyle.Regular, GraphicsUnit.Pixel);
-        public string CFL_STRING = "---";
+        public string CFL_STRING = " ---";
 
         // Define Assigned HDG attributes
         public Point A_HDG_OFFSET = new Point(2, 0);
+        private int HDG_START_X = 0;
+        private int HDG_START_Y = 0;
         public Brush A_HDG_BRUSH = Brushes.Green;
         public static FontFamily A_HDG_FONT_FAMILLY = FontFamily.GenericSansSerif;
         public Font A_HDG_FONT = new Font(A_HDG_FONT_FAMILLY, 10, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -102,6 +104,8 @@ namespace AsterixDisplayAnalyser
 
         // Define Assigned SPD attributes
         public Point A_SPD_OFFSET = new Point(2, 0);
+        private int SPD_START_X = 0;
+        private int SPD_START_Y = 0;
         public Brush A_SPD_BRUSH = Brushes.Green;
         public static FontFamily A_SPD_FONT_FAMILLY = FontFamily.GenericSansSerif;
         public Font A_SPD_FONT = new Font(A_SPD_FONT_FAMILLY, 10, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -146,6 +150,16 @@ namespace AsterixDisplayAnalyser
         public Point GetCFLStartPoint()
         {
             return new Point(CFL_START_X, CFL_START_Y);
+        }
+
+        public Point GetHDGStartPoint()
+        {
+            return new Point(HDG_START_X, HDG_START_Y);
+        }
+
+        public Point GetSPDStartPoint()
+        {
+            return new Point(SPD_START_X, SPD_START_Y);
         }
 
         // Returns starting point of the label box
@@ -217,11 +231,15 @@ namespace AsterixDisplayAnalyser
                 
                 // HDG
                 g.DrawString(A_HDG_STRING, A_HDG_FONT, A_HDG_BRUSH, LabelStartPosition.X + A_HDG_OFFSET.X, LabelStartPosition.Y + LabelHeight);
-               
+                HDG_START_X = LabelStartPosition.X + A_HDG_OFFSET.X;
+                HDG_START_Y = LabelStartPosition.Y + LabelHeight;
+                
                 // SPD
                 A_SPD_OFFSET.X = A_HDG_STRING.Length * (int)A_HDG_FONT.Size;
                 A_SPD_OFFSET.Y = LabelStartPosition.Y + LabelHeight;
                 g.DrawString(A_SPD_STRING, A_SPD_FONT, A_SPD_BRUSH, LabelStartPosition.X + A_SPD_OFFSET.X, A_SPD_OFFSET.Y);
+                SPD_START_X = LabelStartPosition.X + A_SPD_OFFSET.X;
+                SPD_START_Y = A_SPD_OFFSET.Y;
              
                 // ROC
                 //A_ROC_OFFSET.X = A_SPD_OFFSET.X + A_SPD_OFFSET.X + A_SPD_STRING.Length * (int)A_SPD_FONT.Size;

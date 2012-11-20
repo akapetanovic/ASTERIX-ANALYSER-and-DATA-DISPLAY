@@ -107,86 +107,103 @@ namespace AsterixDisplayAnalyser
         // 
         public static System.Collections.Generic.List<CAT02DataItem> I002DataItems = new System.Collections.Generic.List<CAT02DataItem>();
 
-        public static void Intitialize()
+        public static void Intitialize(bool Hard_Reset)
         {
-            I002DataItems.Clear();
+            if (!Hard_Reset)
+                foreach (CAT02.CAT02DataItem Item in CAT02.I002DataItems)
+                    Item.value = null;
+            else
+            {
 
-            // 1 I002/010 Data Source Identifier 
-            I002DataItems.Add(new CAT02DataItem());
-            I002DataItems[ItemIDToIndex("010")].ID = "010";
-            I002DataItems[ItemIDToIndex("010")].Description = "Data Source Identifier";
-            I002DataItems[ItemIDToIndex("010")].HasBeenPresent = false;
-            I002DataItems[ItemIDToIndex("010")].CurrentlyPresent = false;
+                I002DataItems.Clear();
 
-            // 2 I002/000 Message Type
-            I002DataItems.Add(new CAT02DataItem());
-            I002DataItems[ItemIDToIndex("000")].ID = "000";
-            I002DataItems[ItemIDToIndex("000")].Description = "Message Type";
-            I002DataItems[ItemIDToIndex("000")].HasBeenPresent = false;
-            I002DataItems[ItemIDToIndex("000")].CurrentlyPresent = false;
+                // 1 I002/010 Data Source Identifier 
+                I002DataItems.Add(new CAT02DataItem());
+                I002DataItems[ItemIDToIndex("010")].ID = "010";
+                I002DataItems[ItemIDToIndex("010")].Description = "Data Source Identifier";
 
-            // 3.  I002/020 Sector Number
-            I002DataItems.Add(new CAT02DataItem());
-            I002DataItems[ItemIDToIndex("020")].ID = "020";
-            I002DataItems[ItemIDToIndex("020")].Description = "Sector Number";
-            I002DataItems[ItemIDToIndex("020")].HasBeenPresent = false;
-            I002DataItems[ItemIDToIndex("020")].CurrentlyPresent = false;
+                I002DataItems[ItemIDToIndex("010")].HasBeenPresent = false;
+                I002DataItems[ItemIDToIndex("010")].CurrentlyPresent = false;
 
-            // 4.  I002/030 Time of Day
-            I002DataItems.Add(new CAT02DataItem());
-            I002DataItems[ItemIDToIndex("030")].ID = "030";
-            I002DataItems[ItemIDToIndex("030")].Description = "Time of Day";
-            I002DataItems[ItemIDToIndex("030")].HasBeenPresent = false;
-            I002DataItems[ItemIDToIndex("030")].CurrentlyPresent = false;
+                // 2 I002/000 Message Type
+                I002DataItems.Add(new CAT02DataItem());
+                I002DataItems[ItemIDToIndex("000")].ID = "000";
+                I002DataItems[ItemIDToIndex("000")].Description = "Message Type";
 
-            // 5.  I002/041 Antenna Rotation Period
-            I002DataItems.Add(new CAT02DataItem());
-            I002DataItems[ItemIDToIndex("041")].ID = "041";
-            I002DataItems[ItemIDToIndex("041")].Description = "Antenna Rotation Period";
-            I002DataItems[ItemIDToIndex("041")].HasBeenPresent = false;
-            I002DataItems[ItemIDToIndex("041")].CurrentlyPresent = false;
+                I002DataItems[ItemIDToIndex("000")].HasBeenPresent = false;
+                I002DataItems[ItemIDToIndex("000")].CurrentlyPresent = false;
 
-            // 6.  I002/050 Station Configuration Status
-            I002DataItems.Add(new CAT02DataItem());
-            I002DataItems[ItemIDToIndex("050")].ID = "050";
-            I002DataItems[ItemIDToIndex("050")].Description = "Station Configuration Status";
-            I002DataItems[ItemIDToIndex("050")].HasBeenPresent = false;
-            I002DataItems[ItemIDToIndex("050")].CurrentlyPresent = false;
+                // 3.  I002/020 Sector Number
+                I002DataItems.Add(new CAT02DataItem());
+                I002DataItems[ItemIDToIndex("020")].ID = "020";
+                I002DataItems[ItemIDToIndex("020")].Description = "Sector Number";
+                I002DataItems[ItemIDToIndex("020")].HasBeenPresent = false;
+                I002DataItems[ItemIDToIndex("020")].CurrentlyPresent = false;
 
-            // 7.  I002/060 Station Processing Mode
-            I002DataItems.Add(new CAT02DataItem());
-            I002DataItems[ItemIDToIndex("060")].ID = "060";
-            I002DataItems[ItemIDToIndex("060")].Description = "Station Processing Mode";
-            I002DataItems[ItemIDToIndex("060")].HasBeenPresent = false;
-            I002DataItems[ItemIDToIndex("060")].CurrentlyPresent = false;
+                // 4.  I002/030 Time of Day
+                I002DataItems.Add(new CAT02DataItem());
+                I002DataItems[ItemIDToIndex("030")].ID = "030";
+                I002DataItems[ItemIDToIndex("030")].Description = "Time of Day";
 
-            // 8.  I002/070 Plot Count Values
-            I002DataItems.Add(new CAT02DataItem());
-            I002DataItems[ItemIDToIndex("070")].ID = "070";
-            I002DataItems[ItemIDToIndex("070")].Description = "Plot Count Values";
-            I002DataItems[ItemIDToIndex("070")].HasBeenPresent = false;
-            I002DataItems[ItemIDToIndex("070")].CurrentlyPresent = false;
+                I002DataItems[ItemIDToIndex("030")].HasBeenPresent = false;
+                I002DataItems[ItemIDToIndex("030")].CurrentlyPresent = false;
 
-            // 9.  I002/100 Dynamic Window - Type 1
-            I002DataItems.Add(new CAT02DataItem());
-            I002DataItems[ItemIDToIndex("100")].ID = "100";
-            I002DataItems[ItemIDToIndex("100")].Description = "Dynamic Window - Type 1";
-            I002DataItems[ItemIDToIndex("100")].HasBeenPresent = false;
-            I002DataItems[ItemIDToIndex("100")].CurrentlyPresent = false;
+                // 5.  I002/041 Antenna Rotation Period
+                I002DataItems.Add(new CAT02DataItem());
+                I002DataItems[ItemIDToIndex("041")].ID = "041";
+                I002DataItems[ItemIDToIndex("041")].Description = "Antenna Rotation Period";
 
-            // 10. I002/090 Collimation Error
-            I002DataItems.Add(new CAT02DataItem());
-            I002DataItems[ItemIDToIndex("090")].ID = "090";
-            I002DataItems[ItemIDToIndex("090")].Description = "Collimation Error";
-            I002DataItems[ItemIDToIndex("090")].HasBeenPresent = false;
-            I002DataItems[ItemIDToIndex("090")].CurrentlyPresent = false;
+                I002DataItems[ItemIDToIndex("041")].HasBeenPresent = false;
+                I002DataItems[ItemIDToIndex("041")].CurrentlyPresent = false;
 
-            // 11. I002/080 Warning/Error Conditions
-            I002DataItems.Add(new CAT02DataItem());
-            I002DataItems[ItemIDToIndex("080")].ID = "080";
-            I002DataItems[ItemIDToIndex("080")].Description = "Warning/Error Conditions";
-            I002DataItems[ItemIDToIndex("080")].HasBeenPresent = false;
-            I002DataItems[ItemIDToIndex("080")].CurrentlyPresent = false;
+                // 6.  I002/050 Station Configuration Status
+                I002DataItems.Add(new CAT02DataItem());
+                I002DataItems[ItemIDToIndex("050")].ID = "050";
+                I002DataItems[ItemIDToIndex("050")].Description = "Station Configuration Status";
+
+                I002DataItems[ItemIDToIndex("050")].HasBeenPresent = false;
+                I002DataItems[ItemIDToIndex("050")].CurrentlyPresent = false;
+
+                // 7.  I002/060 Station Processing Mode
+                I002DataItems.Add(new CAT02DataItem());
+                I002DataItems[ItemIDToIndex("060")].ID = "060";
+                I002DataItems[ItemIDToIndex("060")].Description = "Station Processing Mode";
+
+                I002DataItems[ItemIDToIndex("060")].HasBeenPresent = false;
+                I002DataItems[ItemIDToIndex("060")].CurrentlyPresent = false;
+
+                // 8.  I002/070 Plot Count Values
+                I002DataItems.Add(new CAT02DataItem());
+                I002DataItems[ItemIDToIndex("070")].ID = "070";
+                I002DataItems[ItemIDToIndex("070")].Description = "Plot Count Values";
+
+                I002DataItems[ItemIDToIndex("070")].HasBeenPresent = false;
+                I002DataItems[ItemIDToIndex("070")].CurrentlyPresent = false;
+
+                // 9.  I002/100 Dynamic Window - Type 1
+                I002DataItems.Add(new CAT02DataItem());
+                I002DataItems[ItemIDToIndex("100")].ID = "100";
+                I002DataItems[ItemIDToIndex("100")].Description = "Dynamic Window - Type 1";
+
+                I002DataItems[ItemIDToIndex("100")].HasBeenPresent = false;
+                I002DataItems[ItemIDToIndex("100")].CurrentlyPresent = false;
+
+                // 10. I002/090 Collimation Error
+                I002DataItems.Add(new CAT02DataItem());
+                I002DataItems[ItemIDToIndex("090")].ID = "090";
+                I002DataItems[ItemIDToIndex("090")].Description = "Collimation Error";
+
+                I002DataItems[ItemIDToIndex("090")].HasBeenPresent = false;
+                I002DataItems[ItemIDToIndex("090")].CurrentlyPresent = false;
+
+                // 11. I002/080 Warning/Error Conditions
+                I002DataItems.Add(new CAT02DataItem());
+                I002DataItems[ItemIDToIndex("080")].ID = "080";
+                I002DataItems[ItemIDToIndex("080")].Description = "Warning/Error Conditions";
+
+                I002DataItems[ItemIDToIndex("080")].HasBeenPresent = false;
+                I002DataItems[ItemIDToIndex("080")].CurrentlyPresent = false;
+            }
 
         }
 

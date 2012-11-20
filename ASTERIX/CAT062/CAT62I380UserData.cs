@@ -493,7 +493,7 @@ namespace AsterixDisplayAnalyser
                     CharOut = "9";
                     break;
                 //////////////////////////////
-                // Handle letters 0 .. 9
+                // Handle letters
                 //////////////////////////////
                 case 1:
                     CharOut = "A";
@@ -559,15 +559,18 @@ namespace AsterixDisplayAnalyser
                     CharOut = "U";
                     break;
                 case 22:
-                    CharOut = "W";
+                    CharOut = "V";
                     break;
                 case 23:
-                    CharOut = "X";
+                    CharOut = "W";
                     break;
                 case 24:
-                    CharOut = "Y";
+                    CharOut = "X";
                     break;
                 case 25:
+                    CharOut = "Y";
+                    break;
+                case 26:
                     CharOut = "Z";
                     break;
                 //////////////////////////////

@@ -117,94 +117,113 @@ namespace AsterixDisplayAnalyser
         // 
         public static System.Collections.Generic.List<CAT34DataItem> I034DataItems = new System.Collections.Generic.List<CAT34DataItem>();
 
-        public static void Intitialize()
+        public static void Intitialize(bool Hard_Reset)
         {
 
-            I034DataItems.Clear();
+            if (!Hard_Reset)
+                foreach (CAT34.CAT34DataItem Item in CAT34.I034DataItems)
+                    Item.value = null;
+            else
+            {
+                I034DataItems.Clear();
 
-            // 1 I034/010 Data Source Identifier 
-            I034DataItems.Add(new CAT34DataItem());
-            I034DataItems[ItemIDToIndex("010")].ID = "010";
-            I034DataItems[ItemIDToIndex("010")].Description = "Data Source Identifier";
-            I034DataItems[ItemIDToIndex("010")].HasBeenPresent = false;
-            I034DataItems[ItemIDToIndex("010")].CurrentlyPresent = false;
+                // 1 I034/010 Data Source Identifier 
+                I034DataItems.Add(new CAT34DataItem());
+                I034DataItems[ItemIDToIndex("010")].ID = "010";
+                I034DataItems[ItemIDToIndex("010")].Description = "Data Source Identifier";
 
-            // 2 I034/000 Message Type
-            I034DataItems.Add(new CAT34DataItem());
-            I034DataItems[ItemIDToIndex("000")].ID = "000";
-            I034DataItems[ItemIDToIndex("000")].Description = "Message Type";
-            I034DataItems[ItemIDToIndex("000")].HasBeenPresent = false;
-            I034DataItems[ItemIDToIndex("000")].CurrentlyPresent = false;
+                I034DataItems[ItemIDToIndex("010")].HasBeenPresent = false;
+                I034DataItems[ItemIDToIndex("010")].CurrentlyPresent = false;
 
-            // 3 I034/030 Time-of-Day 
-            I034DataItems.Add(new CAT34DataItem());
-            I034DataItems[ItemIDToIndex("030")].ID = "030";
-            I034DataItems[ItemIDToIndex("030")].Description = "Time-of-Day";
-            I034DataItems[ItemIDToIndex("030")].HasBeenPresent = false;
-            I034DataItems[ItemIDToIndex("030")].CurrentlyPresent = false;
+                // 2 I034/000 Message Type
+                I034DataItems.Add(new CAT34DataItem());
+                I034DataItems[ItemIDToIndex("000")].ID = "000";
+                I034DataItems[ItemIDToIndex("000")].Description = "Message Type";
 
-            // 4 I034/020 Sector Number
-            I034DataItems.Add(new CAT34DataItem());
-            I034DataItems[ItemIDToIndex("020")].ID = "020";
-            I034DataItems[ItemIDToIndex("020")].Description = "Sector Number";
-            I034DataItems[ItemIDToIndex("020")].HasBeenPresent = false;
-            I034DataItems[ItemIDToIndex("020")].CurrentlyPresent = false;
+                I034DataItems[ItemIDToIndex("000")].HasBeenPresent = false;
+                I034DataItems[ItemIDToIndex("000")].CurrentlyPresent = false;
 
-            // 5 I034/041 Antenna Rotation Period 
-            I034DataItems.Add(new CAT34DataItem());
-            I034DataItems[ItemIDToIndex("041")].ID = "041";
-            I034DataItems[ItemIDToIndex("041")].Description = "Antenna Rotation Period ";
-            I034DataItems[ItemIDToIndex("041")].HasBeenPresent = false;
-            I034DataItems[ItemIDToIndex("041")].CurrentlyPresent = false;
+                // 3 I034/030 Time-of-Day 
+                I034DataItems.Add(new CAT34DataItem());
+                I034DataItems[ItemIDToIndex("030")].ID = "030";
+                I034DataItems[ItemIDToIndex("030")].Description = "Time-of-Day";
 
-            // 6 I034/050 System Configuration and Status 
-            I034DataItems.Add(new CAT34DataItem());
-            I034DataItems[ItemIDToIndex("050")].ID = "050";
-            I034DataItems[ItemIDToIndex("050")].Description = "System Configuration and Status";
-            I034DataItems[ItemIDToIndex("050")].HasBeenPresent = false;
-            I034DataItems[ItemIDToIndex("050")].CurrentlyPresent = false;
+                I034DataItems[ItemIDToIndex("030")].HasBeenPresent = false;
+                I034DataItems[ItemIDToIndex("030")].CurrentlyPresent = false;
 
-            // 7 I034/060 System Processing Mode                
-            I034DataItems.Add(new CAT34DataItem());
-            I034DataItems[ItemIDToIndex("060")].ID = "060";
-            I034DataItems[ItemIDToIndex("060")].Description = "System Processing Mode";
-            I034DataItems[ItemIDToIndex("060")].HasBeenPresent = false;
-            I034DataItems[ItemIDToIndex("060")].CurrentlyPresent = false;
+                // 4 I034/020 Sector Number
+                I034DataItems.Add(new CAT34DataItem());
+                I034DataItems[ItemIDToIndex("020")].ID = "020";
+                I034DataItems[ItemIDToIndex("020")].Description = "Sector Number";
 
-            // 8 I034/070 Message Count Values
-            I034DataItems.Add(new CAT34DataItem());
-            I034DataItems[ItemIDToIndex("070")].ID = "070";
-            I034DataItems[ItemIDToIndex("070")].Description = "Message Count Values";
-            I034DataItems[ItemIDToIndex("070")].HasBeenPresent = false;
-            I034DataItems[ItemIDToIndex("070")].CurrentlyPresent = false;
+                I034DataItems[ItemIDToIndex("020")].HasBeenPresent = false;
+                I034DataItems[ItemIDToIndex("020")].CurrentlyPresent = false;
 
-            // 9 I034/100 Generic Polar Window
-            I034DataItems.Add(new CAT34DataItem());
-            I034DataItems[ItemIDToIndex("100")].ID = "100";
-            I034DataItems[ItemIDToIndex("100")].Description = "Generic Polar Window";
-            I034DataItems[ItemIDToIndex("100")].HasBeenPresent = false;
-            I034DataItems[ItemIDToIndex("100")].CurrentlyPresent = false;
+                // 5 I034/041 Antenna Rotation Period 
+                I034DataItems.Add(new CAT34DataItem());
+                I034DataItems[ItemIDToIndex("041")].ID = "041";
+                I034DataItems[ItemIDToIndex("041")].Description = "Antenna Rotation Period ";
 
-            // 10 I034/110 Data Filter  
-            I034DataItems.Add(new CAT34DataItem());
-            I034DataItems[ItemIDToIndex("110")].ID = "110";
-            I034DataItems[ItemIDToIndex("110")].Description = "Data Filter";
-            I034DataItems[ItemIDToIndex("110")].HasBeenPresent = false;
-            I034DataItems[ItemIDToIndex("110")].CurrentlyPresent = false;
+                I034DataItems[ItemIDToIndex("041")].HasBeenPresent = false;
+                I034DataItems[ItemIDToIndex("041")].CurrentlyPresent = false;
 
-            // 11 I034/120 3D-Position of Data Source 
-            I034DataItems.Add(new CAT34DataItem());
-            I034DataItems[ItemIDToIndex("120")].ID = "120";
-            I034DataItems[ItemIDToIndex("120")].Description = "3D-Position of Data Source ";
-            I034DataItems[ItemIDToIndex("120")].HasBeenPresent = false;
-            I034DataItems[ItemIDToIndex("120")].CurrentlyPresent = false;
+                // 6 I034/050 System Configuration and Status 
+                I034DataItems.Add(new CAT34DataItem());
+                I034DataItems[ItemIDToIndex("050")].ID = "050";
+                I034DataItems[ItemIDToIndex("050")].Description = "System Configuration and Status";
 
-            // 12 I034/090 Collimation Error  
-            I034DataItems.Add(new CAT34DataItem());
-            I034DataItems[ItemIDToIndex("090")].ID = "090";
-            I034DataItems[ItemIDToIndex("090")].Description = "Collimation Error";
-            I034DataItems[ItemIDToIndex("090")].HasBeenPresent = false;
-            I034DataItems[ItemIDToIndex("090")].CurrentlyPresent = false;
+                I034DataItems[ItemIDToIndex("050")].HasBeenPresent = false;
+                I034DataItems[ItemIDToIndex("050")].CurrentlyPresent = false;
+
+                // 7 I034/060 System Processing Mode                
+                I034DataItems.Add(new CAT34DataItem());
+                I034DataItems[ItemIDToIndex("060")].ID = "060";
+                I034DataItems[ItemIDToIndex("060")].Description = "System Processing Mode";
+
+                I034DataItems[ItemIDToIndex("060")].HasBeenPresent = false;
+                I034DataItems[ItemIDToIndex("060")].CurrentlyPresent = false;
+
+                // 8 I034/070 Message Count Values
+                I034DataItems.Add(new CAT34DataItem());
+                I034DataItems[ItemIDToIndex("070")].ID = "070";
+                I034DataItems[ItemIDToIndex("070")].Description = "Message Count Values";
+
+                I034DataItems[ItemIDToIndex("070")].HasBeenPresent = false;
+                I034DataItems[ItemIDToIndex("070")].CurrentlyPresent = false;
+
+                // 9 I034/100 Generic Polar Window
+                I034DataItems.Add(new CAT34DataItem());
+                I034DataItems[ItemIDToIndex("100")].ID = "100";
+                I034DataItems[ItemIDToIndex("100")].Description = "Generic Polar Window";
+
+                I034DataItems[ItemIDToIndex("100")].HasBeenPresent = false;
+                I034DataItems[ItemIDToIndex("100")].CurrentlyPresent = false;
+
+                // 10 I034/110 Data Filter  
+                I034DataItems.Add(new CAT34DataItem());
+                I034DataItems[ItemIDToIndex("110")].ID = "110";
+                I034DataItems[ItemIDToIndex("110")].Description = "Data Filter";
+
+                I034DataItems[ItemIDToIndex("110")].HasBeenPresent = false;
+                I034DataItems[ItemIDToIndex("110")].CurrentlyPresent = false;
+
+                // 11 I034/120 3D-Position of Data Source 
+                I034DataItems.Add(new CAT34DataItem());
+                I034DataItems[ItemIDToIndex("120")].ID = "120";
+                I034DataItems[ItemIDToIndex("120")].Description = "3D-Position of Data Source ";
+
+                I034DataItems[ItemIDToIndex("120")].HasBeenPresent = false;
+                I034DataItems[ItemIDToIndex("120")].CurrentlyPresent = false;
+
+                // 12 I034/090 Collimation Error  
+                I034DataItems.Add(new CAT34DataItem());
+                I034DataItems[ItemIDToIndex("090")].ID = "090";
+                I034DataItems[ItemIDToIndex("090")].Description = "Collimation Error";
+
+                I034DataItems[ItemIDToIndex("090")].HasBeenPresent = false;
+                I034DataItems[ItemIDToIndex("090")].CurrentlyPresent = false;
+            }
+
         }
 
 

@@ -237,261 +237,304 @@ namespace AsterixDisplayAnalyser
         //
         // Based on the data item identifer
 
-        private static void Handle_Type_Of_Report()
+        private static void Handle_Type_Of_Report(bool Hard_R)
         {
-            I001DataItems.Clear();
-
-            if (Type_Of_Report == CAT01I020Types.Type_Of_Report_Type.Plot)
+            if (!Hard_R)
             {
-                // 1  I001/010 Data Source Identifier 
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("010")].ID = "010";
-                I001DataItems[ItemIDToIndex("010")].Description = "Data Source Identifier";
-                I001DataItems[ItemIDToIndex("010")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("010")].CurrentlyPresent = false;
-
-                // 2  I001/020 Target Report Descriptor  
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("020")].ID = "020";
-                I001DataItems[ItemIDToIndex("020")].Description = "Target Report Descriptor";
-                I001DataItems[ItemIDToIndex("020")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("020")].CurrentlyPresent = false;
-
-                // 3  I001/040 Measured Position in Polar Coordinates
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("040")].ID = "040";
-                I001DataItems[ItemIDToIndex("040")].Description = "Measured Position in Polar Coordinates";
-                I001DataItems[ItemIDToIndex("040")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("040")].CurrentlyPresent = false;
-
-                // 4  I001/070 Mode-3/A Code in Octal Representation 
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("070")].ID = "070";
-                I001DataItems[ItemIDToIndex("070")].Description = "Mode-3/A Code in Octal Representation";
-                I001DataItems[ItemIDToIndex("070")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("070")].CurrentlyPresent = false;
-
-                // 5  I001/090 Mode-C Code in Binary Representation 
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("090")].ID = "090";
-                I001DataItems[ItemIDToIndex("090")].Description = "Mode-C Code in Binary Representation";
-                I001DataItems[ItemIDToIndex("090")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("090")].CurrentlyPresent = false;
-
-                // 6  I001/130 Radar Plot Characteristics  
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("130")].ID = "130";
-                I001DataItems[ItemIDToIndex("130")].Description = "Radar Plot Characteristics";
-                I001DataItems[ItemIDToIndex("130")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("130")].CurrentlyPresent = false;
-
-                // 7  I001/141 Truncated Time of Day                        
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("141")].ID = "141";
-                I001DataItems[ItemIDToIndex("141")].Description = "Truncated Time of Day";
-                I001DataItems[ItemIDToIndex("141")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("141")].CurrentlyPresent = false;
-
-                // 8   I001/050 Mode-2 Code in Octal Representation  
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("050")].ID = "050";
-                I001DataItems[ItemIDToIndex("050")].Description = "Mode-2 Code in Octal Representation";
-                I001DataItems[ItemIDToIndex("050")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("050")].CurrentlyPresent = false;
-
-                // 9   I001/120 Measured Radial Doppler Speed  
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("120")].ID = "120";
-                I001DataItems[ItemIDToIndex("120")].Description = "Measured Radial Doppler Speed";
-                I001DataItems[ItemIDToIndex("120")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("120")].CurrentlyPresent = false;
-
-                // 10  I001/131 Received Power  
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("131")].ID = "131";
-                I001DataItems[ItemIDToIndex("131")].Description = "Received Power";
-                I001DataItems[ItemIDToIndex("131")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("131")].CurrentlyPresent = false;
-
-                // 11  I001/080 Mode-3/A Code Confidence Indicator 
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("080")].ID = "080";
-                I001DataItems[ItemIDToIndex("080")].Description = "Mode-3/A Code Confidence Indicator ";
-                I001DataItems[ItemIDToIndex("080")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("080")].CurrentlyPresent = false;
-
-                // 12  I001/100 Mode-C Code and Code Confidence Indicator
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("100")].ID = "100";
-                I001DataItems[ItemIDToIndex("100")].Description = "Mode-C Code and Code Confidence Indicator";
-                I001DataItems[ItemIDToIndex("100")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("100")].CurrentlyPresent = false;
-
-                // 13  I001/060 Mode-2 Code Confidence Indicator  
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("060")].ID = "060";
-                I001DataItems[ItemIDToIndex("060")].Description = "Mode-2 Code Confidence Indicator ";
-                I001DataItems[ItemIDToIndex("060")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("060")].CurrentlyPresent = false;
-
-                // 14  I001/030 Warning/Error Conditions                    
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("030")].ID = "030";
-                I001DataItems[ItemIDToIndex("030")].Description = "Warning/Error Conditions";
-                I001DataItems[ItemIDToIndex("030")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("030")].CurrentlyPresent = false;
-
-                // 15  I001/150 Presence of X-Pulse                         
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("150")].ID = "150";
-                I001DataItems[ItemIDToIndex("150")].Description = "Presence of X-Pulse";
-                I001DataItems[ItemIDToIndex("150")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("150")].CurrentlyPresent = false;
-
+                foreach (CAT01.CAT01DataItem Item in CAT01.I001DataItems)
+                    Item.value = null;
             }
             else
             {
+                I001DataItems.Clear();
 
-                // 1.  I001/010 Data Source Identifier
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("010")].ID = "010";
-                I001DataItems[ItemIDToIndex("010")].Description = "Data Source Identifier";
-                I001DataItems[ItemIDToIndex("010")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("010")].CurrentlyPresent = false;
+                if (Type_Of_Report == CAT01I020Types.Type_Of_Report_Type.Plot)
+                {
+                    // 1  I001/010 Data Source Identifier 
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("010")].ID = "010";
+                    I001DataItems[ItemIDToIndex("010")].Description = "Data Source Identifier";
 
-                // 2.  I001/020 Target Report Descriptor
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("020")].ID = "020";
-                I001DataItems[ItemIDToIndex("020")].Description = "Target Report Descriptor";
-                I001DataItems[ItemIDToIndex("020")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("020")].CurrentlyPresent = false;
+                    I001DataItems[ItemIDToIndex("010")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("010")].CurrentlyPresent = false;
 
-                // 3.  I001/161 Track/Plot Number
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("161")].ID = "161";
-                I001DataItems[ItemIDToIndex("161")].Description = "Track/Plot Number";
-                I001DataItems[ItemIDToIndex("161")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("161")].CurrentlyPresent = false;
+                    // 2  I001/020 Target Report Descriptor  
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("020")].ID = "020";
+                    I001DataItems[ItemIDToIndex("020")].Description = "Target Report Descriptor";
 
-                // 4.  I001/040 Measured Position in Polar Coordinates
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("040")].ID = "040";
-                I001DataItems[ItemIDToIndex("040")].Description = "Measured Position in Polar Coordinates";
-                I001DataItems[ItemIDToIndex("040")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("040")].CurrentlyPresent = false;
+                    I001DataItems[ItemIDToIndex("020")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("020")].CurrentlyPresent = false;
 
-                // 5.  I001/042 Calculated Position in Cartesian Coordinates
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("042")].ID = "042";
-                I001DataItems[ItemIDToIndex("042")].Description = "Calculated Position in Cartesian Coordinates";
-                I001DataItems[ItemIDToIndex("042")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("042")].CurrentlyPresent = false;
+                    // 3  I001/040 Measured Position in Polar Coordinates
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("040")].ID = "040";
+                    I001DataItems[ItemIDToIndex("040")].Description = "Measured Position in Polar Coordinates";
 
-                // 6.  I001/200 Calculated Track Velocity in polar Coordinates
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("200")].ID = "200";
-                I001DataItems[ItemIDToIndex("200")].Description = "Calculated Track Velocity in polar Coordinates";
-                I001DataItems[ItemIDToIndex("200")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("200")].CurrentlyPresent = false;
+                    I001DataItems[ItemIDToIndex("040")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("040")].CurrentlyPresent = false;
 
-                // 7.  I001/070 Mode-3/A Code in Octal Representation
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("070")].ID = "070";
-                I001DataItems[ItemIDToIndex("070")].Description = "Mode-3/A Code in Octal Representation";
-                I001DataItems[ItemIDToIndex("070")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("070")].CurrentlyPresent = false;
+                    // 4  I001/070 Mode-3/A Code in Octal Representation 
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("070")].ID = "070";
+                    I001DataItems[ItemIDToIndex("070")].Description = "Mode-3/A Code in Octal Representation";
 
-                // 8.  I001/090 Mode-C Code in Binary Representation
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("090")].ID = "090";
-                I001DataItems[ItemIDToIndex("090")].Description = "Mode-C Code in Binary Representation";
-                I001DataItems[ItemIDToIndex("090")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("090")].CurrentlyPresent = false;
+                    I001DataItems[ItemIDToIndex("070")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("070")].CurrentlyPresent = false;
 
-                // 9.  I001/141 Truncated Time of Day
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("141")].ID = "141";
-                I001DataItems[ItemIDToIndex("141")].Description = "Truncated Time of Day";
-                I001DataItems[ItemIDToIndex("141")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("141")].CurrentlyPresent = false;
+                    // 5  I001/090 Mode-C Code in Binary Representation 
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("090")].ID = "090";
+                    I001DataItems[ItemIDToIndex("090")].Description = "Mode-C Code in Binary Representation";
 
-                // 10. I001/130 Radar Plot Characteristics
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("130")].ID = "130";
-                I001DataItems[ItemIDToIndex("130")].Description = "Radar Plot Characteristics";
-                I001DataItems[ItemIDToIndex("130")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("130")].CurrentlyPresent = false;
+                    I001DataItems[ItemIDToIndex("090")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("090")].CurrentlyPresent = false;
 
-                // 11. I001/131 Received Power
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("131")].ID = "131";
-                I001DataItems[ItemIDToIndex("131")].Description = "Received Power";
-                I001DataItems[ItemIDToIndex("131")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("131")].CurrentlyPresent = false;
+                    // 6  I001/130 Radar Plot Characteristics  
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("130")].ID = "130";
+                    I001DataItems[ItemIDToIndex("130")].Description = "Radar Plot Characteristics";
 
-                // 12. I001/120 Measured Radial Doppler Speed
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("120")].ID = "120";
-                I001DataItems[ItemIDToIndex("120")].Description = "Measured Radial Doppler Speed";
-                I001DataItems[ItemIDToIndex("120")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("120")].CurrentlyPresent = false;
+                    I001DataItems[ItemIDToIndex("130")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("130")].CurrentlyPresent = false;
 
-                // 13. I001/170 Track Status
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("170")].ID = "170";
-                I001DataItems[ItemIDToIndex("170")].Description = "Track Status";
-                I001DataItems[ItemIDToIndex("170")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("170")].CurrentlyPresent = false;
+                    // 7  I001/141 Truncated Time of Day                        
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("141")].ID = "141";
+                    I001DataItems[ItemIDToIndex("141")].Description = "Truncated Time of Day";
 
-                // 14. I001/210 Track Quality
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("210")].ID = "210";
-                I001DataItems[ItemIDToIndex("210")].Description = "Track Quality";
-                I001DataItems[ItemIDToIndex("210")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("210")].CurrentlyPresent = false;
+                    I001DataItems[ItemIDToIndex("141")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("141")].CurrentlyPresent = false;
+
+                    // 8   I001/050 Mode-2 Code in Octal Representation  
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("050")].ID = "050";
+                    I001DataItems[ItemIDToIndex("050")].Description = "Mode-2 Code in Octal Representation";
+
+                    I001DataItems[ItemIDToIndex("050")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("050")].CurrentlyPresent = false;
+
+                    // 9   I001/120 Measured Radial Doppler Speed  
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("120")].ID = "120";
+                    I001DataItems[ItemIDToIndex("120")].Description = "Measured Radial Doppler Speed";
+
+                    I001DataItems[ItemIDToIndex("120")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("120")].CurrentlyPresent = false;
+
+                    // 10  I001/131 Received Power  
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("131")].ID = "131";
+                    I001DataItems[ItemIDToIndex("131")].Description = "Received Power";
+
+                    I001DataItems[ItemIDToIndex("131")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("131")].CurrentlyPresent = false;
+
+                    // 11  I001/080 Mode-3/A Code Confidence Indicator 
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("080")].ID = "080";
+                    I001DataItems[ItemIDToIndex("080")].Description = "Mode-3/A Code Confidence Indicator ";
+
+                    I001DataItems[ItemIDToIndex("080")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("080")].CurrentlyPresent = false;
+
+                    // 12  I001/100 Mode-C Code and Code Confidence Indicator
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("100")].ID = "100";
+                    I001DataItems[ItemIDToIndex("100")].Description = "Mode-C Code and Code Confidence Indicator";
+
+                    I001DataItems[ItemIDToIndex("100")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("100")].CurrentlyPresent = false;
+
+                    // 13  I001/060 Mode-2 Code Confidence Indicator  
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("060")].ID = "060";
+                    I001DataItems[ItemIDToIndex("060")].Description = "Mode-2 Code Confidence Indicator ";
+
+                    I001DataItems[ItemIDToIndex("060")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("060")].CurrentlyPresent = false;
+
+                    // 14  I001/030 Warning/Error Conditions                    
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("030")].ID = "030";
+                    I001DataItems[ItemIDToIndex("030")].Description = "Warning/Error Conditions";
+
+                    I001DataItems[ItemIDToIndex("030")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("030")].CurrentlyPresent = false;
+
+                    // 15  I001/150 Presence of X-Pulse                         
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("150")].ID = "150";
+                    I001DataItems[ItemIDToIndex("150")].Description = "Presence of X-Pulse";
+
+                    I001DataItems[ItemIDToIndex("150")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("150")].CurrentlyPresent = false;
+
+                }
+                else
+                {
+
+                    // 1.  I001/010 Data Source Identifier
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("010")].ID = "010";
+                    I001DataItems[ItemIDToIndex("010")].Description = "Data Source Identifier";
+
+                    I001DataItems[ItemIDToIndex("010")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("010")].CurrentlyPresent = false;
+
+                    // 2.  I001/020 Target Report Descriptor
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("020")].ID = "020";
+                    I001DataItems[ItemIDToIndex("020")].Description = "Target Report Descriptor";
+
+                    I001DataItems[ItemIDToIndex("020")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("020")].CurrentlyPresent = false;
+
+                    // 3.  I001/161 Track/Plot Number
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("161")].ID = "161";
+                    I001DataItems[ItemIDToIndex("161")].Description = "Track/Plot Number";
+
+                    I001DataItems[ItemIDToIndex("161")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("161")].CurrentlyPresent = false;
+
+                    // 4.  I001/040 Measured Position in Polar Coordinates
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("040")].ID = "040";
+                    I001DataItems[ItemIDToIndex("040")].Description = "Measured Position in Polar Coordinates";
+
+                    I001DataItems[ItemIDToIndex("040")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("040")].CurrentlyPresent = false;
+
+                    // 5.  I001/042 Calculated Position in Cartesian Coordinates
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("042")].ID = "042";
+                    I001DataItems[ItemIDToIndex("042")].Description = "Calculated Position in Cartesian Coordinates";
+
+                    I001DataItems[ItemIDToIndex("042")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("042")].CurrentlyPresent = false;
+
+                    // 6.  I001/200 Calculated Track Velocity in polar Coordinates
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("200")].ID = "200";
+                    I001DataItems[ItemIDToIndex("200")].Description = "Calculated Track Velocity in polar Coordinates";
+
+                    I001DataItems[ItemIDToIndex("200")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("200")].CurrentlyPresent = false;
+
+                    // 7.  I001/070 Mode-3/A Code in Octal Representation
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("070")].ID = "070";
+                    I001DataItems[ItemIDToIndex("070")].Description = "Mode-3/A Code in Octal Representation";
+
+                    I001DataItems[ItemIDToIndex("070")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("070")].CurrentlyPresent = false;
+
+                    // 8.  I001/090 Mode-C Code in Binary Representation
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("090")].ID = "090";
+                    I001DataItems[ItemIDToIndex("090")].Description = "Mode-C Code in Binary Representation";
+
+                    I001DataItems[ItemIDToIndex("090")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("090")].CurrentlyPresent = false;
+
+                    // 9.  I001/141 Truncated Time of Day
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("141")].ID = "141";
+                    I001DataItems[ItemIDToIndex("141")].Description = "Truncated Time of Day";
+
+                    I001DataItems[ItemIDToIndex("141")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("141")].CurrentlyPresent = false;
+
+                    // 10. I001/130 Radar Plot Characteristics
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("130")].ID = "130";
+                    I001DataItems[ItemIDToIndex("130")].Description = "Radar Plot Characteristics";
+
+                    I001DataItems[ItemIDToIndex("130")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("130")].CurrentlyPresent = false;
+
+                    // 11. I001/131 Received Power
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("131")].ID = "131";
+                    I001DataItems[ItemIDToIndex("131")].Description = "Received Power";
+
+                    I001DataItems[ItemIDToIndex("131")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("131")].CurrentlyPresent = false;
+
+                    // 12. I001/120 Measured Radial Doppler Speed
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("120")].ID = "120";
+                    I001DataItems[ItemIDToIndex("120")].Description = "Measured Radial Doppler Speed";
+
+                    I001DataItems[ItemIDToIndex("120")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("120")].CurrentlyPresent = false;
+
+                    // 13. I001/170 Track Status
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("170")].ID = "170";
+                    I001DataItems[ItemIDToIndex("170")].Description = "Track Status";
+
+                    I001DataItems[ItemIDToIndex("170")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("170")].CurrentlyPresent = false;
+
+                    // 14. I001/210 Track Quality
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("210")].ID = "210";
+                    I001DataItems[ItemIDToIndex("210")].Description = "Track Quality";
+
+                    I001DataItems[ItemIDToIndex("210")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("210")].CurrentlyPresent = false;
 
 
-                // 15. I001/050 Mode-2 Code in Octal Representation
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("050")].ID = "050";
-                I001DataItems[ItemIDToIndex("050")].Description = "Mode-2 Code in Octal Representation";
-                I001DataItems[ItemIDToIndex("050")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("050")].CurrentlyPresent = false;
+                    // 15. I001/050 Mode-2 Code in Octal Representation
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("050")].ID = "050";
+                    I001DataItems[ItemIDToIndex("050")].Description = "Mode-2 Code in Octal Representation";
 
-                // 16. I001/080 Mode-3/A Code Confidence Indica
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("080")].ID = "080";
-                I001DataItems[ItemIDToIndex("080")].Description = "Mode-3/A Code Confidence Indica";
-                I001DataItems[ItemIDToIndex("080")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("080")].CurrentlyPresent = false;
+                    I001DataItems[ItemIDToIndex("050")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("050")].CurrentlyPresent = false;
 
-                // 17. I001/100 Mode-C Code and Code Confidence Indicator
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("100")].ID = "100";
-                I001DataItems[ItemIDToIndex("100")].Description = "Mode-C Code and Code Confidence Indicator";
-                I001DataItems[ItemIDToIndex("100")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("100")].CurrentlyPresent = false;
+                    // 16. I001/080 Mode-3/A Code Confidence Indica
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("080")].ID = "080";
+                    I001DataItems[ItemIDToIndex("080")].Description = "Mode-3/A Code Confidence Indica";
 
-                // 18. I001/060 Mode-2 Code Confidence Indicator
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("060")].ID = "060";
-                I001DataItems[ItemIDToIndex("060")].Description = "Mode-2 Code Confidence Indicator";
-                I001DataItems[ItemIDToIndex("060")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("060")].CurrentlyPresent = false;
+                    I001DataItems[ItemIDToIndex("080")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("080")].CurrentlyPresent = false;
 
-                // 19. I001/030 Warning/Error Conditions
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("030")].ID = "030";
-                I001DataItems[ItemIDToIndex("030")].Description = "Warning/Error Conditions";
-                I001DataItems[ItemIDToIndex("030")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("010")].CurrentlyPresent = false;
+                    // 17. I001/100 Mode-C Code and Code Confidence Indicator
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("100")].ID = "100";
+                    I001DataItems[ItemIDToIndex("100")].Description = "Mode-C Code and Code Confidence Indicator";
 
-                // 20  I001/150 Presence of X-Pulse                         
-                I001DataItems.Add(new CAT01DataItem());
-                I001DataItems[ItemIDToIndex("150")].ID = "150";
-                I001DataItems[ItemIDToIndex("150")].Description = "Presence of X-Pulse";
-                I001DataItems[ItemIDToIndex("150")].HasBeenPresent = false;
-                I001DataItems[ItemIDToIndex("150")].CurrentlyPresent = false;
+                    I001DataItems[ItemIDToIndex("100")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("100")].CurrentlyPresent = false;
+
+                    // 18. I001/060 Mode-2 Code Confidence Indicator
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("060")].ID = "060";
+                    I001DataItems[ItemIDToIndex("060")].Description = "Mode-2 Code Confidence Indicator";
+
+                    I001DataItems[ItemIDToIndex("060")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("060")].CurrentlyPresent = false;
+
+                    // 19. I001/030 Warning/Error Conditions
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("030")].ID = "030";
+                    I001DataItems[ItemIDToIndex("030")].Description = "Warning/Error Conditions";
+
+                    I001DataItems[ItemIDToIndex("030")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("010")].CurrentlyPresent = false;
+
+                    // 20  I001/150 Presence of X-Pulse                         
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("150")].ID = "150";
+                    I001DataItems[ItemIDToIndex("150")].Description = "Presence of X-Pulse";
+
+                    I001DataItems[ItemIDToIndex("150")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("150")].CurrentlyPresent = false;
+                }
             }
         }
 
@@ -505,9 +548,9 @@ namespace AsterixDisplayAnalyser
 
         }
 
-        public static void Intitialize()
+        public static void Intitialize(bool Hard_Reset)
         {
-            Handle_Type_Of_Report();
+            Handle_Type_Of_Report(Hard_Reset);
         }
 
         // This method extracts the 8th bit of the Data Item I001/020, Target Report Descriptor
@@ -532,7 +575,7 @@ namespace AsterixDisplayAnalyser
             if (Previous_Type_Of_Report != Type_Of_Report)
             {
                 Previous_Type_Of_Report = Type_Of_Report;
-                Handle_Type_Of_Report();
+                Handle_Type_Of_Report(true);
             }
         }
 

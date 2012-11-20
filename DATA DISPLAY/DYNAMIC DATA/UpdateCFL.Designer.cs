@@ -48,7 +48,7 @@
             "400",
             "500",
             "600"});
-            this.comboBox1.Location = new System.Drawing.Point(0, 16);
+            this.comboBox1.Location = new System.Drawing.Point(1, 16);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(75, 21);
