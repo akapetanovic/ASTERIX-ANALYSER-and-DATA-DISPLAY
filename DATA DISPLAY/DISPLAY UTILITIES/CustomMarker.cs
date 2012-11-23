@@ -58,7 +58,7 @@ namespace AsterixDisplayAnalyser
         public Point LabelOffset = new Point(25, 25);
 
         // Defines the size of the label
-        private int LabelWidth = 90;
+        private int LabelWidth = 110;
         private int LabelHeight = 50;
         private int SpacingIndex = 2;
         public bool ShowLabelBox = false;
@@ -92,6 +92,15 @@ namespace AsterixDisplayAnalyser
         public static FontFamily CFL_FONT_FAMILLY = FontFamily.GenericSansSerif;
         public Font CFL_FONT = new Font(CFL_FONT_FAMILLY, 10, FontStyle.Regular, GraphicsUnit.Pixel);
         public string CFL_STRING = " ---";
+
+        // Define GSPD attributes
+        public Point GSPD_OFFSET = new Point(2, 0);
+        private int GSPD_START_X = 0;
+        private int GSPD_START_Y = 0;
+        public Brush GSPD_BRUSH = Brushes.Green;
+        public static FontFamily GSPD_FONT_FAMILLY = FontFamily.GenericSansSerif;
+        public Font GSPD_FONT = new Font(GSPD_FONT_FAMILLY, 10, FontStyle.Regular, GraphicsUnit.Pixel);
+        public string GSPD_STRING = " ---";
 
         // Define Assigned HDG attributes
         public Point A_HDG_OFFSET = new Point(2, 0);
@@ -127,6 +136,7 @@ namespace AsterixDisplayAnalyser
         public string MACH = "N/A";
         public string M_HDG = "N/A";
         public string TRK = "N/A";
+        public string Roll_Angle = "N/A";
         ///////////////////////////////////////////////////////////
         
         // To be called once the track is terminated
@@ -162,6 +172,11 @@ namespace AsterixDisplayAnalyser
             return new Point(SPD_START_X, SPD_START_Y);
         }
 
+        public Point GetGSPDStartPoint()
+        {
+            return new Point(GSPD_START_X, GSPD_START_Y);
+        }
+
         // Returns starting point of the label box
         public Point GetLabelStartingPoint()
         {
@@ -185,6 +200,9 @@ namespace AsterixDisplayAnalyser
             
             // Draw AC Symbol
             g.DrawRectangle(MyPen, LocalPosition.X, LocalPosition.Y, 10, 10);
+
+            // Here draw speed vector
+
 
             MyPen = new Pen(new SolidBrush(LabelAttributes.LineColor), LabelAttributes.LineWidth);
             MyPen.DashStyle = LabelAttributes.LineStyle;
@@ -215,13 +233,20 @@ namespace AsterixDisplayAnalyser
             g.DrawString(ModeC_STRING, ModeC_FONT, ModeC_BRUSH, LabelStartPosition.X + ModeC_OFFSET.X, LabelStartPosition.Y + LabelHeight);
 
             // Draw CFL on the same line
-            CFL_OFFSET.X = (ModeC_STRING.Length + 0) * (int)ModeC_FONT.Size;
+            CFL_OFFSET.X = ModeC_STRING.Length * (int)ModeC_FONT.Size;
             CFL_OFFSET.Y = LabelStartPosition.Y + LabelHeight;
             g.DrawString(CFL_STRING, CFL_FONT, CFL_BRUSH, LabelStartPosition.X + CFL_OFFSET.X, CFL_OFFSET.Y);
             CFL_START_X = LabelStartPosition.X + CFL_OFFSET.X;
             CFL_START_Y = CFL_OFFSET.Y;
-            
-            LabelHeight = LabelHeight + (int)ModeC_FONT.Size + SpacingIndex * 2;
+
+            // Draw GSPD on the same line
+            GSPD_OFFSET.X = (ModeC_STRING.Length * (int)ModeC_FONT.Size) + (CFL_STRING.Length * (int)CFL_FONT.Size) - 10;
+            GSPD_OFFSET.Y = LabelStartPosition.Y + LabelHeight;
+            g.DrawString(GSPD_STRING, GSPD_FONT, GSPD_BRUSH, LabelStartPosition.X + GSPD_OFFSET.X, GSPD_OFFSET.Y);
+            GSPD_START_X = LabelStartPosition.X + GSPD_OFFSET.X;
+            GSPD_START_Y = GSPD_OFFSET.Y;
+
+            LabelHeight = LabelHeight + (int)GSPD_FONT.Size + SpacingIndex * 2;
 
             if (ShowLabelBox == true)
             {

@@ -39,11 +39,20 @@ CAT62
 			Subfield # 3:  Magnetic Heading
 			Subfield # 5:  True Airspeed (TAS)
 			Subfield # 17: Track Angle
+			Subfield # 18: Ground Speed
 			Subfield # 26: Indicated Airspeed (IAS)
 			Subfield # 27: Mach Number
+
+			Roll Angle
+			COM, ACAS and Flight Status
 			
 
 VERSION HISTORY
+
+Version 2.0
+
+	1. Added decoder and Track Label readout: 062/280 Ground Speed
+	2. 
 
 Version 1.9 
 

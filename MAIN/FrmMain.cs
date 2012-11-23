@@ -849,6 +849,8 @@ namespace AsterixDisplayAnalyser
             Label_Data.IAS = Target_Data.IAS;
             Label_Data.MACH = Target_Data.MACH;
             Label_Data.TAS = Target_Data.TAS;
+            Label_Data.GSPD_STRING = Target_Data.GSPD;
+            Label_Data.Roll_Angle = Target_Data.Roll_Ang;
         }
 
         private string ApplyCModeHisterysis(string Mode_C_In)
@@ -894,8 +896,12 @@ namespace AsterixDisplayAnalyser
             FontStyle.Bold | FontStyle.Regular);
             Marker_In.ModeC_BRUSH = new SolidBrush(LabelAttributes.TextColor);
 
-            Marker_In.CFL_FONT = new Font(LabelAttributes.TextFont, LabelAttributes.TextSize,
+            Marker_In.GSPD_FONT = new Font(LabelAttributes.TextFont, LabelAttributes.TextSize,
             FontStyle.Bold | FontStyle.Regular);
+            Marker_In.GSPD_BRUSH = new SolidBrush(LabelAttributes.TextColor);
+
+            Marker_In.CFL_FONT = new Font(LabelAttributes.TextFont, LabelAttributes.TextSize,
+           FontStyle.Bold | FontStyle.Regular);
             Marker_In.CFL_BRUSH = new SolidBrush(LabelAttributes.TextColor);
 
             Marker_In.A_HDG_FONT = new Font(LabelAttributes.TextFont, LabelAttributes.TextSize,
@@ -1324,8 +1330,6 @@ namespace AsterixDisplayAnalyser
                                     MyMarker.ShowLabelBox = true;
                                     gMapControl.Refresh();
 
-                                    ///////////////////////////////////////////////////
-                                    // OK this must be the lable where the mouse is
                                     if (ExtendedLabel.Visible)
                                     {
                                         Mouse_Not_Over_Label = false;
@@ -1357,6 +1361,7 @@ namespace AsterixDisplayAnalyser
             ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.MACH, MarkerData.MACH);
             ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.TAS, MarkerData.TAS);
             ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.TRK, MarkerData.TRK);
+            ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.Roll_Angle, MarkerData.Roll_Angle);
         }
 
         private void aircraftAddressToolStripMenuItem_Click(object sender, EventArgs e)

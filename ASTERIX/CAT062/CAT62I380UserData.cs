@@ -48,8 +48,48 @@ namespace AsterixDisplayAnalyser
             double MN_14 = MN_13 * 2.0;
             double MN_15 = MN_14 * 2.0;
             double MN_16 = MN_15 * 2.0;
+            ////////////////////////////////////////////////////////////////////
 
             ///////////////////////////////////////////////////////////////////
+            // GSPD NUMBER DECODE CONSTANTS
+            double GSPD_1 = Math.Pow(2, (-14));
+            double GSPD_2 = GSPD_1 * 2.0;
+            double GSPD_3 = GSPD_2 * 2.0;
+            double GSPD_4 = GSPD_3 * 2.0;
+            double GSPD_5 = GSPD_4 * 2.0;
+            double GSPD_6 = GSPD_5 * 2.0;
+            double GSPD_7 = GSPD_6 * 2.0;
+            double GSPD_8 = GSPD_7 * 2.0;
+            double GSPD_9 = GSPD_8 * 2.0;
+            double GSPD_10 = GSPD_9 * 2.0;
+            double GSPD_11 = GSPD_10 * 2.0;
+            double GSPD_12 = GSPD_11 * 2.0;
+            double GSPD_13 = GSPD_12 * 2.0;
+            double GSPD_14 = GSPD_13 * 2.0;
+            double GSPD_15 = GSPD_14 * 2.0;
+            double GSPD_16 = GSPD_15 * 2.0;
+            ////////////////////////////////////////////////////////////////////
+
+            ///////////////////////////////////////////////////////////////////
+            // Roll Angle NUMBER DECODE CONSTANTS
+            double Roll_A_1 = 0.01;
+            double Roll_A_2 = Roll_A_1 * 2.0;
+            double Roll_A_3 = Roll_A_2 * 2.0;
+            double Roll_A_4 = Roll_A_3 * 2.0;
+            double Roll_A_5 = Roll_A_4 * 2.0;
+            double Roll_A_6 = Roll_A_5 * 2.0;
+            double Roll_A_7 = Roll_A_6 * 2.0;
+            double Roll_A_8 = Roll_A_7 * 2.0;
+            double Roll_A_9 = Roll_A_8 * 2.0;
+            double Roll_A_10 = Roll_A_9 * 2.0;
+            double Roll_A_11 = Roll_A_10 * 2.0;
+            double Roll_A_12 = Roll_A_11 * 2.0;
+            double Roll_A_13 = Roll_A_12 * 2.0;
+            double Roll_A_14 = Roll_A_13 * 2.0;
+            double Roll_A_15 = Roll_A_14 * 2.0;
+            double Roll_A_16 = Roll_A_15 * 2.0;
+            ////////////////////////////////////////////////////////////////////
+
 
             // Define a global record for all data, then down there depending on the avalability of each field
             // populate specific items. Each item has validity flag that needs to be set for each available data
@@ -199,7 +239,6 @@ namespace AsterixDisplayAnalyser
             }
             if (WORD0.DWord[CAT62I380Types.Magnetic_Heading] == true)
             {
-
                 Bit_Ops BO = new Bit_Ops();
                 BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 1];
                 BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
@@ -301,7 +340,108 @@ namespace AsterixDisplayAnalyser
             // WORD2
             if (WORD2.DWord[CAT62I380Types.Roll_Angle] == true)
             {
+                //(LSB) = 0.01 degree
+                //-180 ≤ Roll Angle ≤ 180
+                
+                Bit_Ops BO = new Bit_Ops();
+                BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 1];
+                BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
+
+                double RA = 0.0;
+
+                if (BO.DWord[Bit_Ops.Bit15])
+                {
+                    // Invert each bit
+                    BO.DWord[Bit_Ops.Bit0] = !BO.DWord[Bit_Ops.Bit0];
+                    BO.DWord[Bit_Ops.Bit1] = !BO.DWord[Bit_Ops.Bit1];
+                    BO.DWord[Bit_Ops.Bit2] = !BO.DWord[Bit_Ops.Bit2];
+                    BO.DWord[Bit_Ops.Bit3] = !BO.DWord[Bit_Ops.Bit3];
+                    BO.DWord[Bit_Ops.Bit4] = !BO.DWord[Bit_Ops.Bit4];
+                    BO.DWord[Bit_Ops.Bit5] = !BO.DWord[Bit_Ops.Bit5];
+                    BO.DWord[Bit_Ops.Bit6] = !BO.DWord[Bit_Ops.Bit6];
+                    BO.DWord[Bit_Ops.Bit7] = !BO.DWord[Bit_Ops.Bit7];
+                    BO.DWord[Bit_Ops.Bit8] = !BO.DWord[Bit_Ops.Bit8];
+                    BO.DWord[Bit_Ops.Bit9] = !BO.DWord[Bit_Ops.Bit9];
+                    BO.DWord[Bit_Ops.Bit10] = !BO.DWord[Bit_Ops.Bit10];
+                    BO.DWord[Bit_Ops.Bit11] = !BO.DWord[Bit_Ops.Bit11];
+                    BO.DWord[Bit_Ops.Bit12] = !BO.DWord[Bit_Ops.Bit12];
+                    BO.DWord[Bit_Ops.Bit13] = !BO.DWord[Bit_Ops.Bit13];
+                    BO.DWord[Bit_Ops.Bit14] = !BO.DWord[Bit_Ops.Bit14];
+                    BO.DWord[Bit_Ops.Bit15] = !BO.DWord[Bit_Ops.Bit15];
+
+                    BO.DWord[Bit_Ops.Bits0_15_Of_DWord] = BO.DWord[Bit_Ops.Bits0_15_Of_DWord] + 1;
+
+                     if (BO.DWord[Bit_Ops.Bit0])
+                        RA = Roll_A_1;
+                    if (BO.DWord[Bit_Ops.Bit1])
+                        RA = RA + Roll_A_2;
+                    if (BO.DWord[Bit_Ops.Bit2])
+                        RA = RA + Roll_A_3;
+                    if (BO.DWord[Bit_Ops.Bit3])
+                        RA = RA + Roll_A_4;
+                    if (BO.DWord[Bit_Ops.Bit4])
+                        RA = RA + Roll_A_5;
+                    if (BO.DWord[Bit_Ops.Bit5])
+                        RA = RA + Roll_A_6;
+                    if (BO.DWord[Bit_Ops.Bit6])
+                        RA = RA + Roll_A_7;
+                    if (BO.DWord[Bit_Ops.Bit7])
+                        RA = RA + Roll_A_8;
+                    if (BO.DWord[Bit_Ops.Bit8])
+                        RA = RA + Roll_A_9;
+                    if (BO.DWord[Bit_Ops.Bit9])
+                        RA = RA + Roll_A_10;
+                    if (BO.DWord[Bit_Ops.Bit10])
+                        RA = RA + Roll_A_11;
+                    if (BO.DWord[Bit_Ops.Bit11])
+                        RA = RA + Roll_A_12;
+                    if (BO.DWord[Bit_Ops.Bit12])
+                        RA = RA + Roll_A_13;
+                    if (BO.DWord[Bit_Ops.Bit13])
+                        RA = RA + Roll_A_14;
+                    if (BO.DWord[Bit_Ops.Bit14])
+                        RA = RA + Roll_A_15;
+
+                    RA = -RA;
+                }
+                else
+                {
+                    if (BO.DWord[Bit_Ops.Bit0])
+                        RA = Roll_A_1;
+                    if (BO.DWord[Bit_Ops.Bit1])
+                        RA = RA + Roll_A_2;
+                    if (BO.DWord[Bit_Ops.Bit2])
+                        RA = RA + Roll_A_3;
+                    if (BO.DWord[Bit_Ops.Bit3])
+                        RA = RA + Roll_A_4;
+                    if (BO.DWord[Bit_Ops.Bit4])
+                        RA = RA + Roll_A_5;
+                    if (BO.DWord[Bit_Ops.Bit5])
+                        RA = RA + Roll_A_6;
+                    if (BO.DWord[Bit_Ops.Bit6])
+                        RA = RA + Roll_A_7;
+                    if (BO.DWord[Bit_Ops.Bit7])
+                        RA = RA + Roll_A_8;
+                    if (BO.DWord[Bit_Ops.Bit8])
+                        RA = RA + Roll_A_9;
+                    if (BO.DWord[Bit_Ops.Bit9])
+                        RA = RA + Roll_A_10;
+                    if (BO.DWord[Bit_Ops.Bit10])
+                        RA = RA + Roll_A_11;
+                    if (BO.DWord[Bit_Ops.Bit11])
+                        RA = RA + Roll_A_12;
+                    if (BO.DWord[Bit_Ops.Bit12])
+                        RA = RA + Roll_A_13;
+                    if (BO.DWord[Bit_Ops.Bit13])
+                        RA = RA + Roll_A_14;
+                    if (BO.DWord[Bit_Ops.Bit14])
+                        RA = RA + Roll_A_15;
+                }
+               
+                CAT62DataRecord.Rool_Angle.Is_Valid = true;
+                CAT62DataRecord.Rool_Angle.Rool_Angle = RA;
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
+
             }
             if (WORD2.DWord[CAT62I380Types.Track_Angle_Rate] == true)
             {
@@ -353,6 +493,102 @@ namespace AsterixDisplayAnalyser
             }
             if (WORD2.DWord[CAT62I380Types.Ground_Speed] == true)
             {
+                Bit_Ops BO = new Bit_Ops();
+                BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 1];
+                BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
+
+                double GSPD = 0.0;
+
+                if (BO.DWord[Bit_Ops.Bit15])
+                {
+                    BO.DWord[Bit_Ops.Bit0] = !BO.DWord[Bit_Ops.Bit0];
+                    BO.DWord[Bit_Ops.Bit1] = !BO.DWord[Bit_Ops.Bit1];
+                    BO.DWord[Bit_Ops.Bit2] = !BO.DWord[Bit_Ops.Bit2];
+                    BO.DWord[Bit_Ops.Bit3] = !BO.DWord[Bit_Ops.Bit3];
+                    BO.DWord[Bit_Ops.Bit4] = !BO.DWord[Bit_Ops.Bit4];
+                    BO.DWord[Bit_Ops.Bit5] = !BO.DWord[Bit_Ops.Bit5];
+                    BO.DWord[Bit_Ops.Bit6] = !BO.DWord[Bit_Ops.Bit6];
+                    BO.DWord[Bit_Ops.Bit7] = !BO.DWord[Bit_Ops.Bit7];
+                    BO.DWord[Bit_Ops.Bit8] = !BO.DWord[Bit_Ops.Bit8];
+                    BO.DWord[Bit_Ops.Bit9] = !BO.DWord[Bit_Ops.Bit9];
+                    BO.DWord[Bit_Ops.Bit10] = !BO.DWord[Bit_Ops.Bit10];
+                    BO.DWord[Bit_Ops.Bit11] = !BO.DWord[Bit_Ops.Bit11];
+                    BO.DWord[Bit_Ops.Bit12] = !BO.DWord[Bit_Ops.Bit12];
+                    BO.DWord[Bit_Ops.Bit13] = !BO.DWord[Bit_Ops.Bit13];
+                    BO.DWord[Bit_Ops.Bit14] = !BO.DWord[Bit_Ops.Bit14];
+                    BO.DWord[Bit_Ops.Bit15] = !BO.DWord[Bit_Ops.Bit15];
+
+                    BO.DWord[Bit_Ops.Bits0_15_Of_DWord] = BO.DWord[Bit_Ops.Bits0_15_Of_DWord] + 1;
+
+                    if (BO.DWord[Bit_Ops.Bit0])
+                        GSPD = GSPD_1;
+                    if (BO.DWord[Bit_Ops.Bit1])
+                        GSPD = GSPD + GSPD_2;
+                    if (BO.DWord[Bit_Ops.Bit2])
+                        GSPD = GSPD + GSPD_3;
+                    if (BO.DWord[Bit_Ops.Bit3])
+                        GSPD = GSPD + GSPD_4;
+                    if (BO.DWord[Bit_Ops.Bit4])
+                        GSPD = GSPD + GSPD_5;
+                    if (BO.DWord[Bit_Ops.Bit5])
+                        GSPD = GSPD + GSPD_6;
+                    if (BO.DWord[Bit_Ops.Bit6])
+                        GSPD = GSPD + GSPD_7;
+                    if (BO.DWord[Bit_Ops.Bit7])
+                        GSPD = GSPD + GSPD_8;
+                    if (BO.DWord[Bit_Ops.Bit8])
+                        GSPD = GSPD + GSPD_9;
+                    if (BO.DWord[Bit_Ops.Bit9])
+                        GSPD = GSPD + GSPD_10;
+                    if (BO.DWord[Bit_Ops.Bit10])
+                        GSPD = GSPD + GSPD_11;
+                    if (BO.DWord[Bit_Ops.Bit11])
+                        GSPD = GSPD + GSPD_12;
+                    if (BO.DWord[Bit_Ops.Bit12])
+                        GSPD = GSPD + GSPD_13;
+                    if (BO.DWord[Bit_Ops.Bit13])
+                        GSPD = GSPD + GSPD_14;
+                    if (BO.DWord[Bit_Ops.Bit14])
+                        GSPD = GSPD + GSPD_15;
+
+                    GSPD  = -GSPD;
+                }
+                else
+                {
+                    if (BO.DWord[Bit_Ops.Bit0])
+                        GSPD = GSPD_1;
+                    if (BO.DWord[Bit_Ops.Bit1])
+                        GSPD = GSPD + GSPD_2;
+                    if (BO.DWord[Bit_Ops.Bit2])
+                        GSPD = GSPD + GSPD_3;
+                    if (BO.DWord[Bit_Ops.Bit3])
+                        GSPD = GSPD + GSPD_4;
+                    if (BO.DWord[Bit_Ops.Bit4])
+                        GSPD = GSPD + GSPD_5;
+                    if (BO.DWord[Bit_Ops.Bit5])
+                        GSPD = GSPD + GSPD_6;
+                    if (BO.DWord[Bit_Ops.Bit6])
+                        GSPD = GSPD + GSPD_7;
+                    if (BO.DWord[Bit_Ops.Bit7])
+                        GSPD = GSPD + GSPD_8;
+                    if (BO.DWord[Bit_Ops.Bit8])
+                        GSPD = GSPD + GSPD_9;
+                    if (BO.DWord[Bit_Ops.Bit9])
+                        GSPD = GSPD + GSPD_10;
+                    if (BO.DWord[Bit_Ops.Bit10])
+                        GSPD = GSPD + GSPD_11;
+                    if (BO.DWord[Bit_Ops.Bit11])
+                        GSPD = GSPD + GSPD_12;
+                    if (BO.DWord[Bit_Ops.Bit12])
+                        GSPD = GSPD + GSPD_13;
+                    if (BO.DWord[Bit_Ops.Bit13])
+                        GSPD = GSPD + GSPD_14;
+                    if (BO.DWord[Bit_Ops.Bit14])
+                        GSPD = GSPD + GSPD_15;
+                }
+
+                CAT62DataRecord.GSPD.Is_Valid = true;
+                CAT62DataRecord.GSPD.GSPD = GSPD * 60.0 * 60.0;
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
             if (WORD2.DWord[CAT62I380Types.Velocity_Uncertainty] == true)
@@ -452,7 +688,6 @@ namespace AsterixDisplayAnalyser
             // Now assign it to the generic list
             CAT62.I062DataItems[CAT62.ItemIDToIndex("380")].value = CAT62DataRecord;
             //////////////////////////////////////////////////////////////////////////////////
-
         }
 
         private static string Decode6BitASCII(int ASCII_Code)

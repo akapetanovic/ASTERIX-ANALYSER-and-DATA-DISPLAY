@@ -20,19 +20,21 @@ namespace AsterixDisplayAnalyser
             /// </summary>
             public string ModeA;
             public string ModeC;
+            public string GSPD;
             public string ModeC_Previous_Cycle;
             public string ACID_Mode_S;
             public double Lat;
             public double Lon;
             /// <summary>
             /// ////////////////////////////////////////////////////
-            /// Extended label items )Applcable to CAT48 and CAT62
+            /// Extended label items, Applicable to CAT48 and CAT62
             /// </summary>
             public string TAS = "N/A";
             public string IAS = "N/A";
             public string MACH = "N/A";
             public string M_HDG = "N/A";
             public string TRK = "N/A";
+            public string Roll_Ang = "N/A";
             /// <summary>
             /// ////////////////////////////////////////////////////
             /// Internal stuff
@@ -97,12 +99,14 @@ namespace AsterixDisplayAnalyser
                     if (GlobalTargetList[CurrentTarget.TrackNumber].ModeC != null)
                         GlobalTargetList[CurrentTarget.TrackNumber].ModeC_Previous_Cycle = "" + GlobalTargetList[CurrentTarget.TrackNumber].ModeC;
                     GlobalTargetList[CurrentTarget.TrackNumber].ModeC = CurrentTarget.ModeC;
+                    GlobalTargetList[CurrentTarget.TrackNumber].GSPD = CurrentTarget.GSPD;
                     GlobalTargetList[CurrentTarget.TrackNumber].ACID_Mode_S = CurrentTarget.ACID_Mode_S;
                     GlobalTargetList[CurrentTarget.TrackNumber].M_HDG = CurrentTarget.M_HDG;
                     GlobalTargetList[CurrentTarget.TrackNumber].IAS = CurrentTarget.IAS;
                     GlobalTargetList[CurrentTarget.TrackNumber].TRK = CurrentTarget.TRK;
                     GlobalTargetList[CurrentTarget.TrackNumber].MACH = CurrentTarget.MACH;
                     GlobalTargetList[CurrentTarget.TrackNumber].TAS = CurrentTarget.TAS;
+                    GlobalTargetList[CurrentTarget.TrackNumber].Roll_Ang = CurrentTarget.Roll_Ang;
                     GlobalTargetList[CurrentTarget.TrackNumber].Lat = CurrentTarget.Lat;
                     GlobalTargetList[CurrentTarget.TrackNumber].Lon = CurrentTarget.Lon;
                     GlobalTargetList[CurrentTarget.TrackNumber].TrackNumber = CurrentTarget.TrackNumber;
@@ -116,12 +120,14 @@ namespace AsterixDisplayAnalyser
                     if (GlobalTargetList[ModeAIndex].ModeC != null)
                         GlobalTargetList[ModeAIndex].ModeC_Previous_Cycle = "" + GlobalTargetList[ModeAIndex].ModeC;
                     GlobalTargetList[ModeAIndex].ModeC = CurrentTarget.ModeC;
+                    GlobalTargetList[ModeAIndex].GSPD = CurrentTarget.GSPD;
                     GlobalTargetList[ModeAIndex].ACID_Mode_S = CurrentTarget.ACID_Mode_S;
                     GlobalTargetList[ModeAIndex].M_HDG = CurrentTarget.M_HDG;
                     GlobalTargetList[ModeAIndex].IAS = CurrentTarget.IAS;
                     GlobalTargetList[ModeAIndex].TRK = CurrentTarget.TRK;
                     GlobalTargetList[ModeAIndex].MACH = CurrentTarget.MACH;
                     GlobalTargetList[ModeAIndex].TAS = CurrentTarget.TAS;
+                    GlobalTargetList[ModeAIndex].Roll_Ang = CurrentTarget.Roll_Ang;
                     GlobalTargetList[ModeAIndex].Lat = CurrentTarget.Lat;
                     GlobalTargetList[ModeAIndex].Lon = CurrentTarget.Lon;
                     GlobalTargetList[ModeAIndex].TrackNumber = ModeAIndex;
@@ -139,9 +145,11 @@ namespace AsterixDisplayAnalyser
                     NewTarget.ModeA = GlobalTarget.ModeA;
                     NewTarget.ModeC_Previous_Cycle = GlobalTarget.ModeC_Previous_Cycle;
                     NewTarget.ModeC = GlobalTarget.ModeC;
+                    NewTarget.GSPD = GlobalTarget.GSPD;
                     NewTarget.ACID_Mode_S = GlobalTarget.ACID_Mode_S;
                     NewTarget.TRK = GlobalTarget.TRK;
                     NewTarget.TAS = GlobalTarget.TAS;
+                    NewTarget.Roll_Ang = GlobalTarget.Roll_Ang;
                     NewTarget.MACH = GlobalTarget.MACH;
                     NewTarget.M_HDG = GlobalTarget.M_HDG;
                     NewTarget.IAS = GlobalTarget.IAS;
@@ -341,6 +349,8 @@ namespace AsterixDisplayAnalyser
                                 Target.ModeC = "---";
                             }
 
+
+
                             if (CAT62I380Data != null)
                             {
                                 if (CAT62I380Data.ACID.Is_Valid)
@@ -372,6 +382,16 @@ namespace AsterixDisplayAnalyser
                                     Target.TRK = CAT62I380Data.TRK.TRK.ToString();
                                 else
                                     Target.TRK = "N/A";
+
+                                if (CAT62I380Data.GSPD.Is_Valid)
+                                    Target.GSPD = CAT62I380Data.GSPD.GSPD.ToString();
+                                else
+                                    Target.GSPD = "N/A";
+
+                                if (CAT62I380Data.Rool_Angle.Is_Valid)
+                                    Target.Roll_Ang = CAT62I380Data.Rool_Angle.Rool_Angle.ToString();
+                                else
+                                    Target.Roll_Ang= "N/A";
                             }
 
                             Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
@@ -573,6 +593,16 @@ namespace AsterixDisplayAnalyser
                                     Target.TRK = Math.Round(CAT62I380Data.TRK.TRK).ToString();
                                 else
                                     Target.TRK = "N/A";
+
+                                if (CAT62I380Data.GSPD.Is_Valid)
+                                    Target.GSPD = Math.Round(CAT62I380Data.GSPD.GSPD).ToString();
+                                else
+                                    Target.GSPD = "N/A";
+
+                                if (CAT62I380Data.Rool_Angle.Is_Valid)
+                                    Target.Roll_Ang = Math.Round(CAT62I380Data.Rool_Angle.Rool_Angle, 1).ToString();
+                                else
+                                    Target.Roll_Ang = "N/A";
                             }
 
                             Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;

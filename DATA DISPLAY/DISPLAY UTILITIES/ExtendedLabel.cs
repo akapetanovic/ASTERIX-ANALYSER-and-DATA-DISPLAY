@@ -11,7 +11,7 @@ namespace AsterixDisplayAnalyser
 {
     public partial class FrmExtendedLabel : Form
     {
-        public enum DataItems { TAS, IAS, MACH, TRK, HDG }
+        public enum DataItems { TAS, IAS, MACH, TRK, HDG, Roll_Angle }
 
         public FrmExtendedLabel()
         {
@@ -37,6 +37,7 @@ namespace AsterixDisplayAnalyser
             this.labelEXT_TAS.Text = "N/A";
             this.labelEXT_MCH.Text = "N/A";
             this.labelEXT_IAS.Text = "N/A";
+            this.labelRoll_Angle.Text = "N/A";
         }
 
         public void SetDataValue(DataItems Item, string value)
@@ -59,8 +60,10 @@ namespace AsterixDisplayAnalyser
                 case DataItems.TAS:
                     this.labelEXT_TAS.Text = value;
                     break;
+                case DataItems.Roll_Angle:
+                    this.labelRoll_Angle.Text = value;
+                    break;
             }
         }
-
     }
 }

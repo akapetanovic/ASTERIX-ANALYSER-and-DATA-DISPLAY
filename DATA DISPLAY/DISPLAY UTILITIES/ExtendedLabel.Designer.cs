@@ -39,13 +39,15 @@
             this.labelEXT_HDG = new System.Windows.Forms.Label();
             this.labelEXT_TRK = new System.Windows.Forms.Label();
             this.labelEXT_IAS = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.labelRoll_Angle = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Black;
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(125, 93);
+            this.button1.Location = new System.Drawing.Point(138, 93);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(52, 23);
             this.button1.TabIndex = 0;
@@ -108,7 +110,7 @@
             this.labelEXT_TAS.AutoSize = true;
             this.labelEXT_TAS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEXT_TAS.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.labelEXT_TAS.Location = new System.Drawing.Point(50, 9);
+            this.labelEXT_TAS.Location = new System.Drawing.Point(36, 9);
             this.labelEXT_TAS.Name = "labelEXT_TAS";
             this.labelEXT_TAS.Size = new System.Drawing.Size(30, 13);
             this.labelEXT_TAS.TabIndex = 6;
@@ -119,7 +121,7 @@
             this.labelEXT_MCH.AutoSize = true;
             this.labelEXT_MCH.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEXT_MCH.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.labelEXT_MCH.Location = new System.Drawing.Point(50, 53);
+            this.labelEXT_MCH.Location = new System.Drawing.Point(36, 53);
             this.labelEXT_MCH.Name = "labelEXT_MCH";
             this.labelEXT_MCH.Size = new System.Drawing.Size(30, 13);
             this.labelEXT_MCH.TabIndex = 7;
@@ -130,7 +132,7 @@
             this.labelEXT_HDG.AutoSize = true;
             this.labelEXT_HDG.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEXT_HDG.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.labelEXT_HDG.Location = new System.Drawing.Point(50, 75);
+            this.labelEXT_HDG.Location = new System.Drawing.Point(36, 75);
             this.labelEXT_HDG.Name = "labelEXT_HDG";
             this.labelEXT_HDG.Size = new System.Drawing.Size(30, 13);
             this.labelEXT_HDG.TabIndex = 8;
@@ -141,7 +143,7 @@
             this.labelEXT_TRK.AutoSize = true;
             this.labelEXT_TRK.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEXT_TRK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.labelEXT_TRK.Location = new System.Drawing.Point(50, 98);
+            this.labelEXT_TRK.Location = new System.Drawing.Point(36, 98);
             this.labelEXT_TRK.Name = "labelEXT_TRK";
             this.labelEXT_TRK.Size = new System.Drawing.Size(30, 13);
             this.labelEXT_TRK.TabIndex = 9;
@@ -152,18 +154,41 @@
             this.labelEXT_IAS.AutoSize = true;
             this.labelEXT_IAS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEXT_IAS.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.labelEXT_IAS.Location = new System.Drawing.Point(50, 31);
+            this.labelEXT_IAS.Location = new System.Drawing.Point(36, 31);
             this.labelEXT_IAS.Name = "labelEXT_IAS";
             this.labelEXT_IAS.Size = new System.Drawing.Size(30, 13);
             this.labelEXT_IAS.TabIndex = 10;
             this.labelEXT_IAS.Text = "N/A";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(86, 9);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(63, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Roll Ang: ";
+            // 
+            // labelRoll_Angle
+            // 
+            this.labelRoll_Angle.AutoSize = true;
+            this.labelRoll_Angle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelRoll_Angle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.labelRoll_Angle.Location = new System.Drawing.Point(144, 9);
+            this.labelRoll_Angle.Name = "labelRoll_Angle";
+            this.labelRoll_Angle.Size = new System.Drawing.Size(30, 13);
+            this.labelRoll_Angle.TabIndex = 12;
+            this.labelRoll_Angle.Text = "N/A";
             // 
             // FrmExtendedLabel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(179, 119);
+            this.ClientSize = new System.Drawing.Size(193, 119);
+            this.Controls.Add(this.labelRoll_Angle);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.labelEXT_IAS);
             this.Controls.Add(this.labelEXT_TRK);
             this.Controls.Add(this.labelEXT_HDG);
@@ -200,5 +225,7 @@
         private System.Windows.Forms.Label labelEXT_HDG;
         private System.Windows.Forms.Label labelEXT_TRK;
         private System.Windows.Forms.Label labelEXT_IAS;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelRoll_Angle;
     }
 }

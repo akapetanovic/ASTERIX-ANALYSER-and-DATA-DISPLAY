@@ -88,6 +88,37 @@ namespace AsterixDisplayAnalyser
             public bool Is_Valid = false;
         }
 
+        public class CAT62GroundSpeedType
+        {
+            public double GSPD = 0.0;
+            public bool Is_Valid = false;
+        }
+
+        /// <summary>
+        /// ////////////////////////////////////////////////////////////
+        /// COM, ACAS and Flight Status Reportin types
+        /// </summary>
+
+        public enum COM { NO_COM_STATUS, COM_A_B, COM_A_B_Uplink_ELM, COM_A_B_Uplink_ELM_Downlink_ELM, Level_5_Transponde };
+        public enum Flight_Status { No_Alert_No_Spi_Airborne, No_Alert_No_Spi_Ground, Alert_No_Spi_Airborne, Alert_No_Spi_Ground, Alert_No_Spi_Ground_or_Airborne, No_Alert_Spi_Ground_or_Airborne };
+
+
+        public class CAT62COM_ACAS_Flight_Status_Type
+        {
+            public COM COM_Reporting = COM.COM_A_B;
+            public Flight_Status FL_Status = Flight_Status.Alert_No_Spi_Airborne;
+            public bool SSC = false;
+            public bool ARC_Is_25_Feet = false;
+            public bool AIC = false;
+            public bool Is_Valid = false;
+        }
+
+        public class CAT62Rool_Angle_Type
+        {
+            public double Rool_Angle = 0.0;
+            public bool Is_Valid = false;
+        }
+
         // Encapsulate the whole CAT62I380 data
         // into one class
         public class CAT62I380Data
@@ -98,6 +129,9 @@ namespace AsterixDisplayAnalyser
             public CAT62MACHType MACH = new CAT62MACHType();
             public CAT62TrackAngleType TRK = new CAT62TrackAngleType();
             public CAT62MagneticHeadingType M_HDG = new CAT62MagneticHeadingType();
+            public CAT62GroundSpeedType GSPD = new CAT62GroundSpeedType();
+            public CAT62COM_ACAS_Flight_Status_Type COM_ACAS_FL_Reporting = new CAT62COM_ACAS_Flight_Status_Type();
+            public CAT62Rool_Angle_Type Rool_Angle = new CAT62Rool_Angle_Type();
         }
     }
 }
