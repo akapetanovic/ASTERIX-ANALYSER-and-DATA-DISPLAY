@@ -851,6 +851,9 @@ namespace AsterixDisplayAnalyser
             Label_Data.TAS = Target_Data.TAS;
             Label_Data.GSPD_STRING = Target_Data.GSPD;
             Label_Data.Roll_Angle = Target_Data.Roll_Ang;
+            Label_Data.SelectedAltitude_ShortTerm = Target_Data.SelectedAltitude_ShortTerm;
+            Label_Data.SelectedAltitude_LongTerm = Target_Data.SelectedAltitude_LongTerm;
+            Label_Data.Rate_Of_Climb = Target_Data.Rate_Of_Climb;
         }
 
         private string ApplyCModeHisterysis(string Mode_C_In)
@@ -1362,6 +1365,8 @@ namespace AsterixDisplayAnalyser
             ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.TAS, MarkerData.TAS);
             ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.TRK, MarkerData.TRK);
             ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.Roll_Angle, MarkerData.Roll_Angle);
+            ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.RateOfClimb, MarkerData.Rate_Of_Climb);
+            ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.Selected_Altitudes, MarkerData.SelectedAltitude_ShortTerm + '/' + MarkerData.SelectedAltitude_ShortTerm);
         }
 
         private void aircraftAddressToolStripMenuItem_Click(object sender, EventArgs e)

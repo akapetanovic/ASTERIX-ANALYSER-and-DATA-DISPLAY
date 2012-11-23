@@ -40,6 +40,7 @@ namespace AsterixDisplayAnalyser
         private void button1_Click(object sender, EventArgs e)
         {
             FormMain.ShowExtendedLabel();
+            this.Close();
         }
     }
 }

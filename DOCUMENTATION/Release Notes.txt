@@ -34,16 +34,20 @@ CAT62
 		060 Track Mode 3/A Code
 		040 Track Number
 		136 Measured Flight Level
+		220 Calculated Rate of Climb/Descent
 		380 Aircraft Derived Data
-			Subfield # 2:  Target Identification
-			Subfield # 3:  Magnetic Heading
-			Subfield # 5:  True Airspeed (TAS)
+			Subfield # 2: Target Identification
+			Subfield # 3: Magnetic Heading
+			Subfield # 5: True Airspeed (TAS)
+			Subfiled # 6: Selected Altitude
+			Subfiled # 7: Final State Selected Altitude
+			Subfield # 15: Roll Angle
 			Subfield # 17: Track Angle
 			Subfield # 18: Ground Speed
 			Subfield # 26: Indicated Airspeed (IAS)
 			Subfield # 27: Mach Number
 
-			Roll Angle
+			
 			COM, ACAS and Flight Status
 			
 
@@ -51,8 +55,9 @@ VERSION HISTORY
 
 Version 2.0
 
-	1. Added decoder and Track Label readout: 062/280 Ground Speed
-	2. 
+	1. Added decoder and Track Label readout: 062/380 Ground Speed
+	2. Added decoders and Extended label readout" 062/380 Roll Angle, Selected Altitude and Final Selected Altitude
+	3. Added decoder for CAT062/I220 Calculated Rate of Climb. Also aded it into Extended Label Readout.
 
 Version 1.9 
 

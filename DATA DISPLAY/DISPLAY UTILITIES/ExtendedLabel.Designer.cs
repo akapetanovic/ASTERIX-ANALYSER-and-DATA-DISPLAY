@@ -41,13 +41,17 @@
             this.labelEXT_IAS = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.labelRoll_Angle = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.labelSelectedAltitudes = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.labelRateOfClimb = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Black;
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(138, 93);
+            this.button1.Location = new System.Drawing.Point(185, 93);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(52, 23);
             this.button1.TabIndex = 0;
@@ -181,12 +185,58 @@
             this.labelRoll_Angle.TabIndex = 12;
             this.labelRoll_Angle.Text = "N/A";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(86, 31);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(56, 13);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Sel ALT:";
+            // 
+            // labelSelectedAltitudes
+            // 
+            this.labelSelectedAltitudes.AutoSize = true;
+            this.labelSelectedAltitudes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSelectedAltitudes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.labelSelectedAltitudes.Location = new System.Drawing.Point(144, 31);
+            this.labelSelectedAltitudes.Name = "labelSelectedAltitudes";
+            this.labelSelectedAltitudes.Size = new System.Drawing.Size(30, 13);
+            this.labelSelectedAltitudes.TabIndex = 14;
+            this.labelSelectedAltitudes.Text = "N/A";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(107, 53);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(35, 13);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "RoC:";
+            // 
+            // labelRateOfClimb
+            // 
+            this.labelRateOfClimb.AutoSize = true;
+            this.labelRateOfClimb.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelRateOfClimb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.labelRateOfClimb.Location = new System.Drawing.Point(144, 53);
+            this.labelRateOfClimb.Name = "labelRateOfClimb";
+            this.labelRateOfClimb.Size = new System.Drawing.Size(30, 13);
+            this.labelRateOfClimb.TabIndex = 16;
+            this.labelRateOfClimb.Text = "N/A";
+            // 
             // FrmExtendedLabel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(193, 119);
+            this.ClientSize = new System.Drawing.Size(239, 119);
+            this.Controls.Add(this.labelRateOfClimb);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.labelSelectedAltitudes);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.labelRoll_Angle);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.labelEXT_IAS);
@@ -227,5 +277,9 @@
         private System.Windows.Forms.Label labelEXT_IAS;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label labelRoll_Angle;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labelSelectedAltitudes;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label labelRateOfClimb;
     }
 }

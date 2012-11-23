@@ -90,11 +90,27 @@ namespace AsterixDisplayAnalyser
             double Roll_A_16 = Roll_A_15 * 2.0;
             ////////////////////////////////////////////////////////////////////
 
+            ///////////////////////////////////////////////////////////////////
+            // SELECTED ALTITUDE DECODE CONSTANTS
+
+            int SA_1 = 25;
+            int SA_2 = SA_1 * 2;
+            int SA_3 = SA_2 * 2;
+            int SA_4 = SA_3 * 2;
+            int SA_5 = SA_4 * 2;
+            int SA_6 = SA_5 * 2;
+            int SA_7 = SA_6 * 2;
+            int SA_8 = SA_7 * 2;
+            int SA_9 = SA_8 * 2;
+            int SA_10 = SA_9 * 2;
+            int SA_11 = SA_10 * 2;
+            int SA_12 = SA_11 * 2;
+            int SA_13 = SA_12 * 2;
 
             // Define a global record for all data, then down there depending on the avalability of each field
             // populate specific items. Each item has validity flag that needs to be set for each available data
             // item for this message
-            CAT62I380Types.CAT62I380Data CAT62DataRecord = new CAT62I380Types.CAT62I380Data();
+            CAT62I380Types.CAT62I380Data CAT62I380DataRecord = new CAT62I380Types.CAT62I380Data();
 
             // Get an instance of bit ops
             Bit_Ops WORD0 = new Bit_Ops();
@@ -225,8 +241,8 @@ namespace AsterixDisplayAnalyser
                 Char8.DWord[Bit_Ops.Bit1] = Bits_1_To_Bits_32_.DWord[Bit_Ops.Bit1];
                 Char8.DWord[Bit_Ops.Bit0] = Bits_1_To_Bits_32_.DWord[Bit_Ops.Bit0];
 
-                CAT62DataRecord.ACID.Is_Valid = true;
-                CAT62DataRecord.ACID.ACID_String = Decode6BitASCII(Char1.DWord[Bit_Ops.Bits0_7_Of_DWord]) +
+                CAT62I380DataRecord.ACID.Is_Valid = true;
+                CAT62I380DataRecord.ACID.ACID_String = Decode6BitASCII(Char1.DWord[Bit_Ops.Bits0_7_Of_DWord]) +
                     Decode6BitASCII(Char2.DWord[Bit_Ops.Bits0_7_Of_DWord]) +
                     Decode6BitASCII(Char3.DWord[Bit_Ops.Bits0_7_Of_DWord]) +
                     Decode6BitASCII(Char4.DWord[Bit_Ops.Bits0_7_Of_DWord]) +
@@ -277,8 +293,8 @@ namespace AsterixDisplayAnalyser
                 if (BO.DWord[Bit_Ops.Bit15])
                     TA = TA + TA_MA_16;
 
-                CAT62DataRecord.M_HDG.Is_Valid = true;
-                CAT62DataRecord.M_HDG.M_HDG = TA;
+                CAT62I380DataRecord.M_HDG.Is_Valid = true;
+                CAT62I380DataRecord.M_HDG.M_HDG = TA;
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
             if (WORD0.DWord[CAT62I380Types.Indicated_Airspeed_Mach_Number] == true)
@@ -291,18 +307,203 @@ namespace AsterixDisplayAnalyser
                 BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 1];
                 BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
 
-                CAT62DataRecord.TAS.Is_Valid = true;
+                CAT62I380DataRecord.TAS.Is_Valid = true;
                 int Result = BO.DWord[Bit_Ops.Bits0_15_Of_DWord];
-                CAT62DataRecord.TAS.TAS = Result;
+                CAT62I380DataRecord.TAS.TAS = Result;
 
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
             if (WORD0.DWord[CAT62I380Types.Selected_Altitude] == true)
             {
+                Bit_Ops BO = new Bit_Ops();
+                BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 1];
+                BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
+
+                // First extract values of the last three MSB bits 
+                CAT62I380DataRecord.Selected_Altitude.Source_Info_Provided = BO.DWord[Bit_Ops.Bit15];
+
+                if (BO.DWord[Bit_Ops.Bit14] && BO.DWord[Bit_Ops.Bit13])
+                    CAT62I380DataRecord.Selected_Altitude.Source = CAT62I380Types.CAT62SelectedAltitudeType.SourceType.FMS_Selected;
+                else if (BO.DWord[Bit_Ops.Bit13])
+                    CAT62I380DataRecord.Selected_Altitude.Source = CAT62I380Types.CAT62SelectedAltitudeType.SourceType.AircraftAltitude;
+                else if (BO.DWord[Bit_Ops.Bit14])
+                    CAT62I380DataRecord.Selected_Altitude.Source = CAT62I380Types.CAT62SelectedAltitudeType.SourceType.FCU_MCP;
+                else
+                    CAT62I380DataRecord.Selected_Altitude.Source = CAT62I380Types.CAT62SelectedAltitudeType.SourceType.Unknown;
+
+                int SA = 0;
+                if (BO.DWord[Bit_Ops.Bit12])
+                {
+                    BO.DWord[Bit_Ops.Bit0] = !BO.DWord[Bit_Ops.Bit0];
+                    BO.DWord[Bit_Ops.Bit1] = !BO.DWord[Bit_Ops.Bit1];
+                    BO.DWord[Bit_Ops.Bit2] = !BO.DWord[Bit_Ops.Bit2];
+                    BO.DWord[Bit_Ops.Bit3] = !BO.DWord[Bit_Ops.Bit3];
+                    BO.DWord[Bit_Ops.Bit4] = !BO.DWord[Bit_Ops.Bit4];
+                    BO.DWord[Bit_Ops.Bit5] = !BO.DWord[Bit_Ops.Bit5];
+                    BO.DWord[Bit_Ops.Bit6] = !BO.DWord[Bit_Ops.Bit6];
+                    BO.DWord[Bit_Ops.Bit7] = !BO.DWord[Bit_Ops.Bit7];
+                    BO.DWord[Bit_Ops.Bit8] = !BO.DWord[Bit_Ops.Bit8];
+                    BO.DWord[Bit_Ops.Bit9] = !BO.DWord[Bit_Ops.Bit9];
+                    BO.DWord[Bit_Ops.Bit10] = !BO.DWord[Bit_Ops.Bit10];
+                    BO.DWord[Bit_Ops.Bit11] = !BO.DWord[Bit_Ops.Bit11];
+                    BO.DWord[Bit_Ops.Bit12] = !BO.DWord[Bit_Ops.Bit12];
+                    BO.DWord[Bit_Ops.Bit13] = false;
+                    BO.DWord[Bit_Ops.Bit14] = false;
+                    BO.DWord[Bit_Ops.Bit15] = false;
+
+                    BO.DWord[Bit_Ops.Bits0_15_Of_DWord] = BO.DWord[Bit_Ops.Bits0_15_Of_DWord] + 1;
+
+                    if (BO.DWord[Bit_Ops.Bit0])
+                        SA = SA_1;
+                    if (BO.DWord[Bit_Ops.Bit1])
+                        SA = SA + SA_2;
+                    if (BO.DWord[Bit_Ops.Bit2])
+                        SA = SA + SA_3;
+                    if (BO.DWord[Bit_Ops.Bit3])
+                        SA = SA + SA_4;
+                    if (BO.DWord[Bit_Ops.Bit4])
+                        SA = SA + SA_5;
+                    if (BO.DWord[Bit_Ops.Bit5])
+                        SA = SA + SA_6;
+                    if (BO.DWord[Bit_Ops.Bit6])
+                        SA = SA + SA_7;
+                    if (BO.DWord[Bit_Ops.Bit7])
+                        SA = SA + SA_8;
+                    if (BO.DWord[Bit_Ops.Bit8])
+                        SA = SA + SA_9;
+                    if (BO.DWord[Bit_Ops.Bit9])
+                        SA = SA + SA_10;
+                    if (BO.DWord[Bit_Ops.Bit10])
+                        SA = SA + SA_11;
+                    if (BO.DWord[Bit_Ops.Bit11])
+                        SA = SA + SA_12;
+
+                    SA = -SA;
+                }
+                else
+                {
+                    if (BO.DWord[Bit_Ops.Bit0])
+                        SA = SA_1;
+                    if (BO.DWord[Bit_Ops.Bit1])
+                        SA = SA + SA_2;
+                    if (BO.DWord[Bit_Ops.Bit2])
+                        SA = SA + SA_3;
+                    if (BO.DWord[Bit_Ops.Bit3])
+                        SA = SA + SA_4;
+                    if (BO.DWord[Bit_Ops.Bit4])
+                        SA = SA + SA_5;
+                    if (BO.DWord[Bit_Ops.Bit5])
+                        SA = SA + SA_6;
+                    if (BO.DWord[Bit_Ops.Bit6])
+                        SA = SA + SA_7;
+                    if (BO.DWord[Bit_Ops.Bit7])
+                        SA = SA + SA_8;
+                    if (BO.DWord[Bit_Ops.Bit8])
+                        SA = SA + SA_9;
+                    if (BO.DWord[Bit_Ops.Bit9])
+                        SA = SA + SA_10;
+                    if (BO.DWord[Bit_Ops.Bit10])
+                        SA = SA + SA_11;
+                    if (BO.DWord[Bit_Ops.Bit11])
+                        SA = SA + SA_12;
+                }
+
+                CAT62I380DataRecord.Selected_Altitude.Is_Valid = true;
+                CAT62I380DataRecord.Selected_Altitude.SelectedAltitude = SA / 100; // Use FL
+
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
             if (WORD0.DWord[CAT62I380Types.Final_State_SelectedAltitude] == true)
             {
+                Bit_Ops BO = new Bit_Ops();
+                BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 1];
+                BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
+
+                // First extract values of the last three MSB bits 
+                CAT62I380DataRecord.FS_Selected_Altitude.Manage_Mode_Active= BO.DWord[Bit_Ops.Bit15];
+                CAT62I380DataRecord.FS_Selected_Altitude.Altitude_Hold_Active= BO.DWord[Bit_Ops.Bit14];
+                CAT62I380DataRecord.FS_Selected_Altitude.Approach_Mode_Active = BO.DWord[Bit_Ops.Bit13];
+
+                int SA = 0;
+                if (BO.DWord[Bit_Ops.Bit12])
+                {
+                    BO.DWord[Bit_Ops.Bit0] = !BO.DWord[Bit_Ops.Bit0];
+                    BO.DWord[Bit_Ops.Bit1] = !BO.DWord[Bit_Ops.Bit1];
+                    BO.DWord[Bit_Ops.Bit2] = !BO.DWord[Bit_Ops.Bit2];
+                    BO.DWord[Bit_Ops.Bit3] = !BO.DWord[Bit_Ops.Bit3];
+                    BO.DWord[Bit_Ops.Bit4] = !BO.DWord[Bit_Ops.Bit4];
+                    BO.DWord[Bit_Ops.Bit5] = !BO.DWord[Bit_Ops.Bit5];
+                    BO.DWord[Bit_Ops.Bit6] = !BO.DWord[Bit_Ops.Bit6];
+                    BO.DWord[Bit_Ops.Bit7] = !BO.DWord[Bit_Ops.Bit7];
+                    BO.DWord[Bit_Ops.Bit8] = !BO.DWord[Bit_Ops.Bit8];
+                    BO.DWord[Bit_Ops.Bit9] = !BO.DWord[Bit_Ops.Bit9];
+                    BO.DWord[Bit_Ops.Bit10] = !BO.DWord[Bit_Ops.Bit10];
+                    BO.DWord[Bit_Ops.Bit11] = !BO.DWord[Bit_Ops.Bit11];
+                    BO.DWord[Bit_Ops.Bit12] = !BO.DWord[Bit_Ops.Bit12];
+                    BO.DWord[Bit_Ops.Bit13] = false;
+                    BO.DWord[Bit_Ops.Bit14] = false;
+                    BO.DWord[Bit_Ops.Bit15] = false;
+
+                    BO.DWord[Bit_Ops.Bits0_15_Of_DWord] = BO.DWord[Bit_Ops.Bits0_15_Of_DWord] + 1;
+
+                    if (BO.DWord[Bit_Ops.Bit0])
+                        SA = SA_1;
+                    if (BO.DWord[Bit_Ops.Bit1])
+                        SA = SA + SA_2;
+                    if (BO.DWord[Bit_Ops.Bit2])
+                        SA = SA + SA_3;
+                    if (BO.DWord[Bit_Ops.Bit3])
+                        SA = SA + SA_4;
+                    if (BO.DWord[Bit_Ops.Bit4])
+                        SA = SA + SA_5;
+                    if (BO.DWord[Bit_Ops.Bit5])
+                        SA = SA + SA_6;
+                    if (BO.DWord[Bit_Ops.Bit6])
+                        SA = SA + SA_7;
+                    if (BO.DWord[Bit_Ops.Bit7])
+                        SA = SA + SA_8;
+                    if (BO.DWord[Bit_Ops.Bit8])
+                        SA = SA + SA_9;
+                    if (BO.DWord[Bit_Ops.Bit9])
+                        SA = SA + SA_10;
+                    if (BO.DWord[Bit_Ops.Bit10])
+                        SA = SA + SA_11;
+                    if (BO.DWord[Bit_Ops.Bit11])
+                        SA = SA + SA_12;
+
+                    SA = -SA;
+                }
+                else
+                {
+                    if (BO.DWord[Bit_Ops.Bit0])
+                        SA = SA_1;
+                    if (BO.DWord[Bit_Ops.Bit1])
+                        SA = SA + SA_2;
+                    if (BO.DWord[Bit_Ops.Bit2])
+                        SA = SA + SA_3;
+                    if (BO.DWord[Bit_Ops.Bit3])
+                        SA = SA + SA_4;
+                    if (BO.DWord[Bit_Ops.Bit4])
+                        SA = SA + SA_5;
+                    if (BO.DWord[Bit_Ops.Bit5])
+                        SA = SA + SA_6;
+                    if (BO.DWord[Bit_Ops.Bit6])
+                        SA = SA + SA_7;
+                    if (BO.DWord[Bit_Ops.Bit7])
+                        SA = SA + SA_8;
+                    if (BO.DWord[Bit_Ops.Bit8])
+                        SA = SA + SA_9;
+                    if (BO.DWord[Bit_Ops.Bit9])
+                        SA = SA + SA_10;
+                    if (BO.DWord[Bit_Ops.Bit10])
+                        SA = SA + SA_11;
+                    if (BO.DWord[Bit_Ops.Bit11])
+                        SA = SA + SA_12;
+                }
+
+                CAT62I380DataRecord.FS_Selected_Altitude.Is_Valid = true;
+                CAT62I380DataRecord.FS_Selected_Altitude.SelectedAltitude = SA / 100;
+                
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
             // WORD1
@@ -342,7 +543,7 @@ namespace AsterixDisplayAnalyser
             {
                 //(LSB) = 0.01 degree
                 //-180 ≤ Roll Angle ≤ 180
-                
+
                 Bit_Ops BO = new Bit_Ops();
                 BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 1];
                 BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
@@ -371,7 +572,7 @@ namespace AsterixDisplayAnalyser
 
                     BO.DWord[Bit_Ops.Bits0_15_Of_DWord] = BO.DWord[Bit_Ops.Bits0_15_Of_DWord] + 1;
 
-                     if (BO.DWord[Bit_Ops.Bit0])
+                    if (BO.DWord[Bit_Ops.Bit0])
                         RA = Roll_A_1;
                     if (BO.DWord[Bit_Ops.Bit1])
                         RA = RA + Roll_A_2;
@@ -437,9 +638,9 @@ namespace AsterixDisplayAnalyser
                     if (BO.DWord[Bit_Ops.Bit14])
                         RA = RA + Roll_A_15;
                 }
-               
-                CAT62DataRecord.Rool_Angle.Is_Valid = true;
-                CAT62DataRecord.Rool_Angle.Rool_Angle = RA;
+
+                CAT62I380DataRecord.Rool_Angle.Is_Valid = true;
+                CAT62I380DataRecord.Rool_Angle.Rool_Angle = RA;
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
 
             }
@@ -487,8 +688,8 @@ namespace AsterixDisplayAnalyser
                 if (BO.DWord[Bit_Ops.Bit15])
                     TA = TA + TA_MA_16;
 
-                CAT62DataRecord.TRK.Is_Valid = true;
-                CAT62DataRecord.TRK.TRK = TA;
+                CAT62I380DataRecord.TRK.Is_Valid = true;
+                CAT62I380DataRecord.TRK.TRK = TA;
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
             if (WORD2.DWord[CAT62I380Types.Ground_Speed] == true)
@@ -551,7 +752,7 @@ namespace AsterixDisplayAnalyser
                     if (BO.DWord[Bit_Ops.Bit14])
                         GSPD = GSPD + GSPD_15;
 
-                    GSPD  = -GSPD;
+                    GSPD = -GSPD;
                 }
                 else
                 {
@@ -587,8 +788,8 @@ namespace AsterixDisplayAnalyser
                         GSPD = GSPD + GSPD_15;
                 }
 
-                CAT62DataRecord.GSPD.Is_Valid = true;
-                CAT62DataRecord.GSPD.GSPD = GSPD * 60.0 * 60.0;
+                CAT62I380DataRecord.GSPD.Is_Valid = true;
+                CAT62I380DataRecord.GSPD.GSPD = GSPD * 60.0 * 60.0;
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
             if (WORD2.DWord[CAT62I380Types.Velocity_Uncertainty] == true)
@@ -629,9 +830,9 @@ namespace AsterixDisplayAnalyser
                 BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 1];
                 BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
 
-                CAT62DataRecord.IAS.Is_Valid = true;
+                CAT62I380DataRecord.IAS.Is_Valid = true;
                 int Result = BO.DWord[Bit_Ops.Bits0_15_Of_DWord];
-                CAT62DataRecord.IAS.IAS = Result;
+                CAT62I380DataRecord.IAS.IAS = Result;
 
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
@@ -675,8 +876,8 @@ namespace AsterixDisplayAnalyser
                 if (BO.DWord[Bit_Ops.Bit15])
                     MN = MN + MN_16;
 
-                CAT62DataRecord.MACH.Is_Valid = true;
-                CAT62DataRecord.MACH.MACH = MN;
+                CAT62I380DataRecord.MACH.Is_Valid = true;
+                CAT62I380DataRecord.MACH.MACH = MN;
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             }
             if (WORD3.DWord[CAT62I380Types.Barometric_Pressure_Setting] == true)
@@ -686,7 +887,7 @@ namespace AsterixDisplayAnalyser
 
             //////////////////////////////////////////////////////////////////////////////////
             // Now assign it to the generic list
-            CAT62.I062DataItems[CAT62.ItemIDToIndex("380")].value = CAT62DataRecord;
+            CAT62.I062DataItems[CAT62.ItemIDToIndex("380")].value = CAT62I380DataRecord;
             //////////////////////////////////////////////////////////////////////////////////
         }
 

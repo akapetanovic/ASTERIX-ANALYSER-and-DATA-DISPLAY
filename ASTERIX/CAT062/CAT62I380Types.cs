@@ -119,6 +119,24 @@ namespace AsterixDisplayAnalyser
             public bool Is_Valid = false;
         }
 
+        public class CAT62FinalStateSelectedAltitudeType
+        {
+            public bool Manage_Mode_Active = false;
+            public bool Altitude_Hold_Active = false;
+            public bool Approach_Mode_Active = false;
+            public int SelectedAltitude = 0;
+            public bool Is_Valid = false;
+        }
+
+        public class CAT62SelectedAltitudeType
+        {
+            public enum SourceType { Unknown, AircraftAltitude, FCU_MCP, FMS_Selected };
+            public bool Source_Info_Provided = false;
+            public SourceType Source = SourceType.Unknown;
+            public int SelectedAltitude = 0;
+            public bool Is_Valid = false;
+        }
+
         // Encapsulate the whole CAT62I380 data
         // into one class
         public class CAT62I380Data
@@ -132,6 +150,8 @@ namespace AsterixDisplayAnalyser
             public CAT62GroundSpeedType GSPD = new CAT62GroundSpeedType();
             public CAT62COM_ACAS_Flight_Status_Type COM_ACAS_FL_Reporting = new CAT62COM_ACAS_Flight_Status_Type();
             public CAT62Rool_Angle_Type Rool_Angle = new CAT62Rool_Angle_Type();
+            public CAT62FinalStateSelectedAltitudeType FS_Selected_Altitude = new CAT62FinalStateSelectedAltitudeType();
+            public CAT62SelectedAltitudeType Selected_Altitude = new CAT62SelectedAltitudeType();
         }
     }
 }

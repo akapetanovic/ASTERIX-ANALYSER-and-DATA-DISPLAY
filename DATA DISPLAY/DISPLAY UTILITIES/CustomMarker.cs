@@ -137,6 +137,9 @@ namespace AsterixDisplayAnalyser
         public string M_HDG = "N/A";
         public string TRK = "N/A";
         public string Roll_Angle = "N/A";
+        public string SelectedAltitude_ShortTerm = "N/A";
+        public string SelectedAltitude_LongTerm = "N/A";
+        public string Rate_Of_Climb = "N/A";
         ///////////////////////////////////////////////////////////
         
         // To be called once the track is terminated
@@ -240,7 +243,7 @@ namespace AsterixDisplayAnalyser
             CFL_START_Y = CFL_OFFSET.Y;
 
             // Draw GSPD on the same line
-            GSPD_OFFSET.X = (ModeC_STRING.Length * (int)ModeC_FONT.Size) + (CFL_STRING.Length * (int)CFL_FONT.Size) - 10;
+            GSPD_OFFSET.X = (ModeC_STRING.Length * (int)ModeC_FONT.Size) + (CFL_STRING.Length * (int)CFL_FONT.Size);
             GSPD_OFFSET.Y = LabelStartPosition.Y + LabelHeight;
             g.DrawString(GSPD_STRING, GSPD_FONT, GSPD_BRUSH, LabelStartPosition.X + GSPD_OFFSET.X, GSPD_OFFSET.Y);
             GSPD_START_X = LabelStartPosition.X + GSPD_OFFSET.X;

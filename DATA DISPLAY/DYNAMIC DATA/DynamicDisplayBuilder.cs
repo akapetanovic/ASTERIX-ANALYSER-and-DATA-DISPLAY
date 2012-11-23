@@ -35,6 +35,9 @@ namespace AsterixDisplayAnalyser
             public string M_HDG = "N/A";
             public string TRK = "N/A";
             public string Roll_Ang = "N/A";
+            public string SelectedAltitude_ShortTerm = "N/A";
+            public string SelectedAltitude_LongTerm = "N/A";
+            public string Rate_Of_Climb = "N/A";
             /// <summary>
             /// ////////////////////////////////////////////////////
             /// Internal stuff
@@ -107,6 +110,9 @@ namespace AsterixDisplayAnalyser
                     GlobalTargetList[CurrentTarget.TrackNumber].MACH = CurrentTarget.MACH;
                     GlobalTargetList[CurrentTarget.TrackNumber].TAS = CurrentTarget.TAS;
                     GlobalTargetList[CurrentTarget.TrackNumber].Roll_Ang = CurrentTarget.Roll_Ang;
+                    GlobalTargetList[CurrentTarget.TrackNumber].SelectedAltitude_ShortTerm = CurrentTarget.SelectedAltitude_ShortTerm;
+                    GlobalTargetList[CurrentTarget.TrackNumber].SelectedAltitude_LongTerm = CurrentTarget.SelectedAltitude_LongTerm;
+                    GlobalTargetList[CurrentTarget.TrackNumber].Rate_Of_Climb = CurrentTarget.Rate_Of_Climb;
                     GlobalTargetList[CurrentTarget.TrackNumber].Lat = CurrentTarget.Lat;
                     GlobalTargetList[CurrentTarget.TrackNumber].Lon = CurrentTarget.Lon;
                     GlobalTargetList[CurrentTarget.TrackNumber].TrackNumber = CurrentTarget.TrackNumber;
@@ -128,6 +134,9 @@ namespace AsterixDisplayAnalyser
                     GlobalTargetList[ModeAIndex].MACH = CurrentTarget.MACH;
                     GlobalTargetList[ModeAIndex].TAS = CurrentTarget.TAS;
                     GlobalTargetList[ModeAIndex].Roll_Ang = CurrentTarget.Roll_Ang;
+                    GlobalTargetList[ModeAIndex].SelectedAltitude_ShortTerm = CurrentTarget.SelectedAltitude_ShortTerm;
+                    GlobalTargetList[ModeAIndex].SelectedAltitude_LongTerm = CurrentTarget.SelectedAltitude_LongTerm;
+                    GlobalTargetList[ModeAIndex].Rate_Of_Climb = CurrentTarget.Rate_Of_Climb;
                     GlobalTargetList[ModeAIndex].Lat = CurrentTarget.Lat;
                     GlobalTargetList[ModeAIndex].Lon = CurrentTarget.Lon;
                     GlobalTargetList[ModeAIndex].TrackNumber = ModeAIndex;
@@ -150,6 +159,9 @@ namespace AsterixDisplayAnalyser
                     NewTarget.TRK = GlobalTarget.TRK;
                     NewTarget.TAS = GlobalTarget.TAS;
                     NewTarget.Roll_Ang = GlobalTarget.Roll_Ang;
+                    NewTarget.SelectedAltitude_ShortTerm = GlobalTarget.SelectedAltitude_ShortTerm;
+                    NewTarget.SelectedAltitude_LongTerm = GlobalTarget.SelectedAltitude_LongTerm;
+                    NewTarget.Rate_Of_Climb = GlobalTarget.Rate_Of_Climb;
                     NewTarget.MACH = GlobalTarget.MACH;
                     NewTarget.M_HDG = GlobalTarget.M_HDG;
                     NewTarget.IAS = GlobalTarget.IAS;
@@ -326,6 +338,8 @@ namespace AsterixDisplayAnalyser
                         CAT62I060Types.CAT62060Mode3UserData Mode3AData = (CAT62I060Types.CAT62060Mode3UserData)Msg.CAT62DataItems[CAT62.ItemIDToIndex("060")].value;
                         GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.CAT62DataItems[CAT62.ItemIDToIndex("105")].value;
                         CAT62I380Types.CAT62I380Data CAT62I380Data = (CAT62I380Types.CAT62I380Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
+                        CAT62I220Types.CalculatedRateOfClimbDescent CAT62I220Data = (CAT62I220Types.CalculatedRateOfClimbDescent)Msg.CAT62DataItems[CAT62.ItemIDToIndex("220")].value;
+
                         TargetType Target = new TargetType();
 
                         if (Mode3AData != null)
@@ -348,8 +362,6 @@ namespace AsterixDisplayAnalyser
                             {
                                 Target.ModeC = "---";
                             }
-
-
 
                             if (CAT62I380Data != null)
                             {
@@ -392,6 +404,28 @@ namespace AsterixDisplayAnalyser
                                     Target.Roll_Ang = CAT62I380Data.Rool_Angle.Rool_Angle.ToString();
                                 else
                                     Target.Roll_Ang= "N/A";
+
+                                if (CAT62I380Data.FS_Selected_Altitude.Is_Valid)
+                                    Target.SelectedAltitude_LongTerm = CAT62I380Data.FS_Selected_Altitude.SelectedAltitude.ToString();
+                                else
+                                    Target.SelectedAltitude_LongTerm = "N/A";
+
+                                if (CAT62I380Data.Selected_Altitude.Is_Valid)
+                                    Target.SelectedAltitude_ShortTerm = CAT62I380Data.Selected_Altitude.SelectedAltitude.ToString();
+                                else
+                                    Target.SelectedAltitude_ShortTerm = "N/A";
+                            }
+
+                            if (CAT62I220Data != null)
+                            {
+                                if (CAT62I220Data.Is_Valid == true)
+                                    Target.Rate_Of_Climb = CAT62I220Data.Value.ToString();
+                                else
+                                    Target.Rate_Of_Climb = "N/A";
+                            }
+                            else
+                            {
+                                Target.Rate_Of_Climb = "N/A";
                             }
 
                             Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
@@ -536,7 +570,7 @@ namespace AsterixDisplayAnalyser
                         CAT62I060Types.CAT62060Mode3UserData Mode3AData = (CAT62I060Types.CAT62060Mode3UserData)Msg.CAT62DataItems[CAT62.ItemIDToIndex("060")].value;
                         // Get Lat/Long in decimal
                         GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.CAT62DataItems[CAT62.ItemIDToIndex("105")].value;
-
+                        CAT62I220Types.CalculatedRateOfClimbDescent CAT62I220Data = (CAT62I220Types.CalculatedRateOfClimbDescent)Msg.CAT62DataItems[CAT62.ItemIDToIndex("220")].value;
                         CAT62I380Types.CAT62I380Data CAT62I380Data = (CAT62I380Types.CAT62I380Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
 
                         TargetType Target = new TargetType();
@@ -603,6 +637,28 @@ namespace AsterixDisplayAnalyser
                                     Target.Roll_Ang = Math.Round(CAT62I380Data.Rool_Angle.Rool_Angle, 1).ToString();
                                 else
                                     Target.Roll_Ang = "N/A";
+
+                                if (CAT62I380Data.FS_Selected_Altitude.Is_Valid)
+                                    Target.SelectedAltitude_LongTerm = CAT62I380Data.FS_Selected_Altitude.SelectedAltitude.ToString();
+                                else
+                                    Target.SelectedAltitude_LongTerm = "N/A";
+
+                                if (CAT62I380Data.Selected_Altitude.Is_Valid)
+                                    Target.SelectedAltitude_ShortTerm = CAT62I380Data.Selected_Altitude.SelectedAltitude.ToString();
+                                else
+                                    Target.SelectedAltitude_ShortTerm = "N/A";
+                            }
+
+                            if (CAT62I220Data != null)
+                            {
+                                if (CAT62I220Data.Is_Valid == true)
+                                    Target.Rate_Of_Climb = CAT62I220Data.Value.ToString();
+                                else
+                                    Target.Rate_Of_Climb = "N/A";
+                            }
+                            else
+                            {
+                                Target.Rate_Of_Climb = "N/A";
                             }
 
                             Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
