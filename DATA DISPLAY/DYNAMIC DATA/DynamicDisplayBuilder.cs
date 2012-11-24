@@ -115,6 +115,9 @@ namespace AsterixDisplayAnalyser
                     GlobalTargetList[CurrentTarget.TrackNumber].Rate_Of_Climb = CurrentTarget.Rate_Of_Climb;
                     GlobalTargetList[CurrentTarget.TrackNumber].Lat = CurrentTarget.Lat;
                     GlobalTargetList[CurrentTarget.TrackNumber].Lon = CurrentTarget.Lon;
+                    if (GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Count > Properties.Settings.Default.HistoryPoints)
+                        GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Dequeue();
+                    GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Enqueue(new PointLatLng(CurrentTarget.Lat, CurrentTarget.Lon));
                     GlobalTargetList[CurrentTarget.TrackNumber].TrackNumber = CurrentTarget.TrackNumber;
                     GlobalTargetList[CurrentTarget.TrackNumber].TrackTerminateTreshold = CurrentTarget.TrackTerminateTreshold;
                 }
@@ -139,6 +142,9 @@ namespace AsterixDisplayAnalyser
                     GlobalTargetList[ModeAIndex].Rate_Of_Climb = CurrentTarget.Rate_Of_Climb;
                     GlobalTargetList[ModeAIndex].Lat = CurrentTarget.Lat;
                     GlobalTargetList[ModeAIndex].Lon = CurrentTarget.Lon;
+                    if (GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Count > Properties.Settings.Default.HistoryPoints)
+                        GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Dequeue();
+                    GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Enqueue(new PointLatLng(CurrentTarget.Lat, CurrentTarget.Lon));
                     GlobalTargetList[ModeAIndex].TrackNumber = ModeAIndex;
                     GlobalTargetList[ModeAIndex].TrackTerminateTreshold = CurrentTarget.TrackTerminateTreshold;
                 }
@@ -663,6 +669,7 @@ namespace AsterixDisplayAnalyser
 
                             Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
                             Target.Lon = LatLongData.GetLatLongDecimal().LongitudeDecimal;
+
                             CurrentTargetList.Add(Target);
                         }
                     }
@@ -673,6 +680,7 @@ namespace AsterixDisplayAnalyser
             {
                 UpdateGlobalList();
             }
+
             TargetList = CurrentTargetList;
         }
     }

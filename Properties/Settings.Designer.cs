@@ -634,5 +634,17 @@ namespace AsterixDisplayAnalyser.Properties {
                 this["SpeedVector"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public decimal HistoryPoints {
+            get {
+                return ((decimal)(this["HistoryPoints"]));
+            }
+            set {
+                this["HistoryPoints"] = value;
+            }
+        }
     }
 }

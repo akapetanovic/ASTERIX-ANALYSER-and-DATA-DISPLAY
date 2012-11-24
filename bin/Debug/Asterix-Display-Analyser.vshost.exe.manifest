@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Asterix-Display-Analyser.exe" size="484864">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Asterix-Display-Analyser.exe" size="486400">
       <assemblyIdentity name="Asterix-Display-Analyser" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>kOouXFAuz6g1xvvz3u6bS8KSkn4=</dsig:DigestValue>
+        <dsig:DigestValue>RMrcK2iX5yRXgbebMxLR3Nia/aQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -114,22 +114,22 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Asterix-Display-Analyser.exe.config" size="7162">
+  <file name="Asterix-Display-Analyser.exe.config" size="7285">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>6XRXgo9O0BK2k3Q7XMyhn5YeN6M=</dsig:DigestValue>
+      <dsig:DigestValue>1RtTlz/B6fJgv9Nqj3NtJnMRe1E=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="DOCUMENTATION\Release Notes.txt" size="11030">
+  <file name="DOCUMENTATION\Release Notes.txt" size="11141">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>iXfSDexXJYq39QVJGR1P0Jv2Wdo=</dsig:DigestValue>
+      <dsig:DigestValue>y1ANGltQFoxH4hFwNsm/5+qaLTg=</dsig:DigestValue>
     </hash>
   </file>
   <file name="MAIN\README.txt" size="823">

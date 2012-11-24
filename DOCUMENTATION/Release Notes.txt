@@ -59,6 +59,7 @@ Version 2.0
 	3. Added decoder for CAT062/I220 Calculated Rate of Climb. Also added it into Extended Label Readout.
 	5. Fixed bug in CAT062/I105 for West/South positions (2's complement). It now works for any position on the planet.
 	6. Implemented Speed Vector (direction of flight + kts/min (adjustable 0min .. 9min). Based on Ground Speed.
+	7. Implemented History Points (option to choose between 0 .. 9 history position points to be displayed).
 
 Version 1.9 
 

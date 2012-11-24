@@ -47,12 +47,23 @@ namespace AsterixDisplayAnalyser
         {
             Properties.Settings.Default.SpeedVector = this.numericUpDownSpeedVector.Value;
             Properties.Settings.Default.Save();
-
         }
 
         private void DisplayRightClickOptions_Load(object sender, EventArgs e)
         {
             this.numericUpDownSpeedVector.Value = Properties.Settings.Default.SpeedVector;
+            this.numericUpDownHistoryPoints.Value = Properties.Settings.Default.HistoryPoints;
+        }
+
+        private void numericUpDownHistoryPoints_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.HistoryPoints = this.numericUpDownHistoryPoints.Value;
+            Properties.Settings.Default.Save();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

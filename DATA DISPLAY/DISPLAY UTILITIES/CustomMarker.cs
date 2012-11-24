@@ -49,11 +49,11 @@ namespace AsterixDisplayAnalyser
 
     public class GMapTargetandLabel : GMap.NET.WindowsForms.GMapMarker
     {
-        
+
         // Define an index of the track this marker is used for
         // Needed to GUI is able to update the right track (CFL, XFL, etc..
         public int MyTargetIndex = -1;
-        
+
         // Defines starting position of the label relative to the AC symbol
         public Point LabelOffset = new Point(25, 25);
 
@@ -126,8 +126,9 @@ namespace AsterixDisplayAnalyser
         public static FontFamily A_ROC_FONT_FAMILLY = FontFamily.GenericSansSerif;
         public Font A_ROC_FONT = new Font(A_ROC_FONT_FAMILLY, 10, FontStyle.Regular, GraphicsUnit.Pixel);
         public string A_ROC_STRING = "R---";
-        
-        
+
+        public System.Collections.Generic.Queue<PointLatLng> HistoryPoints = new System.Collections.Generic.Queue<PointLatLng>();
+
         ////////////////////////////////////////////////////////////
         // These are Extended label data items.
         // 
@@ -141,13 +142,14 @@ namespace AsterixDisplayAnalyser
         public string SelectedAltitude_LongTerm = "N/A";
         public string Rate_Of_Climb = "N/A";
         ///////////////////////////////////////////////////////////
-        
+
         // To be called once the track is terminated
         public void TerminateTarget()
         {
             LabelOffset = new Point(25, 25);
             CFL_STRING = "---";
             MyTargetIndex = -1;
+            HistoryPoints.Clear();
         }
 
         public int GetLabelWidth()
@@ -193,22 +195,24 @@ namespace AsterixDisplayAnalyser
         public GMapTargetandLabel(PointLatLng p)
             : base(p)
         {
-           
+
         }
 
         public override void OnRender(Graphics g)
         {
             Pen MyPen = new Pen(new SolidBrush(LabelAttributes.TargetColor), LabelAttributes.TargetSize);
             MyPen.DashStyle = LabelAttributes.TargetStyle;
-            
+
             // Draw AC Symbol
-            g.DrawRectangle(MyPen, LocalPosition.X - 5, LocalPosition.Y - 5, 10, 10);
+            g.DrawRectangle(MyPen, LocalPosition.X - 5, LocalPosition.Y - 5, 7, 7);
 
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            // Here draw history points
-
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            // Here handle history points
+            // First draw all previous history points
+            foreach (PointLatLng I in HistoryPoints)
+            {
+                GPoint MarkerPositionLocal = FormMain.gMapControl.FromLatLngToLocal(new PointLatLng(I.Lat, I.Lng));
+                g.DrawEllipse(MyPen, MarkerPositionLocal.X, MarkerPositionLocal.Y, 3, 3);
+            }
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             // Here draw speed vector
@@ -237,7 +241,7 @@ namespace AsterixDisplayAnalyser
 
             MyPen = new Pen(new SolidBrush(LabelAttributes.LineColor), LabelAttributes.LineWidth);
             MyPen.DashStyle = LabelAttributes.LineStyle;
-            
+
             // Draw leader line
             g.DrawLine(MyPen, new Point(LocalPosition.X, LocalPosition.Y), new Point(LocalPosition.X - LabelOffset.X, LocalPosition.Y - LabelOffset.Y));
 
@@ -259,7 +263,7 @@ namespace AsterixDisplayAnalyser
                 g.DrawString(CALLSIGN_STRING, CALLSIGN_FONT, CALLSIGN_BRUSH, LabelStartPosition.X + CALLSIGN_OFFSET.X, LabelStartPosition.Y + LabelHeight);
                 LabelHeight = LabelHeight + (int)CALLSIGN_FONT.Size + SpacingIndex * 2;
             }
-            
+
             // Draw ModeC
             g.DrawString(ModeC_STRING, ModeC_FONT, ModeC_BRUSH, LabelStartPosition.X + ModeC_OFFSET.X, LabelStartPosition.Y + LabelHeight);
 
@@ -284,24 +288,24 @@ namespace AsterixDisplayAnalyser
                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //  DRAW Assigned HDG, SPD and ROC
                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                
+
                 // HDG
                 g.DrawString(A_HDG_STRING, A_HDG_FONT, A_HDG_BRUSH, LabelStartPosition.X + A_HDG_OFFSET.X, LabelStartPosition.Y + LabelHeight);
                 HDG_START_X = LabelStartPosition.X + A_HDG_OFFSET.X;
                 HDG_START_Y = LabelStartPosition.Y + LabelHeight;
-                
+
                 // SPD
                 A_SPD_OFFSET.X = A_HDG_STRING.Length * (int)A_HDG_FONT.Size;
                 A_SPD_OFFSET.Y = LabelStartPosition.Y + LabelHeight;
                 g.DrawString(A_SPD_STRING, A_SPD_FONT, A_SPD_BRUSH, LabelStartPosition.X + A_SPD_OFFSET.X, A_SPD_OFFSET.Y);
                 SPD_START_X = LabelStartPosition.X + A_SPD_OFFSET.X;
                 SPD_START_Y = A_SPD_OFFSET.Y;
-             
+
                 // ROC
                 //A_ROC_OFFSET.X = A_SPD_OFFSET.X + A_SPD_OFFSET.X + A_SPD_STRING.Length * (int)A_SPD_FONT.Size;
                 //A_ROC_OFFSET.Y = LabelStartPosition.Y + LabelHeight;
-               // g.DrawString(A_ROC_STRING, A_ROC_FONT, A_ROC_BRUSH, LabelStartPosition.X + A_ROC_OFFSET.X, A_ROC_OFFSET.Y);
-              
+                // g.DrawString(A_ROC_STRING, A_ROC_FONT, A_ROC_BRUSH, LabelStartPosition.X + A_ROC_OFFSET.X, A_ROC_OFFSET.Y);
+
                 LabelHeight = LabelHeight + (int)A_SPD_FONT.Size + SpacingIndex * 2;
 
                 // Add the final spacing index and draw the box
