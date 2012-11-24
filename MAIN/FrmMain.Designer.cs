@@ -163,7 +163,7 @@
             this.tabPlotDisplay = new System.Windows.Forms.TabPage();
             this.labelLat_Long = new System.Windows.Forms.Label();
             this.labelFrozeDisplay = new System.Windows.Forms.Label();
-            this.gMapControl = new GMap.NET.WindowsForms.GMapControl();
+            gMapControl = new GMap.NET.WindowsForms.GMapControl();
             this.labelTargetCount = new System.Windows.Forms.Label();
             this.lblNumberofTargets = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -1362,7 +1362,7 @@
             this.tabPlotDisplay.BackColor = System.Drawing.SystemColors.Desktop;
             this.tabPlotDisplay.Controls.Add(this.labelLat_Long);
             this.tabPlotDisplay.Controls.Add(this.labelFrozeDisplay);
-            this.tabPlotDisplay.Controls.Add(this.gMapControl);
+            this.tabPlotDisplay.Controls.Add(gMapControl);
             this.tabPlotDisplay.Controls.Add(this.labelTargetCount);
             this.tabPlotDisplay.Controls.Add(this.lblNumberofTargets);
             this.tabPlotDisplay.Controls.Add(this.groupBox2);
@@ -1414,36 +1414,36 @@
             // 
             // gMapControl
             // 
-            this.gMapControl.AutoSize = true;
-            this.gMapControl.BackColor = System.Drawing.Color.White;
-            this.gMapControl.Bearing = 0F;
-            this.gMapControl.CanDragMap = true;
-            this.gMapControl.ForeColor = System.Drawing.Color.Black;
-            this.gMapControl.GrayScaleMode = false;
-            this.gMapControl.LevelsKeepInMemmory = 5;
-            this.gMapControl.Location = new System.Drawing.Point(139, 3);
-            this.gMapControl.MarkersEnabled = true;
-            this.gMapControl.MaxZoom = 2;
-            this.gMapControl.MinZoom = 2;
-            this.gMapControl.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionWithoutCenter;
-            this.gMapControl.Name = "gMapControl";
-            this.gMapControl.NegativeMode = false;
-            this.gMapControl.PolygonsEnabled = true;
-            this.gMapControl.RetryLoadTile = 0;
-            this.gMapControl.RoutesEnabled = true;
-            this.gMapControl.ShowTileGridLines = false;
-            this.gMapControl.Size = new System.Drawing.Size(1026, 702);
-            this.gMapControl.TabIndex = 0;
-            this.gMapControl.Zoom = 0D;
-            this.gMapControl.OnMarkerEnter += new GMap.NET.WindowsForms.MarkerEnter(this.gMapControl_OnMarkerEnter);
-            this.gMapControl.OnMapDrag += new GMap.NET.MapDrag(this.gMapControl_OnMapDrag);
-            this.gMapControl.OnMapZoomChanged += new GMap.NET.MapZoomChanged(this.gMapControl_OnMapZoomChanged);
-            this.gMapControl.Load += new System.EventHandler(this.gMapControl_Load);
-            this.gMapControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseClick);
-            this.gMapControl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseDoubleClick);
-            this.gMapControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseDown);
-            this.gMapControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseMove);
-            this.gMapControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseUp);
+            gMapControl.AutoSize = true;
+            gMapControl.BackColor = System.Drawing.Color.White;
+            gMapControl.Bearing = 0F;
+            gMapControl.CanDragMap = true;
+            gMapControl.ForeColor = System.Drawing.Color.Black;
+            gMapControl.GrayScaleMode = false;
+            gMapControl.LevelsKeepInMemmory = 5;
+            gMapControl.Location = new System.Drawing.Point(139, 3);
+            gMapControl.MarkersEnabled = true;
+            gMapControl.MaxZoom = 2;
+            gMapControl.MinZoom = 2;
+            gMapControl.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionWithoutCenter;
+            gMapControl.Name = "gMapControl";
+            gMapControl.NegativeMode = false;
+            gMapControl.PolygonsEnabled = true;
+            gMapControl.RetryLoadTile = 0;
+            gMapControl.RoutesEnabled = true;
+            gMapControl.ShowTileGridLines = false;
+            gMapControl.Size = new System.Drawing.Size(1026, 702);
+            gMapControl.TabIndex = 0;
+            gMapControl.Zoom = 0D;
+            gMapControl.OnMarkerEnter += new GMap.NET.WindowsForms.MarkerEnter(this.gMapControl_OnMarkerEnter);
+            gMapControl.OnMapDrag += new GMap.NET.MapDrag(this.gMapControl_OnMapDrag);
+            gMapControl.OnMapZoomChanged += new GMap.NET.MapZoomChanged(this.gMapControl_OnMapZoomChanged);
+            gMapControl.Load += new System.EventHandler(this.gMapControl_Load);
+            gMapControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseClick);
+            gMapControl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseDoubleClick);
+            gMapControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseDown);
+            gMapControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseMove);
+            gMapControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseUp);
             // 
             // labelTargetCount
             // 
@@ -2794,7 +2794,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox comboBoxSSRFilterBox;
         private System.Windows.Forms.CheckBox checkBoxFilterBySSR;
-        private GMap.NET.WindowsForms.GMapControl gMapControl;
+        public static GMap.NET.WindowsForms.GMapControl gMapControl;
         private System.Windows.Forms.TabPage tabPageAsterixMessages;
         private System.Windows.Forms.ListBox listBoxManFrame;
         private System.Windows.Forms.Label label3;

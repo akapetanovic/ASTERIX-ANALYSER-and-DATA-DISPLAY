@@ -1290,7 +1290,7 @@ namespace AsterixDisplayAnalyser
         private void gMapControl_MouseMove(object sender, MouseEventArgs e)
         {
             PointLatLng Test = gMapControl.FromLocalToLatLng(e.X, e.Y);
-            this.labelLat_Long.Location = new Point(this.labelLat_Long.Location.X, (this.gMapControl.Size.Height - 4));
+            this.labelLat_Long.Location = new Point(this.labelLat_Long.Location.X, (gMapControl.Size.Height - 4));
 
             if (Properties.Settings.Default.DisplayPosInDecimals)
             {
@@ -1426,7 +1426,7 @@ namespace AsterixDisplayAnalyser
 
         private void tabPlotDisplay_SizeChanged(object sender, EventArgs e)
         {
-            this.gMapControl.Size = new Size(this.tabPlotDisplay.Size.Width - 147, this.tabPlotDisplay.Size.Height - 12);
+            gMapControl.Size = new Size(this.tabPlotDisplay.Size.Width - 147, this.tabPlotDisplay.Size.Height - 12);
             this.groupBoxConnection.Location = new Point(this.Size.Width - 408, 1);
         }
 

@@ -622,5 +622,17 @@ namespace AsterixDisplayAnalyser.Properties {
                 this["DisplayPosInDecimals"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public decimal SpeedVector {
+            get {
+                return ((decimal)(this["SpeedVector"]));
+            }
+            set {
+                this["SpeedVector"] = value;
+            }
+        }
     }
 }

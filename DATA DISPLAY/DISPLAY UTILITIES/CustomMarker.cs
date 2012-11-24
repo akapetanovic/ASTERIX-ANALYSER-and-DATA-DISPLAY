@@ -202,10 +202,38 @@ namespace AsterixDisplayAnalyser
             MyPen.DashStyle = LabelAttributes.TargetStyle;
             
             // Draw AC Symbol
-            g.DrawRectangle(MyPen, LocalPosition.X, LocalPosition.Y, 10, 10);
+            g.DrawRectangle(MyPen, LocalPosition.X - 5, LocalPosition.Y - 5, 10, 10);
 
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            // Here draw history points
+
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             // Here draw speed vector
+            // // Find out what data should be used for speed vector? IAS, TAS, GSPD, MACH?
+            if ((M_HDG != "N/A" || TRK != "N/A") && (GSPD_STRING != null))
+            {
+                if (GSPD_STRING != "N/A")
+                {
+                    double Azimuth = 0;
+                    double Range = double.Parse(GSPD_STRING);
+                    if (TRK != "N/A")
+                        Azimuth = double.Parse(TRK);
+                    else
+                        Azimuth = double.Parse(M_HDG);
 
+                    Range = (Range / 60) * (double)Properties.Settings.Default.SpeedVector;
+
+                    GeoCordSystemDegMinSecUtilities.LatLongClass ResultPosition =
+                        GeoCordSystemDegMinSecUtilities.CalculateNewPosition(new GeoCordSystemDegMinSecUtilities.LatLongClass(Position.Lat, Position.Lng), (double)Range, (double)Azimuth);
+
+                    GPoint MarkerPositionLocal = FormMain.gMapControl.FromLatLngToLocal(new PointLatLng(ResultPosition.GetLatLongDecimal().LatitudeDecimal, ResultPosition.GetLatLongDecimal().LongitudeDecimal));
+                    g.DrawLine(MyPen, new Point(LocalPosition.X, LocalPosition.Y), new Point(MarkerPositionLocal.X, MarkerPositionLocal.Y));
+                }
+            }
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             MyPen = new Pen(new SolidBrush(LabelAttributes.LineColor), LabelAttributes.LineWidth);
             MyPen.DashStyle = LabelAttributes.LineStyle;

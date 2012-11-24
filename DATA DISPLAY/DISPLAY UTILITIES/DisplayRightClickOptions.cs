@@ -42,5 +42,17 @@ namespace AsterixDisplayAnalyser
             FormMain.ShowExtendedLabel();
             this.Close();
         }
+
+        private void numericUpDownSpeedVector_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.SpeedVector = this.numericUpDownSpeedVector.Value;
+            Properties.Settings.Default.Save();
+
+        }
+
+        private void DisplayRightClickOptions_Load(object sender, EventArgs e)
+        {
+            this.numericUpDownSpeedVector.Value = Properties.Settings.Default.SpeedVector;
+        }
     }
 }
