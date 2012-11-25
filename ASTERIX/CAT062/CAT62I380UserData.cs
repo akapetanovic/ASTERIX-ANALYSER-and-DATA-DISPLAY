@@ -10,6 +10,7 @@ namespace AsterixDisplayAnalyser
 
         public static void DecodeCAT62I380(byte[] Data)
         {
+            #region DecodeConstantsRegion
             ///////////////////////////////////////////////////////////////
             // Track_Angle and Magnetic Heading DECODE CONSTANTS
             double TA_MA_1 = 360.0 / Math.Pow(2.0, 16.0); // LSB
@@ -105,7 +106,8 @@ namespace AsterixDisplayAnalyser
             int SA_10 = SA_9 * 2;
             int SA_11 = SA_10 * 2;
             int SA_12 = SA_11 * 2;
-            int SA_13 = SA_12 * 2;
+            int SA_13 = SA_12 * 2; 
+            #endregion
 
             // Define a global record for all data, then down there depending on the avalability of each field
             // populate specific items. Each item has validity flag that needs to be set for each available data
@@ -118,6 +120,7 @@ namespace AsterixDisplayAnalyser
             Bit_Ops WORD2 = new Bit_Ops();
             Bit_Ops WORD3 = new Bit_Ops();
 
+            #region DataItemPresenceRegion
             //Extract the first octet
             WORD0.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
 
@@ -141,15 +144,19 @@ namespace AsterixDisplayAnalyser
                         }
                     }
                 }
-            }
+            } 
+            #endregion
 
             CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 1;
 
             // WORD0
+            #region Target_Address
             if (WORD0.DWord[CAT62I380Types.Target_Address] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 3;
-            }
+            } 
+            #endregion
+            #region Target_Identification
             if (WORD0.DWord[CAT62I380Types.Target_Identification] == true)
             {
 
@@ -164,7 +171,6 @@ namespace AsterixDisplayAnalyser
 
                 Bits_33_To_Bits_48_.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 1];
                 Bits_33_To_Bits_48_.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
-
 
                 Bit_Ops Char1 = new Bit_Ops();
                 Char1.DWord[Bit_Ops.Bits0_7_Of_DWord] = 0;
@@ -252,7 +258,9 @@ namespace AsterixDisplayAnalyser
                     Decode6BitASCII(Char8.DWord[Bit_Ops.Bits0_7_Of_DWord]);
 
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 6;
-            }
+            } 
+            #endregion
+            #region Magnetic_Heading
             if (WORD0.DWord[CAT62I380Types.Magnetic_Heading] == true)
             {
                 Bit_Ops BO = new Bit_Ops();
@@ -296,11 +304,15 @@ namespace AsterixDisplayAnalyser
                 CAT62I380DataRecord.M_HDG.Is_Valid = true;
                 CAT62I380DataRecord.M_HDG.M_HDG = TA;
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
-            }
+            } 
+            #endregion
+            #region Indicated_Airspeed_Mach_Number
             if (WORD0.DWord[CAT62I380Types.Indicated_Airspeed_Mach_Number] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
-            }
+            } 
+            #endregion
+            #region True_Airspeed
             if (WORD0.DWord[CAT62I380Types.True_Airspeed] == true)
             {
                 Bit_Ops BO = new Bit_Ops();
@@ -312,7 +324,9 @@ namespace AsterixDisplayAnalyser
                 CAT62I380DataRecord.TAS.TAS = Result;
 
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
-            }
+            } 
+            #endregion
+            #region Selected_Altitude
             if (WORD0.DWord[CAT62I380Types.Selected_Altitude] == true)
             {
                 Bit_Ops BO = new Bit_Ops();
@@ -412,7 +426,9 @@ namespace AsterixDisplayAnalyser
                 CAT62I380DataRecord.Selected_Altitude.SelectedAltitude = SA / 100; // Use FL
 
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
-            }
+            } 
+            #endregion
+            #region Final_State_SelectedAltitude
             if (WORD0.DWord[CAT62I380Types.Final_State_SelectedAltitude] == true)
             {
                 Bit_Ops BO = new Bit_Ops();
@@ -420,8 +436,8 @@ namespace AsterixDisplayAnalyser
                 BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
 
                 // First extract values of the last three MSB bits 
-                CAT62I380DataRecord.FS_Selected_Altitude.Manage_Mode_Active= BO.DWord[Bit_Ops.Bit15];
-                CAT62I380DataRecord.FS_Selected_Altitude.Altitude_Hold_Active= BO.DWord[Bit_Ops.Bit14];
+                CAT62I380DataRecord.FS_Selected_Altitude.Manage_Mode_Active = BO.DWord[Bit_Ops.Bit15];
+                CAT62I380DataRecord.FS_Selected_Altitude.Altitude_Hold_Active = BO.DWord[Bit_Ops.Bit14];
                 CAT62I380DataRecord.FS_Selected_Altitude.Approach_Mode_Active = BO.DWord[Bit_Ops.Bit13];
 
                 int SA = 0;
@@ -503,42 +519,125 @@ namespace AsterixDisplayAnalyser
 
                 CAT62I380DataRecord.FS_Selected_Altitude.Is_Valid = true;
                 CAT62I380DataRecord.FS_Selected_Altitude.SelectedAltitude = SA / 100;
-                
+
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
-            }
+            } 
+            #endregion
             // WORD1
+            #region Trajectory_Intent_Status
             if (WORD1.DWord[CAT62I380Types.Trajectory_Intent_Status] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 1;
-            }
+            } 
+            #endregion
+            #region Trajectory_Intent_Data
             if (WORD1.DWord[CAT62I380Types.Trajectory_Intent_Data] == true)
             {
                 // Repetitive Data Item starting with a one-octet Field Repetition
                 // Indicator (REP) followed by at least one Trajectory Intent Point
                 // comprising fifteen octets
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 16;
-            }
+            } 
+            #endregion
+            #region Communications_ACAS
             if (WORD1.DWord[CAT62I380Types.Communications_ACAS] == true)
             {
+                Bit_Ops BO = new Bit_Ops();
+                BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 1];
+                BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
+
+                #region COMRegion
+                int COM_Value = 0;
+                if (BO.DWord[Bit_Ops.Bit13])
+                    COM_Value = 1;
+                if (BO.DWord[Bit_Ops.Bit14])
+                    COM_Value = COM_Value + 2;
+                if (BO.DWord[Bit_Ops.Bit15])
+                    COM_Value = COM_Value + 4;
+                switch (COM_Value)
+                {
+                    case 0:
+                        CAT62I380DataRecord.COM_ACAS_FL_Reporting.COM_Reporting = CAT62I380Types.CAT62COM_ACAS_Flight_Status_Type.COM.NO_COM_STATUS;
+                        break;
+                    case 1:
+                        CAT62I380DataRecord.COM_ACAS_FL_Reporting.COM_Reporting = CAT62I380Types.CAT62COM_ACAS_Flight_Status_Type.COM.COM_A_B;
+                        break;
+                    case 2:
+                        CAT62I380DataRecord.COM_ACAS_FL_Reporting.COM_Reporting = CAT62I380Types.CAT62COM_ACAS_Flight_Status_Type.COM.COM_A_B_Uplink_ELM;
+                        break;
+                    case 3:
+                        CAT62I380DataRecord.COM_ACAS_FL_Reporting.COM_Reporting = CAT62I380Types.CAT62COM_ACAS_Flight_Status_Type.COM.COM_A_B_Uplink_ELM_Downlink_ELM;
+                        break;
+                    case 4:
+                        CAT62I380DataRecord.COM_ACAS_FL_Reporting.COM_Reporting = CAT62I380Types.CAT62COM_ACAS_Flight_Status_Type.COM.Level_5_Transponde;
+                        break;
+                } 
+                #endregion
+                #region FlightStatusRegion
+                int FL_Value = 0;
+                if (BO.DWord[Bit_Ops.Bit10])
+                    FL_Value = 1;
+                if (BO.DWord[Bit_Ops.Bit11])
+                    FL_Value = FL_Value + 2;
+                if (BO.DWord[Bit_Ops.Bit12])
+                    FL_Value = FL_Value + 4;
+                switch (FL_Value)
+                {
+                    case 0:
+                        CAT62I380DataRecord.COM_ACAS_FL_Reporting.FL_Status = CAT62I380Types.CAT62COM_ACAS_Flight_Status_Type.Flight_Status.No_Alert_No_Spi_Airborne;
+                        break;
+                    case 1:
+                        CAT62I380DataRecord.COM_ACAS_FL_Reporting.FL_Status = CAT62I380Types.CAT62COM_ACAS_Flight_Status_Type.Flight_Status.No_Alert_No_Spi_Ground;
+                        break;
+                    case 2:
+                        CAT62I380DataRecord.COM_ACAS_FL_Reporting.FL_Status = CAT62I380Types.CAT62COM_ACAS_Flight_Status_Type.Flight_Status.Alert_No_Spi_Airborne;
+                        break;
+                    case 3:
+                        CAT62I380DataRecord.COM_ACAS_FL_Reporting.FL_Status = CAT62I380Types.CAT62COM_ACAS_Flight_Status_Type.Flight_Status.Alert_No_Spi_Ground;
+                        break;
+                    case 4:
+                        CAT62I380DataRecord.COM_ACAS_FL_Reporting.FL_Status = CAT62I380Types.CAT62COM_ACAS_Flight_Status_Type.Flight_Status.Alert_Spi_Ground_or_Airborne;
+                        break;
+                    case 5:
+                        CAT62I380DataRecord.COM_ACAS_FL_Reporting.FL_Status = CAT62I380Types.CAT62COM_ACAS_Flight_Status_Type.Flight_Status.No_Alert_Spi_Ground_or_Airborne;
+                        break;
+                } 
+                #endregion
+
+                CAT62I380DataRecord.COM_ACAS_FL_Reporting.SSC = BO.DWord[Bit_Ops.Bit7];
+                CAT62I380DataRecord.COM_ACAS_FL_Reporting.ARC_Is_25_Feet = BO.DWord[Bit_Ops.Bit6];
+                CAT62I380DataRecord.COM_ACAS_FL_Reporting.AIC = BO.DWord[Bit_Ops.Bit5];
+
+                CAT62I380DataRecord.COM_ACAS_FL_Reporting.Is_Valid = true;
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
-            }
+            } 
+            #endregion
+            #region Status_Reported_By_ADS_B
             if (WORD1.DWord[CAT62I380Types.Status_Reported_By_ADS_B] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
-            }
+            } 
+            #endregion
+            #region ACAS_Resolution_Advisory_Report
             if (WORD1.DWord[CAT62I380Types.ACAS_Resolution_Advisory_Report] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 7;
-            }
+            } 
+            #endregion
+            #region Barometric_Vertical_Rate
             if (WORD1.DWord[CAT62I380Types.Barometric_Vertical_Rate] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
-            }
+            } 
+            #endregion
+            #region Geometric_Vertical_Rate
             if (WORD1.DWord[CAT62I380Types.Geometric_Vertical_Rate] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
-            }
+            } 
+            #endregion
             // WORD2
+            #region Roll_Angle
             if (WORD2.DWord[CAT62I380Types.Roll_Angle] == true)
             {
                 //(LSB) = 0.01 degree
@@ -642,12 +741,15 @@ namespace AsterixDisplayAnalyser
                 CAT62I380DataRecord.Rool_Angle.Is_Valid = true;
                 CAT62I380DataRecord.Rool_Angle.Rool_Angle = RA;
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
-
-            }
+            } 
+            #endregion
+            #region Track_Angle_Rate
             if (WORD2.DWord[CAT62I380Types.Track_Angle_Rate] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
-            }
+            } 
+            #endregion
+            #region Track_Angle
             if (WORD2.DWord[CAT62I380Types.Track_Angle] == true)
             {
                 Bit_Ops BO = new Bit_Ops();
@@ -691,7 +793,9 @@ namespace AsterixDisplayAnalyser
                 CAT62I380DataRecord.TRK.Is_Valid = true;
                 CAT62I380DataRecord.TRK.TRK = TA;
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
-            }
+            } 
+            #endregion
+            #region Ground_Speed
             if (WORD2.DWord[CAT62I380Types.Ground_Speed] == true)
             {
                 Bit_Ops BO = new Bit_Ops();
@@ -791,39 +895,55 @@ namespace AsterixDisplayAnalyser
                 CAT62I380DataRecord.GSPD.Is_Valid = true;
                 CAT62I380DataRecord.GSPD.GSPD = GSPD * 60.0 * 60.0;
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
-            }
+            } 
+            #endregion
+            #region Velocity_Uncertainty
             if (WORD2.DWord[CAT62I380Types.Velocity_Uncertainty] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 1;
-            }
+            } 
+            #endregion
+            #region Meteorological_Data
             if (WORD2.DWord[CAT62I380Types.Meteorological_Data] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 8;
-            }
+            } 
+            #endregion
+            #region Emitter_Category
             if (WORD2.DWord[CAT62I380Types.Emitter_Category] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 1;
-            }
+            } 
+            #endregion
             // WORD3
+            #region Position_Data
             if (WORD3.DWord[CAT62I380Types.Position_Data] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 6;
-            }
+            } 
+            #endregion
+            #region Geometric_Altitude_Data
             if (WORD3.DWord[CAT62I380Types.Geometric_Altitude_Data] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
-            }
+            } 
+            #endregion
+            #region Position_Uncertainty_Data
             if (WORD3.DWord[CAT62I380Types.Position_Uncertainty_Data] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 1;
-            }
+            } 
+            #endregion
+            #region Mode_S_MB_Data
             if (WORD3.DWord[CAT62I380Types.Mode_S_MB_Data] == true)
             {
                 // Repetitive starting with an one-octet Field Repetition Indicator
                 // (REP) followed by at least one BDS report comprising one seven
                 // octet BDS register and one octet BDS code.
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 9;
-            }
+            } 
+            #endregion
+            #region Indicated_Airspeed
             if (WORD3.DWord[CAT62I380Types.Indicated_Airspeed] == true)
             {
                 Bit_Ops BO = new Bit_Ops();
@@ -835,7 +955,9 @@ namespace AsterixDisplayAnalyser
                 CAT62I380DataRecord.IAS.IAS = Result;
 
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
-            }
+            } 
+            #endregion
+            #region Mach_Number
             if (WORD3.DWord[CAT62I380Types.Mach_Number] == true)
             {
                 Bit_Ops BO = new Bit_Ops();
@@ -879,11 +1001,14 @@ namespace AsterixDisplayAnalyser
                 CAT62I380DataRecord.MACH.Is_Valid = true;
                 CAT62I380DataRecord.MACH.MACH = MN;
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
-            }
+            } 
+            #endregion
+            #region Barometric_Pressure_Setting
             if (WORD3.DWord[CAT62I380Types.Barometric_Pressure_Setting] == true)
             {
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
-            }
+            } 
+            #endregion
 
             //////////////////////////////////////////////////////////////////////////////////
             // Now assign it to the generic list

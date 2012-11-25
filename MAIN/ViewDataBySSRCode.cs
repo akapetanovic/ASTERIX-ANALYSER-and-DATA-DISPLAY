@@ -118,7 +118,10 @@ namespace AsterixDisplayAnalyser
                             this.listBoxDataBySSRCode.Items.Add("\tMode Validated:\t" + FL_Data.Code_Validated.ToString());
                             this.listBoxDataBySSRCode.Items.Add("\tMode Garbled:\t" + FL_Data.Code_Garbled.ToString());
                             this.listBoxDataBySSRCode.Items.Add("\tFL:\t" + FL_Data.FlightLevel.ToString());
+
                             this.listBoxDataBySSRCode.Items.Add("    ");
+
+
                         }
                     }
                 }
@@ -139,7 +142,10 @@ namespace AsterixDisplayAnalyser
 
                             // Display Data
                             CAT48I240Types.CAT48I240ACID_Data ACID_String = (CAT48I240Types.CAT48I240ACID_Data)Msg.CAT48DataItems[CAT48.ItemIDToIndex("240")].value;
+                            if (ACID_String != null)
                             this.listBoxDataBySSRCode.Items.Add("\t" + "Callsign:" + ACID_String.ACID);
+                            else
+                                this.listBoxDataBySSRCode.Items.Add("\t" + "Callsign: N/A");
 
                             CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates PositionData = (CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates)Msg.CAT48DataItems[CAT48.ItemIDToIndex("040")].value;
                             this.listBoxDataBySSRCode.Items.Add("\tDistance:\t" + PositionData.Measured_Distance);

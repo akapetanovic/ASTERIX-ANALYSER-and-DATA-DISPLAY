@@ -44,14 +44,6 @@ namespace AsterixDisplayAnalyser
         public static int Barometric_Pressure_Setting = Bit_Ops.Bit1;
         public static int WORD3_FX_Extension_Indicator = Bit_Ops.Bit0;
 
-
-
-
-        /// <summary>
-        /// ////////////////////////////////////////////////////////////
-        /// // Here define all used data subfileds
-        /// ////////////////////////////////////////////////////////////
-        /// </summary>
         public class CAT62ACIDType
         {
             public string ACID_String = "------";
@@ -98,13 +90,13 @@ namespace AsterixDisplayAnalyser
         /// ////////////////////////////////////////////////////////////
         /// COM, ACAS and Flight Status Reportin types
         /// </summary>
-
-        public enum COM { NO_COM_STATUS, COM_A_B, COM_A_B_Uplink_ELM, COM_A_B_Uplink_ELM_Downlink_ELM, Level_5_Transponde };
-        public enum Flight_Status { No_Alert_No_Spi_Airborne, No_Alert_No_Spi_Ground, Alert_No_Spi_Airborne, Alert_No_Spi_Ground, Alert_No_Spi_Ground_or_Airborne, No_Alert_Spi_Ground_or_Airborne };
-
-
         public class CAT62COM_ACAS_Flight_Status_Type
         {
+            public enum COM { NO_COM_STATUS, COM_A_B, COM_A_B_Uplink_ELM, COM_A_B_Uplink_ELM_Downlink_ELM, Level_5_Transponde };
+            public enum Flight_Status { No_Alert_No_Spi_Airborne, No_Alert_No_Spi_Ground, Alert_No_Spi_Airborne, Alert_No_Spi_Ground, Alert_Spi_Ground_or_Airborne, No_Alert_Spi_Ground_or_Airborne };
+
+            // Do not care about BDS fow now....
+            
             public COM COM_Reporting = COM.COM_A_B;
             public Flight_Status FL_Status = Flight_Status.Alert_No_Spi_Airborne;
             public bool SSC = false;
@@ -153,5 +145,7 @@ namespace AsterixDisplayAnalyser
             public CAT62FinalStateSelectedAltitudeType FS_Selected_Altitude = new CAT62FinalStateSelectedAltitudeType();
             public CAT62SelectedAltitudeType Selected_Altitude = new CAT62SelectedAltitudeType();
         }
+    
+    
     }
 }

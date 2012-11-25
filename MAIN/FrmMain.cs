@@ -761,6 +761,9 @@ namespace AsterixDisplayAnalyser
                         }
                     }
 
+                    Cursor.Position = new Point(Cursor.Position.X + 1, Cursor.Position.Y);
+                    Cursor.Position = new Point(Cursor.Position.X - 1, Cursor.Position.Y);
+
                     // Check if there were any items, if so then tell KML to build the file
                     if (Provide_To_Google_Earth)
                         ASTX_TO_KML.BuildKML();
@@ -1286,19 +1289,19 @@ namespace AsterixDisplayAnalyser
 
         }
 
-        // Update Mouse posistion on the control
+        // Update Mouse possition on the control
         private void gMapControl_MouseMove(object sender, MouseEventArgs e)
         {
-            PointLatLng Test = gMapControl.FromLocalToLatLng(e.X, e.Y);
+            PointLatLng MouseLatLong = gMapControl.FromLocalToLatLng(e.X, e.Y);
             this.labelLat_Long.Location = new Point(this.labelLat_Long.Location.X, (gMapControl.Size.Height - 4));
 
             if (Properties.Settings.Default.DisplayPosInDecimals)
             {
-                this.labelLat_Long.Text = Test.Lat + " " + Test.Lng;
+                this.labelLat_Long.Text = MouseLatLong.Lat + " " + MouseLatLong.Lng;
             }
             else
             {
-                GeoCordSystemDegMinSecUtilities.LatLongClass ToConvert = new GeoCordSystemDegMinSecUtilities.LatLongClass(Test.Lat, Test.Lng);
+                GeoCordSystemDegMinSecUtilities.LatLongClass ToConvert = new GeoCordSystemDegMinSecUtilities.LatLongClass(MouseLatLong.Lat, MouseLatLong.Lng);
                 string Latitude_S, Longitude_S;
                 ToConvert.GetDegMinSecStringFormat(out Latitude_S, out Longitude_S);
                 this.labelLat_Long.Text = Latitude_S + " " + Longitude_S;
@@ -2710,10 +2713,6 @@ namespace AsterixDisplayAnalyser
         {
 
         }
-
-
-
-
 
     }
 }

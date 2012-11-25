@@ -65,8 +65,9 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\DARR.ico</ApplicationIcon>
+    <ApplicationIcon>DARR.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="GMap.NET.Core, Version=1.6.0.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -571,7 +572,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DARR.ico" />
     <Content Include="DOCUMENTATION\Release Notes.txt" />
+    <Content Include="DOCUMENTATION\To_Do.txt" />
     <Content Include="Resources\DARR.ico" />
     <Content Include="Resources\radar.jpg" />
     <Content Include="MAIN\README.txt" />
@@ -580,12 +583,12 @@
   <ItemGroup>
     <PublishFile Include="Microsoft.VisualBasic.PowerPacks.Vs">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>
