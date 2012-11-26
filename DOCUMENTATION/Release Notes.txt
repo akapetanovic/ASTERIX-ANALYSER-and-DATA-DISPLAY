@@ -66,7 +66,7 @@ Version 2.0
 		2. Selected Altitude
 		3. Final Selected Altitude
 	3. Added decoder and extended Label Readout for CAT062/I220
-		1. Calculated Rate of Climb. Also added it into E.
+		1. Calculated Rate of Climb.
 	5. Fixed bug in CAT062/I105 for West/South positions (2's complement). It now works for any position on the earth.
 	6. Implemented Speed Vector (direction of flight + kts/min (adjustable 0min .. 9min). Based on Ground Speed.
 	7. Implemented History Points (option to choose between 0 .. 9 history position points to be displayed).
@@ -78,7 +78,6 @@ Version 2.0
 				3. Mach number
 				4. Barometric Altitude rate
 				5. Inertial Altitude rate
-
 
 Version 1.9 
 
@@ -234,5 +233,4 @@ Version 1.0
 2.	Currently there is a significant drop of the messages as I do not check the total size of the received buffer returned from sock.Receive… against the total size of an individual ASTERIX message, resulting in only one message being extracted from each return of sock.Receive…. This, for sure, will get fixed in the next release. 
 
 Do not hesitate to contact me should you have any questions or discover any bug:
-
 Amer Kapetanovic (akapetanovic@gmail.com)
