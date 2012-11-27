@@ -63,7 +63,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 17);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Version 2.0";
+            this.label3.Text = "Version 2.1";
             // 
             // label4
             // 
@@ -83,7 +83,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(109, 17);
             this.label5.TabIndex = 4;
-            this.label5.Text = "November 2012";
+            this.label5.Text = "Decembar 2012";
             // 
             // FrmAbout
             // 

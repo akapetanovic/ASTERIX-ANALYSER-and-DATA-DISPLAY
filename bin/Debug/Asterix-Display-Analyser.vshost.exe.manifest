@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Asterix-Display-Analyser.exe" size="496640">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Asterix-Display-Analyser.exe" size="502272">
       <assemblyIdentity name="Asterix-Display-Analyser" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>fCRood9uYlhZvYEyos8NIws6RI0=</dsig:DigestValue>
+        <dsig:DigestValue>rmQ17FQ49mvvZj6I7UCnShE4gKI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -132,22 +132,22 @@
       <dsig:DigestValue>3vOhkf7KUHfali36RsEXajPpO6M=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="DOCUMENTATION\Release Notes.txt" size="11766">
+  <file name="DOCUMENTATION\Release Notes.txt" size="11887">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>KEudsqtCnlaNqGQ8IKY5beMzZmE=</dsig:DigestValue>
+      <dsig:DigestValue>AD9JdNhyiRvfznRb+6eV+kywANM=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="DOCUMENTATION\To_Do.txt" size="178">
+  <file name="DOCUMENTATION\To_Do.txt" size="140">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>QFx2p5QIw39jBC5JKZf6wN4lVCs=</dsig:DigestValue>
+      <dsig:DigestValue>rfoZGOI7E0E0j2wdQqD+T0H2W6s=</dsig:DigestValue>
     </hash>
   </file>
   <file name="MAIN\README.txt" size="823">

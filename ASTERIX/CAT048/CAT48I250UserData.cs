@@ -57,6 +57,65 @@ namespace AsterixDisplayAnalyser
             int RoC_7 = RoC_6 * 2;
             int RoC_8 = RoC_7 * 2;
             int RoC_9 = RoC_8 * 2;
+            ////////////////////////////////////////////////////////////////
+            // ROLL ANGLE CONSTANTS
+            double ROLL_ANG_1 = 45.0 / 256.0; 
+            double ROLL_ANG_2 = ROLL_ANG_1 * 2;
+            double ROLL_ANG_3 = ROLL_ANG_2 * 2;
+            double ROLL_ANG_4 = ROLL_ANG_3 * 2;
+            double ROLL_ANG_5 = ROLL_ANG_4 * 2;
+            double ROLL_ANG_6 = ROLL_ANG_5 * 2;
+            double ROLL_ANG_7 = ROLL_ANG_6 * 2;
+            double ROLL_ANG_8 = ROLL_ANG_7 * 2;
+            double ROLL_ANG_9 = ROLL_ANG_8 * 2;
+            ////////////////////////////////////////////////////////////////
+            // TRUE TRACK ANGLE CONSTANTS
+            double TRUE_TRK_ANG_1 = 90.0 / 512.0; 
+            double TRUE_TRK_ANG_2 = TRUE_TRK_ANG_1 * 2;
+            double TRUE_TRK_ANG_3 = TRUE_TRK_ANG_2 * 2;
+            double TRUE_TRK_ANG_4 = TRUE_TRK_ANG_3 * 2;
+            double TRUE_TRK_ANG_5 = TRUE_TRK_ANG_4 * 2;
+            double TRUE_TRK_ANG_6 = TRUE_TRK_ANG_5 * 2;
+            double TRUE_TRK_ANG_7 = TRUE_TRK_ANG_6 * 2;
+            double TRUE_TRK_ANG_8 = TRUE_TRK_ANG_7 * 2;
+            double TRUE_TRK_ANG_9 = TRUE_TRK_ANG_8 * 2;
+            double TRUE_TRK_ANG_10 = TRUE_TRK_ANG_9 * 2;
+            ////////////////////////////////////////////////////////////////
+            // GND SPD CONSTANTS
+            double GND_SPD_1 = 1024.0 / 512.0;
+            double GND_SPD_2 = GND_SPD_1 * 2;
+            double GND_SPD_3 = GND_SPD_2 * 2;
+            double GND_SPD_4 = GND_SPD_3 * 2;
+            double GND_SPD_5 = GND_SPD_4 * 2;
+            double GND_SPD_6 = GND_SPD_5 * 2;
+            double GND_SPD_7 = GND_SPD_6 * 2;
+            double GND_SPD_8 = GND_SPD_7 * 2;
+            double GND_SPD_9 = GND_SPD_8 * 2;
+            double GND_SPD_10 = GND_SPD_9 * 2;
+            ////////////////////////////////////////////////////////////////
+            // TRK AND RFATE CONSTANTS
+            double TRK_ANG_RATE_1 = 8.0 / 256.0;
+            double TRK_ANG_RATE_2 = TRK_ANG_RATE_1 * 2;
+            double TRK_ANG_RATE_3 = TRK_ANG_RATE_2 * 2;
+            double TRK_ANG_RATE_4 = TRK_ANG_RATE_3 * 2;
+            double TRK_ANG_RATE_5 = TRK_ANG_RATE_4 * 2;
+            double TRK_ANG_RATE_6 = TRK_ANG_RATE_5 * 2;
+            double TRK_ANG_RATE_7 = TRK_ANG_RATE_6 * 2;
+            double TRK_ANG_RATE_8 = TRK_ANG_RATE_7 * 2;
+            double TRK_ANG_RATE_9 = TRK_ANG_RATE_8 * 2;
+            ////////////////////////////////////////////////////////////////
+            // TRUE AIRSPEED
+            int TAS_1 = 2;
+            int TAS_2 = TAS_1 * 2;
+            int TAS_3 = TAS_2 * 2;
+            int TAS_4 = TAS_3 * 2;
+            int TAS_5 = TAS_4 * 2;
+            int TAS_6 = TAS_5 * 2;
+            int TAS_7 = TAS_6 * 2;
+            int TAS_8 = TAS_7 * 2;
+            int TAS_9 = TAS_8 * 2;
+            int TAS_10 = TAS_9 * 2;
+            ////////////////////////////////////////////////////////////////
             #endregion
 
             CAT48I250Types.CAT48I250DataType CAT48I250Data = new CAT48I250Types.CAT48I250DataType();
@@ -88,6 +147,7 @@ namespace AsterixDisplayAnalyser
                 // Fist check whether this is a Broadcst report or CIGB initiated
                 int Register_Number = System.Convert.ToInt16(BO2.DWord[Bit_Ops.Bits0_7_Of_DWord]);
                 string Test = "NONE";
+                double Value = 0.0;
 
                 if (Register_Number == 0)
                 {
@@ -125,7 +185,161 @@ namespace AsterixDisplayAnalyser
                         // Track and turn report
                         case "50":
 
+                            // BDS50 is present
+                            CAT48I250Data.BDS50_Track_Turn_Report.Present_This_Cycle = true;
 
+                            #region ROLL_ANGLE_REGION
+                            // Bit 1 ROLL ANGLE Status
+                            CAT48I250Data.BDS50_Track_Turn_Report.Roll_Ang.Is_Valid = BO1.DWord[Bit_Ops.Bit31];
+
+                            // Bits 3 .. 11 ROLL ANGLE Value
+                            Value = 0.0;
+                            // Bit 2 ROLL ANGLE SIGN
+                            if (BO1.DWord[Bit_Ops.Bit30])
+                            {
+                                Bit_Ops BO1_Temp = new Bit_Ops();
+                                BO1_Temp.DWord[Bit_Ops.Bit0] = !BO1.DWord[Bit_Ops.Bit21];
+                                BO1_Temp.DWord[Bit_Ops.Bit1] = !BO1.DWord[Bit_Ops.Bit22];
+                                BO1_Temp.DWord[Bit_Ops.Bit2] = !BO1.DWord[Bit_Ops.Bit23];
+                                BO1_Temp.DWord[Bit_Ops.Bit3] = !BO1.DWord[Bit_Ops.Bit24];
+                                BO1_Temp.DWord[Bit_Ops.Bit4] = !BO1.DWord[Bit_Ops.Bit25];
+                                BO1_Temp.DWord[Bit_Ops.Bit5] = !BO1.DWord[Bit_Ops.Bit26];
+                                BO1_Temp.DWord[Bit_Ops.Bit6] = !BO1.DWord[Bit_Ops.Bit27];
+                                BO1_Temp.DWord[Bit_Ops.Bit7] = !BO1.DWord[Bit_Ops.Bit28];
+                                BO1_Temp.DWord[Bit_Ops.Bit8] = !BO1.DWord[Bit_Ops.Bit29];
+                                BO1_Temp.DWord[Bit_Ops.Bit9] = !BO1.DWord[Bit_Ops.Bit30];
+                                BO1_Temp.DWord[Bit_Ops.Bit10] = false;
+                                BO1_Temp.DWord[Bit_Ops.Bit11] = false;
+                                BO1_Temp.DWord[Bit_Ops.Bit12] = false;
+                                BO1_Temp.DWord[Bit_Ops.Bit13] = false;
+                                BO1_Temp.DWord[Bit_Ops.Bit14] = false;
+                                BO1_Temp.DWord[Bit_Ops.Bit15] = false;
+
+                                BO1_Temp.DWord[Bit_Ops.Bits0_15_Of_DWord] = BO1_Temp.DWord[Bit_Ops.Bits0_15_Of_DWord] + 1;
+
+                                if (BO1_Temp.DWord[Bit_Ops.Bit0])
+                                    Value = ROLL_ANG_1;
+                                if (BO1_Temp.DWord[Bit_Ops.Bit1])
+                                    Value = Value + ROLL_ANG_2;
+                                if (BO1_Temp.DWord[Bit_Ops.Bit2])
+                                    Value = Value + ROLL_ANG_3;
+                                if (BO1_Temp.DWord[Bit_Ops.Bit3])
+                                    Value = Value + ROLL_ANG_4;
+                                if (BO1_Temp.DWord[Bit_Ops.Bit4])
+                                    Value = Value + ROLL_ANG_5;
+                                if (BO1_Temp.DWord[Bit_Ops.Bit5])
+                                    Value = Value + ROLL_ANG_6;
+                                if (BO1_Temp.DWord[Bit_Ops.Bit6])
+                                    Value = Value + ROLL_ANG_7;
+                                if (BO1_Temp.DWord[Bit_Ops.Bit7])
+                                    Value = Value + ROLL_ANG_8;
+                                if (BO1_Temp.DWord[Bit_Ops.Bit8])
+                                    Value = Value + ROLL_ANG_9;
+
+                                CAT48I250Data.BDS50_Track_Turn_Report.Roll_Ang.Value = -Value;
+                            }
+                            else
+                            {
+                                if (BO1.DWord[Bit_Ops.Bit21])
+                                    Value = ROLL_ANG_1;
+                                if (BO1.DWord[Bit_Ops.Bit22])
+                                    Value = Value + ROLL_ANG_2;
+                                if (BO1.DWord[Bit_Ops.Bit23])
+                                    Value = Value + ROLL_ANG_3;
+                                if (BO1.DWord[Bit_Ops.Bit24])
+                                    Value = Value + ROLL_ANG_4;
+                                if (BO1.DWord[Bit_Ops.Bit25])
+                                    Value = Value + ROLL_ANG_5;
+                                if (BO1.DWord[Bit_Ops.Bit26])
+                                    Value = Value + ROLL_ANG_6;
+                                if (BO1.DWord[Bit_Ops.Bit27])
+                                    Value = Value + ROLL_ANG_7;
+                                if (BO1.DWord[Bit_Ops.Bit28])
+                                    Value = Value + ROLL_ANG_8;
+                                if (BO1.DWord[Bit_Ops.Bit29])
+                                    Value = Value + ROLL_ANG_9;
+
+                                CAT48I250Data.BDS50_Track_Turn_Report.Roll_Ang.Value = Value;
+                            }
+                            #endregion
+                            #region TRUE_TRACK_ANGLE_REGION
+                            // Bit 12 TRUE TRACK ANGLE Status
+                            CAT48I250Data.BDS50_Track_Turn_Report.TRUE_TRK.Is_Valid = BO1.DWord[Bit_Ops.Bit20];
+
+                            // Bits 14 .. 23 TRUE TRACK ANGLE Value
+                            Value = 0.0;
+                            // Bit 13 TRUE TRACK ANGLE SIGN
+                            if (BO1.DWord[Bit_Ops.Bit19])
+                            {
+                                Bit_Ops BO1_Temp = new Bit_Ops();
+                                BO1_Temp.DWord[Bit_Ops.Bit0] = !BO1.DWord[Bit_Ops.Bit9];
+                                BO1_Temp.DWord[Bit_Ops.Bit1] = !BO1.DWord[Bit_Ops.Bit10];
+                                BO1_Temp.DWord[Bit_Ops.Bit2] = !BO1.DWord[Bit_Ops.Bit11];
+                                BO1_Temp.DWord[Bit_Ops.Bit3] = !BO1.DWord[Bit_Ops.Bit12];
+                                BO1_Temp.DWord[Bit_Ops.Bit4] = !BO1.DWord[Bit_Ops.Bit13];
+                                BO1_Temp.DWord[Bit_Ops.Bit5] = !BO1.DWord[Bit_Ops.Bit14];
+                                BO1_Temp.DWord[Bit_Ops.Bit6] = !BO1.DWord[Bit_Ops.Bit15];
+                                BO1_Temp.DWord[Bit_Ops.Bit7] = !BO1.DWord[Bit_Ops.Bit16];
+                                BO1_Temp.DWord[Bit_Ops.Bit8] = !BO1.DWord[Bit_Ops.Bit17];
+                                BO1_Temp.DWord[Bit_Ops.Bit9] = !BO1.DWord[Bit_Ops.Bit18];
+                                BO1_Temp.DWord[Bit_Ops.Bit10] = !BO1.DWord[Bit_Ops.Bit19];
+                                BO1_Temp.DWord[Bit_Ops.Bit11] = false;
+                                BO1_Temp.DWord[Bit_Ops.Bit12] = false;
+                                BO1_Temp.DWord[Bit_Ops.Bit13] = false;
+                                BO1_Temp.DWord[Bit_Ops.Bit14] = false;
+                                BO1_Temp.DWord[Bit_Ops.Bit15] = false;
+
+                                BO1_Temp.DWord[Bit_Ops.Bits0_15_Of_DWord] = BO1_Temp.DWord[Bit_Ops.Bits0_15_Of_DWord] + 1;
+
+                                if (BO1_Temp.DWord[Bit_Ops.Bit0])
+                                    Value = TRUE_TRK_ANG_1;
+                                if (BO1_Temp.DWord[Bit_Ops.Bit1])
+                                    Value = Value + TRUE_TRK_ANG_2;
+                                if (BO1_Temp.DWord[Bit_Ops.Bit2])
+                                    Value = Value + TRUE_TRK_ANG_3;
+                                if (BO1_Temp.DWord[Bit_Ops.Bit3])
+                                    Value = Value + TRUE_TRK_ANG_4;
+                                if (BO1_Temp.DWord[Bit_Ops.Bit4])
+                                    Value = Value + TRUE_TRK_ANG_5;
+                                if (BO1_Temp.DWord[Bit_Ops.Bit5])
+                                    Value = Value + TRUE_TRK_ANG_6;
+                                if (BO1_Temp.DWord[Bit_Ops.Bit6])
+                                    Value = Value + TRUE_TRK_ANG_7;
+                                if (BO1_Temp.DWord[Bit_Ops.Bit7])
+                                    Value = Value + TRUE_TRK_ANG_8;
+                                if (BO1_Temp.DWord[Bit_Ops.Bit8])
+                                    Value = Value + TRUE_TRK_ANG_9;
+                                if (BO1_Temp.DWord[Bit_Ops.Bit9])
+                                    Value = Value + TRUE_TRK_ANG_10;
+
+                                CAT48I250Data.BDS50_Track_Turn_Report.TRUE_TRK.Value = 360.0 - Value;
+                            }
+                            else
+                            {
+                                if (BO1.DWord[Bit_Ops.Bit9])
+                                    Value = TRUE_TRK_ANG_1;
+                                if (BO1.DWord[Bit_Ops.Bit10])
+                                    Value = Value + TRUE_TRK_ANG_2;
+                                if (BO1.DWord[Bit_Ops.Bit11])
+                                    Value = Value + TRUE_TRK_ANG_3;
+                                if (BO1.DWord[Bit_Ops.Bit12])
+                                    Value = Value + TRUE_TRK_ANG_4;
+                                if (BO1.DWord[Bit_Ops.Bit13])
+                                    Value = Value + TRUE_TRK_ANG_5;
+                                if (BO1.DWord[Bit_Ops.Bit14])
+                                    Value = Value + TRUE_TRK_ANG_6;
+                                if (BO1.DWord[Bit_Ops.Bit15])
+                                    Value = Value + TRUE_TRK_ANG_7;
+                                if (BO1.DWord[Bit_Ops.Bit16])
+                                    Value = Value + TRUE_TRK_ANG_8;
+                                if (BO1.DWord[Bit_Ops.Bit17])
+                                    Value = Value + TRUE_TRK_ANG_9;
+                                if (BO1.DWord[Bit_Ops.Bit18])
+                                    Value = Value + TRUE_TRK_ANG_10;
+
+                                CAT48I250Data.BDS50_Track_Turn_Report.TRUE_TRK.Value = Value;
+                            }
+                            #endregion
 
                             break;
                         // Heading and speed report
@@ -139,7 +353,7 @@ namespace AsterixDisplayAnalyser
                             CAT48I250Data.BDS60_HDG_SPD_Report.MAG_HDG.Is_Valid = BO1.DWord[Bit_Ops.Bit31];
 
                             // Bits 3 .. 12 MAG HDG Value
-                            double Value = 0.0;
+                            Value = 0.0;
                             // Bit 2 MAG HDG SIGN
                             if (BO1.DWord[Bit_Ops.Bit30])
                             {
