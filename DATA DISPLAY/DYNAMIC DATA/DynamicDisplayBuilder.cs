@@ -102,6 +102,7 @@ namespace AsterixDisplayAnalyser
                     if (GlobalTargetList[CurrentTarget.TrackNumber].ModeC != null)
                         GlobalTargetList[CurrentTarget.TrackNumber].ModeC_Previous_Cycle = "" + GlobalTargetList[CurrentTarget.TrackNumber].ModeC;
                     GlobalTargetList[CurrentTarget.TrackNumber].ModeC = CurrentTarget.ModeC;
+                    if (CurrentTarget.GSPD != null)
                     GlobalTargetList[CurrentTarget.TrackNumber].GSPD = CurrentTarget.GSPD;
                     GlobalTargetList[CurrentTarget.TrackNumber].ACID_Mode_S = CurrentTarget.ACID_Mode_S;
                     if (CurrentTarget.M_HDG != "N/A")
@@ -136,6 +137,7 @@ namespace AsterixDisplayAnalyser
                     if (GlobalTargetList[ModeAIndex].ModeC != null)
                         GlobalTargetList[ModeAIndex].ModeC_Previous_Cycle = "" + GlobalTargetList[ModeAIndex].ModeC;
                     GlobalTargetList[ModeAIndex].ModeC = CurrentTarget.ModeC;
+                    if (CurrentTarget.GSPD != null) 
                     GlobalTargetList[ModeAIndex].GSPD = CurrentTarget.GSPD;
                     GlobalTargetList[ModeAIndex].ACID_Mode_S = CurrentTarget.ACID_Mode_S;
                     if (CurrentTarget.M_HDG != "N/A")

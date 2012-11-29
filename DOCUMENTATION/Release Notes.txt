@@ -30,7 +30,9 @@ CAT48
 			BDS50 Track and turn report
 				1. Roll Angle
 				2. Track Angle
-				3. 
+				3. Ground Speed
+				4. Track Angle Rate
+				5. True Airspeed
 
 
 CAT34
@@ -69,6 +71,9 @@ Version 2.1
 		BDS50 Track and turn report
 			1. Roll Angle
 			2. Track Angle
+			3. Ground Speed
+			4. Track Angle Rate
+			5. True Airspeed
 
 Version 2.0
 
