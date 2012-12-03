@@ -34,7 +34,7 @@ namespace AsterixDisplayAnalyser
                 public bool ALT_Hold_Active = false;
                 public bool APP_Mode_Active = false;
                 public enum Target_Altitude_Mode_Type { Unknown, Aircraft_Alt, FCU_MCP_Selected_Alt, FMS_Selected_Alt };
-                public Target_Altitude_Mode_Type Target_Altitude_Mode = Target_Altitude_Mode_Type.Unknown;
+                public Target_Altitude_Mode_Type Target_Altitude_Source = Target_Altitude_Mode_Type.Unknown;
             }
 
             public class BDS40_Selected_Vertical_Intention_Data
@@ -45,7 +45,6 @@ namespace AsterixDisplayAnalyser
                 public Status Status_Data = new Status();
                 public bool Present_This_Cycle = false;
             }
-
         }
 
         public class BDS50_Track_and_Turn_Report

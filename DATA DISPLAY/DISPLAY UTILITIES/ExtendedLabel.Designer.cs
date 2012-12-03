@@ -42,16 +42,20 @@
             this.label6 = new System.Windows.Forms.Label();
             this.labelRoll_Angle = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.labelSelectedAltitudes = new System.Windows.Forms.Label();
+            this.labelSelectedAltitude = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.labelRateOfClimb = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.labelBaroSettings = new System.Windows.Forms.Label();
+            this.labelSelectedAltitudeFinal = new System.Windows.Forms.Label();
+            this.labeSelAltFinal = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Black;
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(185, 93);
+            this.button1.Location = new System.Drawing.Point(185, 113);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(52, 23);
             this.button1.TabIndex = 0;
@@ -168,7 +172,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(86, 9);
+            this.label6.Location = new System.Drawing.Point(82, 9);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(63, 13);
             this.label6.TabIndex = 11;
@@ -179,7 +183,7 @@
             this.labelRoll_Angle.AutoSize = true;
             this.labelRoll_Angle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelRoll_Angle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.labelRoll_Angle.Location = new System.Drawing.Point(144, 9);
+            this.labelRoll_Angle.Location = new System.Drawing.Point(135, 9);
             this.labelRoll_Angle.Name = "labelRoll_Angle";
             this.labelRoll_Angle.Size = new System.Drawing.Size(30, 13);
             this.labelRoll_Angle.TabIndex = 12;
@@ -189,28 +193,28 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(86, 31);
+            this.label7.Location = new System.Drawing.Point(82, 31);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(56, 13);
+            this.label7.Size = new System.Drawing.Size(58, 13);
             this.label7.TabIndex = 13;
-            this.label7.Text = "Sel ALT:";
+            this.label7.Text = "S ALT S:";
             // 
-            // labelSelectedAltitudes
+            // labelSelectedAltitude
             // 
-            this.labelSelectedAltitudes.AutoSize = true;
-            this.labelSelectedAltitudes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSelectedAltitudes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.labelSelectedAltitudes.Location = new System.Drawing.Point(144, 31);
-            this.labelSelectedAltitudes.Name = "labelSelectedAltitudes";
-            this.labelSelectedAltitudes.Size = new System.Drawing.Size(30, 13);
-            this.labelSelectedAltitudes.TabIndex = 14;
-            this.labelSelectedAltitudes.Text = "N/A";
+            this.labelSelectedAltitude.AutoSize = true;
+            this.labelSelectedAltitude.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSelectedAltitude.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.labelSelectedAltitude.Location = new System.Drawing.Point(135, 31);
+            this.labelSelectedAltitude.Name = "labelSelectedAltitude";
+            this.labelSelectedAltitude.Size = new System.Drawing.Size(30, 13);
+            this.labelSelectedAltitude.TabIndex = 14;
+            this.labelSelectedAltitude.Text = "N/A";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(107, 53);
+            this.label8.Location = new System.Drawing.Point(82, 97);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(35, 13);
             this.label8.TabIndex = 15;
@@ -221,21 +225,67 @@
             this.labelRateOfClimb.AutoSize = true;
             this.labelRateOfClimb.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelRateOfClimb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.labelRateOfClimb.Location = new System.Drawing.Point(144, 53);
+            this.labelRateOfClimb.Location = new System.Drawing.Point(135, 97);
             this.labelRateOfClimb.Name = "labelRateOfClimb";
             this.labelRateOfClimb.Size = new System.Drawing.Size(30, 13);
             this.labelRateOfClimb.TabIndex = 16;
             this.labelRateOfClimb.Text = "N/A";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(82, 75);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(57, 13);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "BARO S:";
+            // 
+            // labelBaroSettings
+            // 
+            this.labelBaroSettings.AutoSize = true;
+            this.labelBaroSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBaroSettings.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.labelBaroSettings.Location = new System.Drawing.Point(135, 75);
+            this.labelBaroSettings.Name = "labelBaroSettings";
+            this.labelBaroSettings.Size = new System.Drawing.Size(30, 13);
+            this.labelBaroSettings.TabIndex = 18;
+            this.labelBaroSettings.Text = "N/A";
+            // 
+            // labelSelectedAltitudeFinal
+            // 
+            this.labelSelectedAltitudeFinal.AutoSize = true;
+            this.labelSelectedAltitudeFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSelectedAltitudeFinal.Location = new System.Drawing.Point(82, 53);
+            this.labelSelectedAltitudeFinal.Name = "labelSelectedAltitudeFinal";
+            this.labelSelectedAltitudeFinal.Size = new System.Drawing.Size(57, 13);
+            this.labelSelectedAltitudeFinal.TabIndex = 19;
+            this.labelSelectedAltitudeFinal.Text = "S ALT F:";
+            // 
+            // labeSelAltFinal
+            // 
+            this.labeSelAltFinal.AutoSize = true;
+            this.labeSelAltFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labeSelAltFinal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.labeSelAltFinal.Location = new System.Drawing.Point(135, 53);
+            this.labeSelAltFinal.Name = "labeSelAltFinal";
+            this.labeSelAltFinal.Size = new System.Drawing.Size(30, 13);
+            this.labeSelAltFinal.TabIndex = 20;
+            this.labeSelAltFinal.Text = "N/A";
             // 
             // FrmExtendedLabel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(239, 119);
+            this.ClientSize = new System.Drawing.Size(239, 135);
+            this.Controls.Add(this.labeSelAltFinal);
+            this.Controls.Add(this.labelSelectedAltitudeFinal);
+            this.Controls.Add(this.labelBaroSettings);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.labelRateOfClimb);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.labelSelectedAltitudes);
+            this.Controls.Add(this.labelSelectedAltitude);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.labelRoll_Angle);
             this.Controls.Add(this.label6);
@@ -278,8 +328,12 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label labelRoll_Angle;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label labelSelectedAltitudes;
+        private System.Windows.Forms.Label labelSelectedAltitude;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label labelRateOfClimb;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label labelBaroSettings;
+        private System.Windows.Forms.Label labelSelectedAltitudeFinal;
+        private System.Windows.Forms.Label labeSelAltFinal;
     }
 }

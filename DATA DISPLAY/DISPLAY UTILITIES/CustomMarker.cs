@@ -141,6 +141,7 @@ namespace AsterixDisplayAnalyser
         public string SelectedAltitude_ShortTerm = "N/A";
         public string SelectedAltitude_LongTerm = "N/A";
         public string Rate_Of_Climb = "N/A";
+        public string Barometric_Setting = "N/A";
         ///////////////////////////////////////////////////////////
 
         // To be called once the track is terminated

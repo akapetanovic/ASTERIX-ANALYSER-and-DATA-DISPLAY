@@ -859,6 +859,7 @@ namespace AsterixDisplayAnalyser
             Label_Data.SelectedAltitude_ShortTerm = Target_Data.SelectedAltitude_ShortTerm;
             Label_Data.SelectedAltitude_LongTerm = Target_Data.SelectedAltitude_LongTerm;
             Label_Data.Rate_Of_Climb = Target_Data.Rate_Of_Climb;
+            Label_Data.Barometric_Setting = Target_Data.Barometric_Setting;
         }
 
         private string ApplyCModeHisterysis(string Mode_C_In)
@@ -1371,7 +1372,9 @@ namespace AsterixDisplayAnalyser
             ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.TRK, MarkerData.TRK);
             ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.Roll_Angle, MarkerData.Roll_Angle);
             ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.RateOfClimb, MarkerData.Rate_Of_Climb);
-            ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.Selected_Altitudes, MarkerData.SelectedAltitude_ShortTerm + '/' + MarkerData.SelectedAltitude_ShortTerm);
+            ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.Selected_Altitude, MarkerData.SelectedAltitude_ShortTerm);
+            ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.Selected_Altitude_F, MarkerData.SelectedAltitude_LongTerm);
+            ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.BaroSetting, MarkerData.Barometric_Setting);
         }
 
         private void aircraftAddressToolStripMenuItem_Click(object sender, EventArgs e)

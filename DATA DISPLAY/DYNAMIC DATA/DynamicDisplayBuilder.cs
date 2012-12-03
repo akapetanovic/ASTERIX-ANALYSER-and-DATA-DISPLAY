@@ -38,6 +38,7 @@ namespace AsterixDisplayAnalyser
             public string SelectedAltitude_ShortTerm = "N/A";
             public string SelectedAltitude_LongTerm = "N/A";
             public string Rate_Of_Climb = "N/A";
+            public string Barometric_Setting = "N/A";
             /// <summary>
             /// ////////////////////////////////////////////////////
             /// Internal stuff
@@ -123,6 +124,8 @@ namespace AsterixDisplayAnalyser
                         GlobalTargetList[CurrentTarget.TrackNumber].SelectedAltitude_LongTerm = CurrentTarget.SelectedAltitude_LongTerm;
                     if (CurrentTarget.Rate_Of_Climb != "N/A")
                         GlobalTargetList[CurrentTarget.TrackNumber].Rate_Of_Climb = CurrentTarget.Rate_Of_Climb;
+                    if (CurrentTarget.Barometric_Setting != "N/A")
+                        GlobalTargetList[CurrentTarget.TrackNumber].Barometric_Setting = CurrentTarget.Barometric_Setting;
                     GlobalTargetList[CurrentTarget.TrackNumber].Lat = CurrentTarget.Lat;
                     GlobalTargetList[CurrentTarget.TrackNumber].Lon = CurrentTarget.Lon;
                     if (GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Count > Properties.Settings.Default.HistoryPoints)
@@ -160,6 +163,8 @@ namespace AsterixDisplayAnalyser
                         GlobalTargetList[ModeAIndex].SelectedAltitude_LongTerm = CurrentTarget.SelectedAltitude_LongTerm;
                     if (CurrentTarget.Rate_Of_Climb != "N/A")
                         GlobalTargetList[ModeAIndex].Rate_Of_Climb = CurrentTarget.Rate_Of_Climb;
+                    if (CurrentTarget.Barometric_Setting != "N/A")
+                        GlobalTargetList[ModeAIndex].Barometric_Setting = CurrentTarget.Barometric_Setting;
                     GlobalTargetList[ModeAIndex].Lat = CurrentTarget.Lat;
                     GlobalTargetList[ModeAIndex].Lon = CurrentTarget.Lon;
                     if (GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Count > Properties.Settings.Default.HistoryPoints)
@@ -191,6 +196,7 @@ namespace AsterixDisplayAnalyser
                     NewTarget.MACH = GlobalTarget.MACH;
                     NewTarget.M_HDG = GlobalTarget.M_HDG;
                     NewTarget.IAS = GlobalTarget.IAS;
+                    NewTarget.Barometric_Setting = GlobalTarget.Barometric_Setting;
                     NewTarget.Lat = GlobalTarget.Lat;
                     NewTarget.Lon = GlobalTarget.Lon;
                     NewTarget.TrackNumber = GlobalTarget.TrackNumber;
@@ -407,15 +413,53 @@ namespace AsterixDisplayAnalyser
 
                                             if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Present_This_Cycle)
                                             {
-                                                if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Is_Valid)
-                                                    Target.SelectedAltitude_LongTerm = CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Value.ToString();
+                                                switch (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Source)
+                                                {
+                                                    case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.Aircraft_Alt:
+                                                        Target.SelectedAltitude_ShortTerm = "A/C:" + Target.ModeC;
+                                                        break;
+                                                    case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.FCU_MCP_Selected_Alt:
+                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid)
+                                                            Target.SelectedAltitude_ShortTerm = "FCU:" + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
+                                                        else
+                                                            Target.SelectedAltitude_ShortTerm = "FCU:N/A";
+                                                        break;
+                                                    case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.FMS_Selected_Alt:
+                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Is_Valid)
+                                                            Target.SelectedAltitude_ShortTerm = "FMS:" + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Value.ToString();
+                                                        else
+                                                            Target.SelectedAltitude_ShortTerm = "FMS:N/A";
+                                                        break;
+                                                    case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.Unknown:
+                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid)
+                                                            Target.SelectedAltitude_ShortTerm = "UNK:" + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Value.ToString();
+                                                        else
+                                                            Target.SelectedAltitude_ShortTerm = "N/A";
+                                                        break;
+                                                }
+
+
+                                                if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid)
+                                                {
+                                                    if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.MCP_FCU_Mode_Bits_Populated)
+                                                    {
+                                                        Target.SelectedAltitude_LongTerm = "";
+                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.ALT_Hold_Active)
+                                                            Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "AH:";
+                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.APP_Mode_Active)
+                                                            Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "AM:";
+                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.VNAV_Mode_Active)
+                                                            Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "MV:";
+                                                    }
+                                                    Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
+                                                }
                                                 else
                                                     Target.SelectedAltitude_LongTerm = "N/A";
 
-                                                if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid)
-                                                    Target.SelectedAltitude_ShortTerm = CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
+                                                if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Baro_Sel_ALT.Is_Valid)
+                                                    Target.Barometric_Setting = Math.Round(CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Baro_Sel_ALT.Value, 1).ToString() + "mb";
                                                 else
-                                                    Target.SelectedAltitude_ShortTerm = "N/A";
+                                                    Target.Barometric_Setting = "N/A";
                                             }
 
                                         }
@@ -479,39 +523,72 @@ namespace AsterixDisplayAnalyser
                                     Target.IAS = "N/A";
 
                                 if (CAT62I380Data.MACH.Is_Valid)
-                                    Target.MACH = CAT62I380Data.MACH.MACH.ToString();
+                                    Target.MACH = Math.Round(CAT62I380Data.MACH.MACH, 3).ToString();
                                 else
                                     Target.MACH = "N/A";
 
                                 if (CAT62I380Data.M_HDG.Is_Valid)
-                                    Target.M_HDG = CAT62I380Data.M_HDG.M_HDG.ToString();
+                                    Target.M_HDG = Math.Round(CAT62I380Data.M_HDG.M_HDG).ToString();
                                 else
                                     Target.M_HDG = "N/A";
 
                                 if (CAT62I380Data.TRK.Is_Valid)
-                                    Target.TRK = CAT62I380Data.TRK.TRK.ToString();
+                                    Target.TRK = Math.Round(CAT62I380Data.TRK.TRK).ToString();
                                 else
                                     Target.TRK = "N/A";
 
                                 if (CAT62I380Data.GSPD.Is_Valid)
-                                    Target.GSPD = CAT62I380Data.GSPD.GSPD.ToString();
+                                    Target.GSPD = Math.Round(CAT62I380Data.GSPD.GSPD).ToString();
                                 else
                                     Target.GSPD = "N/A";
 
                                 if (CAT62I380Data.Rool_Angle.Is_Valid)
-                                    Target.Roll_Ang = CAT62I380Data.Rool_Angle.Rool_Angle.ToString();
+                                    Target.Roll_Ang = Math.Round(CAT62I380Data.Rool_Angle.Rool_Angle, 1).ToString();
                                 else
                                     Target.Roll_Ang = "N/A";
 
                                 if (CAT62I380Data.FS_Selected_Altitude.Is_Valid)
-                                    Target.SelectedAltitude_LongTerm = CAT62I380Data.FS_Selected_Altitude.SelectedAltitude.ToString();
+                                {
+                                    Target.SelectedAltitude_LongTerm = "";
+                                    if (CAT62I380Data.FS_Selected_Altitude.Altitude_Hold_Active)
+                                        Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "AH:";
+                                    if (CAT62I380Data.FS_Selected_Altitude.Approach_Mode_Active)
+                                        Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "AM:";
+                                    if (CAT62I380Data.FS_Selected_Altitude.Manage_Mode_Active)
+                                        Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "MV:";
+
+                                    Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + CAT62I380Data.FS_Selected_Altitude.SelectedAltitude.ToString();
+                                }
                                 else
                                     Target.SelectedAltitude_LongTerm = "N/A";
 
                                 if (CAT62I380Data.Selected_Altitude.Is_Valid)
-                                    Target.SelectedAltitude_ShortTerm = CAT62I380Data.Selected_Altitude.SelectedAltitude.ToString();
+                                {
+                                    Target.SelectedAltitude_ShortTerm = "";
+                                    switch (CAT62I380Data.Selected_Altitude.Source)
+                                    {
+                                        case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.AircraftAltitude:
+                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "A/C:";
+                                            break;
+                                        case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.FCU_MCP:
+                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "FCU:";
+                                            break;
+                                        case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.FMS_Selected:
+                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "FMS:";
+                                            break;
+                                        case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.Unknown:
+                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "UKN:";
+                                            break;
+                                    }
+                                    Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + CAT62I380Data.Selected_Altitude.SelectedAltitude.ToString();
+                                }
                                 else
                                     Target.SelectedAltitude_ShortTerm = "N/A";
+
+                                if (CAT62I380Data.Baro_Press_Setting.Is_Valid)
+                                    Target.Barometric_Setting = Math.Round(CAT62I380Data.Baro_Press_Setting.Baro_Pressure_Setting, 1).ToString() + "mb";
+                                else
+                                    Target.Barometric_Setting = "N/A";
                             }
 
                             if (CAT62I220Data != null)
@@ -707,15 +784,53 @@ namespace AsterixDisplayAnalyser
 
                                             if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Present_This_Cycle)
                                             {
-                                                if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Is_Valid)
-                                                    Target.SelectedAltitude_LongTerm = CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Value.ToString();
+                                                switch (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Source)
+                                                {
+                                                    case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.Aircraft_Alt:
+                                                        Target.SelectedAltitude_ShortTerm = "A/C:" + Target.ModeC;
+                                                        break;
+                                                    case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.FCU_MCP_Selected_Alt:
+                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid)
+                                                            Target.SelectedAltitude_ShortTerm = "FCU:" + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
+                                                        else
+                                                            Target.SelectedAltitude_ShortTerm = "FCU:N/A";
+                                                        break;
+                                                    case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.FMS_Selected_Alt:
+                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Is_Valid)
+                                                            Target.SelectedAltitude_ShortTerm = "FMS:" + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Value.ToString();
+                                                        else
+                                                            Target.SelectedAltitude_ShortTerm = "FMS:N/A";
+                                                        break;
+                                                    case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.Unknown:
+                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid)
+                                                            Target.SelectedAltitude_ShortTerm = "UNK:" + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
+                                                        else
+                                                            Target.SelectedAltitude_ShortTerm = "N/A";
+                                                        break;
+                                                }
+
+
+                                                if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid)
+                                                {
+                                                    Target.SelectedAltitude_LongTerm = "";
+                                                    if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.MCP_FCU_Mode_Bits_Populated)
+                                                    {
+                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.ALT_Hold_Active)
+                                                            Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "AH:";
+                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.APP_Mode_Active)
+                                                            Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "AM:";
+                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.VNAV_Mode_Active)
+                                                            Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "MV:";
+                                                    }
+                                                    Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
+                                                }
                                                 else
                                                     Target.SelectedAltitude_LongTerm = "N/A";
 
-                                                if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid)
-                                                    Target.SelectedAltitude_ShortTerm = CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
+                                                if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Baro_Sel_ALT.Is_Valid)
+                                                    Target.Barometric_Setting = Math.Round(CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Baro_Sel_ALT.Value, 1).ToString() + "mb";
                                                 else
-                                                    Target.SelectedAltitude_ShortTerm = "N/A";
+                                                    Target.Barometric_Setting = "N/A";
                                             }
 
                                         }
@@ -808,14 +923,47 @@ namespace AsterixDisplayAnalyser
                                     Target.Roll_Ang = "N/A";
 
                                 if (CAT62I380Data.FS_Selected_Altitude.Is_Valid)
-                                    Target.SelectedAltitude_LongTerm = CAT62I380Data.FS_Selected_Altitude.SelectedAltitude.ToString();
+                                {
+                                    Target.SelectedAltitude_LongTerm = "";
+                                    if (CAT62I380Data.FS_Selected_Altitude.Altitude_Hold_Active)
+                                        Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "AH:";
+                                    if (CAT62I380Data.FS_Selected_Altitude.Approach_Mode_Active)
+                                        Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "AM:";
+                                    if (CAT62I380Data.FS_Selected_Altitude.Manage_Mode_Active)
+                                        Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "MV:";
+
+                                    Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + CAT62I380Data.FS_Selected_Altitude.SelectedAltitude.ToString();
+                                }
                                 else
                                     Target.SelectedAltitude_LongTerm = "N/A";
 
                                 if (CAT62I380Data.Selected_Altitude.Is_Valid)
-                                    Target.SelectedAltitude_ShortTerm = CAT62I380Data.Selected_Altitude.SelectedAltitude.ToString();
+                                {
+                                    Target.SelectedAltitude_ShortTerm = "";
+                                    switch (CAT62I380Data.Selected_Altitude.Source)
+                                    {
+                                        case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.AircraftAltitude:
+                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "A/C:";
+                                            break;
+                                        case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.FCU_MCP:
+                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "FCU:";
+                                            break;
+                                        case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.FMS_Selected:
+                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "FMS:";
+                                            break;
+                                        case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.Unknown:
+                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "UKN:";
+                                            break;
+                                    }
+                                    Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm  + CAT62I380Data.Selected_Altitude.SelectedAltitude.ToString();
+                                }
                                 else
                                     Target.SelectedAltitude_ShortTerm = "N/A";
+
+                                if (CAT62I380Data.Baro_Press_Setting.Is_Valid)
+                                    Target.Barometric_Setting = Math.Round(CAT62I380Data.Baro_Press_Setting.Baro_Pressure_Setting, 1).ToString() + "mb";
+                                else
+                                    Target.Barometric_Setting = "N/A";
                             }
 
                             if (CAT62I220Data != null)

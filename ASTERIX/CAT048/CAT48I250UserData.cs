@@ -280,7 +280,7 @@ namespace AsterixDisplayAnalyser
                             CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Value = (int)Value / 100; // Use FL
                             #endregion
                             #region BARO_SETTING_REGION
-                            // Bit 28 BARO_SETTING Status
+                            // Bit 27 BARO_SETTING Status
                             CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Baro_Sel_ALT.Is_Valid = BO1.DWord[Bit_Ops.Bit5];
 
                             // Bits 28 .. 39 MCP_FCU_SEL_ALT Value
@@ -331,18 +331,18 @@ namespace AsterixDisplayAnalyser
                             // Bit 54 ALT STATUS OF TARGET ALT SOURCE BITS and 55..56 TARGET ALT SOURCE
                             if (!BO2.DWord[Bit_Ops.Bit10])
                             {
-                                CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Mode = CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.Unknown;
+                                CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Source = CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.Unknown;
                             }
                             else
                             {
                                 if (BO2.DWord[Bit_Ops.Bit9] && BO2.DWord[Bit_Ops.Bit8])
-                                    CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Mode = CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.FMS_Selected_Alt;
+                                    CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Source = CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.FMS_Selected_Alt;
                                 else if (BO2.DWord[Bit_Ops.Bit9])
-                                    CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Mode = CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.Aircraft_Alt;
+                                    CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Source = CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.Aircraft_Alt;
                                 else if (BO2.DWord[Bit_Ops.Bit8])
-                                    CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Mode = CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.FCU_MCP_Selected_Alt;
+                                    CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Source = CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.FCU_MCP_Selected_Alt;
                                 else
-                                    CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Mode = CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.Unknown;
+                                    CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Source = CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.Unknown;
                             }
                             #endregion
 
