@@ -116,6 +116,33 @@ namespace AsterixDisplayAnalyser
             int TAS_9 = TAS_8 * 2;
             int TAS_10 = TAS_9 * 2;
             ////////////////////////////////////////////////////////////////
+            // SELECTED_ALTITUDE
+            int SEL_ALT_1 = 16; //feet
+            int SEL_ALT_2 = SEL_ALT_1 * 2;
+            int SEL_ALT_3 = SEL_ALT_2 * 2;
+            int SEL_ALT_4 = SEL_ALT_3 * 2;
+            int SEL_ALT_5 = SEL_ALT_4 * 2;
+            int SEL_ALT_6 = SEL_ALT_5 * 2;
+            int SEL_ALT_7 = SEL_ALT_6 * 2;
+            int SEL_ALT_8 = SEL_ALT_7 * 2;
+            int SEL_ALT_9 = SEL_ALT_8 * 2;
+            int SEL_ALT_10 = SEL_ALT_9 * 2;
+            int SEL_ALT_11 = SEL_ALT_10 * 2;
+            int SEL_ALT_12 = SEL_ALT_11 * 2;
+            ////////////////////////////////////////////////////////////////
+            // BARO SETTING
+            double BARO_STNG_1 = 0.1; //mb (add 800.0 mb to the value computed)
+            double BARO_STNG_2 = BARO_STNG_1 * 2;
+            double BARO_STNG_3 = BARO_STNG_2 * 2;
+            double BARO_STNG_4 = BARO_STNG_3 * 2;
+            double BARO_STNG_5 = BARO_STNG_4 * 2;
+            double BARO_STNG_6 = BARO_STNG_5 * 2;
+            double BARO_STNG_7 = BARO_STNG_6 * 2;
+            double BARO_STNG_8 = BARO_STNG_7 * 2;
+            double BARO_STNG_9 = BARO_STNG_8 * 2;
+            double BARO_STNG_10 = BARO_STNG_9 * 2;
+            double BARO_STNG_11 = BARO_STNG_10 * 2;
+            double BARO_STNG_12 = BARO_STNG_11 * 2;
             #endregion
 
             CAT48I250Types.CAT48I250DataType CAT48I250Data = new CAT48I250Types.CAT48I250DataType();
@@ -180,6 +207,144 @@ namespace AsterixDisplayAnalyser
                             break;
                         // Selected vertical intention
                         case "40":
+
+                            // BDS40 is present
+                            CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Present_This_Cycle = true;
+
+                            #region MCP_FCU_SEL_ALT_REGION
+                            // Bit 1 MCP_FCU_SEL_ALTD Status
+                            CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid = BO1.DWord[Bit_Ops.Bit31];
+
+                            // Bits 2 .. 13 MCP_FCU_SEL_ALT Value
+                            Value = 0.0;
+
+                            if (BO1.DWord[Bit_Ops.Bit19])
+                                Value = SEL_ALT_1;
+                            if (BO1.DWord[Bit_Ops.Bit20])
+                                Value = Value + SEL_ALT_2;
+                            if (BO1.DWord[Bit_Ops.Bit21])
+                                Value = Value + SEL_ALT_3;
+                            if (BO1.DWord[Bit_Ops.Bit22])
+                                Value = Value + SEL_ALT_4;
+                            if (BO1.DWord[Bit_Ops.Bit23])
+                                Value = Value + SEL_ALT_5;
+                            if (BO1.DWord[Bit_Ops.Bit24])
+                                Value = Value + SEL_ALT_6;
+                            if (BO1.DWord[Bit_Ops.Bit25])
+                                Value = Value + SEL_ALT_7;
+                            if (BO1.DWord[Bit_Ops.Bit26])
+                                Value = Value + SEL_ALT_8;
+                            if (BO1.DWord[Bit_Ops.Bit27])
+                                Value = Value + SEL_ALT_9;
+                            if (BO1.DWord[Bit_Ops.Bit28])
+                                Value = Value + SEL_ALT_10;
+                            if (BO1.DWord[Bit_Ops.Bit29])
+                                Value = Value + SEL_ALT_11;
+                            if (BO1.DWord[Bit_Ops.Bit30])
+                                Value = Value + SEL_ALT_12;
+
+                            CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value = (int)Value / 100; // Use FL
+                            #endregion
+                            #region FMS_SELECTED_ALT_REGION
+                            // Bit 14 FMS_SELECTED_ALT Status
+                            CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Is_Valid = BO1.DWord[Bit_Ops.Bit18];
+
+                            // Bits 15 .. 26 MCP_FCU_SEL_ALT Value
+                            Value = 0.0;
+
+                            if (BO1.DWord[Bit_Ops.Bit6])
+                                Value = SEL_ALT_1;
+                            if (BO1.DWord[Bit_Ops.Bit7])
+                                Value = Value + SEL_ALT_2;
+                            if (BO1.DWord[Bit_Ops.Bit8])
+                                Value = Value + SEL_ALT_3;
+                            if (BO1.DWord[Bit_Ops.Bit9])
+                                Value = Value + SEL_ALT_4;
+                            if (BO1.DWord[Bit_Ops.Bit10])
+                                Value = Value + SEL_ALT_5;
+                            if (BO1.DWord[Bit_Ops.Bit11])
+                                Value = Value + SEL_ALT_6;
+                            if (BO1.DWord[Bit_Ops.Bit12])
+                                Value = Value + SEL_ALT_7;
+                            if (BO1.DWord[Bit_Ops.Bit13])
+                                Value = Value + SEL_ALT_8;
+                            if (BO1.DWord[Bit_Ops.Bit14])
+                                Value = Value + SEL_ALT_9;
+                            if (BO1.DWord[Bit_Ops.Bit15])
+                                Value = Value + SEL_ALT_10;
+                            if (BO1.DWord[Bit_Ops.Bit16])
+                                Value = Value + SEL_ALT_11;
+                            if (BO1.DWord[Bit_Ops.Bit17])
+                                Value = Value + SEL_ALT_12;
+
+                            CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Value = (int)Value / 100; // Use FL
+                            #endregion
+                            #region BARO_SETTING_REGION
+                            // Bit 28 BARO_SETTING Status
+                            CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Baro_Sel_ALT.Is_Valid = BO1.DWord[Bit_Ops.Bit5];
+
+                            // Bits 28 .. 39 MCP_FCU_SEL_ALT Value
+                            Value = 0.0;
+
+                            if (BO2.DWord[Bit_Ops.Bit25])
+                                Value = BARO_STNG_1;
+                            if (BO2.DWord[Bit_Ops.Bit26])
+                                Value = Value + BARO_STNG_2;
+                            if (BO2.DWord[Bit_Ops.Bit27])
+                                Value = Value + BARO_STNG_3;
+                            if (BO2.DWord[Bit_Ops.Bit28])
+                                Value = Value + BARO_STNG_4;
+                            if (BO2.DWord[Bit_Ops.Bit29])
+                                Value = Value + BARO_STNG_5;
+                            if (BO2.DWord[Bit_Ops.Bit30])
+                                Value = Value + BARO_STNG_6;
+                            if (BO2.DWord[Bit_Ops.Bit31])
+                                Value = Value + BARO_STNG_7;
+                            if (BO1.DWord[Bit_Ops.Bit0])
+                                Value = Value + BARO_STNG_8;
+                            if (BO1.DWord[Bit_Ops.Bit1])
+                                Value = Value + BARO_STNG_9;
+                            if (BO1.DWord[Bit_Ops.Bit2])
+                                Value = Value + BARO_STNG_10;
+                            if (BO1.DWord[Bit_Ops.Bit3])
+                                Value = Value + BARO_STNG_11;
+                            if (BO1.DWord[Bit_Ops.Bit4])
+                                Value = Value + BARO_STNG_12;
+
+                            CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Baro_Sel_ALT.Value = (int)Value + 800; // Always add 800mb
+                            #endregion
+                            // BIT 40 .. 47 ARE RESERVED (24 ..17)
+                            #region STATUS_REGION
+                            // Bit 48 .. 56 STATUS
+
+                            // Bit 48 STATUS OF MCP/FCU MODE BITS
+                            CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.MCP_FCU_Mode_Bits_Populated = BO2.DWord[Bit_Ops.Bit16];
+                            // Bit 49 VNAV MODE
+                            CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.VNAV_Mode_Active = BO2.DWord[Bit_Ops.Bit15];
+                            // Bit 50 ALT HOLD MODE MODE
+                            CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.ALT_Hold_Active = BO2.DWord[Bit_Ops.Bit14];
+                            // Bit 51 ALT HOLD MODE MODE
+                            CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.APP_Mode_Active = BO2.DWord[Bit_Ops.Bit13];
+
+                            // Bits 52 .. 53 are reserved
+
+                            // Bit 54 ALT STATUS OF TARGET ALT SOURCE BITS and 55..56 TARGET ALT SOURCE
+                            if (!BO2.DWord[Bit_Ops.Bit10])
+                            {
+                                CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Mode = CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.Unknown;
+                            }
+                            else
+                            {
+                                if (BO2.DWord[Bit_Ops.Bit9] && BO2.DWord[Bit_Ops.Bit8])
+                                    CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Mode = CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.FMS_Selected_Alt;
+                                else if (BO2.DWord[Bit_Ops.Bit9])
+                                    CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Mode = CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.Aircraft_Alt;
+                                else if (BO2.DWord[Bit_Ops.Bit8])
+                                    CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Mode = CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.FCU_MCP_Selected_Alt;
+                                else
+                                    CAT48I250Data.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Mode = CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.Unknown;
+                            }
+                            #endregion
 
                             break;
                         // Track and turn report
@@ -398,7 +563,7 @@ namespace AsterixDisplayAnalyser
                                 BO1_Temp.DWord[Bit_Ops.Bit15] = false;
 
                                 BO1_Temp.DWord[Bit_Ops.Bits0_15_Of_DWord] = BO1_Temp.DWord[Bit_Ops.Bits0_15_Of_DWord] + 1;
-               
+
                                 if (BO1_Temp.DWord[Bit_Ops.Bit0])
                                     Value = Value + TRK_ANG_RATE_1;
                                 if (BO1_Temp.DWord[Bit_Ops.Bit1])

@@ -86,6 +86,12 @@ namespace AsterixDisplayAnalyser
             public bool Is_Valid = false;
         }
 
+        public class CAT62BarometricPressureSettingType
+        {
+            public double Baro_Pressure_Setting = 0.0;
+            public bool Is_Valid = false;
+        }
+
         /// <summary>
         /// ////////////////////////////////////////////////////////////
         /// COM, ACAS and Flight Status Reportin types
@@ -144,8 +150,7 @@ namespace AsterixDisplayAnalyser
             public CAT62Rool_Angle_Type Rool_Angle = new CAT62Rool_Angle_Type();
             public CAT62FinalStateSelectedAltitudeType FS_Selected_Altitude = new CAT62FinalStateSelectedAltitudeType();
             public CAT62SelectedAltitudeType Selected_Altitude = new CAT62SelectedAltitudeType();
+            public CAT62BarometricPressureSettingType Baro_Press_Setting = new CAT62BarometricPressureSettingType();
         }
-    
-    
     }
 }

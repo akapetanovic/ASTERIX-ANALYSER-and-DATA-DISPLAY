@@ -21,6 +21,11 @@ CAT48
 		090 Flight Level in Binary Representation
 		240 Aircraft Identification
 		250 Mode-S MB
+			BDS40 Selected Vertial Intention
+				1. MCP/FCU Selected Altitude
+				2. FMS Selected Altitude
+				3. Barometric Pressure Setting Minus 800mb
+				4. Status
 			BDS60 Heading and speed report
 				1. Magnetic Heading
 				2. Indicated Airspeed
@@ -61,34 +66,43 @@ CAT62
 			Subfield # 18: Ground Speed
 			Subfield # 26: Indicated Airspeed (IAS)
 			Subfield # 27: Mach Number
+			Subfiled # 28: Barometric Pressure Setting (from Mode S BDS 4,0)
 
 VERSION HISTORY
 
 Version 2.1
 
 	1. Fixed issue for negative Flight Levels (CAT048I090) 2's complement was not handled properly.
-	2. Added decoder and Extended label readout for CAT48/I250:
+	2. Implemented decoder and Extended label readout for CAT48/I250:
 		BDS50 Track and turn report
 			1. Roll Angle
 			2. Track Angle
 			3. Ground Speed
 			4. Track Angle Rate
 			5. True Airspeed
+	3. Implemented decoder and Extended label readout for CAT48/250 Mode-S MB
+			BDS40 Selected Vertial Intention
+				1. MCP/FCU Selected Altitude
+				2. FMS Selected Altitude
+				3. Barometric Pressure Setting Minus 
+					3.1 Also added Baro Pressure Setting for CAT62/I380
+				4. Status
+	4. Updated Selected Altitude readout and updated User Manual to provide more clarification on the readout.
 
 Version 2.0
 
-	1. Added decoder and Label readout for 062/380 Ground Speed
-	2. Added decoders and Extended label readout for 062/380:
+	1. Implemented decoder and Label readout for 062/380 Ground Speed
+	2. Implemented decoders and Extended label readout for 062/380:
 		1. Roll Angle, 
 		2. Selected Altitude
 		3. Final Selected Altitude
-	3. Added decoder and extended Label Readout for CAT062/I220
+	3. Implemented decoder and extended Label Readout for CAT062/I220
 		1. Calculated Rate of Climb.
 	5. Fixed bug in CAT062/I105 for West/South positions (2's complement). It now works for any position on the earth.
 	6. Implemented Speed Vector (direction of flight + kts/min (adjustable 0min .. 9min). Based on Ground Speed.
 	7. Implemented History Points (option to choose between 0 .. 9 history position points to be displayed).
 	8. Fixed a bug: Extended label now gets updated as long as mouse is over a label.
-	9. Added decoder and Extended label readout for CAT48/I250:
+	9. AImplementeddded decoder and Extended label readout for CAT48/I250:
 		BDS60 Heading and speed report
 				1. Magnetic Heading
 				2. Indicated Airspeed
@@ -103,9 +117,9 @@ Version 1.9
 	2. Fixed bug with Mode-S (CAT48 and CAA62) where a CALLSIGN would get displayed for non Mode-S equipped A/C.
 	3. Fixed bug of not being able to use GUI to set center point (display) and background color.
 	4. Completed implementation of Google Export (KML) for CAT-062
-	5. Added option to enter assigned HDG in track label
-	6. Added option to enter assigned SPD in track label
-	7. Fixed bug in CALLSIGN encoding (a few letters used to be swapped).
+	5. Implemented option to enter assigned HDG in track label
+	6. Implemented option to enter assigned SPD in track label
+	7. Fixed bug in CALLSIGN encoding (a few letters were swapped).
 
 Version 1.8
 

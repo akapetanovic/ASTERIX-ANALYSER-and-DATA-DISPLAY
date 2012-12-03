@@ -7,6 +7,47 @@ namespace AsterixDisplayAnalyser
 {
     class CAT48I250Types
     {
+        public class BDS40_Selected_Vertical_Intention_Report
+        {
+            public class MCP_FCU_Selected_Altitude
+            {
+                public bool Is_Valid = false;
+                public int Value = 0;
+            }
+
+            public class FMS_Selected_Altitude
+            {
+                public bool Is_Valid = false;
+                public int Value = 0;
+            }
+
+            public class Barometric_Pressure_Setting
+            {
+                public bool Is_Valid = false;
+                public double Value = 0.0;
+            }
+
+            public class Status
+            {
+                public bool MCP_FCU_Mode_Bits_Populated = false;
+                public bool VNAV_Mode_Active = false;
+                public bool ALT_Hold_Active = false;
+                public bool APP_Mode_Active = false;
+                public enum Target_Altitude_Mode_Type { Unknown, Aircraft_Alt, FCU_MCP_Selected_Alt, FMS_Selected_Alt };
+                public Target_Altitude_Mode_Type Target_Altitude_Mode = Target_Altitude_Mode_Type.Unknown;
+            }
+
+            public class BDS40_Selected_Vertical_Intention_Data
+            {
+                public MCP_FCU_Selected_Altitude MCP_FCU_Sel_ALT = new MCP_FCU_Selected_Altitude();
+                public FMS_Selected_Altitude FMS_Sel_ALT = new FMS_Selected_Altitude();
+                public Barometric_Pressure_Setting Baro_Sel_ALT = new Barometric_Pressure_Setting();
+                public Status Status_Data = new Status();
+                public bool Present_This_Cycle = false;
+            }
+
+        }
+
         public class BDS50_Track_and_Turn_Report
         {
             public class Roll_Angle
@@ -39,7 +80,7 @@ namespace AsterixDisplayAnalyser
                 public int Value = 0;
             }
 
-            public class BDS50_Track__Turn_Report_Data
+            public class BDS50_Track_Turn_Report_Data
             {
                 public Roll_Angle Roll_Ang = new Roll_Angle();
                 public True_Track_Angle TRUE_TRK = new True_Track_Angle();
@@ -87,8 +128,9 @@ namespace AsterixDisplayAnalyser
 
         public class CAT48I250DataType
         {
+            public BDS40_Selected_Vertical_Intention_Report.BDS40_Selected_Vertical_Intention_Data BDS40_Selected_Vertical_Intention_Report = new BDS40_Selected_Vertical_Intention_Report.BDS40_Selected_Vertical_Intention_Data();
             public BDS60_Heading_And_Speed_Report.BDS60_HDG_SPD_Report_Data BDS60_HDG_SPD_Report = new BDS60_Heading_And_Speed_Report.BDS60_HDG_SPD_Report_Data();
-            public BDS50_Track_and_Turn_Report.BDS50_Track__Turn_Report_Data BDS50_Track_Turn_Report = new BDS50_Track_and_Turn_Report.BDS50_Track__Turn_Report_Data();
+            public BDS50_Track_and_Turn_Report.BDS50_Track_Turn_Report_Data BDS50_Track_Turn_Report = new BDS50_Track_and_Turn_Report.BDS50_Track_Turn_Report_Data();
         }
     }
 

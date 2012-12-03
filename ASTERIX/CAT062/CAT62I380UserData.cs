@@ -93,7 +93,6 @@ namespace AsterixDisplayAnalyser
 
             ///////////////////////////////////////////////////////////////////
             // SELECTED ALTITUDE DECODE CONSTANTS
-
             int SA_1 = 25;
             int SA_2 = SA_1 * 2;
             int SA_3 = SA_2 * 2;
@@ -106,7 +105,22 @@ namespace AsterixDisplayAnalyser
             int SA_10 = SA_9 * 2;
             int SA_11 = SA_10 * 2;
             int SA_12 = SA_11 * 2;
-            int SA_13 = SA_12 * 2; 
+            int SA_13 = SA_12 * 2;
+
+            ///////////////////////////////////////////////////////////////////
+            // BARO SETTING DECODE CONSTANTS
+            double BARO_STNG_1 = 0.1; //mb (add 800.0 mb to the value computed)
+            double BARO_STNG_2 = BARO_STNG_1 * 2;
+            double BARO_STNG_3 = BARO_STNG_2 * 2;
+            double BARO_STNG_4 = BARO_STNG_3 * 2;
+            double BARO_STNG_5 = BARO_STNG_4 * 2;
+            double BARO_STNG_6 = BARO_STNG_5 * 2;
+            double BARO_STNG_7 = BARO_STNG_6 * 2;
+            double BARO_STNG_8 = BARO_STNG_7 * 2;
+            double BARO_STNG_9 = BARO_STNG_8 * 2;
+            double BARO_STNG_10 = BARO_STNG_9 * 2;
+            double BARO_STNG_11 = BARO_STNG_10 * 2;
+            double BARO_STNG_12 = BARO_STNG_11 * 2;
             #endregion
 
             // Define a global record for all data, then down there depending on the avalability of each field
@@ -1006,6 +1020,39 @@ namespace AsterixDisplayAnalyser
             #region Barometric_Pressure_Setting
             if (WORD3.DWord[CAT62I380Types.Barometric_Pressure_Setting] == true)
             {
+                Bit_Ops BO = new Bit_Ops();
+                BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 1];
+                BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
+
+                double BPS = 0.0;
+                if (BO.DWord[Bit_Ops.Bit0])
+                    BPS = MN_1;
+                if (BO.DWord[Bit_Ops.Bit1])
+                    BPS = BPS + MN_2;
+                if (BO.DWord[Bit_Ops.Bit2])
+                    BPS = BPS + MN_3;
+                if (BO.DWord[Bit_Ops.Bit3])
+                    BPS = BPS + MN_4;
+                if (BO.DWord[Bit_Ops.Bit4])
+                    BPS = BPS + MN_5;
+                if (BO.DWord[Bit_Ops.Bit5])
+                    BPS = BPS + MN_6;
+                if (BO.DWord[Bit_Ops.Bit6])
+                    BPS = BPS + MN_7;
+                if (BO.DWord[Bit_Ops.Bit7])
+                    BPS = BPS + MN_8;
+                if (BO.DWord[Bit_Ops.Bit8])
+                    BPS = BPS + MN_9;
+                if (BO.DWord[Bit_Ops.Bit9])
+                    BPS = BPS + MN_10;
+                if (BO.DWord[Bit_Ops.Bit9])
+                    BPS = BPS + MN_11;
+                if (BO.DWord[Bit_Ops.Bit9])
+                    BPS = BPS + MN_12;
+               
+                CAT62I380DataRecord.Baro_Press_Setting.Is_Valid = true;
+                CAT62I380DataRecord.Baro_Press_Setting.Baro_Pressure_Setting = BPS + 800.0;
+                
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 2;
             } 
             #endregion

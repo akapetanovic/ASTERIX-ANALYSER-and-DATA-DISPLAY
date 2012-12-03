@@ -72,12 +72,12 @@ namespace AsterixDisplayAnalyser
 
         public static void UpdateHDG(int Index, string HDG_Value)
         {
-            GlobalTargetList[Index].MyMarker.A_HDG_STRING =  'h' + HDG_Value;
+            GlobalTargetList[Index].MyMarker.A_HDG_STRING = 'h' + HDG_Value;
         }
 
         public static void UpdateSPD(int Index, string SPD_Value)
         {
-            GlobalTargetList[Index].MyMarker.A_SPD_STRING= 's' + SPD_Value;
+            GlobalTargetList[Index].MyMarker.A_SPD_STRING = 's' + SPD_Value;
         }
 
 
@@ -103,24 +103,26 @@ namespace AsterixDisplayAnalyser
                         GlobalTargetList[CurrentTarget.TrackNumber].ModeC_Previous_Cycle = "" + GlobalTargetList[CurrentTarget.TrackNumber].ModeC;
                     GlobalTargetList[CurrentTarget.TrackNumber].ModeC = CurrentTarget.ModeC;
                     if (CurrentTarget.GSPD != null)
-                    GlobalTargetList[CurrentTarget.TrackNumber].GSPD = CurrentTarget.GSPD;
+                        GlobalTargetList[CurrentTarget.TrackNumber].GSPD = CurrentTarget.GSPD;
                     GlobalTargetList[CurrentTarget.TrackNumber].ACID_Mode_S = CurrentTarget.ACID_Mode_S;
                     if (CurrentTarget.M_HDG != "N/A")
-                    GlobalTargetList[CurrentTarget.TrackNumber].M_HDG = CurrentTarget.M_HDG;
+                        GlobalTargetList[CurrentTarget.TrackNumber].M_HDG = CurrentTarget.M_HDG;
                     if (CurrentTarget.IAS != "N/A")
-                    GlobalTargetList[CurrentTarget.TrackNumber].IAS = CurrentTarget.IAS;
+                        GlobalTargetList[CurrentTarget.TrackNumber].IAS = CurrentTarget.IAS;
                     if (CurrentTarget.TRK != "N/A")
-                    GlobalTargetList[CurrentTarget.TrackNumber].TRK = CurrentTarget.TRK;
+                        GlobalTargetList[CurrentTarget.TrackNumber].TRK = CurrentTarget.TRK;
                     if (CurrentTarget.MACH != "N/A")
-                    GlobalTargetList[CurrentTarget.TrackNumber].MACH = CurrentTarget.MACH;
+                        GlobalTargetList[CurrentTarget.TrackNumber].MACH = CurrentTarget.MACH;
                     if (CurrentTarget.TAS != "N/A")
-                    GlobalTargetList[CurrentTarget.TrackNumber].TAS = CurrentTarget.TAS;
+                        GlobalTargetList[CurrentTarget.TrackNumber].TAS = CurrentTarget.TAS;
                     if (CurrentTarget.Roll_Ang != "N/A")
-                    GlobalTargetList[CurrentTarget.TrackNumber].Roll_Ang = CurrentTarget.Roll_Ang;
-                    GlobalTargetList[CurrentTarget.TrackNumber].SelectedAltitude_ShortTerm = CurrentTarget.SelectedAltitude_ShortTerm;
-                    GlobalTargetList[CurrentTarget.TrackNumber].SelectedAltitude_LongTerm = CurrentTarget.SelectedAltitude_LongTerm;
+                        GlobalTargetList[CurrentTarget.TrackNumber].Roll_Ang = CurrentTarget.Roll_Ang;
+                    if (CurrentTarget.SelectedAltitude_ShortTerm != "N/A")
+                        GlobalTargetList[CurrentTarget.TrackNumber].SelectedAltitude_ShortTerm = CurrentTarget.SelectedAltitude_ShortTerm;
+                    if (CurrentTarget.SelectedAltitude_LongTerm != "N/A")
+                        GlobalTargetList[CurrentTarget.TrackNumber].SelectedAltitude_LongTerm = CurrentTarget.SelectedAltitude_LongTerm;
                     if (CurrentTarget.Rate_Of_Climb != "N/A")
-                    GlobalTargetList[CurrentTarget.TrackNumber].Rate_Of_Climb = CurrentTarget.Rate_Of_Climb;
+                        GlobalTargetList[CurrentTarget.TrackNumber].Rate_Of_Climb = CurrentTarget.Rate_Of_Climb;
                     GlobalTargetList[CurrentTarget.TrackNumber].Lat = CurrentTarget.Lat;
                     GlobalTargetList[CurrentTarget.TrackNumber].Lon = CurrentTarget.Lon;
                     if (GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Count > Properties.Settings.Default.HistoryPoints)
@@ -137,25 +139,27 @@ namespace AsterixDisplayAnalyser
                     if (GlobalTargetList[ModeAIndex].ModeC != null)
                         GlobalTargetList[ModeAIndex].ModeC_Previous_Cycle = "" + GlobalTargetList[ModeAIndex].ModeC;
                     GlobalTargetList[ModeAIndex].ModeC = CurrentTarget.ModeC;
-                    if (CurrentTarget.GSPD != null) 
-                    GlobalTargetList[ModeAIndex].GSPD = CurrentTarget.GSPD;
+                    if (CurrentTarget.GSPD != null)
+                        GlobalTargetList[ModeAIndex].GSPD = CurrentTarget.GSPD;
                     GlobalTargetList[ModeAIndex].ACID_Mode_S = CurrentTarget.ACID_Mode_S;
                     if (CurrentTarget.M_HDG != "N/A")
-                    GlobalTargetList[ModeAIndex].M_HDG = CurrentTarget.M_HDG;
+                        GlobalTargetList[ModeAIndex].M_HDG = CurrentTarget.M_HDG;
                     if (CurrentTarget.IAS != "N/A")
-                    GlobalTargetList[ModeAIndex].IAS = CurrentTarget.IAS;
+                        GlobalTargetList[ModeAIndex].IAS = CurrentTarget.IAS;
                     if (CurrentTarget.TRK != "N/A")
-                    GlobalTargetList[ModeAIndex].TRK = CurrentTarget.TRK;
+                        GlobalTargetList[ModeAIndex].TRK = CurrentTarget.TRK;
                     if (CurrentTarget.MACH != "N/A")
-                    GlobalTargetList[ModeAIndex].MACH = CurrentTarget.MACH;
+                        GlobalTargetList[ModeAIndex].MACH = CurrentTarget.MACH;
                     if (CurrentTarget.TAS != "N/A")
-                    GlobalTargetList[ModeAIndex].TAS = CurrentTarget.TAS;
+                        GlobalTargetList[ModeAIndex].TAS = CurrentTarget.TAS;
                     if (CurrentTarget.Roll_Ang != "N/A")
-                    GlobalTargetList[ModeAIndex].Roll_Ang = CurrentTarget.Roll_Ang;
-                    GlobalTargetList[ModeAIndex].SelectedAltitude_ShortTerm = CurrentTarget.SelectedAltitude_ShortTerm;
-                    GlobalTargetList[ModeAIndex].SelectedAltitude_LongTerm = CurrentTarget.SelectedAltitude_LongTerm;
+                        GlobalTargetList[ModeAIndex].Roll_Ang = CurrentTarget.Roll_Ang;
+                    if (CurrentTarget.SelectedAltitude_ShortTerm != "N/A")
+                        GlobalTargetList[ModeAIndex].SelectedAltitude_ShortTerm = CurrentTarget.SelectedAltitude_ShortTerm;
+                    if (CurrentTarget.SelectedAltitude_LongTerm != "N/A")
+                        GlobalTargetList[ModeAIndex].SelectedAltitude_LongTerm = CurrentTarget.SelectedAltitude_LongTerm;
                     if (CurrentTarget.Rate_Of_Climb != "N/A")
-                    GlobalTargetList[ModeAIndex].Rate_Of_Climb = CurrentTarget.Rate_Of_Climb;
+                        GlobalTargetList[ModeAIndex].Rate_Of_Climb = CurrentTarget.Rate_Of_Climb;
                     GlobalTargetList[ModeAIndex].Lat = CurrentTarget.Lat;
                     GlobalTargetList[ModeAIndex].Lon = CurrentTarget.Lon;
                     if (GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Count > Properties.Settings.Default.HistoryPoints)
@@ -375,6 +379,10 @@ namespace AsterixDisplayAnalyser
                                                     Target.Rate_Of_Climb = Target.Rate_Of_Climb + "/" + CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Baro_RoC.Value.ToString();
                                                 else
                                                     Target.Rate_Of_Climb = Target.Rate_Of_Climb + "/" + "B:N/A";
+                                            }
+
+                                            if (CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.Present_This_Cycle)
+                                            {
 
                                                 if (CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.Roll_Ang.Is_Valid)
                                                     Target.Roll_Ang = Math.Round(CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.Roll_Ang.Value).ToString();
@@ -395,8 +403,21 @@ namespace AsterixDisplayAnalyser
                                                     Target.TRK = Math.Round(CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.TRUE_TRK.Value).ToString();
                                                 else
                                                     Target.TRK = "N/A";
-                                                
                                             }
+
+                                            if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Present_This_Cycle)
+                                            {
+                                                if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Is_Valid)
+                                                    Target.SelectedAltitude_LongTerm = CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Value.ToString();
+                                                else
+                                                    Target.SelectedAltitude_LongTerm = "N/A";
+
+                                                if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid)
+                                                    Target.SelectedAltitude_ShortTerm = CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
+                                                else
+                                                    Target.SelectedAltitude_ShortTerm = "N/A";
+                                            }
+
                                         }
 
                                         CurrentTargetList.Add(Target);
@@ -480,7 +501,7 @@ namespace AsterixDisplayAnalyser
                                 if (CAT62I380Data.Rool_Angle.Is_Valid)
                                     Target.Roll_Ang = CAT62I380Data.Rool_Angle.Rool_Angle.ToString();
                                 else
-                                    Target.Roll_Ang= "N/A";
+                                    Target.Roll_Ang = "N/A";
 
                                 if (CAT62I380Data.FS_Selected_Altitude.Is_Valid)
                                     Target.SelectedAltitude_LongTerm = CAT62I380Data.FS_Selected_Altitude.SelectedAltitude.ToString();
@@ -586,7 +607,7 @@ namespace AsterixDisplayAnalyser
                         CAT48I240Types.CAT48I240ACID_Data ACID_Mode_S = (CAT48I240Types.CAT48I240ACID_Data)Msg.CAT48DataItems[CAT48.ItemIDToIndex("240")].value;
                         // Get Mode-S MB Data
                         CAT48I250Types.CAT48I250DataType CAT48I250Mode_S_MB = (CAT48I250Types.CAT48I250DataType)Msg.CAT48DataItems[CAT48.ItemIDToIndex("250")].value;
-                        
+
                         TargetType Target = new TargetType();
                         if (MyCAT48I020UserData != null)
                         {
@@ -630,7 +651,6 @@ namespace AsterixDisplayAnalyser
                                         }
                                         Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                                         Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
-
                                         if (CAT48I250Mode_S_MB != null)
                                         {
                                             if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Present_This_Cycle)
@@ -649,19 +669,23 @@ namespace AsterixDisplayAnalyser
                                                     Target.IAS = CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.IAS.Value.ToString();
                                                 else
                                                     Target.IAS = "N/A";
+
                                                 if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Inertial_RoC.Is_Valid)
                                                     Target.Rate_Of_Climb = "I:" + CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Inertial_RoC.Value.ToString();
                                                 else
                                                     Target.Rate_Of_Climb = "I:N/A";
 
                                                 if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Baro_RoC.Is_Valid)
-                                                    Target.Rate_Of_Climb = Target.Rate_Of_Climb + "/B:" + CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Baro_RoC.Value.ToString();
+                                                    Target.Rate_Of_Climb = Target.Rate_Of_Climb + "/" + CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Baro_RoC.Value.ToString();
                                                 else
-                                                    Target.Rate_Of_Climb = Target.Rate_Of_Climb + "/B:" + "N/A";
+                                                    Target.Rate_Of_Climb = Target.Rate_Of_Climb + "/" + "B:N/A";
+                                            }
 
+                                            if (CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.Present_This_Cycle)
+                                            {
 
                                                 if (CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.Roll_Ang.Is_Valid)
-                                                    Target.Roll_Ang =  Math.Round(CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.Roll_Ang.Value).ToString();
+                                                    Target.Roll_Ang = Math.Round(CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.Roll_Ang.Value).ToString();
                                                 else
                                                     Target.Roll_Ang = "N/A";
 
@@ -671,7 +695,7 @@ namespace AsterixDisplayAnalyser
                                                     Target.TAS = "N/A";
 
                                                 if (CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.GND_SPD.Is_Valid)
-                                                    Target.GSPD =  Math.Round(CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.GND_SPD.Value).ToString();
+                                                    Target.GSPD = Math.Round(CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.GND_SPD.Value).ToString();
                                                 else
                                                     Target.GSPD = "N/A";
 
@@ -680,6 +704,20 @@ namespace AsterixDisplayAnalyser
                                                 else
                                                     Target.TRK = "N/A";
                                             }
+
+                                            if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Present_This_Cycle)
+                                            {
+                                                if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Is_Valid)
+                                                    Target.SelectedAltitude_LongTerm = CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Value.ToString();
+                                                else
+                                                    Target.SelectedAltitude_LongTerm = "N/A";
+
+                                                if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid)
+                                                    Target.SelectedAltitude_ShortTerm = CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
+                                                else
+                                                    Target.SelectedAltitude_ShortTerm = "N/A";
+                                            }
+
                                         }
 
                                         CurrentTargetList.Add(Target);
