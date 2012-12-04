@@ -21,7 +21,7 @@ CAT48
 		090 Flight Level in Binary Representation
 		240 Aircraft Identification
 		250 Mode-S MB
-			BDS40 Selected Vertial Intention
+			BDS40 Selected Vertical Intention
 				1. MCP/FCU Selected Altitude
 				2. FMS Selected Altitude
 				3. Barometric Pressure Setting Minus 800mb
@@ -38,7 +38,6 @@ CAT48
 				3. Ground Speed
 				4. Track Angle Rate
 				5. True Airspeed
-
 
 CAT34
 	    000 Message Type                          
@@ -58,21 +57,21 @@ CAT62
 			Subfield # 2: Target Identification
 			Subfield # 3: Magnetic Heading
 			Subfield # 5: True Airspeed (TAS)
-			Subfiled # 6: Selected Altitude
-			Subfiled # 7: Final State Selected Altitude
-			Subfiled # 10: COM, ACAS and Flight Status 
+			Subfield # 6: Selected Altitude
+			Subfield # 7: Final State Selected Altitude
+			Subfield # 10: COM, ACAS and Flight Status 
 			Subfield # 15: Roll Angle
 			Subfield # 17: Track Angle
 			Subfield # 18: Ground Speed
 			Subfield # 26: Indicated Airspeed (IAS)
-			Subfield # 27: Mach Number
-			Subfiled # 28: Barometric Pressure Setting (from Mode S BDS 4,0)
+			Subfield # 27: Mach number
+			Subfield # 28: Barometric Pressure Setting (from Mode S BDS 4,0)
 
 VERSION HISTORY
 
 Version 2.1
 
-	1. Fixed issue for negative Flight Levels (CAT048I090) 2's complement was not handled properly.
+	1. Fixed bug related to not handling negative Flight Levels (CAT048I090). 2's complement was not handled properly.
 	2. Implemented decoder and Extended label readout for CAT48/I250:
 		BDS50 Track and turn report
 			1. Roll Angle
@@ -84,10 +83,10 @@ Version 2.1
 			BDS40 Selected Vertial Intention
 				1. MCP/FCU Selected Altitude
 				2. FMS Selected Altitude
-				3. Barometric Pressure Setting Minus 
+				3. Barometric Pressure Setting 
 					3.1 Also added Baro Pressure Setting for CAT62/I380
 				4. Status
-	4. Updated Selected Altitude readout and updated User Manual to provide more clarification on the readout.
+	4. Updated Selected Altitude readout and updated User Manual to provide more clarification on the readouts.
 
 Version 2.0
 

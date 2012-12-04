@@ -382,7 +382,7 @@ namespace AsterixDisplayAnalyser
                                                     Target.Rate_Of_Climb = "I:N/A";
 
                                                 if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Baro_RoC.Is_Valid)
-                                                    Target.Rate_Of_Climb = Target.Rate_Of_Climb + "/" + CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Baro_RoC.Value.ToString();
+                                                    Target.Rate_Of_Climb = Target.Rate_Of_Climb + "/" + "B:" + CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Baro_RoC.Value.ToString();
                                                 else
                                                     Target.Rate_Of_Climb = Target.Rate_Of_Climb + "/" + "B:N/A";
                                             }
@@ -420,9 +420,9 @@ namespace AsterixDisplayAnalyser
                                                         break;
                                                     case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.FCU_MCP_Selected_Alt:
                                                         if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid)
-                                                            Target.SelectedAltitude_ShortTerm = "FCU:" + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
+                                                            Target.SelectedAltitude_ShortTerm = "MCP:" + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
                                                         else
-                                                            Target.SelectedAltitude_ShortTerm = "FCU:N/A";
+                                                            Target.SelectedAltitude_ShortTerm = "MCP:N/A";
                                                         break;
                                                     case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.FMS_Selected_Alt:
                                                         if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Is_Valid)
@@ -571,7 +571,7 @@ namespace AsterixDisplayAnalyser
                                             Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "A/C:";
                                             break;
                                         case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.FCU_MCP:
-                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "FCU:";
+                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "MCP:";
                                             break;
                                         case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.FMS_Selected:
                                             Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "FMS:";
@@ -753,7 +753,7 @@ namespace AsterixDisplayAnalyser
                                                     Target.Rate_Of_Climb = "I:N/A";
 
                                                 if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Baro_RoC.Is_Valid)
-                                                    Target.Rate_Of_Climb = Target.Rate_Of_Climb + "/" + CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Baro_RoC.Value.ToString();
+                                                    Target.Rate_Of_Climb = Target.Rate_Of_Climb + "/" + "B:" + CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Baro_RoC.Value.ToString();
                                                 else
                                                     Target.Rate_Of_Climb = Target.Rate_Of_Climb + "/" + "B:N/A";
                                             }
@@ -791,9 +791,9 @@ namespace AsterixDisplayAnalyser
                                                         break;
                                                     case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.FCU_MCP_Selected_Alt:
                                                         if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid)
-                                                            Target.SelectedAltitude_ShortTerm = "FCU:" + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
+                                                            Target.SelectedAltitude_ShortTerm = "MCP:" + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
                                                         else
-                                                            Target.SelectedAltitude_ShortTerm = "FCU:N/A";
+                                                            Target.SelectedAltitude_ShortTerm = "MCP:N/A";
                                                         break;
                                                     case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.FMS_Selected_Alt:
                                                         if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Is_Valid)
@@ -946,7 +946,7 @@ namespace AsterixDisplayAnalyser
                                             Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "A/C:";
                                             break;
                                         case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.FCU_MCP:
-                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "FCU:";
+                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "MCP:";
                                             break;
                                         case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.FMS_Selected:
                                             Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "FMS:";
