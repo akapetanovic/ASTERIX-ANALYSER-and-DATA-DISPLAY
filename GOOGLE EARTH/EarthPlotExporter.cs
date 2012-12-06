@@ -164,7 +164,18 @@ namespace AsterixDisplayAnalyser
                                     // Get Flight Level
                                     CAT48I090Types.CAT48I090FlightLevelUserData FlightLevelData = (CAT48I090Types.CAT48I090FlightLevelUserData)Msg.CAT48DataItems[CAT48.ItemIDToIndex("090")].value;
 
-                                    double LevelInMeeters = (FlightLevelData.FlightLevel * 100.00) * SharedData.FeetToMeeters;
+                                    double LevelInMeeters = 0.0;
+                                    if (FlightLevelData != null)
+                                    {
+                                        try
+                                        {
+                                            LevelInMeeters = (FlightLevelData.FlightLevel * 100.00) * SharedData.FeetToMeeters;
+                                        }
+                                        catch
+                                        {
+
+                                        }
+                                    }
 
                                     Data = Data + "P" + TargetNumber.ToString() + "," + "SSR" + Mode3AData.Mode3A_Code + "_" + TargetNumber.ToString() + "," + LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal.ToString() +
                                         "," + LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal.ToString() + "," + LevelInMeeters.ToString() + Environment.NewLine;
@@ -281,10 +292,6 @@ namespace AsterixDisplayAnalyser
 
                                         }
                                     }
-                                    else
-                                        
-                                   
-
                                     Data = Data + LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal.ToString() +
                                        "," + LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal.ToString() + "," + LevelInMeeters.ToString() + Environment.NewLine;
                                 }

@@ -38,9 +38,9 @@
             // 
             this.btnConvert.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.btnConvert.Enabled = false;
-            this.btnConvert.Location = new System.Drawing.Point(328, 17);
+            this.btnConvert.Location = new System.Drawing.Point(94, 45);
             this.btnConvert.Name = "btnConvert";
-            this.btnConvert.Size = new System.Drawing.Size(43, 29);
+            this.btnConvert.Size = new System.Drawing.Size(503, 21);
             this.btnConvert.TabIndex = 1;
             this.btnConvert.Text = ">";
             this.btnConvert.UseVisualStyleBackColor = false;
@@ -49,7 +49,7 @@
             // btnSource
             // 
             this.btnSource.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.btnSource.Location = new System.Drawing.Point(12, 12);
+            this.btnSource.Location = new System.Drawing.Point(3, 2);
             this.btnSource.Name = "btnSource";
             this.btnSource.Size = new System.Drawing.Size(76, 34);
             this.btnSource.TabIndex = 2;
@@ -60,7 +60,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(328, 1);
+            this.label1.Location = new System.Drawing.Point(36, 49);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 4;
@@ -69,7 +69,7 @@
             // labelSource
             // 
             this.labelSource.AutoSize = true;
-            this.labelSource.Location = new System.Drawing.Point(94, 23);
+            this.labelSource.Location = new System.Drawing.Point(85, 23);
             this.labelSource.Name = "labelSource";
             this.labelSource.Size = new System.Drawing.Size(99, 13);
             this.labelSource.TabIndex = 5;
@@ -80,7 +80,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(373, 50);
+            this.ClientSize = new System.Drawing.Size(600, 69);
             this.Controls.Add(this.labelSource);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSource);

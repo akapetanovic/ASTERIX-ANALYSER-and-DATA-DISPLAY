@@ -69,6 +69,15 @@ CAT62
 
 VERSION HISTORY
 
+Version 2.3
+
+	
+
+Version 2.2
+
+	1. Improved GUI for Replay to Raw convertor
+	2. Fixed bug in EarthPlot export for CAT48 intruduced in release 2.1
+
 Version 2.1
 
 	1. Fixed bug related to not handling negative Flight Levels (CAT048I090). 2's complement was not handled properly.
