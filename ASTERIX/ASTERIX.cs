@@ -224,6 +224,8 @@ namespace AsterixDisplayAnalyser
                     }
                 }
             }
+
+            _shouldStop = false;
         }
 
         public static string DecodeAsterixData(string FileName)

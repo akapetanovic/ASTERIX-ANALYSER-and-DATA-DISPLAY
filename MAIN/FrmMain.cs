@@ -33,6 +33,8 @@ namespace AsterixDisplayAnalyser
         GMapOverlay StaticOverlay;
         // Dynamic Map Overlay
         GMapOverlay DinamicOverlay;
+        // Tools Map Overlay
+        GMapOverlay ToolsOverlay;
 
         // Keep track of the last selected SSR code index
         int SSR_Filter_Last_Index = 0;
@@ -51,6 +53,7 @@ namespace AsterixDisplayAnalyser
 
         GMapMarker currentMarker = null;
         bool isDraggingMarker = false;
+        Point StartMousePoint;
 
         public static bool SystemCenterUpdated = false;
 
@@ -109,7 +112,7 @@ namespace AsterixDisplayAnalyser
             CAT244.Intitialize();
 
             // Start the thread to listen for data
-            ListenForDataThread.Start();
+            //ListenForDataThread.Start();
 
             // Start display update 
             this.StaticDisplayTimer.Enabled = true;
@@ -191,7 +194,6 @@ namespace AsterixDisplayAnalyser
 
             this.labelConnIpAndPort.Text = SharedData.CurrentMulticastAddress.ToString() + " : " + Port;
             this.labelLocalInterface.Text = SharedData.CurrentInterfaceIPAddress.ToString();
-
             this.Text = "AMER KAPETANOVIC - ASTERIX DARR  2.3";
         }
 
@@ -209,7 +211,7 @@ namespace AsterixDisplayAnalyser
             // MyDebug.Show();
 
             // Initialize Map
-            gMapControl.Width = 2000;
+            gMapControl.Width = 2400;
             gMapControl.Height = 2000;
             InitializeMap();
 
@@ -310,6 +312,8 @@ namespace AsterixDisplayAnalyser
             gMapControl.Overlays.Add(StaticOverlay);
             DinamicOverlay = new GMapOverlay(gMapControl, "OverlayOne");
             gMapControl.Overlays.Add(DinamicOverlay);
+            ToolsOverlay = new GMapOverlay(gMapControl, "OverlayThree");
+            gMapControl.Overlays.Add(ToolsOverlay);
 
             this.labelDisplayUpdateRate.Text = "Update rate: " + this.PlotandTrackDisplayUpdateTimer.Interval.ToString() + "ms";
             this.comboBoxMapType.Text = "Plain";
@@ -322,6 +326,7 @@ namespace AsterixDisplayAnalyser
         {
             if (SharedData.bool_Listen_for_Data == true)
             {
+                TerminateASTERIXListenForDataThread();
                 SharedData.bool_Listen_for_Data = false;
                 buttonStopRun.Text = "Stopped";
                 this.progressBar1.Visible = false;
@@ -348,9 +353,20 @@ namespace AsterixDisplayAnalyser
                 this.googleEarthToolStripMenuItem.Enabled = false;
                 this.openToolStripMenuItem.Enabled = false;
                 this.checkBoxRecording.Enabled = true;
+                SetNewConnection();
+                Thread ListenForDataThread = new Thread(new ThreadStart(ASTERIX.ListenForData));
+                ListenForDataThread.Start();
             }
 
             HandlePlotDisplayEnabledChanged();
+        }
+
+        private void SetNewConnection()
+        {
+            if (ASTERIX.ReinitializeSocket() != true)
+            {
+                SharedData.ResetConnectionParameters();
+            }
         }
 
         // This method will analyze received, determine what data items are present and then
@@ -1292,9 +1308,27 @@ namespace AsterixDisplayAnalyser
 
         }
 
+        public static PointLatLng FromLocalToLatLng(int X, int Y)
+        {
+            return gMapControl.FromLocalToLatLng(X, Y);
+        }
+
+        public static GPoint FromLatLngToLocal(PointLatLng LatLng)
+        {
+            return gMapControl.FromLatLngToLocal(LatLng);
+        }
+
         // Update Mouse possition on the control
         private void gMapControl_MouseMove(object sender, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Right)
+            {
+                RngBrngMarker RB_Marker = new RngBrngMarker(gMapControl.FromLocalToLatLng(StartMousePoint.X, StartMousePoint.Y), "Test", new Font(FontFamily.GenericSansSerif, 3), Brushes.Aqua, new Point(StartMousePoint.X, StartMousePoint.Y), new Point(e.X, e.Y));
+                ToolsOverlay.Markers.Clear();
+                ToolsOverlay.Markers.Add(RB_Marker);
+                gMapControl.Refresh();
+            }
+            
             PointLatLng MouseLatLong = gMapControl.FromLocalToLatLng(e.X, e.Y);
             this.labelLat_Long.Location = new Point(this.labelLat_Long.Location.X, (gMapControl.Size.Height - 4));
 
@@ -1492,7 +1526,9 @@ namespace AsterixDisplayAnalyser
 
         private void gMapControl_MouseDown(object sender, MouseEventArgs e)
         {
-            // Check if the user is trying to move the lable. If so then flag it by 
+            StartMousePoint = new Point(e.X, e.Y);
+   
+            // Check if the user is trying to move the label If so then flag it by 
             // setting the flag isDraggingMarker to true
             if (e.Button == MouseButtons.Left && SharedData.bool_Listen_for_Data == true)
             {
@@ -1513,10 +1549,9 @@ namespace AsterixDisplayAnalyser
                             }
                 }
             }
+            // Check if the user clicked on one of the interactive label fields.
             else if (e.Button == MouseButtons.Right && SharedData.bool_Listen_for_Data == true)// 
             {
-                // Check if the user clicked on the CFL field. If so then open up the dialog to
-                // let him/ger to modify/enter the CFL
                 GMapOverlay[] overlays = new GMapOverlay[] { DinamicOverlay };
                 for (int i = overlays.Length - 1; i >= 0; i--)
                 {
@@ -1611,6 +1646,8 @@ namespace AsterixDisplayAnalyser
         {
             isDraggingMarker = false;
             currentMarker = null;
+
+            ToolsOverlay.Markers.Clear();
         }
 
         private void gMapControl_OnMarkerEnter(GMapMarker item)
@@ -1622,8 +1659,14 @@ namespace AsterixDisplayAnalyser
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             // Start the thread to listen for data
+            TerminateASTERIXListenForDataThread();
+        }
+
+        private void TerminateASTERIXListenForDataThread()
+        {
             ASTERIX.RequestStop();
-            ListenForDataThread.Join();
+            if (ListenForDataThread.IsAlive)
+                ListenForDataThread.Join();
             ASTERIX.CleanUp();
         }
 

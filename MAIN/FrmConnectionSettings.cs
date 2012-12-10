@@ -198,6 +198,11 @@ namespace AsterixDisplayAnalyser
 
         private void button1_Click(object sender, EventArgs e)
         {
+            SetNewConnection();
+        }
+
+        private void SetNewConnection()
+        {
             SharedData.ConnName = (string)this.listBoxConnName.Items[this.listBoxConnName.SelectedIndex];
             SharedData.CurrentInterfaceIPAddress = (string)this.listBoxLocalAddr.Items[this.listBoxConnName.SelectedIndex];
             SharedData.CurrentMulticastAddress = (string)this.listBoxIPAddress.Items[this.listBoxConnName.SelectedIndex];

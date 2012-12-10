@@ -157,6 +157,7 @@ namespace AsterixDisplayAnalyser
                     this.btnConnectDisconnect.Text = "Connect";
                     this.btnStartPause.Enabled = false;
                     this.progressBar1.Visible = false;
+                    ReplayHasCompleted = false;
                     break;
             }
         }

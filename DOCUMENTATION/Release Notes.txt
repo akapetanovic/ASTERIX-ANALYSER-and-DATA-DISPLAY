@@ -71,7 +71,8 @@ VERSION HISTORY
 
 Version 2.3
 
-	
+	1. Improved performance by better managamnet of Threads.
+	2. Fixed bug in Replay module when used with multiple connections (connect/disconnect)
 
 Version 2.2
 

@@ -269,11 +269,14 @@ namespace AsterixDisplayAnalyser
             g.DrawString(ModeC_STRING, ModeC_FONT, ModeC_BRUSH, LabelStartPosition.X + ModeC_OFFSET.X, LabelStartPosition.Y + LabelHeight);
 
             // Draw CFL on the same line
+            if (ModeC_STRING == null)
+                ModeC_STRING = "---";
             CFL_OFFSET.X = ModeC_STRING.Length * (int)ModeC_FONT.Size;
             CFL_OFFSET.Y = LabelStartPosition.Y + LabelHeight;
             g.DrawString(CFL_STRING, CFL_FONT, CFL_BRUSH, LabelStartPosition.X + CFL_OFFSET.X, CFL_OFFSET.Y);
             CFL_START_X = LabelStartPosition.X + CFL_OFFSET.X;
             CFL_START_Y = CFL_OFFSET.Y;
+
 
             // Draw GSPD on the same line
             GSPD_OFFSET.X = (ModeC_STRING.Length * (int)ModeC_FONT.Size) + (CFL_STRING.Length * (int)CFL_FONT.Size);
@@ -340,6 +343,45 @@ namespace AsterixDisplayAnalyser
         }
     }
 
+    public class RngBrngMarker : GMap.NET.WindowsForms.GMapMarker
+    {
+        private string WPT_Name;
+        private Font Font_To_Use;
+        private Brush Brush_To_Use;
+        Point StartPosition;
+        Point EndPosition;
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="p">The position of the marker</param>
+        public RngBrngMarker(PointLatLng p, string WPT_Name_In, Font Font_To_Use_In, Brush Brush_To_Use_In, Point S_Position, Point E_Position)
+            : base(p)
+        {
+            WPT_Name = WPT_Name_In;
+            Font_To_Use = Font_To_Use_In;
+            Brush_To_Use = Brush_To_Use_In;
+            StartPosition = S_Position;
+            EndPosition = E_Position;
+        }
 
+        public override void OnRender(Graphics g)
+        {
+            g.DrawLine(new Pen(Brush_To_Use), StartPosition, EndPosition);
 
+            // select a reference elllipsoid
+            Ellipsoid reference = Ellipsoid.WGS84;
+            // instantiate the calculator
+            GeodeticCalculator geoCalc = new GeodeticCalculator();
+            GlobalPosition Start = new GlobalPosition(new GlobalCoordinates(this.Position.Lat, this.Position.Lng));
+            PointLatLng End_LatLng = FormMain.FromLocalToLatLng(EndPosition.X, EndPosition.Y);
+            GlobalPosition End = new GlobalPosition(new GlobalCoordinates(End_LatLng.Lat, End_LatLng.Lng));
+            GeodeticMeasurement GM = geoCalc.CalculateGeodeticMeasurement(reference, Start, End);
+
+            // Now compute position half way between two points.        
+            GlobalCoordinates GC = geoCalc.CalculateEndingGlobalCoordinates(reference, new GlobalCoordinates(this.Position.Lat, this.Position.Lng), GM.Azimuth, (GM.PointToPointDistance / 2));
+            GPoint GP = FormMain.FromLatLngToLocal(new PointLatLng(GC.Latitude.Degrees, GC.Longitude.Degrees));
+            double Distane_NM = 0.00053996 * GM.PointToPointDistance;
+            g.DrawString(Math.Round(GM.Azimuth.Degrees).ToString() + "°/" + Math.Round(Distane_NM, 1).ToString() + "nm", new Font(FontFamily.GenericSansSerif, 9), Brush_To_Use, new PointF(GP.X, GP.Y));
+        }
+    }
 }

@@ -27,7 +27,7 @@ namespace AsterixDisplayAnalyser
             string exampleFileName = "";
             string exampleFileExt = "kmz";
             string file_name = "ASTX_TO_KML";
-         
+
             // Use a Document as the root of the KML
             geDocument doc = new geDocument();
             doc.Name = "Asterix to KML";
@@ -64,8 +64,15 @@ namespace AsterixDisplayAnalyser
                     new geAngle90(Target.Lat),
                 new geAngle180(Target.Lon));
 
-                // Assign te altitude
-                double LevelInMeeters = (double.Parse(Target.ModeC) * 100.00) * SharedData.FeetToMeeters;
+                double LevelInMeeters = 0.0;
+
+                // Assign the altitude
+                if (Target.ModeC != null)
+                {
+                    if (Target.ModeC != "---")
+                        LevelInMeeters = (double.Parse(Target.ModeC) * 100.00) * SharedData.FeetToMeeters;
+                }
+
                 coords.Altitude = (float)LevelInMeeters;
 
                 //Create a point with these new coordinates
@@ -82,9 +89,7 @@ namespace AsterixDisplayAnalyser
 
 
                 if (Properties.Settings.Default.GE_Show_ModeA)
-                {
                     pm.Name = Target.ModeA;
-                }
 
                 if (Properties.Settings.Default.GE_Show_ModeC)
                 {
@@ -107,7 +112,7 @@ namespace AsterixDisplayAnalyser
             }
 
             geKML kml = new geKML(doc);
-           
+
             //Add supporting files to the KMZ (assuming it's going to be rendered as KMZ
             byte[] myFile = File.ReadAllBytes(@"C:\ASTERIX\GE\ac_image.png");
             kml.Files.Add("ac_image.png", myFile);
