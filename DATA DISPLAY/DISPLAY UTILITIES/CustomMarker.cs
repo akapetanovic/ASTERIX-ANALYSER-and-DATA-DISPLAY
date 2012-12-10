@@ -378,10 +378,14 @@ namespace AsterixDisplayAnalyser
             GeodeticMeasurement GM = geoCalc.CalculateGeodeticMeasurement(reference, Start, End);
 
             // Now compute position half way between two points.        
-            GlobalCoordinates GC = geoCalc.CalculateEndingGlobalCoordinates(reference, new GlobalCoordinates(this.Position.Lat, this.Position.Lng), GM.Azimuth, (GM.PointToPointDistance / 2));
-            GPoint GP = FormMain.FromLatLngToLocal(new PointLatLng(GC.Latitude.Degrees, GC.Longitude.Degrees));
-            double Distane_NM = 0.00053996 * GM.PointToPointDistance;
-            g.DrawString(Math.Round(GM.Azimuth.Degrees).ToString() + "°/" + Math.Round(Distane_NM, 1).ToString() + "nm", new Font(FontFamily.GenericSansSerif, 9), Brush_To_Use, new PointF(GP.X, GP.Y));
+            double distance = GM.PointToPointDistance / 2.0;
+            if (distance > 0.0)
+            {
+                GlobalCoordinates GC = geoCalc.CalculateEndingGlobalCoordinates(reference, new GlobalCoordinates(this.Position.Lat, this.Position.Lng), GM.Azimuth, distance);
+                GPoint GP = FormMain.FromLatLngToLocal(new PointLatLng(GC.Latitude.Degrees, GC.Longitude.Degrees));
+                double Distane_NM = 0.00053996 * GM.PointToPointDistance;
+                g.DrawString(Math.Round(GM.Azimuth.Degrees).ToString() + "°/" + Math.Round(Distane_NM, 1).ToString() + "nm", new Font(FontFamily.GenericSansSerif, 9), Brush_To_Use, new PointF(GP.X, GP.Y));
+            }
         }
     }
 }

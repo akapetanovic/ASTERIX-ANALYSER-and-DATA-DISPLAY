@@ -248,9 +248,7 @@ namespace AsterixDisplayAnalyser
             this.checkBoxRecordInRaw.Checked = Properties.Settings.Default.RecordActiveInRaw;
             this.checkBoxSystMonEnabled.Checked = Properties.Settings.Default.SystMonEnabled;
             comboBoxLiveDisplayMode.SelectedIndex = 0;
-
             HandlePlotDisplayEnabledChanged();
-
         }
 
         // This method populates combo box with a color coded message. 
@@ -741,13 +739,10 @@ namespace AsterixDisplayAnalyser
 
                     foreach (DynamicDisplayBuilder.TargetType Target in TargetList)
                     {
-
                         if (Passes_Check_For_Flight_Level_Filter(Target.ModeC))
                         {
                             // If SSR code filtering is to be applied 
-                            if (this.checkBoxFilterBySSR.Enabled == true &&
-                                this.textBoxSSRCode.Enabled == true &&
-                                this.textBoxSSRCode.Text.Length == 4)
+                            if (this.checkBoxFilterBySSR.Checked == true && (this.textBoxSSRCode.Text.Length == 4))
                             {
                                 if (Target.ModeA == this.textBoxSSRCode.Text)
                                 {
@@ -968,14 +963,20 @@ namespace AsterixDisplayAnalyser
         private bool Passes_Check_For_Flight_Level_Filter(string Flight_Level)
         {
             bool Result = true;
-
             if (this.checkBoxFLFilter.Checked)
             {
-                double FL = double.Parse(Flight_Level);
-
-                if (FL < (double)this.numericUpDownLower.Value || FL > (double)this.numericUpDownUpper.Value)
+                try
+                {
+                    double FL = double.Parse(Flight_Level);
+                    if (FL < (double)this.numericUpDownLower.Value || FL > (double)this.numericUpDownUpper.Value)
+                        Result = false;
+                }
+                catch
+                {
                     Result = false;
+                }
             }
+
 
             return Result;
         }
@@ -995,8 +996,6 @@ namespace AsterixDisplayAnalyser
             if (this.checkEnableDisplay.Checked == true || Send_Data_To_Google_Earth == true)
             {
                 this.checkBoxFilterBySSR.Enabled = true;
-                this.comboBoxSSRFilterBox.Enabled = true;
-                this.textBoxSSRCode.Enabled = true;
                 this.checkEnableDisplay.BackColor = Color.Green;
 
                 if (SharedData.bool_Listen_for_Data == true)
@@ -1018,6 +1017,7 @@ namespace AsterixDisplayAnalyser
 
                     this.checkBoxSyncToNM.Enabled = true;
                     this.textBox1TrackCoast.Enabled = true;
+                    this.comboBoxSSRFilterBox.Enabled = false;
                 }
                 else
                 {
@@ -1025,6 +1025,7 @@ namespace AsterixDisplayAnalyser
                     this.textBoxUpdateRate.Enabled = false;
                     this.checkBoxSyncToNM.Enabled = false;
                     this.textBox1TrackCoast.Enabled = false;
+                    this.comboBoxSSRFilterBox.Enabled = true;
                 }
 
                 Update_PlotTrack_Data();
@@ -1033,8 +1034,6 @@ namespace AsterixDisplayAnalyser
             {
                 FirstCycleDisplayEnabled = true;
                 this.checkBoxFilterBySSR.Enabled = false;
-                this.comboBoxSSRFilterBox.Enabled = false;
-                this.textBoxSSRCode.Enabled = false;
                 this.textBoxUpdateRate.Enabled = false;
                 this.checkBoxSyncToNM.Enabled = false;
                 this.textBox1TrackCoast.Enabled = false;
@@ -1095,30 +1094,22 @@ namespace AsterixDisplayAnalyser
             {
                 this.checkBoxFilterBySSR.Text = "Enabled";
                 this.checkBoxFilterBySSR.BackColor = Color.Red;
-
-                if (SharedData.bool_Listen_for_Data == true)
-                {
-                    this.comboBoxSSRFilterBox.Enabled = false;
-                    this.textBoxSSRCode.Enabled = true;
-                }
-                else
-                {
-                    this.comboBoxSSRFilterBox.Enabled = true;
-                    this.textBoxSSRCode.Enabled = false;
-                }
             }
             else
             {
-                this.checkBoxFilterBySSR.Text = "Disbaled";
+                this.checkBoxFilterBySSR.Text = "Disabled";
                 this.checkBoxFilterBySSR.BackColor = Color.Transparent;
-                this.comboBoxSSRFilterBox.Enabled = false;
-                this.textBoxSSRCode.Enabled = false;
             }
 
             Update_PlotTrack_Data();
         }
 
         private void comboBoxSSRFilterBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            PopulateSSRCodeLookup();
+        }
+
+        private void PopulateSSRCodeLookup()
         {
             // Each time the form is opened reset code lookup
             // and then populate based on the latest received
@@ -1328,7 +1319,7 @@ namespace AsterixDisplayAnalyser
                 ToolsOverlay.Markers.Add(RB_Marker);
                 gMapControl.Refresh();
             }
-            
+
             PointLatLng MouseLatLong = gMapControl.FromLocalToLatLng(e.X, e.Y);
             this.labelLat_Long.Location = new Point(this.labelLat_Long.Location.X, (gMapControl.Size.Height - 4));
 
@@ -1527,7 +1518,7 @@ namespace AsterixDisplayAnalyser
         private void gMapControl_MouseDown(object sender, MouseEventArgs e)
         {
             StartMousePoint = new Point(e.X, e.Y);
-   
+
             // Check if the user is trying to move the label If so then flag it by 
             // setting the flag isDraggingMarker to true
             if (e.Button == MouseButtons.Left && SharedData.bool_Listen_for_Data == true)
@@ -1646,7 +1637,6 @@ namespace AsterixDisplayAnalyser
         {
             isDraggingMarker = false;
             currentMarker = null;
-
             ToolsOverlay.Markers.Clear();
         }
 
@@ -2230,8 +2220,6 @@ namespace AsterixDisplayAnalyser
             this.comboBoxPSR_Mon_Sys_Disconect.Items.Clear();
 
             MyCAT34I050UserData_Last_Cycle = new CAT34I050Types.CAT34I050UserData();
-
-
         }
 
         private void checkBoxDisplayPSR_CheckedChanged(object sender, EventArgs e)
@@ -2319,7 +2307,25 @@ namespace AsterixDisplayAnalyser
 
         private void textBoxSSRCode_TextChanged(object sender, EventArgs e)
         {
-            Update_PlotTrack_Data();
+            if (this.textBoxSSRCode.Text.Length == 4)
+            {
+                if (this.comboBoxSSRFilterBox.Enabled)
+                {
+                    PopulateSSRCodeLookup();
+                    int Index = 0;
+                    foreach (var Item in this.comboBoxSSRFilterBox.Items)
+                    {
+                        if (this.textBoxSSRCode.Text == Item.ToString())
+                        {
+                            this.comboBoxSSRFilterBox.SelectedIndex = Index;
+                            break;
+                        }
+                        Index++;
+                    }
+                    
+                }
+                Update_PlotTrack_Data();
+            }
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)

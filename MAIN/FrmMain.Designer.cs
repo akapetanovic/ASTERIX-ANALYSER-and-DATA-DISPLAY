@@ -1879,7 +1879,7 @@
             // 
             this.textBoxSSRCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.textBoxSSRCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxSSRCode.Enabled = false;
+            this.textBoxSSRCode.Enabled = true;
             this.textBoxSSRCode.Location = new System.Drawing.Point(7, 101);
             this.textBoxSSRCode.Name = "textBoxSSRCode";
             this.textBoxSSRCode.Size = new System.Drawing.Size(95, 20);
@@ -1907,7 +1907,7 @@
             // comboBoxSSRFilterBox
             // 
             this.comboBoxSSRFilterBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.comboBoxSSRFilterBox.Enabled = false;
+            this.comboBoxSSRFilterBox.Enabled = true;
             this.comboBoxSSRFilterBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxSSRFilterBox.ForeColor = System.Drawing.SystemColors.Desktop;
             this.comboBoxSSRFilterBox.FormattingEnabled = true;
