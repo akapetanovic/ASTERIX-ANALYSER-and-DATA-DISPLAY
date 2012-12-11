@@ -45,7 +45,7 @@ namespace AsterixDisplayAnalyser
             /// </summary>
             public int TrackNumber = -1;
             public int TrackTerminateTreshold = Properties.Settings.Default.TrackCoast;
-            // Image properties
+            // Marker properties
             public GMapTargetandLabel MyMarker = new GMapTargetandLabel(new PointLatLng(0, 0));
         }
 
@@ -81,6 +81,16 @@ namespace AsterixDisplayAnalyser
             GlobalTargetList[Index].MyMarker.A_SPD_STRING = 's' + SPD_Value;
         }
 
+        public static void ActivateSEPTool(int Index, int TrackToMonitor)
+        {
+            GlobalTargetList[Index].MyMarker.TargetToMonitor = TrackToMonitor;
+            GlobalTargetList[TrackToMonitor].MyMarker.TargetMonitoredBy = Index;
+        }
+
+        public static void DeactivateSEPTool(int Index)
+        {
+            GlobalTargetList[Index].MyMarker.TargetToMonitor = -1;
+        }
 
         public static void Initialise()
         {
@@ -89,6 +99,11 @@ namespace AsterixDisplayAnalyser
             {
                 GlobalTargetList.Add(new TargetType());
             }
+        }
+
+        public static Point GetTargetPositionByIndex(int Index)
+        {
+            return GlobalTargetList[Index].MyMarker.LocalPosition;
         }
 
         private static void UpdateGlobalList()

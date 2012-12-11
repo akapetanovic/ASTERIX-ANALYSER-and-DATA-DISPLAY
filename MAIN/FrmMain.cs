@@ -54,6 +54,7 @@ namespace AsterixDisplayAnalyser
         GMapMarker currentMarker = null;
         bool isDraggingMarker = false;
         Point StartMousePoint;
+        int SEPToolStartTarget = -1;
 
         public static bool SystemCenterUpdated = false;
 
@@ -1541,7 +1542,7 @@ namespace AsterixDisplayAnalyser
                 }
             }
             // Check if the user clicked on one of the interactive label fields.
-            else if (e.Button == MouseButtons.Right && SharedData.bool_Listen_for_Data == true)// 
+            else if (e.Button == MouseButtons.Right && SharedData.bool_Listen_for_Data == true)
             {
                 GMapOverlay[] overlays = new GMapOverlay[] { DinamicOverlay };
                 for (int i = overlays.Length - 1; i >= 0; i--)
@@ -1599,6 +1600,20 @@ namespace AsterixDisplayAnalyser
                                         MyForm.Show();
                                     }
                                 }
+                                else if (MouseIsOnTheAC_Symbol(e, m))
+                                {
+                                    GMapTargetandLabel MyMarker = (GMapTargetandLabel)m;
+                                    if (MyMarker.MyTargetIndex != -1)
+                                    {
+                                        if (MyMarker.TargetToMonitor != -1)
+                                            DynamicDisplayBuilder.DeactivateSEPTool(MyMarker.TargetToMonitor);
+                                        else if (MyMarker.TargetMonitoredBy != -1)
+                                            DynamicDisplayBuilder.DeactivateSEPTool(MyMarker.TargetMonitoredBy);
+                                        else
+                                            SEPToolStartTarget = MyMarker.MyTargetIndex;
+                                    }
+                                }
+
                             }
                 }
 
@@ -1633,11 +1648,44 @@ namespace AsterixDisplayAnalyser
             return MyRectangle.Contains(new Point(Mouse.X, Mouse.Y));
         }
 
+        bool MouseIsOnTheAC_Symbol(MouseEventArgs Mouse, GMapMarker Marker)
+        {
+            GMapTargetandLabel MyMarker = (GMapTargetandLabel)Marker;
+            Rectangle MyRectangle = new Rectangle(MyMarker.GetAC_SYMB_StartPoint().X, MyMarker.GetAC_SYMB_StartPoint().Y, 9, 9);
+            return MyRectangle.Contains(new Point(Mouse.X, Mouse.Y));
+        }
+
         private void gMapControl_MouseUp(object sender, MouseEventArgs e)
         {
             isDraggingMarker = false;
             currentMarker = null;
             ToolsOverlay.Markers.Clear();
+            /////////////////////////////////////////////////
+            // Here check if mouse was over a mouse symbol
+            // and started to drag RNG/BRNG tool and now over
+            // a different symbol. If true then initiate SEP tool
+            if (SEPToolStartTarget != -1)
+            {
+                GMapOverlay[] overlays = new GMapOverlay[] { DinamicOverlay };
+                for (int i = overlays.Length - 1; i >= 0; i--)
+                {
+                    GMapOverlay o = overlays[i];
+                    if (o != null && o.IsVisibile)
+                        foreach (GMapMarker m in o.Markers)
+                            if (m.IsVisible && m.IsHitTestVisible)
+                            {
+                                if (MouseIsOnTheAC_Symbol(e, m))
+                                {
+                                    GMapTargetandLabel MyMarker = (GMapTargetandLabel)m;
+                                    if (MyMarker.MyTargetIndex != -1 && MyMarker.MyTargetIndex != SEPToolStartTarget)
+                                    {
+                                        MyMarker.TargetToMonitor = SEPToolStartTarget;
+                                    }
+                                }
+                            }
+                }
+                SEPToolStartTarget = -1;
+            }
         }
 
         private void gMapControl_OnMarkerEnter(GMapMarker item)
@@ -2322,7 +2370,7 @@ namespace AsterixDisplayAnalyser
                         }
                         Index++;
                     }
-                    
+
                 }
                 Update_PlotTrack_Data();
             }

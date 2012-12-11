@@ -51,12 +51,17 @@ namespace AsterixDisplayAnalyser
     {
 
         // Define an index of the track this marker is used for
-        // Needed to GUI is able to update the right track (CFL, XFL, etc..
+        // Needed so GUI is able to update the right track (CFL, XFL, etc..
         public int MyTargetIndex = -1;
 
         // Defines starting position of the label relative to the AC symbol
         public Point LabelOffset = new Point(25, 25);
 
+        // Start positions of AC SYMBOL
+        // X and Y
+        private int AC_SYMB_START_X = 0;
+        private int AC_SYMB_START_Y = 0;
+        
         // Defines the size of the label
         private int LabelWidth = 110;
         private int LabelHeight = 50;
@@ -144,13 +149,27 @@ namespace AsterixDisplayAnalyser
         public string Barometric_Setting = "N/A";
         ///////////////////////////////////////////////////////////
 
+        ////////////////////////////////////////////////////////////
+        // Here define variable needed for SEP tool implementation
+        //
+        // This the index of the target 
+        // to be monitored for separation
+        // If -1 it means no monitoring is required
+        public int TargetToMonitor = -1;
+        public int TargetMonitoredBy = -1;
+
         // To be called once the track is terminated
         public void TerminateTarget()
         {
             LabelOffset = new Point(25, 25);
-            CFL_STRING = "---";
+            CFL_STRING = " ---";
+            A_HDG_STRING = "h---";
+            A_SPD_STRING = "s---";
+            A_ROC_STRING = "R---";
             MyTargetIndex = -1;
             HistoryPoints.Clear();
+            TargetToMonitor = -1;
+            TargetMonitoredBy = -1;
         }
 
         public int GetLabelWidth()
@@ -161,6 +180,11 @@ namespace AsterixDisplayAnalyser
         public int GetLabelHeight()
         {
             return LabelHeight;
+        }
+
+        public Point GetAC_SYMB_StartPoint()
+        {
+            return new Point(AC_SYMB_START_X, AC_SYMB_START_Y);
         }
 
         public Point GetCFLStartPoint()
@@ -205,7 +229,18 @@ namespace AsterixDisplayAnalyser
             MyPen.DashStyle = LabelAttributes.TargetStyle;
 
             // Draw AC Symbol
-            g.DrawRectangle(MyPen, LocalPosition.X - 5, LocalPosition.Y - 5, 7, 7);
+            g.DrawRectangle(MyPen, LocalPosition.X - 5, LocalPosition.Y - 5, 9, 9);
+            AC_SYMB_START_X = LocalPosition.X - 5;
+            AC_SYMB_START_Y = LocalPosition.Y - 5;
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            // Here handle drawing of SEP tool
+            if (TargetToMonitor != -1)
+            {
+                Point StartPosition = new Point(LocalPosition.X, LocalPosition.Y);
+                Point EndPosition = DynamicDisplayBuilder.GetTargetPositionByIndex(TargetToMonitor);
+                g.DrawLine(MyPen, StartPosition, EndPosition);
+            }
 
             // Here handle history points
             // First draw all previous history points
@@ -276,7 +311,6 @@ namespace AsterixDisplayAnalyser
             g.DrawString(CFL_STRING, CFL_FONT, CFL_BRUSH, LabelStartPosition.X + CFL_OFFSET.X, CFL_OFFSET.Y);
             CFL_START_X = LabelStartPosition.X + CFL_OFFSET.X;
             CFL_START_Y = CFL_OFFSET.Y;
-
 
             // Draw GSPD on the same line
             GSPD_OFFSET.X = (ModeC_STRING.Length * (int)ModeC_FONT.Size) + (CFL_STRING.Length * (int)CFL_FONT.Size);
