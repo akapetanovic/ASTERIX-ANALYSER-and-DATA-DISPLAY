@@ -1,4 +1,2 @@
 ﻿1. Add timeouts for CAT48I250 data items. First determine what the right timeout value should be?
-2. Test CAT48/250 against real data.
-
-1. Check filters (Sarajevo CAT01, CAT02)
+2. Test CAT48/250 against real data

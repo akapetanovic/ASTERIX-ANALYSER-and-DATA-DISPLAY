@@ -1315,7 +1315,7 @@ namespace AsterixDisplayAnalyser
         {
             if (e.Button == MouseButtons.Right)
             {
-                RngBrngMarker RB_Marker = new RngBrngMarker(gMapControl.FromLocalToLatLng(StartMousePoint.X, StartMousePoint.Y), "Test", new Font(FontFamily.GenericSansSerif, 3), Brushes.Aqua, new Point(StartMousePoint.X, StartMousePoint.Y), new Point(e.X, e.Y));
+                RngBrngMarker RB_Marker = new RngBrngMarker(gMapControl.FromLocalToLatLng(StartMousePoint.X, StartMousePoint.Y), "Test", new Font(FontFamily.GenericSansSerif, 3), Brushes.Yellow, new Point(StartMousePoint.X, StartMousePoint.Y), new Point(e.X, e.Y));
                 ToolsOverlay.Markers.Clear();
                 ToolsOverlay.Markers.Add(RB_Marker);
                 gMapControl.Refresh();
@@ -1606,9 +1606,9 @@ namespace AsterixDisplayAnalyser
                                     if (MyMarker.MyTargetIndex != -1)
                                     {
                                         if (MyMarker.TargetToMonitor != -1)
-                                            DynamicDisplayBuilder.DeactivateSEPTool(MyMarker.TargetToMonitor);
+                                            DynamicDisplayBuilder.DeactivateSEPTool(MyMarker.MyTargetIndex, MyMarker.TargetToMonitor);
                                         else if (MyMarker.TargetMonitoredBy != -1)
-                                            DynamicDisplayBuilder.DeactivateSEPTool(MyMarker.TargetMonitoredBy);
+                                            DynamicDisplayBuilder.DeactivateSEPTool(MyMarker.TargetMonitoredBy, MyMarker.MyTargetIndex);
                                         else
                                             SEPToolStartTarget = MyMarker.MyTargetIndex;
                                     }
@@ -1651,7 +1651,7 @@ namespace AsterixDisplayAnalyser
         bool MouseIsOnTheAC_Symbol(MouseEventArgs Mouse, GMapMarker Marker)
         {
             GMapTargetandLabel MyMarker = (GMapTargetandLabel)Marker;
-            Rectangle MyRectangle = new Rectangle(MyMarker.GetAC_SYMB_StartPoint().X, MyMarker.GetAC_SYMB_StartPoint().Y, 9, 9);
+            Rectangle MyRectangle = new Rectangle(MyMarker.GetAC_SYMB_StartPoint().X - 1 , MyMarker.GetAC_SYMB_StartPoint().Y - 1 , 12, 12);
             return MyRectangle.Contains(new Point(Mouse.X, Mouse.Y));
         }
 
@@ -1679,7 +1679,7 @@ namespace AsterixDisplayAnalyser
                                     GMapTargetandLabel MyMarker = (GMapTargetandLabel)m;
                                     if (MyMarker.MyTargetIndex != -1 && MyMarker.MyTargetIndex != SEPToolStartTarget)
                                     {
-                                        MyMarker.TargetToMonitor = SEPToolStartTarget;
+                                        DynamicDisplayBuilder.ActivateSEPTool(MyMarker.MyTargetIndex, SEPToolStartTarget);
                                     }
                                 }
                             }

@@ -87,9 +87,10 @@ namespace AsterixDisplayAnalyser
             GlobalTargetList[TrackToMonitor].MyMarker.TargetMonitoredBy = Index;
         }
 
-        public static void DeactivateSEPTool(int Index)
+        public static void DeactivateSEPTool(int Index, int TargetMonitoredBy)
         {
             GlobalTargetList[Index].MyMarker.TargetToMonitor = -1;
+            GlobalTargetList[TargetMonitoredBy].MyMarker.TargetMonitoredBy = -1;
         }
 
         public static void Initialise()

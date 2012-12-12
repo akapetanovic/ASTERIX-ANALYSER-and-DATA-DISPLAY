@@ -229,7 +229,7 @@ namespace AsterixDisplayAnalyser
             MyPen.DashStyle = LabelAttributes.TargetStyle;
 
             // Draw AC Symbol
-            g.DrawRectangle(MyPen, LocalPosition.X - 5, LocalPosition.Y - 5, 9, 9);
+            g.DrawRectangle(MyPen, LocalPosition.X - 5, LocalPosition.Y - 5, 10, 10);
             AC_SYMB_START_X = LocalPosition.X - 5;
             AC_SYMB_START_Y = LocalPosition.Y - 5;
 
@@ -239,7 +239,26 @@ namespace AsterixDisplayAnalyser
             {
                 Point StartPosition = new Point(LocalPosition.X, LocalPosition.Y);
                 Point EndPosition = DynamicDisplayBuilder.GetTargetPositionByIndex(TargetToMonitor);
-                g.DrawLine(MyPen, StartPosition, EndPosition);
+                g.DrawLine(new Pen(Brushes.Yellow, 1), StartPosition, EndPosition);
+
+                // select a reference elllipsoid
+                Ellipsoid reference = Ellipsoid.WGS84;
+                // instantiate the calculator
+                GeodeticCalculator geoCalc = new GeodeticCalculator();
+                GlobalPosition Start = new GlobalPosition(new GlobalCoordinates(this.Position.Lat, this.Position.Lng));
+                PointLatLng End_LatLng = FormMain.FromLocalToLatLng(EndPosition.X, EndPosition.Y);
+                GlobalPosition End = new GlobalPosition(new GlobalCoordinates(End_LatLng.Lat, End_LatLng.Lng));
+                GeodeticMeasurement GM = geoCalc.CalculateGeodeticMeasurement(reference, End, Start);
+                
+                // Now compute position half way between two points.        
+                double distance = GM.PointToPointDistance / 2.0;
+                if (distance > 0.0)
+                {
+                    GlobalCoordinates GC = geoCalc.CalculateEndingGlobalCoordinates(reference, new GlobalCoordinates(End_LatLng.Lat, End_LatLng.Lng), GM.Azimuth, distance);
+                    GPoint GP = FormMain.FromLatLngToLocal(new PointLatLng(GC.Latitude.Degrees, GC.Longitude.Degrees));
+                    double Distane_NM = 0.00053996 * GM.PointToPointDistance;
+                    g.DrawString(Math.Round(GM.Azimuth.Degrees).ToString() + "°/" + Math.Round(Distane_NM, 1).ToString() + "nm", new Font(FontFamily.GenericSansSerif, 9), Brushes.Yellow, new PointF(GP.X, GP.Y));
+                }
             }
 
             // Here handle history points
