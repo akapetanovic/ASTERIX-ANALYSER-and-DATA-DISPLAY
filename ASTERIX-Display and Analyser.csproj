@@ -28,8 +28,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>10</ApplicationRevision>
-    <ApplicationVersion>1.0.0.10</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>2.3.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -43,6 +43,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -450,6 +452,7 @@
     <Compile Include="REPLAY\FrmReplayToRaw.Designer.cs">
       <DependentUpon>FrmReplayToRaw.cs</DependentUpon>
     </Compile>
+    <Compile Include="SAFETY NET\SEP Tool.cs" />
     <EmbeddedResource Include="DATA DISPLAY\DISPLAY UTILITIES\ExtendedLabel.resx">
       <DependentUpon>ExtendedLabel.cs</DependentUpon>
     </EmbeddedResource>

@@ -107,6 +107,26 @@ namespace AsterixDisplayAnalyser
             return GlobalTargetList[Index].MyMarker.LocalPosition;
         }
 
+        public static string GetTargetGSPDByIndex(int Index)
+        {
+            return GlobalTargetList[Index].MyMarker.GSPD_STRING;
+        }
+
+        public static string GetTargetM_HDGByIndex(int Index)
+        {
+            return GlobalTargetList[Index].MyMarker.M_HDG;
+        }
+
+        public static string GetTargetTRKByIndex(int Index)
+        {
+            return GlobalTargetList[Index].MyMarker.TRK;
+        }
+
+        public static string GetTargetMode_C_ByIndex(int Index)
+        {
+            return GlobalTargetList[Index].MyMarker.ModeC_STRING;
+        }
+
         private static void UpdateGlobalList()
         {
             foreach (TargetType CurrentTarget in CurrentTargetList)

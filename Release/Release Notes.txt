@@ -69,6 +69,14 @@ CAT62
 
 VERSION HISTORY
 
+Version 2.3
+
+	1. Improved performance by better managamnet of Threads.
+	2. Fixed bug in Replay module when used with multiple connections (connect/disconnect)
+	3. Fixed bugs related to the display filters and improved SSR filter logic.
+	4. Implemented Range and Bearing Display tool.
+		4.1 Includes possibility to lock two tracks and monitor RNG/BRG as tracks get updated
+
 Version 2.2
 
 	1. Improved GUI for Replay to Raw convertor

@@ -61,7 +61,7 @@ namespace AsterixDisplayAnalyser
         // X and Y
         private int AC_SYMB_START_X = 0;
         private int AC_SYMB_START_Y = 0;
-        
+
         // Defines the size of the label
         private int LabelWidth = 110;
         private int LabelHeight = 50;
@@ -234,7 +234,7 @@ namespace AsterixDisplayAnalyser
             AC_SYMB_START_Y = LocalPosition.Y - 5;
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            // Here handle drawing of SEP tool
+            // Here handle drawing of Range/Bearing & SEP tool
             if (TargetToMonitor != -1)
             {
                 Point StartPosition = new Point(LocalPosition.X, LocalPosition.Y);
@@ -249,7 +249,7 @@ namespace AsterixDisplayAnalyser
                 PointLatLng End_LatLng = FormMain.FromLocalToLatLng(EndPosition.X, EndPosition.Y);
                 GlobalPosition End = new GlobalPosition(new GlobalCoordinates(End_LatLng.Lat, End_LatLng.Lng));
                 GeodeticMeasurement GM = geoCalc.CalculateGeodeticMeasurement(reference, End, Start);
-                
+
                 // Now compute position half way between two points.        
                 double distance = GM.PointToPointDistance / 2.0;
                 if (distance > 0.0)
@@ -258,6 +258,47 @@ namespace AsterixDisplayAnalyser
                     GPoint GP = FormMain.FromLatLngToLocal(new PointLatLng(GC.Latitude.Degrees, GC.Longitude.Degrees));
                     double Distane_NM = 0.00053996 * GM.PointToPointDistance;
                     g.DrawString(Math.Round(GM.Azimuth.Degrees).ToString() + "°/" + Math.Round(Distane_NM, 1).ToString() + "nm", new Font(FontFamily.GenericSansSerif, 9), Brushes.Yellow, new PointF(GP.X, GP.Y));
+                }
+
+                ////////////////////////////////////////////////////////////////////////////////////////////
+                // Handle SEP Tool
+                double TRK1_SPD = 0.0, TRK2_SPD = 0.0;
+                double TRK1_AZ = 0.0, TRK2_AZ = 0.0;
+                bool Sep_Data_Is_Valid = true;
+
+                if (!double.TryParse(GSPD_STRING, out TRK1_SPD))
+                    Sep_Data_Is_Valid = false;
+
+                if (!double.TryParse(DynamicDisplayBuilder.GetTargetGSPDByIndex(TargetToMonitor), out TRK2_SPD))
+                    Sep_Data_Is_Valid = false;
+
+                if (!double.TryParse(TRK, out TRK1_AZ))
+                {
+                    if (!double.TryParse(M_HDG, out TRK1_AZ))
+                        Sep_Data_Is_Valid = false;
+                }
+
+                if (!double.TryParse(DynamicDisplayBuilder.GetTargetTRKByIndex(TargetToMonitor), out TRK2_AZ))
+                {
+                    if (!double.TryParse(DynamicDisplayBuilder.GetTargetM_HDGByIndex(TargetToMonitor), out TRK2_AZ))
+                        Sep_Data_Is_Valid = false;
+                }
+
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                // If all the necessary data is avilable
+                // then pass it on to the SEP tool calculator
+                // and then draw the result
+                if (Sep_Data_Is_Valid)
+                {
+                    SEP_Tool_Calculator SepTool = new SEP_Tool_Calculator(Start, End, TRK1_SPD, TRK2_SPD, TRK1_AZ, TRK2_AZ, 60);
+                    SEP_Tool_Calculator.OutData Sep_Tool_Data = SepTool.GetResult();
+
+                    if (Sep_Tool_Data.Is_Converging)
+                    {
+                        g.DrawRectangle(new Pen(Brushes.Red, 1), Sep_Tool_Data.StartPosition.X - 5, Sep_Tool_Data.StartPosition.Y - 5, 10, 10);
+                        g.DrawRectangle(new Pen(Brushes.Red, 1), Sep_Tool_Data.EndPosition.X - 5, Sep_Tool_Data.EndPosition.Y - 5, 10, 10);
+                        g.DrawLine(new Pen(Brushes.Red, 1), new Point(Sep_Tool_Data.StartPosition.X, Sep_Tool_Data.StartPosition.Y), new Point(Sep_Tool_Data.EndPosition.X, Sep_Tool_Data.EndPosition.Y));
+                    }
                 }
             }
 
@@ -276,7 +317,7 @@ namespace AsterixDisplayAnalyser
             {
                 if (GSPD_STRING != "N/A")
                 {
-                    double Azimuth = 0;
+                    double Azimuth = 0.0;
                     double Range = double.Parse(GSPD_STRING);
                     if (TRK != "N/A")
                         Azimuth = double.Parse(TRK);
