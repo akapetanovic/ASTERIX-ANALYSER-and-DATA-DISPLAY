@@ -56,12 +56,12 @@ namespace AsterixDisplayAnalyser
             GeodeticCalculator geoCalc = new GeodeticCalculator();
             // Used to calculate the time to the min distance 
             GlobalPosition Orig_Track_1_Pos = new GlobalPosition(new GlobalCoordinates(Track_1_Pos.Latitude, Track_1_Pos.Longitude));
-       
-            
-            for (int LookAheadIndex = 1; LookAheadIndex <= ((MaxLookAheadTimeInMinutes * 60) / 15); LookAheadIndex++)
+
+            int UpdateStep = 60 / Properties.Settings.Default.SEepToolUpdateRate;
+            for (int LookAheadIndex = 1; LookAheadIndex <= ((MaxLookAheadTimeInMinutes * 60) / UpdateStep); LookAheadIndex++)
             {
                 // Calculate new position X seconds ahead for track 1
-                double Range = (Track_1_SPD / 60) / 15;
+                double Range = (Track_1_SPD / 60) / UpdateStep;
                 GeoCordSystemDegMinSecUtilities.LatLongClass ResultPosition_1 =
                     GeoCordSystemDegMinSecUtilities.CalculateNewPosition(new GeoCordSystemDegMinSecUtilities.LatLongClass(Track_1_Pos.Latitude.Degrees, Track_1_Pos.Longitude.Degrees), (double)Range, (double)Track_1_TRK);
                 GPoint MarkerPositionLocal = FormMain.gMapControl.FromLatLngToLocal(new PointLatLng(ResultPosition_1.GetLatLongDecimal().LatitudeDecimal, ResultPosition_1.GetLatLongDecimal().LongitudeDecimal));

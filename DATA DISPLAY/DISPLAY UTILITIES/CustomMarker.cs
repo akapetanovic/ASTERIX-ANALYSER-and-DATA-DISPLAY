@@ -286,10 +286,10 @@ namespace AsterixDisplayAnalyser
 
                     if (Sep_Tool_Data.Is_Converging)
                     {
-                        g.DrawRectangle(new Pen(Brushes.Red, 1), Sep_Tool_Data.Track_1_Pos_Min.X - 5, Sep_Tool_Data.Track_1_Pos_Min.Y - 5, 10, 10);
-                        g.DrawRectangle(new Pen(Brushes.Red, 1), Sep_Tool_Data.Track_2_Pos_Min.X - 5, Sep_Tool_Data.Track_2_Pos_Min.Y - 5, 10, 10);
-                        g.DrawLine(new Pen(Brushes.Yellow, 1), new Point(Sep_Tool_Data.Track_1_Pos_Min.X, Sep_Tool_Data.Track_1_Pos_Min.Y), new Point(StartPosition.X, StartPosition.Y));
-                        g.DrawLine(new Pen(Brushes.Yellow, 1), new Point(Sep_Tool_Data.Track_2_Pos_Min.X, Sep_Tool_Data.Track_2_Pos_Min.Y), new Point(EndPosition.X, EndPosition.Y));
+                        g.DrawRectangle(new Pen(Brushes.Yellow, LabelAttributes.TargetSize), Sep_Tool_Data.Track_1_Pos_Min.X - 5, Sep_Tool_Data.Track_1_Pos_Min.Y - 5, 10, 10);
+                        g.DrawRectangle(new Pen(Brushes.Yellow, LabelAttributes.TargetSize), Sep_Tool_Data.Track_2_Pos_Min.X - 5, Sep_Tool_Data.Track_2_Pos_Min.Y - 5, 10, 10);
+                        g.DrawLine(new Pen(Brushes.Yellow, LabelAttributes.TargetSize), new Point(Sep_Tool_Data.Track_1_Pos_Min.X, Sep_Tool_Data.Track_1_Pos_Min.Y), new Point(StartPosition.X, StartPosition.Y));
+                        g.DrawLine(new Pen(Brushes.Yellow, LabelAttributes.TargetSize), new Point(Sep_Tool_Data.Track_2_Pos_Min.X, Sep_Tool_Data.Track_2_Pos_Min.Y), new Point(EndPosition.X, EndPosition.Y));
                         TimeSpan T = TimeSpan.FromSeconds(Sep_Tool_Data.SecondsToMinimum);
                         SepToolActive = "min d:" + Math.Round(Sep_Tool_Data.MinDistance, 1).ToString() + "/" + T.Minutes.ToString() + ":" + T.Seconds.ToString();
                     }
