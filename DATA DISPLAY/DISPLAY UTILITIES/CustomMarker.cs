@@ -250,16 +250,6 @@ namespace AsterixDisplayAnalyser
                 GlobalPosition End = new GlobalPosition(new GlobalCoordinates(End_LatLng.Lat, End_LatLng.Lng));
                 GeodeticMeasurement GM = geoCalc.CalculateGeodeticMeasurement(reference, End, Start);
 
-                // Now compute position half way between two points.        
-                double distance = GM.PointToPointDistance / 2.0;
-                if (distance > 0.0)
-                {
-                    GlobalCoordinates GC = geoCalc.CalculateEndingGlobalCoordinates(reference, new GlobalCoordinates(End_LatLng.Lat, End_LatLng.Lng), GM.Azimuth, distance);
-                    GPoint GP = FormMain.FromLatLngToLocal(new PointLatLng(GC.Latitude.Degrees, GC.Longitude.Degrees));
-                    double Distane_NM = 0.00053996 * GM.PointToPointDistance;
-                    g.DrawString(Math.Round(GM.Azimuth.Degrees).ToString() + "°/" + Math.Round(Distane_NM, 1).ToString() + "nm", new Font(FontFamily.GenericSansSerif, 9), Brushes.Yellow, new PointF(GP.X, GP.Y));
-                }
-
                 ////////////////////////////////////////////////////////////////////////////////////////////
                 // Handle SEP Tool
                 double TRK1_SPD = 0.0, TRK2_SPD = 0.0;
@@ -288,16 +278,35 @@ namespace AsterixDisplayAnalyser
                 // If all the necessary data is avilable
                 // then pass it on to the SEP tool calculator
                 // and then draw the result
+                string SepToolActive = "N/A";
                 if (Sep_Data_Is_Valid)
                 {
-                    SEP_Tool_Calculator SepTool = new SEP_Tool_Calculator(Start, End, TRK1_SPD, TRK2_SPD, TRK1_AZ, TRK2_AZ, 60);
+                    SEP_Tool_Calculator SepTool = new SEP_Tool_Calculator(Start, End, TRK1_SPD, TRK2_SPD, TRK1_AZ, TRK2_AZ, 20);
                     SEP_Tool_Calculator.OutData Sep_Tool_Data = SepTool.GetResult();
 
                     if (Sep_Tool_Data.Is_Converging)
                     {
-                        g.DrawRectangle(new Pen(Brushes.Red, 1), Sep_Tool_Data.StartPosition.X - 5, Sep_Tool_Data.StartPosition.Y - 5, 10, 10);
-                        g.DrawRectangle(new Pen(Brushes.Red, 1), Sep_Tool_Data.EndPosition.X - 5, Sep_Tool_Data.EndPosition.Y - 5, 10, 10);
-                        g.DrawLine(new Pen(Brushes.Red, 1), new Point(Sep_Tool_Data.StartPosition.X, Sep_Tool_Data.StartPosition.Y), new Point(Sep_Tool_Data.EndPosition.X, Sep_Tool_Data.EndPosition.Y));
+                        g.DrawRectangle(new Pen(Brushes.Red, 1), Sep_Tool_Data.Track_1_Pos_Min.X - 5, Sep_Tool_Data.Track_1_Pos_Min.Y - 5, 10, 10);
+                        g.DrawRectangle(new Pen(Brushes.Red, 1), Sep_Tool_Data.Track_2_Pos_Min.X - 5, Sep_Tool_Data.Track_2_Pos_Min.Y - 5, 10, 10);
+                        g.DrawLine(new Pen(Brushes.Yellow, 1), new Point(Sep_Tool_Data.Track_1_Pos_Min.X, Sep_Tool_Data.Track_1_Pos_Min.Y), new Point(StartPosition.X, StartPosition.Y));
+                        g.DrawLine(new Pen(Brushes.Yellow, 1), new Point(Sep_Tool_Data.Track_2_Pos_Min.X, Sep_Tool_Data.Track_2_Pos_Min.Y), new Point(EndPosition.X, EndPosition.Y));
+                        TimeSpan T = TimeSpan.FromSeconds(Sep_Tool_Data.SecondsToMinimum);
+                        SepToolActive = "min d:" + Math.Round(Sep_Tool_Data.MinDistance, 1).ToString() + "/" + T.Minutes.ToString() + ":" + T.Seconds.ToString();
+                    }
+                }
+
+                // Now compute position half way between two points.        
+                double distance = GM.PointToPointDistance / 2.0;
+                if (distance > 0.0)
+                {
+                    GlobalCoordinates GC = geoCalc.CalculateEndingGlobalCoordinates(reference, new GlobalCoordinates(End_LatLng.Lat, End_LatLng.Lng), GM.Azimuth, distance);
+                    GPoint GP = FormMain.FromLatLngToLocal(new PointLatLng(GC.Latitude.Degrees, GC.Longitude.Degrees));
+                    double Distane_NM = 0.00053996 * GM.PointToPointDistance;
+                    g.DrawString(Math.Round(GM.Azimuth.Degrees).ToString() + "°/" + Math.Round(Distane_NM, 1).ToString() + "nm", new Font(FontFamily.GenericSansSerif, 9), Brushes.Yellow, new PointF(GP.X, GP.Y));
+                    
+                    if (Sep_Data_Is_Valid && SepToolActive != "N/A")
+                    {
+                        g.DrawString(SepToolActive, new Font(FontFamily.GenericSansSerif, 9), Brushes.Yellow, new PointF(GP.X, GP.Y + 15));
                     }
                 }
             }
