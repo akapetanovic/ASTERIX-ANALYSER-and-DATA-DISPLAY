@@ -71,7 +71,7 @@ VERSION HISTORY
 
 Version 2.4
 
-	1.
+	1. Implemented SEP Tool (Separation Tool)
 
 Version 2.3
 

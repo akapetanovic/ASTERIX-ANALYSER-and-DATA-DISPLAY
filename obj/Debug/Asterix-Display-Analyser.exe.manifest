@@ -132,22 +132,22 @@
       <dsig:DigestValue>3vOhkf7KUHfali36RsEXajPpO6M=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="DOCUMENTATION\Release Notes.txt" size="13441">
+  <file name="DOCUMENTATION\Release Notes.txt" size="13480">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>OuZ4zV7S7ejDgOzNr22llDamKl0=</dsig:DigestValue>
+      <dsig:DigestValue>mvWziJyAzI4hWIY//vp/xkRwRLc=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="DOCUMENTATION\To_Do.txt" size="139">
+  <file name="DOCUMENTATION\To_Do.txt" size="102">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>Q8St70GvJb4tf4RFLG5uUUroiSE=</dsig:DigestValue>
+      <dsig:DigestValue>1oNbrwZVYQiB0sd4xyeAd2i3n5o=</dsig:DigestValue>
     </hash>
   </file>
   <file name="MAIN\README.txt" size="823">
