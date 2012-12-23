@@ -11,7 +11,7 @@ namespace AsterixDisplayAnalyser
 {
     public partial class FrmExtendedLabel : Form
     {
-        public enum DataItems { TAS, IAS, MACH, TRK, HDG, Roll_Angle, Selected_Altitude, Selected_Altitude_F, RateOfClimb, BaroSetting }
+        public enum DataItems { TAS, IAS, MACH, TRK, HDG, Roll_Angle, Selected_Altitude, Selected_Altitude_F, RateOfClimb, BaroSetting, Mode_S_Addr }
 
         public FrmExtendedLabel()
         {
@@ -20,7 +20,6 @@ namespace AsterixDisplayAnalyser
 
         private void ExtendedLabel_Load(object sender, EventArgs e)
         {
-            this.ControlBox = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,6 +41,7 @@ namespace AsterixDisplayAnalyser
             this.labeSelAltFinal.Text = "N/A";
             this.labelRateOfClimb.Text = "N/A";
             this.labelBaroSettings.Text = "N/A";
+            this.lblMode_S_Addr.Text = "N/A";
         }
 
         public void SetDataValue(DataItems Item, string value)
@@ -78,6 +78,9 @@ namespace AsterixDisplayAnalyser
                     break;
                 case DataItems.BaroSetting:
                     this.labelBaroSettings.Text = value;
+                    break;
+                case DataItems.Mode_S_Addr:
+                    this.lblMode_S_Addr.Text = value;
                     break;
             }
         }

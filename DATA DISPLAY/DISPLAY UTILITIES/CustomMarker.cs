@@ -137,6 +137,7 @@ namespace AsterixDisplayAnalyser
         ////////////////////////////////////////////////////////////
         // These are Extended label data items.
         // 
+        public string Mode_S_Addr = "N/A";
         public string TAS = "N/A";
         public string IAS = "N/A";
         public string MACH = "N/A";

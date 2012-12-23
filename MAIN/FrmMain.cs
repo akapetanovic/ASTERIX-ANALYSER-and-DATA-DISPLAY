@@ -195,7 +195,7 @@ namespace AsterixDisplayAnalyser
 
             this.labelConnIpAndPort.Text = SharedData.CurrentMulticastAddress.ToString() + " : " + Port;
             this.labelLocalInterface.Text = SharedData.CurrentInterfaceIPAddress.ToString();
-            this.Text = "AMER KAPETANOVIC - ASTERIX DARR  2.4";
+            this.Text = "AMER KAPETANOVIC - ASTERIX DARR  2.5";
         }
 
         // Display menu box to enable users to set up connection(s)
@@ -859,8 +859,7 @@ namespace AsterixDisplayAnalyser
             Label_Data.MyTargetIndex = Target_Data.TrackNumber;
 
             // At the end move extended lable data to the marker, so it is ready for dynamic manipulation by the client
-
-            //Round HDG and TRK
+            Label_Data.Mode_S_Addr = Target_Data.Mode_S_Addr;
             Label_Data.TRK = Target_Data.TRK;
             Label_Data.M_HDG = Target_Data.M_HDG;
             Label_Data.IAS = Target_Data.IAS;
@@ -1401,6 +1400,7 @@ namespace AsterixDisplayAnalyser
             ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.Selected_Altitude, MarkerData.SelectedAltitude_ShortTerm);
             ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.Selected_Altitude_F, MarkerData.SelectedAltitude_LongTerm);
             ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.BaroSetting, MarkerData.Barometric_Setting);
+            ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.Mode_S_Addr, MarkerData.Mode_S_Addr);
         }
 
         private void aircraftAddressToolStripMenuItem_Click(object sender, EventArgs e)

@@ -29,6 +29,7 @@ namespace AsterixDisplayAnalyser
             /// ////////////////////////////////////////////////////
             /// Extended label items, Applicable to CAT48 and CAT62
             /// </summary>
+            public string Mode_S_Addr = "N/A";
             public string TAS = "N/A";
             public string IAS = "N/A";
             public string MACH = "N/A";
@@ -142,6 +143,8 @@ namespace AsterixDisplayAnalyser
                     if (CurrentTarget.GSPD != null)
                         GlobalTargetList[CurrentTarget.TrackNumber].GSPD = CurrentTarget.GSPD;
                     GlobalTargetList[CurrentTarget.TrackNumber].ACID_Mode_S = CurrentTarget.ACID_Mode_S;
+                    if (CurrentTarget.Mode_S_Addr != "N/A")
+                        GlobalTargetList[CurrentTarget.TrackNumber].Mode_S_Addr = CurrentTarget.Mode_S_Addr;
                     if (CurrentTarget.M_HDG != "N/A")
                         GlobalTargetList[CurrentTarget.TrackNumber].M_HDG = CurrentTarget.M_HDG;
                     if (CurrentTarget.IAS != "N/A")
@@ -181,6 +184,8 @@ namespace AsterixDisplayAnalyser
                     if (CurrentTarget.GSPD != null)
                         GlobalTargetList[ModeAIndex].GSPD = CurrentTarget.GSPD;
                     GlobalTargetList[ModeAIndex].ACID_Mode_S = CurrentTarget.ACID_Mode_S;
+                    if (CurrentTarget.Mode_S_Addr != "N/A")
+                        GlobalTargetList[ModeAIndex].Mode_S_Addr = CurrentTarget.Mode_S_Addr;
                     if (CurrentTarget.M_HDG != "N/A")
                         GlobalTargetList[ModeAIndex].M_HDG = CurrentTarget.M_HDG;
                     if (CurrentTarget.IAS != "N/A")
@@ -223,6 +228,7 @@ namespace AsterixDisplayAnalyser
                     NewTarget.ModeC = GlobalTarget.ModeC;
                     NewTarget.GSPD = GlobalTarget.GSPD;
                     NewTarget.ACID_Mode_S = GlobalTarget.ACID_Mode_S;
+                    NewTarget.Mode_S_Addr = GlobalTarget.Mode_S_Addr;
                     NewTarget.TRK = GlobalTarget.TRK;
                     NewTarget.TAS = GlobalTarget.TAS;
                     NewTarget.Roll_Ang = GlobalTarget.Roll_Ang;
@@ -340,6 +346,8 @@ namespace AsterixDisplayAnalyser
                         CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates LatLongData = (CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates)Msg.CAT48DataItems[CAT48.ItemIDToIndex("040")].value;
                         // Get Flight Level
                         CAT48I090Types.CAT48I090FlightLevelUserData FlightLevelData = (CAT48I090Types.CAT48I090FlightLevelUserData)Msg.CAT48DataItems[CAT48.ItemIDToIndex("090")].value;
+                        // Get Mode S Address
+                        CAT48I220Types.CAT48AC_Address_Type Mode_S_Address = (CAT48I220Types.CAT48AC_Address_Type)Msg.CAT48DataItems[CAT48.ItemIDToIndex("220")].value;
                         // Get ACID data for Mode-S
                         CAT48I240Types.CAT48I240ACID_Data ACID_Mode_S = (CAT48I240Types.CAT48I240ACID_Data)Msg.CAT48DataItems[CAT48.ItemIDToIndex("240")].value;
                         // Get Mode-S MB Data
@@ -392,6 +400,17 @@ namespace AsterixDisplayAnalyser
 
                                         Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                                         Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+
+                                        if (Mode_S_Address != null)
+                                        {
+                                            if (Mode_S_Address.Is_Valid)
+                                                Target.Mode_S_Addr = Mode_S_Address.AC_ADDRESS_String;
+                                            else
+                                                Target.Mode_S_Addr = "N/A";
+                                        }
+                                        else
+                                            Target.Mode_S_Addr = "N/A";
+
 
                                         if (CAT48I250Mode_S_MB != null)
                                         {
@@ -543,6 +562,11 @@ namespace AsterixDisplayAnalyser
 
                             if (CAT62I380Data != null)
                             {
+                                if (CAT62I380Data.AC_Address.Is_Valid)
+                                    Target.Mode_S_Addr = CAT62I380Data.AC_Address.AC_ADDRESS_String;
+                                else
+                                    Target.Mode_S_Addr = "N/A";
+
                                 if (CAT62I380Data.ACID.Is_Valid)
                                     Target.ACID_Mode_S = CAT62I380Data.ACID.ACID_String;
                                 else
@@ -716,6 +740,8 @@ namespace AsterixDisplayAnalyser
                         CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates LatLongData = (CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates)Msg.CAT48DataItems[CAT48.ItemIDToIndex("040")].value;
                         // Get Flight Level
                         CAT48I090Types.CAT48I090FlightLevelUserData FlightLevelData = (CAT48I090Types.CAT48I090FlightLevelUserData)Msg.CAT48DataItems[CAT48.ItemIDToIndex("090")].value;
+                        // Get Mode S Address
+                        CAT48I220Types.CAT48AC_Address_Type Mode_S_Address = (CAT48I220Types.CAT48AC_Address_Type)Msg.CAT48DataItems[CAT48.ItemIDToIndex("220")].value;
                         // Get ACID data for Mode-S
                         CAT48I240Types.CAT48I240ACID_Data ACID_Mode_S = (CAT48I240Types.CAT48I240ACID_Data)Msg.CAT48DataItems[CAT48.ItemIDToIndex("240")].value;
                         // Get Mode-S MB Data
@@ -764,6 +790,17 @@ namespace AsterixDisplayAnalyser
                                         }
                                         Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                                         Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+
+                                        if (Mode_S_Address != null)
+                                        {
+                                            if (Mode_S_Address.Is_Valid)
+                                                Target.Mode_S_Addr = Mode_S_Address.AC_ADDRESS_String;
+                                            else
+                                                Target.Mode_S_Addr = "N/A";
+                                        }
+                                        else
+                                            Target.Mode_S_Addr = "N/A";
+                                        
                                         if (CAT48I250Mode_S_MB != null)
                                         {
                                             if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Present_This_Cycle)
@@ -918,6 +955,11 @@ namespace AsterixDisplayAnalyser
 
                             if (CAT62I380Data != null)
                             {
+                                if (CAT62I380Data.AC_Address.Is_Valid)
+                                    Target.Mode_S_Addr = CAT62I380Data.AC_Address.AC_ADDRESS_String;
+                                else
+                                    Target.Mode_S_Addr = "N/A";
+
                                 if (CAT62I380Data.ACID.Is_Valid)
                                     Target.ACID_Mode_S = CAT62I380Data.ACID.ACID_String;
                                 else
@@ -991,7 +1033,7 @@ namespace AsterixDisplayAnalyser
                                             Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "UKN:";
                                             break;
                                     }
-                                    Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm  + CAT62I380Data.Selected_Altitude.SelectedAltitude.ToString();
+                                    Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + CAT62I380Data.Selected_Altitude.SelectedAltitude.ToString();
                                 }
                                 else
                                     Target.SelectedAltitude_ShortTerm = "N/A";

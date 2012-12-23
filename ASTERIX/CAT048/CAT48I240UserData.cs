@@ -141,7 +141,7 @@ namespace AsterixDisplayAnalyser
         public static void DecodeCAT48I240(byte[] Data)
         {
 
-            // A new instance of the CAT48I070 data
+            // A new instance of the CAT48I240 data
             CAT48I240Types.CAT48I240ACID_Data MyCAT48I240 = new CAT48I240Types.CAT48I240ACID_Data();
 
             // Get all 6 octets

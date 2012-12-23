@@ -19,6 +19,7 @@ CAT48
 		040 Measured Position in Slant Polar Coordinates
 		070 Mode-3/A Code in Octal Representation
 		090 Flight Level in Binary Representation
+		220 Aircraft Address
 		240 Aircraft Identification
 		250 Mode-S MB
 			BDS40 Selected Vertical Intention
@@ -54,6 +55,7 @@ CAT62
 		136 Measured Flight Level
 		220 Calculated Rate of Climb/Descent
 		380 Aircraft Derived Data
+			Subfield # 1: Target Address
 			Subfield # 2: Target Identification
 			Subfield # 3: Magnetic Heading
 			Subfield # 5: True Airspeed (TAS)
@@ -68,6 +70,11 @@ CAT62
 			Subfield # 28: Barometric Pressure Setting (from Mode S BDS 4,0)
 
 VERSION HISTORY
+
+Version 1.5
+
+	1. Added CAT62/I380, Subfield #1 Target Address
+	2. Added CAT48/I220 Aircraft Address
 
 Version 2.4
 

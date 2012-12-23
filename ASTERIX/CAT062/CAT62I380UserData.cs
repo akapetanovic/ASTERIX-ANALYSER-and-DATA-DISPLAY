@@ -167,6 +167,13 @@ namespace AsterixDisplayAnalyser
             #region Target_Address
             if (WORD0.DWord[CAT62I380Types.Target_Address] == true)
             {
+                // Get all octets
+                Bit_Ops Bits_1_To_Bits_32_ = new Bit_Ops();
+                Bits_1_To_Bits_32_.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 2];
+                Bits_1_To_Bits_32_.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 1];
+                Bits_1_To_Bits_32_.DWord[Bit_Ops.Bits16_23_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex];
+                CAT62I380DataRecord.AC_Address.Is_Valid = true;
+                CAT62I380DataRecord.AC_Address.AC_ADDRESS_String = Bits_1_To_Bits_32_.DWord.Data.ToString("X");
                 CAT62.CurrentDataBufferOctalIndex = CAT62.CurrentDataBufferOctalIndex + 3;
             } 
             #endregion
@@ -177,7 +184,6 @@ namespace AsterixDisplayAnalyser
                 // Get all 6 octets
                 Bit_Ops Bits_1_To_Bits_32_ = new Bit_Ops();
                 Bit_Ops Bits_33_To_Bits_48_ = new Bit_Ops();
-
                 Bits_1_To_Bits_32_.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 5];
                 Bits_1_To_Bits_32_.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 4];
                 Bits_1_To_Bits_32_.DWord[Bit_Ops.Bits16_23_Of_DWord] = Data[CAT62.CurrentDataBufferOctalIndex + 3];

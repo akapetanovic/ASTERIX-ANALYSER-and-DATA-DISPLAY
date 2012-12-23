@@ -44,6 +44,12 @@ namespace AsterixDisplayAnalyser
         public static int Barometric_Pressure_Setting = Bit_Ops.Bit1;
         public static int WORD3_FX_Extension_Indicator = Bit_Ops.Bit0;
 
+        public class CAT62AC_Address_Type
+        {
+            public string AC_ADDRESS_String = "------";
+            public bool Is_Valid = false;
+        }
+
         public class CAT62ACIDType
         {
             public string ACID_String = "------";
@@ -139,6 +145,7 @@ namespace AsterixDisplayAnalyser
         // into one class
         public class CAT62I380Data
         {
+            public CAT62AC_Address_Type AC_Address = new CAT62AC_Address_Type();
             public CAT62ACIDType ACID = new CAT62ACIDType();
             public CAT62TASType TAS = new CAT62TASType();
             public CAT62IASType IAS = new CAT62IASType();
