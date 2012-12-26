@@ -871,6 +871,10 @@ namespace AsterixDisplayAnalyser
             Label_Data.SelectedAltitude_LongTerm = Target_Data.SelectedAltitude_LongTerm;
             Label_Data.Rate_Of_Climb = Target_Data.Rate_Of_Climb;
             Label_Data.Barometric_Setting = Target_Data.Barometric_Setting;
+
+            // Set STCA parameters
+            foreach (STCA_Target_Item STCA_Item in Target_Data.STCA_List)
+                Label_Data.STCA_List.Add(STCA_Item);
         }
 
         private string ApplyCModeHisterysis(string Mode_C_In)
@@ -1651,7 +1655,7 @@ namespace AsterixDisplayAnalyser
         bool MouseIsOnTheAC_Symbol(MouseEventArgs Mouse, GMapMarker Marker)
         {
             GMapTargetandLabel MyMarker = (GMapTargetandLabel)Marker;
-            Rectangle MyRectangle = new Rectangle(MyMarker.GetAC_SYMB_StartPoint().X - 1 , MyMarker.GetAC_SYMB_StartPoint().Y - 1 , 12, 12);
+            Rectangle MyRectangle = new Rectangle(MyMarker.GetAC_SYMB_StartPoint().X - 1, MyMarker.GetAC_SYMB_StartPoint().Y - 1, 12, 12);
             return MyRectangle.Contains(new Point(Mouse.X, Mouse.Y));
         }
 

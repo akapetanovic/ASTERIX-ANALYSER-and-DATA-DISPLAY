@@ -48,6 +48,9 @@ namespace AsterixDisplayAnalyser
             public int TrackTerminateTreshold = Properties.Settings.Default.TrackCoast;
             // Marker properties
             public GMapTargetandLabel MyMarker = new GMapTargetandLabel(new PointLatLng(0, 0));
+            // STCA parameters
+            // Holds targets this target is in STCA conflict with
+            public System.Collections.Generic.List<STCA_Target_Item> STCA_List = new List<STCA_Target_Item>();
         }
 
         // Keeps track of the data index from the last update of the 
@@ -1070,6 +1073,7 @@ namespace AsterixDisplayAnalyser
                 UpdateGlobalList();
             }
 
+            STCA.RUN(ref CurrentTargetList);
             TargetList = CurrentTargetList;
         }
     }

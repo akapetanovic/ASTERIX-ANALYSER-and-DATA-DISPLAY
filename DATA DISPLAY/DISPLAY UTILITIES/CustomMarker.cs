@@ -159,6 +159,12 @@ namespace AsterixDisplayAnalyser
         public int TargetToMonitor = -1;
         public int TargetMonitoredBy = -1;
 
+        /// <summary>
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// STCA definitions
+        /// </summary>
+        public System.Collections.Generic.List<STCA_Target_Item> STCA_List = new List<STCA_Target_Item>();
+
         // To be called once the track is terminated
         public void TerminateTarget()
         {
@@ -171,6 +177,7 @@ namespace AsterixDisplayAnalyser
             HistoryPoints.Clear();
             TargetToMonitor = -1;
             TargetMonitoredBy = -1;
+            STCA_List.Clear();
         }
 
         public int GetLabelWidth()

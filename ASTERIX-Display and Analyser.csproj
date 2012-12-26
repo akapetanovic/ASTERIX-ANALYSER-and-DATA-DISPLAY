@@ -453,6 +453,7 @@
       <DependentUpon>FrmReplayToRaw.cs</DependentUpon>
     </Compile>
     <Compile Include="SAFETY NET\SEP Tool.cs" />
+    <Compile Include="SAFETY NET\STCA.cs" />
     <EmbeddedResource Include="DATA DISPLAY\DISPLAY UTILITIES\ExtendedLabel.resx">
       <DependentUpon>ExtendedLabel.cs</DependentUpon>
     </EmbeddedResource>

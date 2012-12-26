@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="AsterixDisplayAnalyser.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+        </sectionGroup>
+    </configSections>
+    <userSettings>
+        <AsterixDisplayAnalyser.Properties.Settings>
+            <setting name="Waypoints" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="StateBorder" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="Sectors" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="Radars" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="CAT_001_Enabled" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="CAT_002_Enabled" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="CAT_008_Enabled" serializeAs="String">
+                <value>False</value>
+            </setting>
+            <setting name="CAT_034_Enabled" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="CAT_048_Enabled" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="CAT_062_Enabled" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="CAT_063_Enabled" serializeAs="String">
+                <value>False</value>
+            </setting>
+            <setting name="CAT_065_Enabled" serializeAs="String">
+                <value>False</value>
+            </setting>
+            <setting name="CAT_244_Enabled" serializeAs="String">
+                <value>False</value>
+            </setting>
+            <setting name="TrackCoast" serializeAs="String">
+                <value>5</value>
+            </setting>
+            <setting name="UpdateRate" serializeAs="String">
+                <value>4000</value>
+            </setting>
+            <setting name="DisplayEnabled" serializeAs="String">
+                <value>False</value>
+            </setting>
+            <setting name="FL_Filter_Enabled" serializeAs="String">
+                <value>False</value>
+            </setting>
+            <setting name="FL_Upper" serializeAs="String">
+                <value>0</value>
+            </setting>
+            <setting name="FL_Lower" serializeAs="String">
+                <value>700</value>
+            </setting>
+            <setting name="DisplayPSR" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="DisplayModeC_As_FL" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="PopulateMainListBox" serializeAs="String">
+                <value>False</value>
+            </setting>
+            <setting name="SyncDisplayToNorthMark" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="RecordingDirectory" serializeAs="String">
+                <value>C:\ASTERIX</value>
+            </setting>
+            <setting name="FrwdInterface1" serializeAs="String">
+                <value>None</value>
+            </setting>
+            <setting name="FrwdInterface2" serializeAs="String">
+                <value>None</value>
+            </setting>
+            <setting name="FrwdInterface3" serializeAs="String">
+                <value>None</value>
+            </setting>
+            <setting name="FrwdInterface4" serializeAs="String">
+                <value>None</value>
+            </setting>
+            <setting name="FrwdInterface5" serializeAs="String">
+                <value>None</value>
+            </setting>
+            <setting name="FrwdMulticast1" serializeAs="String">
+                <value>None</value>
+            </setting>
+            <setting name="FrwdMulticast2" serializeAs="String">
+                <value>None</value>
+            </setting>
+            <setting name="FrwdMulticast3" serializeAs="String">
+                <value>None</value>
+            </setting>
+            <setting name="FrwdMulticast4" serializeAs="String">
+                <value>None</value>
+            </setting>
+            <setting name="FrwdMulticast5" serializeAs="String">
+                <value>None</value>
+            </setting>
+            <setting name="FrwdPort1" serializeAs="String">
+                <value>None</value>
+            </setting>
+            <setting name="FrwdPort2" serializeAs="String">
+                <value>None</value>
+            </setting>
+            <setting name="FrwdPort3" serializeAs="String">
+                <value>None</value>
+            </setting>
+            <setting name="FrwdPort4" serializeAs="String">
+                <value>None</value>
+            </setting>
+            <setting name="FrwdPort5" serializeAs="String">
+                <value>None</value>
+            </setting>
+            <setting name="GE_Show_ModeA" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="GE_Show_ModeC" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="GE_Show_Show_Callsign" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="Show_ModeC_as_FL" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="GE_Dest_Path" serializeAs="String">
+                <value>C:\ASTERIX\GE</value>
+            </setting>
+            <setting name="RecordActiveInRaw" serializeAs="String">
+                <value>False</value>
+            </setting>
+            <setting name="ReplayMulticast" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="ReplayPort" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="SystMonEnabled" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="Runways" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="DisplayPosInDecimals" serializeAs="String">
+                <value>False</value>
+            </setting>
+            <setting name="SpeedVector" serializeAs="String">
+                <value>1</value>
+            </setting>
+            <setting name="HistoryPoints" serializeAs="String">
+                <value>5</value>
+            </setting>
+            <setting name="SEepToolUpdateRate" serializeAs="String">
+                <value>4</value>
+            </setting>
+        </AsterixDisplayAnalyser.Properties.Settings>
+    </userSettings>
+</configuration>
