@@ -5,9 +5,9 @@ using System.Text;
 
 namespace AsterixDisplayAnalyser
 {
-    class CAT48I140Types
+    class CAT62I070Types
     {
-        public class CAT48140ElapsedTimeSinceMidnight
+        public class CAT62070ElapsedTimeSinceMidnight
         {
             public double ElapsedTimeSinceMidnight;
         }

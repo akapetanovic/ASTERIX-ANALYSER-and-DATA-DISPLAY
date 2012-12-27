@@ -14,8 +14,9 @@ namespace AsterixDisplayAnalyser
     {
         public class TargetType
         {
-            // Last Position Update Time
-            public DateTime LastCyclePostionUpdateTime;
+            ////////////////////////////////////////////////////
+            public double TimeSinceMidnight;
+            
             /// <summary>
             /// ////////////////////////////////////////////////
             /// Track Label Items
@@ -178,41 +179,16 @@ namespace AsterixDisplayAnalyser
                     GlobalTargetList[CurrentTarget.TrackNumber].Lat = CurrentTarget.Lat;
                     GlobalTargetList[CurrentTarget.TrackNumber].Lon = CurrentTarget.Lon;
 
-                    if (CurrentTarget.GSPD == null || GlobalTargetList[CurrentTarget.TrackNumber].GSPD != "0")
-                    {
-                        if (GlobalTargetList[CurrentTarget.TrackNumber].LastCyclePostionUpdateTime != null)
-                        {
-                            if (GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Count > 0)
-                            {
-                                // select a reference elllipsoid
-                                Ellipsoid reference = Ellipsoid.WGS84;
-                                // instantiate the calculator
-                                GeodeticCalculator geoCalc = new GeodeticCalculator();
-                                // Used to calculate the time to the min distance 
-                                GlobalPosition Track_1 = new GlobalPosition(new GlobalCoordinates(CurrentTarget.Lat, CurrentTarget.Lon));
-                                GlobalPosition Track_2 = new GlobalPosition(new GlobalCoordinates(GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Last().Lat,
-                                    GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Last().Lng));
-
-                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                // First check if the two targets are already in separation violation status.
-                                // If so, then add the STCA items to the STCA pair target
-                                double DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
-                                DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
-
-                                TimeSpan TimeDifference = DateTime.Now - GlobalTargetList[CurrentTarget.TrackNumber].LastCyclePostionUpdateTime;
-                                if (DistanceTraveled > 0 && TimeDifference.TotalHours > 0.0)
-                                {
-                                    double GSPD = DistanceTraveled / TimeDifference.TotalHours;
-                                    GlobalTargetList[CurrentTarget.TrackNumber].GSPD = Math.Round(GSPD).ToString();
-                                }
-                            }
-                        }
-                    }
-                    GlobalTargetList[CurrentTarget.TrackNumber].LastCyclePostionUpdateTime = DateTime.Now;
-
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    // Handle history points
                     if (GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Count > Properties.Settings.Default.HistoryPoints)
                         GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Dequeue();
-                    GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Enqueue(new PointLatLng(CurrentTarget.Lat, CurrentTarget.Lon));
+                    GMapTargetandLabel.HistoryPointsType HP = new GMapTargetandLabel.HistoryPointsType();
+                    HP.LatLong = new PointLatLng(CurrentTarget.Lat, CurrentTarget.Lon);
+                    HP.TimeSinceMidnight = CurrentTarget.TimeSinceMidnight;
+                    GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Enqueue(HP);
+                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
                     GlobalTargetList[CurrentTarget.TrackNumber].TrackNumber = CurrentTarget.TrackNumber;
                     GlobalTargetList[CurrentTarget.TrackNumber].TrackTerminateTreshold = CurrentTarget.TrackTerminateTreshold;
                 }
@@ -254,8 +230,6 @@ namespace AsterixDisplayAnalyser
 
                     if (CurrentTarget.GSPD == null || GlobalTargetList[ModeAIndex].GSPD != "0")
                     {
-                        if (GlobalTargetList[ModeAIndex].LastCyclePostionUpdateTime != null)
-                        {
                             if (GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Count > 0)
                             {
                                 // select a reference elllipsoid
@@ -264,29 +238,33 @@ namespace AsterixDisplayAnalyser
                                 GeodeticCalculator geoCalc = new GeodeticCalculator();
                                 // Used to calculate the time to the min distance 
                                 GlobalPosition Track_1 = new GlobalPosition(new GlobalCoordinates(CurrentTarget.Lat, CurrentTarget.Lon));
-                                GlobalPosition Track_2 = new GlobalPosition(new GlobalCoordinates(GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Last().Lat,
-                                    GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Last().Lng));
+                                GlobalPosition Track_2 = new GlobalPosition(new GlobalCoordinates(GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Last().LatLong.Lat,
+                                    GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Last().LatLong.Lng));
 
                                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 // First check if the two targets are already in separation violation status.
                                 // If so, then add the STCA items to the STCA pair target
                                 double DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
                                 DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
-
-                                TimeSpan TimeDifference = DateTime.Now - GlobalTargetList[ModeAIndex].LastCyclePostionUpdateTime;
+                                double BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Last().TimeSinceMidnight;
+                                TimeSpan TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Round(BetweenTwoUpdates));                                
                                 if (DistanceTraveled > 0 && TimeDifference.TotalHours > 0.0)
                                 {
                                     double GSPD = DistanceTraveled / TimeDifference.TotalHours;
                                     GlobalTargetList[ModeAIndex].GSPD = Math.Round(GSPD).ToString();
                                 }
                             }
-                        }
                     }
-                    GlobalTargetList[ModeAIndex].LastCyclePostionUpdateTime = DateTime.Now;
-
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    // Handle history points
                     if (GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Count > Properties.Settings.Default.HistoryPoints)
                         GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Dequeue();
-                    GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Enqueue(new PointLatLng(CurrentTarget.Lat, CurrentTarget.Lon));
+                    GMapTargetandLabel.HistoryPointsType HP = new GMapTargetandLabel.HistoryPointsType();
+                    HP.LatLong = new PointLatLng(CurrentTarget.Lat, CurrentTarget.Lon);
+                    HP.TimeSinceMidnight = CurrentTarget.TimeSinceMidnight;
+                    GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Enqueue(HP);
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    
                     GlobalTargetList[ModeAIndex].TrackNumber = ModeAIndex;
                     GlobalTargetList[ModeAIndex].TrackTerminateTreshold = CurrentTarget.TrackTerminateTreshold;
                 }
@@ -344,8 +322,6 @@ namespace AsterixDisplayAnalyser
                     CurrentTargetList.Add(NewTarget);
                 }
             }
-
-
         }
 
         // Each time this method is called it will extract the targets recived since the
@@ -373,6 +349,8 @@ namespace AsterixDisplayAnalyser
                         CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates LatLongData = (CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates)Msg.CAT01DataItems[CAT01.ItemIDToIndex("040")].value;
                         // Get Flight Level
                         CAT01I090Types.CAT01I090FlightLevelUserData FlightLevelData = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("090")].value;
+                        // Get Time Since Midnight
+                        CAT01I141Types.CAT01141ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT01I141Types.CAT01141ElapsedTimeSinceMidnight)Msg.CAT01DataItems[CAT01.ItemIDToIndex("141")].value;
 
                         TargetType Target = new TargetType();
                         if (MyCAT01I020UserData != null)
@@ -383,6 +361,7 @@ namespace AsterixDisplayAnalyser
                                 Target.ModeC = "";
                                 Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                                 Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
                                 Target.TrackTerminateTreshold = 0;
                                 PSRTargetList.Add(Target);
                             }
@@ -403,6 +382,7 @@ namespace AsterixDisplayAnalyser
 
                                         Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                                         Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                        Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
                                         CurrentTargetList.Add(Target);
                                     }
                                 }
@@ -430,7 +410,8 @@ namespace AsterixDisplayAnalyser
                         CAT48I240Types.CAT48I240ACID_Data ACID_Mode_S = (CAT48I240Types.CAT48I240ACID_Data)Msg.CAT48DataItems[CAT48.ItemIDToIndex("240")].value;
                         // Get Mode-S MB Data
                         CAT48I250Types.CAT48I250DataType CAT48I250Mode_S_MB = (CAT48I250Types.CAT48I250DataType)Msg.CAT48DataItems[CAT48.ItemIDToIndex("250")].value;
-
+                        // Get Time since midnight
+                        CAT48I140Types.CAT48140ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT48I140Types.CAT48140ElapsedTimeSinceMidnight)Msg.CAT48DataItems[CAT48.ItemIDToIndex("140")].value;
                         TargetType Target = new TargetType();
 
                         if (MyCAT48I020UserData != null)
@@ -442,6 +423,7 @@ namespace AsterixDisplayAnalyser
                                 Target.ACID_Mode_S = "";
                                 Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                                 Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
                                 Target.TrackTerminateTreshold = 0;
                                 PSRTargetList.Add(Target);
                             }
@@ -478,6 +460,7 @@ namespace AsterixDisplayAnalyser
 
                                         Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                                         Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                        Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
 
                                         if (Mode_S_Address != null)
                                         {
@@ -614,6 +597,7 @@ namespace AsterixDisplayAnalyser
                         GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.CAT62DataItems[CAT62.ItemIDToIndex("105")].value;
                         CAT62I380Types.CAT62I380Data CAT62I380Data = (CAT62I380Types.CAT62I380Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
                         CAT62I220Types.CalculatedRateOfClimbDescent CAT62I220Data = (CAT62I220Types.CalculatedRateOfClimbDescent)Msg.CAT62DataItems[CAT62.ItemIDToIndex("220")].value;
+                        CAT62I070Types.CAT62070ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT62I070Types.CAT62070ElapsedTimeSinceMidnight)Msg.CAT62DataItems[CAT62.ItemIDToIndex("070")].value;
 
                         TargetType Target = new TargetType();
 
@@ -743,6 +727,7 @@ namespace AsterixDisplayAnalyser
 
                             Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
                             Target.Lon = LatLongData.GetLatLongDecimal().LongitudeDecimal;
+                            Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
                             CurrentTargetList.Add(Target);
                         }
                     }
@@ -765,6 +750,8 @@ namespace AsterixDisplayAnalyser
                         CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates LatLongData = (CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates)Msg.CAT01DataItems[CAT01.ItemIDToIndex("040")].value;
                         // Get Flight Level
                         CAT01I090Types.CAT01I090FlightLevelUserData FlightLevelData = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("090")].value;
+                        // Get Time Since Midnight
+                        CAT01I141Types.CAT01141ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT01I141Types.CAT01141ElapsedTimeSinceMidnight)Msg.CAT01DataItems[CAT01.ItemIDToIndex("141")].value;
 
                         TargetType Target = new TargetType();
                         if (MyCAT01I020UserData != null)
@@ -775,6 +762,7 @@ namespace AsterixDisplayAnalyser
                                 Target.ModeC = "";
                                 Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                                 Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
                                 Target.MyMarker.Position = new PointLatLng(Target.Lat, Target.Lon);
                                 PSRTargetList.Add(Target);
                             }
@@ -797,6 +785,7 @@ namespace AsterixDisplayAnalyser
 
                                         Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                                         Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                        Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
                                         CurrentTargetList.Add(Target);
                                     }
                                 }
@@ -824,7 +813,8 @@ namespace AsterixDisplayAnalyser
                         CAT48I240Types.CAT48I240ACID_Data ACID_Mode_S = (CAT48I240Types.CAT48I240ACID_Data)Msg.CAT48DataItems[CAT48.ItemIDToIndex("240")].value;
                         // Get Mode-S MB Data
                         CAT48I250Types.CAT48I250DataType CAT48I250Mode_S_MB = (CAT48I250Types.CAT48I250DataType)Msg.CAT48DataItems[CAT48.ItemIDToIndex("250")].value;
-
+                        // Get Time since midnight
+                        CAT48I140Types.CAT48140ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT48I140Types.CAT48140ElapsedTimeSinceMidnight)Msg.CAT48DataItems[CAT48.ItemIDToIndex("140")].value;
                         TargetType Target = new TargetType();
                         if (MyCAT48I020UserData != null)
                         {
@@ -836,6 +826,7 @@ namespace AsterixDisplayAnalyser
                                 Target.ACID_Mode_S = "";
                                 Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                                 Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
                                 PSRTargetList.Add(Target);
                             }
                             else if ((MyCAT48I020UserData.Type_Of_Report != CAT48I020Types.Type_Of_Report_Type.No_Detection) &&
@@ -868,6 +859,7 @@ namespace AsterixDisplayAnalyser
                                         }
                                         Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                                         Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                        Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
 
                                         if (Mode_S_Address != null)
                                         {
@@ -1007,6 +999,7 @@ namespace AsterixDisplayAnalyser
                         GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.CAT62DataItems[CAT62.ItemIDToIndex("105")].value;
                         CAT62I220Types.CalculatedRateOfClimbDescent CAT62I220Data = (CAT62I220Types.CalculatedRateOfClimbDescent)Msg.CAT62DataItems[CAT62.ItemIDToIndex("220")].value;
                         CAT62I380Types.CAT62I380Data CAT62I380Data = (CAT62I380Types.CAT62I380Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
+                        CAT62I070Types.CAT62070ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT62I070Types.CAT62070ElapsedTimeSinceMidnight)Msg.CAT62DataItems[CAT62.ItemIDToIndex("070")].value;
 
                         TargetType Target = new TargetType();
 
@@ -1136,7 +1129,7 @@ namespace AsterixDisplayAnalyser
 
                             Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
                             Target.Lon = LatLongData.GetLatLongDecimal().LongitudeDecimal;
-
+                            Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
                             CurrentTargetList.Add(Target);
                         }
                     }

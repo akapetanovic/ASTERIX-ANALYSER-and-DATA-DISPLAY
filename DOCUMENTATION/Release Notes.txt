@@ -7,6 +7,7 @@ CAT01
 		040 Measured Position in Polar Coordinates
 		070 Mode-3/A Code in Octal Representation
 		090 Mode-C Code in Binary Representation
+		141 Truncated Time of Day
 
 CAT02
 		000 Message Type                        
@@ -19,6 +20,7 @@ CAT48
 		040 Measured Position in Slant Polar Coordinates
 		070 Mode-3/A Code in Octal Representation
 		090 Flight Level in Binary Representation
+		140 Time of Day
 		220 Aircraft Address
 		240 Aircraft Identification
 		250 Mode-S MB
@@ -52,6 +54,7 @@ CAT62
 		105 Calculated Track Position (WGS-84)
 		060 Track Mode 3/A Code
 		040 Track Number
+		070 Time of Track Information
 		136 Measured Flight Level
 		220 Calculated Rate of Climb/Descent
 		380 Aircraft Derived Data
@@ -71,10 +74,19 @@ CAT62
 
 VERSION HISTORY
 
+Version 1.6
+
+	1. Added following Time Stamp Fields:
+		a. CAT01/I141 Truncated Time of Day
+		b. CAT48/I140 Time of Day
+		c. CAT62/I070 Time of Track Information
+	2. Implemented STCA (Short Term Conflict Alert)
+
 Version 1.5
 
 	1. Added CAT62/I380, Subfield #1 Target Address
 	2. Added CAT48/I220 Aircraft Address
+	3. Added Mode-S AC Address readout in the extended label window
 
 Version 2.4
 

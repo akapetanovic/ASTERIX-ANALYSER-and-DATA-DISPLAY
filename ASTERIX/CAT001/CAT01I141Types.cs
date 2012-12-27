@@ -7,5 +7,10 @@ namespace AsterixDisplayAnalyser
 {
     class CAT01I141Types
     {
+
+        public class CAT01141ElapsedTimeSinceMidnight
+        {
+            public double ElapsedTimeSinceMidnight;
+        }
     }
 }

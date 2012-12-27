@@ -132,7 +132,12 @@ namespace AsterixDisplayAnalyser
         public Font A_ROC_FONT = new Font(A_ROC_FONT_FAMILLY, 10, FontStyle.Regular, GraphicsUnit.Pixel);
         public string A_ROC_STRING = "R---";
 
-        public System.Collections.Generic.Queue<PointLatLng> HistoryPoints = new System.Collections.Generic.Queue<PointLatLng>();
+        public class HistoryPointsType
+        {
+            public PointLatLng LatLong;
+            public double TimeSinceMidnight;
+        }
+        public System.Collections.Generic.Queue<HistoryPointsType> HistoryPoints = new System.Collections.Generic.Queue<HistoryPointsType>();
 
         ////////////////////////////////////////////////////////////
         // These are Extended label data items.
@@ -321,9 +326,9 @@ namespace AsterixDisplayAnalyser
 
             // Here handle history points
             // First draw all previous history points
-            foreach (PointLatLng I in HistoryPoints)
+            foreach (HistoryPointsType I in HistoryPoints)
             {
-                GPoint MarkerPositionLocal = FormMain.gMapControl.FromLatLngToLocal(new PointLatLng(I.Lat, I.Lng));
+                GPoint MarkerPositionLocal = FormMain.gMapControl.FromLatLngToLocal(new PointLatLng(I.LatLong.Lat, I.LatLong.Lng));
                 g.DrawEllipse(MyPen, MarkerPositionLocal.X, MarkerPositionLocal.Y, 3, 3);
             }
 

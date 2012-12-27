@@ -7,5 +7,9 @@ namespace AsterixDisplayAnalyser
 {
     class CAT01I030Types
     {
+        public class CAT01030Mode3UserData
+        {
+            
+        }
     }
 }

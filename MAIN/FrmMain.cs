@@ -195,7 +195,7 @@ namespace AsterixDisplayAnalyser
 
             this.labelConnIpAndPort.Text = SharedData.CurrentMulticastAddress.ToString() + " : " + Port;
             this.labelLocalInterface.Text = SharedData.CurrentInterfaceIPAddress.ToString();
-            this.Text = "AMER KAPETANOVIC - ASTERIX DARR  2.5";
+            this.Text = "AMER KAPETANOVIC - ASTERIX DARR  2.6";
         }
 
         // Display menu box to enable users to set up connection(s)
