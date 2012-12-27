@@ -99,12 +99,66 @@ namespace AsterixDisplayAnalyser
         // items in the STCA_List
         private static void Check_And_Set_Horizontal_Infringed(ref DynamicDisplayBuilder.TargetType T1, DynamicDisplayBuilder.TargetType T2)
         {
-            // First check if the two targets are already in separation violation status.
 
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+            // First extract and validate all the data 
+            //
+            GlobalPosition Track_1_Pos = new GlobalPosition(new GlobalCoordinates(T1.Lat, T1.Lon));
+            GlobalPosition Track_2_Pos = new GlobalPosition(new GlobalCoordinates(T2.Lat, T2.Lon));
+            bool DataValid = false;
+            double Track_1_SPD;
+            double Track_2_SPD;
+            double Track_1_TRK;
+            double Track_2_TRK;
 
-            // No they are not, then check if the two targets are going to be in 
-            // the separation violation status a parameter set time in the future
-            // This is so called "violation prediction status"
+            if (!double.TryParse(T1.GSPD, out Track_1_SPD))
+                DataValid = false;
+            if (!double.TryParse(T2.GSPD, out Track_2_SPD))
+                DataValid = false;
+            if (!double.TryParse(T1.TRK, out Track_1_TRK))
+            {
+                if (!double.TryParse(T1.M_HDG, out Track_1_TRK))
+                    DataValid = false;
+            }
+            if (!double.TryParse(T2.TRK, out Track_2_TRK))
+            {
+                if (!double.TryParse(T2.M_HDG, out Track_2_TRK))
+                    DataValid = false;
+            }
+           
+            // Data validated 
+            if (DataValid)
+            {
+                // select a reference elllipsoid
+                Ellipsoid reference = Ellipsoid.WGS84;
+                // instantiate the calculator
+                GeodeticCalculator geoCalc = new GeodeticCalculator();
+                // Used to calculate the time to the min distance 
+                GlobalPosition Track_1 = new GlobalPosition(new GlobalCoordinates(Track_1_Pos.Latitude, Track_1_Pos.Longitude));
+                GlobalPosition Track_2 = new GlobalPosition(new GlobalCoordinates(Track_2_Pos.Latitude, Track_2_Pos.Longitude));
+
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                // First check if the two targets are already in separation violation status.
+                // If so, then add the STCA items to the STCA pair target
+                double DistanceToTravel = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
+                DistanceToTravel = DistanceToTravel * 0.00053996; // Convert to nautical miles
+
+                if (DistanceToTravel < Min_Horizontal_Separation_Nm)
+                {
+                    STCA_Target_Item STCA_Item = new STCA_Target_Item();
+                    STCA_Item.CurrentDistance = DistanceToTravel;
+                    STCA_Item.STCA_Partner = T2.TrackNumber;
+                    STCA_Item.STCA_Status = STCA_Status_Type.Violation;
+                    STCA_Item.TimeToImpact_Sec = 10;
+                    STCA_Item.TimeToConflictSec = 0;
+                    T1.STCA_List.Add(STCA_Item);
+                }
+
+                // No they are not, then check if the two targets are going to be in 
+                // the separation violation status a parameter set time in the future
+                // This is so called "violation prediction status"
+
+            }
         }
     }
 }

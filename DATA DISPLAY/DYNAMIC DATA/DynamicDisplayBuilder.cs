@@ -14,6 +14,8 @@ namespace AsterixDisplayAnalyser
     {
         public class TargetType
         {
+            // Last Position Update Time
+            public DateTime LastCyclePostionUpdateTime;
             /// <summary>
             /// ////////////////////////////////////////////////
             /// Track Label Items
@@ -131,6 +133,11 @@ namespace AsterixDisplayAnalyser
             return GlobalTargetList[Index].MyMarker.ModeC_STRING;
         }
 
+        /// <summary>
+        /// //////////////////////////////////////////////////////////////////////////////////////
+        /// DO NOT CHANGE THE ORDER OF CALLS BELOW !!!
+        /// 
+        /// </summary>
         private static void UpdateGlobalList()
         {
             foreach (TargetType CurrentTarget in CurrentTargetList)
@@ -170,6 +177,39 @@ namespace AsterixDisplayAnalyser
                         GlobalTargetList[CurrentTarget.TrackNumber].Barometric_Setting = CurrentTarget.Barometric_Setting;
                     GlobalTargetList[CurrentTarget.TrackNumber].Lat = CurrentTarget.Lat;
                     GlobalTargetList[CurrentTarget.TrackNumber].Lon = CurrentTarget.Lon;
+
+                    if (CurrentTarget.GSPD == null || GlobalTargetList[CurrentTarget.TrackNumber].GSPD != "0")
+                    {
+                        if (GlobalTargetList[CurrentTarget.TrackNumber].LastCyclePostionUpdateTime != null)
+                        {
+                            if (GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Count > 0)
+                            {
+                                // select a reference elllipsoid
+                                Ellipsoid reference = Ellipsoid.WGS84;
+                                // instantiate the calculator
+                                GeodeticCalculator geoCalc = new GeodeticCalculator();
+                                // Used to calculate the time to the min distance 
+                                GlobalPosition Track_1 = new GlobalPosition(new GlobalCoordinates(CurrentTarget.Lat, CurrentTarget.Lon));
+                                GlobalPosition Track_2 = new GlobalPosition(new GlobalCoordinates(GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Last().Lat,
+                                    GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Last().Lng));
+
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                // First check if the two targets are already in separation violation status.
+                                // If so, then add the STCA items to the STCA pair target
+                                double DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
+                                DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
+
+                                TimeSpan TimeDifference = DateTime.Now - GlobalTargetList[CurrentTarget.TrackNumber].LastCyclePostionUpdateTime;
+                                if (DistanceTraveled > 0 && TimeDifference.TotalHours > 0.0)
+                                {
+                                    double GSPD = DistanceTraveled / TimeDifference.TotalHours;
+                                    GlobalTargetList[CurrentTarget.TrackNumber].GSPD = Math.Round(GSPD).ToString();
+                                }
+                            }
+                        }
+                    }
+                    GlobalTargetList[CurrentTarget.TrackNumber].LastCyclePostionUpdateTime = DateTime.Now;
+
                     if (GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Count > Properties.Settings.Default.HistoryPoints)
                         GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Dequeue();
                     GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Enqueue(new PointLatLng(CurrentTarget.Lat, CurrentTarget.Lon));
@@ -211,6 +251,39 @@ namespace AsterixDisplayAnalyser
                         GlobalTargetList[ModeAIndex].Barometric_Setting = CurrentTarget.Barometric_Setting;
                     GlobalTargetList[ModeAIndex].Lat = CurrentTarget.Lat;
                     GlobalTargetList[ModeAIndex].Lon = CurrentTarget.Lon;
+
+                    if (CurrentTarget.GSPD == null || GlobalTargetList[ModeAIndex].GSPD != "0")
+                    {
+                        if (GlobalTargetList[ModeAIndex].LastCyclePostionUpdateTime != null)
+                        {
+                            if (GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Count > 0)
+                            {
+                                // select a reference elllipsoid
+                                Ellipsoid reference = Ellipsoid.WGS84;
+                                // instantiate the calculator
+                                GeodeticCalculator geoCalc = new GeodeticCalculator();
+                                // Used to calculate the time to the min distance 
+                                GlobalPosition Track_1 = new GlobalPosition(new GlobalCoordinates(CurrentTarget.Lat, CurrentTarget.Lon));
+                                GlobalPosition Track_2 = new GlobalPosition(new GlobalCoordinates(GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Last().Lat,
+                                    GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Last().Lng));
+
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                // First check if the two targets are already in separation violation status.
+                                // If so, then add the STCA items to the STCA pair target
+                                double DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
+                                DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
+
+                                TimeSpan TimeDifference = DateTime.Now - GlobalTargetList[ModeAIndex].LastCyclePostionUpdateTime;
+                                if (DistanceTraveled > 0 && TimeDifference.TotalHours > 0.0)
+                                {
+                                    double GSPD = DistanceTraveled / TimeDifference.TotalHours;
+                                    GlobalTargetList[ModeAIndex].GSPD = Math.Round(GSPD).ToString();
+                                }
+                            }
+                        }
+                    }
+                    GlobalTargetList[ModeAIndex].LastCyclePostionUpdateTime = DateTime.Now;
+
                     if (GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Count > Properties.Settings.Default.HistoryPoints)
                         GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Dequeue();
                     GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Enqueue(new PointLatLng(CurrentTarget.Lat, CurrentTarget.Lon));
@@ -271,6 +344,8 @@ namespace AsterixDisplayAnalyser
                     CurrentTargetList.Add(NewTarget);
                 }
             }
+
+
         }
 
         // Each time this method is called it will extract the targets recived since the
@@ -803,7 +878,7 @@ namespace AsterixDisplayAnalyser
                                         }
                                         else
                                             Target.Mode_S_Addr = "N/A";
-                                        
+
                                         if (CAT48I250Mode_S_MB != null)
                                         {
                                             if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Present_This_Cycle)
