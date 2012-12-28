@@ -181,7 +181,10 @@ namespace AsterixDisplayAnalyser
                             this.listBoxDataBySSRCode.Items.Add("\t" + "TRACK#:" + TrackNumber.ToString());
                             // CALLSIGN
                             CAT62I380Types.CAT62I380Data CAT62I380Data = (CAT62I380Types.CAT62I380Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
-                            this.listBoxDataBySSRCode.Items.Add("\t" + "Callsign:" + CAT62I380Data.ACID.ACID_String);
+                            if (CAT62I380Data != null)
+                            {
+                                this.listBoxDataBySSRCode.Items.Add("\t" + "Callsign:" + CAT62I380Data.ACID.ACID_String);
+                            }
                             // POSITION
                             GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.CAT62DataItems[CAT62.ItemIDToIndex("105")].value;
                             string Lat, Lon;
@@ -189,7 +192,14 @@ namespace AsterixDisplayAnalyser
                             this.listBoxDataBySSRCode.Items.Add("\tLat/Long:\t" + Lat + "/" + Lon);
                             // FLIGHT LEVEL
                             double FlightLevel = (double)Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value;
-                            this.listBoxDataBySSRCode.Items.Add("\tFL:\t" + FlightLevel.ToString());
+                            if (FlightLevel != null)
+                            {
+                                this.listBoxDataBySSRCode.Items.Add("\tFL:\t" + FlightLevel.ToString());
+                            }
+                            else
+                            {
+                                this.listBoxDataBySSRCode.Items.Add("\tFL:\t" + "N/A");
+                            }
                             this.listBoxDataBySSRCode.Items.Add("    ");
                         }
                     }

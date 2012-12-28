@@ -209,7 +209,7 @@ namespace AsterixDisplayAnalyser
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            // MyDebug.Show();
+            DynamicDisplayBuilder.DebugFrame.Show();
 
             // Initialize Map
             gMapControl.Width = 2400;

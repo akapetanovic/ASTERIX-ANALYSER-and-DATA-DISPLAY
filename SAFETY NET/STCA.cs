@@ -40,30 +40,34 @@ namespace AsterixDisplayAnalyser
         // in any possible combination of predictions/violations.
         public static void RUN(ref System.Collections.Generic.List<DynamicDisplayBuilder.TargetType> CurrentTargets)
         {
-            for (int Out_Index = 0; Out_Index < CurrentTargets.Count; Out_Index++)
+            // No need to check for STCA if only one target is present
+            if (CurrentTargets.Count > 1)
             {
-                DynamicDisplayBuilder.TargetType MasterTarget = CurrentTargets[Out_Index];
-                // First check if this master target is active
-                if (MasterTarget.TrackNumber != -1)
+                for (int Out_Index = 0; Out_Index < CurrentTargets.Count; Out_Index++)
                 {
-                    // It is active, so lets check its position/altitude against every other 
-                    // active target, except itself. Loop through all active targets
-                    for (int Inner_Index = Out_Index + 1; Out_Index < CurrentTargets.Count; Out_Index++)
+                    DynamicDisplayBuilder.TargetType MasterTarget = CurrentTargets[Out_Index];
+                    // First check if this master target is active
+                    if (MasterTarget.TrackNumber != -1)
                     {
-                        // Get the Target to compare against and make sure it is an active one
-                        DynamicDisplayBuilder.TargetType CurrentTarget = CurrentTargets[Inner_Index];
-                        if (CurrentTarget.TrackNumber != -1)
+                        // It is active, so lets check its position/altitude against every other 
+                        // active target, except itself. Loop through all active targets
+                        for (int Inner_Index = Out_Index + 1; Out_Index < CurrentTargets.Count; Out_Index++)
                         {
-                            // First check if the vertical separation condition is infridged  
-                            // as it is much less  processing extensive operation.
-                            if (Is_Vertical_Infridged(MasterTarget.ModeC, CurrentTarget.ModeC))
+                            // Get the Target to compare against and make sure it is an active one
+                            DynamicDisplayBuilder.TargetType CurrentTarget = CurrentTargets[Inner_Index];
+                            if (CurrentTarget.TrackNumber != -1)
                             {
-                                // Now when we know that we have two active targets whose vertical
-                                // separation is infringed lets check the vertial separation. In the case
-                                // it is infringed then the following method will calculate its attributes
-                                // and add the STCA to the targets STCA list. The front end display code will
-                                // then use this information to properly indicate/draw STCA warning to the controller
-                                Check_And_Set_Horizontal_Infringed(ref MasterTarget, CurrentTarget);
+                                // First check if the vertical separation condition is infridged  
+                                // as it is much less  processing extensive operation.
+                                if (Is_Vertical_Infridged(MasterTarget.ModeC, CurrentTarget.ModeC))
+                                {
+                                    // Now when we know that we have two active targets whose vertical
+                                    // separation is infringed lets check the vertial separation. In the case
+                                    // it is infringed then the following method will calculate its attributes
+                                    // and add the STCA to the targets STCA list. The front end display code will
+                                    // then use this information to properly indicate/draw STCA warning to the controller
+                                    Check_And_Set_Horizontal_Infringed(ref MasterTarget, CurrentTarget);
+                                }
                             }
                         }
                     }
@@ -125,7 +129,7 @@ namespace AsterixDisplayAnalyser
                 if (!double.TryParse(T2.M_HDG, out Track_2_TRK))
                     DataValid = false;
             }
-           
+
             // Data validated 
             if (DataValid)
             {

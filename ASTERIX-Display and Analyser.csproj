@@ -275,6 +275,12 @@
     <Compile Include="MAIN\FrmAbout.Designer.cs">
       <DependentUpon>FrmAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="MAIN\frmDebug.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MAIN\frmDebug.Designer.cs">
+      <DependentUpon>frmDebug.cs</DependentUpon>
+    </Compile>
     <Compile Include="REC_AND_FORWARD\AppendDateTime.cs" />
     <Compile Include="GOOGLE EARTH\GoogleEarthProvider.cs">
       <SubType>Form</SubType>
@@ -469,6 +475,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MAIN\FrmAbout.resx">
       <DependentUpon>FrmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MAIN\frmDebug.resx">
+      <DependentUpon>frmDebug.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="REC_AND_FORWARD\FrmAstxRecFrwdForm.resx">
       <DependentUpon>FrmAstxRecFrwdForm.cs</DependentUpon>

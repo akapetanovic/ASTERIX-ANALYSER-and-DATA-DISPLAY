@@ -12,6 +12,9 @@ namespace AsterixDisplayAnalyser
 {
     class DynamicDisplayBuilder
     {
+
+        public static frmDebug DebugFrame = new frmDebug();
+
         public class TargetType
         {
             ////////////////////////////////////////////////////
@@ -228,7 +231,7 @@ namespace AsterixDisplayAnalyser
                     GlobalTargetList[ModeAIndex].Lat = CurrentTarget.Lat;
                     GlobalTargetList[ModeAIndex].Lon = CurrentTarget.Lon;
 
-                    if (CurrentTarget.GSPD == null || GlobalTargetList[ModeAIndex].GSPD != "0")
+                    if (CurrentTarget.GSPD == null && GlobalTargetList[ModeAIndex].GSPD != "0")
                     {
                             if (GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Count > 0)
                             {
@@ -247,11 +250,22 @@ namespace AsterixDisplayAnalyser
                                 double DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
                                 DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
                                 double BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Last().TimeSinceMidnight;
-                                TimeSpan TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Round(BetweenTwoUpdates));                                
+
+                                int Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
+                                TimeSpan TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
+
+
                                 if (DistanceTraveled > 0 && TimeDifference.TotalHours > 0.0)
                                 {
+                                    DistanceTraveled = Math.Round(DistanceTraveled, 1);
                                     double GSPD = DistanceTraveled / TimeDifference.TotalHours;
                                     GlobalTargetList[ModeAIndex].GSPD = Math.Round(GSPD).ToString();
+
+                                    DebugFrame.SetListBox("D:" + DistanceTraveled.ToString() + " T:" + CurrentTarget.TimeSinceMidnight.ToString() + "/" + GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Last().TimeSinceMidnight.ToString());
+                                }
+                                else
+                                {
+                                    DebugFrame.SetListBox("D:" + DistanceTraveled.ToString() + " T:" + CurrentTarget.TimeSinceMidnight.ToString() + "/" + GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Last().TimeSinceMidnight.ToString());
                                 }
                             }
                     }
