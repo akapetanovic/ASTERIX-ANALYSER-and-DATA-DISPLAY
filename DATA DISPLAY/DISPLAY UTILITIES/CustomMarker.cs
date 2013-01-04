@@ -326,10 +326,16 @@ namespace AsterixDisplayAnalyser
 
             // Here handle history points
             // First draw all previous history points
-            foreach (HistoryPointsType I in HistoryPoints)
+            int Number_of_Points_Drawn = 0;
+            for (int Index = HistoryPoints.Count - 2; Index >= 0; Index--)
             {
-                GPoint MarkerPositionLocal = FormMain.gMapControl.FromLatLngToLocal(new PointLatLng(I.LatLong.Lat, I.LatLong.Lng));
-                g.DrawEllipse(MyPen, MarkerPositionLocal.X, MarkerPositionLocal.Y, 3, 3);
+                if (Number_of_Points_Drawn < Properties.Settings.Default.HistoryPoints)
+                {
+                    HistoryPointsType I = HistoryPoints.ElementAt(Index);
+                    GPoint MarkerPositionLocal = FormMain.gMapControl.FromLatLngToLocal(new PointLatLng(I.LatLong.Lat, I.LatLong.Lng));
+                    g.DrawEllipse(MyPen, MarkerPositionLocal.X, MarkerPositionLocal.Y, 3, 3);
+                    Number_of_Points_Drawn++;
+                }
             }
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
