@@ -74,6 +74,14 @@ CAT62
 
 VERSION HISTORY
 
+Version 1.7
+
+	1. Added GSPD calculation if not available from DAP (CAT062/I380 or CAT048/I250)
+	   or CAt001/I200. Based on the average of the last 10 target updates.
+	2. Modifed to use TrackNumber from CAT062 for track indexing to allow duplicate
+	   tracks (multiple on ModeA) to be displayed.
+	3. Decoded CAT01I200 
+
 Version 1.6
 
 	1. Added following Time Stamp Fields:

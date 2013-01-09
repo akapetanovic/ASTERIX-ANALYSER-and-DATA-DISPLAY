@@ -200,7 +200,7 @@ namespace AsterixDisplayAnalyser
                         // Calculate distance traveled
                         double DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
                         DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
-                        double BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.ElementAt(GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Count - 2).TimeSinceMidnight;
+                        double BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Last().TimeSinceMidnight;
 
                         int Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
                         TimeSpan TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
@@ -214,6 +214,27 @@ namespace AsterixDisplayAnalyser
                             HP.LatLong = new PointLatLng(CurrentTarget.Lat, CurrentTarget.Lon);
                             HP.TimeSinceMidnight = CurrentTarget.TimeSinceMidnight;
                             GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Enqueue(HP);
+
+                            // Since there was a change in the distance, lets then calculate and GSPD if not
+                            // provided by the DAP data
+                            if (CurrentTarget.GSPD == null)
+                            {
+                                BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.First().TimeSinceMidnight;
+                                Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
+                                TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
+
+                                Track_1 = new GlobalPosition(new GlobalCoordinates(CurrentTarget.Lat, CurrentTarget.Lon));
+                                Track_2 = new GlobalPosition(new GlobalCoordinates(GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.First().LatLong.Lat,
+                                     GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.First().LatLong.Lng));
+
+                                DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
+                                DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
+
+                                //DistanceTraveled = Math.Round(DistanceTraveled, 1);
+                                double GSPD = DistanceTraveled / TimeDifference.TotalHours;
+                                GlobalTargetList[CurrentTarget.TrackNumber].GSPD = Math.Round(GSPD).ToString();
+                                DebugFrame.SetListBox("D:" + DistanceTraveled.ToString() + " T:" + GlobalTargetList[CurrentTarget.TrackNumber].TimeSinceMidnight.ToString() + "/" + GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.ElementAt(GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Count - 2).TimeSinceMidnight.ToString() + " / " + TimeDifference.TotalSeconds.ToString());
+                            }
                         }
                     }
                     else
@@ -299,7 +320,6 @@ namespace AsterixDisplayAnalyser
                             // provided by the DAP data
                             if (CurrentTarget.GSPD == null)
                             {
-
                                 BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.First().TimeSinceMidnight;
                                 Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
                                 TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
@@ -664,6 +684,9 @@ namespace AsterixDisplayAnalyser
 
                         TargetType Target = new TargetType();
 
+                        if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("040")].value != null)
+                            Target.TrackNumber = (int)Msg.CAT62DataItems[CAT62.ItemIDToIndex("040")].value;
+                        
                         if (Mode3AData != null)
                         {
                             Target.ModeA = Mode3AData.Mode3A_Code;
@@ -1066,6 +1089,9 @@ namespace AsterixDisplayAnalyser
 
                         TargetType Target = new TargetType();
 
+                        if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("040")].value != null)
+                            Target.TrackNumber = (int)Msg.CAT62DataItems[CAT62.ItemIDToIndex("040")].value;
+                        
                         if (Mode3AData != null)
                         {
                             Target.ModeA = Mode3AData.Mode3A_Code;
@@ -1207,51 +1233,6 @@ namespace AsterixDisplayAnalyser
 
             STCA.RUN(ref CurrentTargetList);
             TargetList = CurrentTargetList;
-        }
-
-        private static void HandleGSPDCalculation()
-        {
-            foreach (DynamicDisplayBuilder.TargetType Target in CurrentTargetList)
-            {
-                if (Target.GSPD == null)
-                {
-                    if (Target.MyMarker.HistoryPoints.Count > 2)
-                    {
-                        // select a reference elllipsoid
-                        Ellipsoid reference = Ellipsoid.WGS84;
-                        // instantiate the calculator
-                        GeodeticCalculator geoCalc = new GeodeticCalculator();
-                        // Used to calculate the time to the min distance 
-                        GlobalPosition Track_1 = new GlobalPosition(new GlobalCoordinates(Target.Lat, Target.Lon));
-                        GlobalPosition Track_2 = new GlobalPosition(new GlobalCoordinates(Target.MyMarker.HistoryPoints.ElementAt(Target.MyMarker.HistoryPoints.Count - 2).LatLong.Lat,
-                            Target.MyMarker.HistoryPoints.ElementAt(Target.MyMarker.HistoryPoints.Count - 2).LatLong.Lng));
-
-                        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        // First check if the two targets are already in separation violation status.
-                        // If so, then add the STCA items to the STCA pair target
-                        double DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
-                        DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
-                        double BetweenTwoUpdates = Target.TimeSinceMidnight - Target.MyMarker.HistoryPoints.ElementAt(Target.MyMarker.HistoryPoints.Count - 2).TimeSinceMidnight;
-
-                        int Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
-                        TimeSpan TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
-
-
-                        if (DistanceTraveled > 0 && TimeDifference.TotalHours > 0.0)
-                        {
-                            DistanceTraveled = Math.Round(DistanceTraveled, 1);
-                            double GSPD = DistanceTraveled / TimeDifference.Hours;
-                            Target.GSPD = Math.Round(GSPD).ToString();
-
-                            DebugFrame.SetListBox("D:" + DistanceTraveled.ToString() + " T:" + Target.TimeSinceMidnight.ToString() + "/" + Target.MyMarker.HistoryPoints.ElementAt(Target.MyMarker.HistoryPoints.Count - 2).TimeSinceMidnight.ToString() + " / " + TimeDifference.TotalSeconds.ToString());
-                        }
-                        else
-                        {
-                            DebugFrame.SetListBox("D:" + DistanceTraveled.ToString() + " T:" + Target.TimeSinceMidnight.ToString() + "/" + Target.MyMarker.HistoryPoints.ElementAt(Target.MyMarker.HistoryPoints.Count - 2).TimeSinceMidnight.ToString() + " / " + TimeDifference.TotalSeconds.ToString());
-                        }
-                    }
-                }
-            }
         }
     }
 }
