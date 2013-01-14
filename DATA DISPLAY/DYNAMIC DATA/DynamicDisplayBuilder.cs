@@ -13,7 +13,7 @@ namespace AsterixDisplayAnalyser
     class DynamicDisplayBuilder
     {
 
-        public static frmDebug DebugFrame = new frmDebug();
+        //public static frmDebug DebugFrame = new frmDebug();
 
         private static int Max_History_Points = 10;
 
@@ -197,45 +197,45 @@ namespace AsterixDisplayAnalyser
                         GlobalPosition Track_2 = new GlobalPosition(new GlobalCoordinates(GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Last().LatLong.Lat,
                             GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Last().LatLong.Lng));
 
-                        // Calculate distance traveled
-                        double DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
-                        DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
-                        double BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Last().TimeSinceMidnight;
+                        //// Calculate distance traveled
+                        //double DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
+                        //DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
+                        //double BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Last().TimeSinceMidnight;
 
-                        int Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
-                        TimeSpan TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
+                        //int Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
+                        //TimeSpan TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
 
-                        // Only update history position if there was actually a change in the distance
-                        if (DistanceTraveled > 0)
-                        {
-                            if (GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Count > Max_History_Points)
-                                GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Dequeue();
-                            GMapTargetandLabel.HistoryPointsType HP = new GMapTargetandLabel.HistoryPointsType();
-                            HP.LatLong = new PointLatLng(CurrentTarget.Lat, CurrentTarget.Lon);
-                            HP.TimeSinceMidnight = CurrentTarget.TimeSinceMidnight;
-                            GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Enqueue(HP);
+                        //// Only update history position if there was actually a change in the distance
+                        //if (DistanceTraveled > 0)
+                        //{
+                        //    if (GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Count > Max_History_Points)
+                        //        GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Dequeue();
+                        //    GMapTargetandLabel.HistoryPointsType HP = new GMapTargetandLabel.HistoryPointsType();
+                        //    HP.LatLong = new PointLatLng(CurrentTarget.Lat, CurrentTarget.Lon);
+                        //    HP.TimeSinceMidnight = CurrentTarget.TimeSinceMidnight;
+                        //    GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Enqueue(HP);
 
-                            // Since there was a change in the distance, lets then calculate and GSPD if not
-                            // provided by the DAP data
-                            if (CurrentTarget.GSPD == null)
-                            {
-                                BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.First().TimeSinceMidnight;
-                                Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
-                                TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
+                        //    // Since there was a change in the distance, lets then calculate and GSPD if not
+                        //    // provided by the DAP data
+                        //    if (CurrentTarget.GSPD == null)
+                        //    {
+                        //        BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.First().TimeSinceMidnight;
+                        //        Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
+                        //        TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
 
-                                Track_1 = new GlobalPosition(new GlobalCoordinates(CurrentTarget.Lat, CurrentTarget.Lon));
-                                Track_2 = new GlobalPosition(new GlobalCoordinates(GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.First().LatLong.Lat,
-                                     GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.First().LatLong.Lng));
+                        //        Track_1 = new GlobalPosition(new GlobalCoordinates(CurrentTarget.Lat, CurrentTarget.Lon));
+                        //        Track_2 = new GlobalPosition(new GlobalCoordinates(GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.First().LatLong.Lat,
+                        //             GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.First().LatLong.Lng));
 
-                                DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
-                                DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
+                        //        DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
+                        //        DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
 
-                                //DistanceTraveled = Math.Round(DistanceTraveled, 1);
-                                double GSPD = DistanceTraveled / TimeDifference.TotalHours;
-                                GlobalTargetList[CurrentTarget.TrackNumber].GSPD = Math.Round(GSPD).ToString();
-                                DebugFrame.SetListBox("D:" + DistanceTraveled.ToString() + " T:" + GlobalTargetList[CurrentTarget.TrackNumber].TimeSinceMidnight.ToString() + "/" + GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.ElementAt(GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Count - 2).TimeSinceMidnight.ToString() + " / " + TimeDifference.TotalSeconds.ToString());
-                            }
-                        }
+                        //        //DistanceTraveled = Math.Round(DistanceTraveled, 1);
+                        //        double GSPD = DistanceTraveled / TimeDifference.TotalHours;
+                        //        GlobalTargetList[CurrentTarget.TrackNumber].GSPD = Math.Round(GSPD).ToString();
+                        //        DebugFrame.SetListBox("D:" + DistanceTraveled.ToString() + " T:" + GlobalTargetList[CurrentTarget.TrackNumber].TimeSinceMidnight.ToString() + "/" + GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.ElementAt(GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Count - 2).TimeSinceMidnight.ToString() + " / " + TimeDifference.TotalSeconds.ToString());
+                        //    }
+                        //}
                     }
                     else
                     {
@@ -298,45 +298,45 @@ namespace AsterixDisplayAnalyser
                         GlobalPosition Track_2 = new GlobalPosition(new GlobalCoordinates(GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Last().LatLong.Lat,
                             GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Last().LatLong.Lng));
 
-                        // Calculate distance traveled
-                        double DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
-                        DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
-                        double BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Last().TimeSinceMidnight;
+                        //// Calculate distance traveled
+                        //double DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
+                        //DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
+                        //double BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Last().TimeSinceMidnight;
 
-                        int Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
-                        TimeSpan TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
+                        //int Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
+                        //TimeSpan TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
 
-                        // Only update history position if there was actually a change in the distance
-                        if (DistanceTraveled > 0)
-                        {
-                            if (GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Count > Max_History_Points)
-                                GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Dequeue();
-                            GMapTargetandLabel.HistoryPointsType HP = new GMapTargetandLabel.HistoryPointsType();
-                            HP.LatLong = new PointLatLng(CurrentTarget.Lat, CurrentTarget.Lon);
-                            HP.TimeSinceMidnight = CurrentTarget.TimeSinceMidnight;
-                            GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Enqueue(HP);
+                        //// Only update history position if there was actually a change in the distance
+                        //if (DistanceTraveled > 0)
+                        //{
+                        //    if (GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Count > Max_History_Points)
+                        //        GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Dequeue();
+                        //    GMapTargetandLabel.HistoryPointsType HP = new GMapTargetandLabel.HistoryPointsType();
+                        //    HP.LatLong = new PointLatLng(CurrentTarget.Lat, CurrentTarget.Lon);
+                        //    HP.TimeSinceMidnight = CurrentTarget.TimeSinceMidnight;
+                        //    GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Enqueue(HP);
 
-                            // Since there was a change in the distance, lets then calculate and GSPD if not
-                            // provided by the DAP data
-                            if (CurrentTarget.GSPD == null)
-                            {
-                                BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.First().TimeSinceMidnight;
-                                Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
-                                TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
+                        //    // Since there was a change in the distance, lets then calculate and GSPD if not
+                        //    // provided by the DAP data
+                        //    if (CurrentTarget.GSPD == null)
+                        //    {
+                        //        BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.First().TimeSinceMidnight;
+                        //        Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
+                        //        TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
 
-                                Track_1 = new GlobalPosition(new GlobalCoordinates(CurrentTarget.Lat, CurrentTarget.Lon));
-                                Track_2 = new GlobalPosition(new GlobalCoordinates(GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.First().LatLong.Lat,
-                                     GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.First().LatLong.Lng));
+                        //        Track_1 = new GlobalPosition(new GlobalCoordinates(CurrentTarget.Lat, CurrentTarget.Lon));
+                        //        Track_2 = new GlobalPosition(new GlobalCoordinates(GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.First().LatLong.Lat,
+                        //             GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.First().LatLong.Lng));
 
-                                DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
-                                DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
+                        //        DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
+                        //        DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
                                 
-                                //DistanceTraveled = Math.Round(DistanceTraveled, 1);
-                                double GSPD = DistanceTraveled / TimeDifference.TotalHours;
-                                GlobalTargetList[ModeAIndex].GSPD = Math.Round(GSPD).ToString();
-                                DebugFrame.SetListBox("D:" + DistanceTraveled.ToString() + " T:" + GlobalTargetList[ModeAIndex].TimeSinceMidnight.ToString() + "/" + GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.ElementAt(GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Count - 2).TimeSinceMidnight.ToString() + " / " + TimeDifference.TotalSeconds.ToString());
-                            }
-                        }
+                        //        //DistanceTraveled = Math.Round(DistanceTraveled, 1);
+                        //        double GSPD = DistanceTraveled / TimeDifference.TotalHours;
+                        //        GlobalTargetList[ModeAIndex].GSPD = Math.Round(GSPD).ToString();
+                        //        DebugFrame.SetListBox("D:" + DistanceTraveled.ToString() + " T:" + GlobalTargetList[ModeAIndex].TimeSinceMidnight.ToString() + "/" + GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.ElementAt(GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Count - 2).TimeSinceMidnight.ToString() + " / " + TimeDifference.TotalSeconds.ToString());
+                        //    }
+                        //}
                     }
                     else
                     {
@@ -434,7 +434,10 @@ namespace AsterixDisplayAnalyser
                         CAT01I090Types.CAT01I090FlightLevelUserData FlightLevelData = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("090")].value;
                         // Get Time Since Midnight
                         CAT01I141Types.CAT01141ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT01I141Types.CAT01141ElapsedTimeSinceMidnight)Msg.CAT01DataItems[CAT01.ItemIDToIndex("141")].value;
-
+                        // Get Calculated GSPD and HDG_Type
+                        CAT01I200Types.CalculatedGSPandHDG_Type CalculatedGSPandHDG = (CAT01I200Types.CalculatedGSPandHDG_Type)Msg.CAT01DataItems[CAT01.ItemIDToIndex("200")].value;
+                        
+                        
                         TargetType Target = new TargetType();
                         if (MyCAT01I020UserData != null)
                         {
@@ -446,6 +449,16 @@ namespace AsterixDisplayAnalyser
                                 Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
                                 Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
                                 Target.TrackTerminateTreshold = 0;
+
+                                if (CalculatedGSPandHDG != null)
+                                {
+                                    if (CalculatedGSPandHDG.Is_Valid)
+                                    {
+                                        Target.GSPD = Math.Round(CalculatedGSPandHDG.GSPD, 0).ToString();
+                                        Target.M_HDG = Math.Round(CalculatedGSPandHDG.HDG, 0).ToString();
+                                    }
+                                }
+                                
                                 PSRTargetList.Add(Target);
                             }
                             else if ((MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.No_Detection) && (MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.Unknown_Data))
@@ -466,6 +479,16 @@ namespace AsterixDisplayAnalyser
                                         Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                                         Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
                                         Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
+
+                                        if (CalculatedGSPandHDG != null)
+                                        {
+                                            if (CalculatedGSPandHDG.Is_Valid)
+                                            {
+                                                Target.GSPD = Math.Round(CalculatedGSPandHDG.GSPD, 0).ToString();
+                                                Target.M_HDG = Math.Round(CalculatedGSPandHDG.HDG, 0).ToString();
+                                            }
+                                        }
+
                                         CurrentTargetList.Add(Target);
                                     }
                                 }
@@ -495,6 +518,9 @@ namespace AsterixDisplayAnalyser
                         CAT48I250Types.CAT48I250DataType CAT48I250Mode_S_MB = (CAT48I250Types.CAT48I250DataType)Msg.CAT48DataItems[CAT48.ItemIDToIndex("250")].value;
                         // Get Time since midnight
                         CAT48I140Types.CAT48140ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT48I140Types.CAT48140ElapsedTimeSinceMidnight)Msg.CAT48DataItems[CAT48.ItemIDToIndex("140")].value;
+                        // Get Calculated GSPD and HDG_Type
+                        CAT48I200Types.CalculatedGSPandHDG_Type CalculatedGSPandHDG = (CAT48I200Types.CalculatedGSPandHDG_Type)Msg.CAT48DataItems[CAT48.ItemIDToIndex("200")].value;
+                        
                         TargetType Target = new TargetType();
 
                         if (MyCAT48I020UserData != null)
@@ -663,6 +689,17 @@ namespace AsterixDisplayAnalyser
 
                                         }
 
+
+                                        // If GSPD and HDG are available from CAT48/I200 then use it
+                                        if (CalculatedGSPandHDG != null)
+                                        {
+                                            if (CalculatedGSPandHDG.Is_Valid)
+                                            {
+                                                Target.GSPD = Math.Round(CalculatedGSPandHDG.GSPD, 0).ToString();
+                                                Target.M_HDG = Math.Round(CalculatedGSPandHDG.HDG, 0).ToString();
+                                            }
+                                        }
+
                                         CurrentTargetList.Add(Target);
                                     }
                                 }
@@ -686,8 +723,8 @@ namespace AsterixDisplayAnalyser
 
                         if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("040")].value != null)
                             Target.TrackNumber = (int)Msg.CAT62DataItems[CAT62.ItemIDToIndex("040")].value;
-                        
-                        if (Mode3AData != null)
+
+                        if (Mode3AData != null && LatLongData != null)
                         {
                             Target.ModeA = Mode3AData.Mode3A_Code;
 
@@ -838,7 +875,9 @@ namespace AsterixDisplayAnalyser
                         CAT01I090Types.CAT01I090FlightLevelUserData FlightLevelData = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("090")].value;
                         // Get Time Since Midnight
                         CAT01I141Types.CAT01141ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT01I141Types.CAT01141ElapsedTimeSinceMidnight)Msg.CAT01DataItems[CAT01.ItemIDToIndex("141")].value;
-
+                        // Get Calculated GSPD and HDG_Type
+                        CAT01I200Types.CalculatedGSPandHDG_Type CalculatedGSPandHDG = (CAT01I200Types.CalculatedGSPandHDG_Type)Msg.CAT01DataItems[CAT01.ItemIDToIndex("200")].value;
+                        
                         TargetType Target = new TargetType();
                         if (MyCAT01I020UserData != null)
                         {
@@ -850,6 +889,16 @@ namespace AsterixDisplayAnalyser
                                 Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
                                 Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
                                 Target.MyMarker.Position = new PointLatLng(Target.Lat, Target.Lon);
+
+                                if (CalculatedGSPandHDG != null)
+                                {
+                                    if (CalculatedGSPandHDG.Is_Valid)
+                                    {
+                                        Target.GSPD = Math.Round(CalculatedGSPandHDG.GSPD, 0).ToString();
+                                        Target.M_HDG = Math.Round(CalculatedGSPandHDG.HDG, 0).ToString();
+                                    }
+                                }
+
                                 PSRTargetList.Add(Target);
                             }
                             else if ((MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.No_Detection) && (MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.Unknown_Data))
@@ -872,6 +921,16 @@ namespace AsterixDisplayAnalyser
                                         Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                                         Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
                                         Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
+
+                                        if (CalculatedGSPandHDG != null)
+                                        {
+                                            if (CalculatedGSPandHDG.Is_Valid)
+                                            {
+                                                Target.GSPD = Math.Round(CalculatedGSPandHDG.GSPD, 0).ToString();
+                                                Target.M_HDG = Math.Round(CalculatedGSPandHDG.HDG, 0).ToString();
+                                            }
+                                        }
+
                                         CurrentTargetList.Add(Target);
                                     }
                                 }
@@ -901,7 +960,11 @@ namespace AsterixDisplayAnalyser
                         CAT48I250Types.CAT48I250DataType CAT48I250Mode_S_MB = (CAT48I250Types.CAT48I250DataType)Msg.CAT48DataItems[CAT48.ItemIDToIndex("250")].value;
                         // Get Time since midnight
                         CAT48I140Types.CAT48140ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT48I140Types.CAT48140ElapsedTimeSinceMidnight)Msg.CAT48DataItems[CAT48.ItemIDToIndex("140")].value;
+                        // Get Calculated GSPD and HDG_Type
+                        CAT48I200Types.CalculatedGSPandHDG_Type CalculatedGSPandHDG = (CAT48I200Types.CalculatedGSPandHDG_Type)Msg.CAT48DataItems[CAT48.ItemIDToIndex("200")].value;
+                        
                         TargetType Target = new TargetType();
+
                         if (MyCAT48I020UserData != null)
                         {
                             if ((MyCAT48I020UserData.Type_Of_Report == CAT48I020Types.Type_Of_Report_Type.Single_PSR) ||
@@ -1064,6 +1127,16 @@ namespace AsterixDisplayAnalyser
 
                                         }
 
+                                        // If GSPD and HDG are available from CAT48/I200 then use it
+                                        if (CalculatedGSPandHDG != null)
+                                        {
+                                            if (CalculatedGSPandHDG.Is_Valid)
+                                            {
+                                                Target.GSPD = Math.Round(CalculatedGSPandHDG.GSPD, 0).ToString();
+                                                Target.M_HDG = Math.Round(CalculatedGSPandHDG.HDG, 0).ToString();
+                                            }
+                                        }
+
                                         CurrentTargetList.Add(Target);
                                     }
                                 }
@@ -1086,13 +1159,14 @@ namespace AsterixDisplayAnalyser
                         CAT62I220Types.CalculatedRateOfClimbDescent CAT62I220Data = (CAT62I220Types.CalculatedRateOfClimbDescent)Msg.CAT62DataItems[CAT62.ItemIDToIndex("220")].value;
                         CAT62I380Types.CAT62I380Data CAT62I380Data = (CAT62I380Types.CAT62I380Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
                         CAT62I070Types.CAT62070ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT62I070Types.CAT62070ElapsedTimeSinceMidnight)Msg.CAT62DataItems[CAT62.ItemIDToIndex("070")].value;
-
+                        CAT62I185Types.CalculatedGSPandHDG_Type GSPD_and_HDG = (CAT62I185Types.CalculatedGSPandHDG_Type)Msg.CAT62DataItems[CAT62.ItemIDToIndex("185")].value;
+                        
                         TargetType Target = new TargetType();
 
                         if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("040")].value != null)
                             Target.TrackNumber = (int)Msg.CAT62DataItems[CAT62.ItemIDToIndex("040")].value;
-                        
-                        if (Mode3AData != null)
+
+                        if (Mode3AData != null && LatLongData != null)
                         {
                             Target.ModeA = Mode3AData.Mode3A_Code;
 
@@ -1219,6 +1293,16 @@ namespace AsterixDisplayAnalyser
                             Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
                             Target.Lon = LatLongData.GetLatLongDecimal().LongitudeDecimal;
                             Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
+
+                            if (GSPD_and_HDG != null)
+                            {
+                                if (GSPD_and_HDG.Is_Valid)
+                                {
+                                    Target.GSPD = Math.Round(GSPD_and_HDG.GSPD, 0).ToString();
+                                    Target.M_HDG = Math.Round(GSPD_and_HDG.HDG, 0).ToString();
+                                }
+                            }
+
                             CurrentTargetList.Add(Target);
                         }
                     }

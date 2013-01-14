@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AsterixDisplayAnalyser
 {
-    class CAT48I200Types
+    class CAT62I185Types
     {
         public class CalculatedGSPandHDG_Type
         {
