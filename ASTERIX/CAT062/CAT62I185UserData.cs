@@ -288,7 +288,7 @@ namespace AsterixDisplayAnalyser
         {
             CAT62I185Types.CalculatedGSPandHDG_Type ReturnValue = new CAT62I185Types.CalculatedGSPandHDG_Type();
             ReturnValue.GSPD = Math.Pow((Math.Pow(Vx, 2) + Math.Pow(Vy, 2)), 0.5);
-            ReturnValue.HDG = Math.Atan2(Vy, Vx) / (Math.PI / 180.0);
+            ReturnValue.HDG = 360.0 - (Math.Atan2(Vy, Vx) * (180.0 / Math.PI));
             ReturnValue.Is_Valid = true;
             return ReturnValue;
         }

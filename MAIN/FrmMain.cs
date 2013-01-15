@@ -861,11 +861,13 @@ namespace AsterixDisplayAnalyser
             // At the end move extended lable data to the marker, so it is ready for dynamic manipulation by the client
             Label_Data.Mode_S_Addr = Target_Data.Mode_S_Addr;
             Label_Data.TRK = Target_Data.TRK;
-            Label_Data.M_HDG = Target_Data.M_HDG;
+            Label_Data.DAP_HDG = Target_Data.DAP_HDG;
+            Label_Data.CALC_HDG_STRING = Target_Data.CALC_HDG;
             Label_Data.IAS = Target_Data.IAS;
             Label_Data.MACH = Target_Data.MACH;
             Label_Data.TAS = Target_Data.TAS;
-            Label_Data.GSPD_STRING = Target_Data.GSPD;
+            Label_Data.CALC_GSPD_STRING = Target_Data.CALC_GSPD;
+            Label_Data.DAP_GSPD = Target_Data.DAP_GSPD;
             Label_Data.Roll_Angle = Target_Data.Roll_Ang;
             Label_Data.SelectedAltitude_ShortTerm = Target_Data.SelectedAltitude_ShortTerm;
             Label_Data.SelectedAltitude_LongTerm = Target_Data.SelectedAltitude_LongTerm;
@@ -1394,7 +1396,7 @@ namespace AsterixDisplayAnalyser
             // First set title to Track ID
             ExtendedLabel.Text = MarkerData.ModeA_CI_STRING + "/" + MarkerData.CALLSIGN_STRING;
             // Now set the values
-            ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.HDG, MarkerData.M_HDG);
+            ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.HDG, MarkerData.DAP_HDG);
             ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.IAS, MarkerData.IAS);
             ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.MACH, MarkerData.MACH);
             ExtendedLabel.SetDataValue(FrmExtendedLabel.DataItems.TAS, MarkerData.TAS);

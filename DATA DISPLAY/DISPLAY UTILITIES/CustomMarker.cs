@@ -105,7 +105,11 @@ namespace AsterixDisplayAnalyser
         public Brush GSPD_BRUSH = Brushes.Green;
         public static FontFamily GSPD_FONT_FAMILLY = FontFamily.GenericSansSerif;
         public Font GSPD_FONT = new Font(GSPD_FONT_FAMILLY, 10, FontStyle.Regular, GraphicsUnit.Pixel);
-        public string GSPD_STRING = " ---";
+        public string CALC_GSPD_STRING = " ---";
+
+        // Define HDG attributes 
+        // (Not displayed, but is used in airspeed vector and SEP tool calculation)
+        public string CALC_HDG_STRING = "---";
 
         // Define Assigned HDG attributes
         public Point A_HDG_OFFSET = new Point(2, 0);
@@ -146,7 +150,8 @@ namespace AsterixDisplayAnalyser
         public string TAS = "N/A";
         public string IAS = "N/A";
         public string MACH = "N/A";
-        public string M_HDG = "N/A";
+        public string DAP_HDG = "N/A";
+        public string DAP_GSPD = "N/A";
         public string TRK = "N/A";
         public string Roll_Angle = "N/A";
         public string SelectedAltitude_ShortTerm = "N/A";
@@ -174,15 +179,33 @@ namespace AsterixDisplayAnalyser
         public void TerminateTarget()
         {
             LabelOffset = new Point(25, 25);
+            ModeA_CI_STRING = "---- -";
+            CALLSIGN_STRING = "--------";
+            ModeC_STRING = "---";
             CFL_STRING = " ---";
             A_HDG_STRING = "h---";
             A_SPD_STRING = "s---";
             A_ROC_STRING = "R---";
+            CALC_HDG_STRING = "---";
+            CALC_GSPD_STRING = " ---";
             MyTargetIndex = -1;
             HistoryPoints.Clear();
             TargetToMonitor = -1;
             TargetMonitoredBy = -1;
             STCA_List.Clear();
+
+            Mode_S_Addr = "N/A";
+            TAS = "N/A";
+            IAS = "N/A";
+            MACH = "N/A";
+            DAP_HDG = "N/A";
+            DAP_GSPD = "N/A";
+            TRK = "N/A";
+            Roll_Angle = "N/A";
+            SelectedAltitude_ShortTerm = "N/A";
+            SelectedAltitude_LongTerm = "N/A";
+            Rate_Of_Climb = "N/A";
+            Barometric_Setting = "N/A";
         }
 
         public int GetLabelWidth()
@@ -269,22 +292,34 @@ namespace AsterixDisplayAnalyser
                 double TRK1_AZ = 0.0, TRK2_AZ = 0.0;
                 bool Sep_Data_Is_Valid = true;
 
-                if (!double.TryParse(GSPD_STRING, out TRK1_SPD))
-                    Sep_Data_Is_Valid = false;
-
-                if (!double.TryParse(DynamicDisplayBuilder.GetTargetGSPDByIndex(TargetToMonitor), out TRK2_SPD))
-                    Sep_Data_Is_Valid = false;
-
-                if (!double.TryParse(TRK, out TRK1_AZ))
+                if (!double.TryParse(CALC_GSPD_STRING, out TRK1_SPD))
                 {
-                    if (!double.TryParse(M_HDG, out TRK1_AZ))
+                    if (!double.TryParse(DAP_GSPD, out TRK1_SPD))
                         Sep_Data_Is_Valid = false;
                 }
 
-                if (!double.TryParse(DynamicDisplayBuilder.GetTargetTRKByIndex(TargetToMonitor), out TRK2_AZ))
+                if (!double.TryParse(DynamicDisplayBuilder.GetTarget_CALC_GSPD_ByIndex(TargetToMonitor), out TRK2_SPD))
                 {
-                    if (!double.TryParse(DynamicDisplayBuilder.GetTargetM_HDGByIndex(TargetToMonitor), out TRK2_AZ))
+                    if (!double.TryParse(DynamicDisplayBuilder.GetTarget_DAP_GSPD_ByIndex(TargetToMonitor), out TRK2_SPD))
                         Sep_Data_Is_Valid = false;
+                }
+
+                if (!double.TryParse(CALC_HDG_STRING, out TRK1_AZ))
+                {
+                    if (!double.TryParse(TRK, out TRK1_AZ))
+                    {
+                        if (!double.TryParse(DAP_HDG, out TRK1_AZ))
+                            Sep_Data_Is_Valid = false;
+                    }
+                }
+
+                if (!double.TryParse(DynamicDisplayBuilder.GetTarget_CALC_HDG_ByIndex(TargetToMonitor), out TRK2_AZ))
+                {
+                    if (!double.TryParse(DynamicDisplayBuilder.GetTargetTRKByIndex(TargetToMonitor), out TRK2_AZ))
+                    {
+                        if (!double.TryParse(DynamicDisplayBuilder.GetTargetM_HDGByIndex(TargetToMonitor), out TRK2_AZ))
+                            Sep_Data_Is_Valid = false;
+                    }
                 }
 
                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -316,7 +351,7 @@ namespace AsterixDisplayAnalyser
                     GPoint GP = FormMain.FromLatLngToLocal(new PointLatLng(GC.Latitude.Degrees, GC.Longitude.Degrees));
                     double Distane_NM = 0.00053996 * GM.PointToPointDistance;
                     g.DrawString(Math.Round(GM.Azimuth.Degrees).ToString() + "°/" + Math.Round(Distane_NM, 1).ToString() + "nm", new Font(FontFamily.GenericSansSerif, 9), Brushes.Yellow, new PointF(GP.X, GP.Y));
-                    
+
                     if (Sep_Data_Is_Valid && SepToolActive != "N/A")
                     {
                         g.DrawString(SepToolActive, new Font(FontFamily.GenericSansSerif, 9), Brushes.Yellow, new PointF(GP.X, GP.Y + 15));
@@ -341,16 +376,24 @@ namespace AsterixDisplayAnalyser
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             // Here draw speed vector
             // // Find out what data should be used for speed vector? IAS, TAS, GSPD, MACH?
-            if ((M_HDG != "N/A" || TRK != "N/A") && (GSPD_STRING != null))
+            if ((CALC_HDG_STRING != "N/A" || DAP_HDG != "N/A" || TRK != "N/A") && (DAP_GSPD != null || CALC_GSPD_STRING != null))
             {
-                if (GSPD_STRING != "N/A")
+                if (CALC_GSPD_STRING != "N/A" || DAP_GSPD != "N/A")
                 {
                     double Azimuth = 0.0;
-                    double Range = double.Parse(GSPD_STRING);
-                    if (TRK != "N/A")
+                    double Range = 0.0;
+
+                    if (CALC_GSPD_STRING != "N/A")
+                        Range = double.Parse(CALC_GSPD_STRING);
+                    else
+                        Range = double.Parse(DAP_HDG);
+
+                    if (CALC_HDG_STRING != "N/A")
+                        Azimuth = double.Parse(CALC_HDG_STRING);
+                    else if (TRK != "N/A")
                         Azimuth = double.Parse(TRK);
                     else
-                        Azimuth = double.Parse(M_HDG);
+                        Azimuth = double.Parse(DAP_HDG);
 
                     Range = (Range / 60) * (double)Properties.Settings.Default.SpeedVector;
 
@@ -403,7 +446,14 @@ namespace AsterixDisplayAnalyser
             // Draw GSPD on the same line
             GSPD_OFFSET.X = (ModeC_STRING.Length * (int)ModeC_FONT.Size) + (CFL_STRING.Length * (int)CFL_FONT.Size);
             GSPD_OFFSET.Y = LabelStartPosition.Y + LabelHeight;
-            g.DrawString(GSPD_STRING, GSPD_FONT, GSPD_BRUSH, LabelStartPosition.X + GSPD_OFFSET.X, GSPD_OFFSET.Y);
+
+            if (CALC_GSPD_STRING != " ---")
+                g.DrawString(CALC_GSPD_STRING, GSPD_FONT, GSPD_BRUSH, LabelStartPosition.X + GSPD_OFFSET.X, GSPD_OFFSET.Y);
+            else if (DAP_GSPD != "N/A")
+                g.DrawString(DAP_GSPD, GSPD_FONT, GSPD_BRUSH, LabelStartPosition.X + GSPD_OFFSET.X, GSPD_OFFSET.Y);
+            else
+                g.DrawString(" ---", GSPD_FONT, GSPD_BRUSH, LabelStartPosition.X + GSPD_OFFSET.X, GSPD_OFFSET.Y);
+
             GSPD_START_X = LabelStartPosition.X + GSPD_OFFSET.X;
             GSPD_START_Y = GSPD_OFFSET.Y;
 

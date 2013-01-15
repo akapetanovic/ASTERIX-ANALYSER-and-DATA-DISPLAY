@@ -28,7 +28,8 @@ namespace AsterixDisplayAnalyser
             /// </summary>
             public string ModeA;
             public string ModeC;
-            public string GSPD;
+            public string CALC_GSPD;
+            public string CALC_HDG;
             public string ModeC_Previous_Cycle;
             public string ACID_Mode_S;
             public double Lat;
@@ -41,7 +42,8 @@ namespace AsterixDisplayAnalyser
             public string TAS = "N/A";
             public string IAS = "N/A";
             public string MACH = "N/A";
-            public string M_HDG = "N/A";
+            public string DAP_HDG = "N/A";
+            public string DAP_GSPD = "N/A";
             public string TRK = "N/A";
             public string Roll_Ang = "N/A";
             public string SelectedAltitude_ShortTerm = "N/A";
@@ -119,19 +121,29 @@ namespace AsterixDisplayAnalyser
             return GlobalTargetList[Index].MyMarker.LocalPosition;
         }
 
-        public static string GetTargetGSPDByIndex(int Index)
+        public static string GetTarget_CALC_GSPD_ByIndex(int Index)
         {
-            return GlobalTargetList[Index].MyMarker.GSPD_STRING;
+            return GlobalTargetList[Index].MyMarker.CALC_GSPD_STRING;
+        }
+
+        public static string GetTarget_DAP_GSPD_ByIndex(int Index)
+        {
+            return GlobalTargetList[Index].MyMarker.DAP_GSPD;
         }
 
         public static string GetTargetM_HDGByIndex(int Index)
         {
-            return GlobalTargetList[Index].MyMarker.M_HDG;
+            return GlobalTargetList[Index].MyMarker.DAP_HDG;
         }
 
         public static string GetTargetTRKByIndex(int Index)
         {
             return GlobalTargetList[Index].MyMarker.TRK;
+        }
+
+        public static string GetTarget_CALC_HDG_ByIndex(int Index)
+        {
+            return GlobalTargetList[Index].MyMarker.CALC_HDG_STRING;
         }
 
         public static string GetTargetMode_C_ByIndex(int Index)
@@ -156,13 +168,15 @@ namespace AsterixDisplayAnalyser
                     if (GlobalTargetList[CurrentTarget.TrackNumber].ModeC != null)
                         GlobalTargetList[CurrentTarget.TrackNumber].ModeC_Previous_Cycle = "" + GlobalTargetList[CurrentTarget.TrackNumber].ModeC;
                     GlobalTargetList[CurrentTarget.TrackNumber].ModeC = CurrentTarget.ModeC;
-                    if (CurrentTarget.GSPD != null)
-                        GlobalTargetList[CurrentTarget.TrackNumber].GSPD = CurrentTarget.GSPD;
+                    GlobalTargetList[CurrentTarget.TrackNumber].CALC_GSPD = CurrentTarget.CALC_GSPD;
+                    if (CurrentTarget.DAP_GSPD != null)
+                        GlobalTargetList[CurrentTarget.TrackNumber].DAP_GSPD = CurrentTarget.DAP_GSPD;
                     GlobalTargetList[CurrentTarget.TrackNumber].ACID_Mode_S = CurrentTarget.ACID_Mode_S;
                     if (CurrentTarget.Mode_S_Addr != "N/A")
                         GlobalTargetList[CurrentTarget.TrackNumber].Mode_S_Addr = CurrentTarget.Mode_S_Addr;
-                    if (CurrentTarget.M_HDG != "N/A")
-                        GlobalTargetList[CurrentTarget.TrackNumber].M_HDG = CurrentTarget.M_HDG;
+                    if (CurrentTarget.DAP_HDG != "N/A")
+                        GlobalTargetList[CurrentTarget.TrackNumber].DAP_HDG = CurrentTarget.DAP_HDG;
+                    GlobalTargetList[CurrentTarget.TrackNumber].CALC_HDG = CurrentTarget.CALC_HDG; 
                     if (CurrentTarget.IAS != "N/A")
                         GlobalTargetList[CurrentTarget.TrackNumber].IAS = CurrentTarget.IAS;
                     if (CurrentTarget.TRK != "N/A")
@@ -257,13 +271,15 @@ namespace AsterixDisplayAnalyser
                     if (GlobalTargetList[ModeAIndex].ModeC != null)
                         GlobalTargetList[ModeAIndex].ModeC_Previous_Cycle = "" + GlobalTargetList[ModeAIndex].ModeC;
                     GlobalTargetList[ModeAIndex].ModeC = CurrentTarget.ModeC;
-                    if (CurrentTarget.GSPD != null)
-                        GlobalTargetList[ModeAIndex].GSPD = CurrentTarget.GSPD;
+                    if (CurrentTarget.DAP_GSPD != null)
+                        GlobalTargetList[ModeAIndex].DAP_GSPD = CurrentTarget.DAP_GSPD;
+                        GlobalTargetList[ModeAIndex].CALC_GSPD = CurrentTarget.CALC_GSPD;
                     GlobalTargetList[ModeAIndex].ACID_Mode_S = CurrentTarget.ACID_Mode_S;
                     if (CurrentTarget.Mode_S_Addr != "N/A")
                         GlobalTargetList[ModeAIndex].Mode_S_Addr = CurrentTarget.Mode_S_Addr;
-                    if (CurrentTarget.M_HDG != "N/A")
-                        GlobalTargetList[ModeAIndex].M_HDG = CurrentTarget.M_HDG;
+                    if (CurrentTarget.DAP_HDG != "N/A")
+                        GlobalTargetList[ModeAIndex].DAP_HDG = CurrentTarget.DAP_HDG;
+                    GlobalTargetList[ModeAIndex].CALC_HDG = CurrentTarget.CALC_HDG;
                     if (CurrentTarget.IAS != "N/A")
                         GlobalTargetList[ModeAIndex].IAS = CurrentTarget.IAS;
                     if (CurrentTarget.TRK != "N/A")
@@ -330,7 +346,7 @@ namespace AsterixDisplayAnalyser
 
                         //        DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
                         //        DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
-                                
+
                         //        //DistanceTraveled = Math.Round(DistanceTraveled, 1);
                         //        double GSPD = DistanceTraveled / TimeDifference.TotalHours;
                         //        GlobalTargetList[ModeAIndex].GSPD = Math.Round(GSPD).ToString();
@@ -362,7 +378,8 @@ namespace AsterixDisplayAnalyser
                     NewTarget.ModeA = GlobalTarget.ModeA;
                     NewTarget.ModeC_Previous_Cycle = GlobalTarget.ModeC_Previous_Cycle;
                     NewTarget.ModeC = GlobalTarget.ModeC;
-                    NewTarget.GSPD = GlobalTarget.GSPD;
+                    NewTarget.CALC_GSPD = GlobalTarget.CALC_GSPD;
+                    NewTarget.DAP_GSPD = GlobalTarget.DAP_GSPD;
                     NewTarget.ACID_Mode_S = GlobalTarget.ACID_Mode_S;
                     NewTarget.Mode_S_Addr = GlobalTarget.Mode_S_Addr;
                     NewTarget.TRK = GlobalTarget.TRK;
@@ -372,7 +389,8 @@ namespace AsterixDisplayAnalyser
                     NewTarget.SelectedAltitude_LongTerm = GlobalTarget.SelectedAltitude_LongTerm;
                     NewTarget.Rate_Of_Climb = GlobalTarget.Rate_Of_Climb;
                     NewTarget.MACH = GlobalTarget.MACH;
-                    NewTarget.M_HDG = GlobalTarget.M_HDG;
+                    NewTarget.DAP_HDG = GlobalTarget.DAP_HDG;
+                    NewTarget.CALC_HDG = GlobalTarget.CALC_HDG;
                     NewTarget.IAS = GlobalTarget.IAS;
                     NewTarget.Barometric_Setting = GlobalTarget.Barometric_Setting;
                     NewTarget.Lat = GlobalTarget.Lat;
@@ -436,8 +454,8 @@ namespace AsterixDisplayAnalyser
                         CAT01I141Types.CAT01141ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT01I141Types.CAT01141ElapsedTimeSinceMidnight)Msg.CAT01DataItems[CAT01.ItemIDToIndex("141")].value;
                         // Get Calculated GSPD and HDG_Type
                         CAT01I200Types.CalculatedGSPandHDG_Type CalculatedGSPandHDG = (CAT01I200Types.CalculatedGSPandHDG_Type)Msg.CAT01DataItems[CAT01.ItemIDToIndex("200")].value;
-                        
-                        
+
+
                         TargetType Target = new TargetType();
                         if (MyCAT01I020UserData != null)
                         {
@@ -454,11 +472,11 @@ namespace AsterixDisplayAnalyser
                                 {
                                     if (CalculatedGSPandHDG.Is_Valid)
                                     {
-                                        Target.GSPD = Math.Round(CalculatedGSPandHDG.GSPD, 0).ToString();
-                                        Target.M_HDG = Math.Round(CalculatedGSPandHDG.HDG, 0).ToString();
+                                        Target.CALC_GSPD = Math.Round(CalculatedGSPandHDG.GSPD, 0).ToString();
+                                        Target.CALC_HDG = Math.Round(CalculatedGSPandHDG.HDG, 0).ToString();
                                     }
                                 }
-                                
+
                                 PSRTargetList.Add(Target);
                             }
                             else if ((MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.No_Detection) && (MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.Unknown_Data))
@@ -484,8 +502,8 @@ namespace AsterixDisplayAnalyser
                                         {
                                             if (CalculatedGSPandHDG.Is_Valid)
                                             {
-                                                Target.GSPD = Math.Round(CalculatedGSPandHDG.GSPD, 0).ToString();
-                                                Target.M_HDG = Math.Round(CalculatedGSPandHDG.HDG, 0).ToString();
+                                                Target.CALC_GSPD = Math.Round(CalculatedGSPandHDG.GSPD, 0).ToString();
+                                                Target.CALC_HDG = Math.Round(CalculatedGSPandHDG.HDG, 0).ToString();
                                             }
                                         }
 
@@ -520,7 +538,7 @@ namespace AsterixDisplayAnalyser
                         CAT48I140Types.CAT48140ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT48I140Types.CAT48140ElapsedTimeSinceMidnight)Msg.CAT48DataItems[CAT48.ItemIDToIndex("140")].value;
                         // Get Calculated GSPD and HDG_Type
                         CAT48I200Types.CalculatedGSPandHDG_Type CalculatedGSPandHDG = (CAT48I200Types.CalculatedGSPandHDG_Type)Msg.CAT48DataItems[CAT48.ItemIDToIndex("200")].value;
-                        
+
                         TargetType Target = new TargetType();
 
                         if (MyCAT48I020UserData != null)
@@ -587,9 +605,9 @@ namespace AsterixDisplayAnalyser
                                             if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Present_This_Cycle)
                                             {
                                                 if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.MAG_HDG.Is_Valid)
-                                                    Target.M_HDG = Math.Round(CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.MAG_HDG.Value).ToString();
+                                                    Target.DAP_HDG = Math.Round(CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.MAG_HDG.Value).ToString();
                                                 else
-                                                    Target.M_HDG = "N/A";
+                                                    Target.DAP_HDG = "N/A";
 
                                                 if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.MACH.Is_Valid)
                                                     Target.MACH = Math.Round(CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.MACH.Value, 3).ToString();
@@ -626,9 +644,9 @@ namespace AsterixDisplayAnalyser
                                                     Target.TAS = "N/A";
 
                                                 if (CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.GND_SPD.Is_Valid)
-                                                    Target.GSPD = Math.Round(CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.GND_SPD.Value).ToString();
+                                                    Target.DAP_GSPD = Math.Round(CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.GND_SPD.Value).ToString();
                                                 else
-                                                    Target.GSPD = "N/A";
+                                                    Target.DAP_GSPD = "N/A";
 
                                                 if (CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.TRUE_TRK.Is_Valid)
                                                     Target.TRK = Math.Round(CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.TRUE_TRK.Value).ToString();
@@ -689,14 +707,13 @@ namespace AsterixDisplayAnalyser
 
                                         }
 
-
                                         // If GSPD and HDG are available from CAT48/I200 then use it
                                         if (CalculatedGSPandHDG != null)
                                         {
                                             if (CalculatedGSPandHDG.Is_Valid)
                                             {
-                                                Target.GSPD = Math.Round(CalculatedGSPandHDG.GSPD, 0).ToString();
-                                                Target.M_HDG = Math.Round(CalculatedGSPandHDG.HDG, 0).ToString();
+                                                Target.CALC_GSPD = Math.Round(CalculatedGSPandHDG.GSPD, 0).ToString();
+                                                Target.CALC_HDG = Math.Round(CalculatedGSPandHDG.HDG, 0).ToString();
                                             }
                                         }
 
@@ -718,449 +735,8 @@ namespace AsterixDisplayAnalyser
                         CAT62I380Types.CAT62I380Data CAT62I380Data = (CAT62I380Types.CAT62I380Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
                         CAT62I220Types.CalculatedRateOfClimbDescent CAT62I220Data = (CAT62I220Types.CalculatedRateOfClimbDescent)Msg.CAT62DataItems[CAT62.ItemIDToIndex("220")].value;
                         CAT62I070Types.CAT62070ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT62I070Types.CAT62070ElapsedTimeSinceMidnight)Msg.CAT62DataItems[CAT62.ItemIDToIndex("070")].value;
-
-                        TargetType Target = new TargetType();
-
-                        if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("040")].value != null)
-                            Target.TrackNumber = (int)Msg.CAT62DataItems[CAT62.ItemIDToIndex("040")].value;
-
-                        if (Mode3AData != null && LatLongData != null)
-                        {
-                            Target.ModeA = Mode3AData.Mode3A_Code;
-
-                            if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value != null)
-                            {
-                                try
-                                {
-                                    double FlightLevel = (double)Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value;
-                                    Target.ModeC = FlightLevel.ToString();
-                                }
-                                catch
-                                {
-                                    Target.ModeC = "---";
-                                }
-                            }
-                            else
-                            {
-                                Target.ModeC = "---";
-                            }
-
-                            if (CAT62I380Data != null)
-                            {
-                                if (CAT62I380Data.AC_Address.Is_Valid)
-                                    Target.Mode_S_Addr = CAT62I380Data.AC_Address.AC_ADDRESS_String;
-                                else
-                                    Target.Mode_S_Addr = "N/A";
-
-                                if (CAT62I380Data.ACID.Is_Valid)
-                                    Target.ACID_Mode_S = CAT62I380Data.ACID.ACID_String;
-                                else
-                                    Target.ACID_Mode_S = "N/A";
-
-                                if (CAT62I380Data.TAS.Is_Valid)
-                                    Target.TAS = CAT62I380Data.TAS.TAS.ToString();
-                                else
-                                    Target.TAS = "N/A";
-
-                                if (CAT62I380Data.IAS.Is_Valid)
-                                    Target.IAS = CAT62I380Data.IAS.IAS.ToString();
-                                else
-                                    Target.IAS = "N/A";
-
-                                if (CAT62I380Data.MACH.Is_Valid)
-                                    Target.MACH = Math.Round(CAT62I380Data.MACH.MACH, 3).ToString();
-                                else
-                                    Target.MACH = "N/A";
-
-                                if (CAT62I380Data.M_HDG.Is_Valid)
-                                    Target.M_HDG = Math.Round(CAT62I380Data.M_HDG.M_HDG).ToString();
-                                else
-                                    Target.M_HDG = "N/A";
-
-                                if (CAT62I380Data.TRK.Is_Valid)
-                                    Target.TRK = Math.Round(CAT62I380Data.TRK.TRK).ToString();
-                                else
-                                    Target.TRK = "N/A";
-
-                                if (CAT62I380Data.GSPD.Is_Valid)
-                                    Target.GSPD = Math.Round(CAT62I380Data.GSPD.GSPD).ToString();
-                                else
-                                    Target.GSPD = "N/A";
-
-                                if (CAT62I380Data.Rool_Angle.Is_Valid)
-                                    Target.Roll_Ang = Math.Round(CAT62I380Data.Rool_Angle.Rool_Angle, 1).ToString();
-                                else
-                                    Target.Roll_Ang = "N/A";
-
-                                if (CAT62I380Data.FS_Selected_Altitude.Is_Valid)
-                                {
-                                    Target.SelectedAltitude_LongTerm = "";
-                                    if (CAT62I380Data.FS_Selected_Altitude.Altitude_Hold_Active)
-                                        Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "AH:";
-                                    if (CAT62I380Data.FS_Selected_Altitude.Approach_Mode_Active)
-                                        Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "AM:";
-                                    if (CAT62I380Data.FS_Selected_Altitude.Manage_Mode_Active)
-                                        Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "MV:";
-
-                                    Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + CAT62I380Data.FS_Selected_Altitude.SelectedAltitude.ToString();
-                                }
-                                else
-                                    Target.SelectedAltitude_LongTerm = "N/A";
-
-                                if (CAT62I380Data.Selected_Altitude.Is_Valid)
-                                {
-                                    Target.SelectedAltitude_ShortTerm = "";
-                                    switch (CAT62I380Data.Selected_Altitude.Source)
-                                    {
-                                        case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.AircraftAltitude:
-                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "A/C:";
-                                            break;
-                                        case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.FCU_MCP:
-                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "MCP:";
-                                            break;
-                                        case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.FMS_Selected:
-                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "FMS:";
-                                            break;
-                                        case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.Unknown:
-                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "UKN:";
-                                            break;
-                                    }
-                                    Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + CAT62I380Data.Selected_Altitude.SelectedAltitude.ToString();
-                                }
-                                else
-                                    Target.SelectedAltitude_ShortTerm = "N/A";
-
-                                if (CAT62I380Data.Baro_Press_Setting.Is_Valid)
-                                    Target.Barometric_Setting = Math.Round(CAT62I380Data.Baro_Press_Setting.Baro_Pressure_Setting, 1).ToString() + "mb";
-                                else
-                                    Target.Barometric_Setting = "N/A";
-                            }
-
-                            if (CAT62I220Data != null)
-                            {
-                                if (CAT62I220Data.Is_Valid == true)
-                                    Target.Rate_Of_Climb = CAT62I220Data.Value.ToString();
-                                else
-                                    Target.Rate_Of_Climb = "N/A";
-                            }
-                            else
-                            {
-                                Target.Rate_Of_Climb = "N/A";
-                            }
-
-                            Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
-                            Target.Lon = LatLongData.GetLatLongDecimal().LongitudeDecimal;
-                            Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
-                            CurrentTargetList.Add(Target);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (MainASTERIXDataStorage.CAT01Message.Count > 0)
-                {
-                    for (int Start_Idx = LastDataIndex; Start_Idx < MainASTERIXDataStorage.CAT01Message.Count; Start_Idx++)
-                    {
-                        LastDataIndex++;
-                        MainASTERIXDataStorage.CAT01Data Msg = MainASTERIXDataStorage.CAT01Message[Start_Idx];
-
-                        // Get Target Descriptor
-                        CAT01I020UserData MyCAT01I020UserData = (CAT01I020UserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("020")].value;
-                        // Get Mode3A
-                        CAT01I070Types.CAT01070Mode3UserData Mode3AData = (CAT01I070Types.CAT01070Mode3UserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("070")].value;
-                        // Get Lat/Long
-                        CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates LatLongData = (CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates)Msg.CAT01DataItems[CAT01.ItemIDToIndex("040")].value;
-                        // Get Flight Level
-                        CAT01I090Types.CAT01I090FlightLevelUserData FlightLevelData = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("090")].value;
-                        // Get Time Since Midnight
-                        CAT01I141Types.CAT01141ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT01I141Types.CAT01141ElapsedTimeSinceMidnight)Msg.CAT01DataItems[CAT01.ItemIDToIndex("141")].value;
-                        // Get Calculated GSPD and HDG_Type
-                        CAT01I200Types.CalculatedGSPandHDG_Type CalculatedGSPandHDG = (CAT01I200Types.CalculatedGSPandHDG_Type)Msg.CAT01DataItems[CAT01.ItemIDToIndex("200")].value;
-                        
-                        TargetType Target = new TargetType();
-                        if (MyCAT01I020UserData != null)
-                        {
-                            if (MyCAT01I020UserData.Type_Of_Radar_Detection == CAT01I020Types.Radar_Detection_Type.Primary)
-                            {
-                                Target.ModeA = "PSR";
-                                Target.ModeC = "";
-                                Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
-                                Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
-                                Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
-                                Target.MyMarker.Position = new PointLatLng(Target.Lat, Target.Lon);
-
-                                if (CalculatedGSPandHDG != null)
-                                {
-                                    if (CalculatedGSPandHDG.Is_Valid)
-                                    {
-                                        Target.GSPD = Math.Round(CalculatedGSPandHDG.GSPD, 0).ToString();
-                                        Target.M_HDG = Math.Round(CalculatedGSPandHDG.HDG, 0).ToString();
-                                    }
-                                }
-
-                                PSRTargetList.Add(Target);
-                            }
-                            else if ((MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.No_Detection) && (MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.Unknown_Data))
-                            {
-
-                                if (Mode3AData != null)
-                                {
-                                    if (Mode3AData.Code_Validated == CAT01I070Types.Code_Validation_Type.Code_Validated)
-                                    {
-                                        Target.ModeA = Mode3AData.Mode3A_Code;
-
-                                        if (FlightLevelData != null)
-                                            if (FlightLevelData.Code_Validated == CAT01I090Types.Code_Validation_Type.Code_Validated)
-                                                Target.ModeC = FlightLevelData.FlightLevel.ToString();
-                                            else
-                                                Target.ModeC = "---";
-                                        else
-                                            Target.ModeC = "---";
-
-                                        Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
-                                        Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
-                                        Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
-
-                                        if (CalculatedGSPandHDG != null)
-                                        {
-                                            if (CalculatedGSPandHDG.Is_Valid)
-                                            {
-                                                Target.GSPD = Math.Round(CalculatedGSPandHDG.GSPD, 0).ToString();
-                                                Target.M_HDG = Math.Round(CalculatedGSPandHDG.HDG, 0).ToString();
-                                            }
-                                        }
-
-                                        CurrentTargetList.Add(Target);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                else if (MainASTERIXDataStorage.CAT48Message.Count > 0)
-                {
-                    for (int Start_Idx = LastDataIndex; Start_Idx < MainASTERIXDataStorage.CAT48Message.Count; Start_Idx++)
-                    {
-                        LastDataIndex++;
-
-                        MainASTERIXDataStorage.CAT48Data Msg = MainASTERIXDataStorage.CAT48Message[Start_Idx];
-
-                        CAT48I020UserData MyCAT48I020UserData = (CAT48I020UserData)Msg.CAT48DataItems[CAT48.ItemIDToIndex("020")].value;
-                        CAT48I070Types.CAT48I070Mode3UserData Mode3AData = (CAT48I070Types.CAT48I070Mode3UserData)Msg.CAT48DataItems[CAT48.ItemIDToIndex("070")].value;
-                        // Get Lat/Long in decimal
-                        CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates LatLongData = (CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates)Msg.CAT48DataItems[CAT48.ItemIDToIndex("040")].value;
-                        // Get Flight Level
-                        CAT48I090Types.CAT48I090FlightLevelUserData FlightLevelData = (CAT48I090Types.CAT48I090FlightLevelUserData)Msg.CAT48DataItems[CAT48.ItemIDToIndex("090")].value;
-                        // Get Mode S Address
-                        CAT48I220Types.CAT48AC_Address_Type Mode_S_Address = (CAT48I220Types.CAT48AC_Address_Type)Msg.CAT48DataItems[CAT48.ItemIDToIndex("220")].value;
-                        // Get ACID data for Mode-S
-                        CAT48I240Types.CAT48I240ACID_Data ACID_Mode_S = (CAT48I240Types.CAT48I240ACID_Data)Msg.CAT48DataItems[CAT48.ItemIDToIndex("240")].value;
-                        // Get Mode-S MB Data
-                        CAT48I250Types.CAT48I250DataType CAT48I250Mode_S_MB = (CAT48I250Types.CAT48I250DataType)Msg.CAT48DataItems[CAT48.ItemIDToIndex("250")].value;
-                        // Get Time since midnight
-                        CAT48I140Types.CAT48140ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT48I140Types.CAT48140ElapsedTimeSinceMidnight)Msg.CAT48DataItems[CAT48.ItemIDToIndex("140")].value;
-                        // Get Calculated GSPD and HDG_Type
-                        CAT48I200Types.CalculatedGSPandHDG_Type CalculatedGSPandHDG = (CAT48I200Types.CalculatedGSPandHDG_Type)Msg.CAT48DataItems[CAT48.ItemIDToIndex("200")].value;
-                        
-                        TargetType Target = new TargetType();
-
-                        if (MyCAT48I020UserData != null)
-                        {
-                            if ((MyCAT48I020UserData.Type_Of_Report == CAT48I020Types.Type_Of_Report_Type.Single_PSR) ||
-                                (MyCAT48I020UserData.Type_Of_Report == CAT48I020Types.Type_Of_Report_Type.Mode_S_Roll_Call_PSR))
-                            {
-                                Target.ModeA = "PSR";
-                                Target.ModeC = "";
-                                Target.ACID_Mode_S = "";
-                                Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
-                                Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
-                                Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
-                                PSRTargetList.Add(Target);
-                            }
-                            else if ((MyCAT48I020UserData.Type_Of_Report != CAT48I020Types.Type_Of_Report_Type.No_Detection) &&
-                             (MyCAT48I020UserData.Type_Of_Report != CAT48I020Types.Type_Of_Report_Type.Unknown_Data))
-                            {
-
-                                if (Mode3AData != null)
-                                {
-                                    if (Mode3AData.Code_Validated == CAT48I070Types.Code_Validation_Type.Code_Validated)
-                                    {
-                                        Target.ModeA = Mode3AData.Mode3A_Code;
-
-                                        if (FlightLevelData != null)
-                                        {
-                                            if (FlightLevelData.Code_Validated == CAT48I090Types.Code_Validation_Type.Code_Validated)
-                                                Target.ModeC = FlightLevelData.FlightLevel.ToString();
-                                            else
-                                                Target.ModeC = "---";
-                                        }
-                                        else
-                                            Target.ModeC = "---";
-
-                                        if (ACID_Mode_S != null)
-                                        {
-                                            Target.ACID_Mode_S = ACID_Mode_S.ACID;
-                                        }
-                                        else
-                                        {
-                                            Target.ACID_Mode_S = "N/A";
-                                        }
-                                        Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
-                                        Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
-                                        Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
-
-                                        if (Mode_S_Address != null)
-                                        {
-                                            if (Mode_S_Address.Is_Valid)
-                                                Target.Mode_S_Addr = Mode_S_Address.AC_ADDRESS_String;
-                                            else
-                                                Target.Mode_S_Addr = "N/A";
-                                        }
-                                        else
-                                            Target.Mode_S_Addr = "N/A";
-
-                                        if (CAT48I250Mode_S_MB != null)
-                                        {
-                                            if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Present_This_Cycle)
-                                            {
-                                                if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.MAG_HDG.Is_Valid)
-                                                    Target.M_HDG = Math.Round(CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.MAG_HDG.Value).ToString();
-                                                else
-                                                    Target.M_HDG = "N/A";
-
-                                                if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.MACH.Is_Valid)
-                                                    Target.MACH = Math.Round(CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.MACH.Value, 3).ToString();
-                                                else
-                                                    Target.MACH = "N/A";
-
-                                                if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.IAS.Is_Valid)
-                                                    Target.IAS = CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.IAS.Value.ToString();
-                                                else
-                                                    Target.IAS = "N/A";
-
-                                                if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Inertial_RoC.Is_Valid)
-                                                    Target.Rate_Of_Climb = "I:" + CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Inertial_RoC.Value.ToString();
-                                                else
-                                                    Target.Rate_Of_Climb = "I:N/A";
-
-                                                if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Baro_RoC.Is_Valid)
-                                                    Target.Rate_Of_Climb = Target.Rate_Of_Climb + "/" + "B:" + CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Baro_RoC.Value.ToString();
-                                                else
-                                                    Target.Rate_Of_Climb = Target.Rate_Of_Climb + "/" + "B:N/A";
-                                            }
-
-                                            if (CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.Present_This_Cycle)
-                                            {
-
-                                                if (CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.Roll_Ang.Is_Valid)
-                                                    Target.Roll_Ang = Math.Round(CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.Roll_Ang.Value).ToString();
-                                                else
-                                                    Target.Roll_Ang = "N/A";
-
-                                                if (CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.TAS.Is_Valid)
-                                                    Target.TAS = CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.TAS.Value.ToString();
-                                                else
-                                                    Target.TAS = "N/A";
-
-                                                if (CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.GND_SPD.Is_Valid)
-                                                    Target.GSPD = Math.Round(CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.GND_SPD.Value).ToString();
-                                                else
-                                                    Target.GSPD = "N/A";
-
-                                                if (CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.TRUE_TRK.Is_Valid)
-                                                    Target.TRK = Math.Round(CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.TRUE_TRK.Value).ToString();
-                                                else
-                                                    Target.TRK = "N/A";
-                                            }
-
-                                            if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Present_This_Cycle)
-                                            {
-                                                switch (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Source)
-                                                {
-                                                    case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.Aircraft_Alt:
-                                                        Target.SelectedAltitude_ShortTerm = "A/C:" + Target.ModeC;
-                                                        break;
-                                                    case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.FCU_MCP_Selected_Alt:
-                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid)
-                                                            Target.SelectedAltitude_ShortTerm = "MCP:" + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
-                                                        else
-                                                            Target.SelectedAltitude_ShortTerm = "MCP:N/A";
-                                                        break;
-                                                    case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.FMS_Selected_Alt:
-                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Is_Valid)
-                                                            Target.SelectedAltitude_ShortTerm = "FMS:" + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Value.ToString();
-                                                        else
-                                                            Target.SelectedAltitude_ShortTerm = "FMS:N/A";
-                                                        break;
-                                                    case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.Unknown:
-                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid)
-                                                            Target.SelectedAltitude_ShortTerm = "UNK:" + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
-                                                        else
-                                                            Target.SelectedAltitude_ShortTerm = "N/A";
-                                                        break;
-                                                }
-
-
-                                                if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid)
-                                                {
-                                                    Target.SelectedAltitude_LongTerm = "";
-                                                    if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.MCP_FCU_Mode_Bits_Populated)
-                                                    {
-                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.ALT_Hold_Active)
-                                                            Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "AH:";
-                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.APP_Mode_Active)
-                                                            Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "AM:";
-                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.VNAV_Mode_Active)
-                                                            Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "MV:";
-                                                    }
-                                                    Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
-                                                }
-                                                else
-                                                    Target.SelectedAltitude_LongTerm = "N/A";
-
-                                                if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Baro_Sel_ALT.Is_Valid)
-                                                    Target.Barometric_Setting = Math.Round(CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Baro_Sel_ALT.Value, 1).ToString() + "mb";
-                                                else
-                                                    Target.Barometric_Setting = "N/A";
-                                            }
-
-                                        }
-
-                                        // If GSPD and HDG are available from CAT48/I200 then use it
-                                        if (CalculatedGSPandHDG != null)
-                                        {
-                                            if (CalculatedGSPandHDG.Is_Valid)
-                                            {
-                                                Target.GSPD = Math.Round(CalculatedGSPandHDG.GSPD, 0).ToString();
-                                                Target.M_HDG = Math.Round(CalculatedGSPandHDG.HDG, 0).ToString();
-                                            }
-                                        }
-
-                                        CurrentTargetList.Add(Target);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                else if (MainASTERIXDataStorage.CAT62Message.Count > 0)
-                {
-
-                    for (int Start_Idx = LastDataIndex; Start_Idx < MainASTERIXDataStorage.CAT62Message.Count; Start_Idx++)
-                    {
-                        LastDataIndex++;
-
-                        MainASTERIXDataStorage.CAT62Data Msg = MainASTERIXDataStorage.CAT62Message[Start_Idx];
-
-                        CAT62I060Types.CAT62060Mode3UserData Mode3AData = (CAT62I060Types.CAT62060Mode3UserData)Msg.CAT62DataItems[CAT62.ItemIDToIndex("060")].value;
-                        // Get Lat/Long in decimal
-                        GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.CAT62DataItems[CAT62.ItemIDToIndex("105")].value;
-                        CAT62I220Types.CalculatedRateOfClimbDescent CAT62I220Data = (CAT62I220Types.CalculatedRateOfClimbDescent)Msg.CAT62DataItems[CAT62.ItemIDToIndex("220")].value;
-                        CAT62I380Types.CAT62I380Data CAT62I380Data = (CAT62I380Types.CAT62I380Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
-                        CAT62I070Types.CAT62070ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT62I070Types.CAT62070ElapsedTimeSinceMidnight)Msg.CAT62DataItems[CAT62.ItemIDToIndex("070")].value;
                         CAT62I185Types.CalculatedGSPandHDG_Type GSPD_and_HDG = (CAT62I185Types.CalculatedGSPandHDG_Type)Msg.CAT62DataItems[CAT62.ItemIDToIndex("185")].value;
-                        
+
                         TargetType Target = new TargetType();
 
                         if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("040")].value != null)
@@ -1215,9 +791,9 @@ namespace AsterixDisplayAnalyser
                                     Target.MACH = "N/A";
 
                                 if (CAT62I380Data.M_HDG.Is_Valid)
-                                    Target.M_HDG = Math.Round(CAT62I380Data.M_HDG.M_HDG).ToString();
+                                    Target.DAP_HDG = Math.Round(CAT62I380Data.M_HDG.M_HDG).ToString();
                                 else
-                                    Target.M_HDG = "N/A";
+                                    Target.DAP_HDG = "N/A";
 
                                 if (CAT62I380Data.TRK.Is_Valid)
                                     Target.TRK = Math.Round(CAT62I380Data.TRK.TRK).ToString();
@@ -1225,9 +801,9 @@ namespace AsterixDisplayAnalyser
                                     Target.TRK = "N/A";
 
                                 if (CAT62I380Data.GSPD.Is_Valid)
-                                    Target.GSPD = Math.Round(CAT62I380Data.GSPD.GSPD).ToString();
+                                    Target.DAP_GSPD = Math.Round(CAT62I380Data.GSPD.GSPD).ToString();
                                 else
-                                    Target.GSPD = "N/A";
+                                    Target.DAP_GSPD = "N/A";
 
                                 if (CAT62I380Data.Rool_Angle.Is_Valid)
                                     Target.Roll_Ang = Math.Round(CAT62I380Data.Rool_Angle.Rool_Angle, 1).ToString();
@@ -1298,8 +874,460 @@ namespace AsterixDisplayAnalyser
                             {
                                 if (GSPD_and_HDG.Is_Valid)
                                 {
-                                    Target.GSPD = Math.Round(GSPD_and_HDG.GSPD, 0).ToString();
-                                    Target.M_HDG = Math.Round(GSPD_and_HDG.HDG, 0).ToString();
+                                    Target.CALC_GSPD = Math.Round(GSPD_and_HDG.GSPD, 0).ToString();
+                                    Target.CALC_HDG = Math.Round(GSPD_and_HDG.HDG, 0).ToString();
+                                }
+                            }
+
+                            CurrentTargetList.Add(Target);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (MainASTERIXDataStorage.CAT01Message.Count > 0)
+                {
+                    for (int Start_Idx = LastDataIndex; Start_Idx < MainASTERIXDataStorage.CAT01Message.Count; Start_Idx++)
+                    {
+                        LastDataIndex++;
+                        MainASTERIXDataStorage.CAT01Data Msg = MainASTERIXDataStorage.CAT01Message[Start_Idx];
+
+                        // Get Target Descriptor
+                        CAT01I020UserData MyCAT01I020UserData = (CAT01I020UserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("020")].value;
+                        // Get Mode3A
+                        CAT01I070Types.CAT01070Mode3UserData Mode3AData = (CAT01I070Types.CAT01070Mode3UserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("070")].value;
+                        // Get Lat/Long
+                        CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates LatLongData = (CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates)Msg.CAT01DataItems[CAT01.ItemIDToIndex("040")].value;
+                        // Get Flight Level
+                        CAT01I090Types.CAT01I090FlightLevelUserData FlightLevelData = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("090")].value;
+                        // Get Time Since Midnight
+                        CAT01I141Types.CAT01141ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT01I141Types.CAT01141ElapsedTimeSinceMidnight)Msg.CAT01DataItems[CAT01.ItemIDToIndex("141")].value;
+                        // Get Calculated GSPD and HDG_Type
+                        CAT01I200Types.CalculatedGSPandHDG_Type CalculatedGSPandHDG = (CAT01I200Types.CalculatedGSPandHDG_Type)Msg.CAT01DataItems[CAT01.ItemIDToIndex("200")].value;
+
+                        TargetType Target = new TargetType();
+                        if (MyCAT01I020UserData != null)
+                        {
+                            if (MyCAT01I020UserData.Type_Of_Radar_Detection == CAT01I020Types.Radar_Detection_Type.Primary)
+                            {
+                                Target.ModeA = "PSR";
+                                Target.ModeC = "";
+                                Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
+                                Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
+                                Target.MyMarker.Position = new PointLatLng(Target.Lat, Target.Lon);
+
+                                if (CalculatedGSPandHDG != null)
+                                {
+                                    if (CalculatedGSPandHDG.Is_Valid)
+                                    {
+                                        Target.CALC_GSPD = Math.Round(CalculatedGSPandHDG.GSPD, 0).ToString();
+                                        Target.CALC_HDG = Math.Round(CalculatedGSPandHDG.HDG, 0).ToString();
+                                    }
+                                }
+
+                                PSRTargetList.Add(Target);
+                            }
+                            else if ((MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.No_Detection) && (MyCAT01I020UserData.Type_Of_Radar_Detection != CAT01I020Types.Radar_Detection_Type.Unknown_Data))
+                            {
+
+                                if (Mode3AData != null)
+                                {
+                                    if (Mode3AData.Code_Validated == CAT01I070Types.Code_Validation_Type.Code_Validated)
+                                    {
+                                        Target.ModeA = Mode3AData.Mode3A_Code;
+
+                                        if (FlightLevelData != null)
+                                            if (FlightLevelData.Code_Validated == CAT01I090Types.Code_Validation_Type.Code_Validated)
+                                                Target.ModeC = FlightLevelData.FlightLevel.ToString();
+                                            else
+                                                Target.ModeC = "---";
+                                        else
+                                            Target.ModeC = "---";
+
+                                        Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
+                                        Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                        Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
+
+                                        if (CalculatedGSPandHDG != null)
+                                        {
+                                            if (CalculatedGSPandHDG.Is_Valid)
+                                            {
+                                                Target.CALC_GSPD = Math.Round(CalculatedGSPandHDG.GSPD, 0).ToString();
+                                                Target.CALC_HDG = Math.Round(CalculatedGSPandHDG.HDG, 0).ToString();
+                                            }
+                                        }
+
+                                        CurrentTargetList.Add(Target);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (MainASTERIXDataStorage.CAT48Message.Count > 0)
+                {
+                    for (int Start_Idx = LastDataIndex; Start_Idx < MainASTERIXDataStorage.CAT48Message.Count; Start_Idx++)
+                    {
+                        LastDataIndex++;
+
+                        MainASTERIXDataStorage.CAT48Data Msg = MainASTERIXDataStorage.CAT48Message[Start_Idx];
+
+                        CAT48I020UserData MyCAT48I020UserData = (CAT48I020UserData)Msg.CAT48DataItems[CAT48.ItemIDToIndex("020")].value;
+                        CAT48I070Types.CAT48I070Mode3UserData Mode3AData = (CAT48I070Types.CAT48I070Mode3UserData)Msg.CAT48DataItems[CAT48.ItemIDToIndex("070")].value;
+                        // Get Lat/Long in decimal
+                        CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates LatLongData = (CAT48I040Types.CAT48I040MeasuredPosInPolarCoordinates)Msg.CAT48DataItems[CAT48.ItemIDToIndex("040")].value;
+                        // Get Flight Level
+                        CAT48I090Types.CAT48I090FlightLevelUserData FlightLevelData = (CAT48I090Types.CAT48I090FlightLevelUserData)Msg.CAT48DataItems[CAT48.ItemIDToIndex("090")].value;
+                        // Get Mode S Address
+                        CAT48I220Types.CAT48AC_Address_Type Mode_S_Address = (CAT48I220Types.CAT48AC_Address_Type)Msg.CAT48DataItems[CAT48.ItemIDToIndex("220")].value;
+                        // Get ACID data for Mode-S
+                        CAT48I240Types.CAT48I240ACID_Data ACID_Mode_S = (CAT48I240Types.CAT48I240ACID_Data)Msg.CAT48DataItems[CAT48.ItemIDToIndex("240")].value;
+                        // Get Mode-S MB Data
+                        CAT48I250Types.CAT48I250DataType CAT48I250Mode_S_MB = (CAT48I250Types.CAT48I250DataType)Msg.CAT48DataItems[CAT48.ItemIDToIndex("250")].value;
+                        // Get Time since midnight
+                        CAT48I140Types.CAT48140ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT48I140Types.CAT48140ElapsedTimeSinceMidnight)Msg.CAT48DataItems[CAT48.ItemIDToIndex("140")].value;
+                        // Get Calculated GSPD and HDG_Type
+                        CAT48I200Types.CalculatedGSPandHDG_Type CalculatedGSPandHDG = (CAT48I200Types.CalculatedGSPandHDG_Type)Msg.CAT48DataItems[CAT48.ItemIDToIndex("200")].value;
+
+                        TargetType Target = new TargetType();
+
+                        if (MyCAT48I020UserData != null)
+                        {
+                            if ((MyCAT48I020UserData.Type_Of_Report == CAT48I020Types.Type_Of_Report_Type.Single_PSR) ||
+                                (MyCAT48I020UserData.Type_Of_Report == CAT48I020Types.Type_Of_Report_Type.Mode_S_Roll_Call_PSR))
+                            {
+                                Target.ModeA = "PSR";
+                                Target.ModeC = "";
+                                Target.ACID_Mode_S = "";
+                                Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
+                                Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
+                                PSRTargetList.Add(Target);
+                            }
+                            else if ((MyCAT48I020UserData.Type_Of_Report != CAT48I020Types.Type_Of_Report_Type.No_Detection) &&
+                             (MyCAT48I020UserData.Type_Of_Report != CAT48I020Types.Type_Of_Report_Type.Unknown_Data))
+                            {
+
+                                if (Mode3AData != null)
+                                {
+                                    if (Mode3AData.Code_Validated == CAT48I070Types.Code_Validation_Type.Code_Validated)
+                                    {
+                                        Target.ModeA = Mode3AData.Mode3A_Code;
+
+                                        if (FlightLevelData != null)
+                                        {
+                                            if (FlightLevelData.Code_Validated == CAT48I090Types.Code_Validation_Type.Code_Validated)
+                                                Target.ModeC = FlightLevelData.FlightLevel.ToString();
+                                            else
+                                                Target.ModeC = "---";
+                                        }
+                                        else
+                                            Target.ModeC = "---";
+
+                                        if (ACID_Mode_S != null)
+                                        {
+                                            Target.ACID_Mode_S = ACID_Mode_S.ACID;
+                                        }
+                                        else
+                                        {
+                                            Target.ACID_Mode_S = "N/A";
+                                        }
+                                        Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
+                                        Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                        Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
+
+                                        if (Mode_S_Address != null)
+                                        {
+                                            if (Mode_S_Address.Is_Valid)
+                                                Target.Mode_S_Addr = Mode_S_Address.AC_ADDRESS_String;
+                                            else
+                                                Target.Mode_S_Addr = "N/A";
+                                        }
+                                        else
+                                            Target.Mode_S_Addr = "N/A";
+
+                                        if (CAT48I250Mode_S_MB != null)
+                                        {
+                                            if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Present_This_Cycle)
+                                            {
+                                                if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.MAG_HDG.Is_Valid)
+                                                    Target.DAP_HDG = Math.Round(CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.MAG_HDG.Value).ToString();
+                                                else
+                                                    Target.DAP_HDG = "N/A";
+
+                                                if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.MACH.Is_Valid)
+                                                    Target.MACH = Math.Round(CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.MACH.Value, 3).ToString();
+                                                else
+                                                    Target.MACH = "N/A";
+
+                                                if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.IAS.Is_Valid)
+                                                    Target.IAS = CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.IAS.Value.ToString();
+                                                else
+                                                    Target.IAS = "N/A";
+
+                                                if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Inertial_RoC.Is_Valid)
+                                                    Target.Rate_Of_Climb = "I:" + CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Inertial_RoC.Value.ToString();
+                                                else
+                                                    Target.Rate_Of_Climb = "I:N/A";
+
+                                                if (CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Baro_RoC.Is_Valid)
+                                                    Target.Rate_Of_Climb = Target.Rate_Of_Climb + "/" + "B:" + CAT48I250Mode_S_MB.BDS60_HDG_SPD_Report.Baro_RoC.Value.ToString();
+                                                else
+                                                    Target.Rate_Of_Climb = Target.Rate_Of_Climb + "/" + "B:N/A";
+                                            }
+
+                                            if (CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.Present_This_Cycle)
+                                            {
+
+                                                if (CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.Roll_Ang.Is_Valid)
+                                                    Target.Roll_Ang = Math.Round(CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.Roll_Ang.Value).ToString();
+                                                else
+                                                    Target.Roll_Ang = "N/A";
+
+                                                if (CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.TAS.Is_Valid)
+                                                    Target.TAS = CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.TAS.Value.ToString();
+                                                else
+                                                    Target.TAS = "N/A";
+
+                                                if (CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.GND_SPD.Is_Valid)
+                                                    Target.DAP_GSPD = Math.Round(CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.GND_SPD.Value).ToString();
+                                                else
+                                                    Target.DAP_GSPD = "N/A";
+
+                                                if (CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.TRUE_TRK.Is_Valid)
+                                                    Target.TRK = Math.Round(CAT48I250Mode_S_MB.BDS50_Track_Turn_Report.TRUE_TRK.Value).ToString();
+                                                else
+                                                    Target.TRK = "N/A";
+                                            }
+
+                                            if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Present_This_Cycle)
+                                            {
+                                                switch (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.Target_Altitude_Source)
+                                                {
+                                                    case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.Aircraft_Alt:
+                                                        Target.SelectedAltitude_ShortTerm = "A/C:" + Target.ModeC;
+                                                        break;
+                                                    case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.FCU_MCP_Selected_Alt:
+                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid)
+                                                            Target.SelectedAltitude_ShortTerm = "MCP:" + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
+                                                        else
+                                                            Target.SelectedAltitude_ShortTerm = "MCP:N/A";
+                                                        break;
+                                                    case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.FMS_Selected_Alt:
+                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Is_Valid)
+                                                            Target.SelectedAltitude_ShortTerm = "FMS:" + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.FMS_Sel_ALT.Value.ToString();
+                                                        else
+                                                            Target.SelectedAltitude_ShortTerm = "FMS:N/A";
+                                                        break;
+                                                    case CAT48I250Types.BDS40_Selected_Vertical_Intention_Report.Status.Target_Altitude_Mode_Type.Unknown:
+                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid)
+                                                            Target.SelectedAltitude_ShortTerm = "UNK:" + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
+                                                        else
+                                                            Target.SelectedAltitude_ShortTerm = "N/A";
+                                                        break;
+                                                }
+
+
+                                                if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Is_Valid)
+                                                {
+                                                    Target.SelectedAltitude_LongTerm = "";
+                                                    if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.MCP_FCU_Mode_Bits_Populated)
+                                                    {
+                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.ALT_Hold_Active)
+                                                            Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "AH:";
+                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.APP_Mode_Active)
+                                                            Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "AM:";
+                                                        if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Status_Data.VNAV_Mode_Active)
+                                                            Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "MV:";
+                                                    }
+                                                    Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.MCP_FCU_Sel_ALT.Value.ToString();
+                                                }
+                                                else
+                                                    Target.SelectedAltitude_LongTerm = "N/A";
+
+                                                if (CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Baro_Sel_ALT.Is_Valid)
+                                                    Target.Barometric_Setting = Math.Round(CAT48I250Mode_S_MB.BDS40_Selected_Vertical_Intention_Report.Baro_Sel_ALT.Value, 1).ToString() + "mb";
+                                                else
+                                                    Target.Barometric_Setting = "N/A";
+                                            }
+
+                                        }
+
+                                        // If GSPD and HDG are available from CAT48/I200 then use it
+                                        if (CalculatedGSPandHDG != null)
+                                        {
+                                            if (CalculatedGSPandHDG.Is_Valid)
+                                            {
+                                                Target.CALC_GSPD = Math.Round(CalculatedGSPandHDG.GSPD, 0).ToString();
+                                                Target.CALC_HDG = Math.Round(CalculatedGSPandHDG.HDG, 0).ToString();
+                                            }
+                                        }
+
+                                        CurrentTargetList.Add(Target);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else if (MainASTERIXDataStorage.CAT62Message.Count > 0)
+                {
+
+                    for (int Start_Idx = LastDataIndex; Start_Idx < MainASTERIXDataStorage.CAT62Message.Count; Start_Idx++)
+                    {
+                        LastDataIndex++;
+
+                        MainASTERIXDataStorage.CAT62Data Msg = MainASTERIXDataStorage.CAT62Message[Start_Idx];
+
+                        CAT62I060Types.CAT62060Mode3UserData Mode3AData = (CAT62I060Types.CAT62060Mode3UserData)Msg.CAT62DataItems[CAT62.ItemIDToIndex("060")].value;
+                        // Get Lat/Long in decimal
+                        GeoCordSystemDegMinSecUtilities.LatLongClass LatLongData = (GeoCordSystemDegMinSecUtilities.LatLongClass)Msg.CAT62DataItems[CAT62.ItemIDToIndex("105")].value;
+                        CAT62I220Types.CalculatedRateOfClimbDescent CAT62I220Data = (CAT62I220Types.CalculatedRateOfClimbDescent)Msg.CAT62DataItems[CAT62.ItemIDToIndex("220")].value;
+                        CAT62I380Types.CAT62I380Data CAT62I380Data = (CAT62I380Types.CAT62I380Data)Msg.CAT62DataItems[CAT62.ItemIDToIndex("380")].value;
+                        CAT62I070Types.CAT62070ElapsedTimeSinceMidnight TimeSinceMidnight = (CAT62I070Types.CAT62070ElapsedTimeSinceMidnight)Msg.CAT62DataItems[CAT62.ItemIDToIndex("070")].value;
+                        CAT62I185Types.CalculatedGSPandHDG_Type GSPD_and_HDG = (CAT62I185Types.CalculatedGSPandHDG_Type)Msg.CAT62DataItems[CAT62.ItemIDToIndex("185")].value;
+
+                        TargetType Target = new TargetType();
+
+                        if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("040")].value != null)
+                            Target.TrackNumber = (int)Msg.CAT62DataItems[CAT62.ItemIDToIndex("040")].value;
+
+                        if (Mode3AData != null && LatLongData != null)
+                        {
+                            Target.ModeA = Mode3AData.Mode3A_Code;
+
+                            if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value != null)
+                            {
+                                try
+                                {
+                                    double FlightLevel = (double)Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value;
+                                    Target.ModeC = FlightLevel.ToString();
+                                }
+                                catch
+                                {
+                                    Target.ModeC = "---";
+                                }
+                            }
+                            else
+                            {
+                                Target.ModeC = "---";
+                            }
+
+                            if (CAT62I380Data != null)
+                            {
+                                if (CAT62I380Data.AC_Address.Is_Valid)
+                                    Target.Mode_S_Addr = CAT62I380Data.AC_Address.AC_ADDRESS_String;
+                                else
+                                    Target.Mode_S_Addr = "N/A";
+
+                                if (CAT62I380Data.ACID.Is_Valid)
+                                    Target.ACID_Mode_S = CAT62I380Data.ACID.ACID_String;
+                                else
+                                    Target.ACID_Mode_S = "N/A";
+
+                                if (CAT62I380Data.TAS.Is_Valid)
+                                    Target.TAS = CAT62I380Data.TAS.TAS.ToString();
+                                else
+                                    Target.TAS = "N/A";
+
+                                if (CAT62I380Data.IAS.Is_Valid)
+                                    Target.IAS = CAT62I380Data.IAS.IAS.ToString();
+                                else
+                                    Target.IAS = "N/A";
+
+                                if (CAT62I380Data.MACH.Is_Valid)
+                                    Target.MACH = Math.Round(CAT62I380Data.MACH.MACH, 3).ToString();
+                                else
+                                    Target.MACH = "N/A";
+
+                                if (CAT62I380Data.M_HDG.Is_Valid)
+                                    Target.DAP_HDG = Math.Round(CAT62I380Data.M_HDG.M_HDG).ToString();
+                                else
+                                    Target.DAP_HDG = "N/A";
+
+                                if (CAT62I380Data.TRK.Is_Valid)
+                                    Target.TRK = Math.Round(CAT62I380Data.TRK.TRK).ToString();
+                                else
+                                    Target.TRK = "N/A";
+
+                                if (CAT62I380Data.GSPD.Is_Valid)
+                                    Target.DAP_GSPD = Math.Round(CAT62I380Data.GSPD.GSPD).ToString();
+                                else
+                                    Target.DAP_GSPD = "N/A";
+
+                                if (CAT62I380Data.Rool_Angle.Is_Valid)
+                                    Target.Roll_Ang = Math.Round(CAT62I380Data.Rool_Angle.Rool_Angle, 1).ToString();
+                                else
+                                    Target.Roll_Ang = "N/A";
+
+                                if (CAT62I380Data.FS_Selected_Altitude.Is_Valid)
+                                {
+                                    Target.SelectedAltitude_LongTerm = "";
+                                    if (CAT62I380Data.FS_Selected_Altitude.Altitude_Hold_Active)
+                                        Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "AH:";
+                                    if (CAT62I380Data.FS_Selected_Altitude.Approach_Mode_Active)
+                                        Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "AM:";
+                                    if (CAT62I380Data.FS_Selected_Altitude.Manage_Mode_Active)
+                                        Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + "MV:";
+
+                                    Target.SelectedAltitude_LongTerm = Target.SelectedAltitude_LongTerm + CAT62I380Data.FS_Selected_Altitude.SelectedAltitude.ToString();
+                                }
+                                else
+                                    Target.SelectedAltitude_LongTerm = "N/A";
+
+                                if (CAT62I380Data.Selected_Altitude.Is_Valid)
+                                {
+                                    Target.SelectedAltitude_ShortTerm = "";
+                                    switch (CAT62I380Data.Selected_Altitude.Source)
+                                    {
+                                        case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.AircraftAltitude:
+                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "A/C:";
+                                            break;
+                                        case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.FCU_MCP:
+                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "MCP:";
+                                            break;
+                                        case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.FMS_Selected:
+                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "FMS:";
+                                            break;
+                                        case CAT62I380Types.CAT62SelectedAltitudeType.SourceType.Unknown:
+                                            Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + "UKN:";
+                                            break;
+                                    }
+                                    Target.SelectedAltitude_ShortTerm = Target.SelectedAltitude_ShortTerm + CAT62I380Data.Selected_Altitude.SelectedAltitude.ToString();
+                                }
+                                else
+                                    Target.SelectedAltitude_ShortTerm = "N/A";
+
+                                if (CAT62I380Data.Baro_Press_Setting.Is_Valid)
+                                    Target.Barometric_Setting = Math.Round(CAT62I380Data.Baro_Press_Setting.Baro_Pressure_Setting, 1).ToString() + "mb";
+                                else
+                                    Target.Barometric_Setting = "N/A";
+                            }
+
+                            if (CAT62I220Data != null)
+                            {
+                                if (CAT62I220Data.Is_Valid == true)
+                                    Target.Rate_Of_Climb = CAT62I220Data.Value.ToString();
+                                else
+                                    Target.Rate_Of_Climb = "N/A";
+                            }
+                            else
+                            {
+                                Target.Rate_Of_Climb = "N/A";
+                            }
+
+                            Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
+                            Target.Lon = LatLongData.GetLatLongDecimal().LongitudeDecimal;
+                            Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
+
+                            if (GSPD_and_HDG != null)
+                            {
+                                if (GSPD_and_HDG.Is_Valid)
+                                {
+                                    Target.CALC_GSPD = Math.Round(GSPD_and_HDG.GSPD, 0).ToString();
+                                    Target.CALC_HDG = Math.Round(GSPD_and_HDG.HDG, 0).ToString();
                                 }
                             }
 

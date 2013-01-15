@@ -115,18 +115,18 @@ namespace AsterixDisplayAnalyser
             double Track_1_TRK;
             double Track_2_TRK;
 
-            if (!double.TryParse(T1.GSPD, out Track_1_SPD))
+            if (!double.TryParse(T1.CALC_GSPD, out Track_1_SPD))
                 DataValid = false;
-            if (!double.TryParse(T2.GSPD, out Track_2_SPD))
+            if (!double.TryParse(T2.CALC_GSPD, out Track_2_SPD))
                 DataValid = false;
             if (!double.TryParse(T1.TRK, out Track_1_TRK))
             {
-                if (!double.TryParse(T1.M_HDG, out Track_1_TRK))
+                if (!double.TryParse(T1.DAP_HDG, out Track_1_TRK))
                     DataValid = false;
             }
             if (!double.TryParse(T2.TRK, out Track_2_TRK))
             {
-                if (!double.TryParse(T2.M_HDG, out Track_2_TRK))
+                if (!double.TryParse(T2.DAP_HDG, out Track_2_TRK))
                     DataValid = false;
             }
 
