@@ -171,6 +171,12 @@ namespace AsterixDisplayAnalyser
                 case "340":
                     index = 26;
                     break;
+                case "REF":
+                    index = 27;
+                    break;
+                case "SPI":
+                    index = 28;
+                    break;
                 default:
                     break;
             }
@@ -388,6 +394,20 @@ namespace AsterixDisplayAnalyser
                 if (Hard_Reset)
                     I062DataItems[ItemIDToIndex("340")].HasBeenPresent = false;
                 I062DataItems[ItemIDToIndex("340")].CurrentlyPresent = false;
+                // I062/REF 
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("REF")].ID = "REF";
+                I062DataItems[ItemIDToIndex("REF")].Description = "Reserved Expansion Field";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("REF")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("REF")].CurrentlyPresent = false;
+                // I062/SPI
+                I062DataItems.Add(new CAT062DataItem());
+                I062DataItems[ItemIDToIndex("SPI")].ID = "SPI";
+                I062DataItems[ItemIDToIndex("SPI")].Description = "Special Purpose Indicator";
+                if (Hard_Reset)
+                    I062DataItems[ItemIDToIndex("SPI")].HasBeenPresent = false;
+                I062DataItems[ItemIDToIndex("SPI")].CurrentlyPresent = false;
             }
         }
 
@@ -413,8 +433,11 @@ namespace AsterixDisplayAnalyser
             // Lenght of the current record's FSPECs
             int FSPEC_Length = 0;
 
-            // The four possible FSPEC octets
+            // The first four possible FSPEC octets
             BitVector32 FourFSPECOctets = new BitVector32();
+
+            // The fifth FSPEC octet in the case RE or SP field is present
+            BitVector32 TheFifthFSPECOctet = new BitVector32();
 
             while (DataBufferIndexForThisExtraction < LengthOfDataBlockInBytes)
             {
@@ -427,6 +450,7 @@ namespace AsterixDisplayAnalyser
                 // Get all four data words, but use only the number specifed 
                 // by the length of FSPEC words
                 FourFSPECOctets = ASTERIX.GetFourFSPECOctets(LocalSingleRecordBuffer);
+                TheFifthFSPECOctet = ASTERIX.GetFifthFSPECOctet(LocalSingleRecordBuffer);
 
                 // Determine Length of FSPEC fields in bytes
                 FSPEC_Length = ASTERIX.DetermineLenghtOfFSPEC(LocalSingleRecordBuffer);
@@ -840,6 +864,36 @@ namespace AsterixDisplayAnalyser
 
                             break;
 
+                        // These are Reserved Expansion and Special Purpose fileds.
+                        case 5:
+ 
+                            // RE Reserved Expansion Field
+                            if (TheFifthFSPECOctet[Bit_Ops.Bit2] == true)
+                            {
+                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  REF:T";
+                                I062DataItems[ItemIDToIndex("REF")].HasBeenPresent = true;
+                                I062DataItems[ItemIDToIndex("REF")].CurrentlyPresent = true;
+                            }
+                            else
+                            {
+                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  REF:F";
+                                I062DataItems[ItemIDToIndex("REF")].CurrentlyPresent = false;
+                            }
+
+                            // SP Special Purpose Indicator
+                            if (TheFifthFSPECOctet[Bit_Ops.Bit1] == true)
+                            {
+                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  SPI:T";
+                                I062DataItems[ItemIDToIndex("SPI")].HasBeenPresent = true;
+                                I062DataItems[ItemIDToIndex("SPI")].CurrentlyPresent = true;
+                            }
+                            else
+                            {
+                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  SPI:F";
+                                I062DataItems[ItemIDToIndex("SPI")].CurrentlyPresent = false;
+                            }
+
+                            break;
 
                         // Handle errors
                         default:

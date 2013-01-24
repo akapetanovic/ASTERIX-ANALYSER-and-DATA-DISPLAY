@@ -243,6 +243,9 @@
     <Compile Include="ASTERIX\CAT062\CAT62I220Types.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I070Types.cs" />
     <Compile Include="ASTERIX\CAT062\CAT62I185Types.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62IREFUserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62ISPIUserData.cs" />
+    <Compile Include="ASTERIX\CAT062\CAT62I290Types.cs" />
     <Compile Include="DATA DISPLAY\DISPLAY UTILITIES\ExtendedLabel.cs">
       <SubType>Form</SubType>
     </Compile>

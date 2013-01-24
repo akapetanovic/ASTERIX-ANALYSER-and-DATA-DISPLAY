@@ -176,7 +176,7 @@ namespace AsterixDisplayAnalyser
                         GlobalTargetList[CurrentTarget.TrackNumber].Mode_S_Addr = CurrentTarget.Mode_S_Addr;
                     if (CurrentTarget.DAP_HDG != "N/A")
                         GlobalTargetList[CurrentTarget.TrackNumber].DAP_HDG = CurrentTarget.DAP_HDG;
-                    GlobalTargetList[CurrentTarget.TrackNumber].CALC_HDG = CurrentTarget.CALC_HDG; 
+                    GlobalTargetList[CurrentTarget.TrackNumber].CALC_HDG = CurrentTarget.CALC_HDG;
                     if (CurrentTarget.IAS != "N/A")
                         GlobalTargetList[CurrentTarget.TrackNumber].IAS = CurrentTarget.IAS;
                     if (CurrentTarget.TRK != "N/A")
@@ -273,7 +273,7 @@ namespace AsterixDisplayAnalyser
                     GlobalTargetList[ModeAIndex].ModeC = CurrentTarget.ModeC;
                     if (CurrentTarget.DAP_GSPD != null)
                         GlobalTargetList[ModeAIndex].DAP_GSPD = CurrentTarget.DAP_GSPD;
-                        GlobalTargetList[ModeAIndex].CALC_GSPD = CurrentTarget.CALC_GSPD;
+                    GlobalTargetList[ModeAIndex].CALC_GSPD = CurrentTarget.CALC_GSPD;
                     GlobalTargetList[ModeAIndex].ACID_Mode_S = CurrentTarget.ACID_Mode_S;
                     if (CurrentTarget.Mode_S_Addr != "N/A")
                         GlobalTargetList[ModeAIndex].Mode_S_Addr = CurrentTarget.Mode_S_Addr;
@@ -496,7 +496,9 @@ namespace AsterixDisplayAnalyser
 
                                         Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                                         Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
-                                        Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
+                                        
+                                        if (TimeSinceMidnight != null)
+                                            Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
 
                                         if (CalculatedGSPandHDG != null)
                                         {
@@ -868,7 +870,9 @@ namespace AsterixDisplayAnalyser
 
                             Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
                             Target.Lon = LatLongData.GetLatLongDecimal().LongitudeDecimal;
-                            Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
+
+                            if (TimeSinceMidnight != null)
+                                Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
 
                             if (GSPD_and_HDG != null)
                             {

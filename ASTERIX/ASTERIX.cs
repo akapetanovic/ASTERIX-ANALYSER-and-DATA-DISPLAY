@@ -432,6 +432,7 @@ namespace AsterixDisplayAnalyser
         private static int SecondFSPECS_Byte_Index = 1;
         private static int ThirdFSPECS_Byte_Index = 2;
         private static int FourthFSPECS_Byte_Index = 3;
+        private static int FifthFSPECS_Byte_Index = 4;
 
         /////////////////////////////////////////////////////////////////////////
         // Extracts the first 8 bits from the given messages. These first 8 bits
@@ -557,11 +558,11 @@ namespace AsterixDisplayAnalyser
         }
 
         /////////////////////////////////////////////////////////////////////////
-        // This method returns the possible four FSPEC octets 
+        // This method returns the first four FSPEC octets 
         // as a BitVector32. User then can evaluate the individual bits
         // and interpret their meaining depending on the ASTERIX CAT
         //
-        // NOTE: It returns all four possible FSPEC, but user is first to
+        // NOTE: It returns the four possible FSPEC, but user is first to
         // determine the length of the FSPEC and according to that to use it.
         public static BitVector32 GetFourFSPECOctets(byte[] Data)
         {
@@ -573,6 +574,21 @@ namespace AsterixDisplayAnalyser
             BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[SecondFSPECS_Byte_Index];
             BO.DWord[Bit_Ops.Bits16_23_Of_DWord] = Data[ThirdFSPECS_Byte_Index];
             BO.DWord[Bit_Ops.Bits24_31_Of_DWord] = Data[FourthFSPECS_Byte_Index];
+
+            return BO.DWord;
+        }
+
+        /////////////////////////////////////////////////////////////////////////
+        // This method returns the fifth FSPEC octet 
+        // as a BitVector32. User then can evaluate the individual bits
+        // and interpret their meaining depending on the ASTERIX CAT
+        public static BitVector32 GetFifthFSPECOctet(byte[] Data)
+        {
+            // Get an instance of bit ops
+            Bit_Ops BO = new Bit_Ops();
+
+            // Move each octet into the DWORD
+            BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[FifthFSPECS_Byte_Index];
 
             return BO.DWord;
         }

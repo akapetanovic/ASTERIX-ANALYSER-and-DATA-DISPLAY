@@ -189,6 +189,19 @@ namespace AsterixDisplayAnalyser
             
             // FX.     - Field extension indicator -
 
+            // I062/500 Estimated Accuracies                            1+
+            if (CAT62.I062DataItems[CAT62.ItemIDToIndex("REF")].CurrentlyPresent == true)
+            {
+                CAT62IREFUserData.DecodeCAT62IREF(Data);
+            }
+
+            // I062/340 Measured Information                            1+
+            if (CAT62.I062DataItems[CAT62.ItemIDToIndex("SPI")].CurrentlyPresent == true)
+            {
+                CAT62ISPIUserData.DecodeCAT62ISPI(Data);
+            }
+
+
             ////////////////////////////////////////////////////////////////////////////////////
             // All CAT62 data has been decoded, so lets save off the message data to the global
             // storage for latter usage

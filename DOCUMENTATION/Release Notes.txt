@@ -78,12 +78,14 @@ VERSION HISTORY
 
 Version 1.7
 
-	1. Modifed to use TrackNumber from CAT062 for track indexing to allow duplicate
+	1. Fixed issue with CAT62 to handle Reserved Expansion Field
+	2. Fixed issue with CAT62 to handle I290 System Track Update Ages
+	3. Modifed to use TrackNumber from CAT062 for track indexing to allow duplicate
 	   tracks (multiple on ModeA) to be displayed.
-	2. Decoded CAT01I200, Calculated Track Velocity in Polar Coordinates
+	3. Decoded CAT01I200, Calculated Track Velocity in Polar Coordinates
 		2.1: GSPD and HDG now work for CAT01 and is based on CAT01I200
-	3. Decoded CAT48I200, Calculated Track Velocity in Polar Coordinates
-		2.1: GSPD and HDG now alos work for CAT48/CAT48I200. If not available
+	5. Decoded CAT48I200, Calculated Track Velocity in Polar Coordinates
+		2.1: GSPD and HDG now also work for CAT48/CAT48I200. If not available
 			 from CAT48/I200, then CAT48/I250 is used as a source.
 
 Version 1.6
@@ -92,7 +94,6 @@ Version 1.6
 		a. CAT01/I141 Truncated Time of Day
 		b. CAT48/I140 Time of Day
 		c. CAT62/I070 Time of Track Information
-	2. Implemented STCA (Short Term Conflict Alert)
 
 Version 1.5
 
