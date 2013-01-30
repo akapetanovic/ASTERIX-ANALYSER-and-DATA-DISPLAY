@@ -18,7 +18,7 @@ namespace AsterixDisplayAnalyser
             TargetList.Add(NewTarget);
         }
 
-        // Thise method is to be called one all desired targets
+        // This method is to be called once all the targets
         // are loaded via AddNewTarget. Once KML is created the list
         // will be emptied.
         public void BuildKML()

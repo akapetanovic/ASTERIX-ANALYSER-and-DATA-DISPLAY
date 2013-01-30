@@ -465,6 +465,7 @@
     </Compile>
     <Compile Include="SAFETY NET\SEP Tool.cs" />
     <Compile Include="SAFETY NET\STCA.cs" />
+    <Compile Include="WBTD\WBTD.cs" />
     <EmbeddedResource Include="DATA DISPLAY\DISPLAY UTILITIES\ExtendedLabel.resx">
       <DependentUpon>ExtendedLabel.cs</DependentUpon>
     </EmbeddedResource>
