@@ -1,6 +1,0 @@
-#ITEM_NAME,TEXT_SIZE,TEXT_FONT,TEXT_COLOR,LINE_WIDTH,LINE_COLOR,LINE_STYLE,AREA_COLOR,IMAGE_SIZE
-Radar,10,Microsoft Sans Serif,White,1,White,Solid,Black,20,20
-Waypoint,10,Microsoft Sans Serif,WhiteSmoke,2,Red,Solid,Black,10,10
-StateBorder,8,Microsoft Sans Serif,White,1,WhiteSmoke,Solid,Black,30,19
-SectorBorder,8,Microsoft Sans Serif,DimGray,1,DimGray,Solid,SlateGray,30,30
-RunwayBorder,8,Microsoft Sans Serif,White,2,White,Solid,Black,30,30

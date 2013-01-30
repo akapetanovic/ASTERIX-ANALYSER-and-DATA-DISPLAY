@@ -86,7 +86,7 @@ Version 1.7
 		2.1: GSPD and HDG now work for CAT01 and is based on CAT01I200
 	5. Decoded CAT48I200, Calculated Track Velocity in Polar Coordinates
 		2.1: GSPD and HDG now also work for CAT48/CAT48I200. If not available
-			 from CAT48/I200, then CAT48/I250 is used as a source.
+			 from CAT48/I200, then CAT48I250 is used as a source.
 
 Version 1.6
 
