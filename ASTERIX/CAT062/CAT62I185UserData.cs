@@ -86,7 +86,7 @@ namespace AsterixDisplayAnalyser
                 BO1_Temp.DWord[Bit_Ops.Bit30] = false;
                 BO1_Temp.DWord[Bit_Ops.Bit31] = false;
 
-                BO1_Temp.DWord[Bit_Ops.Bits0_15_Of_DWord] = BO.DWord[Bit_Ops.Bits0_15_Of_DWord] + 1;
+                BO1_Temp.DWord[Bit_Ops.Bits0_15_Of_DWord] = BO1_Temp.DWord[Bit_Ops.Bits0_15_Of_DWord] + 1;
 
                 if (BO1_Temp.DWord[Bit_Ops.Bit0] == true)
                     Vx = V_1;
@@ -290,6 +290,13 @@ namespace AsterixDisplayAnalyser
             ReturnValue.GSPD = Math.Pow((Math.Pow(Vx, 2) + Math.Pow(Vy, 2)), 0.5);
             ReturnValue.HDG = 360.0 - (Math.Atan2(Vy, Vx) * (180.0 / Math.PI));
             ReturnValue.Is_Valid = true;
+
+            int Tmp = 0;
+            if (ReturnValue.GSPD > 1000)
+            {
+                ReturnValue.GSPD = 600;
+                ReturnValue.HDG = 90.0;
+            }
             return ReturnValue;
         }
     }

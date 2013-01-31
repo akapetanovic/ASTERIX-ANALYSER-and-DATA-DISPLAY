@@ -158,7 +158,7 @@ namespace AsterixDisplayAnalyser
                 if (BO.DWord[Bit_Ops.Bit27] == true)
                     Result = Result + POS_FIX_28;
 
-                Latitude = Result;
+                Latitude = -Result;
 
             }
             else
@@ -325,7 +325,7 @@ namespace AsterixDisplayAnalyser
                 if (BO.DWord[Bit_Ops.Bit27] == true)
                     Result = Result + POS_FIX_28;
 
-                Longitude = Result;
+                Longitude = -Result;
             }
             else
             {

@@ -15,8 +15,8 @@ namespace AsterixDisplayAnalyser
 
     class WBTD
     {
-        private static string FileName = @"C:\ASTERIX\WBTD\Tracks.txt";
-        private static string TrackBuffer = "";
+        private string FileName = @"C:\ASTERIX\WBTD\Tracks.txt";
+        private string TrackBuffer = "";
 
         // To be called with a new target data set. This one line of the data in the text file.
         public void SetTargetData(string LAT, string LON, string CALLSIGN, string ModeA, string ModeC)
@@ -29,22 +29,25 @@ namespace AsterixDisplayAnalyser
         // track data.
         public void WriteTrackData()
         {
-            // create a writer and open the file
-            TextWriter tw = new StreamWriter(FileName);
 
-            try
+            if (TrackBuffer.Length > 0)
             {
-                // write a line of text to the file
-                tw.Write(TrackBuffer);
-                MessageBox.Show("DisplayAttributes succefully saved");
-            }
-            catch (System.IO.IOException e)
-            {
-                MessageBox.Show(e.Message);
-            }
+                // create a writer and open the file
+                StreamWriter sw = new StreamWriter(FileName, false);
 
-            // close the stream
-            tw.Close();
+                try
+                {
+                    sw.Write(TrackBuffer);
+                }
+                catch (System.IO.IOException e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+
+                // close the stream
+                sw.Close();
+                sw.Dispose();
+            }
         }
     }
 }

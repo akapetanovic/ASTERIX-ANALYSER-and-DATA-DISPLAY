@@ -496,7 +496,7 @@ namespace AsterixDisplayAnalyser
 
                                         Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
                                         Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
-                                        
+
                                         if (TimeSinceMidnight != null)
                                             Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
 
@@ -1324,7 +1324,9 @@ namespace AsterixDisplayAnalyser
 
                             Target.Lat = LatLongData.GetLatLongDecimal().LatitudeDecimal;
                             Target.Lon = LatLongData.GetLatLongDecimal().LongitudeDecimal;
-                            Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
+
+                            if (TimeSinceMidnight != null)
+                                Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
 
                             if (GSPD_and_HDG != null)
                             {
@@ -1344,7 +1346,6 @@ namespace AsterixDisplayAnalyser
             if (Return_Buffered == false)
             {
                 UpdateGlobalList();
-                //HandleGSPDCalculation();
             }
 
             STCA.RUN(ref CurrentTargetList);

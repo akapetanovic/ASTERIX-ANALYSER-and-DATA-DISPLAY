@@ -386,7 +386,7 @@ namespace AsterixDisplayAnalyser
                     if (CALC_GSPD_STRING != "N/A")
                         Range = double.Parse(CALC_GSPD_STRING);
                     else
-                        Range = double.Parse(DAP_HDG);
+                        Range = double.Parse(DAP_GSPD);
 
                     if (CALC_HDG_STRING != "N/A")
                         Azimuth = double.Parse(CALC_HDG_STRING);
