@@ -259,8 +259,13 @@ namespace AsterixDisplayAnalyser
 
         }
 
+        private bool DataItemValidator(string Item)
+        { return (Item != null && Item != "N/A"); }
+
         public override void OnRender(Graphics g)
         {
+
+
             Pen MyPen = new Pen(new SolidBrush(LabelAttributes.TargetColor), LabelAttributes.TargetSize);
             MyPen.DashStyle = LabelAttributes.TargetStyle;
 
@@ -373,36 +378,36 @@ namespace AsterixDisplayAnalyser
                 }
             }
 
+
+
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             // Here draw speed vector
             // // Find out what data should be used for speed vector? IAS, TAS, GSPD, MACH?
-            if ((CALC_HDG_STRING != "N/A" || DAP_HDG != "N/A" || TRK != "N/A") && (DAP_GSPD != null || CALC_GSPD_STRING != null))
+            if ((DataItemValidator(CALC_HDG_STRING) || DataItemValidator(DAP_HDG) || DataItemValidator(TRK)) && (DataItemValidator(DAP_GSPD) || DataItemValidator(CALC_GSPD_STRING)))
             {
-                if (CALC_GSPD_STRING != "N/A" || DAP_GSPD != "N/A")
-                {
-                    double Azimuth = 0.0;
-                    double Range = 0.0;
 
-                    if (CALC_GSPD_STRING != "N/A")
-                        Range = double.Parse(CALC_GSPD_STRING);
-                    else
-                        Range = double.Parse(DAP_GSPD);
+                double Azimuth = 0.0;
+                double Range = 0.0;
 
-                    if (CALC_HDG_STRING != "N/A")
-                        Azimuth = double.Parse(CALC_HDG_STRING);
-                    else if (TRK != "N/A")
-                        Azimuth = double.Parse(TRK);
-                    else
-                        Azimuth = double.Parse(DAP_HDG);
+                if (DataItemValidator(CALC_GSPD_STRING))
+                    Range = double.Parse(CALC_GSPD_STRING);
+                else
+                    Range = double.Parse(DAP_GSPD);
 
-                    Range = (Range / 60) * (double)Properties.Settings.Default.SpeedVector;
+                if (DataItemValidator(CALC_HDG_STRING))
+                    Azimuth = double.Parse(CALC_HDG_STRING);
+                else if (DataItemValidator(TRK))
+                    Azimuth = double.Parse(TRK);
+                else
+                    Azimuth = double.Parse(DAP_HDG);
 
-                    GeoCordSystemDegMinSecUtilities.LatLongClass ResultPosition =
-                        GeoCordSystemDegMinSecUtilities.CalculateNewPosition(new GeoCordSystemDegMinSecUtilities.LatLongClass(Position.Lat, Position.Lng), (double)Range, (double)Azimuth);
+                Range = (Range / 60) * (double)Properties.Settings.Default.SpeedVector;
 
-                    GPoint MarkerPositionLocal = FormMain.gMapControl.FromLatLngToLocal(new PointLatLng(ResultPosition.GetLatLongDecimal().LatitudeDecimal, ResultPosition.GetLatLongDecimal().LongitudeDecimal));
-                    g.DrawLine(MyPen, new Point(LocalPosition.X, LocalPosition.Y), new Point(MarkerPositionLocal.X, MarkerPositionLocal.Y));
-                }
+                GeoCordSystemDegMinSecUtilities.LatLongClass ResultPosition =
+                    GeoCordSystemDegMinSecUtilities.CalculateNewPosition(new GeoCordSystemDegMinSecUtilities.LatLongClass(Position.Lat, Position.Lng), (double)Range, (double)Azimuth);
+
+                GPoint MarkerPositionLocal = FormMain.gMapControl.FromLatLngToLocal(new PointLatLng(ResultPosition.GetLatLongDecimal().LatitudeDecimal, ResultPosition.GetLatLongDecimal().LongitudeDecimal));
+                g.DrawLine(MyPen, new Point(LocalPosition.X, LocalPosition.Y), new Point(MarkerPositionLocal.X, MarkerPositionLocal.Y));
             }
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

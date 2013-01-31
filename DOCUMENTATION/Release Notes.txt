@@ -58,7 +58,7 @@ CAT62
 		040 Track Number
 		070 Time of Track Information
 		136 Measured Flight Level
-		185, Calculated Track Velocity (Cartesian)
+		185 Calculated Track Velocity (Cartesian)
 		220 Calculated Rate of Climb/Descent
 		380 Aircraft Derived Data
 			Subfield # 1: Target Address
@@ -84,6 +84,7 @@ Version 1.8
 		2.1: GSPD and HDG now also work for CAT62/CAT62I185. If not available
 			 from CAT62/I185, then CAT62I380 is used as a source.
 	2. Implemented support for Web Based Track Display. Please see User Manaul
+	3. Fixed several other minor bugs discovered during testing of different data samples
 
 Version 1.7
 
