@@ -58,7 +58,7 @@ namespace AsterixDisplayAnalyser
                         sw.Dispose();
                         Success = false;
                     }
-                    catch (System.IO.IOException e)
+                    catch
                     {
                         Thread.Sleep(100);       
                     }

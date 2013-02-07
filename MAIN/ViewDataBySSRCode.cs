@@ -192,7 +192,7 @@ namespace AsterixDisplayAnalyser
                             this.listBoxDataBySSRCode.Items.Add("\tLat/Long:\t" + Lat + "/" + Lon);
                             // FLIGHT LEVEL
                             double FlightLevel = (double)Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value;
-                            if (FlightLevel != null)
+                            if (Msg.CAT62DataItems[CAT62.ItemIDToIndex("136")].value != null)
                             {
                                 this.listBoxDataBySSRCode.Items.Add("\tFL:\t" + FlightLevel.ToString());
                             }

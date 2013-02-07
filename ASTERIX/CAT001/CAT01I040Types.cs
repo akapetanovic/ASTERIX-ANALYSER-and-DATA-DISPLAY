@@ -12,7 +12,6 @@ namespace AsterixDisplayAnalyser
             public double Measured_Distance;
             public double Measured_Azimuth;
             public GeoCordSystemDegMinSecUtilities.LatLongClass LatLong = new GeoCordSystemDegMinSecUtilities.LatLongClass();
-            public DateTime UpdateTime;
         }
     }
 }

@@ -12,11 +12,6 @@ namespace AsterixDisplayAnalyser
 {
     class DynamicDisplayBuilder
     {
-
-        //public static frmDebug DebugFrame = new frmDebug();
-
-        private static int Max_History_Points = 10;
-
         public class TargetType
         {
             ////////////////////////////////////////////////////
