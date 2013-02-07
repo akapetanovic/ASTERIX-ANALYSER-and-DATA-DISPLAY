@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace AsterixDisplayAnalyser
 {
@@ -18,11 +19,21 @@ namespace AsterixDisplayAnalyser
         private string FileName = @"C:\ASTERIX\WBTD\Tracks.txt";
         private string TrackBuffer = "";
 
+
+        private string ValidateData(string Item)
+        {
+
+            if (Item == null)
+                return "N/A";
+            else
+                return Item;
+        }
+        
         // To be called with a new target data set. This one line of the data in the text file.
         public void SetTargetData(string LAT, string LON, string CALLSIGN, string ModeA, string ModeC)
         {
 
-            TrackBuffer = TrackBuffer + LAT + "," + LON + "," + CALLSIGN + "," + ModeA + "," + ModeC + Environment.NewLine;
+            TrackBuffer = TrackBuffer + LAT + "," + LON + "," + ValidateData(CALLSIGN) + "," + ValidateData(ModeA) + "," + ValidateData(ModeC) + Environment.NewLine;
         }
 
         // To be called once Track buffer is filled out with the new
@@ -32,21 +43,26 @@ namespace AsterixDisplayAnalyser
 
             if (TrackBuffer.Length > 0)
             {
-                // create a writer and open the file
-                StreamWriter sw = new StreamWriter(FileName, false);
 
-                try
-                {
-                    sw.Write(TrackBuffer);
-                }
-                catch (System.IO.IOException e)
-                {
-                    MessageBox.Show(e.Message);
-                }
+                bool Success = true;
 
-                // close the stream
-                sw.Close();
-                sw.Dispose();
+                while (Success)
+                {
+                    try
+                    {
+                        // create a writer and open the file
+                        StreamWriter sw = new StreamWriter(FileName, false);
+                        sw.Write(TrackBuffer);
+                        // close the stream
+                        sw.Close();
+                        sw.Dispose();
+                        Success = false;
+                    }
+                    catch (System.IO.IOException e)
+                    {
+                        Thread.Sleep(100);       
+                    }
+                }
             }
         }
     }
