@@ -740,9 +740,7 @@ namespace AsterixDisplayAnalyser
 
                     bool Build_Local_Display = comboBoxLiveDisplayMode.Text != "Google Earth";
                     bool Provide_To_Google_Earth = comboBoxLiveDisplayMode.Text != "Local";
-                    bool ProvideWebData = comboBoxLiveDisplayMode.Text == "Local & Web" || comboBoxLiveDisplayMode.Text == "Web";
                     Asterix_To_KML_Provider ASTX_TO_KML = new Asterix_To_KML_Provider();
-                    WBTD WebBasedDisplayProvider = new WBTD();
 
                     foreach (DynamicDisplayBuilder.TargetType Target in TargetList)
                     {
@@ -763,10 +761,6 @@ namespace AsterixDisplayAnalyser
 
                                     if (Provide_To_Google_Earth)
                                         ASTX_TO_KML.AddNewTarget(Target);
-
-                                    if (ProvideWebData)
-                                        WebBasedDisplayProvider.SetTargetData(Target.Lat.ToString(), Target.Lon.ToString(), Target.ACID_Mode_S,
-                                            Target.ModeA, Target.ModeC);
                                 }
                             }
                             else // No SSR filter so just display all of them
@@ -782,9 +776,6 @@ namespace AsterixDisplayAnalyser
                                 if (Provide_To_Google_Earth)
                                     ASTX_TO_KML.AddNewTarget(Target);
 
-                                if (ProvideWebData)
-                                    WebBasedDisplayProvider.SetTargetData(Target.Lat.ToString(), Target.Lon.ToString(), Target.ACID_Mode_S,
-                                        Target.ModeA, Target.ModeC);
                             }
                         }
                     }
@@ -795,9 +786,6 @@ namespace AsterixDisplayAnalyser
                     // Check if there were any items, if so then tell KML to build the file
                     if (Provide_To_Google_Earth)
                         ASTX_TO_KML.BuildKML();
-
-                    if (ProvideWebData)
-                        WebBasedDisplayProvider.WriteTrackData();
                         
                 }
                 else // Here handle display of passive display (buffered data)
