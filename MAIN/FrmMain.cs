@@ -251,9 +251,6 @@ namespace AsterixDisplayAnalyser
             this.checkBoxSystMonEnabled.Checked = Properties.Settings.Default.SystMonEnabled;
             comboBoxLiveDisplayMode.SelectedIndex = 0;
             HandlePlotDisplayEnabledChanged();
-
-            comboBoxLiveDisplayMode.Items.Add("Web");
-            comboBoxLiveDisplayMode.Items.Add("Local & Web");
         }
 
         // This method populates combo box with a color coded message. 
