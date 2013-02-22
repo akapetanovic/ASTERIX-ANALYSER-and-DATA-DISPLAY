@@ -63,6 +63,9 @@ namespace AsterixDisplayAnalyser
         // since the last data update. 
         private static int LastDataIndex = 0;
 
+        // Max number of history points
+        private static int Max_History_Points = 10;
+
         // This method is to be used to reset the data index when the main data buffer is reseted
         // and a new block of data is te be recived.
         public static int ResetGetDataIndex
@@ -164,7 +167,7 @@ namespace AsterixDisplayAnalyser
                         GlobalTargetList[CurrentTarget.TrackNumber].ModeC_Previous_Cycle = "" + GlobalTargetList[CurrentTarget.TrackNumber].ModeC;
                     GlobalTargetList[CurrentTarget.TrackNumber].ModeC = CurrentTarget.ModeC;
                     GlobalTargetList[CurrentTarget.TrackNumber].CALC_GSPD = CurrentTarget.CALC_GSPD;
-                    if (CurrentTarget.DAP_GSPD != null)
+                    if (CurrentTarget.DAP_GSPD != "N/A")
                         GlobalTargetList[CurrentTarget.TrackNumber].DAP_GSPD = CurrentTarget.DAP_GSPD;
                     GlobalTargetList[CurrentTarget.TrackNumber].ACID_Mode_S = CurrentTarget.ACID_Mode_S;
                     if (CurrentTarget.Mode_S_Addr != "N/A")
@@ -206,45 +209,24 @@ namespace AsterixDisplayAnalyser
                         GlobalPosition Track_2 = new GlobalPosition(new GlobalCoordinates(GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Last().LatLong.Lat,
                             GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Last().LatLong.Lng));
 
-                        //// Calculate distance traveled
-                        //double DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
-                        //DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
-                        //double BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Last().TimeSinceMidnight;
+                        // Calculate distance traveled
+                        double DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
+                        DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
+                        double BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Last().TimeSinceMidnight;
 
-                        //int Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
-                        //TimeSpan TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
+                        int Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
+                        TimeSpan TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
 
-                        //// Only update history position if there was actually a change in the distance
-                        //if (DistanceTraveled > 0)
-                        //{
-                        //    if (GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Count > Max_History_Points)
-                        //        GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Dequeue();
-                        //    GMapTargetandLabel.HistoryPointsType HP = new GMapTargetandLabel.HistoryPointsType();
-                        //    HP.LatLong = new PointLatLng(CurrentTarget.Lat, CurrentTarget.Lon);
-                        //    HP.TimeSinceMidnight = CurrentTarget.TimeSinceMidnight;
-                        //    GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Enqueue(HP);
-
-                        //    // Since there was a change in the distance, lets then calculate and GSPD if not
-                        //    // provided by the DAP data
-                        //    if (CurrentTarget.GSPD == null)
-                        //    {
-                        //        BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.First().TimeSinceMidnight;
-                        //        Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
-                        //        TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
-
-                        //        Track_1 = new GlobalPosition(new GlobalCoordinates(CurrentTarget.Lat, CurrentTarget.Lon));
-                        //        Track_2 = new GlobalPosition(new GlobalCoordinates(GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.First().LatLong.Lat,
-                        //             GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.First().LatLong.Lng));
-
-                        //        DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
-                        //        DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
-
-                        //        //DistanceTraveled = Math.Round(DistanceTraveled, 1);
-                        //        double GSPD = DistanceTraveled / TimeDifference.TotalHours;
-                        //        GlobalTargetList[CurrentTarget.TrackNumber].GSPD = Math.Round(GSPD).ToString();
-                        //        DebugFrame.SetListBox("D:" + DistanceTraveled.ToString() + " T:" + GlobalTargetList[CurrentTarget.TrackNumber].TimeSinceMidnight.ToString() + "/" + GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.ElementAt(GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Count - 2).TimeSinceMidnight.ToString() + " / " + TimeDifference.TotalSeconds.ToString());
-                        //    }
-                        //}
+                        // Only update history position if there was actually a change in the distance
+                        if (DistanceTraveled > 0)
+                        {
+                            if (GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Count > Max_History_Points)
+                                GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Dequeue();
+                            GMapTargetandLabel.HistoryPointsType HP = new GMapTargetandLabel.HistoryPointsType();
+                            HP.LatLong = new PointLatLng(CurrentTarget.Lat, CurrentTarget.Lon);
+                            HP.TimeSinceMidnight = CurrentTarget.TimeSinceMidnight;
+                            GlobalTargetList[CurrentTarget.TrackNumber].MyMarker.HistoryPoints.Enqueue(HP);
+                        }
                     }
                     else
                     {
@@ -266,7 +248,7 @@ namespace AsterixDisplayAnalyser
                     if (GlobalTargetList[ModeAIndex].ModeC != null)
                         GlobalTargetList[ModeAIndex].ModeC_Previous_Cycle = "" + GlobalTargetList[ModeAIndex].ModeC;
                     GlobalTargetList[ModeAIndex].ModeC = CurrentTarget.ModeC;
-                    if (CurrentTarget.DAP_GSPD != null)
+                    if (CurrentTarget.DAP_GSPD != "N/A")
                         GlobalTargetList[ModeAIndex].DAP_GSPD = CurrentTarget.DAP_GSPD;
                     GlobalTargetList[ModeAIndex].CALC_GSPD = CurrentTarget.CALC_GSPD;
                     GlobalTargetList[ModeAIndex].ACID_Mode_S = CurrentTarget.ACID_Mode_S;
@@ -309,45 +291,24 @@ namespace AsterixDisplayAnalyser
                         GlobalPosition Track_2 = new GlobalPosition(new GlobalCoordinates(GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Last().LatLong.Lat,
                             GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Last().LatLong.Lng));
 
-                        //// Calculate distance traveled
-                        //double DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
-                        //DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
-                        //double BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Last().TimeSinceMidnight;
+                        // Calculate distance traveled
+                        double DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
+                        DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
+                        double BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Last().TimeSinceMidnight;
 
-                        //int Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
-                        //TimeSpan TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
+                        int Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
+                        TimeSpan TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
 
-                        //// Only update history position if there was actually a change in the distance
-                        //if (DistanceTraveled > 0)
-                        //{
-                        //    if (GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Count > Max_History_Points)
-                        //        GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Dequeue();
-                        //    GMapTargetandLabel.HistoryPointsType HP = new GMapTargetandLabel.HistoryPointsType();
-                        //    HP.LatLong = new PointLatLng(CurrentTarget.Lat, CurrentTarget.Lon);
-                        //    HP.TimeSinceMidnight = CurrentTarget.TimeSinceMidnight;
-                        //    GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Enqueue(HP);
-
-                        //    // Since there was a change in the distance, lets then calculate and GSPD if not
-                        //    // provided by the DAP data
-                        //    if (CurrentTarget.GSPD == null)
-                        //    {
-                        //        BetweenTwoUpdates = CurrentTarget.TimeSinceMidnight - GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.First().TimeSinceMidnight;
-                        //        Miliseconds = (int)(((BetweenTwoUpdates - Math.Floor(BetweenTwoUpdates)) * 10.0));
-                        //        TimeDifference = new TimeSpan(0, 0, 0, (int)Math.Floor(BetweenTwoUpdates), Miliseconds);
-
-                        //        Track_1 = new GlobalPosition(new GlobalCoordinates(CurrentTarget.Lat, CurrentTarget.Lon));
-                        //        Track_2 = new GlobalPosition(new GlobalCoordinates(GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.First().LatLong.Lat,
-                        //             GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.First().LatLong.Lng));
-
-                        //        DistanceTraveled = geoCalc.CalculateGeodeticMeasurement(reference, Track_1, Track_2).PointToPointDistance;
-                        //        DistanceTraveled = DistanceTraveled * 0.00053996; // Convert to nautical miles
-
-                        //        //DistanceTraveled = Math.Round(DistanceTraveled, 1);
-                        //        double GSPD = DistanceTraveled / TimeDifference.TotalHours;
-                        //        GlobalTargetList[ModeAIndex].GSPD = Math.Round(GSPD).ToString();
-                        //        DebugFrame.SetListBox("D:" + DistanceTraveled.ToString() + " T:" + GlobalTargetList[ModeAIndex].TimeSinceMidnight.ToString() + "/" + GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.ElementAt(GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Count - 2).TimeSinceMidnight.ToString() + " / " + TimeDifference.TotalSeconds.ToString());
-                        //    }
-                        //}
+                        // Only update history position if there was actually a change in the distance
+                        if (DistanceTraveled > 0)
+                        {
+                            if (GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Count > Max_History_Points)
+                                GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Dequeue();
+                            GMapTargetandLabel.HistoryPointsType HP = new GMapTargetandLabel.HistoryPointsType();
+                            HP.LatLong = new PointLatLng(CurrentTarget.Lat, CurrentTarget.Lon);
+                            HP.TimeSinceMidnight = CurrentTarget.TimeSinceMidnight;
+                            GlobalTargetList[ModeAIndex].MyMarker.HistoryPoints.Enqueue(HP);
+                        }
                     }
                     else
                     {

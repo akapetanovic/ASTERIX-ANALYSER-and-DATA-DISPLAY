@@ -409,6 +409,11 @@ namespace AsterixDisplayAnalyser
                 GPoint MarkerPositionLocal = FormMain.gMapControl.FromLatLngToLocal(new PointLatLng(ResultPosition.GetLatLongDecimal().LatitudeDecimal, ResultPosition.GetLatLongDecimal().LongitudeDecimal));
                 g.DrawLine(MyPen, new Point(LocalPosition.X, LocalPosition.Y), new Point(MarkerPositionLocal.X, MarkerPositionLocal.Y));
             }
+            else
+            {
+                int T = 9;
+                int r = T;
+            }
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             MyPen = new Pen(new SolidBrush(LabelAttributes.LineColor), LabelAttributes.LineWidth);
