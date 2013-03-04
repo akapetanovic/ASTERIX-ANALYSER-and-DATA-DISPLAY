@@ -138,10 +138,10 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ReplayMulticast" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">225.0.0.1</Value>
     </Setting>
     <Setting Name="ReplayPort" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">4001</Value>
     </Setting>
     <Setting Name="SystMonEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

@@ -565,7 +565,7 @@ namespace AsterixDisplayAnalyser.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("225.0.0.1")]
         public string ReplayMulticast {
             get {
                 return ((string)(this["ReplayMulticast"]));
@@ -577,7 +577,7 @@ namespace AsterixDisplayAnalyser.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("4001")]
         public string ReplayPort {
             get {
                 return ((string)(this["ReplayPort"]));

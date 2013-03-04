@@ -173,6 +173,14 @@ namespace AsterixDisplayAnalyser
                 this.btnStartPause.Text = "Pause";
                 this.progressBar1.Visible = true;
                 timerMonitorReplay.Enabled = true;
+
+                SetInputConnectionToReplayParameters();
+
+                if (SharedData.bool_Listen_for_Data == false)
+                {
+                    FormMain MainFrame = Application.OpenForms[0] as FormMain;
+                    MainFrame.HandleStartStopDisplayButton();
+                }
             }
             else if (AsterixReplay.LANReplay.GetCurrentStatus() == AsterixReplay.ReplayStatus.Replaying)
             {
@@ -206,6 +214,11 @@ namespace AsterixDisplayAnalyser
         }
 
         private void btnSetConnection_Click(object sender, EventArgs e)
+        {
+            SetInputConnectionToReplayParameters();
+        }
+
+        private void SetInputConnectionToReplayParameters()
         {
             bool Input_Validated = true;
             IPAddress IP = IPAddress.Any;
@@ -277,28 +290,6 @@ namespace AsterixDisplayAnalyser
                     SharedData.ResetConnectionParameters();
                 }
             }
-        }
-
-        private void ValidateInputConnectionParameters()
-        {
-            if (this.textboxPort.Text.Length > 0 && this.txtboxIPAddress.Text.Length > 0 && this.comboBoxNetworkInterface.Text.Length > 0)
-                this.btnSetConnection.Enabled = true;
-            else
-                this.btnSetConnection.Enabled = false;
-        }
-        private void textboxPort_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputConnectionParameters();
-        }
-
-        private void txtboxIPAddress_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputConnectionParameters();
-        }
-
-        private void comboBoxNetworkInterface_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputConnectionParameters();
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)

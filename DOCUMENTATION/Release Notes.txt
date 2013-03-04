@@ -77,6 +77,10 @@ CAT62
 
 VERSION HISTORY
 
+Version 1.9
+
+	1. Added default multicast IP/Port for Replay function (225.0.0.1/4001)
+	2. Modified Replay GUI to enable one click replay (sets all parameters and starts listener)
 
 Version 1.8
 
