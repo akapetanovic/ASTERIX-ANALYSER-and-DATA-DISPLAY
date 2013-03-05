@@ -744,14 +744,30 @@ namespace AsterixDisplayAnalyser
                     bool Provide_To_Google_Earth = comboBoxLiveDisplayMode.Text != "Local";
                     Asterix_To_KML_Provider ASTX_TO_KML = new Asterix_To_KML_Provider();
 
-                    foreach (DynamicDisplayBuilder.TargetType Target in TargetList)
+                    try
                     {
-                        if (Passes_Check_For_Flight_Level_Filter(Target.ModeC))
+                        foreach (DynamicDisplayBuilder.TargetType Target in TargetList)
                         {
-                            // If SSR code filtering is to be applied 
-                            if (this.checkBoxFilterBySSR.Checked == true && (this.textBoxSSRCode.Text.Length == 4))
+                            if (Passes_Check_For_Flight_Level_Filter(Target.ModeC))
                             {
-                                if (Target.ModeA == this.textBoxSSRCode.Text)
+                                // If SSR code filtering is to be applied 
+                                if (this.checkBoxFilterBySSR.Checked == true && (this.textBoxSSRCode.Text.Length == 4))
+                                {
+                                    if (Target.ModeA == this.textBoxSSRCode.Text)
+                                    {
+                                        Target.MyMarker.ToolTipMode = MarkerTooltipMode.Never;
+                                        Target.MyMarker.Position = new PointLatLng(Target.Lat, Target.Lon);
+                                        BuildDynamicLabelText(Target, ref Target.MyMarker);
+                                        SetLabelAttributes(ref Target.MyMarker);
+
+                                        if (Build_Local_Display)
+                                            DinamicOverlay.Markers.Add(Target.MyMarker);
+
+                                        if (Provide_To_Google_Earth)
+                                            ASTX_TO_KML.AddNewTarget(Target);
+                                    }
+                                }
+                                else // No SSR filter so just display all of them
                                 {
                                     Target.MyMarker.ToolTipMode = MarkerTooltipMode.Never;
                                     Target.MyMarker.Position = new PointLatLng(Target.Lat, Target.Lon);
@@ -763,23 +779,14 @@ namespace AsterixDisplayAnalyser
 
                                     if (Provide_To_Google_Earth)
                                         ASTX_TO_KML.AddNewTarget(Target);
+
                                 }
                             }
-                            else // No SSR filter so just display all of them
-                            {
-                                Target.MyMarker.ToolTipMode = MarkerTooltipMode.Never;
-                                Target.MyMarker.Position = new PointLatLng(Target.Lat, Target.Lon);
-                                BuildDynamicLabelText(Target, ref Target.MyMarker);
-                                SetLabelAttributes(ref Target.MyMarker);
-
-                                if (Build_Local_Display)
-                                    DinamicOverlay.Markers.Add(Target.MyMarker);
-
-                                if (Provide_To_Google_Earth)
-                                    ASTX_TO_KML.AddNewTarget(Target);
-
-                            }
                         }
+                    }
+                    catch
+                    {
+
                     }
 
                     Cursor.Position = new Point(Cursor.Position.X + 1, Cursor.Position.Y);
@@ -788,7 +795,7 @@ namespace AsterixDisplayAnalyser
                     // Check if there were any items, if so then tell KML to build the file
                     if (Provide_To_Google_Earth)
                         ASTX_TO_KML.BuildKML();
-                        
+
                 }
                 else // Here handle display of passive display (buffered data)
                 {
