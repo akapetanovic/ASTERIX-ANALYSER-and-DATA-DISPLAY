@@ -47,9 +47,6 @@
     <Setting Name="UpdateRate" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">4000</Value>
     </Setting>
-    <Setting Name="DisplayEnabled" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="FL_Filter_Enabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>

@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>nJsgiRoQrYS1Gug/W0pErWn9QDQ=</dsig:DigestValue>
+        <dsig:DigestValue>P11nUoDdY6Bh1IYzwltS9ups6gc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -114,13 +114,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Asterix-Display-Analyser.exe.config" size="7438">
+  <file name="Asterix-Display-Analyser.exe.config" size="7310">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>HDGR3G46UOjwY1oH+6rYLDVnsdA=</dsig:DigestValue>
+      <dsig:DigestValue>GmDkilqJse4TF7t/gEFXqAr4aEI=</dsig:DigestValue>
     </hash>
   </file>
   <file name="DARR.ico" size="1078">

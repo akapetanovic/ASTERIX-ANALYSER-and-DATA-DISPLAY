@@ -180,6 +180,7 @@ namespace AsterixDisplayAnalyser
                 {
                     FormMain MainFrame = Application.OpenForms[0] as FormMain;
                     MainFrame.HandleStartStopDisplayButton();
+ 
                 }
             }
             else if (AsterixReplay.LANReplay.GetCurrentStatus() == AsterixReplay.ReplayStatus.Replaying)
@@ -188,6 +189,9 @@ namespace AsterixDisplayAnalyser
                 this.btnStartPause.Text = "Start";
                 this.progressBar1.Visible = false;
                 timerMonitorReplay.Enabled = false;
+
+                FormMain MainFrame = Application.OpenForms[0] as FormMain;
+                MainFrame.HandleStartStopDisplayButton();
             }
         }
 

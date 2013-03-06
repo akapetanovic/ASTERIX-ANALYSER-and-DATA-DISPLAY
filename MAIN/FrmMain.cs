@@ -240,7 +240,7 @@ namespace AsterixDisplayAnalyser
             this.labelTrackCoast.Text = Properties.Settings.Default.TrackCoast.ToString();
             this.PlotandTrackDisplayUpdateTimer.Interval = Properties.Settings.Default.UpdateRate;
             this.labelDisplayUpdateRate.Text = "Update rate: " + this.PlotandTrackDisplayUpdateTimer.Interval.ToString() + "ms";
-            this.checkEnableDisplay.Checked = Properties.Settings.Default.DisplayEnabled;
+            this.checkEnableDisplay.Checked = false;
             this.checkBoxFLFilter.Checked = Properties.Settings.Default.FL_Filter_Enabled;
             this.numericUpDownUpper.Value = Properties.Settings.Default.FL_Upper;
             this.numericUpDownLower.Value = Properties.Settings.Default.FL_Lower;
@@ -343,7 +343,8 @@ namespace AsterixDisplayAnalyser
                 this.checkBoxRecording.Enabled = false;
                 this.checkBoxRecording.Checked = false;
                 HandleNoDataForCAT034I050(false);
-
+                this.checkEnableDisplay.Checked = false;
+                HandlePlotDisplayEnabledChanged();
             }
             else
             {
@@ -361,6 +362,8 @@ namespace AsterixDisplayAnalyser
                 SetNewConnection();
                 Thread ListenForDataThread = new Thread(new ThreadStart(ASTERIX.ListenForData));
                 ListenForDataThread.Start();
+                this.checkEnableDisplay.Checked = true;
+                HandlePlotDisplayEnabledChanged();
             }
 
             HandlePlotDisplayEnabledChanged();
@@ -1066,7 +1069,6 @@ namespace AsterixDisplayAnalyser
                     DinamicOverlay.Markers.Clear();
             }
 
-            Properties.Settings.Default.DisplayEnabled = this.checkEnableDisplay.Checked;
             Properties.Settings.Default.Save();
         }
 
