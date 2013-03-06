@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>P11nUoDdY6Bh1IYzwltS9ups6gc=</dsig:DigestValue>
+        <dsig:DigestValue>l2OJu2Y7wO+jyzn3RMkzIvN6uN0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -132,13 +132,13 @@
       <dsig:DigestValue>3vOhkf7KUHfali36RsEXajPpO6M=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="DOCUMENTATION\Release Notes.txt" size="15311">
+  <file name="DOCUMENTATION\Release Notes.txt" size="15390">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>HnkviEeqZklex1SaqNUtykyXByw=</dsig:DigestValue>
+      <dsig:DigestValue>7iiykiqBZwVtj/jzdRY/E2K07eI=</dsig:DigestValue>
     </hash>
   </file>
   <file name="DOCUMENTATION\To_Do.txt" size="55">
