@@ -60,7 +60,6 @@
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape11 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape10 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.lineShape9 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape5 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape4 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
@@ -115,6 +114,32 @@
             this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape12 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.button6 = new System.Windows.Forms.Button();
+            this.progressBar6 = new System.Windows.Forms.ProgressBar();
+            this.progressBar7 = new System.Windows.Forms.ProgressBar();
+            this.progressBar8 = new System.Windows.Forms.ProgressBar();
+            this.progressBar9 = new System.Windows.Forms.ProgressBar();
+            this.progressBar10 = new System.Windows.Forms.ProgressBar();
+            this.chkBoxReplayFormatEnabled7 = new System.Windows.Forms.CheckBox();
+            this.chkBoxReplayFormatEnabled8 = new System.Windows.Forms.CheckBox();
+            this.chkBoxReplayFormatEnabled9 = new System.Windows.Forms.CheckBox();
+            this.chkBoxReplayFormatEnabled10 = new System.Windows.Forms.CheckBox();
+            this.chkBoxReplayFormatEnabled6 = new System.Windows.Forms.CheckBox();
+            this.labelBytes10 = new System.Windows.Forms.Label();
+            this.labelBytes9 = new System.Windows.Forms.Label();
+            this.labelBytes8 = new System.Windows.Forms.Label();
+            this.labelBytes7 = new System.Windows.Forms.Label();
+            this.labelBytes6 = new System.Windows.Forms.Label();
+            this.checkBoxF7 = new System.Windows.Forms.CheckBox();
+            this.checkBoxF8 = new System.Windows.Forms.CheckBox();
+            this.checkBoxF9 = new System.Windows.Forms.CheckBox();
+            this.checkBoxF10 = new System.Windows.Forms.CheckBox();
+            this.checkBoxF6 = new System.Windows.Forms.CheckBox();
+            this.lineShape9 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.progressBarF10 = new System.Windows.Forms.ProgressBar();
+            this.progressBarF9 = new System.Windows.Forms.ProgressBar();
+            this.progressBarF8 = new System.Windows.Forms.ProgressBar();
+            this.progressBarF7 = new System.Windows.Forms.ProgressBar();
+            this.progressBarF6 = new System.Windows.Forms.ProgressBar();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -250,7 +275,7 @@
             this.listBoxIPAddress.ItemHeight = 16;
             this.listBoxIPAddress.Location = new System.Drawing.Point(228, 191);
             this.listBoxIPAddress.Name = "listBoxIPAddress";
-            this.listBoxIPAddress.Size = new System.Drawing.Size(84, 84);
+            this.listBoxIPAddress.Size = new System.Drawing.Size(84, 164);
             this.listBoxIPAddress.TabIndex = 20;
             this.listBoxIPAddress.SelectedIndexChanged += new System.EventHandler(this.listBoxIPAddress_SelectedIndexChanged);
             // 
@@ -261,7 +286,7 @@
             this.listBoxPort.ItemHeight = 16;
             this.listBoxPort.Location = new System.Drawing.Point(308, 191);
             this.listBoxPort.Name = "listBoxPort";
-            this.listBoxPort.Size = new System.Drawing.Size(41, 84);
+            this.listBoxPort.Size = new System.Drawing.Size(41, 164);
             this.listBoxPort.TabIndex = 21;
             this.listBoxPort.SelectedIndexChanged += new System.EventHandler(this.listBoxPort_SelectedIndexChanged);
             // 
@@ -281,7 +306,7 @@
             this.listBoxLocalAddr.ItemHeight = 16;
             this.listBoxLocalAddr.Location = new System.Drawing.Point(128, 191);
             this.listBoxLocalAddr.Name = "listBoxLocalAddr";
-            this.listBoxLocalAddr.Size = new System.Drawing.Size(101, 84);
+            this.listBoxLocalAddr.Size = new System.Drawing.Size(101, 164);
             this.listBoxLocalAddr.TabIndex = 24;
             this.listBoxLocalAddr.SelectedIndexChanged += new System.EventHandler(this.listBoxLocalAddr_SelectedIndexChanged);
             // 
@@ -300,7 +325,7 @@
             this.checkedListBoxRecordingName.FormattingEnabled = true;
             this.checkedListBoxRecordingName.Location = new System.Drawing.Point(4, 191);
             this.checkedListBoxRecordingName.Name = "checkedListBoxRecordingName";
-            this.checkedListBoxRecordingName.Size = new System.Drawing.Size(126, 84);
+            this.checkedListBoxRecordingName.Size = new System.Drawing.Size(126, 164);
             this.checkedListBoxRecordingName.TabIndex = 28;
             this.checkedListBoxRecordingName.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxRecordingName_ItemCheck);
             this.checkedListBoxRecordingName.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxRecordingName_SelectedIndexChanged);
@@ -310,9 +335,9 @@
             // 
             this.button1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(4, 278);
+            this.button1.Location = new System.Drawing.Point(4, 373);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(76, 51);
+            this.button1.Size = new System.Drawing.Size(76, 40);
             this.button1.TabIndex = 29;
             this.button1.Text = "Choose Destination Folder";
             this.button1.UseVisualStyleBackColor = false;
@@ -320,7 +345,7 @@
             // 
             // textBoxRecordDirectory
             // 
-            this.textBoxRecordDirectory.Location = new System.Drawing.Point(84, 281);
+            this.textBoxRecordDirectory.Location = new System.Drawing.Point(86, 373);
             this.textBoxRecordDirectory.Name = "textBoxRecordDirectory";
             this.textBoxRecordDirectory.Size = new System.Drawing.Size(282, 20);
             this.textBoxRecordDirectory.TabIndex = 30;
@@ -330,9 +355,9 @@
             this.button2.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(4, 335);
+            this.button2.Location = new System.Drawing.Point(2, 418);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(447, 32);
+            this.button2.Size = new System.Drawing.Size(447, 24);
             this.button2.TabIndex = 31;
             this.button2.Text = "Close";
             this.button2.UseVisualStyleBackColor = false;
@@ -389,13 +414,13 @@
             this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.lineShape9,
             this.lineShape11,
             this.lineShape10,
-            this.lineShape9,
             this.lineShape5,
             this.lineShape4,
             this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(908, 369);
+            this.shapeContainer1.Size = new System.Drawing.Size(908, 445);
             this.shapeContainer1.TabIndex = 36;
             this.shapeContainer1.TabStop = false;
             // 
@@ -405,7 +430,7 @@
             this.lineShape11.X1 = 822;
             this.lineShape11.X2 = 822;
             this.lineShape11.Y1 = 141;
-            this.lineShape11.Y2 = 331;
+            this.lineShape11.Y2 = 363;
             // 
             // lineShape10
             // 
@@ -414,14 +439,6 @@
             this.lineShape10.X2 = 477;
             this.lineShape10.Y1 = 142;
             this.lineShape10.Y2 = 184;
-            // 
-            // lineShape9
-            // 
-            this.lineShape9.Name = "lineShape9";
-            this.lineShape9.X1 = 3;
-            this.lineShape9.X2 = 911;
-            this.lineShape9.Y1 = 330;
-            this.lineShape9.Y2 = 332;
             // 
             // lineShape5
             // 
@@ -498,7 +515,7 @@
             // 
             // progressBar2
             // 
-            this.progressBar2.Location = new System.Drawing.Point(355, 207);
+            this.progressBar2.Location = new System.Drawing.Point(355, 206);
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(60, 13);
             this.progressBar2.Step = 2;
@@ -576,9 +593,9 @@
             // 
             this.button4.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(372, 278);
+            this.button4.Location = new System.Drawing.Point(372, 373);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(76, 51);
+            this.button4.Size = new System.Drawing.Size(76, 40);
             this.button4.TabIndex = 46;
             this.button4.Text = "Open Destination Folder";
             this.button4.UseVisualStyleBackColor = false;
@@ -698,7 +715,7 @@
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(428, 99);
             this.numericUpDown1.Maximum = new decimal(new int[] {
-            5,
+            10,
             0,
             0,
             0});
@@ -749,9 +766,9 @@
             this.listBoxForwardingInterface.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxForwardingInterface.FormattingEnabled = true;
             this.listBoxForwardingInterface.ItemHeight = 16;
-            this.listBoxForwardingInterface.Location = new System.Drawing.Point(523, 190);
+            this.listBoxForwardingInterface.Location = new System.Drawing.Point(526, 192);
             this.listBoxForwardingInterface.Name = "listBoxForwardingInterface";
-            this.listBoxForwardingInterface.Size = new System.Drawing.Size(102, 84);
+            this.listBoxForwardingInterface.Size = new System.Drawing.Size(101, 164);
             this.listBoxForwardingInterface.TabIndex = 63;
             this.listBoxForwardingInterface.SelectedIndexChanged += new System.EventHandler(this.listBoxForwardingInterface_SelectedIndexChanged);
             // 
@@ -760,9 +777,9 @@
             this.listBoxForwardingPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxForwardingPort.FormattingEnabled = true;
             this.listBoxForwardingPort.ItemHeight = 16;
-            this.listBoxForwardingPort.Location = new System.Drawing.Point(711, 190);
+            this.listBoxForwardingPort.Location = new System.Drawing.Point(712, 192);
             this.listBoxForwardingPort.Name = "listBoxForwardingPort";
-            this.listBoxForwardingPort.Size = new System.Drawing.Size(41, 84);
+            this.listBoxForwardingPort.Size = new System.Drawing.Size(41, 164);
             this.listBoxForwardingPort.TabIndex = 62;
             this.listBoxForwardingPort.SelectedIndexChanged += new System.EventHandler(this.listBoxForwardingPort_SelectedIndexChanged);
             // 
@@ -771,9 +788,9 @@
             this.listBoxForwardingMulticast.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxForwardingMulticast.FormattingEnabled = true;
             this.listBoxForwardingMulticast.ItemHeight = 16;
-            this.listBoxForwardingMulticast.Location = new System.Drawing.Point(621, 190);
+            this.listBoxForwardingMulticast.Location = new System.Drawing.Point(622, 192);
             this.listBoxForwardingMulticast.Name = "listBoxForwardingMulticast";
-            this.listBoxForwardingMulticast.Size = new System.Drawing.Size(93, 84);
+            this.listBoxForwardingMulticast.Size = new System.Drawing.Size(93, 164);
             this.listBoxForwardingMulticast.TabIndex = 61;
             this.listBoxForwardingMulticast.SelectedIndexChanged += new System.EventHandler(this.listBoxForwardingMulticast_SelectedIndexChanged);
             // 
@@ -842,7 +859,7 @@
             // 
             // progressBarF5
             // 
-            this.progressBarF5.Location = new System.Drawing.Point(758, 258);
+            this.progressBarF5.Location = new System.Drawing.Point(758, 261);
             this.progressBarF5.Name = "progressBarF5";
             this.progressBarF5.Size = new System.Drawing.Size(60, 13);
             this.progressBarF5.Step = 2;
@@ -852,7 +869,7 @@
             // 
             // progressBarF4
             // 
-            this.progressBarF4.Location = new System.Drawing.Point(758, 241);
+            this.progressBarF4.Location = new System.Drawing.Point(758, 244);
             this.progressBarF4.Name = "progressBarF4";
             this.progressBarF4.Size = new System.Drawing.Size(60, 13);
             this.progressBarF4.Step = 2;
@@ -862,7 +879,7 @@
             // 
             // progressBarF3
             // 
-            this.progressBarF3.Location = new System.Drawing.Point(758, 224);
+            this.progressBarF3.Location = new System.Drawing.Point(758, 227);
             this.progressBarF3.Name = "progressBarF3";
             this.progressBarF3.Size = new System.Drawing.Size(60, 13);
             this.progressBarF3.Step = 2;
@@ -872,7 +889,7 @@
             // 
             // progressBarF2
             // 
-            this.progressBarF2.Location = new System.Drawing.Point(758, 207);
+            this.progressBarF2.Location = new System.Drawing.Point(758, 210);
             this.progressBarF2.Name = "progressBarF2";
             this.progressBarF2.Size = new System.Drawing.Size(60, 13);
             this.progressBarF2.Step = 2;
@@ -882,7 +899,7 @@
             // 
             // progressBarF1
             // 
-            this.progressBarF1.Location = new System.Drawing.Point(758, 190);
+            this.progressBarF1.Location = new System.Drawing.Point(758, 194);
             this.progressBarF1.Name = "progressBarF1";
             this.progressBarF1.Size = new System.Drawing.Size(60, 13);
             this.progressBarF1.Step = 2;
@@ -973,20 +990,303 @@
             this.button6.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(458, 335);
+            this.button6.Location = new System.Drawing.Point(458, 418);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(447, 32);
+            this.button6.Size = new System.Drawing.Size(447, 24);
             this.button6.TabIndex = 78;
             this.button6.Text = "Minimize";
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // progressBar6
+            // 
+            this.progressBar6.Location = new System.Drawing.Point(355, 275);
+            this.progressBar6.Name = "progressBar6";
+            this.progressBar6.Size = new System.Drawing.Size(60, 13);
+            this.progressBar6.Step = 2;
+            this.progressBar6.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar6.TabIndex = 79;
+            this.progressBar6.Visible = false;
+            // 
+            // progressBar7
+            // 
+            this.progressBar7.Location = new System.Drawing.Point(355, 292);
+            this.progressBar7.Name = "progressBar7";
+            this.progressBar7.Size = new System.Drawing.Size(60, 13);
+            this.progressBar7.Step = 2;
+            this.progressBar7.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar7.TabIndex = 80;
+            this.progressBar7.Visible = false;
+            // 
+            // progressBar8
+            // 
+            this.progressBar8.Location = new System.Drawing.Point(355, 308);
+            this.progressBar8.Name = "progressBar8";
+            this.progressBar8.Size = new System.Drawing.Size(60, 13);
+            this.progressBar8.Step = 2;
+            this.progressBar8.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar8.TabIndex = 81;
+            this.progressBar8.Visible = false;
+            // 
+            // progressBar9
+            // 
+            this.progressBar9.Location = new System.Drawing.Point(355, 325);
+            this.progressBar9.Name = "progressBar9";
+            this.progressBar9.Size = new System.Drawing.Size(60, 13);
+            this.progressBar9.Step = 2;
+            this.progressBar9.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar9.TabIndex = 82;
+            this.progressBar9.Visible = false;
+            // 
+            // progressBar10
+            // 
+            this.progressBar10.Location = new System.Drawing.Point(355, 342);
+            this.progressBar10.Name = "progressBar10";
+            this.progressBar10.Size = new System.Drawing.Size(60, 13);
+            this.progressBar10.Step = 2;
+            this.progressBar10.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar10.TabIndex = 83;
+            this.progressBar10.Visible = false;
+            // 
+            // chkBoxReplayFormatEnabled7
+            // 
+            this.chkBoxReplayFormatEnabled7.AutoSize = true;
+            this.chkBoxReplayFormatEnabled7.Location = new System.Drawing.Point(433, 291);
+            this.chkBoxReplayFormatEnabled7.Name = "chkBoxReplayFormatEnabled7";
+            this.chkBoxReplayFormatEnabled7.Size = new System.Drawing.Size(15, 14);
+            this.chkBoxReplayFormatEnabled7.TabIndex = 88;
+            this.chkBoxReplayFormatEnabled7.UseVisualStyleBackColor = true;
+            // 
+            // chkBoxReplayFormatEnabled8
+            // 
+            this.chkBoxReplayFormatEnabled8.AutoSize = true;
+            this.chkBoxReplayFormatEnabled8.Location = new System.Drawing.Point(433, 308);
+            this.chkBoxReplayFormatEnabled8.Name = "chkBoxReplayFormatEnabled8";
+            this.chkBoxReplayFormatEnabled8.Size = new System.Drawing.Size(15, 14);
+            this.chkBoxReplayFormatEnabled8.TabIndex = 87;
+            this.chkBoxReplayFormatEnabled8.UseVisualStyleBackColor = true;
+            // 
+            // chkBoxReplayFormatEnabled9
+            // 
+            this.chkBoxReplayFormatEnabled9.AutoSize = true;
+            this.chkBoxReplayFormatEnabled9.Location = new System.Drawing.Point(433, 325);
+            this.chkBoxReplayFormatEnabled9.Name = "chkBoxReplayFormatEnabled9";
+            this.chkBoxReplayFormatEnabled9.Size = new System.Drawing.Size(15, 14);
+            this.chkBoxReplayFormatEnabled9.TabIndex = 86;
+            this.chkBoxReplayFormatEnabled9.UseVisualStyleBackColor = true;
+            // 
+            // chkBoxReplayFormatEnabled10
+            // 
+            this.chkBoxReplayFormatEnabled10.AutoSize = true;
+            this.chkBoxReplayFormatEnabled10.Location = new System.Drawing.Point(433, 342);
+            this.chkBoxReplayFormatEnabled10.Name = "chkBoxReplayFormatEnabled10";
+            this.chkBoxReplayFormatEnabled10.Size = new System.Drawing.Size(15, 14);
+            this.chkBoxReplayFormatEnabled10.TabIndex = 85;
+            this.chkBoxReplayFormatEnabled10.UseVisualStyleBackColor = true;
+            // 
+            // chkBoxReplayFormatEnabled6
+            // 
+            this.chkBoxReplayFormatEnabled6.AutoSize = true;
+            this.chkBoxReplayFormatEnabled6.Location = new System.Drawing.Point(433, 274);
+            this.chkBoxReplayFormatEnabled6.Name = "chkBoxReplayFormatEnabled6";
+            this.chkBoxReplayFormatEnabled6.Size = new System.Drawing.Size(15, 14);
+            this.chkBoxReplayFormatEnabled6.TabIndex = 84;
+            this.chkBoxReplayFormatEnabled6.UseVisualStyleBackColor = true;
+            // 
+            // labelBytes10
+            // 
+            this.labelBytes10.AutoSize = true;
+            this.labelBytes10.Location = new System.Drawing.Point(829, 343);
+            this.labelBytes10.Name = "labelBytes10";
+            this.labelBytes10.Size = new System.Drawing.Size(13, 13);
+            this.labelBytes10.TabIndex = 93;
+            this.labelBytes10.Text = "0";
+            // 
+            // labelBytes9
+            // 
+            this.labelBytes9.AutoSize = true;
+            this.labelBytes9.Location = new System.Drawing.Point(829, 326);
+            this.labelBytes9.Name = "labelBytes9";
+            this.labelBytes9.Size = new System.Drawing.Size(13, 13);
+            this.labelBytes9.TabIndex = 92;
+            this.labelBytes9.Text = "0";
+            // 
+            // labelBytes8
+            // 
+            this.labelBytes8.AutoSize = true;
+            this.labelBytes8.Location = new System.Drawing.Point(829, 309);
+            this.labelBytes8.Name = "labelBytes8";
+            this.labelBytes8.Size = new System.Drawing.Size(13, 13);
+            this.labelBytes8.TabIndex = 91;
+            this.labelBytes8.Text = "0";
+            // 
+            // labelBytes7
+            // 
+            this.labelBytes7.AutoSize = true;
+            this.labelBytes7.Location = new System.Drawing.Point(829, 292);
+            this.labelBytes7.Name = "labelBytes7";
+            this.labelBytes7.Size = new System.Drawing.Size(13, 13);
+            this.labelBytes7.TabIndex = 90;
+            this.labelBytes7.Text = "0";
+            // 
+            // labelBytes6
+            // 
+            this.labelBytes6.AutoSize = true;
+            this.labelBytes6.Location = new System.Drawing.Point(829, 275);
+            this.labelBytes6.Name = "labelBytes6";
+            this.labelBytes6.Size = new System.Drawing.Size(13, 13);
+            this.labelBytes6.TabIndex = 89;
+            this.labelBytes6.Text = "0";
+            // 
+            // checkBoxF7
+            // 
+            this.checkBoxF7.AutoSize = true;
+            this.checkBoxF7.Enabled = false;
+            this.checkBoxF7.Location = new System.Drawing.Point(487, 291);
+            this.checkBoxF7.Name = "checkBoxF7";
+            this.checkBoxF7.Size = new System.Drawing.Size(38, 17);
+            this.checkBoxF7.TabIndex = 98;
+            this.checkBoxF7.Text = "-->";
+            this.checkBoxF7.UseVisualStyleBackColor = true;
+            this.checkBoxF7.CheckedChanged += new System.EventHandler(this.checkBoxF7_CheckedChanged);
+            // 
+            // checkBoxF8
+            // 
+            this.checkBoxF8.AutoSize = true;
+            this.checkBoxF8.Enabled = false;
+            this.checkBoxF8.Location = new System.Drawing.Point(487, 308);
+            this.checkBoxF8.Name = "checkBoxF8";
+            this.checkBoxF8.Size = new System.Drawing.Size(38, 17);
+            this.checkBoxF8.TabIndex = 97;
+            this.checkBoxF8.Text = "-->";
+            this.checkBoxF8.UseVisualStyleBackColor = true;
+            this.checkBoxF8.CheckedChanged += new System.EventHandler(this.checkBoxF8_CheckedChanged);
+            // 
+            // checkBoxF9
+            // 
+            this.checkBoxF9.AutoSize = true;
+            this.checkBoxF9.Enabled = false;
+            this.checkBoxF9.Location = new System.Drawing.Point(487, 325);
+            this.checkBoxF9.Name = "checkBoxF9";
+            this.checkBoxF9.Size = new System.Drawing.Size(38, 17);
+            this.checkBoxF9.TabIndex = 96;
+            this.checkBoxF9.Text = "-->";
+            this.checkBoxF9.UseVisualStyleBackColor = true;
+            this.checkBoxF9.CheckedChanged += new System.EventHandler(this.checkBoxF9_CheckedChanged);
+            // 
+            // checkBoxF10
+            // 
+            this.checkBoxF10.AutoSize = true;
+            this.checkBoxF10.Enabled = false;
+            this.checkBoxF10.Location = new System.Drawing.Point(487, 342);
+            this.checkBoxF10.Name = "checkBoxF10";
+            this.checkBoxF10.Size = new System.Drawing.Size(38, 17);
+            this.checkBoxF10.TabIndex = 95;
+            this.checkBoxF10.Text = "-->";
+            this.checkBoxF10.UseVisualStyleBackColor = true;
+            this.checkBoxF10.CheckedChanged += new System.EventHandler(this.checkBoxF10_CheckedChanged);
+            // 
+            // checkBoxF6
+            // 
+            this.checkBoxF6.AutoSize = true;
+            this.checkBoxF6.Enabled = false;
+            this.checkBoxF6.Location = new System.Drawing.Point(487, 274);
+            this.checkBoxF6.Name = "checkBoxF6";
+            this.checkBoxF6.Size = new System.Drawing.Size(38, 17);
+            this.checkBoxF6.TabIndex = 94;
+            this.checkBoxF6.Text = "-->";
+            this.checkBoxF6.UseVisualStyleBackColor = true;
+            this.checkBoxF6.CheckedChanged += new System.EventHandler(this.checkBoxF6_CheckedChanged);
+            // 
+            // lineShape9
+            // 
+            this.lineShape9.Name = "lineShape9";
+            this.lineShape9.X1 = -2;
+            this.lineShape9.X2 = 907;
+            this.lineShape9.Y1 = 364;
+            this.lineShape9.Y2 = 364;
+            // 
+            // progressBarF10
+            // 
+            this.progressBarF10.Location = new System.Drawing.Point(758, 345);
+            this.progressBarF10.Name = "progressBarF10";
+            this.progressBarF10.Size = new System.Drawing.Size(60, 13);
+            this.progressBarF10.Step = 2;
+            this.progressBarF10.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBarF10.TabIndex = 103;
+            this.progressBarF10.Visible = false;
+            // 
+            // progressBarF9
+            // 
+            this.progressBarF9.Location = new System.Drawing.Point(758, 328);
+            this.progressBarF9.Name = "progressBarF9";
+            this.progressBarF9.Size = new System.Drawing.Size(60, 13);
+            this.progressBarF9.Step = 2;
+            this.progressBarF9.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBarF9.TabIndex = 102;
+            this.progressBarF9.Visible = false;
+            // 
+            // progressBarF8
+            // 
+            this.progressBarF8.Location = new System.Drawing.Point(758, 311);
+            this.progressBarF8.Name = "progressBarF8";
+            this.progressBarF8.Size = new System.Drawing.Size(60, 13);
+            this.progressBarF8.Step = 2;
+            this.progressBarF8.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBarF8.TabIndex = 101;
+            this.progressBarF8.Visible = false;
+            // 
+            // progressBarF7
+            // 
+            this.progressBarF7.Location = new System.Drawing.Point(758, 294);
+            this.progressBarF7.Name = "progressBarF7";
+            this.progressBarF7.Size = new System.Drawing.Size(60, 13);
+            this.progressBarF7.Step = 2;
+            this.progressBarF7.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBarF7.TabIndex = 100;
+            this.progressBarF7.Visible = false;
+            // 
+            // progressBarF6
+            // 
+            this.progressBarF6.Location = new System.Drawing.Point(758, 277);
+            this.progressBarF6.Name = "progressBarF6";
+            this.progressBarF6.Size = new System.Drawing.Size(60, 13);
+            this.progressBarF6.Step = 2;
+            this.progressBarF6.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBarF6.TabIndex = 99;
+            this.progressBarF6.Visible = false;
             // 
             // FrmAstxRecFrwdForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(908, 369);
+            this.ClientSize = new System.Drawing.Size(908, 445);
+            this.Controls.Add(this.progressBarF10);
+            this.Controls.Add(this.progressBarF9);
+            this.Controls.Add(this.progressBarF8);
+            this.Controls.Add(this.progressBarF7);
+            this.Controls.Add(this.progressBarF6);
+            this.Controls.Add(this.checkBoxF7);
+            this.Controls.Add(this.checkBoxF8);
+            this.Controls.Add(this.checkBoxF9);
+            this.Controls.Add(this.checkBoxF10);
+            this.Controls.Add(this.checkBoxF6);
+            this.Controls.Add(this.labelBytes10);
+            this.Controls.Add(this.labelBytes9);
+            this.Controls.Add(this.labelBytes8);
+            this.Controls.Add(this.labelBytes7);
+            this.Controls.Add(this.labelBytes6);
+            this.Controls.Add(this.chkBoxReplayFormatEnabled7);
+            this.Controls.Add(this.chkBoxReplayFormatEnabled8);
+            this.Controls.Add(this.chkBoxReplayFormatEnabled9);
+            this.Controls.Add(this.chkBoxReplayFormatEnabled10);
+            this.Controls.Add(this.chkBoxReplayFormatEnabled6);
+            this.Controls.Add(this.progressBar10);
+            this.Controls.Add(this.progressBar9);
+            this.Controls.Add(this.progressBar8);
+            this.Controls.Add(this.progressBar7);
+            this.Controls.Add(this.progressBar6);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label20);
@@ -1125,7 +1425,6 @@
         private System.Windows.Forms.ListBox listBoxForwardingInterface;
         private System.Windows.Forms.ListBox listBoxForwardingPort;
         private System.Windows.Forms.ListBox listBoxForwardingMulticast;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape9;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.CheckBox chkBoxReplayFormatEnabled1;
@@ -1147,5 +1446,31 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.ComboBox comboBoxNetworkInterface;
+        private System.Windows.Forms.ProgressBar progressBar6;
+        private System.Windows.Forms.ProgressBar progressBar7;
+        private System.Windows.Forms.ProgressBar progressBar8;
+        private System.Windows.Forms.ProgressBar progressBar9;
+        private System.Windows.Forms.ProgressBar progressBar10;
+        private System.Windows.Forms.CheckBox chkBoxReplayFormatEnabled7;
+        private System.Windows.Forms.CheckBox chkBoxReplayFormatEnabled8;
+        private System.Windows.Forms.CheckBox chkBoxReplayFormatEnabled9;
+        private System.Windows.Forms.CheckBox chkBoxReplayFormatEnabled10;
+        private System.Windows.Forms.CheckBox chkBoxReplayFormatEnabled6;
+        private System.Windows.Forms.Label labelBytes10;
+        private System.Windows.Forms.Label labelBytes9;
+        private System.Windows.Forms.Label labelBytes8;
+        private System.Windows.Forms.Label labelBytes7;
+        private System.Windows.Forms.Label labelBytes6;
+        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape9;
+        private System.Windows.Forms.CheckBox checkBoxF7;
+        private System.Windows.Forms.CheckBox checkBoxF8;
+        private System.Windows.Forms.CheckBox checkBoxF9;
+        private System.Windows.Forms.CheckBox checkBoxF10;
+        private System.Windows.Forms.CheckBox checkBoxF6;
+        private System.Windows.Forms.ProgressBar progressBarF10;
+        private System.Windows.Forms.ProgressBar progressBarF9;
+        private System.Windows.Forms.ProgressBar progressBarF8;
+        private System.Windows.Forms.ProgressBar progressBarF7;
+        private System.Windows.Forms.ProgressBar progressBarF6;
     }
 }

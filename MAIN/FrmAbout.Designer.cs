@@ -63,7 +63,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 17);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Version 2.9";
+            this.label3.Text = "Version 3.0";
             // 
             // label4
             // 
@@ -81,9 +81,9 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(3, 45);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(95, 17);
+            this.label5.Size = new System.Drawing.Size(83, 17);
             this.label5.TabIndex = 4;
-            this.label5.Text = "January 2013";
+            this.label5.Text = "March 2013";
             // 
             // FrmAbout
             // 

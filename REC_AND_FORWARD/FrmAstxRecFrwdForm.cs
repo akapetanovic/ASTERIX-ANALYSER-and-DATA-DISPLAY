@@ -94,7 +94,7 @@ namespace AsterixDisplayAnalyser
                 this.checkedListBoxRecordingName.SelectedIndex = this.checkedListBoxRecordingName.Items.Count - 1;
             }
 
-            if (checkedListBoxRecordingName.Items.Count == 5)
+            if (checkedListBoxRecordingName.Items.Count == 10)
                 this.btnAdd.Enabled = false;
         }
 
@@ -240,18 +240,33 @@ namespace AsterixDisplayAnalyser
             this.listBoxForwardingInterface.Items.Add(Properties.Settings.Default.FrwdInterface3);
             this.listBoxForwardingInterface.Items.Add(Properties.Settings.Default.FrwdInterface4);
             this.listBoxForwardingInterface.Items.Add(Properties.Settings.Default.FrwdInterface5);
+            this.listBoxForwardingInterface.Items.Add(Properties.Settings.Default.FrwdInterface6);
+            this.listBoxForwardingInterface.Items.Add(Properties.Settings.Default.FrwdInterface7);
+            this.listBoxForwardingInterface.Items.Add(Properties.Settings.Default.FrwdInterface8);
+            this.listBoxForwardingInterface.Items.Add(Properties.Settings.Default.FrwdInterface9);
+            this.listBoxForwardingInterface.Items.Add(Properties.Settings.Default.FrwdInterface10);
 
             this.listBoxForwardingMulticast.Items.Add(Properties.Settings.Default.FrwdMulticast1);
             this.listBoxForwardingMulticast.Items.Add(Properties.Settings.Default.FrwdMulticast2);
             this.listBoxForwardingMulticast.Items.Add(Properties.Settings.Default.FrwdMulticast3);
             this.listBoxForwardingMulticast.Items.Add(Properties.Settings.Default.FrwdMulticast4);
             this.listBoxForwardingMulticast.Items.Add(Properties.Settings.Default.FrwdMulticast5);
+            this.listBoxForwardingMulticast.Items.Add(Properties.Settings.Default.FrwdMulticast6);
+            this.listBoxForwardingMulticast.Items.Add(Properties.Settings.Default.FrwdMulticast7);
+            this.listBoxForwardingMulticast.Items.Add(Properties.Settings.Default.FrwdMulticast8);
+            this.listBoxForwardingMulticast.Items.Add(Properties.Settings.Default.FrwdMulticast9);
+            this.listBoxForwardingMulticast.Items.Add(Properties.Settings.Default.FrwdMulticast10);
 
             this.listBoxForwardingPort.Items.Add(Properties.Settings.Default.FrwdPort1);
             this.listBoxForwardingPort.Items.Add(Properties.Settings.Default.FrwdPort2);
             this.listBoxForwardingPort.Items.Add(Properties.Settings.Default.FrwdPort3);
             this.listBoxForwardingPort.Items.Add(Properties.Settings.Default.FrwdPort4);
             this.listBoxForwardingPort.Items.Add(Properties.Settings.Default.FrwdPort5);
+            this.listBoxForwardingPort.Items.Add(Properties.Settings.Default.FrwdPort6);
+            this.listBoxForwardingPort.Items.Add(Properties.Settings.Default.FrwdPort7);
+            this.listBoxForwardingPort.Items.Add(Properties.Settings.Default.FrwdPort8);
+            this.listBoxForwardingPort.Items.Add(Properties.Settings.Default.FrwdPort9);
+            this.listBoxForwardingPort.Items.Add(Properties.Settings.Default.FrwdPort10);
 
             this.listBoxForwardingInterface.SelectedIndex = 0;
             this.listBoxForwardingMulticast.SelectedIndex = 0;
@@ -358,6 +373,26 @@ namespace AsterixDisplayAnalyser
             {
                 this.labelBytes5.Text = RecForwConnection5.GetBytesProcessed().ToString();
             }
+            if (RecForwConnection6.IsRecordingEnabled() == true || RecForwConnection6.IsForwardingEnabled() == true)
+            {
+                this.labelBytes6.Text = RecForwConnection6.GetBytesProcessed().ToString();
+            }
+            if (RecForwConnection7.IsRecordingEnabled() == true || RecForwConnection7.IsForwardingEnabled() == true)
+            {
+                this.labelBytes7.Text = RecForwConnection7.GetBytesProcessed().ToString();
+            }
+            if (RecForwConnection8.IsRecordingEnabled() == true || RecForwConnection8.IsForwardingEnabled() == true)
+            {
+                this.labelBytes8.Text = RecForwConnection8.GetBytesProcessed().ToString();
+            }
+            if (RecForwConnection9.IsRecordingEnabled() == true || RecForwConnection9.IsForwardingEnabled() == true)
+            {
+                this.labelBytes9.Text = RecForwConnection9.GetBytesProcessed().ToString();
+            }
+            if (RecForwConnection10.IsRecordingEnabled() == true || RecForwConnection10.IsForwardingEnabled() == true)
+            {
+                this.labelBytes10.Text = RecForwConnection10.GetBytesProcessed().ToString();
+            }
         }
 
         private void FrmAsterixRecorder_VisibleChanged(object sender, EventArgs e)
@@ -393,7 +428,7 @@ namespace AsterixDisplayAnalyser
             else
                 return ".raw";
         }
-        
+
         private void checkedListBoxRecordingName_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             // Check if this item is checked
@@ -401,7 +436,7 @@ namespace AsterixDisplayAnalyser
             {
                 AppendDateTime DateTimeAppend = new AppendDateTime();
                 string path_and_name = this.textBoxRecordDirectory.Text + "\\" + DateTimeAppend.ApendDateandTimeToFront(this.checkedListBoxRecordingName.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString());
-                
+
                 switch (this.checkedListBoxRecordingName.SelectedIndex)
                 {
                     case 0:
@@ -499,6 +534,102 @@ namespace AsterixDisplayAnalyser
 
                         }
                         break;
+
+                    case 5:
+                        if (RecForwConnection6.IsRecordingEnabled() == false)
+                        {
+                            if (RecForwConnection6.StartRecording(!this.chkBoxReplayFormatEnabled6.Checked,
+                                path_and_name + GetFileExtension(!this.chkBoxReplayFormatEnabled6.Checked),
+                                   IPAddress.Parse(this.listBoxLocalAddr.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
+                                   IPAddress.Parse(this.listBoxIPAddress.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
+                                  int.Parse(this.listBoxPort.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString())) == false)
+                            {
+                                this.checkedListBoxRecordingName.SetItemCheckState(this.checkedListBoxRecordingName.SelectedIndex, CheckState.Unchecked);
+                            }
+                            else
+                            {
+                                progressBar6.Visible = true;
+                                this.chkBoxReplayFormatEnabled6.Enabled = false;
+                            }
+
+                        }
+                        break;
+                    case 6:
+                        if (RecForwConnection7.IsRecordingEnabled() == false)
+                        {
+                            if (RecForwConnection7.StartRecording(!this.chkBoxReplayFormatEnabled7.Checked,
+                                path_and_name + GetFileExtension(!this.chkBoxReplayFormatEnabled7.Checked),
+                                   IPAddress.Parse(this.listBoxLocalAddr.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
+                                   IPAddress.Parse(this.listBoxIPAddress.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
+                                  int.Parse(this.listBoxPort.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString())) == false)
+                            {
+                                this.checkedListBoxRecordingName.SetItemCheckState(this.checkedListBoxRecordingName.SelectedIndex, CheckState.Unchecked);
+                            }
+                            else
+                            {
+                                progressBar7.Visible = true;
+                                this.chkBoxReplayFormatEnabled6.Enabled = false;
+                            }
+
+                        }
+                        break;
+                    case 7:
+                        if (RecForwConnection8.IsRecordingEnabled() == false)
+                        {
+                            if (RecForwConnection8.StartRecording(!this.chkBoxReplayFormatEnabled8.Checked,
+                                path_and_name + GetFileExtension(!this.chkBoxReplayFormatEnabled8.Checked),
+                                   IPAddress.Parse(this.listBoxLocalAddr.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
+                                   IPAddress.Parse(this.listBoxIPAddress.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
+                                  int.Parse(this.listBoxPort.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString())) == false)
+                            {
+                                this.checkedListBoxRecordingName.SetItemCheckState(this.checkedListBoxRecordingName.SelectedIndex, CheckState.Unchecked);
+                            }
+                            else
+                            {
+                                progressBar8.Visible = true;
+                                this.chkBoxReplayFormatEnabled8.Enabled = false;
+                            }
+
+                        }
+                        break;
+                    case 8:
+                        if (RecForwConnection9.IsRecordingEnabled() == false)
+                        {
+                            if (RecForwConnection9.StartRecording(!this.chkBoxReplayFormatEnabled9.Checked,
+                                path_and_name + GetFileExtension(!this.chkBoxReplayFormatEnabled9.Checked),
+                                   IPAddress.Parse(this.listBoxLocalAddr.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
+                                   IPAddress.Parse(this.listBoxIPAddress.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
+                                  int.Parse(this.listBoxPort.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString())) == false)
+                            {
+                                this.checkedListBoxRecordingName.SetItemCheckState(this.checkedListBoxRecordingName.SelectedIndex, CheckState.Unchecked);
+                            }
+                            else
+                            {
+                                progressBar9.Visible = true;
+                                this.chkBoxReplayFormatEnabled9.Enabled = false;
+                            }
+
+                        }
+                        break;
+                    case 9:
+                        if (RecForwConnection10.IsRecordingEnabled() == false)
+                        {
+                            if (RecForwConnection10.StartRecording(!this.chkBoxReplayFormatEnabled10.Checked,
+                                path_and_name + GetFileExtension(!this.chkBoxReplayFormatEnabled10.Checked),
+                                   IPAddress.Parse(this.listBoxLocalAddr.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
+                                   IPAddress.Parse(this.listBoxIPAddress.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString()),
+                                  int.Parse(this.listBoxPort.Items[this.checkedListBoxRecordingName.SelectedIndex].ToString())) == false)
+                            {
+                                this.checkedListBoxRecordingName.SetItemCheckState(this.checkedListBoxRecordingName.SelectedIndex, CheckState.Unchecked);
+                            }
+                            else
+                            {
+                                progressBar10.Visible = true;
+                                this.chkBoxReplayFormatEnabled10.Enabled = false;
+                            }
+
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -545,6 +676,47 @@ namespace AsterixDisplayAnalyser
                             RecForwConnection5.StopRecording();
                             progressBar5.Visible = false;
                             this.chkBoxReplayFormatEnabled5.Enabled = true;
+                        }
+                        break;
+
+                    case 5:
+                        if (RecForwConnection6.IsRecordingEnabled() == true)
+                        {
+                            RecForwConnection6.StopRecording();
+                            progressBar6.Visible = false;
+                            this.chkBoxReplayFormatEnabled6.Enabled = true;
+                        }
+                        break;
+                    case 6:
+                        if (RecForwConnection7.IsRecordingEnabled() == true)
+                        {
+                            RecForwConnection7.StopRecording();
+                            progressBar7.Visible = false;
+                            this.chkBoxReplayFormatEnabled7.Enabled = true;
+                        }
+                        break;
+                    case 7:
+                        if (RecForwConnection8.IsRecordingEnabled() == true)
+                        {
+                            RecForwConnection8.StopRecording();
+                            progressBar8.Visible = false;
+                            this.chkBoxReplayFormatEnabled8.Enabled = true;
+                        }
+                        break;
+                    case 8:
+                        if (RecForwConnection9.IsRecordingEnabled() == true)
+                        {
+                            RecForwConnection9.StopRecording();
+                            progressBar9.Visible = false;
+                            this.chkBoxReplayFormatEnabled9.Enabled = true;
+                        }
+                        break;
+                    case 9:
+                        if (RecForwConnection10.IsRecordingEnabled() == true)
+                        {
+                            RecForwConnection10.StopRecording();
+                            progressBar10.Visible = false;
+                            this.chkBoxReplayFormatEnabled10.Enabled = true;
                         }
                         break;
                     default:
@@ -594,6 +766,26 @@ namespace AsterixDisplayAnalyser
                     break;
                 case 5:
                     if (this.checkBoxF5.Checked)
+                        ChecForActivePassed = false;
+                    break;
+                case 6:
+                    if (this.checkBoxF6.Checked)
+                        ChecForActivePassed = false;
+                    break;
+                case 7:
+                    if (this.checkBoxF7.Checked)
+                        ChecForActivePassed = false;
+                    break;
+                case 8:
+                    if (this.checkBoxF8.Checked)
+                        ChecForActivePassed = false;
+                    break;
+                case 9:
+                    if (this.checkBoxF9.Checked)
+                        ChecForActivePassed = false;
+                    break;
+                case 10:
+                    if (this.checkBoxF10.Checked)
                         ChecForActivePassed = false;
                     break;
             }
@@ -685,6 +877,30 @@ namespace AsterixDisplayAnalyser
                             Properties.Settings.Default.FrwdMulticast5 = this.txtboxIPAddress.Text;
                             Properties.Settings.Default.FrwdPort5 = this.textboxPort.Text;
                             break;
+                        case 6:
+                            Properties.Settings.Default.FrwdInterface6 = this.comboBoxNetworkInterface.Text;
+                            Properties.Settings.Default.FrwdMulticast6 = this.txtboxIPAddress.Text;
+                            Properties.Settings.Default.FrwdPort6 = this.textboxPort.Text;
+                            break;
+                        case 7: Properties.Settings.Default.FrwdInterface7 = this.comboBoxNetworkInterface.Text;
+                            Properties.Settings.Default.FrwdMulticast7 = this.txtboxIPAddress.Text;
+                            Properties.Settings.Default.FrwdPort7 = this.textboxPort.Text;
+                            break;
+                        case 8:
+                            Properties.Settings.Default.FrwdInterface8 = this.comboBoxNetworkInterface.Text;
+                            Properties.Settings.Default.FrwdMulticast8 = this.txtboxIPAddress.Text;
+                            Properties.Settings.Default.FrwdPort8 = this.textboxPort.Text;
+                            break;
+                        case 9:
+                            Properties.Settings.Default.FrwdInterface9 = this.comboBoxNetworkInterface.Text;
+                            Properties.Settings.Default.FrwdMulticast9 = this.txtboxIPAddress.Text;
+                            Properties.Settings.Default.FrwdPort9 = this.textboxPort.Text;
+                            break;
+                        case 10:
+                            Properties.Settings.Default.FrwdInterface10 = this.comboBoxNetworkInterface.Text;
+                            Properties.Settings.Default.FrwdMulticast10 = this.txtboxIPAddress.Text;
+                            Properties.Settings.Default.FrwdPort10 = this.textboxPort.Text;
+                            break;
                     }
 
                     Properties.Settings.Default.Save();
@@ -725,6 +941,26 @@ namespace AsterixDisplayAnalyser
                     if (this.checkBoxF5.Checked)
                         ChecForActivePassed = false;
                     break;
+                case 6:
+                    if (this.checkBoxF6.Checked)
+                        ChecForActivePassed = false;
+                    break;
+                case 7:
+                    if (this.checkBoxF7.Checked)
+                        ChecForActivePassed = false;
+                    break;
+                case 8:
+                    if (this.checkBoxF8.Checked)
+                        ChecForActivePassed = false;
+                    break;
+                case 9:
+                    if (this.checkBoxF9.Checked)
+                        ChecForActivePassed = false;
+                    break;
+                case 10:
+                    if (this.checkBoxF10.Checked)
+                        ChecForActivePassed = false;
+                    break;
             }
 
             if (ChecForActivePassed == false)
@@ -747,6 +983,11 @@ namespace AsterixDisplayAnalyser
             this.checkBoxF3.Enabled = false;
             this.checkBoxF4.Enabled = false;
             this.checkBoxF5.Enabled = false;
+            this.checkBoxF6.Enabled = false;
+            this.checkBoxF7.Enabled = false;
+            this.checkBoxF8.Enabled = false;
+            this.checkBoxF9.Enabled = false;
+            this.checkBoxF10.Enabled = false;
 
             for (int I = 0; I < this.checkedListBoxRecordingName.Items.Count; I++)
             {
@@ -771,6 +1012,26 @@ namespace AsterixDisplayAnalyser
                     case 4:
                         if ((string)listBoxForwardingInterface.Items[4] != "None")
                             this.checkBoxF5.Enabled = true;
+                        break;
+                    case 5:
+                        if ((string)listBoxForwardingInterface.Items[5] != "None")
+                            this.checkBoxF6.Enabled = true;
+                        break;
+                    case 6:
+                        if ((string)listBoxForwardingInterface.Items[6] != "None")
+                            this.checkBoxF7.Enabled = true;
+                        break;
+                    case 7:
+                        if ((string)listBoxForwardingInterface.Items[7] != "None")
+                            this.checkBoxF8.Enabled = true;
+                        break;
+                    case 8:
+                        if ((string)listBoxForwardingInterface.Items[8] != "None")
+                            this.checkBoxF9.Enabled = true;
+                        break;
+                    case 9:
+                        if ((string)listBoxForwardingInterface.Items[9] != "None")
+                            this.checkBoxF10.Enabled = true;
                         break;
                 }
 
@@ -860,6 +1121,26 @@ namespace AsterixDisplayAnalyser
                     break;
                 case 4:
                     if (progressBar5.Visible == false)
+                        this.checkedListBoxRecordingName.SetItemCheckState(this.checkedListBoxRecordingName.SelectedIndex, CheckState.Unchecked);
+                    break;
+                case 5:
+                    if (progressBar6.Visible == false)
+                        this.checkedListBoxRecordingName.SetItemCheckState(this.checkedListBoxRecordingName.SelectedIndex, CheckState.Unchecked);
+                    break;
+                case 6:
+                    if (progressBar7.Visible == false)
+                        this.checkedListBoxRecordingName.SetItemCheckState(this.checkedListBoxRecordingName.SelectedIndex, CheckState.Unchecked);
+                    break;
+                case 7:
+                    if (progressBar8.Visible == false)
+                        this.checkedListBoxRecordingName.SetItemCheckState(this.checkedListBoxRecordingName.SelectedIndex, CheckState.Unchecked);
+                    break;
+                case 8:
+                    if (progressBar9.Visible == false)
+                        this.checkedListBoxRecordingName.SetItemCheckState(this.checkedListBoxRecordingName.SelectedIndex, CheckState.Unchecked);
+                    break;
+                case 9:
+                    if (progressBar10.Visible == false)
                         this.checkedListBoxRecordingName.SetItemCheckState(this.checkedListBoxRecordingName.SelectedIndex, CheckState.Unchecked);
                     break;
             }
@@ -988,6 +1269,156 @@ namespace AsterixDisplayAnalyser
         private void button6_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void checkBoxF6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBoxF6.Checked == true)
+            {
+                if (RecForwConnection6.StartForward(
+                    //Source parameters (always passed in, however the connection manager will use it just in the case the
+                    // connection is not active already)
+                                   IPAddress.Parse(this.listBoxLocalAddr.Items[5].ToString()),
+                                   IPAddress.Parse(this.listBoxIPAddress.Items[5].ToString()),
+                                  int.Parse(this.listBoxPort.Items[5].ToString()),
+                    // Forward parameters
+                                  IPAddress.Parse(this.listBoxForwardingInterface.Items[5].ToString()),
+                                   IPAddress.Parse(this.listBoxForwardingMulticast.Items[5].ToString()),
+                                  int.Parse(this.listBoxForwardingPort.Items[5].ToString())) == false)
+                {
+                    this.checkBoxF6.Checked = false;
+                }
+                else
+                {
+                    this.progressBarF6.Visible = true;
+                }
+
+            }
+            else
+            {
+                RecForwConnection6.StopForwarding();
+                this.progressBarF6.Visible = false;
+            }
+        }
+
+        private void checkBoxF7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBoxF7.Checked == true)
+            {
+                if (RecForwConnection7.StartForward(
+                    //Source parameters (always passed in, however the connection manager will use it just in the case the
+                    // connection is not active already)
+                                   IPAddress.Parse(this.listBoxLocalAddr.Items[6].ToString()),
+                                   IPAddress.Parse(this.listBoxIPAddress.Items[6].ToString()),
+                                  int.Parse(this.listBoxPort.Items[6].ToString()),
+                    // Forward parameters
+                                  IPAddress.Parse(this.listBoxForwardingInterface.Items[6].ToString()),
+                                   IPAddress.Parse(this.listBoxForwardingMulticast.Items[6].ToString()),
+                                  int.Parse(this.listBoxForwardingPort.Items[6].ToString())) == false)
+                {
+                    this.checkBoxF7.Checked = false;
+                }
+                else
+                {
+                    this.progressBarF7.Visible = true;
+                }
+
+            }
+            else
+            {
+                RecForwConnection7.StopForwarding();
+                this.progressBarF7.Visible = false;
+            }
+        }
+
+        private void checkBoxF8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBoxF8.Checked == true)
+            {
+                if (RecForwConnection8.StartForward(
+                    //Source parameters (always passed in, however the connection manager will use it just in the case the
+                    // connection is not active already)
+                                   IPAddress.Parse(this.listBoxLocalAddr.Items[7].ToString()),
+                                   IPAddress.Parse(this.listBoxIPAddress.Items[7].ToString()),
+                                  int.Parse(this.listBoxPort.Items[7].ToString()),
+                    // Forward parameters
+                                  IPAddress.Parse(this.listBoxForwardingInterface.Items[7].ToString()),
+                                   IPAddress.Parse(this.listBoxForwardingMulticast.Items[7].ToString()),
+                                  int.Parse(this.listBoxForwardingPort.Items[7].ToString())) == false)
+                {
+                    this.checkBoxF8.Checked = false;
+                }
+                else
+                {
+                    this.progressBarF8.Visible = true;
+                }
+
+            }
+            else
+            {
+                RecForwConnection8.StopForwarding();
+                this.progressBarF8.Visible = false;
+            }
+        }
+
+        private void checkBoxF9_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBoxF9.Checked == true)
+            {
+                if (RecForwConnection9.StartForward(
+                    //Source parameters (always passed in, however the connection manager will use it just in the case the
+                    // connection is not active already)
+                                   IPAddress.Parse(this.listBoxLocalAddr.Items[8].ToString()),
+                                   IPAddress.Parse(this.listBoxIPAddress.Items[8].ToString()),
+                                  int.Parse(this.listBoxPort.Items[8].ToString()),
+                    // Forward parameters
+                                  IPAddress.Parse(this.listBoxForwardingInterface.Items[8].ToString()),
+                                   IPAddress.Parse(this.listBoxForwardingMulticast.Items[8].ToString()),
+                                  int.Parse(this.listBoxForwardingPort.Items[8].ToString())) == false)
+                {
+                    this.checkBoxF9.Checked = false;
+                }
+                else
+                {
+                    this.progressBarF9.Visible = true;
+                }
+
+            }
+            else
+            {
+                RecForwConnection9.StopForwarding();
+                this.progressBarF9.Visible = false;
+            }
+        }
+
+        private void checkBoxF10_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBoxF10.Checked == true)
+            {
+                if (RecForwConnection10.StartForward(
+                    //Source parameters (always passed in, however the connection manager will use it just in the case the
+                    // connection is not active already)
+                                   IPAddress.Parse(this.listBoxLocalAddr.Items[9].ToString()),
+                                   IPAddress.Parse(this.listBoxIPAddress.Items[9].ToString()),
+                                  int.Parse(this.listBoxPort.Items[9].ToString()),
+                    // Forward parameters
+                                  IPAddress.Parse(this.listBoxForwardingInterface.Items[9].ToString()),
+                                   IPAddress.Parse(this.listBoxForwardingMulticast.Items[9].ToString()),
+                                  int.Parse(this.listBoxForwardingPort.Items[9].ToString())) == false)
+                {
+                    this.checkBoxF10.Checked = false;
+                }
+                else
+                {
+                    this.progressBarF10.Visible = true;
+                }
+
+            }
+            else
+            {
+                RecForwConnection10.StopForwarding();
+                this.progressBarF10.Visible = false;
+            }
         }
     }
 }

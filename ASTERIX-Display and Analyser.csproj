@@ -18,7 +18,7 @@
     <UpgradeBackupLocation />
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\Release\</PublishUrl>
+    <PublishUrl>C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\Release\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -29,7 +29,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>2.7.0.0</ApplicationVersion>
+    <ApplicationVersion>3.0.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -292,6 +292,11 @@
     <Compile Include="GOOGLE EARTH\GoogleEarthProvider.Designer.cs">
       <DependentUpon>GoogleEarthProvider.cs</DependentUpon>
     </Compile>
+    <Compile Include="REC_AND_FORWARD\RecForwConnection10.cs" />
+    <Compile Include="REC_AND_FORWARD\RecForwConnection9.cs" />
+    <Compile Include="REC_AND_FORWARD\RecForwConnection8.cs" />
+    <Compile Include="REC_AND_FORWARD\RecForwConnection7.cs" />
+    <Compile Include="REC_AND_FORWARD\RecForwConnection6.cs" />
     <Compile Include="REC_AND_FORWARD\RecForwConnection5.cs" />
     <Compile Include="REC_AND_FORWARD\RecForwConnection3.cs" />
     <Compile Include="REC_AND_FORWARD\RecForwConnection4.cs" />
