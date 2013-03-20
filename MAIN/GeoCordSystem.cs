@@ -211,7 +211,7 @@ namespace AsterixDisplayAnalyser
             // DEG
             Num1 = (int)Math.Floor(TempLatitude);
             // MIN
-            Temp = InData.LatitudeDecimal - Math.Floor(TempLatitude);
+            Temp = TempLatitude - Math.Floor(TempLatitude);
             Temp = Temp * 60.0;
             Num2 = (int)Math.Floor(Temp);
             // SEC
