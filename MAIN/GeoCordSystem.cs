@@ -264,10 +264,10 @@ namespace AsterixDisplayAnalyser
             OutData.LatitudeDecimal = InData.Latitude.Deg + (InData.Latitude.Min * OneOverSixty) + (InData.Latitude.Sec * OneOverSixty * OneOverSixty);
             OutData.LongitudeDecimal = InData.Longitude.Deg + (InData.Longitude.Min * OneOverSixty) + (InData.Longitude.Sec * OneOverSixty * OneOverSixty);
 
-            if (InData.Latitude.Prefix == LatLongPrefix.W)
+            if (InData.Latitude.Prefix == LatLongPrefix.S)
                 OutData.LatitudeDecimal = OutData.LatitudeDecimal * -1.0;
 
-            if (InData.Longitude.Prefix == LatLongPrefix.S)
+            if (InData.Longitude.Prefix == LatLongPrefix.W)
                 OutData.LongitudeDecimal = OutData.LongitudeDecimal * -1.0;
             
             return OutData;

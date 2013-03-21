@@ -82,6 +82,7 @@ Version 3.0
 	1. Increased Recording & Forwarding streams from 5 to 10.
 	2. Fixed bug thad caused inorrect display of latitude
 	   for south position in DEG/MIN/SEC format.
+	3. Fixed bug that incorrectly handled system origyn for W/S positions.
 
 Version 2.9
 
