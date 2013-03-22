@@ -54,6 +54,7 @@ namespace AsterixDisplayAnalyser
         private static IPEndPoint iep;
         // Buffer to receive raw data
         private static byte[] UDPBuffer;
+        private static byte[] UDPBuffer_Non_Standard;
 
         public static void CleanUp()
         {
@@ -130,6 +131,10 @@ namespace AsterixDisplayAnalyser
         {
             bool ThereWasAnException = false;
 
+            // File stream
+           // Stream RecordingStream_debug = new FileStream(@"C:\ASTERIX\Italy", FileMode.Create);
+          //  BinaryWriter RecordingBinaryWriter_debug = new BinaryWriter(RecordingStream_debug);
+
             // Loop forever
             while (!_shouldStop)
             {
@@ -151,11 +156,22 @@ namespace AsterixDisplayAnalyser
 
                     if (ThereWasAnException == false)
                     {
+                        int DataBufferIndexForThisExtraction = 0;
+
+                        // Check if this is non-standard 6 byte RMCDE header ASTERIX.
+                        if (Properties.Settings.Default.RMCDE_ASTERIX)
+                        {
+                            UDPBuffer_Non_Standard = new byte[(UDPBuffer.Length - 6)];
+                            Array.Copy(UDPBuffer, 6, UDPBuffer_Non_Standard, 0, (UDPBuffer.Length - 6));
+                            UDPBuffer = UDPBuffer_Non_Standard;
+                        }
+
+                        // Now write the data block
+                        // RecordingBinaryWriter_debug.Write(UDPBuffer);
 
                         // Extract lenghts
                         int LengthOfASTERIX_CAT = ASTERIX.ExtractLengthOfDataBlockInBytes_Int(UDPBuffer);
                         int LenghtOfDataBuffer = UDPBuffer.Length;
-                        int DataBufferIndexForThisExtraction = 0;
 
                         // Loop through the buffer and pass on each ASTERIX category block to
                         // the category extractor. The extractor itslef will then extract individual
@@ -164,7 +180,7 @@ namespace AsterixDisplayAnalyser
                         {
                             byte[] LocalSingle_ASTERIX_CAT_Buffer = new byte[LengthOfASTERIX_CAT];
                             Array.Copy(UDPBuffer, DataBufferIndexForThisExtraction, LocalSingle_ASTERIX_CAT_Buffer, 0, LengthOfASTERIX_CAT);
-                            ExtractAndDecodeASTERIX_CAT_DataBlock(LocalSingle_ASTERIX_CAT_Buffer, true);
+                            // ExtractAndDecodeASTERIX_CAT_DataBlock(LocalSingle_ASTERIX_CAT_Buffer, true);
 
                             DataBufferIndexForThisExtraction = DataBufferIndexForThisExtraction + LengthOfASTERIX_CAT;
 

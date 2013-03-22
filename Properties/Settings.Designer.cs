@@ -826,5 +826,17 @@ namespace AsterixDisplayAnalyser.Properties {
                 this["FrwdPort10"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RMCDE_ASTERIX {
+            get {
+                return ((bool)(this["RMCDE_ASTERIX"]));
+            }
+            set {
+                this["RMCDE_ASTERIX"] = value;
+            }
+        }
     }
 }

@@ -238,6 +238,7 @@ namespace AsterixDisplayAnalyser
                 }
 
                 //  Reserved for Special Purpose Indicator (SP)
+               
 
                 //  Reserved for RFS Indicator (RS-bit)
 

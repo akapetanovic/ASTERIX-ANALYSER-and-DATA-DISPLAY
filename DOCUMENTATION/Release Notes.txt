@@ -14,7 +14,8 @@ CAT02
 		000 Message Type                        
         020 Sector Number                       
         030 Time of Day                         
-        041 Antenna Rotation Period             
+        041 Antenna Rotation Period 
+		060 Station Processing Mode            
 
 CAT48
 		020 Target Report Descriptor
@@ -83,6 +84,8 @@ Version 3.0
 	2. Fixed bug thad caused inorrect display of latitude
 	   for south position in DEG/MIN/SEC format.
 	3. Fixed bug that incorrectly handled system origyn for W/S positions.
+	4. Added support for non-standard 6 byte RMCDE header ASTERIX.
+	6. Implemented decoder for CAT02/060 Station Processing Mode
 
 Version 2.9
 

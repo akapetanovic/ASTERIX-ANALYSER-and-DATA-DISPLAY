@@ -21,6 +21,7 @@ namespace AsterixDisplayAnalyser
             this.checkBoxDisplaModeasFL.Checked = Properties.Settings.Default.DisplayModeC_As_FL;
             this.checkBoxDisplayPosInDecimals.Checked = Properties.Settings.Default.DisplayPosInDecimals;
             this.numericSepToolStep.Value = Properties.Settings.Default.SEepToolUpdateRate;
+            this.checkBoxRMCDE_ASTERIX.Checked = Properties.Settings.Default.RMCDE_ASTERIX;
         }
 
         private void checkBoxDisplaModeasFL_CheckedChanged(object sender, EventArgs e)
@@ -38,6 +39,12 @@ namespace AsterixDisplayAnalyser
         private void numericSepToolStep_ValueChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.SEepToolUpdateRate = (int)this.numericSepToolStep.Value;
+            Properties.Settings.Default.Save();
+        }
+
+        private void checkBoxRMCDE_ASTERIX_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.RMCDE_ASTERIX = this.checkBoxRMCDE_ASTERIX.Checked;
             Properties.Settings.Default.Save();
         }
     }

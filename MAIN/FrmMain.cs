@@ -362,7 +362,7 @@ namespace AsterixDisplayAnalyser
                 SetNewConnection();
                 Thread ListenForDataThread = new Thread(new ThreadStart(ASTERIX.ListenForData));
                 ListenForDataThread.Start();
-                this.checkEnableDisplay.Checked = true;
+               // this.checkEnableDisplay.Checked = true;
                 HandlePlotDisplayEnabledChanged();
             }
 
