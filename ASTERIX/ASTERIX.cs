@@ -132,8 +132,8 @@ namespace AsterixDisplayAnalyser
             bool ThereWasAnException = false;
 
             // File stream
-            // Stream RecordingStream_debug = new FileStream(@"C:\ASTERIX\Italy", FileMode.Create);
-            //  BinaryWriter RecordingBinaryWriter_debug = new BinaryWriter(RecordingStream_debug);
+           // Stream RecordingStream_debug = new FileStream(@"C:\ASTERIX\Italy", FileMode.Create);
+            //BinaryWriter RecordingBinaryWriter_debug = new BinaryWriter(RecordingStream_debug);
 
             // Loop forever
             while (!_shouldStop)
@@ -167,7 +167,7 @@ namespace AsterixDisplayAnalyser
                         }
 
                         // Now write the data block
-                        // RecordingBinaryWriter_debug.Write(UDPBuffer);
+                        //RecordingBinaryWriter_debug.Write(UDPBuffer);
 
                         // Extract lenghts
                         int LengthOfASTERIX_CAT = ASTERIX.ExtractLengthOfDataBlockInBytes_Int(UDPBuffer);

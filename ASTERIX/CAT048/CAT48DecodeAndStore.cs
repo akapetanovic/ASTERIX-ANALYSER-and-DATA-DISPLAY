@@ -175,6 +175,12 @@ namespace AsterixDisplayAnalyser
                 CAT48I060UserData.DecodeCAT48I060(Data);
             }
 
+            //  Reserved for Special Purpose Indicator (SP)                       1+
+            if (CAT48.I048DataItems[CAT48.ItemIDToIndex("SPI")].CurrentlyPresent == true)
+            {
+                CAT48ISPIUserData.DecodeCAT48ISPI(Data);
+            }
+
             ////////////////////////////////////////////////////////////////////////////////////
             // All CAT48 data has been decoded, so lets save off the message data to the global
             // storage for latter usage

@@ -88,8 +88,9 @@ Version 3.0
 	4. Added support for non-standard 6 byte RMCDE header ASTERIX.
 	6. Implemented decoder for CAT02/060 Station Processing Mode.
 	7. Fixed bug in handling CAT01/141.
-	8. Updated code to handle ASTERIX containing CAT01/SPI fields in track data.
+	8. Updated code to handle ASTERIX containing CAT01/SPI fields.
 	9. Implemented decoder for I001/042 Calculated Position in Cartesian Coordinates.
+	10. Updated code to handle ASTERIX containing CAT48/SPI fields.
 
 Version 2.9
 

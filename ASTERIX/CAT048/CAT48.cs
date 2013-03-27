@@ -160,6 +160,9 @@ namespace AsterixDisplayAnalyser
                 case "060":
                     index = 25;
                     break;
+                case "SPI":
+                    index = 26;
+                    break;
                 default:
                     break;
             }
@@ -369,6 +372,13 @@ namespace AsterixDisplayAnalyser
 
                 I048DataItems[ItemIDToIndex("060")].HasBeenPresent = false;
                 I048DataItems[ItemIDToIndex("060")].CurrentlyPresent = false;
+                // I048/SPI Special Purpose Indicator 
+                I048DataItems.Add(new CAT48DataItem());
+                I048DataItems[ItemIDToIndex("SPI")].ID = "SPI";
+                I048DataItems[ItemIDToIndex("SPI")].Description = "SPI Special Purpose Indicator";
+
+                I048DataItems[ItemIDToIndex("SPI")].HasBeenPresent = false;
+                I048DataItems[ItemIDToIndex("SPI")].CurrentlyPresent = false;
             }
         }
 
@@ -379,7 +389,6 @@ namespace AsterixDisplayAnalyser
             {
                 Item.CurrentlyPresent = false;
             }
-
         }
 
         public string[] Decode(byte[] DataBlockBuffer, string Time, out int NumOfMessagesDecoded)
@@ -400,6 +409,11 @@ namespace AsterixDisplayAnalyser
             // SIC/SAC Indexes
             int SIC_Index = 0;
             int SAC_Index = 0;
+
+            // Save off SIC/SAC and time in the case they are not present 
+            // in each message. Some implementation have it only in the first record
+            int SIC = 0;
+            int SAC = 0;
 
             // Lenght of the current record's FSPECs
             int FSPEC_Length = 0;
@@ -431,23 +445,28 @@ namespace AsterixDisplayAnalyser
                     // Extract SIC/SAC Indexes.
                     DataOut[DataOutIndex] = LocalSingleRecordBuffer[SIC_Index].ToString() + '/' + LocalSingleRecordBuffer[SAC_Index].ToString();
 
+                    // Save off data for other records
+                    SIC = LocalSingleRecordBuffer[SIC_Index];
+                    SAC = LocalSingleRecordBuffer[SAC_Index];
+
                     // Save of the current data buffer index so it can be used by
                     // Decoder
                     CurrentDataBufferOctalIndex = SAC_Index + 1;
-
-                    ///////////////////////////////////////////////////////////////////////////
-                    // Populate the current SIC/SAC and Time stamp for this meesage
-                    //
-                    I048DataItems[ItemIDToIndex("010")].value =
-                        new ASTERIX.SIC_SAC_Time(LocalSingleRecordBuffer[SIC_Index], LocalSingleRecordBuffer[SAC_Index], ASTERIX.TimeOfReception);
+                   
                 }
                 else
                 {
                     CurrentDataBufferOctalIndex = FSPEC_Length;
                     // Extract SIC/SAC Indexes.
-                    DataOut[DataOutIndex] = "---" + '/' + "---";
+                    DataOut[DataOutIndex] = SIC.ToString() + '/' + SAC.ToString();
                 }
 
+                ///////////////////////////////////////////////////////////////////////////
+                // Populate the current SIC/SAC and Time stamp for this meesage
+                //
+                I048DataItems[ItemIDToIndex("010")].value =
+                    new ASTERIX.SIC_SAC_Time(SIC, SAC, ASTERIX.TimeOfReception);
+                
                 Reset_Currently_Present_Flags();
 
                 // Loop for each FSPEC and determine what data item is present
@@ -727,12 +746,19 @@ namespace AsterixDisplayAnalyser
                                 DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  60:F";
 
 
-                            if ((FourFSPECOctets[Bit_Ops.Bit26] == true) || (FourFSPECOctets[Bit_Ops.Bit25] == true)
-                                || (FourFSPECOctets[Bit_Ops.Bit24] == true))
+                            if (FourFSPECOctets[Bit_Ops.Bit26] == true)
                             {
-                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  SPECIAL PURPOSE";
+                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + " SPI:T";
+                                I048DataItems[ItemIDToIndex("SPI")].HasBeenPresent = true;
+                                I048DataItems[ItemIDToIndex("SPI")].CurrentlyPresent = true;
                             }
+                            else
+                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + " SPI:F";
 
+                            if (FourFSPECOctets[Bit_Ops.Bit25] == true)
+                            {
+                                DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  Reserved Expansion";
+                            }
 
                             break;
 

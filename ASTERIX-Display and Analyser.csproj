@@ -168,6 +168,7 @@
     <Compile Include="ASTERIX\CAT034\CAT34I100UserData.cs" />
     <Compile Include="ASTERIX\CAT034\CAT34I120Types.cs" />
     <Compile Include="ASTERIX\CAT034\CAT34I120UserData.cs" />
+    <Compile Include="ASTERIX\CAT048\CAT48ISPIUserData.cs" />
     <Compile Include="ASTERIX\CAT048\CAT48I130Types.cs" />
     <Compile Include="ASTERIX\CAT048\CAT48I220Types.cs" />
     <Compile Include="ASTERIX\CAT048\CAT48I240Types.cs" />

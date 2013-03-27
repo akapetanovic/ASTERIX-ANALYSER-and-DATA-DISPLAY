@@ -237,8 +237,7 @@ namespace AsterixDisplayAnalyser
                     CAT01I030UserData.DecodeCAT01I030(Data);
                 }
 
-                //  Reserved for Special Purpose Indicator (SP)
-                // I001/030 Warning/Error Conditions                        1+
+                //  Reserved for Special Purpose Indicator (SP)                1+
                 if (CAT01.I001DataItems[CAT01.ItemIDToIndex("SPI")].CurrentlyPresent == true)
                 {
                     CAT01ISPIUserData.DecodeCAT01ISPI(Data);
