@@ -415,9 +415,8 @@ namespace AsterixDisplayAnalyser
                         if (MyCAT01I020UserData.Type_Of_Report == CAT01I020Types.Type_Of_Report_Type.Track)
                           CalculatedGSPandHDG = (CAT01I200Types.CalculatedGSPandHDG_Type)Msg.CAT01DataItems[CAT01.ItemIDToIndex("200")].value;
 
-
                         TargetType Target = new TargetType();
-                        if (MyCAT01I020UserData != null)
+                        if ((MyCAT01I020UserData != null) && (LatLongData_40 != null || LatLongData_42 != null))
                         {
                             double Lat, Lng = 0.0;
                             if (LatLongData_40 != null)
@@ -887,7 +886,8 @@ namespace AsterixDisplayAnalyser
                             CalculatedGSPandHDG = (CAT01I200Types.CalculatedGSPandHDG_Type)Msg.CAT01DataItems[CAT01.ItemIDToIndex("200")].value;
 
                         TargetType Target = new TargetType();
-                        if (MyCAT01I020UserData != null)
+
+                        if ((MyCAT01I020UserData != null) && (LatLongData_40 != null || LatLongData_42 != null))
                         {
                             double Lat, Lng = 0.0;
                             if (LatLongData_40 != null)

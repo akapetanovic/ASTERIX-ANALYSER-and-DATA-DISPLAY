@@ -7,10 +7,10 @@ namespace AsterixDisplayAnalyser
 {
     class CAT01I042UserData
     {
-        public class CalculatedGSPandHDG_Type
+        public class Azimuth_And_Distance_Type
         {
-            public double GSPD = 0.0;
-            public double HDG = 0.0;
+            public double Distance = 0.0;
+            public double Azimuth = 0.0;
         }
 
         private static double XY_1 = 1.0 / 64.0; // 2 ** (-6) = 0.015625
@@ -234,9 +234,9 @@ namespace AsterixDisplayAnalyser
 
             MyCAT01I042.Y = Result;
 
-            CalculatedGSPandHDG_Type CalculatedGSPDandHDG = ToPolarFromCarteisan(MyCAT01I042.X, MyCAT01I042.Y);
+            Azimuth_And_Distance_Type CalculatedGSPDandHDG = ToPolarFromCarteisan(MyCAT01I042.X, MyCAT01I042.Y);
 
-           // DecodeAzimuthAndDistance(ref MyCAT01I042.LatLong, CalculatedGSPDandHDG.GSPD, CalculatedGSPDandHDG.HDG);
+            DecodeAzimuthAndDistance(ref MyCAT01I042.LatLong, CalculatedGSPDandHDG.Distance, CalculatedGSPDandHDG.Azimuth);
             //////////////////////////////////////////////////////////////////////////////////
             // Now assign it to the generic list
             CAT01.I001DataItems[CAT01.ItemIDToIndex("042")].value = MyCAT01I042;
@@ -245,15 +245,15 @@ namespace AsterixDisplayAnalyser
             CAT01.CurrentDataBufferOctalIndex = CAT01.CurrentDataBufferOctalIndex + 4;
         }
 
-        public static CalculatedGSPandHDG_Type ToPolarFromCarteisan(double Vx, double Vy)
+        public static Azimuth_And_Distance_Type ToPolarFromCarteisan(double Vx, double Vy)
         {
-            CalculatedGSPandHDG_Type ReturnValue = new CalculatedGSPandHDG_Type();
-            ReturnValue.GSPD = Math.Pow((Math.Pow(Vx, 2) + Math.Pow(Vy, 2)), 0.5);
-            ReturnValue.HDG = (Math.Atan2(Vx, Vy) * (180.0 / Math.PI));
+            Azimuth_And_Distance_Type ReturnValue = new Azimuth_And_Distance_Type();
+            ReturnValue.Distance = Math.Pow((Math.Pow(Vx, 2) + Math.Pow(Vy, 2)), 0.5);
+            ReturnValue.Azimuth = (Math.Atan2(Vx, Vy) * (180.0 / Math.PI));
             return ReturnValue;
         }
 
-        private static void DecodeAzimuthAndDistance(ref GeoCordSystemDegMinSecUtilities.LatLongClass NewPosition,  double Distance,  double Azimuth)
+        private static void DecodeAzimuthAndDistance(ref GeoCordSystemDegMinSecUtilities.LatLongClass NewPosition, double Distance, double Azimuth)
         {
             GeoCordSystemDegMinSecUtilities.LatLongClass ResultPosition = new GeoCordSystemDegMinSecUtilities.LatLongClass();
 

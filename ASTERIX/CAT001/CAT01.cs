@@ -619,6 +619,11 @@ namespace AsterixDisplayAnalyser
             int SIC_Index = 0;
             int SAC_Index = 0;
 
+            // Save off SIC/SAC and time in the case they are not present 
+            // in each message. Some implementation have it only in the first record
+            int SIC = 0;
+            int SAC = 0;
+
             // Lenght of the current record's FSPECs
             int FSPEC_Length = 0;
 
@@ -649,6 +654,10 @@ namespace AsterixDisplayAnalyser
                     // Extract SIC/SAC Indexes.
                     DataOut[DataOutIndex] = LocalSingleRecordBuffer[SIC_Index].ToString() + '/' + LocalSingleRecordBuffer[SAC_Index].ToString();
 
+                    // Save off data for other records
+                    SIC = LocalSingleRecordBuffer[SIC_Index];
+                    SAC = LocalSingleRecordBuffer[SAC_Index];
+
                     // Save of the current data buffer index so it can be used by
                     // Decoder
                     CurrentDataBufferOctalIndex = SAC_Index + 1;
@@ -657,22 +666,23 @@ namespace AsterixDisplayAnalyser
                     // that has been received, (plot or track)
                     Determine_Type_Of_Report(LocalSingleRecordBuffer, CurrentDataBufferOctalIndex);
 
-                    ///////////////////////////////////////////////////////////////////////////
-                    // Populate the current SIC/SAC and Time stamp for this meesage
-                    //
-                    I001DataItems[ItemIDToIndex("010")].value =
-                        new ASTERIX.SIC_SAC_Time(LocalSingleRecordBuffer[SIC_Index], LocalSingleRecordBuffer[SAC_Index], ASTERIX.TimeOfReception);
                 }
                 else
                 {
                     // Extract SIC/SAC Indexes.
-                    DataOut[DataOutIndex] = "---" + '/' + "---";
+                    DataOut[DataOutIndex] = SIC.ToString() + '/' + SAC.ToString();
                     CurrentDataBufferOctalIndex = FSPEC_Length;
 
                     //Call method to determine the type of the report 
                     // that has been received, (plot or track)
                     Determine_Type_Of_Report(LocalSingleRecordBuffer, CurrentDataBufferOctalIndex);
                 }
+
+                ///////////////////////////////////////////////////////////////////////////
+                // Populate the current SIC/SAC and Time stamp for this meesage
+                //
+                I001DataItems[ItemIDToIndex("010")].value =
+                    new ASTERIX.SIC_SAC_Time(SIC, SAC, ASTERIX.TimeOfReception);
 
                 Reset_Currently_Present_Flags();
 

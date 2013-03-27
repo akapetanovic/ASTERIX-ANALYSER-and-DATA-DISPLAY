@@ -5,6 +5,7 @@ SO FAR THE FOLLOWING DECODERS ARE IMPLEMENTED
 CAT01
 		020 Target Report Descriptor
 		040 Measured Position in Polar Coordinates
+		042 Calculated Position in Cartesian Coordinates
 		070 Mode-3/A Code in Octal Representation
 		090 Mode-C Code in Binary Representation
 		141 Truncated Time of Day
@@ -87,7 +88,8 @@ Version 3.0
 	4. Added support for non-standard 6 byte RMCDE header ASTERIX.
 	6. Implemented decoder for CAT02/060 Station Processing Mode.
 	7. Fixed bug in handling CAT01/141.
-	8. Updated code to handle ASTERIX containing CAT01/SPI fileds in track data (will be ignored).
+	8. Updated code to handle ASTERIX containing CAT01/SPI fields in track data.
+	9. Implemented decoder for I001/042 Calculated Position in Cartesian Coordinates.
 
 Version 2.9
 

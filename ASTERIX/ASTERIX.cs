@@ -132,8 +132,8 @@ namespace AsterixDisplayAnalyser
             bool ThereWasAnException = false;
 
             // File stream
-           // Stream RecordingStream_debug = new FileStream(@"C:\ASTERIX\Italy", FileMode.Create);
-          //  BinaryWriter RecordingBinaryWriter_debug = new BinaryWriter(RecordingStream_debug);
+            // Stream RecordingStream_debug = new FileStream(@"C:\ASTERIX\Italy", FileMode.Create);
+            //  BinaryWriter RecordingBinaryWriter_debug = new BinaryWriter(RecordingStream_debug);
 
             // Loop forever
             while (!_shouldStop)
@@ -176,19 +176,26 @@ namespace AsterixDisplayAnalyser
                         // Loop through the buffer and pass on each ASTERIX category block to
                         // the category extractor. The extractor itslef will then extract individual
                         // data records.
-                        while (DataBufferIndexForThisExtraction < LenghtOfDataBuffer)
+                        try
                         {
-                            byte[] LocalSingle_ASTERIX_CAT_Buffer = new byte[LengthOfASTERIX_CAT];
-                            Array.Copy(UDPBuffer, DataBufferIndexForThisExtraction, LocalSingle_ASTERIX_CAT_Buffer, 0, LengthOfASTERIX_CAT);
-                            // ExtractAndDecodeASTERIX_CAT_DataBlock(LocalSingle_ASTERIX_CAT_Buffer, true);
-
-                            DataBufferIndexForThisExtraction = DataBufferIndexForThisExtraction + LengthOfASTERIX_CAT;
-
-                            if (DataBufferIndexForThisExtraction < LenghtOfDataBuffer)
+                            while (DataBufferIndexForThisExtraction < LenghtOfDataBuffer)
                             {
-                                Array.Copy(UDPBuffer, DataBufferIndexForThisExtraction, LocalSingle_ASTERIX_CAT_Buffer, 0, 3);
-                                LengthOfASTERIX_CAT = ASTERIX.ExtractLengthOfDataBlockInBytes_Int(LocalSingle_ASTERIX_CAT_Buffer);
+                                byte[] LocalSingle_ASTERIX_CAT_Buffer = new byte[LengthOfASTERIX_CAT];
+                                Array.Copy(UDPBuffer, DataBufferIndexForThisExtraction, LocalSingle_ASTERIX_CAT_Buffer, 0, LengthOfASTERIX_CAT);
+                                ExtractAndDecodeASTERIX_CAT_DataBlock(LocalSingle_ASTERIX_CAT_Buffer, true);
+
+                                DataBufferIndexForThisExtraction = DataBufferIndexForThisExtraction + LengthOfASTERIX_CAT;
+
+                                if (DataBufferIndexForThisExtraction < LenghtOfDataBuffer)
+                                {
+                                    Array.Copy(UDPBuffer, DataBufferIndexForThisExtraction, LocalSingle_ASTERIX_CAT_Buffer, 0, 3);
+                                    LengthOfASTERIX_CAT = ASTERIX.ExtractLengthOfDataBlockInBytes_Int(LocalSingle_ASTERIX_CAT_Buffer);
+                                }
                             }
+                        }
+                        catch
+                        {
+                            MessageBox.Show("There was an error in data acquire, please check if standard ASTERIX or RMCDE header is properly selected.");
                         }
 
                         // Check if recording of the currently live connection is requested
