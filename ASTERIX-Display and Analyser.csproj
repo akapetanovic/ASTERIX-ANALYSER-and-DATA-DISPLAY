@@ -125,6 +125,7 @@
     <Compile Include="ASTERIX\CAT001\CAT01I170UserData.cs" />
     <Compile Include="ASTERIX\CAT001\CAT01I210Types.cs" />
     <Compile Include="ASTERIX\CAT001\CAT01I210UserData.cs" />
+    <Compile Include="ASTERIX\CAT001\CAT01ISPIUserData.cs" />
     <Compile Include="ASTERIX\CAT002\CAT02I000Types.cs" />
     <Compile Include="ASTERIX\CAT002\CAT02I000UserData.cs" />
     <Compile Include="ASTERIX\CAT002\CAT02I020Types.cs" />

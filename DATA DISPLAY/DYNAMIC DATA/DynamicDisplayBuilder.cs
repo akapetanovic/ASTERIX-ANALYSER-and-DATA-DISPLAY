@@ -403,7 +403,8 @@ namespace AsterixDisplayAnalyser
                         // Get Mode3A
                         CAT01I070Types.CAT01070Mode3UserData Mode3AData = (CAT01I070Types.CAT01070Mode3UserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("070")].value;
                         // Get Lat/Long
-                        CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates LatLongData = (CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates)Msg.CAT01DataItems[CAT01.ItemIDToIndex("040")].value;
+                        CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates LatLongData_40 = (CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates)Msg.CAT01DataItems[CAT01.ItemIDToIndex("040")].value;
+                        CAT01I042Types.CAT01I042CalculatedPositionInCartesianCoordinates LatLongData_42 = (CAT01I042Types.CAT01I042CalculatedPositionInCartesianCoordinates)Msg.CAT01DataItems[CAT01.ItemIDToIndex("042")].value;
                         // Get Flight Level
                         CAT01I090Types.CAT01I090FlightLevelUserData FlightLevelData = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("090")].value;
                         // Get Time Since Midnight
@@ -418,12 +419,24 @@ namespace AsterixDisplayAnalyser
                         TargetType Target = new TargetType();
                         if (MyCAT01I020UserData != null)
                         {
+                            double Lat, Lng = 0.0;
+                            if (LatLongData_40 != null)
+                            {
+                                Lat = LatLongData_40.LatLong.GetLatLongDecimal().LatitudeDecimal;
+                                Lng = LatLongData_40.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                            }
+                            else
+                            {
+                                Lat = LatLongData_42.LatLong.GetLatLongDecimal().LatitudeDecimal;
+                                Lng = LatLongData_42.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                            }
+                            
                             if (MyCAT01I020UserData.Type_Of_Radar_Detection == CAT01I020Types.Radar_Detection_Type.Primary)
                             {
                                 Target.ModeA = "PSR";
                                 Target.ModeC = "";
-                                Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
-                                Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                Target.Lat = Lat;
+                                Target.Lon = Lng;
                                 Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
                                 Target.TrackTerminateTreshold = 0;
 
@@ -453,8 +466,8 @@ namespace AsterixDisplayAnalyser
                                         else
                                             Target.ModeC = "---";
 
-                                        Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
-                                        Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                        Target.Lat = Lat;
+                                        Target.Lon = Lng;
 
                                         if (TimeSinceMidnight != null)
                                             Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
@@ -861,7 +874,8 @@ namespace AsterixDisplayAnalyser
                         // Get Mode3A
                         CAT01I070Types.CAT01070Mode3UserData Mode3AData = (CAT01I070Types.CAT01070Mode3UserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("070")].value;
                         // Get Lat/Long
-                        CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates LatLongData = (CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates)Msg.CAT01DataItems[CAT01.ItemIDToIndex("040")].value;
+                        CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates LatLongData_40 = (CAT01I040Types.CAT01I040MeasuredPosInPolarCoordinates)Msg.CAT01DataItems[CAT01.ItemIDToIndex("040")].value;
+                        CAT01I042Types.CAT01I042CalculatedPositionInCartesianCoordinates LatLongData_42 = (CAT01I042Types.CAT01I042CalculatedPositionInCartesianCoordinates)Msg.CAT01DataItems[CAT01.ItemIDToIndex("042")].value;
                         // Get Flight Level
                         CAT01I090Types.CAT01I090FlightLevelUserData FlightLevelData = (CAT01I090Types.CAT01I090FlightLevelUserData)Msg.CAT01DataItems[CAT01.ItemIDToIndex("090")].value;
                         // Get Time Since Midnight
@@ -875,12 +889,24 @@ namespace AsterixDisplayAnalyser
                         TargetType Target = new TargetType();
                         if (MyCAT01I020UserData != null)
                         {
+                            double Lat, Lng = 0.0;
+                            if (LatLongData_40 != null)
+                            {
+                                Lat = LatLongData_40.LatLong.GetLatLongDecimal().LatitudeDecimal;
+                                Lng = LatLongData_40.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                            }
+                            else
+                            {
+                                Lat = LatLongData_42.LatLong.GetLatLongDecimal().LatitudeDecimal;
+                                Lng = LatLongData_42.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                            }
+
                             if (MyCAT01I020UserData.Type_Of_Radar_Detection == CAT01I020Types.Radar_Detection_Type.Primary)
                             {
                                 Target.ModeA = "PSR";
                                 Target.ModeC = "";
-                                Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
-                                Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                Target.Lat = Lat;
+                                Target.Lon = Lng;
                                 Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
                                 Target.MyMarker.Position = new PointLatLng(Target.Lat, Target.Lon);
 
@@ -912,8 +938,8 @@ namespace AsterixDisplayAnalyser
                                         else
                                             Target.ModeC = "---";
 
-                                        Target.Lat = LatLongData.LatLong.GetLatLongDecimal().LatitudeDecimal;
-                                        Target.Lon = LatLongData.LatLong.GetLatLongDecimal().LongitudeDecimal;
+                                        Target.Lat = Lat;
+                                        Target.Lon = Lng;
                                         Target.TimeSinceMidnight = TimeSinceMidnight.ElapsedTimeSinceMidnight;
 
                                         if (CalculatedGSPandHDG != null)

@@ -120,7 +120,7 @@ namespace AsterixDisplayAnalyser
                 {
                     MyI002UserData.Next_Extension_1 = CAT01I020Types.Next_Extension_Type.Yes;
 
-                    // OK we have a filed extension, so lets first move the data buffer to the next 
+                    // OK we have a field extension, so lets first move the data buffer to the next 
                     // octet
                     CAT01.CurrentDataBufferOctalIndex = CAT01.CurrentDataBufferOctalIndex + 1;
 

@@ -153,6 +153,9 @@ namespace AsterixDisplayAnalyser
                     case "150":
                         index = 14;
                         break;
+                    case "SPI":
+                        index = 15;
+                        break;
                     default:
                         break;
                 }
@@ -218,8 +221,11 @@ namespace AsterixDisplayAnalyser
                     case "030":
                         index = 18;
                         break;
-                    case "150":
+                    case "SPI":
                         index = 19;
+                        break;
+                    case "150":
+                        index = 20;
                         break;
                     default:
                         break;
@@ -370,6 +376,13 @@ namespace AsterixDisplayAnalyser
                     I001DataItems[ItemIDToIndex("150")].HasBeenPresent = false;
                     I001DataItems[ItemIDToIndex("150")].CurrentlyPresent = false;
 
+                    // 16  I001/SPI                         
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("SPI")].ID = "SPI";
+                    I001DataItems[ItemIDToIndex("SPI")].Description = "Special Purpose Indicator";
+
+                    I001DataItems[ItemIDToIndex("SPI")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("SPI")].CurrentlyPresent = false;
                 }
                 else
                 {
@@ -527,7 +540,15 @@ namespace AsterixDisplayAnalyser
                     I001DataItems[ItemIDToIndex("030")].HasBeenPresent = false;
                     I001DataItems[ItemIDToIndex("010")].CurrentlyPresent = false;
 
-                    // 20  I001/150 Presence of X-Pulse                         
+                    // 20  I001/SPI                         
+                    I001DataItems.Add(new CAT01DataItem());
+                    I001DataItems[ItemIDToIndex("SPI")].ID = "SPI";
+                    I001DataItems[ItemIDToIndex("SPI")].Description = "Special Purpose Indicator";
+
+                    I001DataItems[ItemIDToIndex("SPI")].HasBeenPresent = false;
+                    I001DataItems[ItemIDToIndex("SPI")].CurrentlyPresent = false;
+
+                    // 21  I001/150 Presence of X-Pulse                         
                     I001DataItems.Add(new CAT01DataItem());
                     I001DataItems[ItemIDToIndex("150")].ID = "150";
                     I001DataItems[ItemIDToIndex("150")].Description = "Presence of X-Pulse";
@@ -1033,7 +1054,11 @@ namespace AsterixDisplayAnalyser
 
                                 //  Reserved for Special Purpose Indicator (SP)
                                 if (FourFSPECOctets[Bit_Ops.Bit18] == true)
+                                {
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  SPI:T";
+                                    I001DataItems[ItemIDToIndex("SPI")].HasBeenPresent = true;
+                                    I001DataItems[ItemIDToIndex("SPI")].CurrentlyPresent = true;
+                                }
                                 else
                                     DataOut[DataOutIndex] = DataOut[DataOutIndex] + "  SPI:F";
 

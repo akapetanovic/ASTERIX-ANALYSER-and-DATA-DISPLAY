@@ -238,7 +238,11 @@ namespace AsterixDisplayAnalyser
                 }
 
                 //  Reserved for Special Purpose Indicator (SP)
-               
+                // I001/030 Warning/Error Conditions                        1+
+                if (CAT01.I001DataItems[CAT01.ItemIDToIndex("SPI")].CurrentlyPresent == true)
+                {
+                    CAT01ISPIUserData.DecodeCAT01ISPI(Data);
+                }
 
                 //  Reserved for RFS Indicator (RS-bit)
 

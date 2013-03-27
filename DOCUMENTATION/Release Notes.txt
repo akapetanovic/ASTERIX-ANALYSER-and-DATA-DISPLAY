@@ -82,10 +82,12 @@ Version 3.0
 
 	1. Increased Recording & Forwarding streams from 5 to 10.
 	2. Fixed bug thad caused inorrect display of latitude
-	   for south position in DEG/MIN/SEC format.
+	   for south positions in DEG/MIN/SEC format.
 	3. Fixed bug that incorrectly handled system origyn for W/S positions.
 	4. Added support for non-standard 6 byte RMCDE header ASTERIX.
-	6. Implemented decoder for CAT02/060 Station Processing Mode
+	6. Implemented decoder for CAT02/060 Station Processing Mode.
+	7. Fixed bug in handling CAT01/141.
+	8. Updated code to handle ASTERIX containing CAT01/SPI fileds in track data (will be ignored).
 
 Version 2.9
 

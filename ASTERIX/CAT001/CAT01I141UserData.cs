@@ -30,8 +30,8 @@ namespace AsterixDisplayAnalyser
             // Get an instance of bit ops
             Bit_Ops BO = new Bit_Ops();
 
-            BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT01.CurrentDataBufferOctalIndex + 1];
-            BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT01.CurrentDataBufferOctalIndex ];
+            BO.DWord[Bit_Ops.Bits0_7_Of_DWord] = Data[CAT01.CurrentDataBufferOctalIndex + 2];
+            BO.DWord[Bit_Ops.Bits8_15_Of_DWord] = Data[CAT01.CurrentDataBufferOctalIndex + 1 ];
 
             CAT01I141Types.CAT01141ElapsedTimeSinceMidnight Result = new CAT01I141Types.CAT01141ElapsedTimeSinceMidnight();
 
