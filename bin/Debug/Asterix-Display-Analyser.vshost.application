@@ -7,14 +7,14 @@
     <framework targetVersion="4.0" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Asterix-Display-Analyser.exe.manifest" size="9236">
+    <dependentAssembly dependencyType="install" codebase="Asterix-Display-Analyser.exe.manifest" size="9235">
       <assemblyIdentity name="Asterix-Display-Analyser.exe" version="3.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>5gaNSGmAzVU/me7GkCU0iq+VK3Y=</dsig:DigestValue>
+        <dsig:DigestValue>Qv8Nz04I8LTkjBSKfnnqB9/WWzI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
