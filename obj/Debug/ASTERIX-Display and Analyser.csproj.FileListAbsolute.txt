@@ -80,13 +80,6 @@ C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DI
 C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\Asterix-Display-Analyser.pdb
 C:\Users\bhdca\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\obj\Debug\AsterixDisplayAnalyser.frmDebug.resources
 C:\Users\CAAS\Documents\Visual Studio 2010\Projects\ASTERIX-ANALYSER and DATA DISPLAY\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.frmDebug.resources
-C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\Asterix-Display-Analyser.exe.config
-C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\Asterix-Display-Analyser.exe
-C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\Asterix-Display-Analyser.pdb
-C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\Asterix-Display-Analyser.exe.manifest
-C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\Asterix-Display-Analyser.application
-C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\Asterix-Display-Analyser.exe
-C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\Asterix-Display-Analyser.pdb
 C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\GMap.NET.Core.dll
 C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\GMap.NET.WindowsForms.dll
 C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\Google.KML.dll
@@ -120,5 +113,12 @@ C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\Ast
 C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmReplayToRaw.resources
 C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\GenerateResource.read.1.tlog
 C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\GenerateResource.write.1.tlog
-C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\Asterix-Display-Analyser.exe.manifest
-C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\Asterix-Display-Analyser.application
+C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\DARR.exe.config
+C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\DARR.exe.manifest
+C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\DARR.application
+C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\DARR.exe
+C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\DARR.pdb
+C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\DARR.exe.manifest
+C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\DARR.application
+C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\DARR.exe
+C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\DARR.pdb

@@ -79,6 +79,11 @@ CAT62
 
 VERSION HISTORY
 
+Version 3.1
+
+	1. Fixed label colors so all are visible on XP.
+	2. 
+
 Version 3.0
 
 	1. Increased Recording & Forwarding streams from 5 to 10.

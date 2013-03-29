@@ -1435,15 +1435,15 @@
             gMapControl.Size = new System.Drawing.Size(1026, 702);
             gMapControl.TabIndex = 0;
             gMapControl.Zoom = 0D;
-            gMapControl.OnMarkerEnter += new GMap.NET.WindowsForms.MarkerEnter(this.gMapControl_OnMarkerEnter);
-            gMapControl.OnMapDrag += new GMap.NET.MapDrag(this.gMapControl_OnMapDrag);
-            gMapControl.OnMapZoomChanged += new GMap.NET.MapZoomChanged(this.gMapControl_OnMapZoomChanged);
-            gMapControl.Load += new System.EventHandler(this.gMapControl_Load);
-            gMapControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseClick);
-            gMapControl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseDoubleClick);
-            gMapControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseDown);
-            gMapControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseMove);
-            gMapControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseUp);
+            gMapControl.OnMarkerEnter += new GMap.NET.WindowsForms.MarkerEnter(gMapControl_OnMarkerEnter);
+            gMapControl.OnMapDrag += new GMap.NET.MapDrag(gMapControl_OnMapDrag);
+            gMapControl.OnMapZoomChanged += new GMap.NET.MapZoomChanged(gMapControl_OnMapZoomChanged);
+            gMapControl.Load += new System.EventHandler(gMapControl_Load);
+            gMapControl.MouseClick += new System.Windows.Forms.MouseEventHandler(gMapControl_MouseClick);
+            gMapControl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(gMapControl_MouseDoubleClick);
+            gMapControl.MouseDown += new System.Windows.Forms.MouseEventHandler(gMapControl_MouseDown);
+            gMapControl.MouseMove += new System.Windows.Forms.MouseEventHandler(gMapControl_MouseMove);
+            gMapControl.MouseUp += new System.Windows.Forms.MouseEventHandler(gMapControl_MouseUp);
             // 
             // labelTargetCount
             // 
@@ -1879,7 +1879,6 @@
             // 
             this.textBoxSSRCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.textBoxSSRCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxSSRCode.Enabled = true;
             this.textBoxSSRCode.Location = new System.Drawing.Point(7, 101);
             this.textBoxSSRCode.Name = "textBoxSSRCode";
             this.textBoxSSRCode.Size = new System.Drawing.Size(95, 20);
@@ -1907,7 +1906,6 @@
             // comboBoxSSRFilterBox
             // 
             this.comboBoxSSRFilterBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.comboBoxSSRFilterBox.Enabled = true;
             this.comboBoxSSRFilterBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxSSRFilterBox.ForeColor = System.Drawing.SystemColors.Desktop;
             this.comboBoxSSRFilterBox.FormattingEnabled = true;
@@ -1953,6 +1951,7 @@
             // checkBoxFillListBox
             // 
             this.checkBoxFillListBox.AutoSize = true;
+            this.checkBoxFillListBox.ForeColor = System.Drawing.Color.White;
             this.checkBoxFillListBox.Location = new System.Drawing.Point(1065, 2);
             this.checkBoxFillListBox.Name = "checkBoxFillListBox";
             this.checkBoxFillListBox.Size = new System.Drawing.Size(108, 17);
@@ -1978,6 +1977,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(432, 3);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 13);
@@ -1988,6 +1988,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(14, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 13);
@@ -1998,6 +1999,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(391, 3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
@@ -2008,6 +2010,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(236, 3);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(86, 13);
@@ -2018,6 +2021,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(113, 3);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(67, 13);
@@ -2028,6 +2032,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(345, 3);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(40, 13);
@@ -2794,7 +2799,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox comboBoxSSRFilterBox;
         private System.Windows.Forms.CheckBox checkBoxFilterBySSR;
-        public static GMap.NET.WindowsForms.GMapControl gMapControl;
+        
         private System.Windows.Forms.TabPage tabPageAsterixMessages;
         private System.Windows.Forms.ListBox listBoxManFrame;
         private System.Windows.Forms.Label label3;
@@ -2881,6 +2886,7 @@
         private System.Windows.Forms.Label labelLat_Long;
         private System.Windows.Forms.ToolStripMenuItem extendedLabelToolStripMenuItem;
         private System.Windows.Forms.CheckBox checkBoxFullscreen;
+        public static GMap.NET.WindowsForms.GMapControl gMapControl;
     }
 }
 
