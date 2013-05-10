@@ -300,6 +300,10 @@ namespace AsterixDisplayAnalyser
             gMapControl.Manager.Mode = AccessMode.ServerAndCache;
             gMapControl.EmptyMapBackground = Color.Gray;
 
+            // Set Web proxy
+            GMapProvider.WebProxy = WebRequest.GetSystemWebProxy();
+            GMapProvider.WebProxy.Credentials = CredentialCache.DefaultCredentials;
+
             // Set MIN/MAX for the ZOOM function
             gMapControl.MinZoom = 0;
             gMapControl.MaxZoom = 30;
