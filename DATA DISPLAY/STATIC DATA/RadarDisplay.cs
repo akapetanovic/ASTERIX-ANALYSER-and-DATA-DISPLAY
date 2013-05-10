@@ -5,6 +5,7 @@ using System.Text;
 using GMap.NET.WindowsForms;
 using System.Drawing;
 using GMap.NET;
+using System.Resources;
 
 namespace AsterixDisplayAnalyser
 {
@@ -16,8 +17,7 @@ namespace AsterixDisplayAnalyser
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             // Display defined radars
             //
-            string FileName = @"C:\ASTERIX\IMAGES\radar.jpg";
-            Image RadarImage = Image.FromFile(FileName);
+            Image RadarImage = (Image)AsterixDisplayAnalyser.Properties.Resources.ResourceManager.GetObject("radar");
 
             // Get radar display attributes
             DisplayAttributes.DisplayAttributesType RadarDisplayAttribute = DisplayAttributes.GetDisplayAttribute(DisplayAttributes.DisplayItemsType.Radar);

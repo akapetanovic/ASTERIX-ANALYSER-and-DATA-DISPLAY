@@ -601,6 +601,7 @@
     <Content Include="DOCUMENTATION\Release Notes.txt" />
     <Content Include="DOCUMENTATION\To_Do.txt" />
     <Content Include="Resources\DARR.ico" />
+    <None Include="Resources\radar.bmp" />
     <Content Include="Resources\radar.jpg" />
     <Content Include="MAIN\README.txt" />
     <None Include="Resources\waypoint.jpg" />

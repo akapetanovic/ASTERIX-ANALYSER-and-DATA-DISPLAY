@@ -16,8 +16,7 @@ namespace AsterixDisplayAnalyser
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             // Display defined radars
             //
-            string FileName = @"C:\ASTERIX\IMAGES\waypoint.jpg";
-            Image WaypointImage = Image.FromFile(FileName);
+            Image WaypointImage = (Image)AsterixDisplayAnalyser.Properties.Resources.ResourceManager.GetObject("waypoint");
 
             DisplayAttributes.DisplayAttributesType WaypointDisplayAttribute = DisplayAttributes.GetDisplayAttribute(DisplayAttributes.DisplayItemsType.Waypoint);
 

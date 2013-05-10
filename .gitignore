@@ -5,3 +5,5 @@ ASTERIX-Display and Analyser.suo
 ASTERIX-Display and Analyser.suo
 bin/Debug/MulticastingUDP.exe
 bin/Debug/MulticastingUDP.pdb
+/bin
+/obj
