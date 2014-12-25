@@ -122,3 +122,43 @@ C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\DAR
 C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\DARR.application
 C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\DARR.exe
 C:\Users\AMER\Documents\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\DARR.pdb
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\DARR.exe.config
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\DARR.exe
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\DARR.pdb
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmExtendedLabel.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.UpdateHDG.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.UpdateSPD.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.CAT_Decoder_Selector.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmAbout.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.frmDebug.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmAstxRecFrwdForm.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.DisplayAttibutePicker.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.DisplayItemSelection.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.DisplayRightClickOptions.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.FileReadProgress.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.LabelAttributePicker.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.MisscelaneousSettings.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.UpdateCFL.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.EarthPlotExporter.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmDataItemPresence.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmDetailedView.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.FormMain.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.Properties.Resources.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmConnectionSettings.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.GoogleEarthProvider.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmReplayForm.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.ViewDataBySSRCode.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\AsterixDisplayAnalyser.FrmReplayToRaw.resources
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\ASTERIX-Display and Analyser.csproj.GenerateResource.Cache
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\DARR.exe.manifest
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\DARR.application
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\DARR.exe
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\DARR.pdb
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\GMap.NET.Core.dll
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\GMap.NET.WindowsForms.dll
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\Google.KML.dll
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\GMap.NET.Core.xml
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\bin\Debug\GMap.NET.WindowsForms.xml
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\DARR.exe.manifest
+C:\Users\Amer.Kapetanovic\Documents\Visual Studio 2013\Projects\ASTERIX-ANALYSER-and-DATA-DISPLAY\obj\Debug\DARR.application

@@ -1296,7 +1296,7 @@
             this.groupBoxConnection.Controls.Add(this.labelActiveConnName);
             this.groupBoxConnection.Controls.Add(this.labelConnIpAndPort);
             this.groupBoxConnection.ForeColor = System.Drawing.Color.White;
-            this.groupBoxConnection.Location = new System.Drawing.Point(798, 0);
+            this.groupBoxConnection.Location = new System.Drawing.Point(798, -20);
             this.groupBoxConnection.Name = "groupBoxConnection";
             this.groupBoxConnection.Size = new System.Drawing.Size(384, 60);
             this.groupBoxConnection.TabIndex = 23;
@@ -1435,15 +1435,15 @@
             gMapControl.Size = new System.Drawing.Size(1026, 702);
             gMapControl.TabIndex = 0;
             gMapControl.Zoom = 0D;
-            gMapControl.OnMarkerEnter += new GMap.NET.WindowsForms.MarkerEnter(gMapControl_OnMarkerEnter);
-            gMapControl.OnMapDrag += new GMap.NET.MapDrag(gMapControl_OnMapDrag);
-            gMapControl.OnMapZoomChanged += new GMap.NET.MapZoomChanged(gMapControl_OnMapZoomChanged);
-            gMapControl.Load += new System.EventHandler(gMapControl_Load);
-            gMapControl.MouseClick += new System.Windows.Forms.MouseEventHandler(gMapControl_MouseClick);
-            gMapControl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(gMapControl_MouseDoubleClick);
-            gMapControl.MouseDown += new System.Windows.Forms.MouseEventHandler(gMapControl_MouseDown);
-            gMapControl.MouseMove += new System.Windows.Forms.MouseEventHandler(gMapControl_MouseMove);
-            gMapControl.MouseUp += new System.Windows.Forms.MouseEventHandler(gMapControl_MouseUp);
+            gMapControl.OnMarkerEnter += new GMap.NET.WindowsForms.MarkerEnter(this.gMapControl_OnMarkerEnter);
+            gMapControl.OnMapDrag += new GMap.NET.MapDrag(this.gMapControl_OnMapDrag);
+            gMapControl.OnMapZoomChanged += new GMap.NET.MapZoomChanged(this.gMapControl_OnMapZoomChanged);
+            gMapControl.Load += new System.EventHandler(this.gMapControl_Load);
+            gMapControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseClick);
+            gMapControl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseDoubleClick);
+            gMapControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseDown);
+            gMapControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseMove);
+            gMapControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseUp);
             // 
             // labelTargetCount
             // 
@@ -2599,7 +2599,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1189, 781);
+            this.ClientSize = new System.Drawing.Size(1189, 741);
             this.Controls.Add(this.checkBoxFullscreen);
             this.Controls.Add(this.checkBoxIs_UTC);
             this.Controls.Add(this.labelClock);
